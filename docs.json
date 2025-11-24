@@ -46,7 +46,8 @@
               "agent-design/voice/interruption-settings",
               "agent-design/add-manage-phone-numbers",
               "agent-design/set-agent-guidelines",
-              "agent-design/flow-settings"
+              "agent-design/flow-settings",
+              "agent-desing/compliance-settings"
             ]
           },
           {
