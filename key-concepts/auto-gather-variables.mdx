@@ -35,9 +35,7 @@ For example: inside API Request, Payment, Calendar, Email, and more.
 ### How to Create One
 
 1. Open any block (e.g., API Request or Payment).
-
 2. Click on any of the fields where you want to collect and add the variable.
-
 3. This should open the **Variables** panel. Click and expand the Auto-gather variables section.
 
 <img
@@ -58,9 +56,9 @@ For example: inside API Request, Payment, Calendar, Email, and more.
   style={{ width:"69%" }}
 />
 
-- **Variable Name**: A short, descriptive name.      
-- **Variable Type:** Choose from several built-in types.                
-- **Description:** Clarify what Phonely should gather, e.g. _“The amount the customer wants to donate.”_
+- **Variable Name**: A short, descriptive name.
+- **Variable Type:** Choose from several built-in types.
+- **Description:** Clarify what Phonely should gather, e.g. _“The amount the customer wants to donate.”                  _
 
 This helps the AI understand exactly what to capture.
 
@@ -92,23 +90,26 @@ This ensures the agent outputs values _exactly the way your system expects them_
 
 Imagine you want to collect the payment amount from a caller.
 
-### Instead of           
+### Instead of
 
 1. Adding a Talk Block
 2. Asking for the amount
 3. Validating the format manually
 4. Passing it to the Payment block
 
-### You simply.        
+### You simply.
 
 1. Open **Payment Block**
 2. Click **\+ Auto-Gather Variable**
-3. Create a variable:
-   - Name: `amount`
-   - Type: Custom
-   - Custom Type Definition: _“Format this as a raw number with two decimal places (e.g., 34 → 34.00).”_
-   - Description: _“Amount the customer wants to pay.”_
-   - Enable **Required** and **Confirm**
+3. Enter the following details:
+
+   <Expandable title="Configuration Details">
+     - Name: amount
+     - Type: Custom                                                  
+     - Custom Type Definition: “Format this as a raw number with two decimal places (e.g., 34 → 34.00).”
+     - Description: “Amount the customer wants to pay.”
+     - Enable Required and Confirm
+   </Expandable>
 
 <img
   src="/assets/custom-auto-gather-variables.png"
