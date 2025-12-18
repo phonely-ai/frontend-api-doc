@@ -10,27 +10,27 @@ Phonely lets you add, import, and manage phone lines connected to your Agents. Y
 To add or manage numbers:
 
 1. Go to **Agent Design \> Settings** from the left sidebar.
-2. Click the **Phone Numbers** tab.                                                                           
+2. Click the **Phone Numbers** tab.
 4. Click **\+ Add a Number** to open the phone number setup window.
 
 ![Add Phone Number Phonely Pn](/assets/add-phone-number-phonely.png)
 
-You’ll see two tabs at the top of the window:    
+You’ll see two tabs at the top of the window:
 
 - **New Number:** to generate a Phonely-hosted number.
 - **Import Number:** to connect an existing number from Twilio, Vonage, or another carrier.
-- **Create SIP Address:** Generate a SIP endpoint for inbound call routing.     
+- **Create SIP Address:** Generate a SIP endpoint for inbound call routing.
 
 ## Generate a New Number
 
 Use this option to instantly create a new Phonely number that supports both calling and SMS.
 
-1. Select the **New Number** tab.     
+1. Select the **New Number** tab.
 2. Choose your **Country Code** from the dropdown (e.g., United States +1).
 3. Optionally enter an **Area Code** for local targeting (e.g., 646 for Manhattan NYC).
 4. Click **Generate**. Phonely lists available numbers that match your criteria.
 5. Review the list  and click **Select** next to your preferred number.
-6. Click **Get Number** to confirm.          
+6. Click **Get Number** to confirm.
 
    <Tip>
      Use Regenerate to refresh the list and see more options.
@@ -39,7 +39,7 @@ Use this option to instantly create a new Phonely number that supports both call
 
 ## Import an Existing Number
 
-If you already use a provider like Twilio or Vonage, you can connect those numbers directly to Phonely.                                
+If you already use a provider like Twilio or Vonage, you can connect those numbers directly to Phonely.
 
 ![Import Phone Number From Twillio Or Voyage Gi](/assets/import-phone-number-from-twillio-or-voyage.gif)
 
@@ -47,23 +47,21 @@ If you already use a provider like Twilio or Vonage, you can connect those numbe
 
 1. Select the **Import Number** tab.
 2. From the import your number dropdown, choose From Twilio.
-3. Enter your:       
-   - Twilio Account SID
-   - Twilio Auth Token
-4. Click **Import Number**. Your Twilio number(s) will appear in the dashboard once verified.                       
+3. Enter your Twilio account SID and auth token. 
+4. Click **Import Number**. Your Twilio number(s) will appear in the dashboard once verified.
 
 ### Import from Vonage
 
-1. Under **Import your number**, select From Vonage.            
-2. Enter: the phone number, Vonage API key, and the Vonage API secret.     
-3. Click **Import Number** to connect.                       
+1. Under **Import your number**, select From Vonage.
+2. Enter: the phone number, Vonage API key, and the Vonage API secret.
+3. Click **Import Number** to connect.
 
 ## Port an Existing Number
 
 You can transfer (port) your current phone number to Phonely if you prefer to keep it.
 
-1. Select **Import Number** \> **Port Number**.               
-2. Review the porting steps below:                                 
+1. Select **Import Number** \> **Port Number**.
+2. Review the porting steps below:
 
    <Expandable title="Porting Steps">
      - **Fill out the form:** Verify ownership by answering required questions.
@@ -82,15 +80,15 @@ You can transfer (port) your current phone number to Phonely if you prefer to ke
 
 Phonely allows you to generate a dedicated SIP address for inbound calling. This is ideal if you already have a SIP-based phone system, PBX, or softphone that you want to route calls to.
 
-A SIP address works like an internet-based phone number. It allows external systems, such as Twilio SIP Domains, SIP-enabled devices, VoIP softphones, or PBX systems to send calls directly into your Phonely Agent.                                            
+A SIP address works like an internet-based phone number. It allows external systems, such as Twilio SIP Domains, SIP-enabled devices, VoIP softphones, or PBX systems to send calls directly into your Phonely Agent.
 
 ### How to Create a SIP Address
 
 1. Open **\+ Add a Number** from the Phone Numbers panel.
 2. Switch to the **Create SIP Address** tab and click **Enable SIP Address**.
-4. Your SIP channel becomes active for inbound traffic.                    
+4. Your SIP channel becomes active for inbound traffic.
 5. Phonely automatically generates a SIP endpoint for your account.
-6. Click the **Copy** icon to copy the SIP URI to your clipboard.         
+6. Click the **Copy** icon to copy the SIP URI to your clipboard.
 7. Your SIP Address is now ready for use. To disable this address, click **Disable SIP Address**.
 
 ![Sip Address Pn](/assets/sip-address.png)
@@ -103,24 +101,24 @@ Once added, your numbers appear in the **Additional Phone Numbers** table.
 
 ### Set as Primary
 
-- Click the three-dot men **(⋮)**  next to the number.       
+- Click the three-dot men **(⋮)**  next to the number.
 - Select **Set as Primary** to make this the default outgoing line for your agent.
-- Only one number can be primary at a time.              
-- Calls and messages initiated by your agent will default to the primary number unless overridden in a specific flow.                                                     
+- Only one number can be primary at a time.
+- Calls and messages initiated by your agent will default to the primary number unless overridden in a specific flow.
 
 ### Release a Number
 
-Click the **(:)** actions menu corresponding to the number you want to release. Click **Release Number**.                                 
+Click the **(:)** actions menu corresponding to the number you want to release. Click **Release Number**.
 
 ![Manage Phonely Phone Numbers Pn](/assets/manage-phonely-phone-numbers.png)
 
 ### Block Phone Numbers
 
-Phonely also allows you to block specific phone numbers from contacting your agent. At the botton of this page:            
+Phonely also allows you to block specific phone numbers from contacting your agent. At the botton of this page:
 
 1. Click the **Add Blocked Phone Number** button.
 2. Choose the country code of this phone number.
-3. Enter the phone number that you want to block and click the enter button on your keyboard to add them.                                                                 
-4. To remove a phone number from the blocked list hover over the number and click the trash icon corresponding to this number.   
+3. Enter the phone number that you want to block and click the enter button on your keyboard to add them.
+4. To remove a phone number from the blocked list hover over the number and click the trash icon corresponding to this number.
 
 ![Managing Blocked Numbers Phonely Pn](/assets/managing-blocked-numbers-phonely.png)
