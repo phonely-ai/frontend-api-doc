@@ -90,27 +90,40 @@ Here you’ll find:
 
 Click the dropdown that says **“is equal to”** to see other options:
 
-1. **exists:**  Checks whether the variable has any value. Useful for verifying that earlier blocks captured caller input.
-2. **doesn’t exist:** True when the variable is empty, null, or was never set.
-3. **is equal to:** Compares the field to a specific value.
-4. **is not equal to** : True when the field does _not_ match the provided value.
-5. **is an array containing:**  Used when the variable is a list and you need to check if it contains a specific item.
-6. **matches condition (AI)**\
-   Uses AI to evaluate whether the caller’s message or extracted intent semantically_matches_  a natural-language condition you define.
+<Steps>
+  <Step title="exists">
+    Checks whether the variable has any value. Useful for verifying that earlier blocks captured caller input.
+  </Step>
+  <Step title="Doesn’t exist:">
+    True when the variable is empty, null, or was never set.
+  </Step>
+  <Step title="is equal to">
+    Compares the field to a specific value.
+  </Step>
+  <Step title="is not equal to">
+    True when the field does not match the provided value
+  </Step>
+  <Step title="is an array containing:">
+     Used when the variable is a list and you need to check if it contains a specific item.
+  </Step>
+  <Step title="matches condition (AI)">
+    Uses AI to evaluate whether the caller’s message or extracted intent semantically_matches\_  a natural-language condition you define.
 
-   <Expandable title="Examples">
-     - “caller wants to book an appointment”
-     - “caller is asking for refund”
-     - “caller needs technical support”
-   </Expandable>
+    <Expandable title="Examples">
+      - “caller wants to book an appointment”
+      - “caller is asking for refund”
+      - “caller needs technical support”
+    </Expandable>
+  </Step>
+  <Step title="does not match condition (AI)">
+    The inverse of the above. True when the caller’s message or intent _does not_ match your natural-language condition.
 
-
-7. **does not match condition (AI)**\
-   The inverse of the above. True when the caller’s message or intent _does not_ match your natural-language condition.\
-   Examples:
-
-- “caller is not asking about appointments”
-- “caller is not requesting order status”.
+    <Expandable title="Examples">
+      - “caller is not asking about appointments”
+      - “caller is not requesting order status”.
+    </Expandable>
+  </Step>
+</Steps>
 
 These AI-powered options are ideal when you want logic based on **intent**, not exact words, enabling more natural decision-making without manually collecting variables.Choose one that fits your logic.
 
@@ -132,8 +145,7 @@ You can branch your flow based on cases, where each case represents a possible p
 
 #### Cases
 
-A case represents a distinct route your flow can take. For example, _Case 1_ might handle verified callers, while _Case 2_ handles unverified callers.\
-Use **➕ Add Case** to create a new case with its own set of conditions.
+A case represents a distinct route your flow can take. For example, _Case 1_ might handle verified callers, while _Case 2_ handles unverified callers. Use **➕ Add Case** to create a new case with its own set of conditions.
 
 #### Conditions
 
