@@ -15,11 +15,11 @@ Think of a Custom Action as a mini reusable workflow inside your larger flow. It
 - **Reusability:** Build a workflow once (e.g., appointment scheduling, lead collection, verification) and reuse it across multiple flows.
 - **Consistency:** Ensure teams follow the same steps and structure for repeated processes.
 - **Scalability:** Share standard actions (like “Verify Customer Identity”) across teams and departments.
-- **Mantainability:** Update logic in one place, changes automatically propagate to all flows using that action.                                                            
+- **Mantainability:** Update logic in one place, changes automatically propagate to all flows using that action.
 
 ## Building a Custom Action (Appointment Example)
 
-Let’s build a Make Appointment Custom Action that collects a preferred time, checks availability, and books an appointment.               
+Let’s build a Make Appointment Custom Action that collects a preferred time, checks availability, and books an appointment.
 
 ![How To Create A Custom Action Gi](/assets/how-to-create-a-custom-action.gif)
 
@@ -42,6 +42,8 @@ Let’s build a Make Appointment Custom Action that collects a preferred time, c
 Inside the purple area (your Custom Action workspace), you can start building just like you would in a regular flow.
 
 Click the **＋ button** below the **Start node** to open the block selector, then choose any block you want to add, for example, Talk, Collect, API Request, or Send Email.
+
+Click the button below the smartt noode
 
 <img
   src="/assets/add-blocks-to-a-custom-action.png"
@@ -104,15 +106,11 @@ Now add the second Google Calendar block:
 1. Chose the Create Appointment.
 
 <Expandable title="Fields to configure">
-  Calendar ID
-
-  Start Time / End Time
-
-  Attendee Email → use the variable from Collect (e.g., caller_email)
-
-  Title (e.g., “Consultation with caller_name”)
-
-  Description (optional)
+  - Calendar ID
+  - Start Time / End Time
+  - Attendee Email → use the variable from Collect (e.g., caller_email)
+  - Title (e.g., “Consultation with caller_name”)
+  - Description (optional)
 </Expandable>
 
 If successful, Google Calendar automatically sends the guest invitation.
@@ -129,7 +127,7 @@ They act as exit points - determining what happens once your action finishes, wh
 Each output path represents a possible outcome of your action. For example:
 
 - **Success:** The action completed successfully. i.e The appointment was booked and confirmed.
-- **Fail:** Something went wrong during the process. i.e The booking API request failed or returned an error.
+  - **Fail:** Something went wrong during the process. i.e The booking API request failed or returned an error.
 - **Not Interested:** The caller declined to proceed. i.e The client decided not to book or continue with the call.
 
 These output paths let you control what the AI should do next, ensuring that every scenario is handled gracefully.
@@ -139,7 +137,7 @@ These output paths let you control what the AI should do next, ensuring that eve
 1. Click any empty area inside the purple Custom Action box (the group area).
 2. The **Global Settings** panel will slide in from the right side.
 3. Under **Output Paths**, you’ll see existing nodes (e.g., _Success_, _Fail_, _Not Interested_).
-4. To create a new one, click **➕ Add Output Path**, then enter a name - for example, _Escalate_ or _Reschedule_.
+4. To create a new one, click \*\*➕ Add Output Path \*\*button, then enter the name - for example, _Escalate_ or \_Reschedule. \_
 5. Click **Done** to save your changes.
 
 Once saved, each output path will appear as a small circle at the bottom of the purple Custom Action box, ready to connect to the next step in your flow.
@@ -188,7 +186,7 @@ Once your Custom Action is complete and tested, the next step is to **publish** 
 
 **Accessing the Publish Options**
 
-To begin publishing:
+To begin publihing:
 
 1. Click the **⋯ (three vertical dots)** at the **top-right corner** of the purple Custom Action area.
 2. From the dropdown menu, select one of the following options:
