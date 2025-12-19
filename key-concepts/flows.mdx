@@ -129,13 +129,23 @@ You can now select one or multiple blocks. Copy them and then paste them into an
 
 Click any block to open its configuration panel.
 
-Each block type exposes **only the settings that matter**, for example:
+Each block type exposes only the settings that matter, for example:
 
 - Talk blocks → prompts, voice settings
 - Collect blocks → questions, variables, validation
 - API blocks → endpoints, headers, payloads, mappings
 
 This keeps configuration focused and avoids unnecessary complexity.
+
+### Save, Version, and Publish
+
+- Every save creates a new **version. **Versions can be reviewed or reverted
+- Publishing makes the version live for callers
+
+When publishing:
+
+- Phonely compares the new version to the previous one
+- AI-generated release notes summarize what changed
 
 ## Call variables
 
