@@ -31,12 +31,12 @@ Here are common scenarios where the Filter block is useful:
 
 ## Understanding How It Works
 
-When the Filter block is added to your flow, it evaluates one or more conditions using variables and comparison rules.
+When the Filter block is added to your flow, it evaluates one or more conditions using variables and comparison rules.      
 
-Based on the outcome:
+Based on the outcome:   
 
 - **True path** \> Executes the next connected block when all/any conditions are met.
-- **False path** \> Executes the next block when conditions fail.
+- **False path** \> Executes the next block when conditions fail.   
 
 <img
   src="/assets/updated-filters-phonely.png"
@@ -55,7 +55,7 @@ Let’s walk through every part of the setup shown in your screenshots.
 
 In your flow, click the **“+”** icon after any existing block.
 
-Under **Flow Actions**, choose **Filter**.
+Under **Flow Actions**, choose **Filter**.    
 
 The Filter block will appear with two output paths: **True** and **False**.
 
@@ -63,9 +63,7 @@ The Filter block will appear with two output paths: **True** and **False**.
 
 Each condition is a rule that tells Phonely what to check.
 
-Click the Filter block to open its configuration panel.
-
-Under **Conditions**, click into **Condition 1**.
+Click the Filter block to open its configuration panel. Under **Conditions**, click into **Condition 1**.   
 
 You’ll see three main fields:
 
@@ -83,8 +81,8 @@ Here you’ll find:
 
 - **Call Variables** – System-generated details like caller ID, phone number, or call metadata.
 - **Custom Variables** – Variables you’ve defined manually.
-- **Auto-Gather Variables (Beta)** – Prompts the caller at the moment a block needs a value (name, email, date, etc.) no extra Talk block required.
-- **Collect Caller Details** – Inputs from Collect or Ask Exactly blocks (e.g., `caller_name`, `caller_phone`).
+- **Auto-Gather Variables (Beta)** – Prompts the caller at the moment a block needs a value (name, email, date, etc.) no extra Talk block required.       
+- **Collect Caller Details** – Inputs from Collect or Ask Exactly blocks (e.g., `caller_name`, `caller_phone`).       
 
 ### Select the Comparison Operator
 
@@ -104,7 +102,7 @@ Click the dropdown that says **“is equal to”** to see other options:
     True when the field does not match the provided value
   </Step>
   <Step title="is an array containing:">
-     Used when the variable is a list and you need to check if it contains a specific item.
+    Used when the variable is a list and you need to check if it contains a specific item.
   </Step>
   <Step title="matches condition (AI)">
     Uses AI to evaluate whether the caller’s message or extracted intent semantically_matches\_  a natural-language condition you define.
@@ -139,7 +137,7 @@ Then enter your comparison value.
 
 ### Add Multiple Cases and Conditions
 
-You can branch your flow based on cases, where each case represents a possible path or scenario. Each case can contain one or more conditions, which define the logic that must be met for that path to trigger.
+You can branch your flow based on cases, where each case represents a possible path or scenario. Each case can contain one or more conditions, which define the logic that must be met for that path to trigger.     
 
 ![Cases And Conditions Filter Gi](/assets/cases-and-conditions-filter.gif)
 
@@ -163,12 +161,12 @@ When you have multiple conditions in a case, choose how they interact using a **
 | **And**      | All conditions must be true for the case to match.         |
 | **Or**       | Only one condition needs to be true for the case to match. |
 
-#### Example
+<Expandable title="Examples">
+  - And → caller_name = John and caller_phone = 123456
+  - Or → caller_name = John or caller_name = Jane
+</Expandable>
 
-- **And** → `caller_name = John` **and** `caller_phone = 123456`
-- **Or** → `caller_name = John` **or** `caller_name = Jane`
-
-### Configure Advanced Settings
+#### Configure Advanced Settings
 
 Scroll down to **Advanced Settings**.
 
@@ -202,7 +200,7 @@ Let’s say your **Collect block** gathered two inputs from the caller:
 - `caller_phone`
 - `caller_zip_code`
 
-You can then use a **Filter block** to determine which store location the caller should be routed to based on these values.
+You can then use a filter block to determine which store location the caller should be routed to based on these values.    
 
 Example conditions:
 
