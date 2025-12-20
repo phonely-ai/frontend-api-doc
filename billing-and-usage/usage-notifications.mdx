@@ -5,11 +5,9 @@ description: "Learn how to set up usage notifications in Phonely to receive emai
 
 Usage Notifications help you stay in control of your Phonely spending by alerting you when your workspace usage reaches specific thresholds. Instead of discovering overages after the fact, you can proactively monitor usage and take action before limits are exceeded.
 
-This feature is especially useful for teams running multiple agents, high call volumes, or time-sensitive campaigns where usage can spike unexpectedly.
-
 ## What Usage Notifications Do
 
-A usage notification sends an email alert when your Phonely workspace reaches a defined percentage of its monthly usage limit. Notifications are informational only, they do not stop calls or restrict agents, but they give you early visibility so you can adjust workflows, pause campaigns, or upgrade plans if needed.                
+A usage notification sends an email alert when your Phonely workspace reaches a defined percentage of its monthly usage limit. Notifications are informational only, they do not stop calls or restrict agents, but they give you early visibility so you can adjust workflows, pause campaigns, or upgrade plans if needed.              
 
 You can create multiple notifications at different thresholds (for example, 50% and 75%) to progressively track consumption throughout the billing cycle.
 
@@ -23,7 +21,7 @@ To access usage notifications:
 2. Navigate to **Notifications**.
 3. You’ll see the Notifications page, where all usage alerts are created and managed.
 
-If no notifications are configured yet, Phonely will prompt you to add one.             
+If no notifications are configured yet, Phonely will prompt you to add one.
 
 ## Creating a Usage Notification
 
@@ -31,7 +29,7 @@ Click **Add Notification** to begin setting up a new alert.
 
 In the first step, you’ll choose the **Alert Type**. Select **Usage Alert**, which is designed specifically for monitoring monthly usage limits.
 
-Next, choose one or more **usage threshold percentages**. These represent the point at which the alert will trigger. Common choices include 25%, 50%, 75%, or 100%, depending on how early you want to be notified.     
+Next, choose one or more **usage threshold percentages**. These represent the point at which the alert will trigger. Common choices include 25%, 50%, 75%, or 100%, depending on how early you want to be notified.
 
 <img
   src="/assets/create-notification-alert.png"
@@ -56,15 +54,17 @@ Your notification becomes effective immediately and applies to the current and f
 
 Once a usage notification is created, you can manage it at any time from the **Notifications** page. This includes updating thresholds or recipients, removing notifications you no longer need, and reviewing when alerts were triggered.
 
-### Viewing Existing Notifications
+###  Viewing Existing Notifications
 
 All configured usage notifications appear as cards on the Notifications page. Each card shows:
 
-- The usage threshold (for example, **75% usage**)
-- The notification type (Usage)
-- The list of recipients who will receive the alert
+<Expandable title="Details">
+  - The usage threshold (for example, 75% usage)
+  - The notification type (Usage)
+  - The list of recipients who will receive the alert
+</Expandable>
 
-This gives you a quick overview of which alerts are active and who will be notified as usage increases.
+![Manage Notifications](/assets/manage-notifications.png)
 
 ### Editing a Notification
 
@@ -80,16 +80,15 @@ Phonely keeps a record of when usage notifications are triggered, making it easy
 
 To view this history, click the **clock icon** on a notification card. A Notification History panel opens, showing all alerts that have been sent for that notification.
 
-This history is useful for understanding how often thresholds are reached and validating that alerts are working as expected.
+<img
+  src="/assets/notification-history.png"
+  alt="Notification History"
+  title="Notification History"
+  style={{ width:"95%" }}
+/>
 
 ## When Notifications Are Triggered
 
 Usage notifications are evaluated continuously throughout the billing period. Once your workspace crosses the selected threshold, Phonely sends an email alert to the configured recipients.
 
-Each threshold triggers only once per billing cycle, helping prevent alert fatigue while still keeping teams informed.
-
-## Best Practices for Usage Alerts
-
-For most teams, it’s helpful to set at least two alerts—one early warning (such as 50% or 75%) and one at full usage (100%). This provides enough time to react without being overly noisy.
-
-Usage notifications work best when paired with regular workflow reviews and call analytics, especially for high-volume or automated agents.
+Each threshold triggers only once per billing cycle, helping prevent alert fatigue while still keeping teams informed. 
