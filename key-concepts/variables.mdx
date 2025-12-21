@@ -181,7 +181,7 @@ Variables that describe the execution environment, flow versioning, and infrastr
 
 ### See What's Available
 
-In any block field, type `@` to insert existing variables. You can also reference knowledge base docs with the same menu.
+In any block field, type `@` to insert existing variables. You can also reference knowledge base docs with the same menu.        
 
 <img
   src="/assets/referencing-variables.png"
@@ -194,13 +194,19 @@ In any block field, type `@` to insert existing variables. You can also referenc
 
 Open the Variables modal and add keys you'll reuse (for example, `api_key`, `org_id`). This keeps requests consistent across flows.
 
+### Reorder Variables
+
+You can **reorder variables** directly within the Variables panel to better match your workflow logic or preferred reading order.
+
+Drag and drop variables using the handle on the left side of each variable row to rearrange them. Reordering does not affect runtime behavior or data capture, it only changes how variables are displayed.           
+
 ### Use Auto-Gather Where It Matters
 
 Inside an API Request block, set a parameter's source to "Auto-gather," choose a type (Text, Email, Phone, Date, Time), and mark it required. The agent will ask at runtime and then proceed. [Learn more about auto-gather variables here](/key-concepts/auto-gather-variables).
 
 ### Separate Live vs Post-Call
 
-Attach a Post-Call node off the block you care about. Anything wired here runs only if the conversation ends there or later (for example, send recap email with `dashboard_url` and `recording_url`).
+Attach a Post-Call node off the block you care about. Anything wired here runs only if the conversation ends there or later (for example, send recap email with `dashboard_url` and `recording_url`).    
 
 <Tip>
   AI can infer an outcome, but explicit tagging on key branches produces cleaner dashboards and more reliable automation triggers.
