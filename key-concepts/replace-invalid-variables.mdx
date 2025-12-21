@@ -1,0 +1,41 @@
+---
+title: "Replace Invalid Variables"
+---
+
+As your workflows evolve, variables can occasionally become invalid. This usually happens when a block is removed, disconnected, renamed, or no longer runs on a given path, but its variable is still referenced elsewhere in the flow. When this occurs, Phonely highlights the issue so you can resolve it safely without breaking your agent or downstream actions.
+
+### How invalid variables appear
+
+Invalid variables are visually flagged directly in the builder. You’ll see them highlighted inline within text fields (for example, in descriptions, messages, or API payloads), along with a warning indicator. Hovering over the variable shows a tooltip explaining that the variable is no longer valid and needs to be replaced.
+
+![Invalid Variables](/assets/invalid-variables.png)
+
+### Ways to replace an invalid variable
+
+You can replace invalid variables in two ways:
+
+- **Click the variable directly**\
+  Clicking on the highlighted variable opens the _Replace Invalid Variable_ dialog.
+- **Use the left-hand toolbar**\
+  Select **Replace Invalid Variables** from the flow editor toolbar to review and resolve all invalid variables in one place.
+
+![How To Replace Invalid Variable](/assets/how-to-replace-invalid-variable.gif)
+
+Both approaches lead to the same replacement workflow.
+
+### Using the Replace Invalid Variable dialog
+
+When the dialog opens, Phonely shows you exactly what needs fixing and where it’s used.
+
+First, you’ll see the **invalid variable** that is currently referenced, along with a list of the blocks or nodes where it appears. This helps you understand the impact of the change before making it.
+
+Next, choose a **replacement variable** from the dropdown. Search is supported, making it easy to find the correct variable even in large workflows.
+
+Click  the **Apply** button to replace the vairable. 
+
+<img
+  src="/assets/replace-variables-dialog.png"
+  alt="Replace Variables Dialog"
+  title="Replace Variables Dialog"
+  style={{ width:"89%" }}
+/>
