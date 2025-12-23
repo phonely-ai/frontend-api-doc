@@ -33,6 +33,7 @@
               "key-concepts/routing",
               "key-concepts/variables",
               "key-concepts/auto-gather-variables",
+              "key-concepts/replace-invalid-variables",
               "key-concepts/flow-canvas-controls",
               "key-concepts/manage-workflow-versions"
             ]
