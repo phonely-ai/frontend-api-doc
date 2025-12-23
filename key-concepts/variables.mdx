@@ -181,7 +181,7 @@ Variables that describe the execution environment, flow versioning, and infrastr
 
 ### See What's Available
 
-In any block field, type `@` to insert existing variables. You can also reference knowledge base docs with the same menu.        
+In any block field, type `@` to insert existing variables. You can also reference knowledge base docs with the same menu.
 
 <img
   src="/assets/referencing-variables.png"
@@ -206,7 +206,7 @@ Inside an API Request block, set a parameter's source to "Auto-gather," choose a
 
 ### Separate Live vs Post-Call
 
-Attach a Post-Call node off the block you care about. Anything wired here runs only if the conversation ends there or later (for example, send recap email with `dashboard_url` and `recording_url`).    
+Attach a Post-Call node off the block you care about. Anything wired here runs only if the conversation ends there or later (for example, send recap email with `dashboard_url` and `recording_url`).
 
 <Tip>
   AI can infer an outcome, but explicit tagging on key branches produces cleaner dashboards and more reliable automation triggers.
@@ -229,11 +229,3 @@ In the API block, add a body field `first_name` → choose Auto-gather → Type 
 ### Result
 
 At runtime, the agent asks: "What's your first name?" and then proceeds to book without requiring an extra Talk block.
-
-## Summary
-
-- Prebuilt variables arrive from telephony (numbers, timestamps, caller geo).
-- Custom variables keep configuration consistent across blocks.
-- Auto-gather captures inputs exactly where you need them.
-- Post-call variables give you the complete record: transcript, links, AI summaries, entities, outcomes, and reasons.
-- Tag outcomes in-flow for clean reporting, and always guard for blanks.
