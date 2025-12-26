@@ -8,9 +8,9 @@ They describe what the agent says, what it asks, what it stores, what APIs it ca
 
 ## What Are Flows?
 
-A **Flow** is a visual representation of a live phone conversation. It controls the entire lifecycle of a call  from greeting to resolution.
+A **Flow** is a visual representation of a live phone conversation. It controls the entire lifecycle of a call  from greeting to resolution.   
 
-Flows are made of several core elements:
+Flows are made of several core elements:    
 
 ### 1. Blocks
 
@@ -22,7 +22,7 @@ Blocks are the individual steps in your workflow. Each block performs **one clea
 - Calling an external system (API Request, Google Sheets, Code)
 - Transferring or ending a call (Transfer Flow, End Call)
 - Sending messages (Email, SMS)
-- Running post-call actions
+- Running post-call actions. 
 
 Blocks are intentionally focused complex behavior is created by **connecting blocks together**, not by overloading a single block
 
@@ -38,14 +38,9 @@ An edge can represent:
 
 #### Exit condition tooltips
 
-When you hover over a connection handle or edge, Phonely now displays a tooltip explaining which condition is applied, why the edge exists or what will cause the call to take that path.
+When you hover over a connection handle or edge, Phonely now displays a tooltip explaining which condition is applied, why the edge exists or what will cause the call to take that path.    
 
-<img
-  src="/assets/block-edge-tool-tip.png"
-  alt="Block Edge Tool Tip"
-  title="Block Edge Tool Tip"
-  style={{ width:"96%" }}
-/>
+![Edge Tool Tip Message](/assets/edge-tool-tip-message.png)
 
 This makes large or complex flows easier to understand and debug at a glance.
 
@@ -54,8 +49,8 @@ This makes large or complex flows easier to understand and debug at a glance.
 Variables store information during the call, such as:
 
 - Caller-provided inputs.
-- API responses.
-- System-generated data (timestamp, outcomes, etc.)
+- API responses.             
+- System-generated data (timestamp, outcomes, etc.).   
 
 They act as the agent’s short-term working memory for the duration of the call.
 
@@ -73,25 +68,23 @@ You’ll find tools for:
 
 See the dedicated [Navigation & Editing Tools in the Flow Builder guide](/key-concepts/flow-canvas-controls) for more details.
 
-## Core Concepts
+## How to Create a Flow
 
-### How to Create a Flow
-
-1. Go to the agent design page.
+1. Go to the agent design page.            
 1. Click the **\+** to create a new workflow or select an existing workflow and click the Edit button.
 2. Click the “**\+**” button between existing blocks or at the end of a chain to insert a new block.
-4. New blocks are **auto-positioned** to keep the layout readable.
+4. New blocks are **auto-positioned** to keep the layout readable.    
 
 The canvas is where you visually design and manage your workflow.
 
 <img
-  src="/assets/new-agent-design-view.png"
-  alt="New Agent Design View"
-  title="New Agent Design View"
-  style={{ width:"67%" }}
+  src="/assets/how-to-add-a-new-block.png"
+  alt="How To Add A New Block"
+  title="How To Add A New Block"
+  style={{ width:"69%" }}
 />
 
-3. Configure a Block
+Configure a Block
 
 Click any block in your Flow to open its configuration panel.\
 Each block contains different settings, and the options you see will depend on the type of block you’re setting up.
@@ -107,12 +100,14 @@ Each block contains different settings, and the options you see will depend on t
   style={{ width:"87%" }}
 />
 
-4. Connect blocks\
-   When a new block is added, Phonely automatically creates a connection. You can change connections between blocks by hovering over an edge clicking the **X** button, and then place your cursor over the output node of one block and drag the edge to connect to the input node of another block.
-5. Save your changes\
-   Every save creates a **new version** you can review or revert.
-6. Publish when ready\
-   Publishing makes the version live for real callers.
+Connect blocks\
+When a new block is added, Phonely automatically creates a connection. You can change connections between blocks by hovering over an edge clicking the **X** button, and then place your cursor over the output node of one block and drag the edge to connect to the input node of another block.
+
+Save your changes\
+Every save creates a **new version** you can review or revert.
+
+Publish when ready\
+Publishing makes the version live for real callers.
 
 ### Copy & Paste Across Tabs
 
