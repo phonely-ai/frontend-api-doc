@@ -14,15 +14,15 @@ Instead of creating Talk blocks just to gather data, Auto-Gather Variables let y
 Traditionally, collecting a variable required a Talk Block:
 
 - Ask the caller a question.
-- Define the variable inside that Talk Block.   
-- Validate and confirm it.   
-- Use it later in your flow.   
+- Define the variable inside that Talk Block.
+- Validate and confirm it.
+- Use it later in your flow.
 
 This works, but becomes complicated when:
 
-- You need many variables.   
-- You want to gather them only at specific points.  
-- Your flow changes over time.   
+- You need many variables.
+- You want to gather them only at specific points.
+- Your flow changes over time.
 - You want fewer blocks and cleaner logic.
 
 Auto-Gather Variables solve all of this by letting you define variables exactly where they’re needed, with built-in validation, formatting, confirmation, and re-use.
@@ -34,8 +34,8 @@ For example: inside API Request, Payment, Calendar, Email, and more.
 
 ### How to Create One
 
-1. Open any block (e.g., API Request or Payment).  
-2. Click on any of the fields where you want to collect and add the variable.  
+1. Open any block (e.g., API Request or Payment).
+2. Click on any of the fields where you want to collect and add the variable.
 3. This should open the **Variables** panel. Click and expand the Auto-gather variables section.
 
 <img
@@ -45,7 +45,7 @@ For example: inside API Request, Payment, Calendar, Email, and more.
   style={{ width:"82%" }}
 />
 
-4. Click **\+** to create a new variable.
+4. Click **\+** to auto-gather a new variable.
 4. Fill in the required fields.
 
 <img
@@ -71,11 +71,11 @@ Depending on the type, you may see:
 
 ## Using Custom Types
 
-Custom types let you define a format using natural language, for example:  
+Custom types let you define a format using natural language, for example:
 
 > _“Format this as a raw number with two decimal places. If someone says \$34, output 34.00.”_
 
-This ensures the agent outputs values _exactly the way your system expects them_, without extra logic or multiple retries.      
+This ensures the agent outputs values _exactly the way your system expects them_, without extra logic or multiple retries.
 
 **Great for:**
 
@@ -87,7 +87,7 @@ This ensures the agent outputs values _exactly the way your system expects them_
 
 ## Auto-Gather in Example: Payment Block
 
-Imagine you want to collect the payment amount from a caller. Instead ofAdding a Talk Block, asking for the amount, validating the format manually, and passing it to the Payment block.    
+Imagine you want to collect the payment amount from a caller. Instead ofAdding a Talk Block, asking for the amount, validating the format manually, and passing it to the Payment block.
 
 ### You simply.
 
