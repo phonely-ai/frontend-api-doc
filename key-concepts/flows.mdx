@@ -152,7 +152,7 @@ When publishing, Phonely compares the new version to the previous on and generat
 
 ### Variable types
 
-Variables in Phonely can store different types of data. Choose the appropriate type when collecting information from callers or storing data from API responses.
+Variables in Phonely can store different types of data. Choose the appropriate type when collecting information from callers or storing data from API responses.     
 
 | Type           | Data Type  | Description                                |
 | :------------- | :--------- | :----------------------------------------- |
@@ -180,21 +180,26 @@ Variables in Phonely can store different types of data. Choose the appropriate t
 
 <Card title="Automatic">
   System applies defaults like `completed`, `failed`, `lead_qualified`, `appointment_schedule,` or `transferred`.
-</Card>
 
-<Card title="Custom">
+  **Custom**
+
   Set custom tags in End Call blocks for downstream workflows.
+
+  **Conditional**
+
+  Apply tags only when conditions on variables are met. 
 </Card>
 
-<Card title="Conditional">
-  Apply tags only when conditions on variables are met.
-</Card>
+<img
+  src="/assets/outcome-tagging-end-block.png"
+  alt="Outcome Tagging End Block"
+  title="Outcome Tagging End Block"
+  style={{ width:"97%" }}
+/>
 
 <Tip>
   Some examples of tags that you can use include: **appointment_scheduled**, **lead_qualified,** **customer_satisfied, escalation_needed, no_show_followup**, etc.
 </Tip>
-
----
 
 ## Testing & best practices
 
