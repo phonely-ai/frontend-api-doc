@@ -42,7 +42,7 @@ Type `@` in any field to insert an available variable. You can also reference kn
 **Live vs. post-call actions**
 
 - Live actions happen during the call (API request, SMS, email, transfer, booking).
-- Post-call actions run only if the call ends at/after a specific node, useful for sending a recap email with recording, logging outcomes, or notifying a team.
+- Post-call actions run only if the call ends at/after a specific node, useful for sending a recap email with recording, logging outcomes, or notifying a team.  
 
 ```mermaid
 flowchart LR
@@ -66,7 +66,7 @@ Define a key/value once (for example, `api_key`) and reuse across blocks and flo
 
 ### Auto-gather
 
-Prompt the caller at the moment a block needs a value (name, email, date, etc.) no extra Talk block required.
+Prompt the caller at the moment a block needs a value (name, email, date, etc.) no extra Talk block required.                                            
 
 <Tip>
   In an API Request block, add a query/body field → choose "Auto-gather" → set type (Text, Email, Phone, Date, Time) and "Required." At runtime, the agent asks, then proceeds with the request.
@@ -184,13 +184,13 @@ Variables that describe the execution environment, flow versioning, and infrastr
 
 ### See What's Available
 
-In any block field, type `@` to insert existing variables. You can also reference knowledge base docs with the same menu.
+In any block field, type `@` to insert existing variables. You can also reference knowledge base docs with the same menu.    
 
 <img
-  src="/assets/referencing-variables.png"
-  alt="Referencing Variables Pn"
-  title="Referencing Variables Pn"
-  style={{ width:"80%" }}
+  src="/assets/variables-window.png"
+  alt="Variables Window"
+  title="Variables Window"
+  style={{ width:"87%" }}
 />
 
 ### Create Custom Variables
@@ -227,7 +227,7 @@ You're booking an appointment and need the caller's first name.
 
 ### Setup
 
-In the API block, add a body field `first_name` → choose Auto-gather → Type Text → mark Required.
+In the API block, add a body field `first_name` → choose Auto-gather → Type Text → mark Required.      
 
 ### Result
 
