@@ -1,13 +1,13 @@
 ---
 title: "Using Variables"
-description: "Every variable in Phonely - what it means, when it's set, and how to use it in flows, APIs, and post-call automations."
+description: "Every variable in Phonely, what it means, when it's set, and how to use it in flows, APIs, and post-call automations."
 ---
 
 ## Overview
 
 In this guide, we'll introduce you to Phonely's powerful variable system that serves as the backbone for capturing, storing, and reusing information throughout your call workflows.
 
-Variables are the backbone of your agents. They capture data during a call, pass it between blocks, and export it after the call for follow-ups and analytics. This page extracts key concepts from the video and includes a complete, paste-ready catalog of live and post-call variables.
+Variables are the backbone of your agents. They capture data during a call, pass it between blocks, and export it after the call for follow-ups and analytics. This page extracts key concepts from the video and includes a complete, paste-ready catalog of live and post-call variables.     
 
 <Info>
   If a block didn't run, its variable appears blank in post-call context. That's intentional so you can safely reference variables without breaking integrations.
@@ -19,21 +19,21 @@ Variables are the backbone of your agents. They capture data during a call, pass
 
 **What variables are.**
 
-Structured data (caller phone, name, intent, outcomes, etc.) that your agent reads/writes at runtime and exposes after the call.
+Structured data (caller phone, name, intent, outcomes, etc.) that your agent reads/writes at runtime and exposes after the call.            
 
-**Where they live.**
+**Where they live**
 
-Live-call variables exist while the conversation is running and power real-time logic (branching, transfers, API requests, messages).
+Live-call variables exist while the conversation is running and power real-time logic (branching, transfers, API requests, messages).         
 
-Post-call variables are the finalized record (transcript, summary, sentiment, outcomes, links) used in emails, webhooks, CRMs, or BI.
+Post-call variables are the finalized record (transcript, summary, sentiment, outcomes, links) used in emails, webhooks, CRMs, or BI.    
 
-**How they're created.**
+**How they're created**
 
 Prebuilt/telephony: injected automatically (numbers, timestamps, caller geo, caller ID).
 
-Custom: you define once (e.g., an API key) and reuse anywhere.
+Custom: you define once (e.g., an API key) and reuse anywhere.   
 
-Auto-gather: the agent asks for a value at the moment a block needs it (e.g., ask for name inside an API Request block).
+Auto-gather: the agent asks for a value at the moment a block needs it (e.g., ask for name inside an API Request block).    
 
 **Referencing variables**
 
@@ -42,7 +42,7 @@ Type `@` in any field to insert an available variable. You can also reference kn
 **Live vs. post-call actions.**
 
 - Live actions happen during the call (API request, SMS, email, transfer, booking).
-- Post-call actions run only if the call ends at/after a specific node—useful for sending a recap email with recording, logging outcomes, or notifying a team.
+- Post-call actions run only if the call ends at/after a specific node, useful for sending a recap email with recording, logging outcomes, or notifying a team.
 
 ```mermaid
 flowchart LR
@@ -66,7 +66,7 @@ Define a key/value once (for example, `api_key`) and reuse across blocks and flo
 
 ### Auto-gather
 
-Prompt the caller at the moment a block needs a value (name, email, date, etc.)—no extra Talk block required.
+Prompt the caller at the moment a block needs a value (name, email, date, etc.) no extra Talk block required.        
 
 <Tip>
   In an API Request block, add a query/body field → choose "Auto-gather" → set type (Text, Email, Phone, Date, Time) and "Required." At runtime, the agent asks, then proceeds with the request.
@@ -154,7 +154,7 @@ Prompt the caller at the moment a block needs a value (name, email, date, etc.)�
 
 ### **System & Version Metadata (New)**
 
-Variables that describe the execution environment, flow versioning, and infrastructure details. Useful for debugging, analytics, release tracking, and conditional routing.
+Variables that describe the execution environment, flow versioning, and infrastructure details. Useful for debugging, analytics, release tracking, and conditional routing.      
 
 | Variable                | Type   | When Set / Source | Notes                                                                                                                                                               |
 | :---------------------- | :----- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -169,7 +169,7 @@ Variables that describe the execution environment, flow versioning, and infrastr
 - `ai_hung_up`
 - `transferred`
 - `silence_timeout`
-- `voicemail_detected` (outbound)
+- `voicemail_detected` (outbound) 
 - `greeting_hangup`
 
 ### A/B Testing Fields
@@ -184,7 +184,7 @@ Variables that describe the execution environment, flow versioning, and infrastr
 
 ### See What's Available
 
-In any block field, type `@` to insert existing variables. You can also reference knowledge base docs with the same menu.
+In any block field, type `@` to insert existing variables. You can also reference knowledge base docs with the same menu.                                        
 
 <img
   src="/assets/referencing-variables.png"
@@ -195,21 +195,21 @@ In any block field, type `@` to insert existing variables. You can also referenc
 
 ### Create Custom Variables
 
-Open the Variables modal and add keys you'll reuse (for example, `api_key`, `org_id`). This keeps requests consistent across flows.
+Open the Variables modal and add keys you'll reuse (for example, `api_key`, `org_id`). This keeps requests consistent across flows.     
 
 ### Reorder Variables
 
 You can **reorder variables** directly within the Variables panel to better match your workflow logic or preferred reading order.
 
-Drag and drop variables using the handle on the left side of each variable row to rearrange them. Reordering does not affect runtime behavior or data capture, it only changes how variables are displayed in the builder and selection menus. This is especially useful for keeping frequently used or related variables grouped together.
+Drag and drop variables using the handle on the left side of each variable row to rearrange them. Reordering does not affect runtime behavior or data capture, it only changes how variables are displayed in the builder and selection menus. This is especially useful for keeping frequently used or related variables grouped together.       
 
 ### Use Auto-Gather Where It Matters
 
-Inside an API Request block, set a parameter's source to "Auto-gather," choose a type (Text, Email, Phone, Date, Time), and mark it required. The agent will ask at runtime and then proceed. [Learn more about auto-gather variables here](/key-concepts/auto-gather-variables).
+Inside an API Request block, set a parameter's source to "Auto-gather," choose a type (Text, Email, Phone, Date, Time), and mark it required. The agent will ask at runtime and then proceed. [Learn more about auto-gather variables here](/key-concepts/auto-gather-variables).     
 
 ### Separate Live vs Post-Call
 
-Attach a Post-Call node off the block you care about. Anything wired here runs only if the conversation ends there or later (for example, send recap email with `dashboard_url` and `recording_url`).
+Attach a Post-Call node off the block you care about. Anything wired here runs only if the conversation ends there or later (for example, send recap email with `dashboard_url` and `recording_url`).          
 
 <Tip>
   AI can infer an outcome, but explicit tagging on key branches produces cleaner dashboards and more reliable automation triggers.
@@ -223,7 +223,7 @@ Attach a Post-Call node off the block you care about. Anything wired here runs o
 
 ### Scenario
 
-You're booking an appointment and need the caller's first name.
+You're booking an appointment and need the caller's first name.    
 
 ### Setup
 
