@@ -30,7 +30,7 @@ Blocks are intentionally focused complex behavior is created by connecting block
 
 Connections determine how the conversation moves forward.
 
-An edge can represent:
+An edge can represent:   
 
 - A simple continuation (always go next)
 - A conditional path (only proceed if a condition is met)
@@ -40,7 +40,11 @@ An edge can represent:
 
 When you hover over a connection handle or edge, Phonely now displays a tooltip explaining which condition is applied, why the edge exists or what will cause the call to take that path.
 
-![Edge Tool Tip Message](/assets/edge-tool-tip-message.png)
+<img
+  src="/assets/edge-tool-tip-message.png"
+  alt="Edge Tool Tip Message"
+  style={{ width:"88%" }}
+/>
 
 This makes large or complex flows easier to understand and debug at a glance.
 
@@ -51,6 +55,13 @@ Variables store information during the call, such as:
 - Caller-provided inputs.
 - API responses.
 - System-generated data (timestamp, outcomes, etc.).
+
+<img
+  src="/assets/list-of-available-variables.png"
+  alt="List Of Available Variables"
+  title="List Of Available Variables"
+  style={{ width:"87%" }}
+/>
 
 They act as the agent’s short-term working memory for the duration of the call.
 
