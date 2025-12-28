@@ -30,7 +30,7 @@ Blocks are intentionally focused complex behavior is created by connecting block
 
 Connections determine how the conversation moves forward.
 
-An edge can represent:   
+An edge can represent:
 
 - A simple continuation (always go next)
 - A conditional path (only proceed if a condition is met)
@@ -43,7 +43,7 @@ When you hover over a connection handle or edge, Phonely now displays a tooltip 
 <img
   src="/assets/edge-tool-tip-message.png"
   alt="Edge Tool Tip Message"
-  style={{ width:"88%" }}
+  style={{ width:"73%" }}
 />
 
 This makes large or complex flows easier to understand and debug at a glance.
@@ -54,13 +54,13 @@ Variables store information during the call, such as:
 
 - Caller-provided inputs.
 - API responses.
-- System-generated data (timestamp, outcomes, etc.).
+- System-generated data (timestamp, outcomes, etc.)
 
 <img
   src="/assets/list-of-available-variables.png"
   alt="List Of Available Variables"
   title="List Of Available Variables"
-  style={{ width:"87%" }}
+  style={{ width:"74%" }}
 />
 
 They act as the agent’s short-term working memory for the duration of the call.
@@ -99,7 +99,7 @@ The canvas is where you visually design and manage your workflow.
 5. Configure a Block
 
 Click any block in your Flow to open its configuration panel.\
-Each block contains different settings, and the options you see will depend on the type of block you’re setting up.
+Each block contains different settings, and the options you see will depend on the type of block you’re setting up. 
 
 <Tip>
   Blocks have different setup and configuration requirements. For example, a Talk block includes questions and answers, Collect blocks include questions and variables, while API Request blocks include payload, headers, and response mapping.
@@ -114,7 +114,7 @@ Each block contains different settings, and the options you see will depend on t
 
 6. Connect blocks\
    When a new block is added, Phonely automatically creates a connection. You can change connections between blocks by hovering over an edge clicking the **X** button, and then place your cursor over the output node of one block and drag the edge to connect to the input node of another block.
-7. Save your changes. Every save creates a **new version** you can review or revert.
+7. Save your changes. Every save creates a new version you can review or revert.
 8. Publish when ready. Publishing makes the version live for real callers.
 
 ### Copy & Paste Across Tabs
