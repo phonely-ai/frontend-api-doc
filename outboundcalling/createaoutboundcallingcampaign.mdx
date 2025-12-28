@@ -13,7 +13,7 @@ With concurrent calling, multiple leads can be contacted simultaneously, drastic
 
 An outbound campaign is a coordinated series of automated calls initiated by your Phonely AI agent. Each campaign is configured with a purpose (called a _use case_), assigned specific phone numbers, and given a flow that determines what your AI says and how it responds.
 
-Phonely connects with platforms like Twilio for outbound numbers and Google Sheets, webhooks, or CSV uploads for lead sources.                          
+Phonely connects with platforms like Twilio for outbound numbers and Google Sheets, webhooks, or CSV uploads for lead sources.
 
 <Danger>
   Campaigns support both batch calling for large lead uploads and \*\*continuous \*\*mode for real-time outreach as new leads sync from your CRM.
@@ -23,14 +23,14 @@ Once configured, the system can automatically call new leads as they appear or p
 
 ## Create a Campaign
 
-When you click **Create Campaign**, you’re first asked to define the _identity_ and _intent_ of your campaign. This will help you organize campaigns and ensure that metrics and compliance requirements are clear later.                 
+When you click **Create Campaign**, you’re first asked to define the _identity_ and _intent_ of your campaign. This will help you organize campaigns and ensure that metrics and compliance requirements are clear later.
 
 ### **Campaign Name**
 
 The campaign name is how Phonely identifies your automation in dashboards and reports.\
 Use a descriptive name that conveys purpose.
 
-This helps your team quickly find and analyze campaigns later, especially when multiple outbound initiatives are running simultaneously.                           
+This helps your team quickly find and analyze campaigns later, especially when multiple outbound initiatives are running simultaneously.
 
 ### **Campaign Use Cases**
 
@@ -48,7 +48,7 @@ Once defined, this context shapes your reporting and helps ensure that future an
 
 ### Add Outbound Numbers
 
-A campaign needs outbound phone numbers that it can use to place calls. These numbers are provisioned through **Twilio**.    
+A campaign needs outbound phone numbers that it can use to place calls. These numbers are provisioned through **Twilio**.
 
 When you connect Twilio to Phonely, all your available numbers become visible, allowing you to choose which ones will represent the campaign.
 
@@ -57,7 +57,7 @@ When you connect Twilio to Phonely, all your available numbers become visible, a
 When prompted, click **Add Numbers \> Import from Twilio**. You’ll enter your **Account SID** and **Auth Token**, which allow Phonely to securely access your Twilio account.\
 Once authenticated, your Twilio numbers appear in a list.
 
-You can then select which numbers to use. The goal here is not just to assign numbers, but to manage how calls will be distributed across them.      
+You can then select which numbers to use. The goal here is not just to assign numbers, but to manage how calls will be distributed across them.
 
 <Danger>
   Your Twilio account must be set up on Autopay with a card that has sufficient funds, for your agent to successfully run an outbound campaign.
@@ -74,9 +74,9 @@ Phonely offers three distinct ways to route calls across your outbound numbers:
    Phonely detects the state of the recipient and automatically uses a number that matches that state. This improves answer rates, since recipients often respond more positively to local area codes. If no number matches the caller’s state, Phonely defaults to a random enabled number.
 3. **Country-Based Routing** – Used for international outreach.\
    Calls are routed through numbers assigned to the recipient’s country, preserving a local presence and helping with compliance in regions where cross-border calls may be restricted.     \
-   As with state-based routing, if no local number exists, Phonely falls back to a random enabled number.                                                
+   As with state-based routing, if no local number exists, Phonely falls back to a random enabled number.
 
-Routing determines how your campaign appears to the outside world and directly affects engagement metrics like pickup and conversion rates.    
+Routing determines how your campaign appears to the outside world and directly affects engagement metrics like pickup and conversion rates.
 
 ### Call Cadence
 
@@ -85,7 +85,7 @@ Phonely allows scheduling so your AI never calls outside of approved working hou
 
 You’ll see a week-based grid interface where you can toggle each day on or off and define start and end times (for instance, Monday–Friday, 9 AM–6 PM).
 
-You can add multiple blocks per day if you want to include breaks. These schedules align with your customers’ local time zones, ensuring compliance with “do not disturb” hours.    
+You can add multiple blocks per day if you want to include breaks. These schedules align with your customers’ local time zones, ensuring compliance with “do not disturb” hours.
 
 **Calls per Hour**
 
@@ -129,7 +129,7 @@ Because this runs continuously, it’s ideal for teams managing leads collaborat
 The Webhook trigger is designed for real-time system integrations.\
 Phonely generates a secure URL endpoint that can receive POST requests containing lead data.
 
-For example:         
+For example:
 
 ```
 {
@@ -142,7 +142,7 @@ Each POST instantly adds a new lead to your campaign queue.
 
 You can customize the schema and click **Update Fields** after any changes to ensure Phonely correctly interprets your payload.
 
-This option is excellent for developers or CRM systems that want to trigger calls based on specific events -  like when a new signup or missed call is logged.                        
+This option is excellent for developers or CRM systems that want to trigger calls based on specific events -  like when a new signup or missed call is logged.
 
 #### 3. CSV Upload
 
@@ -172,7 +172,7 @@ For example:
 <img
   src="/assets/map-fields-in-a-campaign.png"
   alt="Map Fields In A Campaign Pn"
-  style={{ width:"74%" }}
+  style={{ width:"70%" }}
 />
 
 Correct mapping ensures that each call feels personalized. When your AI says, “Hi Jane, this is your delivery confirmation,” it’s pulling that name from your sheet or webhook payload.
@@ -197,7 +197,11 @@ You’ll see two confirmation checkboxes:
 2. **Do-Not-Call (DNC) Policy** – You acknowledge responsibility for ensuring that no prohibited numbers are called.\
    Phonely screens against common DNC registries, but compliance ultimately rests with the campaign owner.
 
-![Avoid Spamming Outbound Campaign](/assets/avoid-spamming-outbound-campaign.png)
+<img
+  src="/assets/avoid-spamming-outbound-campaign.png"
+  alt="Avoid Spamming Outbound Campaign"
+  style={{ width:"83%" }}
+/>
 
 Once both are acknowledged, you can safely **publish** your campaign.
 
