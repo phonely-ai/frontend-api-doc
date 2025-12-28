@@ -3,13 +3,9 @@ title: " Create Workflows for Outbound Campaigns"
 description: "Learn how to create call flows for outbound campaigns"
 ---
 
-Outbound call flows in Phonely allow you to automate how your AI agent interacts with leads from greeting and information collection to follow-up messages and task triggers. You can create call flows either by using prebuilt templates or by building from scratch. This guide walks you through both methods in detail, explaining key settings, filters, and publishing steps.
+Outbound call flows in Phonely allow you to automate how your AI agent interacts with leads from greeting and information collection to follow-up messages and task triggers. You can create call flows either by using prebuilt templates or by building from scratch.
 
-### Understanding Outbound Call Flows
-
-A **call flow** defines the logic your AI agent follows during outbound calls — what it says, how it responds to user input, and what actions (like making calls, sending an SMS, email, or API request) it performs afterward. Each call flow can be used in a **campaign**, and a campaign determines how and when these calls are triggered.
-
-## Navigating to Outbound Call Campaigns
+A **call flow** defines the logic your AI agent follows during outbound calls, what it says, how it responds to user input, and what actions (like making calls, sending an SMS, email, or API request) it performs afterward. Each call flow can be used in a **campaign**, and a campaign determines how and when these calls are triggered.                              
 
 <Steps>
   <Step title="From the Phonely dashboard">
@@ -32,7 +28,7 @@ Templates provide prebuilt logic for common outbound use cases. Each one include
 <Steps>
   <Step title="Open the Template Library">
     When you click **New Flow**, a **Choose a Template** window appears.\
-    Here, you can:
+    Here, you can:    
 
     - Browse All templates or view Recommended ones.
     - Search by keywords or filter templates by:
@@ -63,12 +59,15 @@ Templates provide prebuilt logic for common outbound use cases. Each one include
     - Edit each node (e.g., greeting, data collection, verification).
     - Modify text prompts, logic conditions, or connected integrations.
     - Add or remove actions such as:
-      - **Send SMS**
-      - **Send Email**
-      - **Transfer Call**
-      - **API Request**
-      - **Connect to Google Sheets**
-      - **Run custom code**
+
+      <Expandable title="Actions">
+        - Send SMS
+        - Send Email
+        - Transfer Call
+        - API Request
+        - Connect to Google Sheets
+        - Run custom code
+      </Expandable>
 
     You can also toggle whether the flow is **turned on** at the top left.
   </Step>
