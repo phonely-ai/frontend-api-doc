@@ -49,6 +49,12 @@
                   "agent-design/voice/clone-voice"
                 ]
                },
+              {
+                "group": "Phone Numbers",
+                "pages": [
+                  "agent-design/add-manage-phone-numbers"
+                ]
+              },
                {
                 "group": "Agent Settings",
                  "pages": [
@@ -56,7 +62,6 @@
               "agent-design/call-settings",
               "agent-design/voice/voice-and-personality",
               "agent-design/voice/interruption-settings",
-              "agent-design/add-manage-phone-numbers",
               "agent-design/compliance-settings"
                  ]
                },
