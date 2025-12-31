@@ -41,9 +41,14 @@
           {
             "group": "Agent Design & Settings",
             "pages": [
+              {
+                "group": "Voice",
+                "pages": [
+                  "agent-design/voice/voice-selection"
+                ]
+              },
               "agent-design/voice/clone-voice",
               "agent-design/voice/add-a-voice",
-              "agent-design/voice/voice-selection",
               "agent-design/call-settings",
               "agent-design/voice/voice-and-personality",
               "agent-design/voice/interruption-settings",
