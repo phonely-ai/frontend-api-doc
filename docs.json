@@ -137,7 +137,7 @@
             ]
           },
           {
-            "group": "Outbound Calling",
+            "group": "OUTBOUND CALLING",
             "pages": [
               "outboundcalling/createaoutboundcallingcampaign",
               "outboundcalling/creating-call-flows-for-outbound-campaigns"
