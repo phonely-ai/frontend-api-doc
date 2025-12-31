@@ -137,7 +137,7 @@
             ]
           },
           {
-            "group": "OUTBOUND CALLING",
+            "group": "OUTBOUND CALLS",
             "pages": [
               "outboundcalling/createaoutboundcallingcampaign",
               "outboundcalling/creating-call-flows-for-outbound-campaigns"
@@ -160,12 +160,12 @@
             ]
           },
           {
-            "group": "Testing",
+            "group": "TESTING",
             "pages": [
               "/testing/ab-testing"            ]
           },
           {
-            "group": "Account, and Organization Settings",
+            "group": "ACCOUNT & ORGANIZATION SETTINGS",
             "pages": [
               "manage-account-and-organization-settings/manage-account-and-oraganization-settings"
             ]
