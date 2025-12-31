@@ -57,11 +57,16 @@
               "agent-design/voice/voice-and-personality",
               "agent-design/voice/interruption-settings",
               "agent-design/add-manage-phone-numbers",
-              "agent-design/set-agent-guidelines",
               "agent-design/flow-settings",
               "agent-design/compliance-settings"
                  ]
-               }              
+               },
+              {
+                "group": "Agent Guildelines",
+                "pages": [
+                  "agent-design/set-agent-guidelines"
+                ]
+              }
             ]
           },
           {
