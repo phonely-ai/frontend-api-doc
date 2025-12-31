@@ -66,6 +66,12 @@
                 "pages": [
                   "agent-design/set-agent-guidelines"
                 ]
+              },
+              {
+                "group": "Flow Settings",
+                "pages": [
+                  "agent-design/flow-settings"
+                ]
               }
             ]
           },
