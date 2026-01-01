@@ -13,10 +13,10 @@ This guide explains how A/B testing works, how to create and run a test, and how
 
 A/B Testing lets you run controlled experiments between two versions of your AI agent:
 
-- The Base Agent (Control) - your exisiting setup.    
-- The Test Agent (Variant) - a duplicate with specific changes.    
+- The Base Agent (Control) - your exisiting setup.
+- The Test Agent (Variant) - a duplicate with specific changes.
 
-Incoming calls are automatically split between the two versions. Phonely then measures how each one perfoms based on the success criteria you define, such as call duration, outcomes, or end reasons.    
+Incoming calls are automatically split between the two versions. Phonely then measures how each one perfoms based on the success criteria you define, such as call duration, outcomes, or end reasons.
 
 This gives you clear, data-driven insights into what changes actually improve performance instead of relying on guesswork.
 
@@ -35,7 +35,7 @@ You’ll see three sections:
 
 Click **Create a new test** in the Planned section to begin. A step-by-step setup window will appear.
 
-### Name and Describe Your Test
+**Name and Describe Your Test**
 
 Give your test a descrptive name that identifies what you’re testing.\
 _Example:_ “Friendly Voice vs Formal Voice – Support Line.”
@@ -57,11 +57,11 @@ Phonely supports multiple types of tests depending on your experiment goal. You 
 | **Knowledge Base** | Tests different documentation sources                            | See which knowlesdge sources improve the accuracy of the the answers |
 | **Other**          | For any other tests outside these categories                     |                                                                      |
 
-Once selected, click **Next**.
+Once selected, click **Next**.     
 
 ## Define End Criteria and Call Distribution
 
-Here, you’ll specify how long the test should run and what share of calls should be routed to your test version.
+Here, you’ll specify how long the test should run and what share of calls should be routed to your test version.    
 
 ### End Criteria
 
@@ -85,20 +85,20 @@ After configuring both, click **Next**.
 
 ## Set Success Criteria
 
-This step defines what “success” means for your test. You can base success on how calls end, what outcomes are tagged, or how long they last.
+This step defines what “success” means for your test. You can base success on how calls end, what outcomes are tagged, or how long they last.   
 
 ### Call Ended Reason-Based Testing
 
-Evaluates success based on how the call ended. Use this if you care about the technical or behavioral outcome of the call.
+Evaluates success based on how the call ended. Use this if you care about the technical or behavioral outcome of the call.     
 
-**Examples of End Reasons:**
-
-- Call Transferred.
-- Voicemail
-- Max Duration
-- Silence Timeout
-- Customer Ended
-- Agent Endedded
+<Expandable title="Examples of End Call Reasons">
+  - Call Transferred.
+  - Voicemail
+  - Max Duration
+  - Silence Timeout
+  - Customer Ended
+  - Agent Endedded
+</Expandable>
 
 Example Use case: “We want more calls to end in transfers to the sales team.
 
