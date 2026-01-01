@@ -13,23 +13,23 @@ This guide explains how A/B testing works, how to create and run a test, and how
 
 A/B Testing lets you run controlled experiments between two versions of your AI agent:
 
-- The Base Agent (Control) - your exisiting setup.
-- The Test Agent (Variant) - a duplicate with specific changes.
+- The Base Agent (Control) - your exisiting setup.    
+- The Test Agent (Variant) - a duplicate with specific changes.    
 
-Incoming calls are automatically split between the two versions. Phonely then measures how each one perfoms based on the success criteria you define, such as call duration, outcomes, or end reasons.
+Incoming calls are automatically split between the two versions. Phonely then measures how each one perfoms based on the success criteria you define, such as call duration, outcomes, or end reasons.    
 
 This gives you clear, data-driven insights into what changes actually improve performance instead of relying on guesswork.
 
-## Where to Access A/B Testing
+## Access A/B Testing
 
 1. Go to your Phonely Menu and click to open Testing .
 3. Choose A/B Testing from the top navigation bar.
 
 You’ll see three sections:
 
-- **Planned** – Tests you’ve set up but haven’t started yet.   
-- **In Progress** – Tests currently running on live calls.   
-- **Completed** – Finished tests where you can review performance results.   
+- **Planned** – Tests you’ve set up but haven’t started yet.
+- **In Progress** – Tests currently running on live calls.
+- **Completed** – Finished tests where you can review performance results.
 
 ## Creating a New A/B Test
 
@@ -57,19 +57,19 @@ Phonely supports multiple types of tests depending on your experiment goal. You 
 | **Knowledge Base** | Tests different documentation sources                            | See which knowlesdge sources improve the accuracy of the the answers |
 | **Other**          | For any other tests outside these categories                     |                                                                      |
 
-Once selected, click **Next**.           
+Once selected, click **Next**.
 
 ## Define End Criteria and Call Distribution
 
-Here, you’ll specify how long the test should run and what share of calls should be routed to your test version.                                                                                       
+Here, you’ll specify how long the test should run and what share of calls should be routed to your test version.
 
 ### End Criteria
 
-Choose when the test should stop automatically:   
+Choose when the test should stop automatically:
 
 - **By Number of Calls:** Ends after a set number of test calls.\
   _Example:_ Stop after 1,000 calls routed to the test version.
-- **By Number of Days:** Runs for a fixed duration (e.g., 10 days).    
+- **By Number of Days:** Runs for a fixed duration (e.g., 10 days).
 - **AI-Determined:** Will allow Phonely to automatically decide when enough data is collected.
 
 ### Call Route Percentage
@@ -79,7 +79,7 @@ Use the slider to define how much traffic is sent to the test version.
 - **Example:** Route 30% of calls to the test, and keep 70% on the base agent.
 - **Recommendation:** Start small (20–30%) to ensure stability before scaling up.
 
-After configuring both, click **Next**.    
+After configuring both, click **Next**.
 
 ![Configure Test End Criteria Gi](/assets/configure-test-end-criteria.gif)
 
@@ -100,7 +100,7 @@ Evaluates success based on how the call ended. Use this if you care about the te
 - Customer Ended
 - Agent Endedded
 
-Example Use case: “We want more calls to end in transfers to the sales team.”
+Example Use case: “We want more calls to end in transfers to the sales team.
 
 ### Call Outcome-Based Testing
 
