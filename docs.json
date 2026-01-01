@@ -162,7 +162,10 @@
           {
             "group": "TESTING",
             "pages": [
-              "/testing/ab-testing"            ]
+              "/testing/ab-testing",
+              "/testing/simulation-testing"
+            
+            ]
           },
           {
             "group": "ACCOUNT & ORGANIZATION SETTINGS",
