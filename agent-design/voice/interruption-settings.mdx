@@ -5,9 +5,14 @@ description: "Learn how to configure settings that dictate how your AI agent lis
 
 The **Interruption** tab controls how your Phonely AI agent listens, responds, and reacts when a user speaks.These settings are designed to fine-tune conversational flow, ensuring your agent feels natural, patient, and responsive without cutting off the user or leaving long pauses.
 
-Whether you want your agent to sound calm and thoughtful or quick and snappy, this section helps you balance responsiveness, patience, and listening accuracy.   
+Whether you want your agent to sound calm and thoughtful or quick and snappy, this section helps you balance responsiveness, patience, and listening accuracy.       
 
-![Agent Advanced Settings Pn](/assets/agent-advanced-settings.png)
+<img
+  src="/assets/advanced-call-settings-phonely.png"
+  alt="Advanced Call Settings Phonely"
+  title="Advanced Call Settings Phonely"
+  style={{ width:"96%" }}
+/>
 
 ## Background Noise Reduction
 
@@ -16,15 +21,15 @@ This feature helps your agent filter out unwanted environmental sounds, such as 
 
 ### How to Configure
 
-1. Go to **Advanced Settings**.   
-2. Open the **Background Noise Reduction** dropdown.   
-3. Choose from **Phonely (Default)**, **None**, **Krisp**, **AI Coustics**, or **Krisp VIVA**,  each offering varying levels of AI-powered background noise filtering, response delays,  and number of words to interrupt.    
+1. Go to **Advanced Settings**.
+2. Open the **Background Noise Reduction** dropdown.
+3. Choose from **Phonely (Default)**, **None**, **Krisp**, **AI Coustics**, or **Krisp VIVA**,  each offering varying levels of AI-powered background noise filtering, response delays, and number of words to interrupt.        
 
 ## Conversation Presets
 
-Conversation presets let you quickly adjust multiple interruption parameters to match the desired communication style of your agent. They’re great for aligning tone and response timing without manually tweaking each control.   
+Conversation presets let you quickly adjust multiple interruption parameters to match the desired communication style of your agent. They’re great for aligning tone and response timing without manually tweaking each control.          
 
-![Interruption Settings Phonely Pn](/assets/interruption-settings-phonely.png)
+![Interruption Settings In Phonely](/assets/interruption-settings-in-phonely.png)
 
 ### **Available Presets**
 
@@ -35,56 +40,55 @@ Conversation presets let you quickly adjust multiple interruption parameters to 
 | **Urgent**   | Quick & Responsive | Responds faster, ideal for concise, fast-paced exchanges.                       | Emergency hotlines, internal team calls, or status updates. |
 
 1. Under **Conversation Presets**, choose the tone that best fits your workflow.
-2. Adjust individual settings below if you want finer control.    
+2. Adjust individual settings below if you want finer control.
 
 ## Response Delay
 
-Defines how long the agent waits after the agent waits after a user finishes speaking before responding.                                                                             \
-This helps avoid awkward overlaps or overly long pauses between sentences.
+Defines how long the agent waits after the agent waits after a user finishes speaking before responding. This helps avoid awkward overlaps or overly long pauses between sentences.
 
 1. Use the **Response Delay** slider to set the desired wait time in seconds.
-2. You can also choose from the presents above to adjust this.
+2. You can also choose from the presents above to adjust this.    
 
-![Number Of Words To Interrupt Pn](/assets/number-of-words-to-interrupt.png)
+![Response Delay Settings](/assets/response-delay-settings.png)
 
 ## Number of Words to Interrupt Assistant
 
 This determines how many words the caller must speak before interrupting the AI mid-response.\
-It helps balance between letting the agent finish its thoughts and ensuring users can easily interject when needed.     
+It helps balance between letting the agent finish its thoughts and ensuring users can easily interject when needed.   
 
 ## Smart Endpointing
 
-Smart Endpointing uses machine learning to detect when the caller has truly finished speaking — not just paused momentarily. This helps prevent the AI from interrupting too early and creates smoother turn-taking between the agent and the user.   
+Smart Endpointing uses machine learning to detect when the caller has truly finished speaking not just paused momentarily. This helps prevent the AI from interrupting too early and creates smoother turn-taking between the agent and the user.
 
-1. Make sure **Smart Endpointing** is enabled.
-2. Adjust the Smart Turn Stop Time slider to control how long the AI waits before speaking again.
+1. Make sure **Smart Endpointing** is enabled.     
+2. Adjust the smart turn stop time slider to control how long the AI waits before speaking again.
 
-![Smart End Pointing Pn](/assets/smart-end-pointing.png)
+![Smart Endpointing Settings](/assets/smart-endpointing-settings.png)
 
 ## Model Providers
 
-The **Model Providers** section controls the AI and telecom engines that power your Phonely agent. These settings influence how your agent sounds, how quickly it responds, how well it reasons, and how reliably it handles calls. For best performance, Phonely recommends keeping most of these options on their defaults, but you can still customize everything based on your workflow.    
+The **Model Providers** section controls the AI and telecom engines that power your Phonely agent. These settings influence how your agent sounds, how quickly it responds, how well it reasons, and how reliably it handles calls. For best performance, Phonely recommends keeping most of these options on their defaults, but you can still customize everything based on your workflow.     
 
-![Model Providers Phonely Pn](/assets/model-providers-phonely.png)
+![Model Providers Settings Phonely](/assets/model-providers-settings-phonely.png)
 
 ## Voice LLM Model
 
-This setting determines which **Large Language Model**  your agent uses when speaking to callers. Different models offer different balances of speed, reasoning quality, and cost.    
+This setting determines which **Large Language Model**  your agent uses when speaking to callers. Different models offer different balances of speed, reasoning quality, and cost.      
 
 You can choose from several OpenAI-powered models, along with Phonely’s optimized default:
 
-- **Phonely (Default):** A pre-optimized model configuration designed specifically for live phone conversations. It provides the best mix of speed, reliability, and stable conversational tone.
-- **GPT-5.1:** OpenAI’s latest high-reasoning model. Excellent for complex or technical conversations, though slightly slower.      
-- **GPT-5:** Strong reasoning with ~800ms response time.    
+- **Phonely (Default):** A pre-optimized model configuration designed specifically for live phone   conversations. It provides the best mix of speed, reliability, and stable conversational tone.
+- **GPT-5.1:** OpenAI’s latest high-reasoning model. Excellent for complex or technical.  conversations, though slightly slower.   
+- **GPT-5:** Strong reasoning with ~800ms response time.      
 - **GPT-5 Mini**: A faster, more lightweight GPT-5 variant with ~600ms response time.
 - **GPT-4.1:** Balanced performance, stable and predictable.   
-- **GPT-4o:** Azure-powered with very fast ~450ms responses.                
+- **GPT-4o:** Azure-powered with very fast ~450ms responses.   
 
 ## Telecom Provider
 
 This determines which telecom network your Phonely agent uses when placing and receiving calls.
 
-You can choose between:
+You can choose between:  
 
 - **Phonely (Default):** Optimized for warm transfers and clear audio quality.
 - **Dialy:** Great for warm transfers but has a slightly slower dial-out.
@@ -108,9 +112,9 @@ Simply type a keyword and press **Enter** to save it. This helps improve transcr
 
 ## Knowledge Base Settings
 
-The Knowledge Base settings control how your agent retrieves and uses information from your uploaded documents. These influence how much context your agent pulls in and how strictly it filters irrelevant content.
+The Knowledge Base settings control how your agent retrieves and uses information from your uploaded documents. These influence how much context your agent pulls in and how strictly it filters irrelevant content.      
 
-![Rag Settings Pn](/assets/rag-settings.png)
+![Llm Rag Prompt Version Settings](/assets/llm-rag-prompt-version-settings.png)
 
 ## RAG Score Threshold
 
@@ -130,12 +134,12 @@ Unlike call outcomes, which are tied to specific blocks in a workflow, Call Topi
 
 You define a list of possible topics that represent common reasons or situations during calls. These can be broad, such as caller transferred or caller asked to speak to a representative, or highly specific, such as caller hung up after agent asked for age.
 
-When a call finishes, Phonely reviews the entire transcript and selects the single topic that best matches what actually occurred during the conversation.
+When a call finishes, Phonely reviews the entire transcript and selects the single topic that best matches what actually occurred during the conversation.     
 
 ![Call Topic List](/asset/call-topic-list.png)
 
 **When to Use Call Topics**
 
-Call Topics are especially useful when you want deeper insights than outcomes alone can provide. They help you identify patterns like partial form completion, frequent transfer requests, or recurring caller frustrations that may not map cleanly to a single workflow end state.
+Call Topics are especially useful when you want deeper insights than outcomes alone can provide. They help you identify patterns like partial form completion, frequent transfer requests, or recurring caller frustrations that may not map cleanly to a single workflow end state.        
 
-You can keep topics intentionally high-level for reporting and trend analysis, or make them highly granular to surface specific breakdown points within complex flows.
+You can keep topics intentionally high-level for reporting and trend analysis, or make them highly granular to surface specific breakdown points within complex flows.         
