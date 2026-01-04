@@ -2,13 +2,15 @@
 title: "Transfer Flow New"
 ---
 
-The Transfer Flow block lets your AI agent route a caller from the current flow to one or more sub-flows, without ending the call. The new version of this block introduces multiple destinations, centralized transition logic, and a simpler configuration model, making complex routing easier to build and maintain.
+The Transfer Flow block lets your AI agent route a caller from the current flow to one or more sub-flows, without ending the call. 
+
+From the caller’s perspective, the transition is seamless, they remain in the same call while the agent switches conversational context behind the scenes.
+
+The new version of this block introduces multiple destinations, centralized transition logic, and a simpler configuration model, making complex routing easier to build and maintain.
 
 ## What’s New in the Transfer Flow Block
 
 The new Transfer Flow block replaces the old pattern of chaining multiple transfer blocks together. Instead, you can now manage all routing destinations from a single block.
-
-### Key Improvements
 
 ### 1. Multiple Flow Destinations
 
@@ -20,11 +22,11 @@ This removes the need for:
 - Multiple downstream transfer blocks
 - Duplicated logic across flows
 
-### 2. Transition Conditions 
+### 2. Transition Conditions
 
 Transition conditions appear only when more than one destination is configured.
 
-Each destination can have a plain-text condition that describes _when_ a caller should be routed to that flow.             
+Each destination can have a plain-text condition that describes _when_ a caller should be routed to that flow.
 
 <Tip>
   Phonely will use this condition to determine when to route to this flow based on the caller's request, asking clarifying questions if needed. Be as descriptive as possible.
@@ -47,12 +49,6 @@ Unlike older transfer blocks, the new Transfer Flow block:
 - Focuses on fast, consistent routing
 - Preserves advanced logic under the global workflow configuration
 
-## What Is the Transfer Flow Block?
-
-The Transfer Flow block routes an active call from the current flow to the start of another flow, without disconnecting the caller.
-
-From the caller’s perspective, the transition is seamless, they remain in the same call while the agent switches conversational context behind the scenes.
-
 ## Key Capabilities
 
 - Seamless flow-to-flow transitions without ending the call
@@ -65,7 +61,7 @@ From the caller’s perspective, the transition is seamless, they remain in the 
 ## How to Use the Transfer Flow Block
 
 1. Open your agent in **Agent Design**
-2. Click the **➕** button on the canvas and select **Transfer Flow. **
+2. Click the **➕** button on the canvas and select \*\*Transfer Flow. \*\*
 
 <img
   src="/assets/new-transfer-flow.png"
@@ -89,7 +85,7 @@ From the caller’s perspective, the transition is seamless, they remain in the 
 
 Each destination appears as a separate routing option inside the block.
 
-### Define Transition Conditions 
+### Define Transition Conditions
 
 If you configure **multiple destinations**, a **Transition Condition** field appears.
 
