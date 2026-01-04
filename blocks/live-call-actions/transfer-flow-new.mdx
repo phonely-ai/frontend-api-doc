@@ -1,0 +1,141 @@
+---
+title: "Transfer Flow New"
+---
+
+The Transfer Flow block lets your AI agent route a caller from the current flow to one or more sub-flows, without ending the call. The new version of this block introduces multiple destinations, centralized transition logic, and a simpler configuration model, making complex routing easier to build and maintain.
+
+## What’s New in the Transfer Flow Block
+
+The new Transfer Flow block replaces the old pattern of chaining multiple transfer blocks together. Instead, you can now manage all routing destinations from a single block.
+
+### Key Improvements
+
+### 1. Multiple Flow Destinations
+
+You can add multiple sub-flows inside a single Transfer Flow block. Each destination represents a possible routing outcome.
+
+This removes the need for:
+
+- A primary routing block
+- Multiple downstream transfer blocks
+- Duplicated logic across flows
+
+### 2. Transition Conditions 
+
+Transition conditions appear only when more than one destination is configured.
+
+Each destination can have a plain-text condition that describes _when_ a caller should be routed to that flow.             
+
+<Tip>
+  Phonely will use this condition to determine when to route to this flow based on the caller's request, asking clarifying questions if needed. Be as descriptive as possible.
+</Tip>
+
+### 3. Global Transition Conditions
+
+Transition logic is now managed globally at the workflow level.
+
+This means:
+
+- Transition conditions are defined once
+- Any updates automatically propagate everywhere they’re used
+
+### 4. Simplified Exit Logic
+
+Unlike older transfer blocks, the new Transfer Flow block:
+
+- Does **not** inject variables into exit conditions
+- Focuses on fast, consistent routing
+- Preserves advanced logic under the global workflow configuration
+
+## What Is the Transfer Flow Block?
+
+The Transfer Flow block routes an active call from the current flow to the start of another flow, without disconnecting the caller.
+
+From the caller’s perspective, the transition is seamless, they remain in the same call while the agent switches conversational context behind the scenes.
+
+## Key Capabilities
+
+- Seamless flow-to-flow transitions without ending the call
+- Modular call flow design for cleaner, maintainable agents
+- Reusable sub-flows across multiple agents or workflows
+- Centralized routing logic via global transition conditions
+- Optional interim message during flow transitions
+- Call outcome tagging for analytics and reporting
+
+## How to Use the Transfer Flow Block
+
+1. Open your agent in **Agent Design**
+2. Click the **➕** button on the canvas and select **Transfer Flow. **
+
+<img
+  src="/assets/new-transfer-flow.png"
+  alt="New Transfer Flow"
+  title="New Transfer Flow"
+  style={{ width:"70%" }}
+/>
+
+3. Under **Available Sub-Flows**
+4. Open the **Flow** dropdown
+5. Select the sub-flow you want to route to
+
+<img
+  src="/assets/select-subflow.png"
+  alt="Select Subflow"
+  title="Select Subflow"
+  style={{ width:"72%" }}
+/>
+
+3. Repeat to add multiple destinations if needed
+
+Each destination appears as a separate routing option inside the block.
+
+### Define Transition Conditions 
+
+If you configure **multiple destinations**, a **Transition Condition** field appears.
+
+Use this field to describe:
+
+- When the caller should be routed to that destination
+- How the intent differs from other flows
+
+<img
+  src="/assets/transition-condition.png"
+  alt="Transition Condition"
+  title="Transition Condition"
+  style={{ width:"79%" }}
+/>
+
+> These conditions connect to the **global transition rules** defined in your workflow.
+
+### Advanced Settings
+
+#### Interim Message
+
+Enable Interim Message if you want the agent to say something during the transition, such as:
+
+> “Let me connect you to the right place.”
+
+You can also configure:
+
+- Prompt-generated messages
+- Post-interim message delay
+
+<img
+  src="/assets/interim-and-post-interim-messages.png"
+  alt="Interim And Post Interim Messages"
+  title="Interim And Post Interim Messages"
+  style={{ width:"78%" }}
+/>
+
+#### Call Outcome Tagging
+
+Add tags to label the call at this routing point for:
+
+- Analytics
+- Funnel tracking
+- Reporting
+
+### Save and Publish
+
+1. Click **Done**
+2. Publish your flow
