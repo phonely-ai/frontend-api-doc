@@ -39,7 +39,7 @@ Auto-gather: the agent asks for a value at the moment a block needs it (e.g., as
 
 Type `@` in any field to insert an available variable. You can also reference knowledge base docs via the same menu.
 
-**Live vs. post-call actions**
+**ive vs. post-call actions**
 
 - Live actions happen during the call (API request, SMS, email, transfer, booking).
 - Post-call actions run only if the call ends at/after a specific node, useful for sending a recap email with recording, logging outcomes, or notifying a team.
@@ -71,6 +71,49 @@ Prompt the caller at the moment a block needs a value (name, email, date, etc.) 
 <Tip>
   In an API Request block, add a query/body field → choose "Auto-gather" → set type (Text, Email, Phone, Date, Time) and "Required." At runtime, the agent asks, then proceeds with the request.
 </Tip>
+
+## Type Safety, and Backward Compatibility
+
+Phonely now maintains an explicit **type for variables** to improve reliability in API requests, code blocks, and post-call automation—while remaining fully backward compatible with existing workflows.
+
+**Variable Types at a Glance**
+
+Variables can now carry an explicit type, such as: `text, number, boolean, date, time, email, list(text), json, array,enum etc.`
+
+When hovering over a variable in the builder, its type is displayed to help you understand how it will be handled at runtime.
+
+**Backward Compatibility **
+
+- **Existing variables are not affected.**\
+  Any variables that were already added to blocks before this update continue to behave as **strings**.
+- Only **newly added variables** will automatically carry and preserve a type in the backend.
+
+This ensures older flows continue working exactly as before.
+
+**Typed vs. Untyped Variables**
+
+- **Untyped variables: **Legacy variables (or plain string variables) do not display a type and are treated as strings.
+- **Typed variables: **New variables, especially those created via AI extraction, Auto-gather, API Request blocks, or Code blocks, retain their type. 
+
+### **Type Conversion Rules**
+
+Phonely performs type conversion only when the variable is the sole content of a field.
+
+**Type conversion occurs when:**
+
+The variable has a non-string type (for example, array or boolean), it is passed through to the backend as-is.
+
+```
+{{response_object}}
+```
+
+**Type conversion does NOT occur when:**
+
+There is some additional text around the type variable. In this case, the entire field is treated as a string, even if the variable itself has a type. 
+
+```
+{{response_object}} some additional text
+```
 
 ## Full Variable Catalog
 
@@ -195,11 +238,11 @@ In any block field, type `@` to insert existing variables. You can also referenc
 
 ### Create Custom Variables
 
-Open the Variables modal and add keys you'll reuse (for example, `api_key`, `org_id`). This keeps requests consistent across flows.    
+Open the Variables modal and add keys you'll reuse (for example, `api_key`, `org_id`). This keeps requests consistent across flows.
 
 ### Reorder Variables
 
-You can **reorder variables** directly within the Variables panel to better match your workflow logic or preferred reading order.    
+You can **reorder variables** directly within the Variables panel to better match your workflow logic or preferred reading order.
 
 Drag and drop variables using the handle on the left side of each variable row to rearrange them. Reordering does not affect runtime behavior or data capture, it only changes how variables are displayed in the builder and selection menus. This is especially useful for keeping frequently used or related variables grouped together.
 
