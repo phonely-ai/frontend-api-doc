@@ -82,7 +82,7 @@ Variables can now carry an explicit type, such as: `text, number, boolean, date,
 
 When hovering over a variable in the builder, its type is displayed to help you understand how it will be handled at runtime.
 
-**Backward Compatibility **
+\*\*Backward Compatibility \*\*
 
 - **Existing variables are not affected.**\
   Any variables that were already added to blocks before this update continue to behave as **strings**.
@@ -92,14 +92,14 @@ This ensures older flows continue working exactly as before.
 
 **Typed vs. Untyped Variables**
 
-- **Untyped variables: **Legacy variables (or plain string variables) do not display a type and are treated as strings.
-- **Typed variables: **New variables, especially those created via AI extraction, Auto-gather, API Request blocks, or Code blocks, retain their type. 
+- \*\*Untyped variables: \*\*Legacy variables (or plain string variables) do not display a type and are treated as strings.
+- \*\*Typed variables: \*\*New variables, especially those created via AI extraction, Auto-gather, API Request blocks, or Code blocks, retain their type.
 
 ### **Type Conversion Rules**
 
 Phonely performs type conversion only when the variable is the sole content of a field.
 
-**Type conversion occurs when:**
+**Conversion occurs when:**
 
 The variable has a non-string type (for example, array or boolean), it is passed through to the backend as-is.
 
@@ -107,9 +107,9 @@ The variable has a non-string type (for example, array or boolean), it is passed
 {{response_object}}
 ```
 
-**Type conversion does NOT occur when:**
+**Conversion does NOT occur when:**
 
-There is some additional text around the type variable. In this case, the entire field is treated as a string, even if the variable itself has a type. 
+There is some additional text around the type variable. In this case, the entire field is treated as a string, even if the variable itself has a type.
 
 ```
 {{response_object}} some additional text
