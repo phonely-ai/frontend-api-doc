@@ -145,7 +145,7 @@
             ]
           },
           {
-            "group": " AGENT KNOWLEDGEBASE",
+            "group": "AGENT KNOWLEDGEBASE",
             "pages": [
               "agent-knowledge-base/upload-files",
               "agent-knowledge-base/upload-documents",
