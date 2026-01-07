@@ -1,22 +1,23 @@
 ---
 title: "Payments"
+description: "Learn how to configure and use the Payment block to securely collect and process payments during live phone calls"
 ---
 
-## Using the Payment Block in Phonely
-
-The **Payment block** enables your Phonely AI agent to securely collect and process payments during a live phone call. With this block, callers can complete a transaction without leaving the call, speaking to a human agent, or being redirected to an external checkout experience. 
+The **Payment block** enables your Phonely AI agent to securely collect and process payments during a live phone call. With this block, callers can complete a transaction without leaving the call, speaking to a human agent, or being redirected to an external checkout experience.
 
 The result is a fast, natural, and fully automated payment flow that works seamlessly within your existing call logic.
 
-Phonely’s payment handling is **fully PCI-compliant**. All sensitive card information is transferred into an isolated, secure environment and never stored or exposed inside your workflow. 
+Phonely’s payment handling is **fully PCI-compliant**. All sensitive card information is transferred into an isolated, secure environment and never stored or exposed inside your workflow.
+
+<iframe src="https://www.youtube.com/embed/sAZhC5RNOpI" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
 
 ## Where the Payment Block Fits in a Call Flow
 
-The Payment block is typically used after the agent has identified a clear payment intent. This intent might be detected through a conversation, a condition block, or a structured intake step. 
+The Payment block is typically used after the agent has identified a clear payment intent. This intent might be detected through a conversation, a condition block, or a structured intake step.
 
 For example, a caller may indicate they want to make a donation, pay an invoice, or complete a purchase.
 
-Once that intent is confirmed, the workflow routes the caller into the Payment block. At this point, the call temporarily transitions into a secure payment experience. The caller can enter card details using their phone keypad or speak them aloud, depending on how the block is configured. 
+Once that intent is confirmed, the workflow routes the caller into the Payment block. At this point, the call temporarily transitions into a secure payment experience. The caller can enter card details using their phone keypad or speak them aloud, depending on how the block is configured.
 
 After the payment attempt completes, successfully or not, the call automatically returns to your flow so the agent can continue, escalate, or end the conversation.
 
@@ -103,13 +104,13 @@ Choose the voice used during the secure payment step.
 
 ### Optional Metadata & Parameters
 
-You can pass additional metadata (such as order IDs, campaign names, or internal references) along with the payment for downstream systems or reporting.  
+You can pass additional metadata (such as order IDs, campaign names, or internal references) along with the payment for downstream systems or reporting.
 
 ## Using Auto-Gather with Payments
 
-The Payment block works seamlessly with Auto-Gather variables, allowing you to collect required information at the exact moment it’s needed.   
+The Payment block works seamlessly with Auto-Gather variables, allowing you to collect required information at the exact moment it’s needed.
 
-Example setup:      
+Example setup:
 
 - `payment_amount` → Number → Required → Confirm
 - `donation_reason` → Text → Optional
