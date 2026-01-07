@@ -29,7 +29,7 @@ Common scenarios include:
 - Order or invoice payments
 - Subscription sign-ups
 - One-time service fees
-- Balance collection before escalation
+- Balance collection before escalatio
 
 ## Adding the Payment Block to a Flow
 
@@ -57,13 +57,16 @@ You can:
 - Enter a fixed amount, or
 - Use an auto-gather variable to collect the amount at runtime
 
-**Example (Donation Flow):**
+### Using Auto-Gather with Payments
 
-- Create an auto-gather variable like `payment_amount`
-- Set its type to **Number**
-- Ask: _“How much would you like to donate?”_
+The Payment block works seamlessly with Auto-Gather variables, allowing you to collect required information at the exact moment it’s needed.
 
-This ensures the amount is properly formatted and stored as a numeric value.
+Example setup:
+
+- `payment_amount` → Number → Required → Confirm
+- `donation_reason` → Text → Optional
+
+This removes the need for extra Talk or Collect blocks and keeps your flow clean.
 
 ### Currency
 
@@ -104,18 +107,7 @@ Choose the voice used during the secure payment step.
 
 ### Optional Metadata & Parameters
 
-You can pass additional metadata (such as order IDs, campaign names, or internal references) along with the payment for downstream systems or reporting.
-
-## Using Auto-Gather with Payments
-
-The Payment block works seamlessly with Auto-Gather variables, allowing you to collect required information at the exact moment it’s needed.
-
-Example setup:
-
-- `payment_amount` → Number → Required → Confirm
-- `donation_reason` → Text → Optional
-
-This removes the need for extra Talk or Collect blocks and keeps your flow clean.
+You can pass additional metadata under the payment parameters field. 
 
 ## Handling Success and Failure
 
@@ -134,10 +126,3 @@ After the Payment block runs, you can branch your workflow:
 - Escalate to support
 
 This makes it easy to design graceful recovery paths.
-
-## Security & Compliance
-
-- Fully **PCI compliant**
-- Card data is never stored in your workflow
-- Payment handling occurs in a **secure, isolated environment**
-- Suitable for production use across regulated industries
