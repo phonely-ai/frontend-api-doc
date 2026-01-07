@@ -101,6 +101,7 @@
                   "blocks/live-call-actions/api-request",
                   "blocks/live-call-actions/transfer-flow-new",
                   "blocks/live-call-actions/new-transfer-call",
+                  "blocks/live-call-actions/payments",
                   "blocks/live-call-actions/send-sms",
                   "blocks/live-call-actions/send-email",
                   "blocks/live-call-actions/codeflow"
