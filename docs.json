@@ -173,7 +173,8 @@
           {
             "group": "ACCOUNT & ORGANIZATION SETTINGS",
             "pages": [
-              "manage-account-and-organization-settings/manage-account-and-oraganization-settings"
+              "manage-account-and-organization-settings/manage-account-and-oraganization-settings",
+              "manage-account-and-organization-settings/delete-agents"
             ]
           },
           {
