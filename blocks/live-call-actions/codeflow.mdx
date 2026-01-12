@@ -7,11 +7,11 @@ Code is a powerful new workflow block that allows you to execute Python code dir
 
 It acts as a dynamic logic layer between conversational steps, giving you the ability to compute values and make conditional decisions through your own scripts.
 
-When a Code Block runs, it:       
+When a Code Block runs, it:
 
-- Receives workflow variables as input (through an input dictionary).    
-- Executes your defined Python logic.  
-- Returns any new or modified values as output (through an output dictionary).    
+- Receives workflow variables as input (through an input dictionary).
+- Executes your defined Python logic.
+- Returns any new or modified values as output (through an output dictionary).
 
 <Danger>
   Currently, Code Blocks only support Python
@@ -21,10 +21,10 @@ When a Code Block runs, it:
 
 ## When to Use
 
-Understanding when to use a Code Block helps you unlock its full potential in building smart, adaptive flows:   
+Understanding when to use a Code Block helps you unlock its full potential in building smart, adaptive flows:
 
 - Custom Logic Execution – Use it to calculate, compare, or transform varaibles dynamically.
-- Conditional Workflows – When decisions depend on complex logic that goes beyond standard Flow conditions.      
+- Conditional Workflows – When decisions depend on complex logic that goes beyond standard Flow conditions.
 
 ## Setup
 
@@ -34,29 +34,25 @@ In this example, we will demonstrate how the Code Block is used inside a workflo
   <Step title="Add a New Block" titleSize="p">
     From your workflow canvas, click the **\+** icon and select Code action from the list of available blocks.
 
-    The block will appear in your flow, ready for configuration.    
+    The block will appear in your flow, ready for configuration.
 
     ![Howtoaddcodeblock Gi](/assets/how-to-access-code-flow.gif)
   </Step>
   <Step title="Configure Input Variables">
-    Each Code Block begins with one or more input variables, these are values passed into your script from previous blocks.   
+    Each Code Block begins with one or more input variables, these are values passed into your script from previous blocks.
 
-    Enter the name of the variable. This is the name that you will use to refer to the variable in your code.         
+    Enter the name of the variable. This is the name that you will use to refer to the variable in your code.
 
     <Tip>
       You’ll notice default variables like `arg1` and `arg2` when adding a Code Block. Feel free to rename or remove them to match your workflow’s actual input variables.
     </Tip>
-    <img
-      src="/assets/variables-in-code-block.png"
-      alt="Selectinginputvariblesforpythoncodeblocks Pn"
-      style={{ width:"96%" }}
-    />
+    ![Configure Code Block](/assets/configure-code-block.png)
 
-    Once you have entered the variable name set the variable itself. There are two of ways to do this:   
+    Once you have entered the variable name set the variable itself. There are two of ways to do this:
 
     #### Auto-gather
 
-    Automatically prompt the caller when a block needs specific information (e.g., name, email, or date). Phonely collects this input in real time no extra Talk block required.               
+    Automatically prompt the caller when a block needs specific information (e.g., name, email, or date). Phonely collects this input in real time no extra Talk block required.
 
     #### Variables from Previous Blocks
 
