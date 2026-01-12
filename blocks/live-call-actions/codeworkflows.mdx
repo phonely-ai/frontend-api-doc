@@ -58,7 +58,7 @@ In this example, we will demonstrate how the Code Block is used inside a workflo
 
     Use information already gathered earlier in other flows.
 
-    For example, in this workflow, the AI first asks the caller why they’re calling. If the caller requests a store transfer, they’ll be prompted to provide their zip_code. This value can then be used as an input variable within the Code Block.        
+    For example, in this workflow, the AI first asks the caller why they’re calling. If the caller requests a store transfer, they’ll be prompted to provide their zip_code. This value can then be used as an input variable within the Code Block.
   </Step>
   <Step title="Write Your Code">
     <Tip>
@@ -126,7 +126,7 @@ In this example, we will demonstrate how the Code Block is used inside a workflo
 
     - It searches the dictionary for the customer’s zip_code value (captured earlier in the workflow).
     - If it finds a match, it retrieves the store’s phone number.
-    - If the ZIP code isn’t recognized, it falls back to a default number,  in this case, **\+1-444-504-6273**, which might be your main support or general customer service line.
+    - If the ZIP code isn’t recognized, it falls back to a default number,  in this case, +1-444-504-6273, which might be your main support or general customer service line.
 
     This ensures there’s always a valid number to dial, even for unrecognized ZIP codes.
 
@@ -159,7 +159,7 @@ In this example, we will demonstrate how the Code Block is used inside a workflo
     ![Codevalidation Pn](/images/codevalidation.png)
   </Step>
   <Step title="Test the Block">
-    Once you’ve written and validated your Python function, you can test it directly from the Test tab. This step allows you to make sure the logic behaves exactly as you expect before you connect it to other workflow components.                     
+    Once you’ve written and validated your Python function, you can test it directly from the Test tab. This step allows you to make sure the logic behaves exactly as you expect before you connect it to other workflow components.
 
     To do this, simply enter the respective values of the input variables into the test input field and observe the results when you click the **Test** button.
 
@@ -176,7 +176,7 @@ In this example, we will demonstrate how the Code Block is used inside a workflo
 
     Each time the code flow runs, all returned data is automatically made available as variables for the subsequent flows.
 
-    These variables can then be referenced in later blocks - such as Transfer, Send SMS, or Email etc.    
+    These variables can then be referenced in later blocks - such as Transfer, Send SMS, or Email etc.
 
     In the above example we can:
 
