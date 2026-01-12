@@ -10,9 +10,9 @@ This guide explains how to connect your **Phonely** account to **Make (formerly 
 Phonely can push call data (like caller name, phone number, transcript, and summary) to Make through a webhook URL.\
 To receive and process this data correctly, Make requires:
 
-1. A **Webhook** module to capture data from Phonely.
-2. A **Scenario** that defines the data structure (inputs and outputs).
-3. A **Return Output** module that allows the webhook to send structured results back to Phonely.
+1. A Webhook module to capture data from Phonely.
+2. A Scenario that defines the data structure (inputs and outputs).
+3. A Return Output module that allows the webhook to send structured results back to Phonely.
 
 ### Create a Webhook in Make
 
@@ -20,20 +20,18 @@ To receive and process this data correctly, Make requires:
 2. Click **Open Scenario Builder**.
 3. In the Scenario Builder, click the **\+** icon to add a module.
 4. Search for **Webhooks (Built-in)**.
-
-
 4. Select **Custom Webhook** under **Triggers**.
 5. Click **Add**, name your webhook, and click **Save**.
 6. Make will generate a unique **Webhook URL** (e.g.,\
    `https://hook.eu1.make.com/your-webhook-id`).
-7. Clikc copy address to clipborad to copy the webhook url. 
+7. Clikc copy address to clipborad to copy the webhook url.
 
 ![How To Create A Webhook In Make Gi](/assets/how-to-create-a-webhook-in-make.gif)
 
 Click **Run once** — you should see “**Listening for data…**”.
 
 <Tip>
-  If you run the Phonely test _before_ the scenario is listening, you get and error saying that there is no scenario listening for this webhook. 
+  If you run the Phonely test _before_ the scenario is listening, you get and error saying that there is no scenario listening for this webhook.
 </Tip>
 
 If Make receives it, you’ll see a successful bundle appear in that webhook module, and Phonely’s test will show success.
@@ -54,21 +52,19 @@ Without closing that page, go back to **Phonely** and follow the steps below.
    - `summary`
    - `longSummary`
    - `ai_success`
-4. Click **Continue** and test the webhook. 
+4. Click **Continue** and test the webhook.
 
 ![How To Connect Phonely To Make Gi](/assets/how-to-connect-phonely-to-make.gif)
 
 ### Test and Verify
 
-1. Trigger a test call or event from Phonely.  You should see a success message like. 
+1. Trigger a test call or event from Phonely.  You should see a success message like.
 
    ```
    {
      "message": "Make webhook test successful"
    }
    ```
-
-
 1. In Make, open your scenario and check the execution log.
 2. Confirm that:
    - The webhook received the call data.
