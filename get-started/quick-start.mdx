@@ -20,9 +20,9 @@ Phonely lets you design AI phone agents using visual workflows. Instead of writi
 
 Phonely combines three core systems that work together in every call.
 
-Your agent configuration defines the voice, tone, and knowledge it uses.\
-Your workflow (flow) defines the conversation logic.\
-Your data and integrations turn calls into real business actions.
+1. Your agent configuration defines the voice, tone, and knowledge it uses.
+2. Your workflow (flow) defines the conversation logic.
+3. Your data and integrations turn calls into real business actions.
 
 When a call comes in, Phonely follows your flow in real time, collecting variables, making decisions, calling APIs, transferring calls, scheduling appointments, or taking payments.
 
@@ -159,7 +159,11 @@ All of these use the same variables collected during the call.
 
 ### Publish & test
 
-Click **Publish**, choose **Test**, or call your provisioned number to hear your agent live. Iterate fast and deploy instantly. 
+Click **Publish**, choose **Test**, or call your provisioned number to hear your agent live. Iterate fast and deploy instantly.
+
+You do not have to call from the beginning every time you want to test your workflow. You can right-click any block and choose [Test from here](/testing/test-from-a-block/) to simulate a call starting at that point, using dummy values. This makes debugging and iteration extremely fast.
+
+Every publish is versioned so you can safely roll back or compare changes later.
 
 ![Test Workflow Publish Save Draft Gi](/images/test-workflow-publish-save-draft.gif)
 
