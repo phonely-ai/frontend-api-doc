@@ -20,9 +20,9 @@ Phonely lets you design AI phone agents using visual workflows. Instead of writi
 
 Phonely combines three core systems that work together in every call.
 
-Your **agent configuration** defines the voice, tone, and knowledge it uses.\
-Your **workflow (flow)** defines the conversation logic.\
-Your **data and integrations** turn calls into real business actions.
+Your agent configuration defines the voice, tone, and knowledge it uses.\
+Your workflow (flow) defines the conversation logic.\
+Your data and integrations turn calls into real business actions.
 
 When a call comes in, Phonely follows your flow in real time, collecting variables, making decisions, calling APIs, transferring calls, scheduling appointments, or taking payments.
 
@@ -56,7 +56,9 @@ Building voice AI agents has never been easier. Get started in just a few simple
 
 ### Add your knowledge
 
-Upload FAQs, SOPs, and documents to the knowledge base. Phonely uses retrieval (RAG) to answer policy and product questions anywhere in the call.
+Upload FAQs, SOPs, pricing sheets, and policy documents into the [knowledge base](/agent-knowledge-base/). Phonely uses retrieval-augmented generation (RAG) to answer questions during the call using your actual content.
+
+This allows your agent to respond accurately without hard-coding every answer into the flow.
 
 ![Knowledbase View In Phonely Gi](/images/knowledbase-view-in-phonely.gif)
 
@@ -64,9 +66,26 @@ Upload FAQs, SOPs, and documents to the knowledge base. Phonely uses retrieval (
   
 </Frame>
 
-### Design the flow
+### Design the Call Flow
 
-Use the visual Flow Builder to map greetings, questions, transfers, API calls, scheduling, and post-call actions.
+Open the Flow Builder and begin laying out how the call should work.
+
+Flows are visual. Each block represents something the agent does:
+
+<Expandable title="Examples">
+  - speak to the caller
+  - ask a question
+  - collect data
+  - check a condition
+  - call an API
+  - schedule an appointment
+  - transfer to a human
+  - end the call
+</Expandable>
+
+You connect these blocks to define how the conversation moves forward.
+
+You can also use [Ask AI](/key-concepts/ask-ai/) inside the builder to generate, explain, or improve your flow while you work.
 
 <img
   src="/assets/example-flow.png"
@@ -81,7 +100,16 @@ Use the visual Flow Builder to map greetings, questions, transfers, API calls, s
 
 ### Capture variables
 
-Define what to collect (e.g., name, DOB). Mark key fields **required** and **confirm** spelling. Use auto-gather to collect data exactly when the block needs it.
+Use [variables](/key-concepts/variables/) to define what to collect (e.g., name, phone number, DOB). Use [auto-gather](/key-concepts/auto-gather-variables/) to collect data exactly when the block needs it.  When a block needs information (name, order number, email, payment amount), the agent automatically asks the caller, confirms it, and stores it in a variable.
+
+These variables can then be:
+
+- used in logic
+- sent to APIs
+- inserted into emails
+- logged after the call, etc.
+
+You can mark important fields as required, enable confirmation, and spell-back to ensure accuracy.
 
 ![Vairable Configuration Panel Gi](/images/vairable-configuration_panel.gif)
 
@@ -89,7 +117,7 @@ Define what to collect (e.g., name, DOB). Mark key fields **required** and **con
   
 </Frame>
 
-### Transfer & escalate
+### Route, Transfer, and Escalate
 
 Add warm transfers (with voicemail detection and fallback) or cold transfers.            \
 Route by intent, person, or department to keep every call moving toward resolution.
@@ -107,7 +135,16 @@ Route by intent, person, or department to keep every call moving toward resoluti
 
 ### Integrate actions
 
-Use pre-built integrations like Google Calendar, or call your APIs with the API Request block. Pass variables such as `@name` and `@dob` dynamically.
+Flows can trigger real actions using pre-built integrations. For example, you can:
+
+- check availability or book meetings in Google Calendar
+- send or receive data via API
+- write to Google Sheets
+- create tickets via webhooks
+- take PCI-compliant payments
+- send emails or SMS
+
+All of these use the same variables collected during the call.
 
 <img
   src="/assets/api-request-block-config.png"
@@ -122,7 +159,7 @@ Use pre-built integrations like Google Calendar, or call your APIs with the API 
 
 ### Publish & test
 
-Click **Publish**, choose **Test**, or call your provisioned number to hear your agent live. Iterate fast and deploy instantly.
+Click **Publish**, choose **Test**, or call your provisioned number to hear your agent live. Iterate fast and deploy instantly. 
 
 ![Test Workflow Publish Save Draft Gi](/images/test-workflow-publish-save-draft.gif)
 
