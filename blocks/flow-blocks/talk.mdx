@@ -9,32 +9,29 @@ Think of talk blocks as prompt blocks. Prompts are essentially a set of instruct
 
 ## Creating a Talk Block
 
-When you add a Talk Block, configuration happens in two steps:
+There are **two ways** to configure a Talk Block:
 
-1. Setup
+- **Generate with AI** – Phonely automatically generates the prompt, variables, and basic structure for the block.
+- **Build Manually** – You configure the Talk Block yourself by defining the prompt, exit conditions, and variables.
 
-2. Configure
+## Setup
 
-You must complete Setup before moving to Configure.
-
-## Setup – Define the AI’s Task
-
-In the **Setup** step, describe what you want the AI to do in plain language.
+In the **Setup** step, describe in plain language what you want the AI to do during this part of the conversation.
 
 **Example:**
 
-> “Greet the caller and ask for their name.”
+> “Greet the caller and ask for their name and phone number."
 
-You can then choose one of the following:
+After completing this step, continue to **Configure** to review or refine the generated setup.
 
-- **Generate with AI** – Phonely automatically creates a prompt
-- **Build Manually** – You write and control the prompt yourself
+## Configure
 
-Once completed, continue to the Configure step.
+The **Configure** tab gives you full control over how the Talk Block behaves.\
+Here, you can manually adjust or define:
 
-##  Configure – Control the Conversation
-
-The **Configure** tab is where you fine-tune how the Talk Block behaves.
+- The prompt the AI uses
+- Exit conditions that determine when to move to the next block
+- Variables used to capture and reuse information
 
 ### Prompt
 
@@ -89,10 +86,10 @@ Variables allow you to:
 
 To add a variable:
 
-1. Click Add Variable. 
-2. Enter a Name (e.g. Caller Name). 
+1. Click Add Variable.
+2. Enter a Name (e.g. Caller Name).
 3. Select a Type (Text, Number, etc.)
-4. (Optional) Add a Description. 
+4. (Optional) Add a Description.
 
 <img
   src="/assets/variables-in-talk-block.png"
