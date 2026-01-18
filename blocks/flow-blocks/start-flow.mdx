@@ -19,15 +19,15 @@ Third, it specifies which communication types can activate the flow, such as inb
 
 ### Add a Start Flow
 
-When you create a **new workflow from scratch** in Phonely, the **Start Flow block is added automatically** to the canvas.
+When you create a new workflow from scratch in Phonely, the Start Flow block is added automatically to the canvas.
 
 You do not need to manually insert it or select it from the block library. Phonely always includes a Start Flow block because every workflow must have a clear entry point.
 
 When the workflow opens:
 
 - The Start Flow block is already present on the canvas
-- It is ready to be configured as a **First Flow**, **Global Flow**, or both (where applicable)
-- Your only required action is to connect it to the next block, typically a **Greeting Message** or **Talk** block
+- It is ready to be configured as a **First Flow**, **Global Flow**, or both. 
+- Your only required action is to connect it to the next block, typically a Greeting Message, Collect, or Talk block.  
 
 <img
   src="/assets/start-flow-block.png"
@@ -37,17 +37,19 @@ When the workflow opens:
 
 ## Set as First Flow
 
-Set as First Flow makes this workflow the default starting point for an agent.
+When **Set as First Flow** is enabled, Phonely will always start with this workflow whenever an **inbound call** is received. Only **one** workflow per agent can be set as the First Flow.
 
-When this option is enabled, Phonely will always begin with this workflow whenever an inbound call is received. Only one workflow per agent can be marked as the First Flow.
+<Note>
+  This option is not available for outbound calls. 
+</Note>
 
-Important behavior to note:
+The **Greeting Message** field is where you write the first thing the agent says when the call begins (for example: “Hello, how can I help you?”).
 
-- Only one First Flow is allowed per agent.
-- This option is not available for outbound calls, as shown in the tooltip.
-- If no First Flow is set, Phonely relies on global flows or manual transfers.
+If call recording is enabled for the agent, you must include a recording disclosure in your greeting. The tooltip in the UI explicitly warns that you must state the call is being recorded, and that you can remove this requirement by disabling call recordings in settings.
 
-Use this when the workflow represents your agent’s main entry experience, such as a general receptionist or support greeting.
+Under **Advanced Settings**, you can add Answers (keywords). These are used to create branching paths for the greeting message.
+
+In practice, this means you can type one or more keywords a caller might say (each entry is added when you press **Enter**), and then route the call differently based on the caller’s response right after the greeting.
 
 ## Set as Global Flow
 
