@@ -8,109 +8,116 @@ Once created, you can reuse this actions across multiple call flows, share it wi
 
 Think of a custom action as a mini reusable workflow inside your larger flow. It behaves like a single block but contains its own inner logic, inputs, and outputs.
 
-Using custom actions you can:
+**When to Use a Custom Action**
 
-2. Ensure teams follow the same steps and structure for repeated processes.
-3. Share standard actions (like “Verify Customer Identity”) across teams and departments.
-4. Update logic in one place, changes automatically propagate to all flows using that action.
+Custom Actions are ideal when you need to:
+
+- Combine multiple blocks into a single, reusable action.
+- Reuse the same multi-step process across multiple agents or flows
+- Standardize logic such as appointment booking, identity verification, or eligibility checks
+- Update logic in one place and automatically apply changes everywhere it’s used
 
 ## Building a Custom Action (Appointment Example)
 
 Let’s build a Make Appointment Custom Action that collects a preferred time, checks availability, and books an appointment.
 
-<img
-  src="/assets/how-to-create-a-custom-action.gif"
-  alt="How To Create A Custom Action Gi"
-  style={{ width:"95%" }}
-/>
-
 ### Start from Your Flow
 
 <Steps>
-  <Step title="Open an existing call flow (e.g., your appointment scheduling flow).">
+  <Step title="Create a new workflow, or open an existing one">
     
   </Step>
-  <Step title="Click the ＋ button under any existing block.">
+  <Step title="Click the ＋ button under any existing block">
     
   </Step>
-  <Step title="Select Build a Custom Action. A purple editor window opens, this is your custom action workspace.">
+  <Step title="Select Build a Custom Action. A purple editor window opens, this is your custom action workspace">
     
   </Step>
 </Steps>
 
-### Add Blocks to Your Custom Action
-
-Inside the purple area (your Custom Action workspace), you can start building just like you would in a regular flow.
-
-Click the **＋ button** below the **Start node** to open the block selector, then choose any block you want to add, for example, Talk, Collect, API Request, or Send Email.
-
-Click the button below the smart node.
+Inside the purple area, click the **＋** button below the Start node to begin adding blocks.
 
 <img
   src="/assets/add-actions-to-blocks.png"
   alt="Add Actions To Blocks"
   title="Add Actions To Blocks"
-  style={{ width:"81%" }}
+  style={{ width:"77%" }}
 />
 
-Alternatively, you can drag blocks into the purple area from an existing flow.
+### Collect Appointment Preferences
 
-<Tip>
-  When you drag a block into a Custom Action, it becomes part of that action’s internal logic. This means it is disconnected from any nodes outside the group.
+Start by gathering the caller’s preferred date or time.
 
-  Only the designated output nodes (e.g., Success, Error) can connect outside the Custom Action to the rest of your main flow.
-</Tip>
+Add a **Talk** or **Collect** block to ask something like:
 
-Inside the purple area, you can drag and connect blocks just like a normal workflow.
+> “What day would you like to schedule your consultation?”
 
-### Configuring an  Custom Action 
+Store the response in a variable such as `booking_date`.
 
-Let’s walk through how to configure a Custom Action that handles appointment scheduling for a legal office.
+<img
+  src="/assets/appointment-date-custom-action.png"
+  alt="Appointment Date Custom Action"
+  title="Appointment Date Custom Action"
+  style={{ width:"89%" }}
+/>
 
 ### Check Availability (Google Calendar)
 
-After collecting details, click **＋** and select Google Calendar.
+Next, check whether that time is available.
 
-Choose the Check Availability action. [Learn how you can connect phonely with your google calendar here](/blocks/live-call-integrations/google-calendar)
+1. Click **＋**
+2. Select **Google Calendar**
+3. Choose **Check Availability**
 
-<Expandable title="Configuration Details">
-  - Calendar ID – choose the calendar to check.
-  - Start time & search window – when to begin scanning.
-  - Slot duration – 15m, 30m, 1h, etc.
-  - Business hours – restrict available times
-  - Number of slots to return – how many options to offer the caller.
-</Expandable>
+Configure the block:
+
+- Select the calendar
+- Set the search window and slot duration
+- Limit results to business hours
+- Choose how many slots to return
+
+This block returns available time slots that you can present to the caller.
 
 <img
-  src="/assets/configure-google-calendar-block.png"
-  alt="Configure Google Calendar Block"
-  style={{ width:"96%" }}
+  src="/assets/get-availability-custom-action.png"
+  alt="Get Availability Custom Action"
+  title="Get Availability Custom Action"
+  style={{ width:"90%" }}
 />
 
-Once configured, add a Talk or Ask block to present the available slots and allow the caller to choose one.
+### Let the Caller Choose a Slot
 
-_Example prompt:_
+Add another **Talk** or **Collect** block to present the options:
 
-> _“I found availability at 10 AM or 2 PM. Which would you prefer?”_
+> “I have availability at 10 AM or 2 PM. Which works for you?”
 
-Capture their selection using another Collect block (e.g., `selected_slot`).
+Store the result in a variable such as `selected_slot`.
 
-### Create Appointment (Google Calendar)
+### Create the Appointment
 
-Now add the second Google Calendar block:
+Once the caller selects a time:
 
-1. Click **＋** and select **Google Calendar**.
-1. Chose the Create Appointment.
+1. Click **＋**
+2. Select **Google Calendar**
+3. Choose **Create Appointment**
 
-<Expandable title="Fields to configure">
-  - Calendar ID
-  - Start Time / End Time
-  - Attendee Email → use the variable from Collect (e.g., caller_email)
-  - Title (e.g., “Consultation with caller_name”)
-  - Description (optional)
-</Expandable>
+Configure:
 
-If successful, Google Calendar automatically sends the guest invitation.
+- Calendar ID
+- Start and end time using `selected_slot`
+- Attendee email (from a collected variable)
+- Title and optional description
+
+If successful, Google Calendar automatically sends the invite
+
+<img
+  src="/assets/make-appointment-custom-action.png"
+  alt="Make Appointment Custom Action"
+  title="Make Appointment Custom Action"
+  style={{ width:"92%" }}
+/>
+
+### 
 
 ### Connect Output Paths
 
