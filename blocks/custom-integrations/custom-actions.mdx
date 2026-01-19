@@ -19,7 +19,7 @@ Custom Actions are ideal when you need to:
 
 ## Building a Custom Action (Appointment Example)
 
-Let’s build a make appointment custom action that collects a preferred time, checks availability, and books an appointment.
+Let’s build an Appointment Custom Action that collects a caller’s preferred time, checks availability, and books the appointment. Once created, this custom action can be reused across any workflow where callers need to schedule an appointment, without rebuilding the logic from scratch.
 
 <Steps>
   <Step title="Create a new workflow, or open an existing one">
@@ -44,9 +44,7 @@ Inside the purple area, click the **＋** button below the Start node to begin a
 
 ### Collect Appointment Preferences
 
-Start by gathering the caller’s preferred date or time.
-
-Add a **Talk** or **Collect** block to ask something like:
+Start by gathering the caller’s preferred date or time. Add a **Talk** or **Collect** block to ask something like:
 
 > “What day would you like to schedule your consultation?”
 
@@ -63,8 +61,7 @@ Store the response in a variable such as `booking_date`.
 
 Next, check whether that time is available.
 
-1. Click **＋**
-2. Select **Google Calendar**
+1. Click **＋ **and select **Google Calendar**
 3. Choose **Check Availability**
 
 Configure the block:
@@ -85,9 +82,7 @@ This block returns available time slots that you can present to the caller.
 
 ### Let the Caller Choose a Slot
 
-Add another **Talk** or **Collect** block to present the options:
-
-> “I have availability at 10 AM or 2 PM. Which works for you?”
+Add another **Talk** or **Collect** block to present the options: “I have availability at 10 AM or 2 PM. Which works for you?”
 
 Store the result in a variable such as `selected_slot`.
 
@@ -117,7 +112,7 @@ If successful, Google Calendar automatically sends the invite
 
 ### Connect Output Paths
 
-Output nodes define how your **Custom Action** communicates results back to the main flow.\
+Output nodes define how your custom action communicates results back to the main flow.\
 They act as exit points - determining what happens once your action finishes, whether it succeeds, fails, or the caller ends the process.
 
 <img
