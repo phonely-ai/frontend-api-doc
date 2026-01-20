@@ -3,7 +3,7 @@ title: "Call Settings"
 description: "Learn how to configure your agent’s calling behavior using the call settings."
 ---
 
-The Call Settings page lets you fine-tune how your agent behaves during live calls. These options control how long the agent waits during silence, how it responds when a caller doesn’t speak, how long calls are allowed to last, and how timezones and retry attempts are handled. Each setting plays a role in creating natural and predictable call flows, so understanding this page helps you design a smooth caller experience.
+The call settings page lets you fine-tune how your agent behaves during live calls. These options control how long the agent waits during silence, how it responds when a caller doesn’t speak, how long calls are allowed to last, and how timezones and retry attempts are handled. Each setting plays a role in creating natural and predictable call flows, so understanding this page helps you design a smooth caller experience.
 
 <Steps>
   <Step title="Go to Agent Design > Settings from the left sidebar.">
@@ -25,7 +25,7 @@ This setting defines what the agent should do if it does not detect anyone speak
 
 ## Silence Detection
 
-Silence Detection is designed to help your agent handle moments when the caller stops speaking. The **Silence Timeout** slider lets you choose how many seconds the AI should wait before responding or taking action.
+Silence detection is designed to help your agent handle moments when the caller stops speaking. The silence timeout slider lets you choose how many seconds the AI should wait before responding or taking action.
 
 For example, if you set the timeout to 14 seconds, the agent will remain silent until that duration passes, then gently step in with a follow-up message.
 
@@ -35,7 +35,7 @@ This allows your agent to keep conversations flowing naturally, especially when 
 
 ## Max Retries
 
-Max Retries controls how many times Phonely should attempt a prompt again when a caller doesn’t respond or when the AI needs to retry part of a conversation. You can choose between 1 and 5 attempts. Setting a higher retry count makes the agent more persistent, while lower values create sharper, quicker call conclusions.
+Max retries controls how many times Phonely should attempt a prompt again when a caller doesn’t respond or when the AI needs to retry part of a conversation. You can choose between 1 and 5 attempts. Setting a higher retry count makes the agent more persistent, while lower values create sharper, quicker call conclusions.
 
 ![Call Time Out Settings](/assets/call-time-out-settings.png)
 
@@ -55,11 +55,11 @@ Adjust this prompt if you want Phonely to respond more formally, more playfully,
 
 ## Max Call Duration
 
-Max Call Duration limits how long a customer can stay on a call with your agent. By default, Phonely allows up to 20 minutes, but you can adjust this anywhere from zero minutes to one hour. The slider displays the exact number of minutes chosen as you modify it.
+Max call duration limits how long a customer can stay on a call with your agent. By default, Phonely allows up to 20 minutes, but you can adjust this anywhere from zero minutes to one hour. The slider displays the exact number of minutes chosen as you modify it.
 
 ### Max Duration Message
 
-Once the maximum duration is reached, your agent ends the call automatically. You can customize the closing line using the Max Duration Message field. This message is what the agent will say right before ending the call.
+Once the maximum duration is reached, your agent ends the call automatically. You can customize the closing line using the max duration message field. This message is what the agent will say right before ending the call.
 
 If you prefer the call to end immediately without any closing message at all, you can toggle End Immediately.
 
@@ -67,4 +67,6 @@ If you prefer the call to end immediately without any closing message at all, yo
 
 ## Agent Timezone
 
-Phonely uses your agent’s timezone for scheduling, reporting, and time-based behavior. Under **Select Timezone**, you’ll find a searchable list of global timezones. Select the timezone where your business or your callers primarily operate. This helps ensure features like scheduling, eligibility checks, and time-related conversation logic work reliably.
+Phonely uses your agent’s timezone for scheduling, reporting, and time-based behavior. Under select timezone, you’ll find a searchable list of global timezones. 
+
+Select the timezone where your business or your callers primarily operate. This helps ensure features like scheduling, eligibility checks, and time-related conversation logic work reliably.  
