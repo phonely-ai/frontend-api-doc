@@ -120,8 +120,6 @@ You’ll authenticate your Google account (or reconnect if needed), then select:
 
 Every new row added to that tab becomes a new outbound call. Phonely reads the column headers and lets you map them to variables like name, phone number, or address.
 
-Because this runs continuously, it’s ideal for teams managing leads collaboratively in a shared sheet - the AI will always stay up to date with the latest entries.
-
 #### 2. Webhook
 
 The Webhook trigger is designed for real-time system integrations. Phonely generates a secure URL endpoint that can receive POST requests containing lead data.
@@ -154,7 +152,7 @@ Now that Phonely knows who to call, this step defines what happens during the ca
 
 ### **Selecting or Editing a Flow**
 
-You can choose an existing flow or create a new one. Each flow contains “prompt blocks” and “logic branches” that the AI uses to guide conversations. You can also open the flow editor to modify dialogue, add fallback paths, or integrate with third-party systems.
+You can choose an existing flow or create a new one. Each flow contains “prompt blocks” and “logic branches” that the AI uses to guide conversations.
 
 ### **Mapping Variables**
 
@@ -169,7 +167,7 @@ For example:
   style={{ width:"66%" }}
 />
 
-Correct mapping ensures that each call feels personalized. When your AI says, “Hi Jane, this is your delivery confirmation,” it’s pulling that name from your sheet or webhook payload.
+Correct mapping ensures that each call feels personalized. When your AI says, “_Hi Jane, this is your delivery confirmation_,” it’s pulling that name from your sheet or webhook payload.
 
 <Danger>
   Please note that **not all variables need to be mapped**, only those you want your agent to reference or use during the call
@@ -201,7 +199,7 @@ Once both are acknowledged, you can safely publish your campaign.
 
 ## Launching and Monitoring the Campaign
 
-After publishing, your campaign appears on the outbound calls dashboard. This page provides real-time insights into every call attempt and result. Click **Start Campaign** to begin. Phonely immediately activates your Agents, which begins dialing leads according to your scheduled.
+Once published, the campaign is listed on the outbound calls dashboard with real-time visibility into call activity and results. Use the ▶️ Start control on the campaign row to launch the campaign.
 
 ## Managing Campaign Status
 
