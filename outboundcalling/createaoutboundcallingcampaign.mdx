@@ -54,22 +54,72 @@ A campaign needs outbound phone numbers that it can use to place calls. These nu
 
 When you connect Twilio to Phonely, all your available numbers become visible, allowing you to choose which ones will represent the campaign.
 
-### **Connecting Twilio**
+### **Connect to Twilio**
 
-When prompted, click **Add Numbers \> Import from Twilio**. You’ll enter your **Account SID** and **Auth Token**, which allow Phonely to securely access your Twilio account.\
-Once authenticated, your Twilio numbers appear in a list.
+Phonely uses Twilio to power inbound and outbound calls. To place calls or receive calls in Phonely, you first need to connect your Twilio account and import at least one phone number.
 
-You can then select which numbers to use. The goal here is not just to assign numbers, but to manage how calls will be distributed across them.
+<Steps>
+  <Step title="Access Your Twilio Credentials">
+    Start by logging into your Twilio Console.
+
+    From the **Account Dashboard**, use the **Jump to search bar** at the top of the page and search for **General Settings**. This is the fastest way to locate account-level configuration without navigating through menus manually.
+
+    ![Access Twillio General Settings](/assets/access-twillio-general-settings.png)
+
+    Once you’re on the General Settings page, look at the left-hand navigation and locate **Keys & Credentials**. From there, click **API Keys & Tokens**.
+
+    On this page, you’ll see your **Live credentials** section. You need two values:
+
+    - **Account SID** – used to identify your Twilio account when making API requests
+    - **Auth Token** – used to authenticate requests securely
+
+    Copy both values and keep them handy. 
+
+    ![Twillio Live Credentials](/assets/twillio-live-credentials.png)
+  </Step>
+  <Step title="Import Numbers into Phonely">
+    Now switch over to Phonely.
+
+    Navigate to the area where you manage phone numbers and click **Add Phone Numbers**. 
+
+    ![Add Phone Numbers To Campaign](/assets/add-phone-numbers-to-campaign.png)
+
+    If no numbers are currently available, select **Import numbers from Twilio**.
+
+    A modal will appear asking for:
+
+    - **Twilio Account SID**
+    - **Twilio Auth Token**
+
+    Paste the credentials you copied from Twilio, then click **Connect & Fetch Numbers**.
+
+    ![Add Twillio Credentials To Phonely](/assets/add-twillio-credentials-to-phonely.png)
+
+    If the credentials are correct, Phonely will connect to your Twilio account and display any available phone numbers. Select the number(s) you want and add them to your campaign or agent.
+  </Step>
+  <Step title="Purchase a Phone Number in Twili">
+    If no phone numbers appear after connecting, it means your Twilio account does not yet have an active number.
+
+    To purchase, return to the **Twilio Console** and go back to the **Account Dashboard**. From the left-hand menu, open **Phone Numbers**, then select **Buy a Number**.
+
+    Twilio will display a list of available numbers based on region. When choosing a number, review its capabilities carefully:
+
+    - Voice (required for calls)
+    - SMS/MMS (optional, but may require A2P 10DLC registration in the US)
+
+    Once you’ve selected a number, review the routing and emergency calling requirements, accept the terms, and complete the purchase.
+
+    ![How To Buy A Phonenumber In Twillio](/assets/how-to-buy-a-phonenumber-in-twillio.png)
+
+    After the purchase is complete, return to **Phonely** and repeat the **Import from Twilio** step. The newly purchased number will now appear and can be selected for use.
+
+    ![Select Phone Numbers To Add To A Campaign In Phonely](/assets/select-phone-numbers-to-add-to-a-campaign-in-phonely.png)
+  </Step>
+</Steps>
 
 <Danger>
   Your Twilio account must be set up on Autopay with a card that has sufficient funds, for your agent to successfully run an outbound campaign.
 </Danger>
-
-<img
-  src="/assets/outbound-campaign-phone-numbers-and-cadence.gif"
-  alt="Outbound Campaign Phone Numbers and Cadence"
-  style={{ width:"96%" }}
-/>
 
 ### Choose Routing Method
 
