@@ -12,6 +12,20 @@
     "library": "lucide"
   },
   "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Dashboard",
+          "icon": "gauge",
+          "href": "https://app.phonely.ai"
+        },
+        {
+          "anchor": "Community",
+          "icon": "users",
+          "href": "https://discord.gg/BMHPUaZG37"
+        }
+      ]
+    },
     "tabs": [
       {
         "tab": "Home",
@@ -28,6 +42,7 @@
           {
             "group": "KEY CONCEPTS",
             "pages": [
+              "home/key-concepts/advanced-variables",
               "key-concepts/create-duplicate-agents",
               "key-concepts/flows",
               "key-concepts/routing",
@@ -49,23 +64,22 @@
                   "agent-design/voice/add-a-voice",
                   "agent-design/voice/clone-voice"
                 ]
-               },
+              },
               {
                 "group": "Phone Numbers",
                 "pages": [
                   "agent-design/add-manage-phone-numbers"
                 ]
               },
-               {
+              {
                 "group": "Agent Settings",
-                 "pages": [
-
-              "agent-design/call-settings",
-              "agent-design/voice/voice-and-personality",
-              "agent-design/voice/interruption-settings",
-              "agent-design/compliance-settings"
-                 ]
-               },
+                "pages": [
+                  "agent-design/call-settings",
+                  "agent-design/voice/voice-and-personality",
+                  "agent-design/voice/interruption-settings",
+                  "agent-design/compliance-settings"
+                ]
+              },
               {
                 "group": "Agent Guidelines",
                 "pages": [
@@ -167,7 +181,6 @@
               "/testing/test-from-a-block",
               "/testing/ab-testing",
               "/testing/simulation-testing"
-            
             ]
           },
           {
@@ -191,9 +204,7 @@
         "tab": "API Reference",
         "icon": "code",
         "pages": [
-          "api-reference/introduction"
-        ],
-        "groups": [
+          "api-reference/introduction",
           {
             "group": "API Reference",
             "pages": [
@@ -209,7 +220,7 @@
                       "api-reference/endpoint/get-all-agents",
                       "api-reference/endpoint/duplicate-agent",
                       "api-reference/endpoint/update-agent"
-                    ] 
+                    ]
                   },
                   {
                     "group": "Call Management",
@@ -231,7 +242,7 @@
                       "api-reference/endpoint/list-voices",
                       "api-reference/endpoint/import-number"
                     ]
-                  },    
+                  },
                   {
                     "group": "Knowledge Base",
                     "pages": [
@@ -266,9 +277,7 @@
         "tab": "Webhook Reference",
         "icon": "webhook",
         "pages": [
-          "webhook-reference/Intro"
-        ],
-        "groups": [
+          "webhook-reference/Intro",
           {
             "group": "Webhook Reference",
             "pages": [
@@ -278,21 +287,7 @@
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Dashboard",
-          "href": "https://app.phonely.ai",
-          "icon": "gauge"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://discord.gg/BMHPUaZG37",
-          "icon": "users"
-        }
-      ]
-    }
+    ]
   },
   "interaction": {
     "drilldown": true
