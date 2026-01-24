@@ -167,6 +167,12 @@ How long Phonely should attempt the warm introduction before switching to cold t
 
 **Detection timeout:** The maximum time allowed for the other end to speak before being detected as an IVR, voicemail, or a person.
 
+**Ask Outbound Leg for Permission:** When selected, the Outbound leg must express consent after being read the Outbound message before transferring.
+
+<Note>
+  When asking for permission, this outbound message to the recipient must be a clear yes/no question (e.g., "Say yes if you would like me to transfer the call.")
+</Note>
+
 **Message to caller (inbound):** After detecting a person on the line, this message is played to the inbound caller before transferring them to the outbound destination.
 
 **Message to recipient (outbound):** After detecting a person on the line, this message is played to the outbound destination before connecting the inbound caller to them.
@@ -174,6 +180,13 @@ How long Phonely should attempt the warm introduction before switching to cold t
 **Post transfer message:** After connecting the inbound caller to the outbound destination, this message is played to both parties before the agent disconnects.
 
 **Warm transfer duration:** The maximum duration in seconds that Phonely will attempt to complete the warm transfer.
+
+<img
+  src="/assets/Ask-Outbound-Leg-for-Permission.png"
+  alt="Ask Outbound Leg For Permission"
+  title="Ask Outbound Leg For Permission"
+  style={{ width:"52%" }}
+/>
 
 ### Call Outcome Tagging
 
