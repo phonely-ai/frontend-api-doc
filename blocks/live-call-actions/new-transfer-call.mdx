@@ -5,9 +5,9 @@ description: "Learn how you can transfer calls seamlessly using the new transfer
 
 ## What is it?
 
-The **Transfer Call** block lets your agent seamlessly hand off a live call to another person, department, or fallback destination. This dramatically simplifies call routing by replacing large, branching, hard-to-manage flows with a single intelligent block that can handle warm transfers, cold transfers, failover logic, caller triage, and on-hold experience, all in one place.
+The Transfer Call block lets your agent seamlessly hand off a live call to another person, department, or fallback destination. This dramatically simplifies call routing by replacing large, branching, hard-to-manage flows with a single intelligent block that can handle warm transfers, cold transfers, failover logic, caller triage, and on-hold experience, all in one place.
 
-This guide walks you through everything you can do inside the updated **Transfer Call** block, how it works, and how to set it up step-by-step.
+This guide walks you through everything you can do inside the updated Transfer Call block, how it works, and how to set it up step-by-step.
 
 <iframe src="https://www.youtube.com/embed/AykOOGnQf2Q" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
 
@@ -178,6 +178,8 @@ How long Phonely should attempt the warm introduction before switching to cold t
 **Message to recipient (outbound):** After detecting a person on the line, this message is played to the outbound destination before connecting the inbound caller to them.
 
 **Post transfer message:** After connecting the inbound caller to the outbound destination, this message is played to both parties before the agent disconnects.
+
+**Transfer Failed Message for Recipient:** This message is read to the Outbound leg if the Inbound leg leaves during the transfer process before we eject the Outbound leg.
 
 **Warm transfer duration:** The maximum duration in seconds that Phonely will attempt to complete the warm transfer.
 
