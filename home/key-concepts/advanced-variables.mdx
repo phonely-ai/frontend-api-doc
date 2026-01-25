@@ -1,5 +1,6 @@
 ---
-title: "Advanced CustomVariables"
+title: "Advanced Custom Variables"
+description: "Learn how to use custom variables in Phonely to capture, validate, and store structured data accurately using AI during live calls."
 ---
 
 Advanced Variables allow you to capture, validate, and store highly structured information during a call using AI, even when the data must follow strict formatting rules. This feature is especially useful when accuracy matters and free-form text is not sufficient.
@@ -45,7 +46,7 @@ They behave like any other variable in the system:
 - They can be confirmed with the caller
 - They appear in post-call data, webhooks, and integrations
 
-The difference lies in **how the value is extracted and formatted**.
+The difference lies in how the value is extracted and formatted.
 
 ## Example: Capturing a VIN Number Correctly
 
@@ -56,7 +57,15 @@ A VIN must:
 - Be exactly 17 characters
 - Contain only letters and numbers
 - Have no spaces or special characters
-- Be stored consistently every time
+
+Be stored consistently every time
+
+<img
+  src="/assets/advanced-custom-variables.png"
+  alt="Advanced Custom Variables"
+  title="Advanced Custom Variables"
+  style={{ width:"82%" }}
+/>
 
 This is a perfect use case for an advanced variable.
 
@@ -74,13 +83,11 @@ This is a perfect use case for an advanced variable.
     In the block configuration:
 
     - Create a new variable (for example, `vehicle_vin`)
-    - Choose the variable type (Text, Number, Date, etc.)
+    - Choose the variable type as **custom**. 
 
     Even though a VIN is technically text, this is where advanced configuration becomes important.
   </Step>
-  <Step title="Define a Custom Format (Advanced Variable)">
-    Enable the **custom format** option for the variable.
-
+  <Step title="Define a Custom Format ">
     This allows you to describe, in plain language, exactly how the value should look. Phonely’s AI uses this description to extract and normalize the value correctly from natural speech.
 
     For a VIN, your custom description might explain:
@@ -92,7 +99,7 @@ This is a perfect use case for an advanced variable.
 
     You can also provide an example value so the AI has a clear reference for what a valid entry looks like.
 
-    This step is essentially **prompt-engineering for data extraction**, but it’s built directly into the variable system.
+    This step is essentially prompt-engineering for data extraction, but it’s built directly into the variable system.
   </Step>
   <Step title="Mark the Variable as Required (Optional)">
     If the flow cannot proceed without this information, you can mark the variable as **required**.
@@ -116,20 +123,19 @@ This is a perfect use case for an advanced variable.
 
     This adds an extra layer of reliability without requiring additional prompts or branching logic.
   </Step>
-  <Step title="Using Advanced Variables Elsewhere in the Flow">
-    Once captured, advanced variables behave exactly like any other variable in Phonely.
-
-    You can:
-
-    - Reference them in later prompts (`@vehicle_vin`)
-    - Pass them into API Request blocks
-    - Store them in CRMs or databases
-    - Include them in post-call emails or summaries
-    - Use them in routing or decision logic
-
-    If a block that sets the variable does not run, the variable remains blank — allowing you to safely reference it without breaking integrations.
-  </Step>
 </Steps>
+
+## Using Advanced Variables Elsewhere in the Flow
+
+Once captured, advanced variables behave exactly like any other variable in Phonely.
+
+You can:
+
+- Reference them in later prompts (`@vehicle_vin`)
+- Pass them into API Request blocks
+- Store them in CRMs or databases
+- Include them in post-call emails or summaries
+- Use them in routing or decision logic
 
 ## When You Should Use Advanced Variables
 
@@ -140,4 +146,4 @@ Use advanced variables when:
 - You want to avoid manual cleanup or retries
 - Accuracy matters more than flexibility
 
-For simple conversational data (like intent or general feedback), standard variables are often sufficient.
+For simple conversational data, standard variables are often sufficient.
