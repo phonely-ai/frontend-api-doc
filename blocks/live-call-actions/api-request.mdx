@@ -24,7 +24,7 @@ Phonely supports standard REST APIs and allows you to configure requests either 
 
 ## Adding the API Request Block to a Flow
 
-In your Flow Editor, locate the block where the API call should occur, then click the ➕ (plus) i 
+In your Flow Editor, locate the block where the API call should occur, then click the ➕ (plus) i
 
 To add an API Request block:
 
@@ -33,7 +33,7 @@ To add an API Request block:
 3. Click the **➕ (plus)** icon beneath or beside an existing block.
 4. Under **Actions**, select **API Request**.
 
-A new block labeled **API Request** will appear on your canvas. 
+A new block labeled **API Request** will appear on your canvas.
 
 <img
   src="/assets/how-to-add-an-api-request-block.png"
@@ -48,9 +48,9 @@ When you open the block, you’ll see two ways to define your API request:
 
 ### Option 1: Import from cURL
 
-If you already have a cURL command (e.g., from Postman or developer docs):
+If you already have a cURL command (for example, from Postman or API documentation):
 
-1. Paste it into the **cURL Command** box.
+1. Paste the full cURL command into the **cURL Command** field.
 2. Click **Import from cURL**. Phonely automatically extracts the method, endpoint, headers, and body.
 
 Example:
@@ -75,13 +75,13 @@ If you don’t have a cURL command, click **Build Manually**. You’ll then defi
 
 ## Configure
 
-The **Configure** tab is where you define what your API request should do.
+The Configure tab is where you define what your API request should do.
 
 <img
-  src="/assets/api-configuration-page.png"
-  alt="Api Configuration Page"
-  title="Api Configuration Page"
-  style={{ width:"60%" }}
+  src="/assets/configure-api-request-manually.png"
+  alt="Configure Api Request Manually"
+  title="Configure Api Request Manually"
+  style={{ width:"72%" }}
 />
 
 **1. API Method**
@@ -90,7 +90,7 @@ Select the type of request from the dropdown:
 
 - `GET` – Retrieve data from a system.
 - `POST` – Send new data (most common).
-- `PUT` or `PATCH` – Update an existing record.
+- `PUT` or `PATCH`– Update an existing record.
 - `DELETE` – Remove a resource.
 
 > Example: Choose **POST** when sending call data to an external app.
@@ -103,10 +103,12 @@ Enter the endpoint where the request should go. This is the destination for your
 
 Headers define metadata or authentication details for your API call.                                                         Click **\+ Add** to add key-value pairs such as:
 
-| **Key**       | **Value**           |
-| :------------ | :------------------ |
-| Content-Type  | application/json    |
-| Authorization | Bearer YOUR_API_KEY |
+<img
+  src="/assets/configure-header-for-api-request.png"
+  alt="Configure Header For Api Request"
+  title="Configure Header For Api Request"
+  style={{ width:"96%" }}
+/>
 
 <Tip>
   Always include `Content-Type: application/json` for JSON-based APIs.
@@ -116,16 +118,30 @@ Headers define metadata or authentication details for your API call.            
 
 Use this if your API uses query strings in the URL (e.g., filtering or pagination).
 
-Example:
-
-| **Key** | **Value** |
-| :------ | :-------- |
-| userId  | 5         |
-| limit   | 10        |
+<img
+  src="/assets/configure-query-parameters-in-phonely.png"
+  alt="Configure Query Parameters In Phonely"
+  title="Configure Query Parameters In Phonely"
+  style={{ width:"95%" }}
+/>
 
 **5. Body (For POST, PUT, PATCH Requests)**
 
-Define what data will be sent.Switch between **Code** (for JSON) and **Raw** (for plain text).                     Example:
+For **POST**, **PUT**, or **PATCH** requests, you can define a request body. Phonely supports multiple body types, selectable directly in the UI.
+
+#### Supported Body Types
+
+**None**\
+Use this when the request does not require a body.
+
+**x-www-form-urlencoded**\
+Use this when the API expects traditional form data. Each key-value pair is sent as form data, commonly required by legacy systems or OAuth flows.
+
+![X Www Form Urlencoded](/assets/x-www-form-urlencoded.png)
+
+**JSON**\
+Use this when sending structured data in JSON format (most modern APIs).\
+You can switch the editor to **Code** mode to write raw JSON directly.
 
 <img
   src="/assets/api-payload-config-page.png"
