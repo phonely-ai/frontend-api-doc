@@ -42,16 +42,17 @@
           {
             "group": "KEY CONCEPTS",
             "pages": [
-              "home/key-concepts/advanced-variables",
+            
               "key-concepts/create-duplicate-agents",
               "key-concepts/flows",
               "key-concepts/routing",
               "key-concepts/variables",
               "key-concepts/auto-gather-variables",
+              "key-concepts/flow-canvas-controls",
+              "key-concepts/manage-workflow-versions",
               "key-concepts/ask-ai",
               "key-concepts/replace-invalid-variables",
-              "key-concepts/flow-canvas-controls",
-              "key-concepts/manage-workflow-versions"
+              "key-concepts/advanced-variables"
             ]
           },
           {
