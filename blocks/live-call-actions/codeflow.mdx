@@ -7,7 +7,7 @@ Code is a powerful new workflow block that allows you to execute Python code dir
 
 It acts as a dynamic logic layer between conversational steps, giving you the ability to compute values and make conditional decisions through your own scripts.
 
-When a Code Block runs, it:
+When a code block runs, it:
 
 - Receives workflow variables as input (through an input dictionary).
 - Executes your defined Python logic.
@@ -21,14 +21,14 @@ When a Code Block runs, it:
 
 ## When to Use
 
-Understanding when to use a Code Block helps you unlock its full potential in building smart, adaptive flows:
+Understanding when to use a code block helps you unlock its full potential in building smart, adaptive flows:
 
 - Custom Logic Execution – Use it to calculate, compare, or transform varaibles dynamically.
-- Conditional Workflows – When decisions depend on complex logic that goes beyond standard Flow conditions.
+- Conditional Workflows – When decisions depend on complex logic that goes beyond standard flow conditions.
 
 ## Setup
 
-In this example, we will demonstrate how the Code Block is used inside a workflow for a store. The goal is to automatically transfer customers to their nearest store based on the ZIP code provided during a call.
+In this example, we will demonstrate how the code block is used inside a workflow for a store. The goal is to automatically transfer customers to their nearest store based on the ZIP code provided during a call.
 
 <Steps>
   <Step title="Add a New Block" titleSize="p">
@@ -37,9 +37,9 @@ In this example, we will demonstrate how the Code Block is used inside a workflo
     ![Howtoaddcodeblock Gi](/assets/how-to-access-code-flow.gif)
   </Step>
   <Step title="Configure Input Variables">
-    Each Code Block begins with one or more input variables, these are values passed into your script from previous blocks.
+    Each code block begins with one or more input variables, these are values passed into your script from previous blocks.
 
-    Enter the name of the variable. This is the name that you will use to refer to the variable in your code. 
+    Enter the name of the variable. This is the name that you will use to refer to the variable in your code.
 
     <Tip>
       You’ll notice default variables like `arg1` and `arg2` when adding a Code Block. Feel free to rename or remove them to match your workflow’s actual input variables.
@@ -50,7 +50,7 @@ In this example, we will demonstrate how the Code Block is used inside a workflo
 
     #### Auto-gather
 
-    Automatically prompt the caller when a block needs specific information (e.g., name, email, or date). Phonely collects this input in real time no extra Talk block required.       
+    Automatically prompt the caller when a block needs specific information (e.g., name, email, or date). Phonely collects this input in real time no extra Talk block required.
 
     #### Variables from Previous Blocks
 
@@ -62,7 +62,7 @@ In this example, we will demonstrate how the Code Block is used inside a workflo
     <Tip>
       Do not alter the main function definition, it must always accept and return dictionaries named input and output.
     </Tip>
-    ```
+    ```python
     def function(input_dict: dict) -> dict:
         zip_to_store_map = {
             "12345": "+15551234567",
@@ -88,7 +88,7 @@ In this example, we will demonstrate how the Code Block is used inside a workflo
     def function(input_dict: dict) -> dict:
     ```
 
-    Every Code Block in Phonely starts with a function definition like this.
+    Every code block in Phonely starts with a function definition like this.
 
     - input_dict represents all variables passed into this block from earlier steps in the workflow.
     - The function returns another dictionary that becomes the **output**, feeding data to the next blocks.
@@ -152,7 +152,7 @@ In this example, we will demonstrate how the Code Block is used inside a workflo
   </Step>
   <Step title="Validate Your Code">
     After entering your Python code, click Validate Code to ensure it’s syntactically correct.\
-    If validation passes, a green checkmark  appears next to the Cofigure tab name, and the **Continue** button activates.
+    If validation passes, a green checkmark  appears next to the Cofigure tab name, and the continue button activates.
 
     Click **Continue** to proceed to the testing step.
 
