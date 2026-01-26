@@ -18,42 +18,43 @@ When you add a **Redial** block to your flow, a configuration panel opens on the
 
 Let’s go through each setting:
 
-#### 1. **Action**
+<Steps>
+  <Step title="Action">
+    The **Action** dropdown defines what should happen after the redial trigger:
 
-The **Action** dropdown defines what should happen after the redial trigger:
+    - **Retry After** – Attempts to call the same number again after a specific delay.
+    - **Move to Campaign** – Transfers the contact to a different campaign (useful for follow-ups or escalation flows).
+  </Step>
+  <Step title="Delay Duration">
+    
+  </Step>
+  <Step title="New Step">
+    This field specifies how long the system should wait before redialing. You can set the delay in:
 
-- **Retry After** – Attempts to call the same number again after a specific delay.
-- **Move to Campaign** – Transfers the contact to a different campaign (useful for follow-ups or escalation flows).
+    - Minutes
+    - Hours
+    - Days
 
-#### 2. **Delay Duration**
+    For example:
 
-This field specifies how long the system should wait before redialing.
+    - `Retry After 10 Minutes` \> The system will retry the call after 10 minutes.
+    - `Retry After 2 Hours` \> Useful for scheduling later follow-ups within the day.
+  </Step>
+  <Step title="Override Voicemail Message (Optional)">
+    When enabled, this option allows you to customize the voicemail message that the AI leaves during a redial attempt.
 
-You can set the delay in:
+    - Check **Override Voicemail Message**
+    - Enter a custom message in the **Voicemail Message** field\
+      Example:\
+      _“Hi, we’re calling to follow up on your recent inquiry. Please call us back at your convenience.”_
 
-- Minutes
-- Hours
-- Days
-
-For example:
-
-- `Retry After 10 Minutes` \> The system will retry the call after 10 minutes.
-- `Retry After 2 Hours` \> Useful for scheduling later follow-ups within the day.
-
-#### 3. **Override Voicemail Message (Optional)**
-
-When enabled, this option allows you to customize the voicemail message that the AI leaves during a redial attempt.
-
-- Check **Override Voicemail Message**
-- Enter a custom message in the **Voicemail Message** field\
-  Example:\
-  _“Hi, we’re calling to follow up on your recent inquiry. Please call us back at your convenience.”_
-
-This helps you control how your brand communicates when an agent or AI redials a customer.
+    This helps you control how your brand communicates when an agent or AI redials a customer.
+  </Step>
+</Steps>
 
 ### Adding Multiple Redial Attempts
 
-You can configure **multiple retry attempts** for each call:
+You can configure multiple retry attempts for each call:
 
 1. Click **Add Redial Attempt** at the bottom of the panel.
 2. For each attempt:
