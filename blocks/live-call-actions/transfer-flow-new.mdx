@@ -3,9 +3,9 @@ title: "Transfer Flow "
 description: "Learn how to seamlessly transition between call flows while maintaining context and data"
 ---
 
-The Transfer Flow block lets your AI agent route a caller from the current flow to one or more sub-flows, without ending the call.
+The Transfer Flow block lets your AI agent route a caller from the current flow to one or more sub-flows, without ending the call.    
 
-From the caller’s perspective, the transition is seamless, they remain in the same call while the agent switches conversational context behind the scenes.
+From the caller’s perspective, the transition is seamless, they remain in the same call while the agent switches conversational context behind the scenes.      
 
 The new version of this block introduces multiple destinations, centralized transition logic, and a simpler configuration model, making complex routing easier to build and maintain.
 
@@ -29,7 +29,7 @@ This removes the need for:
 
 Transition conditions appear only when more than one destination is configured.
 
-Each destination can have a plain-text condition that describes when a caller should be routed to that flow.                                                                                    
+Each destination can have a plain-text condition that describes when a caller should be routed to that flow.
 
 <Tip>
   Phonely will use this condition to determine when to route to this flow based on the caller's request, asking clarifying questions if needed. Be as descriptive as possible.
@@ -41,8 +41,8 @@ Transition logic is now managed globally at the workflow level.
 
 This means:
 
-- Transition conditions are defined once. 
-- Any updates automatically propagate everywhere they’re used. 
+- Transition conditions are defined once.
+- Any updates automatically propagate everywhere they’re used.
 
 ### 4. Simplified Exit Logic
 
@@ -54,17 +54,17 @@ Unlike older transfer blocks, the new Transfer Flow block:
 
 ## Key Capabilities
 
-- Seamless flow-to-flow transitions without ending the call. 
-- Modular call flow design for cleaner, maintainable agents. 
-- Reusable sub-flows across multiple agents or workflows. 
-- Centralized routing logic via global transition conditions. 
-- Optional interim message during flow transitions. 
-- Call outcome tagging for analytics and reporting. 
+- Seamless flow-to-flow transitions without ending the call.
+- Modular call flow design for cleaner, maintainable agents.
+- Reusable sub-flows across multiple agents or workflows.
+- Centralized routing logic via global transition conditions.
+- Optional interim message during flow transitions.
+- Call outcome tagging for analytics and reporting.
 
 ## How to Use the Transfer Flow Block
 
 1. Open your agent in **Agent** **Design**.
-2. Click the **➕** button on the canvas and select Transfer Flow.    
+2. Click the **➕** button on the canvas and select Transfer Flow.
 
 <img
   src="/assets/new-transfer-flow.png"
@@ -117,7 +117,7 @@ Enable Interim Message if you want the agent to say something during the transit
 You can also configure:
 
 - Prompt-generated messages or type a fixed message.
-- Post-interim message delay. 
+- Post-interim message delay.
 
 <img
   src="/assets/interim-and-post-interim-messages.png"
