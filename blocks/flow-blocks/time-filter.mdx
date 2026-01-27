@@ -50,14 +50,9 @@ Using the Time Filter Block involves defining your operational hours and connect
   <Step title="Configure Time Ranges">
     Within the block's settings, you will see a calendar interface to define your time ranges.
 
-    - **Set Daily Hours**: For each day of the week, adjust the sliders or input exact times to set the desired "open" hours.
+    - **Set Daily Hours**: For each day of the week, input exact times to set the desired "open" hours.
     - **Add Multiple Ranges**: If you have breaks or multiple shifts within a day (e.g., open from 9 AM-12 PM and 1 PM-5 PM), click the + button to add additional time blocks for that specific day.
     - **Disconnect Times**: If you want no action to occur during a specific time block, ensure it is disconnected from any output path. The AI will not route through any "true" path for disconnected times.
-  </Step>
-  <Step title="Define Outcome Paths">
-    Connect subsequent blocks from the "True" path for actions that should occur when the time falls within your configured range(s).
-
-    Connect subsequent blocks from the "False" path for actions that should occur when the time falls outside your configured range(s).
 
     <img
       src="/assets/time-filter-configure-slots.png"
@@ -65,6 +60,14 @@ Using the Time Filter Block involves defining your operational hours and connect
       title="Time Filter Configure Slots"
       style={{ width:"91%" }}
     />
+    
+  </Step>
+  <Step title="Define Outcome Paths">
+    Connect subsequent blocks from the "True" path for actions that should occur when the time falls within your configured range(s).
+
+    Connect subsequent blocks from the "False" path for actions that should occur when the time falls outside your configured range(s).
+
+    
   </Step>
 </Steps>
 
