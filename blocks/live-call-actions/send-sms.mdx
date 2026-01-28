@@ -7,102 +7,83 @@ The send text message block very simply allows Phonely to send a text message fr
 
 <iframe src="https://www.youtube.com/embed/U4WWVGZOBTk" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
 
-## Key Features of the Send Text Message Block
+## What the Send SMS Block Is Used For
 
-<Steps>
-  <Step title="Automated SMS Delivery:">
-    Sends text messages from Phonely's system to a customer's phone number automatically based on workflow logic.
-  </Step>
-  <Step title="Variable Integration">
-    Compose dynamic message content by including answers from previous questions or other stored variables (e.g., caller name, phone number, address, live transcript data).
-  </Step>
-  <Step title="Flexible Recipient Selection">
-    Choose to send the SMS to the customer's phone number from which they initiated the call, or to a specific phone number collected as a variable within the workflow.
-  </Step>
-  <Step title="Custom Number Support">
-    Optionally use your own dedicated SMS number for texting (requires A2P 10DLC compliance and additional verification).
-  </Step>
-  <Step title="Interim Message">
-    Define a message that the AI agent says aloud while the text message is being sent (e.g., "One moment please," or "Sending you that text right now").
-  </Step>
-  <Step title="Call Outcome Tagging:">
-    Allows you to tag the call at this stage for further analytics, helping you understand workflow progression.
-  </Step>
-</Steps>
+The Send SMS block is most effective when you need to reinforce or extend a call interaction. Typical use cases include:
 
-## How to Use the Send Text Message Block
+- Sending appointment confirmations or reminders
+- Delivering links, reference numbers, or next steps
+- Following up after a missed call or voicemail
+- Notifying internal teams or clients after call completion
 
-<Steps>
-  <Step title="Access the Workflows Page">
-    Navigate to the "Agent" page and then select "Workflows".
-  </Step>
-  <Step title="Create or Edit a Workflow">
-    Click on "Create New Flow" or edit an existing flow.
+Because the block supports variables, every message can be personalized and dynamically generated based on what happened earlier in the call.
 
-    Set a Trigger Condition for your workflow (e.g., "when someone asks about call flows"). This allows you to create different questions and branching answers based on the trigger.
-  </Step>
-  <Step title="Add the Send SMS Block" stepNumber={3}>
-    Link the action by clicking the plus + button in your workflow where you want the SMS to be sent. Select "Send SMS " from the available blocks.
-  </Step>
-</Steps>
+## Adding the Send SMS Block to a Flow
 
-## Choose the Phone Number
+To add the block:
 
-<Steps>
-  <Step title="You have two primary options for the recipient:">
-    - Use the customer's phone number from which the call was sent to or received.
-    - Use a phone number provided in a previous block.
-    - Use autogather to collect the phone number.
-    - **Advanced**: You can also access Twilio metadata variables (like caller_phone_number) for advanced use cases, but explicitly asking the customer is often simpler and more reliable.
-  </Step>
-  <Step title="Compose the Message Content: Enter the message you want to send.">
-    - You can dynamically include answers to previous questions or other stored variables by selecting them from the available options.
-    - For post-call SMS, you can use variables like caller_name, phone_number, or URL.
-    - For live call SMS, you can use any variable stored from previous blocks (e.g., address, confirmation, or a live transcript).
-  </Step>
-  <Step title="Add Interim Message (Optional)">
-    Define a brief message for the AI to say while the text is being sent.
-  </Step>
-  <Step title="Add Call Outcome Tagging (Optional)">
-    Tag this stage for analytics, allowing you to understand if Phonely reached this point in the conversation.
+1. Open your agent in **Agent Design**.
+2. Click the **➕** button where you want the message to be sent.
+3. Select **Send SMS** from the available actions.
 
-    <img
-      src="/assets/send-sms-block.png"
-      alt="Send Sms Block"
-      title="Send Sms Block"
-      style={{ width:"59%" }}
-    />
-  </Step>
-</Steps>
+You’ll see the block appear on the canvas, labeled **Send SMS**, with a configuration panel opening on the right.
 
-## Important Note on Phone Number Forwarding & SMS
+## Configuring the Send SMS Block
+
+The Send SMS block has two required fields: **Phone Number** and **Content**.
+
+### Phone Number
+
+This field determines who receives the message.
+
+You can enter:
+
+- A fixed phone number (for example, a test or internal number), or
+- A variable collected earlier in the flow, such as the caller’s phone number
+
+In most cases, you’ll use a variable like `@phone_number`. You can insert this by typing `@` or selecting it from the available variables panel.
+
+Using variables ensures the message is sent to the correct recipient automatically, without hard-coding numbers into your flow.
+
+### Content
+
+The **Content** field defines the body of the SMS message.
+
+You can write plain text or build a dynamic message using variables. For example:
+
+> “Hi @message_recipient, your appointment is confirmed. Details: @message_content”
+
+Variables such as `@message_recipient`, `@appointment_time`, or `@case_number` allow the SMS to reflect the exact context of the call.
+
+This makes messages feel personal and relevant, rather than generic or automated.
+
+![Configure Sms Block](/assets/configure-sms-block.png)
+
+## Post-Call SMS Messages
+
+Many teams use the Send SMS block as a post-call action.
+
+For example:
+
+- After an appointment is booked
+- After a voicemail is recorded
+- After a call is escalated or transferred
+
+In these cases, the block runs after the voice interaction ends, allowing you to send confirmations, summaries, or follow-ups without keeping the caller on the line.
+
+### Common Example
+
+After an appointment booking flow completes successfully:
+
+- Phone Number: `@phone_number`
+- Content:
+
+  > “Thanks for calling! Your appointment is scheduled for @appointment_date at @appointment_time. Reply STOP to opt out.”
+
+This message is sent automatically, using data already collected during the call.
 
 If you are forwarding your main business phone number to Phonely's phone number, and you attempt to use the "customer's phone number they texted from" option directly with that forwarded number, the SMS might incorrectly be sent back to your forwarded number rather than the actual customer's original calling number.
 
 **Workaround/Best Practice**: To ensure the SMS is always sent to the correct customer, it is highly recommended to add a step in your workflow to explicitly ask the customer for their phone number (using an Ask Exactly Block, for example) and then use that collected variable as the recipient for the Send Text Message Block. This also provides an opportunity for a verification step.
-
-## Send SMS Use Case
-
-Here's an example workflow to illustrate the process of using the Send Text Message Block:
-
-<Steps>
-  <Step title="Trigger">
-    Customer would like to book an appointment
-  </Step>
-  <Step title="Action 1 (Talk Block)">
-    Qualify the customer with a series of questions to determine if they can schedule an appointment or not.
-  </Step>
-  <Step title="Action 2 (Ask Exactly Block)">
-    Ask for the customer's phone number (e.g., "What's the best number to send that link to?"). Store as customer_number.
-  </Step>
-  <Step title="Action 3 (Send Text Message Block)">
-    Send an SMS to the customer_number variable.
-
-    - **Message Content**: "Here's the link to our scheduling calendar: [cal_link_variable]"
-    - **Interim Message**: "Sending you that link right now."
-  </Step>
-</Steps>
-
-## Conclusion
 
 By following these steps, you can effectively send text messages to your customers within Phonely's call flows. This functionality is a powerful way to enhance customer interaction, provide supplementary information, and streamline communication, adding a robust channel to your AI receptionist's capabilities.
