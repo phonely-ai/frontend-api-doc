@@ -82,8 +82,8 @@ After an appointment booking flow completes successfully:
 
 This message is sent automatically, using data already collected during the call.
 
-If you are forwarding your main business phone number to Phonely's phone number, and you attempt to use the "customer's phone number they texted from" option directly with that forwarded number, the SMS might incorrectly be sent back to your forwarded number rather than the actual customer's original calling number.
+<Note>
+  If you are forwarding your main business phone number to Phonely's phone number, and you attempt to use the "customer's phone number they texted from" option directly with that forwarded number, the SMS might incorrectly be sent back to your forwarded number rather than the actual customer's original calling number.
+</Note>
 
 **Workaround/Best Practice**: To ensure the SMS is always sent to the correct customer, it is highly recommended to add a step in your workflow to explicitly ask the customer for their phone number (using an Ask Exactly Block, for example) and then use that collected variable as the recipient for the Send Text Message Block. This also provides an opportunity for a verification step.
-
-By following these steps, you can effectively send text messages to your customers within Phonely's call flows. This functionality is a powerful way to enhance customer interaction, provide supplementary information, and streamline communication, adding a robust channel to your AI receptionist's capabilities.
