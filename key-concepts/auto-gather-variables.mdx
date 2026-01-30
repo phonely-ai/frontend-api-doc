@@ -57,12 +57,12 @@ You can create an Auto-Gather variable from inside any block that supports it. F
 <Expandable title="Required Fields" defaultOpen="true">
   - Variable Name: A short, descriptive name.
   - Variable Type: Choose from several built-in types.
-  - Description: Clarify what Phonely should gather, e.g.  “The amount the customer wants to donate.”
+  - Description: Clarify what Phonely should gather, e.g.  “The amount the customer wants to donate.”                                          
 </Expandable>
 
 ### Validation Options
 
-Depending on the type, you may see:
+Depending on the type, you may see:     
 
 - **Required** – forces the agent to collect the value before continuing
 - **Confirm** – agent asks: “_You said 34 dollars, correct?_”
@@ -70,11 +70,11 @@ Depending on the type, you may see:
 
 ## Custom Type Definition
 
-Custom types let you define a format using natural language, for example:
+Custom types let you define a format using natural language, for example:     
 
 > _“Format this as a raw number with two decimal places. If someone says \$34, output 34.00.”_
 
-This ensures the agent outputs values _exactly the way your system expects them_, without extra logic or multiple retries.
+This ensures the agent outputs values _exactly the way your system expects them_, without extra logic or multiple retries.    
 
 **Great for:**
 
@@ -93,12 +93,12 @@ This ensures the agent outputs values _exactly the way your system expects them_
 
 ## Auto-Gather in Example: Payment Block
 
-Imagine you want to collect the payment amount from a caller. Instead of Adding a Talk Block, asking for the amount, validating the format manually, and passing it to the Payment block.
+Imagine you want to collect the payment amount from a caller. Instead of Adding a Talk Block, asking for the amount, validating the format manually, and passing it to the payment block.    
 
 ### You simply
 
-1. Open **Payment Block**. 
-2. Click **\+ Auto-Gather Variable**.  
+1. Open **Payment Block**.
+2. Click **\+ Auto-Gather Variable**.
 3. Enter the following details:
 
    <Expandable title="Configuration Details">
@@ -121,7 +121,7 @@ Now your agent automatically:
 - Asks for the payment amount right before the block runs
 - Formats it correctly
 - Confirms the value
-- Passes it to the Payment processor
+- Passes it to the payment processor
 
 No extra blocks. No manual logic.
 
