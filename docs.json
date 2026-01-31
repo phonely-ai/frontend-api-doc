@@ -179,9 +179,9 @@
           {
             "group": "TESTING",
             "pages": [
-              "/testing/test-from-a-block",
-              "/testing/ab-testing",
-              "/testing/simulation-testing"
+              "testing/test-from-a-block",
+              "testing/ab-testing",
+              "testing/simulation-testing"
             ]
           },
           {
