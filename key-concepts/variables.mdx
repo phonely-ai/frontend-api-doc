@@ -76,17 +76,14 @@ Phonely now maintains an explicit type for variables to improve reliability in A
 
 **Variable Types at a Glance**
 
-Variables can now carry an explicit type, such as: `text, number, boolean, date, time, email, list(text), json, array,enum etc.`
-
-When hovering over a variable in the builder, its type is displayed to help you understand how it will be handled at runtime.
+Variables can now carry an explicit type, such as: `text, number, boolean, date, time, email, list(text), json, array,enum etc.`When hovering over a variable in the builder, its type is displayed to help you understand how it will be handled at runtime.
 
 **Backward Compatibility**
 
-- **Existing variables are not affected.**\
-  Any variables that were already added to blocks before this update continue to behave as strings.
-- Only newly added variables will automatically carry and preserve a type in the backend.
+**Existing variables are not affected.**\
+Any variables that were already added to blocks before this update continue to behave as strings.
 
-This ensures older flows continue working exactly as before.
+Only newly added variables will automatically carry and preserve a type in the backend. This ensures older flows continue working exactly as before.
 
 **Typed vs. Untyped Variables**
 
@@ -104,13 +101,13 @@ This ensures older flows continue working exactly as before.
 
 Phonely performs type conversion only when the variable is the sole content of a field.
 
-**Conversion occurs when: **The variable has a non-string type (for example, array or boolean), it is passed through to the backend as-is.
+\*\*Conversion occurs when: \*\*The variable has a non-string type (for example, array or boolean), it is passed through to the backend as-is.
 
 ```
 {{response_object}}
 ```
 
-**Conversion does NOT occur when: **There is some additional text around the type variable. In this case, the entire field is treated as a string, even if the variable itself has a type.
+\*\*Conversion does NOT occur when: \*\*There is some additional text around the type variable. In this case, the entire field is treated as a string, even if the variable itself has a type.
 
 ```
 {{response_object}} some additional text
