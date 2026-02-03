@@ -175,7 +175,7 @@ Click to expand this section. These options help control the flow behavior durin
 
 Click **Continue** to save and move on to the **Test** step.
 
-## Test Stage
+## Test 
 
 Testing ensures your configuration works before you publish your flow.
 
@@ -186,15 +186,20 @@ If successful, you’ll see:
 
 ```
 Status: 201 Created
-{
-  "id": 101,
-  "title": "",
-  "body": "",
-  "userId": 1
-}
 ```
 
 If failed, you’ll get an error message explaining what went wrong (e.g., invalid URL, authentication error, or timeout).
+
+<Note>
+  When building workflows, you can now hover over API request and code block variables to instantly preview test data. This reduces debugging time and improves confidence before publishing flows
+</Note>
+
+<img
+  src="/assets/preview-test-data.png"
+  alt="Preview Test Data"
+  title="Preview Test Data"
+  style={{ width:"66%" }}
+/>
 
 ## Use cases for API Requests
 
