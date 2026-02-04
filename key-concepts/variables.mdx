@@ -101,13 +101,13 @@ Only newly added variables will automatically carry and preserve a type in the b
 
 Phonely performs type conversion only when the variable is the sole content of a field.
 
-\*\*Conversion occurs when: \*\*The variable has a non-string type (for example, array or boolean), it is passed through to the backend as-is.
+**Conversion occurs when:** The variable has a non-string type (for example, array or boolean), it is passed through to the backend as-is.
 
 ```
 {{response_object}}
 ```
 
-\*\*Conversion does NOT occur when: \*\*There is some additional text around the type variable. In this case, the entire field is treated as a string, even if the variable itself has a type.
+**Conversion does NOT occur when:** There is some additional text around the type variable. In this case, the entire field is treated as a string, even if the variable itself has a type.
 
 ```
 {{response_object}} some additional text
