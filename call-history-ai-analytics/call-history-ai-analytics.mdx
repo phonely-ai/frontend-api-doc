@@ -74,39 +74,206 @@ Once you’ve selected your filters, click **Apply** to immediately update the c
 Click any call row to open the call detail view.\
 You’ll find three tabs at the top: **Highlights**, **Transcript**, and **Blocks**.
 
-### **1. Highlights Tab**
+## Highlights Tab
 
-Displays a summarized view of the entire call:
+The **Highlights** tab provides a concise, structured overview of the entire call at a glance. It’s designed to help you quickly understand what happened during the conversation, what actions were taken, and how the call concluded, without needing to review the full transcript.
 
-- **Call Summary** – A quick narrative describing what the call was about.
-- **Caller Details** – The caller’s phone number and detected location.
-- **Call Stats** – Sentiment, end reason, duration, topic, and final outcome.
+<img
+  src="/assets/highlights-tab-call-history.png"
+  alt="Highlights Tab Call History"
+  title="Highlights Tab Call History"
+  style={{ width:"91%" }}
+/>
 
-### **2. Transcript Tab**
+### Call Summary
 
-The **Transcript** provides a turn-by-turn record of the conversation.
+At the top of the page, Phonely generates a clear, human-readable summary of the call.
 
-- Each Phonely message and user response is timestamped.
-- Stored variables (like `caller_reason` or `room_type`) appear inline.
-- “View Reasoning” shows the AI’s decision-making process in real time - Phonely’s real-time reasoning feature explains why the AI responded a certain way.
-- Checkboxes indicate endpoint detection, marking pauses or timeouts in conversation.
+- Describes the caller’s intent (for example, _order status inquiry_ or _appointment booking_)
+- Explains what the AI attempted and what ultimately happened
+- Highlights key outcomes, such as whether a record was found, an action succeeded, or a fallback was triggered
 
-### **3. Blocks Tab**
+This summary is automatically generated and updated based on the full conversation context.
 
-The **Blocks** tab breaks the conversation down into the individual workflow blocks used during the call.
+### Caller Details
 
-Each block displays:
+The caller details section captures who the call came from and how it entered the system.
 
-- Block name and status.
-- AI speech and user input text.
-- Variables extracted during the exchange.
-- Reasoning that explains AI intent detection or clarification logic.
+- **Caller Number / Source** – Displays the call type (Inbound, Outbound, or Web Call)
+- **Caller Location** – Shows the detected location when available, or _Unknown_ if it cannot be determined
 
-This view is especially helpful when debugging or optimizing your call flows.
+This section helps distinguish between phone and web-based calls at a glance.
+
+### Call Stats
+
+The call stats section provides structured metadata about how the call progressed and ended.
+
+- **Sentiment** – AI-detected sentiment (Positive, Neutral, or Negative)
+- **Call Ended Reason** – Indicates why the call ended (for example, _Assistant ended call_ or _Customer ended_)
+- **Call Topic** – The primary topic detected during the conversation
+- **Call Outcome** – The final outcome selected or reached in the workflow
+- **Duration** – Total length of the call
+- **Actions Completed** – Lists any integrations or actions executed during the call (for example, Google Sheets lookups or webhook triggers)
+
+These fields are especially useful for reporting, QA, and workflow optimization.
+
+### Call Flow & Stored Variables
+
+On the right-hand side, the call flow panel shows how the call moved through your workflow in real time.
+
+- Displays when the call was initiated and which workflow was used
+- Shows each step where variables were stored
+- Lists extracted variables (such as order numbers or email addresses) exactly as they were captured during the call
+
+This view is invaluable for debugging flows, validating variable capture, and understanding decision points.
+
+### Call Audio Player (Bottom Bar)
+
+At the bottom of the highlights view, Phonely includes an embedded audio player so you can listen to the call without leaving the page. You can access actions such as play / pause, progress bar, volume control, more options menu (three dots) for download and playback speed, quick feedback controls (thumbs up / thumbs down).
+
+## Transcript Tab
+
+The Transcript tab provides a complete, turn-by-turn record of the conversation between the caller and your Phonely agent. It’s designed for deep inspection, debugging, and understanding how and why the AI behaved the way it did during the call.
+
+This view combines spoken dialogue, AI actions, stored variables, and external requests into a single chronological timeline.
+
+<img
+  src="/assets/transcript-tab-call-history.png"
+  alt="Transcript Tab Call History"
+  title="Transcript Tab Call History"
+  style={{ width:"89%" }}
+/>
+
+### Conversation Timeline
+
+Every exchange is displayed in order, clearly separated between you agent and user messages.
+
+- Each message reflects exactly what was spoken during the call
+- Messages are time-aligned with the call playback at the bottom of the screen
+- You can scrub the audio player to any point and follow along in the transcript
+
+### AI Messages & User Responses
+
+For each AI message, you’ll see:
+
+- The exact spoken response generated by Phonely
+- Playback controls (play, pause) for that specific moment
+- Feedback controls (thumbs up / thumbs down) to evaluate response quality
+
+User responses are shown inline, making it easy to follow the conversational flow and identify misunderstandings, corrections, or confirmations.
+
+### References
+
+Some AI responses include references, indicating that the agent used connected knowledge sources or documents to generate its reply.
+
+- Expand references to see which sources were used
+- Helpful for validating factual accuracy or debugging knowledge base behavior
+
+### Variables Stored
+
+When the AI captures or updates information, it’s recorded inline as variables stored.
+
+- Variables (such as `order_number` or `customer_email`) are displayed clearly
+- Values can be copied directly from the UI
+- Makes it easy to verify what data was collected and when
+
+This is especially useful for troubleshooting cases where incorrect or incomplete information was captured during the call.
+
+### View Reasoning
+
+Each AI message includes a view reasoning option.
+
+- Reveals the AI’s internal decision-making process at that moment
+- Explains why the AI asked a follow-up question, confirmed details, or took a specific action
+- Essential for understanding intent detection, clarification logic, and fallback behavior
+
+This transparency is invaluable when optimizing prompts or refining workflows.
+
+### External Actions & API Requests
+
+When the agent performs an action, such as an API call or webhook, you’ll see it directly in the transcript.
+
+For example:
+
+- HTTP request status (e.g., `POST 200 Success`)
+- Request URL and payload
+- Response body returned from the external system
+- Execution timing
+
+This makes the Transcript tab a powerful debugging tool for integrations like ticket creation, CRM updates, or automation triggers.
+
+### End-of-Call Playback
+
+At the bottom of the transcript, you’ll find the full call audio player.
+
+- Play the entire conversation from start to finish
+- Jump to specific timestamps
+- Review tone, pacing, and clarity for quality assurance or training
+
+## Blocks Tab
+
+The **Blocks** tab provides a structured, execution-level view of how the call moved through your workflow. It shows **every block that ran**, when it ran, how long it took, and whether it completed successfully, making it ideal for debugging, auditing, and optimization.
+
+<img
+  src="/assets/blocks-tab-call-history.png"
+  alt="Blocks Tab Call History"
+  title="Blocks Tab Call History"
+  style={{ width:"94%" }}
+/>
+
+### Block Execution Overview
+
+At the top level, the Blocks tab displays a table with one row per executed block, including:
+
+- **Block Name** – The label of the block as defined in your workflow (for example, _Greeting Message_, _Talk_, _API Request_).
+- **Block** – The specific workflow block instance that was executed.
+- **Timestamp** – The exact time the block started during the call.
+- **Duration** – How long the block ran.
+- **Status** – Execution result (for example, _Completed_).
+
+This view gives you a chronological summary of the entire call flow from start to finish.
+
+### Expanding a Block for Details
+
+Click the arrow next to any block to expand it and view detailed execution data. Expanded blocks reveal a structured event log showing exactly what happened inside that block.
+
+Each expanded block includes:
+
+- **Timestamp** – When each event occurred.
+- **Event Type** – What kind of action took place.
+- **Data** – The payload, message, or response associated with the event.
+
+### Event Types You May See
+
+Depending on the block type, expanded views may include:
+
+- **AI Speech** – Messages spoken by the agent.
+- **User Input** – Transcribed caller responses.
+- **Referenced Knowledge Base** – Knowledge or documents referenced during the block.
+- **Block Transition** – Movement between workflow blocks.
+- **API / Webhook Requests** – Outbound requests with full request and response details.
+- **System Actions** – Internal workflow or execution events.
+
+### API Request Visibility
+
+For API and webhook blocks, the Blocks tab provides full transparency into external calls, including:
+
+- Request URL and method
+- Request body
+- Response body
+- HTTP status code
+- Execution time
+
+This makes it easy to verify integrations, troubleshoot failures, and confirm downstream systems received the expected data.
+
+At the bottom of expanded sections, you may see:
+
+- **Total Events** – Number of events recorded for that block.
+- **Duration** – Total execution time for the block.
 
 ## Exporting Selected Calls and Running Reports
 
-The **Export** and **Report** options allow you to analyze call performance or share data externally.
+The Export and Report options allow you to analyze call performance or share data externally.
 
 ### Export Selected Calls
 
@@ -114,56 +281,14 @@ Use Export Selected Calls when you want to download specific calls manually from
 
 1. From the call history table, check the calls you want to include.
    - You can select one or multiple rows.
-2. Click **Export Selected Calls**.
-   - This action downloads a **CSV file** containing detailed data for only those calls.
-
-### Running a Report
-
-Use **Run Report** to generate an automatic summary of all calls that match your filters and date range - no manual selection needed.
-
-1. At the top of the call history page, apply the desired date range.
-2. Once your filters are set, click **Run Report** in the bottom toolbar.
-3. Phonely will automatically generate a Call Report summarizing those filtered calls.
-
-### Understanding the Call Report
-
-After clicking **Run Report**, a summary panel appears showing:
+2. Click **Export Selected Calls**. This action downloads a **CSV file** containing detailed data for only those calls.
 
 <img
-  src="/assets/generate-call-history-report.png"
-  alt="Generate Call History Report"
-  title="Generate Call History Report"
-  style={{ width:"50%" }}
+  src="/assets/export-data-call-history.png"
+  alt="Export Data Call History"
+  title="Export Data Call History"
+  style={{ width:"95%" }}
 />
-
-### Downloading Report Data
-
-You can download your report in two formats:
-
-- **Raw Data (CSV)** – Contains every individual call and all details, perfect for deeper review in Excel or Sheets.
-- **Summary Stats (JSON)** – Contains aggregated metrics only (totals, averages, outcomes), useful for analytics tools or dashboards.
-
-Simply click the **Download CSV** or **Download JSON** button from the Call Report panel.
-
-## Understanding Call Path Analytics
-
-Click the call path tab at the top of the call history page to visualize how conversations progress through your workflows.
-
-Each node in the diagram represents a block or workflow segment, while the connecting lines show call progression between them.
-
-![Call Path Gi](/assets/call-path.gif)
-
-### **What You’ll See**
-
-- **Start Node** – Entry point of all calls (shows total call count and average duration).
-- **Workflow Nodes** – Represent steps like  _Reception Flow_, or _AI Receptionist_.
-- **End Node** – Displays success rate, total calls ended, and end reasons (e.g., _AI Hang Up_, _Customer Ended_).
-
-You can use filters here to focus on:
-
-- A specific date range.
-- Your workflows (e.g., Appointment Booking vs. Legal Reception).
-- Calls that share the same outcome or end reason.
 
 ## Example Use Cases
 
