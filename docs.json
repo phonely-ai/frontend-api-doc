@@ -32,13 +32,6 @@
         "icon": "house",
         "groups": [
           {
-            "group": "PERFOMANCE",
-            "pages": [
-              "call-paths",
-              "perfomance"
-            ]
-          },
-          {
             "group": "GET STARTED",
             "pages": [
               "get-started/overview",
@@ -174,6 +167,13 @@
               "agent-knowledge-base/add-websites",
               "agent-knowledge-base/import-from-external",
               "agent-knowledge-base/managing-data-sources"
+            ]
+          },
+          {
+            "group": "PERFOMANCE",
+            "pages": [
+              "call-paths",
+              "perfomance"
             ]
           },
           {
