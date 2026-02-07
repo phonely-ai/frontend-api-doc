@@ -32,6 +32,13 @@
         "icon": "house",
         "groups": [
           {
+            "group": "PERFOMANCE",
+            "pages": [
+              "call-paths",
+              "perfomance"
+            ]
+          },
+          {
             "group": "GET STARTED",
             "pages": [
               "get-started/overview",
@@ -42,7 +49,6 @@
           {
             "group": "KEY CONCEPTS",
             "pages": [
-            
               "key-concepts/create-duplicate-agents",
               "key-concepts/flows",
               "key-concepts/routing",
