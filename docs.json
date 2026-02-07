@@ -172,8 +172,8 @@
           {
             "group": "PERFOMANCE",
             "pages": [
-              "call-paths",
-              "perfomance"
+              "perfomance",
+              "call-paths"
             ]
           },
           {
