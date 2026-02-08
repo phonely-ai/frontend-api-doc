@@ -36,7 +36,7 @@ To analyze a specific period, switch to **Custom** and select an exact start and
 The agent selector determines which agent’s workflow and calls are visualized in the Call Paths view.
 
 - Includes a **Search agents…** field for fast lookup
-- Allows you to switch between agents. 
+- Allows you to switch between agents.
 
 When you change the selected agent, the call flow updates immediately to reflect only calls handled by that agent.
 
@@ -56,16 +56,9 @@ This snapshot helps you understand the overall shape of your data before diving 
 
 ### Workflow blocks
 
-Below the Start block are the **workflow blocks**, which represent the steps in your agent, such as:
-
-- Main Routing
-- Order Tracking Intake
-- Lookup Order
-- Escalation Options
+Below the start block are the **workflow blocks**, which represent the steps in your agent. 
 
 The connecting lines between blocks show how callers progress through the flow. Thicker or more prominent paths typically indicate higher traffic, making it easy to see the most common routes.
-
----
 
 ### Viewing step-level details
 
@@ -73,11 +66,9 @@ Some blocks display a **“Click to view”** label. Clicking one of these block
 
 - See how calls arrived at that block
 - Understand what happened within the step
-- Identify where callers continued—or dropped off
+- Identify where callers continued, or dropped off
 
 This is especially useful for diagnosing confusion points, loops, or unexpected exits in your workflow.
-
----
 
 ### End block
 
@@ -85,14 +76,16 @@ At the bottom of the diagram is the **End** block, which summarizes how calls co
 
 - Total calls that reached the end
 - Overall success rate
-- A breakdown of end call reasons, such as:
-  - Customer ended the call
-  - Silence timeout
-  - AI hangup
+- A breakdown of end call reasons. 
+
+<img
+  src="/assets/end-block-call-paths.png"
+  alt="End Block Call Paths"
+  title="End Block Call Paths"
+  style={{ width:"96%" }}
+/>
 
 Reviewing this block helps you quickly determine whether calls are ending naturally or failing before reaching a successful resolution.
-
----
 
 ## Filtering Call Paths
 
