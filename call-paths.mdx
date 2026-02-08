@@ -68,6 +68,35 @@ Below the start block are the **workflow blocks**, which represent the steps in 
 
 The connecting lines between blocks show how callers progress through the flow. Thicker or more prominent paths typically indicate higher traffic, making it easy to see the most common routes.
 
+## Inspecting Calls Along a Path
+
+In Call Paths, the blue connectors between blocks aren’t just visual links—they’re interactive. Clicking a path lets you inspect the actual calls that traveled through that specific route, giving you concrete examples behind the flow.
+
+Each blue path represents a transition between two stages in your workflow, such as:
+
+- **Start → Order Tracking Workflow**
+- **Order Tracking Workflow → End**
+
+The thickness of the path reflects how many calls followed that route, while the label shows:
+
+- The number of calls
+- The percentage of total calls
+
+### Viewing calls on a path
+
+When you click a blue path, a slide-in panel opens from the right side of the screen. This panel lists all calls that passed through that exact transition.
+
+Each call entry includes: the caller label, call summary snippet describing what the caller requested, date and time of the call and call duration. 
+
+This makes it easy to move from high-level flow analysis to individual call examples without leaving the Call Paths view.
+
+<img
+  src="/assets/call-path-analysis.png"
+  alt="Call Path Analysis"
+  title="Call Path Analysis"
+  style={{ width:"93%" }}
+/>
+
 ### Viewing step-level details
 
 Blocks display a **“Click to view”** label. Clicking one of these blocks lets you drill into that specific workflow allowing you to:
@@ -76,7 +105,14 @@ Blocks display a **“Click to view”** label. Clicking one of these blocks let
 - Understand what happened within the step
 - Identify where callers continued, or dropped off
 
-This is especially useful for diagnosing confusion points, loops, or unexpected exits in your workflow.
+<img
+  src="/assets/call-path-workflow-details.png"
+  alt="Call Path Workflow Details"
+  title="Call Path Workflow Details"
+  style={{ width:"66%" }}
+/>
+
+This is especially useful for diagnosing confusion points, loops, or unexpected exits in your workflow. 
 
 ### End block
 
