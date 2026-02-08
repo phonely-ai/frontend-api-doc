@@ -1,3 +1,133 @@
 ---
-title: "call-paths"
+title: "Call Paths"
 ---
+
+The call paths view shows how calls move through your agent’s workflow from start to finish. Instead of focusing on totals or trends, it helps you understand caller behavior, where callers go, where they drop off, and which paths lead to successful outcomes.
+
+Unlike the Performance page, Call Paths uses a visual flow diagram rather than charts. This makes it easier to spot friction points, dead ends, and high-performing routes through your agent.
+
+To access Call Paths:
+
+1. Go to **Analytics** in the left sidebar
+2. Open **Performance**
+3. In the top-right corner, switch from **Performance** to **Call Paths**
+
+<img
+  src="/assets/call-paths-perfomance.png"
+  alt="Call Paths Perfomance"
+  title="Call Paths Perfomance"
+  style={{ width:"94%" }}
+/>
+
+## Top controls
+
+The top controls define which calls are included in the Call Paths diagram before the flow is rendered. Every block, connection, and metric in the flow is built from the data selected here.
+
+### Date range selector
+
+Use the date range dropdown to control the time window used to generate the call flow.
+
+Available preset ranges include: last 24 hours, 7 days, 30 days, 90 days
+
+To analyze a specific period, switch to **Custom** and select an exact start and end date. The entire call path recalculates based on the selected range.
+
+### Agent selector
+
+The agent selector determines which agent’s workflow and calls are visualized in the Call Paths view.
+
+- Includes a **Search agents…** field for fast lookup
+- Allows you to switch between agents. 
+
+When you change the selected agent, the call flow updates immediately to reflect only calls handled by that agent.
+
+## How the Call Paths layout works
+
+The Call Paths view is displayed as a vertical flow diagram made up of connected blocks. Each block represents a step in your agent’s workflow, and the connections show how callers move between steps.
+
+### Start block
+
+At the top of the flow is the **Start** block. This provides high-level context for the calls entering the workflow, including:
+
+- Total calls
+- Average call duration
+- A mini breakdown of top call outcomes
+
+This snapshot helps you understand the overall shape of your data before diving into individual paths.
+
+### Workflow blocks
+
+Below the Start block are the **workflow blocks**, which represent the steps in your agent, such as:
+
+- Main Routing
+- Order Tracking Intake
+- Lookup Order
+- Escalation Options
+
+The connecting lines between blocks show how callers progress through the flow. Thicker or more prominent paths typically indicate higher traffic, making it easy to see the most common routes.
+
+---
+
+### Viewing step-level details
+
+Some blocks display a **“Click to view”** label. Clicking one of these blocks lets you drill into that specific step to:
+
+- See how calls arrived at that block
+- Understand what happened within the step
+- Identify where callers continued—or dropped off
+
+This is especially useful for diagnosing confusion points, loops, or unexpected exits in your workflow.
+
+---
+
+### End block
+
+At the bottom of the diagram is the **End** block, which summarizes how calls concluded. This section includes:
+
+- Total calls that reached the end
+- Overall success rate
+- A breakdown of end call reasons, such as:
+  - Customer ended the call
+  - Silence timeout
+  - AI hangup
+
+Reviewing this block helps you quickly determine whether calls are ending naturally or failing before reaching a successful resolution.
+
+---
+
+## Filtering Call Paths
+
+Call Paths supports the same filtering system used on the Performance page. You can filter calls by:
+
+- Status
+- Call outcome
+- Call type
+- End reason
+- Sentiment
+
+Filters allow you to focus on very specific behaviors. For example, you can isolate calls that ended in silence to see where they drop off, or filter to successful outcomes to identify which paths perform best.
+
+Once applied, filters update the flow instantly to reflect only the selected calls.
+
+---
+
+## Creating views for Call Paths
+
+You can save filtered Call Paths as **custom views**, just like on the Performance page.
+
+This allows you to create focused views such as:
+
+- A failed-calls view showing only customer-ended calls
+- An escalation-focused view tracking support handoffs
+- A high-success view filtered to completed calls
+
+Each saved view remembers its filters, date range, agent selection, and path configuration, making it easy to switch between analyses without reconfiguring everything.
+
+---
+
+## When to use Call Paths vs Performance
+
+Use **Performance** when you want to understand trends and volumes over time, compare outcomes, or review distributions at a high level.
+
+Use **Call Paths** when you want to understand **behavior**—how callers move through your agent, where they drop off, and which workflows lead to success.
+
+Together, these views give you both the _what_ and the _why_ behind your agent’s performance
