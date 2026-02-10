@@ -170,7 +170,7 @@
             ]
           },
           {
-            "group": "PERFOMANCE",
+            "group": "PERFORMANCE",
             "pages": [
               "perfomance",
               "call-paths"
