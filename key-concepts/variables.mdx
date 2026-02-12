@@ -11,8 +11,6 @@ Variables are the backbone of your agents. They capture data during a call, pass
   If a block didn't run, its variable appears blank in post-call context. That's intentional so you can safely reference variables without breaking integrations.
 </Info>
 
-<iframe src="https://www.youtube.com/embed/mPRa7T5qJSo" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
-
 ## Key Concepts
 
 **What variables are**
@@ -80,8 +78,7 @@ Variables can now carry an explicit type, such as: `text, number, boolean, date,
 
 **Backward Compatibility**
 
-**Existing variables are not affected.**\
-Any variables that were already added to blocks before this update continue to behave as strings.
+Existing variables are not affected. Any variables that were already added to blocks before this update continue to behave as strings.
 
 Only newly added variables will automatically carry and preserve a type in the backend. This ensures older flows continue working exactly as before.
 
