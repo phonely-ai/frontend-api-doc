@@ -58,6 +58,10 @@
             "group": "AGENT DESIGN & SETTINGS",
             "pages": [
               {
+                "group": "Call Tagging",
+                "pages": []
+              },
+              {
                 "group": "Voice",
                 "pages": [
                   "agent-design/voice/voice-selection",
