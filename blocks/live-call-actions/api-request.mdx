@@ -84,16 +84,63 @@ The Configure tab is where you define what your API request should do.
   style={{ width:"72%" }}
 />
 
-**1. API Method**
+<Steps>
+  <Step title="API Method" titleSize="p">
+    Select the type of request from the dropdown:
 
-Select the type of request from the dropdown:
+    - `GET` – Retrieve data from a system.
+    - `POST` – Send new data.
+    - `PUT` or `PATCH`– Update an existing record.
+    - `DELETE` – Remove a resource.
 
-- `GET` – Retrieve data from a system.
-- `POST` – Send new data.
-- `PUT` or `PATCH`– Update an existing record.
-- `DELETE` – Remove a resource.
+    > Example: Choose **POST** when sending call data to an external app.
+  </Step>
+  <Step title="API URL">
+    Enter the endpoint where the request should go. This is the destination for your data.
+  </Step>
+  <Step title="Headers" titleSize="p">
+    Headers define metadata or authentication details for your API call.                                                         Click **\+ Add** to add key-value pairs such as:
 
-> Example: Choose **POST** when sending call data to an external app.
+    <Tip>
+      Always include `Content-Type: application/json` for JSON-based APIs.
+    </Tip>
+  </Step>
+  <Step title="Query Parameters" titleSize="p">
+    Use this if your API uses query strings in the URL (e.g., filtering or pagination).
+  </Step>
+  <Step title="Body (For POST, PUT, PATCH Requests)" stepNumber={5} titleSize="p">
+    For **POST**, **PUT**, or **PATCH** requests, you can define a request body. Phonely supports multiple body types, selectable directly in the UI.
+
+    #### Supported Body Types
+
+    **None**\
+    Use this when the request does not require a body.
+
+    **x-www-form-urlencoded**\
+    Use this when the API expects traditional form data. Each key-value pair is sent as form data, commonly required by legacy systems or OAuth flows.
+
+    **JSON**\
+    Use this when sending structured data in JSON format (most modern APIs).\
+    You can switch the editor to **Code** mode to write raw JSON directly.
+
+    <Tip>
+      You can make your API requests dynamic by inserting variables captured earlier in your flow. Type `@`to open the variable picker or select from available variables or auto-gather variables to include dynamic data in your request.
+    </Tip>
+  </Step>
+  <Step stepNumber={6}>
+    Click to expand this section. These options help control the flow behavior during API communication.
+
+    | **Setting**                    | **Description**                                                                       |
+    | :----------------------------- | :------------------------------------------------------------------------------------ |
+    | **Enable Error Handling**      | Lets you catch failed API calls and redirect the flow.                                |
+    | **Retry on Failure**           | Retries automatically if the server doesn’t respond.                                  |
+    | **Interim Message**            | Sends a short message to the caller (e.g., “Please hold while I send your request.”). |
+    | **Post Interim Message Delay** | Adds a short pause after the interim message.                                         |
+    | **Call Outcome Tagging**       | Add labels for analytics or call reports (e.g., “api_success” or “crm_update”).       |
+
+    Click **Continue** to save and move on to the **Test** step.
+  </Step>
+</Steps>
 
 **2. API URL**
 
