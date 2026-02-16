@@ -85,7 +85,7 @@ The Configure tab is where you define what your API request should do.
 />
 
 <Steps>
-  <Step title="API Method" titleSize="p">
+  <Step titleSize="h3" title="API Method">
     Select the type of request from the dropdown:
 
     - `GET` – Retrieve data from a system.
@@ -95,10 +95,10 @@ The Configure tab is where you define what your API request should do.
 
     > Example: Choose **POST** when sending call data to an external app.
   </Step>
-  <Step title="API URL">
+  <Step titleSize="h3" title="API URL">
     Enter the endpoint where the request should go. This is the destination for your data.
   </Step>
-  <Step title="Headers" titleSize="p">
+  <Step titleSize="h3" title="Headers">
     Headers define metadata or authentication details for your API call.                                                         Click **\+ Add** to add key-value pairs such as:
 
     <img
@@ -112,7 +112,7 @@ The Configure tab is where you define what your API request should do.
       Always include `Content-Type: application/json` for JSON-based APIs.
     </Tip>
   </Step>
-  <Step title="Query Parameters" titleSize="p">
+  <Step titleSize="h3" title="Query Parameters">
     Use this if your API uses query strings in the URL (e.g., filtering or pagination).
 
     <img
@@ -122,7 +122,7 @@ The Configure tab is where you define what your API request should do.
       style={{ width:"95%" }}
     />
   </Step>
-  <Step title="Body (For POST, PUT, PATCH Requests)" stepNumber={5} titleSize="p">
+  <Step stepNumber={5} titleSize="h3" title="Body (For POST, PUT, PATCH Requests)">
     For **POST**, **PUT**, or **PATCH** requests, you can define a request body. Phonely supports multiple body types, selectable directly in the UI.
 
     #### Supported Body Types
@@ -150,7 +150,7 @@ The Configure tab is where you define what your API request should do.
       You can make your API requests dynamic by inserting variables captured earlier in your flow. Type `@`to open the variable picker or select from available variables or auto-gather variables to include dynamic data in your request.
     </Tip>
   </Step>
-  <Step title="Advanced settings" stepNumber={6}>
+  <Step stepNumber={6} title="Advanced settings">
     Click to expand this section. These options help control the flow behavior during API communication.
 
     <img
