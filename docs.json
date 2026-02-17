@@ -92,6 +92,16 @@
             ]
           },
           {
+            "group": "AGENT KNOWLEDGEBASE",
+            "pages": [
+              "agent-knowledge-base/upload-files",
+              "agent-knowledge-base/upload-documents",
+              "agent-knowledge-base/add-websites",
+              "agent-knowledge-base/import-from-external",
+              "agent-knowledge-base/managing-data-sources"
+            ]
+          },
+          {
             "group": "CALL FLOWS",
             "pages": [
               {
@@ -171,16 +181,6 @@
             "pages": [
               "outboundcalling/createaoutboundcallingcampaign",
               "outboundcalling/creating-call-flows-for-outbound-campaigns"
-            ]
-          },
-          {
-            "group": "AGENT KNOWLEDGEBASE",
-            "pages": [
-              "agent-knowledge-base/upload-files",
-              "agent-knowledge-base/upload-documents",
-              "agent-knowledge-base/add-websites",
-              "agent-knowledge-base/import-from-external",
-              "agent-knowledge-base/managing-data-sources"
             ]
           },
           {
