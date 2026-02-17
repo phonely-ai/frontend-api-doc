@@ -83,8 +83,6 @@ Phonely lets you update the post-call outcome fields for a call using either of 
 
 Updates one exact call using its unique call ID.
 
-Use this when your CRM/app stores the **call_id**. It’s the safest option because you’re not guessing which call to update.
-
 ```javascript
 curl -X PATCH "https://app.phonely.ai/api/calls/agent123/call456" \
   -H "X-Authorization: your-api-key-here" \
