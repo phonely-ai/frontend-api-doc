@@ -92,18 +92,6 @@
             ]
           },
           {
-            "group": "KEY CONCEPTS",
-            "pages": [
-              "key-concepts/variables",
-              "key-concepts/auto-gather-variables",
-              "key-concepts/flow-canvas-controls",
-              "key-concepts/manage-workflow-versions",
-              "key-concepts/ask-ai",
-              "key-concepts/replace-invalid-variables",
-              "home/key-concepts/advanced-variables"
-            ]
-          },
-          {
             "group": "FLOW BLOCKS & ACTIONS",
             "pages": [
               {
@@ -159,6 +147,18 @@
                   "blocks/custom-integrations/google-calendar-custom-block"
                 ]
               }
+            ]
+          },
+          {
+            "group": "KEY CONCEPTS",
+            "pages": [
+              "key-concepts/variables",
+              "key-concepts/auto-gather-variables",
+              "key-concepts/flow-canvas-controls",
+              "key-concepts/manage-workflow-versions",
+              "key-concepts/ask-ai",
+              "key-concepts/replace-invalid-variables",
+              "home/key-concepts/advanced-variables"
             ]
           },
           {
