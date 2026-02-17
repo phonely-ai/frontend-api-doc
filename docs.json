@@ -197,8 +197,8 @@
             "group": "PERFORMANCE",
             "pages": [
               "perfomance",
-              "call-paths",
-              "post-call-outcomes"
+              "post-call-outcomes",
+              "call-paths"
             ]
           },
           {
