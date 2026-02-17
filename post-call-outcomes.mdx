@@ -76,7 +76,7 @@ Phonely lets you update the post-call outcome fields for a call using either of 
 - **Phone Number:** Use this endpoint to update the outcome based on the caller’s phone number. The `preference` parameter determines whether the update applies to the **first** or **last** call associated with that number.
 
   ```javascript
-  PATCH /api/calls/{agent_id}/{e164_number}?preference=first|last
+  PATCH /api/calls/{agent_id}/{e164_phone_number}?preference=first|last
   ```
 
 ### Option 1: Update by Call ID
