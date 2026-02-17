@@ -213,17 +213,114 @@ Example scenario: AI agent books an appointment.
 
 ## Viewing Post-Call Outcomes in Analytics
 
-Once outcomes are set, they appear everywhere in Phonely analytics.
+Once post-call outcomes are set using the API, webhook, or integration, they automatically appear in the **performance page**, where you can track, compare, and analyze results over time.
 
-## Performance Page
+To open the Performance page:
 
-You can:
+1. Go to **Analytics** in the left sidebar
+2. Click **Performance**
+3. Select the appropriate **date range** and **agent**
 
-- Filter by outcome
-- Group by outcome
-- Track outcome trends
-- Compare outcomes over time
+The charts and metrics will update automatically to include any post-call outcomes that were assigned.
 
-You can learn more about the performance page here.
+Every time a call outcome is updated (for example, `"Sold"` or `"Appointment Completed"`), that outcome becomes a trackable category in your analytics.
+
+You can view:
+
+- When outcomes occurred (by day or week)
+- How frequently each outcome occurs
+- How outcomes compare to total calls
+- How outcomes trend over time
+
+![In Scope Outcomes Phonely 1](/assets/in-scope-outcomes-phonely-1.png)
+
+This helps you understand not just call volume, but actual business impact.
+
+## Groups
+
+Grouping allows you to compare specific outcomes against total calls or other outcomes. This is one of the most powerful ways to measure conversion rates.
+
+To configure grouping:
+
+1. Click **Group** at the top of the Performance chart
+2. Click **Add Group**
+3. Select **Group Type \> Call Outcome**
+4. Select the outcome you want to track (for example, `Appointment Booked`)
+5. Rename the group to something meaningful (for example, `Appointments Booked`)
+6. Add another group for comparison (for example, `All Calls` or other outcomes)
+7. Click **Apply**
+
+The chart will now show each group separately.
+
+This allows you to clearly see:
+
+- How many calls resulted in appointments
+- How that compares to total calls
+- The percentage conversion rate over time
+
+<Frame>
+  ![Call Outcome Tagging 1](/assets/call-outcome-tagging-1.png)
+</Frame>
+
+Example insight:
+
+- Total calls: 100
+- Appointment Booked: 25
+- Conversion rate: 25%
+
+This helps you measure how effectively your AI agent is achieving your business goals.
+
+## Absolute and Percentage Views
+
+You can change how the data is displayed using the chart controls.
+
+- **Absolute mode** shows raw counts (for example, 25 appointments)
+- **Percentage mode** shows conversion rates (for example, 25%)
+
+## View the Actual Calls Behind an Outcome
+
+You can click any outcome, group, or chart segment to see the specific calls that produced that result.
+
+For example:
+
+Clicking the **Appointment Booked** group will open a list showing:
+
+- All calls marked with that outcome
+- Call timestamps
+- Caller phone numbers
+- Call summaries
+- Call recordings
+- Full transcripts
+
+From there, you can:
+
+- Listen to successful calls
+- Identify patterns in high-performing conversations
+- See exactly what the AI did correctly
+- Identify areas for improvement
+
+This allows you to move beyond analytics and understand real caller behavior.
 
 ---
+
+## Example: Measuring Appointment Conversion Rate
+
+Scenario: You want to measure how many calls resulted in booked appointments.
+
+Steps:
+
+1. Set post-call outcomes using `"Appointment Booked"`
+2. Go to **Analytics → Performance**
+3. Set date range (for example, Last 30 days)
+4. Click **Group**
+5. Create group: `Appointment Booked`
+6. Create group: `All Calls`
+7. Switch chart to **Percentage**
+
+You can now see:
+
+- Percentage of calls resulting in appointments
+- Trends over time
+- Whether your agent is improving or declining
+
+You can also click the group to review individual calls.
