@@ -33,7 +33,7 @@ Post-Call Outcomes allow you to send this information back into Phonely so you c
 
 ## What You Can Track with Post-Call Outcomes
 
-You can update any call with:
+Each call can be updated with three types of outcome data.
 
 | Field                     | Description                                | Example                              |
 | :------------------------ | :----------------------------------------- | :----------------------------------- |
@@ -112,7 +112,7 @@ This is common for workflows like:
 
 **Why it matters:** If the same person called twice, the outcome attaches to the most recent interaction, which usually matches conversion reality.
 
-**Example** 
+**Example**
 
 ```javascript
 curl -X PATCH "https://app.phonely.ai/api/calls/agent123/+14155551234" \
