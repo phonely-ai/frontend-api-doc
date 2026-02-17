@@ -102,6 +102,14 @@ curl -X PATCH "https://app.phonely.ai/api/calls/agent123/call456" \
 
 Updates a call using the caller’s **phone number** (E.164 format), and automatically picks the **most recent call** from that number.
 
+<Note>
+  Phone numbers must be in E.164 format.
+
+  **Correct:** +14155551234
+
+  **Incorrect**: 4155551234
+</Note>
+
 This is common for workflows like:
 
 - “Customer bought later”
