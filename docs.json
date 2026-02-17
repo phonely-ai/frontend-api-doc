@@ -184,7 +184,7 @@
                       "api-reference/endpoint/list-calls",
                       "api-reference/endpoint/get-call",
                       "api-reference/endpoint/report-call-error",
-                      "api-reference/endpoint/set-call-outcome"
+                      "api-reference/endpoint/set-post-call-outcome"
                     ]
                   },
                   {

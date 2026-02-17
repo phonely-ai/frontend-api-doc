@@ -1,11 +1,11 @@
 ---
-title: "Set Call Outcome"
+title: "Set PostCall Outcome"
 openapi: "PATCH /calls/{agentId}/{callIdOrPhone}"
 ---
 
 ## Overview
 
-This API allows you to set call outcome fields for calls by either:
+This API allows you to set post call outcome fields for calls by either:
 
 1. **Call ID:** `PATCH /api/calls/{agent_id}/{call_id}`
 2. **Phone Number:** `PATCH /api/calls/{agent_id}/{e164_number}?preference=first|last`
