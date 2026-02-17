@@ -92,7 +92,7 @@
             ]
           },
           {
-            "group": "FLOW BLOCKS & ACTIONS",
+            "group": "CALL FLOWS",
             "pages": [
               {
                 "group": "Flow Blocks",
@@ -105,7 +105,12 @@
                   "blocks/flow-blocks/time-filter",
                   "blocks/flow-blocks/end-call"
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "group": "ACTIONS & INTEGRATIONS",
+            "pages": [
               {
                 "group": "Live Call Actions",
                 "pages": [
