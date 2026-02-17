@@ -36,6 +36,7 @@
             "pages": [
               "get-started/overview",
               "get-started/quick-start",
+              "key-concepts/ask-ai",
               "get-started/dashboard-overview"
             ]
           },
@@ -115,6 +116,21 @@
                   "blocks/flow-blocks/time-filter",
                   "blocks/flow-blocks/end-call"
                 ]
+              },
+              {
+                "group": "Variables",
+                "pages": [
+                  "key-concepts/variables",
+                  "key-concepts/auto-gather-variables",
+                  "key-concepts/replace-invalid-variables",
+                  "home/key-concepts/advanced-variables"
+                ]
+              },
+              {
+                "group": "Workflow Versions",
+                "pages": [
+                  "key-concepts/manage-workflow-versions"
+                ]
               }
             ]
           },
@@ -167,13 +183,7 @@
           {
             "group": "KEY CONCEPTS",
             "pages": [
-              "key-concepts/variables",
-              "key-concepts/auto-gather-variables",
-              "key-concepts/flow-canvas-controls",
-              "key-concepts/manage-workflow-versions",
-              "key-concepts/ask-ai",
-              "key-concepts/replace-invalid-variables",
-              "home/key-concepts/advanced-variables"
+              "key-concepts/flow-canvas-controls"
             ]
           },
           {
