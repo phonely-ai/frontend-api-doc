@@ -43,6 +43,14 @@
             "group": "BUILD YOUR AGENT",
             "pages": [
               {
+                "group": "Create an Agent",
+                "pages": [
+                  "key-concepts/create-duplicate-agents",
+                  "key-concepts/flows",
+                  "key-concepts/routing"
+                ]
+              },
+              {
                 "group": "Call Tagging",
                 "pages": []
               },
@@ -86,9 +94,6 @@
           {
             "group": "KEY CONCEPTS",
             "pages": [
-              "key-concepts/create-duplicate-agents",
-              "key-concepts/flows",
-              "key-concepts/routing",
               "key-concepts/variables",
               "key-concepts/auto-gather-variables",
               "key-concepts/flow-canvas-controls",
