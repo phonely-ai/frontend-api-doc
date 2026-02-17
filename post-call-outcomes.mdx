@@ -68,19 +68,18 @@ This allows you to measure:
 
 Phonely lets you update the post-call outcome fields for a call using either of the following identifiers:
 
-- **Call ID:  **Use this endpoint when you want to update the outcome for a specific call.
+- **Call ID:**  Use this endpoint when you want to update the outcome for a specific call.
 
   ```
   PATCH /api/calls/{agent_id}/{call_id}
   ```
-- **Phone Number: **Use this endpoint to update the outcome based on the caller’s phone number. The `preference` parameter determines whether the update applies to the **first** or **last** call associated with that number.
+- **Phone Number:** Use this endpoint to update the outcome based on the caller’s phone number. The `preference` parameter determines whether the update applies to the **first** or **last** call associated with that number.
 
   ```javascript
   PATCH /api/calls/{agent_id}/{e164_number}?preference=first|last
   ```
 
-## \
-Option 1: Update by Call ID 
+### Option 1: Update by Call ID
 
 Updates one exact call using its unique call ID.
 
@@ -101,7 +100,7 @@ curl -X PATCH "https://app.phonely.ai/api/calls/agent123/call456" \
   }'
 ```
 
-## Option 2: Update by Phone Number (Last Touch  - default)
+### Option 2: Update by Phone Number (Last Touch  - default)
 
 Updates a call using the caller’s **phone number** (E.164 format), and automatically picks the **most recent call** from that number.
 
@@ -113,7 +112,7 @@ This is common for workflows like:
 
 **Why it matters:** If the same person called twice, the outcome attaches to the most recent interaction, which usually matches conversion reality.
 
-**Example **
+\*\*Example \*\*
 
 ```javascript
 curl -X PATCH "https://app.phonely.ai/api/calls/agent123/+14155551234" \
@@ -141,7 +140,7 @@ Common cases:
 Updates the **earliest call** for that phone number.\
 You must explicitly set:`?preference=first`
 
-**Example** 
+**Example**
 
 ```javascript
 curl -X PATCH "https://app.phonely.ai/api/calls/agent123/+14155551234?preference=first" \
@@ -170,7 +169,7 @@ This is useful when:
 
 Depends on how you identify the call:
 
-- If you update by **call_id** → no attribution 
+- If you update by **call_id** → no attribution
 - If you update by **phone number** → attribution rules apply (first/last touch)
 
 **Example**
@@ -223,6 +222,6 @@ You can:
 - Track outcome trends
 - Compare outcomes over time
 
-You can learn more about the performance page here. 
+You can learn more about the performance page here.
 
 ---
