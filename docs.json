@@ -75,6 +75,8 @@
                   "agent-design/call-settings",
                   "agent-design/voice/voice-and-personality",
                   "agent-design/voice/interruption-settings",
+                  "call-topics-and-sentiments",
+                  "call-sentiments",
                   "agent-design/compliance-settings"
                 ]
               },

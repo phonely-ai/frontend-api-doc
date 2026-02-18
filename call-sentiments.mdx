@@ -1,0 +1,110 @@
+---
+title: "Call Sentiments"
+---
+
+Call Sentiment helps you understand how callers feel during conversations. Phonely automatically analyzes each call and classifies sentiment as **Positive, Neutral, or Negative**, giving you visibility into customer satisfaction, agent effectiveness, and overall call quality.
+
+Phonely detects sentiment automatically using AI and applies it to each call as part of the call record.
+
+Sentiment data helps you:
+
+- Measure customer satisfaction
+- Identify frustrated or unhappy callers
+- Monitor agent performance
+- Track customer experience trends over time
+- Improve workflows and conversation design
+
+## Define setiments
+
+Phonely lets you customize the meaning of each sentiment so the AI tags calls based on _your_ standards (not a generic definition).
+
+1. Open your agent
+2. Go to **Settings**
+3. Open the **Call Tagging** tab
+4. Scroll to **Sentiment Definitions**
+
+You’ll see three cards: Positive, Neutral and Negative. Each card contains a short definition you can edit.
+
+![Sentiment Definations](/assets/sentiment-definations.png)
+
+For each sentiment card:
+
+1. Click **Edit**
+2. Replace the text with your definition
+
+<Info>
+  #### Example definitions
+
+  **Positive**
+
+  - Caller expresses satisfaction, gratitude, excitement, or confirms success.
+  - Examples: “That’s perfect”, “Thanks for helping”, “Yes, book it”, “Great, that worked.”
+
+  **Neutral**
+
+  - Caller is calm and informational, with no clear satisfaction or frustration.
+  - Examples: asking questions, providing details, confirming order info.
+
+  **Negative**
+
+  - Caller is frustrated, angry, impatient, or repeatedly expresses dissatisfaction.
+  - Examples: “This is ridiculous”, “I’ve called before”, “You’re not helping”, raised tone or complaints.
+</Info>
+
+Once saved, these definitions are used when Phonely assigns sentiment to calls after conversations complete.
+
+## Use Sentiment in the Performance page
+
+After sentiment is detected, it becomes available in analytics so you can track how sentiment changes over time and what’s driving it.
+
+### A) Filter performance data by sentiment
+
+Use this when you want the entire dashboard to show _only_ certain sentiment calls.
+
+1. Go to **Analytics → Performance**
+2. Open **Filters**
+3. Select **Sentiment**
+4. Choose **Positive**, **Neutral**, or **Negative**
+5. Click **Apply**
+
+<img
+  src="/assets/sentiment-filters.png"
+  alt="Sentiment Filters"
+  title="Sentiment Filters"
+  style={{ width:"52%" }}
+/>
+
+### B) Compare sentiments using Groups
+
+Use this when you want side-by-side comparisons (instead of filtering everything down to one sentiment).
+
+1. On the **Performance** page, click **Group**
+2. **Add Group**
+3. Set the grouping type to **Sentiment**
+4. Create groups such as:
+   - Group 1: Positive
+   - Group 2: Neutral
+   - Group 3: Negative
+5. Click **Apply**
+
+<img
+  src="/assets/sentiment-groups.png"
+  alt="Sentiment Groups"
+  title="Sentiment Groups"
+  style={{ width:"44%" }}
+/>
+
+What you’ll get:
+
+- Separate trend lines / bars per sentiment
+- Clear comparison of volume and percentage by sentiment over time
+
+![Sentiment Group Bar](/assets/sentiment-group-bar.png)
+
+<Expandable title="Examples">
+  Example questions this answers:
+
+  - “Are negative calls increasing week over week?”
+  - “Did a workflow change reduce negative sentiment?”
+  - “Do we get more negative calls during certain hours or days?”
+</Expandable>
