@@ -21,7 +21,7 @@ This feature helps your agent filter out unwanted environmental sounds, such as 
 
 1. Go to **Advanced Settings**.
 2. Open the **Background Noise Reduction** dropdown.
-3. Choose from **Phonely (Default)**, **None**, **Krisp**, **AI Coustics**, or **Krisp VIVA**,  each offering varying levels of AI-powered background noise filtering, response delays, and number of words to interrupt.      
+3. Choose from **Phonely (Default)**, **None**, **Krisp**, **AI Coustics**, or **Krisp VIVA**,  each offering varying levels of AI-powered background noise filtering, response delays, and number of words to interrupt.
 
 ## Conversation Presets
 
@@ -103,13 +103,13 @@ Available versions include:
 
 ## Transcription Keywords
 
-If your business uses uncommon names, technical terms, product codes, model numbers, or industry-specific jargon, you can enter them here to help the transcriber recognize them accurately during calls.                                                                             
+If your business uses uncommon names, technical terms, product codes, model numbers, or industry-specific jargon, you can enter them here to help the transcriber recognize them accurately during calls.
 
-Simply type a keyword and press **Enter** to save it. This helps improve transcript accuracy and prevents misheard words. 
+Simply type a keyword and press **Enter** to save it. This helps improve transcript accuracy and prevents misheard words.
 
 ## Knowledge Base Settings
 
-The Knowledge Base settings control how your agent retrieves and uses information from your uploaded documents. These influence how much context your agent pulls in and how strictly it filters irrelevant content.     
+The Knowledge Base settings control how your agent retrieves and uses information from your uploaded documents. These influence how much context your agent pulls in and how strictly it filters irrelevant content.
 
 ![Llm Rag Prompt Version Settings](/assets/llm-rag-prompt-version-settings.png)
 
@@ -120,23 +120,3 @@ This threshold determines how similar a knowledge chunk must be in order for the
 ## RAG Top K Results
 
 This controls the maximum number of chunks retrieved from your Knowledge Base for each answer. Higher values provide more context but may include less relevant information. Default is 3.
-
-## Call Topics
-
-Call Topics let Phonely automatically categorize calls by analyzing the full call transcript and selecting the most relevant topic from a predefined list. This provides an additional layer of classification beyond call outcomes and helps teams better understand why calls happened, not just how they ended.
-
-Unlike call outcomes, which are tied to specific blocks in a workflow, Call Topics are transcript-based and evaluated at the end of the call. This makes them flexible and suitable for both high-level categorization and very granular analysis.
-
-**How Call Topics Work**
-
-You define a list of possible topics that represent common reasons or situations during calls. These can be broad, such as caller transferred or caller asked to speak to a representative, or highly specific, such as caller hung up after agent asked for age.
-
-When a call finishes, Phonely reviews the entire transcript and selects the single topic that best matches what actually occurred during the conversation.
-
-![Call Topic List](/asset/call-topic-list.png)
-
-**When to Use Call Topics**
-
-Call Topics are especially useful when you want deeper insights than outcomes alone can provide. They help you identify patterns like partial form completion, frequent transfer requests, or recurring caller frustrations that may not map cleanly to a single workflow end state.
-
-You can keep topics intentionally high-level for reporting and trend analysis, or make them highly granular to surface specific breakdown points within complex flows.
