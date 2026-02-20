@@ -25,19 +25,21 @@ Each setting plays a role in creating natural and predictable call flows, so und
 
 This setting defines what the agent should do if it does not detect anyone speaking on the other side of the call. It determines the threshold at which your agent assumes the caller is unavailable or has hung up. Adjusting this helps you avoid scenarios where the agent waits indefinitely.
 
-## Silence Detection
+## Silence Timeout
 
-Silence detection is designed to help your agent handle moments when the caller stops speaking. The silence timeout slider lets you choose how many seconds the AI should wait before responding or taking action.
+Silence timeout defines how long the agent waits after it has finished speaking before taking further action if no response is detected from the caller. This is measured from the moment the agent last spoke.
 
-For example, if you set the timeout to 14 seconds, the agent will remain silent until that duration passes, then gently step in with a follow-up message.
+For example, if the silence timeout is set to 14 seconds, the agent will wait 14 seconds after its last message. If the caller does not respond within that time, the agent will proceed based on the configured behavior, such as sending a follow-up message or ending the call.
 
 This allows your agent to keep conversations flowing naturally, especially when callers hesitate, get distracted, or think before answering.
 
-![Silence Detection Setting](/assets/silence-detection-setting.png)
+<Frame>
+  ![Silence Detection And Time Out](/assets/silence-detection-and-time-out.png)
+</Frame>
 
 ## Max Retries
 
-Max retries controls how many times Phonely should attempt a prompt again when a caller doesn’t respond or when the AI needs to retry part of a conversation. You can choose between 1 and 5 attempts. 
+Max retries controls how many times Phonely should attempt a prompt again when a caller doesn’t respond or when the AI needs to retry part of a conversation. You can choose between 1 and 5 attempts.
 
 ![Call Time Out Settings](/assets/call-time-out-settings.png)
 
@@ -45,7 +47,7 @@ Max retries controls how many times Phonely should attempt a prompt again when a
 
 The message type section determines what the agent should say when responding to silence events. You can select a fixed message, which uses the same predefined sentence every time, or choose AI-generated message to let your agent craft contextual responses dynamically.
 
-If you use AI-generated message, you’ll see a field labeled AI message generation prompt. 
+If you use AI-generated message, you’ll see a field labeled AI message generation prompt.
 
 <Note>
   For example:  _“The user has been quiet. Respond appropriately.”_
