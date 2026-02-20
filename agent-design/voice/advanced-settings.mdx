@@ -23,6 +23,12 @@ This feature helps your agent filter out unwanted environmental sounds, such as 
 2. Open the **Background Noise Reduction** dropdown.
 3. Choose from **Phonely (Default)**, **None**, **Krisp**, **AI Coustics**, or **Krisp VIVA**,  each offering varying levels of AI-powered background noise filtering, response delays, and number of words to interrupt.
 
+## Transcriber
+
+The **Transcriber** setting allows you to choose which speech-to-text service Phonely uses to convert caller audio into text in real time. This transcription powers the agent’s understanding of the conversation and directly impacts accuracy, speed, and overall call performance.
+
+From the dropdown, you can select your preferred transcription provider (e.g., Phonely (Recommended), Deepgram, Flux, Gladia, Soniox). Each provider may differ slightly in latency, accuracy, and language handling.
+
 ## Conversation Presets
 
 Conversation presets let you quickly adjust multiple interruption parameters to match the desired communication style of your agent. They’re great for aligning tone and response timing without manually tweaking each control.
@@ -81,19 +87,9 @@ You can choose from several OpenAI-powered models, along with Phonely’s optimi
 - **GPT-4.1:** Balanced performance, stable and predictable.
 - **GPT-4o:** Azure-powered with very fast ~450ms responses.
 
-## Telecom Provider
-
-This determines which telecom network your Phonely agent uses when placing and receiving calls.
-
-You can choose between:
-
-- **Phonely (Default):** Optimized for warm transfers and clear audio quality.
-- **Dialy:** Great for warm transfers but has a slightly slower dial-out.
-- **Twilio:**  Extremely reliable with fast dial-out, ideal for high-volume environments.
-
 ## Prompt Version (Beta)
 
-Prompt Versions control the instructions and reasoning style your AI agent uses internally. Each version represents an improvement in clarity, response tone, and logic.
+Prompt versions control the instructions and reasoning style your AI agent uses internally. Each version represents an improvement in clarity, response tone, and logic.
 
 Available versions include:
 
