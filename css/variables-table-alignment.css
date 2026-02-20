@@ -58,6 +58,7 @@
 }
 */
 /* Cell styling - keep content within boundaries */
+/*
 .mintlify-doc-content table th,
 .mintlify-doc-content table td,
 [data-mintlify-doc-content] table th,
@@ -79,6 +80,7 @@
     height: auto !important;
     min-height: 40px !important;
 }
+*/
 
 /* Header styling */
 .mintlify-doc-content table th,
