@@ -3,9 +3,36 @@ title: "Filter"
 description: "Route conversation based on conditions and create dynamic conversation paths"
 ---
 
-The filter block in Phonely allows you to split your call flow based on conditions. Think of it as a decision-making point that checks if certain criteria are met, like whether the caller’s name matches a specific value, or if a collected variable exists, and then routes the call accordingly.
+The filter block is the routing logic layer in a Phonely call flow. You use it when the next step in the conversation shouldn’t be the same for every caller, because something about the call should change the route.
 
-This helps you create personalized, dynamic, and logic-based flows where outcomes depend on user input, call data, or system variables.
+That “something” can be simple (like whether an email was collected) or more operational (like whether the caller is VIP, the request is urgent, or the caller is trying to reschedule). Instead of writing one long conversational prompt that tries to handle every situation, the Filter block lets you model those situations as explicit routing paths.
+
+The key idea to understand is that Phonely does not route based on individual conditions. It routes based on cases.
+
+A case is a routing path, a named outcome that the call can take, like:
+
+- Case 1 → “Billing”
+- Case 2 → “Scheduling”
+- Case 3 → “VIP Escalation”
+- Else → “General Support”
+
+Each case becomes a visible output on the canvas that you connect to a different part of your flow. The filter block decides which case output to follow by evaluating the conditions inside each case.
+
+A condition is simply a rule used to qualify a case, such as:
+
+- `caller_email exists`
+- `plan_type is equal to "premium"`
+- `detected_topics contains "refund"`
+- AI match: “caller wants to reschedule an appointment”
+
+In simple terms:
+
+- **Cases define where the call can go.**
+- **Conditions define when the call is allowed to take that route.**
+
+When the filter block runs, Phonely evaluates your cases top to bottom, and selects the first case whose conditions are met. If none of the cases match, the call falls through to the Else path.
+
+This ordering matters. If Case 1 is too broad, it can “catch” calls that you intended for Case 2. That’s why Filter blocks work best when you structure your cases from **most specific** to **most general**, and treat **Else** as your safe fallback. 
 
 ![Filter Block Phonely Gi](/assets/filter-block-phonely.gif)
 
@@ -17,24 +44,24 @@ Here are common scenarios where the filter block is useful:
 2. **Time-based call handling:** Handle calls differently based on time or day. For example, If current_time is after 6 PM, route to after-hours voicemail; else continue to live agent.
 3. **Service level routing**: Serve customers according to their plan or service tier. For example, If plan_type = premium, send to priority support; if not, route to standard support.
 4. **Geographic routing**: Route calls based on caller location or language preference. For example, If caller_country = USA, connect to US team; if caller_country = South Africa, route to Cape Town Team.
-5. **Priority-based escalation**: Automatically escalate high-priority or urgent cases. For example, If ticket_urgency = High and customer_status = VIP, route to Escalation Queue.
+5. **Priority-based escalation**: Automatically escalate high-priority or urgent cases. For example, If ticket_urgency = High and customer_status = VIP, route to sscalation queue.
 
-## How It Works
+## How routing works in the Filter block
 
-When the filter block is added to your flow, it evaluates one or more conditions using variables and comparison rules.
+When a call reaches a **Filter** block, Phonely doesn’t evaluate one big “true/false” decision. Instead, it evaluates your **cases in order** and picks the first case that matches.
 
-Based on the outcome:
+Here’s the routing behavior to keep in mind:
 
-**Meets condition (True path)** → Executes the next connected block when the configured condition logic evaluates to true, meaning the required condition outcome is achieved according to the filter configuration.
-
-**Does not meet condition (False path)** → Executes the next connected block when the configured condition logic evaluates to false, meaning the required condition outcome is not achieved according to the filter configuration.
+1. Phonely starts with **Case 1** and checks the conditions inside it.
+2. If Case 1’s conditions are met, the call immediately routes to **Case 1’s output path**.
+3. If Case 1 does not match, Phonely checks **Case 2**, then **Case 3**, and so on.
+4. If **no case matches**, the call routes to the **Else** path.
 
 <Frame>
   <img
-    src="/assets/list-of-filter-options.png"
-    alt="List Of Filter Options"
-    title="List Of Filter Options"
-    style={{ width:"93%" }}
+    src="/assets/casefiltersblock.png"
+    alt="Casefiltersblock"
+    title="Casefiltersblock"
   />
 </Frame>
 
@@ -42,13 +69,22 @@ Based on the outcome:
 
 In your flow, click the **“+”** icon after any existing block.
 
-Under **Flow Actions**, choose **Filter**. The Filter block will appear with two output paths: **True** and **False**.
+Under **Flow Actions**, choose **Filter**. The Filter block will appear with two output paths: **Case 1** and **Else**.
 
-### Define Your Conditions
+### Create a case (the routing path)
 
-Each condition is a rule that tells Phonely what to check.
+Click the filter block to open the Filter block configuration panel. Under **Cases**, you’ll see **Case 1** by default. A case is the actual route you will connect on the canvas. Think of it as:
 
-Click the filter block to open its configuration panel. Under **Conditions**, click into **Condition 1**.
+> “If this case matches, send the call down this path.”
+
+To add another route, click **Add Case**. This creates a new output path on the canvas (e.g., Case 3)
+
+**Practical way to name cases:**\
+Even if the UI shows “Case 1 / Case
+
+### Define Your Conditions inside a case
+
+Each condition is a rule that tells Phonely what to check. Click the filter block to open its configuration panel. Under **Conditions**, click into **Condition 1**.
 
 You’ll see three main fields:
 
@@ -76,18 +112,105 @@ Click the dropdown that says **“is equal to”** to see other options:
 <Steps>
   <Step title="exists">
     Checks whether the variable has any value. Useful for verifying that earlier blocks captured caller input.
+
+    <Expandable title="Example">
+      **Confirm caller provided an email**
+
+      - Define Field: `caller_email`
+      - Comparison: **exists**
+
+      **True path:** continue to next step (booking, confirmation, CRM lookup)\
+      **False path:** ask again for email
+
+      Why this is useful: Sometimes callers skip input, the transcription misses it, or a previous step didn’t run. This check prevents the flow from continuing with missing data.
+    </Expandable>
   </Step>
   <Step title="Doesn’t exist:">
-    True when the variable is empty, null, or was never set.
+    Use this when you want a fallback path if a value is missing. True when the variable is empty, null, or was never set.
+
+    <Expandable title="Example">
+      Caller didn’t provide their name
+
+      Condition:
+
+      - Define Field: `caller_name`
+      - Comparison: **doesn’t exist**
+
+      **True path:** ask for name\
+      **False path:** greet caller using their name and continue
+
+      This is one of the simplest “polish” filters, your agent can feel smarter by handling missing details gracefully.
+    </Expandable>
   </Step>
   <Step title="is equal to">
-    Compares the field to a specific value.
+    Use this when you want exact matching. Best for categories, flags, status fields, or known inputs
+
+    <Expandable title="Examples">
+      **Route premium customers**
+
+      Condition:
+
+      - Define Field: `plan_type`
+      - Comparison: **is equal to**
+      - Value: `premium`
+
+      **True path:** route to Priority Support\
+      **False path:** route to Standard Support
+
+      **Route based on appointment type**
+
+      Condition:
+
+      - Define Field: `appointment_type`
+      - Comparison: **is equal to**
+      - Value: `dentist`
+
+      **True path:** route to Dental Scheduling flow\
+      **False path:** route to general scheduling
+    </Expandable>
   </Step>
   <Step title="is not equal to">
-    True when the field does not match the provided value
+    Use this when one value is allowed and everything else should go to another path.
+
+    <Expandable title="Examples">
+      **Prevent transfers for everyone except “VIP”**
+
+      **Use case:** Only VIP callers should be routed to a human agent; everyone else stays in the AI containment flow.
+
+      Condition
+
+      - Define Field: `customer_tier`
+      - Comparison: **is not equal to**
+      - Value: `VIP`
+
+      Paths
+
+      - **True path (not VIP):** Continue with AI self-serve flow
+      - **False path (VIP):** Transfer to live agent / escalation queue
+
+      Why it’s useful: Protects your human agent time while still giving VIP customers priority handling.
+    </Expandable>
   </Step>
   <Step title="is an array containing:">
     Used when the variable is a list and you need to check if it contains a specific item.
+
+    <Expandable title="Example">
+      Escalate “angry customer” calls detected by sentiment + topic tagging
+
+      **Use case:** You tag calls that need a softer handoff (e.g., escalation) based on automation rules.
+
+      Condition:
+
+      - Define Field: `call_tags`
+      - Comparison: **is an array containing**
+      - Value: `needs_escalation`
+
+      **True path:** Transfer to escalation queue + add outcome tag “escalated”\
+      **False path:** Continue AI containment flow
+
+      Why it’s useful:\
+      You can keep your flow simple while using tags as the “signal” to trigger escalation.
+    </Expandable>
   </Step>
   <Step title="matches condition (AI)">
     Uses AI to evaluate whether the caller’s message or extracted intent semantically_matches\_  a natural-language condition you define.
