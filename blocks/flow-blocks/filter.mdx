@@ -25,8 +25,9 @@ When the filter block is added to your flow, it evaluates one or more conditions
 
 Based on the outcome:
 
-- **True path** \> Executes the next connected block when all conditions are met 
-- **False path** \> Executes the next block when conditions fail.
+**Meets condition (True path)** → Executes the next connected block when the configured condition logic evaluates to true, meaning the required condition outcome is achieved according to the filter configuration.
+
+**Does not meet condition (False path)** → Executes the next connected block when the configured condition logic evaluates to false, meaning the required condition outcome is not achieved according to the filter configuration.
 
 <Frame>
   <img
@@ -36,8 +37,6 @@ Based on the outcome:
     style={{ width:"93%" }}
   />
 </Frame>
-
-So, you can visually branch your automation into multiple directions depending on call or data logic.
 
 ## Set Up a Filter Block
 
@@ -49,7 +48,7 @@ Under **Flow Actions**, choose **Filter**. The Filter block will appear with two
 
 Each condition is a rule that tells Phonely what to check.
 
-Click the Filter block to open its configuration panel. Under **Conditions**, click into **Condition 1**.
+Click the filter block to open its configuration panel. Under **Conditions**, click into **Condition 1**.
 
 You’ll see three main fields:
 
@@ -61,7 +60,7 @@ You’ll see three main fields:
 
 ### Choose Available Variables
 
-Click inside define field, this opens the Available Variables panel.
+Click inside define field, this opens the available variables panel.
 
 Here you’ll find:
 
