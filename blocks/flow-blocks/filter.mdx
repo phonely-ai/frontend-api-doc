@@ -231,11 +231,11 @@ Click the dropdown that says **“is equal to”** to see other options:
   </Step>
 </Steps>
 
-These AI-powered options are ideal when you want logic based on intent, not exact words, enabling more natural decision-making without manually collecting variables.Choose one that fits your logic. 
+These AI-powered options are ideal when you want logic based on intent, not exact words, enabling more natural decision-making without manually collecting variables.Choose one that fits your logic.
 
 ### Enter the Comparison Value
 
-Under the comparison dropdown, click the small menu and choose the correct type of the value you want to compare against. 
+Under the comparison dropdown, click the small menu and choose the correct type of the value you want to compare against.
 
 | Data Type   | When to Use                                         |
 | :---------- | :-------------------------------------------------- |
@@ -271,26 +271,49 @@ Meaning: this case only matches if both values were captured.
 Meaning: either signal qualifies for billing.
 
 <Expandable title="Examples">
-  - And → caller_name = John and caller_phone = 123456
-  - Or → caller_name = John or caller_name = Jane
+  - And → caller_name = John **and** caller_phone = 123456
+  - Or → caller_name = John **or** caller_name = Jane
 </Expandable>
 
-#### Configure Advanced Settings
+## Configure Advanced Settings
 
-Scroll down to **Advanced Settings**.
+Here’s what you can adjustAdvanced Settings let you fine-tune what the caller hears while the Filter evaluates cases, and optionally tag the call outcome for reporting.
 
-Here’s what you can adjust:
+Scroll down to **Advanced Settings** section. Click to expand.
 
-#### Interim Message
+### Interim Message
 
-Enable this if you want to play a message to the caller while Phonely checks the conditions.
+Enable **Interim Message** to play a short message to the caller while Phonely processes the filter logic (for example, evaluating conditions or selecting the matching case). This helps avoid awkward silence and makes the experience feel intentional.
 
-- **Post Interim Message Delay:** Adds a short delay before continuing.
-- **Interim Message Prompt:** You can write or auto-generate a 3–7 word message such as _“Please hold while I check_” or _“Verifying your input.”_
+You can choose how the interim message is generated:
 
-#### Call Outcome Tagging
+- **Fixed**: You write the exact message Phonely should say every time.\
+  Example: “One moment while I check that.” 
+- **Promptable**: You provide a prompt and Phonely generates a friendly **3–7 word** interim message based on your instruction.\
+  Example prompt: “Generate a friendly 3–7 word interim message to inform the caller that you are working on their request.”
 
-Optionally, add a keyword tag to label this flow’s result (e.g., `validated`, `invalid_number`). This helps track call outcomes later in reports or analytics.
+<Frame>
+  ![Interim And Post Interim Message](/assets/interim-and-post-interim-message.png)
+</Frame>
+
+### Post Interim Message Delay
+
+Enable post interim message delay to add a short wait _after_ the interim message is spoken, before the flow continues to the selected case path. Use the **Delay Duration** slider to set the delay in seconds.
+
+This is helpful when you want the interim message to land naturally (instead of the flow moving immediately into the next block).
+
+### Call Outcome Tagging
+
+Use **Call Outcome Tagging** to label the call at this point in the flow. You can **select an existing outcome** or **type a custom one**.
+
+This is useful for analytics because it lets you track how often a specific routing decision occurs (for example, how many calls were escalated vs. handled normally), and later filter/group performance reporting by those outcomes.
+
+Example outcome tags:
+
+- `vip_escalation`
+- `billing_routed`
+- `missing_required_info`
+- `appointment_booking_path`
 
 ### Save the Filter
 
@@ -309,7 +332,7 @@ Let’s say your **Collect block** gathered two inputs from the caller:
 - `caller_phone`
 - `caller_zip_code`
 
-You can then use a filter block to determine which store location the caller should be routed to based on these values.    
+You can then use a filter block to determine which store location the caller should be routed to based on these values.
 
 <Expandable title="Conditions">
   - **Condition 1:** caller_phone starts with "+1-312" (Chicago area code).
