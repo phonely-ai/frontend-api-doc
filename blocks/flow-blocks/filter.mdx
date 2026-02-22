@@ -25,7 +25,7 @@ In simple terms:
 
 When the filter block runs, Phonely evaluates your cases top to bottom, and selects the first case whose conditions are met. If none of the cases match, the call falls through to the Else path.
 
-This ordering matters. If Case 1 is too broad, it can “catch” calls that you intended for Case 2. That’s why Filter blocks work best when you structure your cases from **most specific** to **most general**, and treat **Else** as your safe fallback.
+This ordering matters. If Case 1 is too broad, it can “catch” calls that you intended for Case 2. That’s why filter blocks work best when you structure your cases from most specific to most general, and treat Else as your safe fallback.
 
 ![Filter Block Phonely Gi](/assets/filter-block-phonely.gif)
 
@@ -51,11 +51,7 @@ Here’s the routing behavior to keep in mind:
 4. If **no case matches**, the call routes to the **Else** path.
 
 <Frame>
-  <img
-    src="/assets/examplefiltersblock.png"
-    alt="Examplefiltersblock"
-    title="Examplefiltersblock"
-  />
+  ![Examplefiltersblock](/assets/examplefiltersblock.png)
 </Frame>
 
 ## Set Up a Filter Block
