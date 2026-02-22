@@ -32,7 +32,7 @@ In simple terms:
 
 When the filter block runs, Phonely evaluates your cases top to bottom, and selects the first case whose conditions are met. If none of the cases match, the call falls through to the Else path.
 
-This ordering matters. If Case 1 is too broad, it can “catch” calls that you intended for Case 2. That’s why Filter blocks work best when you structure your cases from **most specific** to **most general**, and treat **Else** as your safe fallback. 
+This ordering matters. If Case 1 is too broad, it can “catch” calls that you intended for Case 2. That’s why Filter blocks work best when you structure your cases from **most specific** to **most general**, and treat **Else** as your safe fallback.
 
 ![Filter Block Phonely Gi](/assets/filter-block-phonely.gif)
 
@@ -58,11 +58,7 @@ Here’s the routing behavior to keep in mind:
 4. If **no case matches**, the call routes to the **Else** path.
 
 <Frame>
-  <img
-    src="/assets/casefiltersblock.png"
-    alt="Casefiltersblock"
-    title="Casefiltersblock"
-  />
+  ![Casefiltersblock](/assets/casefiltersblock.png)
 </Frame>
 
 ## Set Up a Filter Block
@@ -78,6 +74,10 @@ Click the filter block to open the Filter block configuration panel. Under **Cas
 > “If this case matches, send the call down this path.”
 
 To add another route, click **Add Case**. This creates a new output path on the canvas (e.g., Case 3)
+
+<Frame>
+  ![Cases And Conditions Filter Gi](/assets/cases-and-conditions-filter.gif)
+</Frame>
 
 **Practical way to name cases:**\
 Even if the UI shows “Case 1 / Case
@@ -154,8 +154,8 @@ Click the dropdown that says **“is equal to”** to see other options:
       - Comparison: **is equal to**
       - Value: `premium`
 
-      **True path:** route to Priority Support\
-      **False path:** route to Standard Support
+      **True path:** route to priority support\
+      **False path:** route to standard support
 
       **Route based on appointment type**
 
@@ -165,7 +165,7 @@ Click the dropdown that says **“is equal to”** to see other options:
       - Comparison: **is equal to**
       - Value: `dentist`
 
-      **True path:** route to Dental Scheduling flow\
+      **True path:** route to Dental scheduling flow\
       **False path:** route to general scheduling
     </Expandable>
   </Step>
@@ -231,9 +231,11 @@ Click the dropdown that says **“is equal to”** to see other options:
   </Step>
 </Steps>
 
-These AI-powered options are ideal when you want logic based on intent, not exact words, enabling more natural decision-making without manually collecting variables.Choose one that fits your logic.
+These AI-powered options are ideal when you want logic based on intent, not exact words, enabling more natural decision-making without manually collecting variables.Choose one that fits your logic. 
 
-Under the comparison dropdown, click the small menu and choose the correct type:
+### Enter the Comparison Value
+
+Under the comparison dropdown, click the small menu and choose the correct type of the value you want to compare against. 
 
 | Data Type   | When to Use                                         |
 | :---------- | :-------------------------------------------------- |
@@ -243,31 +245,30 @@ Under the comparison dropdown, click the small menu and choose the correct type:
 
 Then enter your comparison value.
 
-### Add Multiple Cases and Conditions
+## Add multiple conditions inside the same case (AND vs OR)
 
-You can branch your flow based on cases, where each case represents a possible path or scenario. Each case can contain one or more conditions, which define the logic that must be met for that path to trigger.
-
-![Cases And Conditions Filter Gi](/assets/cases-and-conditions-filter.gif)
-
-#### Cases
-
-A case represents a distinct route your flow can take. For example, _Case 1_ might handle verified callers, while _Case 2_ handles unverified callers. Use **➕ Add Case** to create a new case with its own set of conditions.
-
-#### Conditions
-
-Within each case, you can define one or more conditions to check specific rules or data values.
-
-- Click **➕ Add Condition** to add another rule within the same case.
-- Each condition can evaluate a different variable, such as caller name, phone number, or appointment type.
-
-#### Logic Operators
-
-When you have multiple conditions in a case, choose how they interact using a **Logic Operator**:
+A case can contain more than one condition. When you add multiple conditions, you must choose how they combine:
 
 | Logic Option | Description                                                |
 | :----------- | :--------------------------------------------------------- |
 | **And**      | All conditions must be true for the case to match.         |
 | **Or**       | Only one condition needs to be true for the case to match. |
+
+**Example (AND): Verify caller before routing**
+
+- `caller_name exists`
+- `caller_phone exists`\
+  Logic: **AND**
+
+Meaning: this case only matches if both values were captured.
+
+**Example (OR): Route to billing**
+
+- AI match: “caller wants a refund”
+- AI match: “caller is asking about charges”\
+  Logic: **OR**
+
+Meaning: either signal qualifies for billing.
 
 <Expandable title="Examples">
   - And → caller_name = John and caller_phone = 123456
@@ -308,7 +309,7 @@ Let’s say your **Collect block** gathered two inputs from the caller:
 - `caller_phone`
 - `caller_zip_code`
 
-You can then use a filter block to determine which store location the caller should be routed to based on these values.
+You can then use a filter block to determine which store location the caller should be routed to based on these values.    
 
 <Expandable title="Conditions">
   - **Condition 1:** caller_phone starts with "+1-312" (Chicago area code).
