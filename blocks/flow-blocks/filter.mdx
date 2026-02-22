@@ -9,13 +9,6 @@ That “something” can be simple (like whether an email was collected) or more
 
 The key idea to understand is that Phonely does not route based on individual conditions. It routes based on cases.
 
-A case is a routing path, a named outcome that the call can take, like:
-
-- Case 1 → “Billing”
-- Case 2 → “Scheduling”
-- Case 3 → “VIP Escalation”
-- Else → “General Support”
-
 Each case becomes a visible output on the canvas that you connect to a different part of your flow. The filter block decides which case output to follow by evaluating the conditions inside each case.
 
 A condition is simply a rule used to qualify a case, such as:
@@ -288,7 +281,7 @@ Enable **Interim Message** to play a short message to the caller while Phonely p
 You can choose how the interim message is generated:
 
 - **Fixed**: You write the exact message Phonely should say every time.\
-  Example: “One moment while I check that.” 
+  Example: “One moment while I check that.”
 - **Promptable**: You provide a prompt and Phonely generates a friendly **3–7 word** interim message based on your instruction.\
   Example prompt: “Generate a friendly 3–7 word interim message to inform the caller that you are working on their request.”
 
