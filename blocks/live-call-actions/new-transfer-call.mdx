@@ -150,14 +150,14 @@ Warm transfer is best for:
 - VIP callers where you want a smoother, higher-touch experience
 
 <Steps>
-  <Step title="Choose Warm Transfer in Setup">
+  <Step titleSize="h3" title="Choose Warm Transfer in Setup">
     Open the Transfer Call block.
 
     In the Setup step, under Action, select Warm Transfer.
 
     Click Continue.
   </Step>
-  <Step title="Configure destinations in On Transfer">
+  <Step titleSize="h3" title="Configure destinations in On Transfer">
     In the **on transfer** step, you define who the call can be transferred to and how Phonely should introduce the transfer.
 
     Each **Transfer Destination** includes:
@@ -216,7 +216,7 @@ Warm transfer is best for:
 
     Click **Add Transfer Destination** to define additional departments/people (for example Sales + Support), each with its own condition, number, and message.
   </Step>
-  <Step title="Configure the caller’s hold experience (While Waiting for Connection)">
+  <Step titleSize="h3" title="Configure the caller’s hold experience (While Waiting for Connection)">
     Warm transfers often require a few seconds while Phonely connects to the recipient. The **While Waiting for Connection** section controls what the caller experiences during that wait.
 
     Under **Customer Experience While on Hold**, choose one option:
@@ -236,9 +236,9 @@ Warm transfer is best for:
 
     You can set it to:
 
-    **Fixed: **Example: “Thanks for holding. We’re still connecting you.”
+    \*\*Fixed: \*\*Example: “Thanks for holding. We’re still connecting you.”
 
-    **Promptable: **Example prompt: “Generate a brief 3–5 words reminder message to let the caller know you are still working on connecting them.”
+    \*\*Promptable: \*\*Example prompt: “Generate a brief 3–5 words reminder message to let the caller know you are still working on connecting them.”
 
     **Reminder Frequency**
 
@@ -246,7 +246,7 @@ Warm transfer is best for:
 
     Example: every **20 seconds**.
   </Step>
-  <Step title="Configure what happens when the recipient answers (When Connection is Established)">
+  <Step titleSize="h3" title="Configure what happens when the recipient answers (When Connection is Established)">
     This section controls how Phonely behaves once the outbound destination picks up, this is the “warm” part of the warm transfer.
 
     #### **Ask Outbound Leg for Permission (Optional)**
@@ -280,7 +280,7 @@ Warm transfer is best for:
     Message played to both parties right after the bridge (before Phonely disconnects).\
     Example: “You’re both connected now. I’ll drop off.”
   </Step>
-  <Step title="Advanced Settings (Warm Transfer)">
+  <Step titleSize="h3" title="Advanced Settings (Warm Transfer)">
     #### **Warm Transfer Attempt Duration**
 
     This controls the maximum time (in seconds) Phonely will attempt to complete the warm transfer before it times out.
@@ -310,7 +310,7 @@ Warm transfer is best for:
 
     This helps you distinguish “transfer attempted” from “transfer successfully connected to a person.”
   </Step>
-  <Step title="Routing">
+  <Step titleSize="h3" title="Routing">
     After you finish setup and on transfer, the final step is routing.
 
     This section controls what Phonely should do when the outbound number does not connect cleanly to a human, especially when the destination is an IVR menu (e.g., “Press 1 for Sales”) or voicemail.
@@ -319,9 +319,9 @@ Warm transfer is best for:
 
     In the **Routing** tab for Warm Transfer, you can configure:
 
-    - **IVR Detection**
-    - **IVR Detection Prompt**
-    - **Voicemail Detection**
+    - IVR Detection
+    - IVR Detection Prompt
+    - Voicemail Detection
 
     These settings help you decide whether Phonely should continue the transfer attempt, interact with an IVR, or exit when voicemail/IVR is detected.
 
@@ -333,11 +333,11 @@ Warm transfer is best for:
     - “Press 2 for Support”
     - “For billing, press 3”
 
-    \*\*Available options \*\*
+    Available options 
 
-    - **None**
-    - **Transfer on IVR Detection**
-    - **Exit on IVR Detection**
+    - None
+    - Transfer on IVR Detection
+    - Exit on IVR Detection
 
     **None**
 
