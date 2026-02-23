@@ -162,7 +162,7 @@ Warm transfer is best for:
 
     Each **Transfer Destination** includes:
 
-    #### **Transition Condition**
+    **Transition Condition**
 
     This tells Phonely when to use this destination.
 
@@ -174,7 +174,7 @@ Warm transfer is best for:
 
     You can add multiple destinations so Phonely can route to the right number based on what the caller says.
 
-    #### **Phone Number**
+    **Phone Number**
 
     Enter the destination number in **E.164 format**:
 
@@ -186,7 +186,7 @@ Warm transfer is best for:
     <Frame>
       ![Warmtransferconfigurationoption 1](/assets/warmtransferconfigurationoption-1.png)
     </Frame>
-    #### **Pre Transfer Message (Inbound)**
+    **Pre Transfer Message (Inbound)**
 
     This is the message spoken to the **caller** before the transfer starts.
 
@@ -197,7 +197,7 @@ Warm transfer is best for:
     - **Promptable** (Phonely generates a brief message from your prompt)\
       Example prompt: “Generate a brief transfer message to inform the caller you are transferring them now.”
 
-    #### **Enable Failover (Optional)**
+    **Enable Failover (Optional)**
 
     Enable **Failover** if you want automatic retries when the primary number fails.
 
@@ -212,7 +212,7 @@ Warm transfer is best for:
     <Frame>
       ![Pretransfermessage 1](/assets/pretransfermessage-1.png)
     </Frame>
-    #### **Add Transfer Destination**
+    **Add Transfer Destination**
 
     Click **Add Transfer Destination** to define additional departments/people (for example Sales + Support), each with its own condition, number, and message.
   </Step>
@@ -230,7 +230,7 @@ Warm transfer is best for:
     <Frame>
       ![Onholdmusic](/assets/onholdmusic.png)
     </Frame>
-    #### **Reminder Message**
+    **Reminder Message**
 
     This is the message played periodically to remind the caller they’re still being connected.
 
@@ -241,14 +241,14 @@ Warm transfer is best for:
     - **Promptable**\
       Example prompt: “Generate a brief 3–5 words reminder message to let the caller know you are still working on connecting them.”
 
-    #### **Reminder Frequency**
+    **Reminder Frequency**
 
     Controls how often the reminder message plays (in seconds).
 
     Example: every **20 seconds**.
   </Step>
   <Step title="Configure what happens when the recipient answers (When Connection is Established)">
-    This section controls how Phonely behaves once the outbound destination picks up—this is the “warm” part of the warm transfer.
+    This section controls how Phonely behaves once the outbound destination picks up, this is the “warm” part of the warm transfer.
 
     #### **Ask Outbound Leg for Permission (Optional)**
 
@@ -312,5 +312,112 @@ Warm transfer is best for:
     - `handoff_success`
 
     This helps you distinguish “transfer attempted” from “transfer successfully connected to a person.”
+  </Step>
+  <Step title="Routing">
+    After you finish setup and on transfer, the final step is routing.
+
+    This section controls what Phonely should do when the outbound number does not connect cleanly to a human, especially when the destination is an IVR menu (e.g., “Press 1 for Sales”) or voicemail.
+
+    In short, **Routing** defines how Phonely behaves when it reaches the destination phone system.
+
+    In the **Routing** tab for Warm Transfer, you can configure:
+
+    - **IVR Detection**
+    - **IVR Detection Prompt**
+    - **Voicemail Detection**
+
+    These settings help you decide whether Phonely should continue the transfer attempt, interact with an IVR, or exit when voicemail/IVR is detected.
+
+    ### **1) IVR Detection**
+
+    IVR Detection tells Phonely what to do if the transfer destination answers with an automated phone menu (Interactive Voice Response), such as:
+
+    - “Press 1 for Sales”
+    - “Press 2 for Support”
+    - “For billing, press 3”
+
+    **Available options **
+
+    - **None**
+    - **Transfer on IVR Detection**
+    - **Exit on IVR Detection**
+
+    **None**
+
+    Phonely does not apply a special IVR handling behavior.
+
+    Use this when:
+
+    - you expect a direct human answer,
+    - or the destination line is a direct extension/cell phone.
+
+    **Transfer on IVR Detection**
+
+    Phonely proceeds when an IVR is detected (used with an IVR prompt so it can navigate the menu).
+
+    Use this when:
+
+    - the destination number is a company line with a menu,
+    - and you want Phonely to handle that menu instead of failing the transfer.
+
+    You set:
+
+    - **IVR Detection:** Transfer on IVR Detection
+    - **IVR Detection Prompt:** `Press 2 for technical support`
+
+    This allows Phonely to continue the transfer flow through the IVR.
+
+    #### **Exit on IVR Detection**
+
+    Phonely stops the transfer attempt when an IVR is detected.
+
+    Use this when:
+
+    - you only want to transfer to a live person directly,
+    - and automated menus are considered a failed transfer path.
+
+    **Example:**\
+    You are routing VIP calls to an account manager’s direct line.\
+    If that line forwards to a company IVR after hours, you may not want the caller trapped in a phone tree.\
+    Set **Exit on IVR Detection** so the flow can return and handle the caller with a fallback message.
+
+    ### 2) IVR Detection Prompt
+
+    When IVR handling is enabled, you can provide an IVR Detection Prompt.
+
+    This field tells Phonely how to navigate the menu it hears. Use a short instruction that matches the destination’s menu path.
+
+    Without a clear IVR prompt, Phonely may detect an IVR but not know how to proceed to the correct destination.
+
+    This is especially useful when:
+
+    - you are transferring to a shared business line,
+    - the menu is predictable,
+    - and you want the warm transfer to still reach the intended team.
+
+    ## 3) Voicemail Detection
+
+    Voicemail Detection tells Phonely what to do if the destination line reaches voicemail instead of a person.
+
+    Options include:
+
+    - **None**
+    - **Exit on Voicemail Detection**
+
+    #### **None**
+
+    Phonely does not apply a special voicemail exit behavior.
+
+    #### **Exit on Voicemail Detection**
+
+    Phonely exits the transfer attempt when voicemail is detected.
+
+    Use this when you do **not** want callers sent to voicemail.\
+    For urgent support calls, you may want:
+
+    - **Voicemail Detection:** Exit on Voicemail Detection\
+      So the caller is not dropped into a mailbox. Instead, Phonely can continue with a fallback path like:
+
+    > “No one is available right now. I can schedule a callback or take a message.”
   </Step>
 </Steps>
