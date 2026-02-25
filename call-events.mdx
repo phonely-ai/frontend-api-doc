@@ -1,0 +1,260 @@
+---
+title: "Call Events"
+---
+
+The call events page is where you troubleshoot what happened _behind the scenes_ during your calls. While the calls view shows the conversation outcome (for example, _Customer Ended Call_ or _Greeting Hangup_), Call Events shows the technical actions executed during the call, such as an API Request, whether it succeeded, what status code it returned, and how long it took.
+
+This is especially useful when you are building workflows that use actions like **API Request**, **Code**, or other event-driven steps and you want to confirm that everything is running as expected.
+
+After you open your call history page, you can switch into the events-level view from the top-right controls.
+
+1. Open the **Calls History** page in your workspace.
+2. In the top-right section of the page, locate the view toggle/button labeled **Events**.
+3. Use **Refresh** to load the latest event data before starting your review.
+
+Instead of only showing what the call outcome was, this page helps you understand why something happened.
+
+For example, you can use it to check whether:
+
+- an API request succeeded or failed,
+- a request returned `200` or another status code,
+- an event happened during **Pre Call**, **Live Call**, or **Post Call**,
+- a workflow action was slow (high execution time),
+- a specific call ID had a failing event.
+
+In short, this page is your event-level debugging and monitoring workspace.
+
+## Page layout overview
+
+The page is split into two main working areas: a **filter sidebar** on the left and an **events table** on the right. There are also controls at the top-right for refreshing results, customizing filters, and switching views.     
+
+### Left side: Filter panel
+
+The left panel contains collapsible filter sections, such as:
+
+- **Time Range**
+- **Event Status**
+- **Status Code**
+- **Event Type**
+- **Execution Stage**
+- **Execution Time**
+- **Call ID**
+
+These filters let you narrow down results quickly so you’re not scanning every event manually.
+
+### Events table
+
+The main table lists event records matching your selected filters. Based on the screenshots, columns include:
+
+- **Date**
+- **Success**
+- **Status**
+- **Event Type**
+- **Execution Stage**
+- **Method**
+- **Execution Time**
+
+Each row represents a single event execution (for example, one API request during a live call).
+
+## View Event Details
+
+After reviewing events in the table, you can click any event row to open a detailed side panel with full execution information.
+
+This is especially useful when you want to inspect:
+
+- what exactly happened during an event
+- whether an action succeeded or failed
+- the execution stage (Pre Call, Live Call, Post Call)
+- request/response details for API events
+- timing and status information for troubleshooting
+
+### How to open Event Details
+
+1. Go to the **Call Events** page.
+2. Use filters (optional) to narrow down the events you want to inspect.
+3. In the **events table**, click the row for the event you want to review.
+4. An **Event Details** panel opens on the right side of the page.
+
+This panel lets you inspect the selected event without leaving the Events page.
+
+## What you can see in the Event Details panel
+
+The Event Details panel provides a full breakdown of the selected event. Depending on the event type (for example, **API Request**), the fields shown may vary.
+
+### Core event information
+
+These fields help identify and trace the event:
+
+- **Event ID:** A unique identifier for the specific event record.
+- **Call ID:** The unique ID of the call this event belongs to.\
+  Useful when correlating multiple events from the same call.
+- **Workflow ID:** The workflow associated with the event execution.
+- **Event Type:** The type of event that occurred (for example, **API Request**).
+- **Success:** Indicates whether the event completed successfully (`true` / `false`).
+- **Execution Stage:** Shows when the event happened in the call lifecycle, such as **Pre Call, Live Call, or Post Call.** 
+
+### Timing and performance details
+
+These fields help you understand event timing and responsiveness:
+
+- **Event Started:** Timestamp for when the event began.
+- **Event Ended:** Timestamp for when the event completed.
+- **Execution Time:** Total time taken to execute the event (for example, `41.70ms`.
+
+This is particularly helpful for diagnosing slow actions or identifying latency in external integrations.
+
+## API Request event details
+
+When the selected event is an **API Request**, the panel includes additional integration-specific fields.
+
+### Request details
+
+- **Request Method**\
+  The HTTP method used for the request (for example, `POST`, `GET`, `PATCH`).
+- **Request URL**\
+  The endpoint URL Phonely called during workflow execution.
+
+### Response details
+
+- **Response Code**\
+  The HTTP response status returned by the external service (for example, `200`).
+- **API Response Body**\
+  The returned response payload from the API request.
+
+This helps confirm:
+
+- whether the external service responded correctly
+- whether the response format matched expectations
+- what data was returned to the workflow at runtime
+
+## Viewing the API Response Body
+
+In the **API Response Body** section, you can inspect the response in a structured format.
+
+From the UI shown in your images, the response body supports a readable display for JSON responses, including:
+
+- **Type** (for example, `json`)
+- **Response** (the actual payload content)
+
+Example values you may see in a successful response:
+
+- `status: "success"`
+- an `id`
+- an `attempt` identifier
+- a `request_id`
+
+This section is useful when validating webhook/API behavior (for example, Zapier, CRM systems, or custom endpoints) and confirming that the workflow received the expected response.
+
+## Why Event Details matter
+
+The Event Details panel is one of the most important tools for debugging and verification because it helps you answer questions like:
+
+- Did the API request actually fire during the call?
+- Did it succeed or fail?
+- Which workflow and call triggered it?
+- How long did it take?
+- What response came back from the external system?
+
+Instead of guessing what happened, you can inspect the exact event record and response data directly from the events page.
+
+## Customize the Events Table and Filter Panel
+
+The **column/options menu** (opened from the icon next to **Refresh**) lets you control what fields are available on the page and in what order they appear. This makes the Events page easier to use when you want to focus on a specific troubleshooting workflow.
+
+### What this menu is for
+
+Use this menu to:
+
+- **Search** for a field/option quickly
+- **Show or hide** fields using checkboxes
+- **Reorder** fields using drag handles
+
+This is especially useful when you want to prioritize fields like **Call ID**, **Execution Stage**, or **Execution Time** without scrolling through a long filter panel.
+
+### Open the customization menu
+
+1. Go to the **Events** page.
+2. Click the **customization / columns icon** (next to **Refresh**).
+3. The options panel opens with:
+   - a **Search options...** bar at the top,
+   - a list of available fields,
+   - checkboxes to enable/disable each field,
+   - and drag handles for reordering.
+
+---
+
+### Search options
+
+At the top of the panel, use **Search options...** to quickly find a field by name.
+
+This is helpful when many options are available and you want to find one specific item (for example, **Event Name** or **Execution Time**) without scanning the full list.
+
+**Example uses:**
+
+- Type `call` to find **Call ID**
+- Type `event` to find **Event Status**, **Event Type**, **Event Name**
+- Type `execution` to find **Execution Stage** and **Execution Time**
+
+### Show or hide fields
+
+Each item in the list includes a checkbox.
+
+- **Checked** = the field is enabled/visible on the page
+- **Unchecked** = the field is hidden from the current layout
+
+Depending on the field, enabling/disabling it may affect:
+
+- the **left filter panel** (which filters are shown), and/or
+- the **Events table** (which columns are available/shown)
+
+This helps you reduce clutter and keep only the fields relevant to your current investigation.
+
+### Reorder fields
+
+Each row in the options panel includes a **drag handle** (the dotted grip icon).
+
+Use it to drag items up or down and change the display order.
+
+Reordering can make the page much faster to use, especially during repeated debugging sessions.
+
+### Pagination / incremental loading
+
+If more records exist than are currently shown, use **Load More** to fetch additional rows in the current filtered view.
+
+## Sorting events
+
+Some table headers like event time and date include sorting controls. You can use sorting to quickly answer questions like:
+
+- What are the newest events?
+- Which events took the longest?
+- When did failures happen in sequence?
+
+## Viewing event details from the table
+
+After reviewing the table, you can click any event row to open a detailed side panel with full event information.
+
+This is the best way to move from a high-level event list into a full technical inspection of a single record.
+
+## Event Details panel
+
+When you click an event row, an **Event Details** panel opens (typically on the right side of the screen). This panel provides detailed metadata and payload information for the selected event.
+
+**What the event details panel includes**
+
+The exact fields vary by event type, but your screenshots show the panel may include: Event ID, Call ID. Workflow ID, Event Type, Success/Fail, Execution Stage, Event Started, Event Ended, Execution Time, Request Method (for API requests), Request URL (for API requests), Response Code (for API requests), API Response Body (when available). 
+
+This detailed view is essential for troubleshooting and audit trails because it links the event back to the call and workflow it came from.
+
+**Why this panel is useful**
+
+The event details panel helps you answer questions such as:
+
+- Which workflow generated this event?
+- Which call triggered it?
+- Did it succeed?
+- When exactly did it start and end?
+- How long did it take?
+- What endpoint was called?
+- What response was returned?
+
+Instead of guessing from the table row alone, you can inspect the exact event record.

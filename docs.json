@@ -200,7 +200,8 @@
             "pages": [
               "perfomance",
               "post-call-outcomes",
-              "call-paths"
+              "call-paths",
+              "call-events"
             ]
           },
           {
