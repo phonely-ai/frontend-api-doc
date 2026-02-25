@@ -177,40 +177,10 @@ Reordering can make the page much faster to use, especially during repeated debu
 
 If more records exist than are currently shown, use **Load More** to fetch additional rows in the current filtered view.
 
-## Sorting events
+### Sorting events
 
 Some table headers like event time and date include sorting controls. You can use sorting to quickly answer questions like:
 
 - What are the newest events?
 - Which events took the longest?
 - When did failures happen in sequence?
-
-## Viewing event details from the table
-
-After reviewing the table, you can click any event row to open a detailed side panel with full event information.
-
-This is the best way to move from a high-level event list into a full technical inspection of a single record.
-
-## Event Details panel
-
-When you click an event row, an **Event Details** panel opens (typically on the right side of the screen). This panel provides detailed metadata and payload information for the selected event.
-
-**What the event details panel includes**
-
-The exact fields vary by event type, but your screenshots show the panel may include: Event ID, Call ID. Workflow ID, Event Type, Success/Fail, Execution Stage, Event Started, Event Ended, Execution Time, Request Method (for API requests), Request URL (for API requests), Response Code (for API requests), API Response Body (when available).
-
-This detailed view is essential for troubleshooting and audit trails because it links the event back to the call and workflow it came from.
-
-**Why this panel is useful**
-
-The event details panel helps you answer questions such as:
-
-- Which workflow generated this event?
-- Which call triggered it?
-- Did it succeed?
-- When exactly did it start and end?
-- How long did it take?
-- What endpoint was called?
-- What response was returned?
-
-Instead of guessing from the table row alone, you can inspect the exact event record.
