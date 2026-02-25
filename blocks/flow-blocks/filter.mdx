@@ -247,18 +247,17 @@ A case can contain more than one condition. When you add multiple conditions, yo
 **Example (AND): Verify caller before routing**
 
 - `caller_name exists`
-- `caller_phone exists`\
-  Logic: **AND**
+- `caller_phone exists`
 
-Meaning: this case only matches if both values were captured.
+Logic: **AND** meaning this case only matches if both values were captured.
 
 **Example (OR): Route to billing**
 
 - AI match: “caller wants a refund”
-- AI match: “caller is asking about charges”\
-  Logic: **OR**
 
-Meaning: either signal qualifies for billing.
+AI match: “caller is asking about charges”
+
+Logic: **OR** meaning: either signal qualifies for billing.
 
 <Expandable title="Examples">
   - And → caller_name = John **and** caller_phone = 123456
