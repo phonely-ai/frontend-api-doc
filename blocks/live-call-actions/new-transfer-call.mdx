@@ -371,22 +371,6 @@ Warm transfer is best for:
 
     This allows Phonely to continue the transfer flow through the IVR.
 
-    **Exit on IVR Detection**
-
-    Phonely stops the transfer attempt when an IVR is detected.
-
-    Use this when:
-
-    - you only want to transfer to a live person directly,
-    - and automated menus are considered a failed transfer path.
-
-    **Example:**\
-    You are routing VIP calls to an account manager’s direct line.\
-    If that line forwards to a company IVR after hours, you may not want the caller trapped in a phone tree.\
-    Set **Exit on IVR Detection** so the flow can return and handle the caller with a fallback message.
-
-    ### 2) IVR Detection Prompt
-
     When IVR handling is enabled, you can provide an IVR Detection Prompt.
 
     This field tells Phonely how to navigate the menu it hears. Use a short instruction that matches the destination’s menu path.
@@ -402,7 +386,20 @@ Warm transfer is best for:
     - the menu is predictable,
     - and you want the warm transfer to still reach the intended team.
 
-    ### 3) Voicemail Detection
+    **Exit on IVR Detection**
+
+    Phonely stops the transfer attempt when an IVR is detected.
+
+    Use this when:
+
+    - you only want to transfer to a live person directly,
+    - and automated menus are considered a failed transfer path.
+
+    **Example:**\
+    You are routing VIP calls to an account manager’s direct line. If that line forwards to a company IVR after hours, you may not want the caller trapped in a phone tree.\
+    Set **Exit on IVR Detection** so the flow can return and handle the caller with a fallback message.
+
+    ### 2) Voicemail Detection
 
     Voicemail Detection tells Phonely what to do if the destination line reaches voicemail instead of a person.
 
