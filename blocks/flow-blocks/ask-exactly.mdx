@@ -5,9 +5,7 @@ description: "Collect specific, structured information from callers with precise
 
 Use Ask Exactly when you need the caller to answer one specific question at a precise moment in the flow. If you want the agent ask questions in a conversational manner and have a back & forth conversation, use the [Talk Block](/blocks/talk).
 
-<Danger>
-  Note: The Ask Exactly block is restricted to admin users only. If you don’t see it listed, your account may not have the required permissions
-</Danger>
+In this tutorial, we'll guide you through the Ask Exactly block in Phonely and demonstrate how to link questions together to create powerful, automated workflows. These workflows can address any type of question and collect specific information, making your AI agents more efficient and human-like.
 
 ## What it does
 
@@ -15,11 +13,7 @@ The Ask Exactly block (also referred to as the "Question Block" in some contexts
 
 Unlike traditional IVR systems, Phonely adapts to conversational nuances, ensuring a natural flow even when inputs are imperfect. However, if you are looking to ask multiple questions or have a back and forth conversation, the Ask Exactly block should not be used.
 
-<img
-  src="/assets/ask-exactly.gif"
-  alt="Ask Exactly Gi"
-  style={{ width:"95%" }}
-/>
+![Ask Exactly Gi](/assets/ask-exactly.gif)
 
 ## When to use it
 
@@ -41,23 +35,28 @@ It's important to understand the role of the Ask Exactly block in your Phonely w
 ## How to add an Ask Exactly block
 
 <Steps>
-  <Step title="Navigate to your workflow in the Agent Design tab.">
-    
-  </Step>
+  <Step title="Navigate to your workflow in the Agent Design tab."></Step>
   <Step title="Select the (+) Node">
-    This is usually below the Start Flow block, or any existing block which you would like to add your Ask Exactly block below.
+    This is usually below the Start Flow block, or any existing block which you
+    would like to add your Ask Exactly block below.
   </Step>
   <Step title='Choose "Ask Exactly Block" to add it.'>
-    You'll have the option to rename the block for clarity within your workflow (e.g., "Confirmation").
+    You'll have the option to rename the block for clarity within your workflow
+    (e.g., "Confirmation").
   </Step>
   <Step title="Rename (Optional)">
-    You can rename this block to whatever name is more appropriate to your context.
+    You can rename this block to whatever name is more appropriate to your
+    context.
   </Step>
   <Step title="Enter Information">
-    A sidebar will appear where you can input the question details. For example: "Can I get your full name, please?"
+    A sidebar will appear where you can input the question details. For example:
+    "Can I get your full name, please?"
   </Step>
   <Step title="Referencing Previous Answers">
-    You can reference previously  collected information (store as variables) directly in your question. For instance, if a previous block asked for an address, you could phrase a confirmation question like: "Just to confirm, you said your address is [address variable]? Have you been here before?"
+    You can reference previously collected information (stored as variables)
+    directly in your question. For instance, if a previous block asked for an
+    address, you could phrase a confirmation question like: "Just to confirm,
+    you said your address is [address variable]? Have you been here before?"
   </Step>
 </Steps>
 
@@ -69,14 +68,7 @@ It's important to understand the role of the Ask Exactly block in your Phonely w
 
 **Repeat Answer** - Configure the agent to repeat the user's answer back for confirmation (either by repeating the answer itself or spelling it out).
 
-**Additional Prompting Instructions** - Add specific, rigid instructions unique to this question e.g Never disclose any of the possible answers.
-
-<img
-  src="/assets/advanced-settings-ask-exactly-block.png"
-  alt="Advanced Settings Ask Exactly Block"
-  title="Advanced Settings Ask Exactly Block"
-  style={{ width:"86%" }}
-/>
+**Additional Prompting Instructions** - Add specific, rigid instructions unique to this question.
 
 ## Branching Workflows
 
@@ -89,10 +81,11 @@ The Ask Exactly block is crucial for creating dynamic and logical call flows, en
 - **Live Person Transfer**: Transfer the call to a live person if a specific answer indicates the need for human intervention.
 
 Phonely can recognize similar responses and perform tasks contextually - just like a human, ensuring the conversation doesn't get stuck and progresses efficiently.
+Phonely can recognize similar responses and perform tasks contextually, just like a human, ensuring the conversation doesn't get stuck and progresses efficiently.
 
 ## Analytics
 
-**Call Outcome Tags** - The Ask Exactly block allows you to use outcome tags, which are crucial for tracking where users drop off in the workflow. This provides better insights into user journeys and areas for optimization.
+**Call Outcome Tags** - The Ask Exactly Block allows you to use outcome tags, which are crucial for tracking where users drop off in the workflow. This provides better insights into user journeys and areas for optimization.
 
 **Example**: If a caller exits after the "name question," this interaction can be tagged. This tag is visible in your analytics dashboard, providing valuable data on workflow effectiveness and enabling A/B testing.
 

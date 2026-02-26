@@ -15,31 +15,29 @@ The API Request block acts as a bridge between Phonely and external applications
 
 You can use it to:
 
-- Send caller data such as names, phone numbers, emails, or custom variables to another system
-- Retrieve information like order status, appointment availability, or account details
-- Trigger automations in tools like Zapier, Make, Slack, or internal APIs
-- Execute webhooks during or after a call
+- **Send data** collected from callers (e.g., names, phone numbers, emails).
+- **Retrieve data** (e.g., product info, availability, or pricing).
+- **Trigger workflows** in apps like Zapier, Make, or your internal API.
 
-Phonely supports standard REST APIs and allows you to configure requests either by importing a cURL command or building the request manually.
+You can connect it to any REST API using a cURL command or manual setup.
 
-## How to Use it
+## Adding the API Request Block to a Flow
 
-In your Flow Editor, locate the block where the API call should occur, then click the ➕ (plus) icon.
+1. Connect it below a **Collect** or **Ask Exactly** block if you want to send the data collected earlier.
 
-To add an API Request block:
+<Tip>
+  For example, you can collect a caller’s name and email first, then use the API
+  Request block to send those details to your CRM.
+</Tip>
 
-1. Open your Flow Editor.
-2. Locate the point in the flow where the API interaction should occur.
-3. Click the **➕ (plus)** icon beneath or beside an existing block.
-4. Under **Actions**, select **API Request**.
-
-A new block labeled **API Request** will appear on your canvas.
+2. In your Flow Editor, locate the block where the API call should occur, then click the ➕ (plus) icon directly beneath or next to it.
+3. In the popup menu, look under Live Call Actions.
+4. Select **API Request**. You’ll see a new block added to your canvas labeled **API Request**.
 
 <img
-  src="/assets/how-to-add-an-api-request-block.png"
-  alt="How To Add An Api Request Block"
-  title="How To Add An Api Request Block"
-  style={{ width:"96%" }}
+  src="/assets/api-request-block.png"
+  alt="Api Request Block Pn"
+  style={{ width: "90%" }}
 />
 
 ## Setup
@@ -75,83 +73,72 @@ If you don’t have a cURL command, click **Build Manually**. You’ll then defi
 
 ## Configuration
 
-The Configure tab is where you define what your API request should do.
+The **Configure** tab is where you define what your API request should do.
 
 <img
-  src="/assets/configure-api-request-manually.png"
-  alt="Configure Api Request Manually"
-  title="Configure Api Request Manually"
-  style={{ width:"72%" }}
+  src="/assets/configure-api-request.png"
+  alt="Configure Api Request Pn"
+  className="mx-auto"
+  style={{ width: "72%" }}
 />
 
-<Steps>
-  <Step titleSize="h3" title="API Method">
-    Select the type of request from the dropdown:
+**1. API Method**
 
-    - `GET` – Retrieve data from a system.
-    - `POST` – Send new data.
-    - `PUT` or `PATCH`– Update an existing record.
-    - `DELETE` – Remove a resource.
+Select the type of request from the dropdown:
 
-    > Example: Choose **POST** when sending call data to an external app.
-  </Step>
-  <Step titleSize="h3" title="API URL">
-    Enter the endpoint where the request should go. This is the destination for your data.
-  </Step>
-  <Step titleSize="h3" title="Headers">
-    Headers define metadata or authentication details for your API call.                                                         Click **\+ Add** to add key-value pairs such as:
+- `GET` – Retrieve data from a system.
+- `POST` – Send new data (most common).
+- `PUT` or `PATCH` – Update an existing record.
+- `DELETE` – Remove a resource.
 
-    <img
-      src="/assets/configure-header-for-api-request.png"
-      alt="Configure Header For Api Request"
-      title="Configure Header For Api Request"
-      style={{ width:"96%" }}
-    />
+> Example: Choose **POST** when sending call data to an external app.
 
-    <Tip>
-      Always include `Content-Type: application/json` for JSON-based APIs.
-    </Tip>
-  </Step>
-  <Step titleSize="h3" title="Query Parameters">
-    Use this if your API uses query strings in the URL (e.g., filtering or pagination).
+**2. API URL**
 
-    <img
-      src="/assets/configure-query-parameters-in-phonely.png"
-      alt="Configure Query Parameters In Phonely"
-      title="Configure Query Parameters In Phonely"
-      style={{ width:"95%" }}
-    />
-  </Step>
-  <Step stepNumber={5} titleSize="h3" title="Body (For POST, PUT, PATCH Requests)">
-    For **POST**, **PUT**, or **PATCH** requests, you can define a request body. Phonely supports multiple body types, selectable directly in the UI.
+Enter the endpoint where the request should go. This is the destination for your data.
 
-    #### Supported Body Types
+**3. Headers**
 
-    **None**\
-    Use this when the request does not require a body.
+Headers define metadata or authentication details for your API call. Click **+ Add** to add key-value pairs such as:
 
-    **x-www-form-urlencoded**\
-    Use this when the API expects traditional form data. Each key-value pair is sent as form data, commonly required by legacy systems or OAuth flows.
+| **Key**       | **Value**           |
+| :------------ | :------------------ |
+| Content-Type  | application/json    |
+| Authorization | Bearer YOUR_API_KEY |
 
-    ![X Www Form Urlencoded](/assets/x-www-form-urlencoded.png)
+<Tip>Always include `Content-Type: application/json` for JSON-based APIs.</Tip>
 
-    **JSON**\
-    Use this when sending structured data in JSON format (most modern APIs).\
-    You can switch the editor to **Code** mode to write raw JSON directly.
+**4. Query Parameters (optional)**
 
-    <img
-      src="/assets/api-payload-config-page.png"
-      alt="Api Payload Config Page"
-      title="Api Payload Config Page"
-      style={{ width:"60%" }}
-    />
+Use this if your API uses query strings in the URL (e.g., filtering or pagination).
 
-    <Tip>
-      You can make your API requests dynamic by inserting variables captured earlier in your flow. Type `@`to open the variable picker or select from available variables or auto-gather variables to include dynamic data in your request.
-    </Tip>
-  </Step>
-  <Step stepNumber={6} title="Advanced settings">
-    Click to expand this section. These options help control the flow behavior during API communication.
+Example:
+
+| **Key** | **Value** |
+| :------ | :-------- |
+| userId  | 5         |
+| limit   | 10        |
+
+**5. Body (For POST, PUT, PATCH Requests)**
+
+Define what data will be sent. Switch between **Code** (for JSON) and **Raw** (for plain text). Example:
+
+<img
+  src="/assets/api-request-body.png"
+  alt="Api Request Body Pn"
+  className="mx-auto"
+  style={{ width: "71%" }}
+/>
+
+<Tip>
+  You can make your API requests dynamic by inserting variables captured earlier
+  in your flow. Type `@`to open the variable picker or select from Available
+  Variables or Auto-Gather Variables to include dynamic data in your request.
+</Tip>
+
+**6. Advanced Settings**
+
+Click to expand this section. These options help control the flow behavior during API communication.
 
     <img
       src="/assets/api-request-block-advanced-settings.png"
@@ -168,15 +155,14 @@ The Configure tab is where you define what your API request should do.
     | **Post Interim Message Delay** | Adds a short pause after the interim message.                                         |
     | **Call Outcome Tagging**       | Add labels for analytics or call reports (e.g., “api_success” or “crm_update”).       |
 
-    Click **Continue** to save and move on to the **Test** step.
-  </Step>
-</Steps>
+Click **Continue** to save and move on to the **Test** step.
 
 ## Test
 
 Testing ensures your configuration works before you publish your flow.
 
-1. Click **Test**. Phonely will send the request exactly as you configured.
+1. Click **Test**.\
+   Phonely will send the request exactly as you configured.
 2. The response will display instantly, showing whether it succeeded or failed.
 
 If successful, you’ll see:
@@ -186,17 +172,6 @@ Status: 201 Created
 ```
 
 If failed, you’ll get an error message explaining what went wrong (e.g., invalid URL, authentication error, or timeout).
-
-<Note>
-  When building workflows, you can now hover over API request and code block variables to instantly preview test data. This reduces debugging time and improves confidence before publishing flows
-</Note>
-
-<img
-  src="/assets/preview-api-request-test-data.png"
-  alt="Preview Api Request Test Data"
-  title="Preview Api Request Test Data"
-  style={{ width:"61%" }}
-/>
 
 ## Use cases for API Requests
 

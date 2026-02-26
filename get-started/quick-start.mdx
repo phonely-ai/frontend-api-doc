@@ -4,7 +4,8 @@ description: "Build your first agent in 5 minutes"
 ---
 
 <Info>
-  Want to jump right in? Try out Phonely for completely free [here](https://phonely.ai).
+  Want to jump right in? Try out Phonely for completely free
+  [here](https://phonely.ai).
 </Info>
 
 Phonely lets you design AI phone agents using visual workflows. Instead of writing scripts, you connect blocks that control what the agent says, what it listens for, what data it collects, and what actions it takes during and after every call.
@@ -22,18 +23,40 @@ Phonely combines three core systems that work together in every call.
 When a call comes in, Phonely follows your flow in real time, collecting variables, making decisions, calling APIs, transferring calls, scheduling appointments, or taking payments.
 
 <CardGroup cols={3}>
-  <Card title="Plan your agent" icon="lightbulb" iconType="solid" href="/get-started/overview" cta="Learn best practices">
-    Define what your agent should accomplish before building. Clear planning helps automate accurately, handle edge cases, and deliver consistent results.
+  <Card
+    title="Plan your agent"
+    icon="lightbulb"
+    iconType="solid"
+    href="/get-started/overview"
+    cta="Learn best practices"
+  >
+    If you know what you want done, we can almost guarantee we can automate it
+    with Phonely. But like anything, a little planning will go a long way in
+    making sure your agent does everything you need.
   </Card>
-  <Card title="Build the call flow" icon="workflow" iconType="solid" href="/key-concepts/flows" cta="Learn flow basics">
-    Create visual call flows that connect prompts, logic, and tools. Flows turn scripts into structured, executable conversations with control.
+  <Card
+    title="Build the call flow"
+    icon="workflow"
+    iconType="solid"
+    href="/key-concepts/flows"
+    cta="Learn flow basics"
+  >
+    Everything in Phonely is built in flows. Flows allow you to take your call
+    scripts, connect them to tools and so much more.
   </Card>
-  <Card title="Test, Analyze, Scale" icon="chart-line" iconType="solid" href="/testing" cta="Learn about analytics">
-    Validate your agents before going live. Test workflows, review outcomes and summaries, compare, and use insights to refine behavior and scale with confidence.
+  <Card
+    title="Test, analyze, and scale"
+    icon="chart-line"
+    iconType="solid"
+    href="/call-history-ai-analytics/call-history-ai-analytics"
+    cta="Learn about analytics"
+  >
+    Call your agent instantly to test behavior. Learn how to get the most from
+    review AI summaries, outcomes, and A/B testing your AI agent.
   </Card>
 </CardGroup>
 
-## Lets build your agent right now.
+## Let's build your agent right now.
 
 Building voice AI agents has never been easier. Get started in just a few simple steps to build the AI that can automate anything, repeatedly, every single time.
 
@@ -51,43 +74,22 @@ This allows your agent to respond accurately without hard-coding every answer in
 
 ![Knowledbase View In Phonely Gi](/images/knowledbase-view-in-phonely.gif)
 
-### Design the Call Flow
+<Frame caption="Knowledge base upload view"></Frame>
 
-Open the Flow Builder and begin laying out how the call should work. Flows are visual. Each block represents something the agent does:
+### Design the flow
 
-<Expandable title="Examples">
-  - speak to the caller
-  - ask a question
-  - collect data
-  - check a condition
-  - collect payments
-  - call an API
-  - schedule an appointment
-  - transfer to a human
-  - end the call
-</Expandable>
+Use the visual Flow Builder to map greetings, questions, transfers, API calls, scheduling, and post-call actions. Learn best practices of flow building here.
 
-You connect these blocks to define how the conversation moves forward.
+![Flow Builder Canvas Pn](/assets/flow-builder-canvas.png)
 
-You can also use [Ask AI](/key-concepts/ask-ai/) inside the builder to generate, explain, or improve your flow while you work.
-
-<img
-  src="/assets/ask-ai-example.png"
-  alt="Ask Ai Example"
-  title="Ask Ai Example"
-  style={{ width:"89%" }}
-/>
+<Frame caption="Flow builder canvas"></Frame>
 
 ### Capture variables
 
-Use [variables](/key-concepts/variables/) to define what to collect (e.g., name, phone number, DOB). Use [auto-gather](/key-concepts/auto-gather-variables/) to collect data exactly when the block needs it.  When a block needs information (name, order number, email, payment amount), the agent automatically asks the caller, confirms it, and stores it in a variable.
+Define what to collect (e.g., name, DOB). Mark key fields **required** and **confirm** spelling.\
+Use auto-gather to collect data exactly when the block needs it.
 
-These variables can then be:
-
-- used in logic
-- sent to APIs
-- inserted into emails
-- logged after the call, etc.
+![Variable Configuration Panel Gi](/images/variable-configuration_panel.gif)
 
 You can mark important fields as required, enable confirmation, and spell-back to ensure accuracy.
 
@@ -95,14 +97,13 @@ You can mark important fields as required, enable confirmation, and spell-back t
 
 ### Route, Transfer, and Escalate
 
-Add warm [transfers](/blocks/live-call-actions/new-transfer-call) (with voicemail detection and fallback) or cold transfers.            \
+Add **warm transfers** (with voicemail detection and fallback) or **cold transfers**.\
 Route by intent, person, or department to keep every call moving toward resolution.
 
 <img
-  src="/assets/cold-and-warm-call-transfers.png"
-  alt="Cold And Warm Call Transfers"
-  title="Cold And Warm Call Transfers"
-  style={{ width:"69%" }}
+  src="/assets/transfer-calls.png"
+  alt="Transfer Calls Pn"
+  style={{ width: "74%" }}
 />
 
 ### Integrate actions
@@ -119,11 +120,12 @@ Flows can trigger real actions using pre-built integrations. For example, you ca
 All of these use the same variables collected during the call.
 
 <img
-  src="/assets/make-an-api-request-quick-start.png"
-  alt="Make An Api Request Quick Start"
-  title="Make An Api Request Quick Start"
-  style={{ width:"53%" }}
+  src="/assets/api-builder-block.png"
+  alt="Api Builder Block Pn"
+  style={{ width: "73%" }}
 />
+
+<Frame caption="API Request block configuration"></Frame>
 
 ### Publish & test
 
@@ -144,14 +146,35 @@ From here, you're ready to explore the deeper concepts that power every Phonely 
 Learn the core concepts used to answer millions of calls by selecting one of the following components below.
 
 <CardGroup cols={3}>
-  <Card title="Learn about Flows" icon="workflow" iconType="solid" href="/key-concepts/flows" cta="Understand how flows work">
-    Design call scripts, connect integrations, and automate logic using Phonely’s visual flow builder at scale.
+  <Card
+    title="Learn about Flows"
+    icon="workflow"
+    iconType="solid"
+    href="/key-concepts/flows"
+    cta="Understand how flows work"
+  >
+    Learn how Phonely’s visual Flow Builder helps you define scripts, connect
+    integrations, and automate your call logic.
   </Card>
-  <Card title="Outbound Calling" icon="phone" iconType="solid" href="/outboundcalling/createaoutboundcallingcampaign/" cta="Build your first outbound campaign">
-    Automate reminders, reactivations, and follow-up calls using the same building blocks as inbound flows.
+  <Card
+    title="Outbound Calling"
+    icon="phone"
+    iconType="solid"
+    href="/outboundcalling/createaoutboundcallingcampaign/"
+    cta="Build your first outbound campaign"
+  >
+    Automate appointment reminders, reactivations, or follow-up calls using the
+    same intuitive building blocks as inbound.
   </Card>
-  <Card title="A/B Testing" icon="shuffle" iconType="solid" href="/testing/ab-testing" cta="Learn how to test your agents">
-    Test prompts, voices, and routing strategies, compare results, and deploy the best-performing setup.
+  <Card
+    title="A/B Testing"
+    icon="shuffle"
+    iconType="solid"
+    href="/capabilities/ab-testing"
+    cta="Start testing your agent"
+  >
+    Experiment with prompts, voices, or routing strategies and instantly roll
+    out the winning configuration.
   </Card>
 </CardGroup>
 
@@ -170,6 +193,7 @@ Learn the core concepts used to answer millions of calls by selecting one of the
     <Tip>
       If you don’t see your integration listed, you can **import any API directly from a cURL command** to make it work instantly.
     </Tip>
+
   </Accordion>
   <Accordion title="Can I test my agent before deploying it?">
     Yes. Use the **Test** button on the agent design page or call your assigned Phonely number. You can hear the agent in real time, confirm it follows your call flows, and review analytics immediately after.

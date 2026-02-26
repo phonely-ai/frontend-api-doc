@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "palm",
-  "name": " Phonely Documentation",
+  "name": "Phonely Documentation",
   "colors": {
     "primary": "#6B0099",
     "light": "#FAFAFA",
@@ -196,7 +196,7 @@
             ]
           },
           {
-            "group": "PERFORMANCE",
+            "group": "Agent Knowledge Base",
             "pages": [
               "perfomance",
               "post-call-outcomes",
@@ -213,16 +213,13 @@
           {
             "group": "TESTING",
             "pages": [
-              "testing/test-from-a-block",
-              "testing/ab-testing",
-              "testing/simulation-testing"
+              "testing/ab-testing"
             ]
           },
           {
-            "group": "ACCOUNT & ORGANIZATION SETTINGS",
+            "group": "Account and Organization Settings",
             "pages": [
-              "manage-account-and-organization-settings/manage-account-and-oraganization-settings",
-              "manage-account-and-organization-settings/delete-agents"
+              "manage-account-and-organization-settings/manage-account-and-organization-settings"
             ]
           },
           {
@@ -254,14 +251,17 @@
                       "api-reference/endpoint/get-agents",
                       "api-reference/endpoint/get-all-agents",
                       "api-reference/endpoint/duplicate-agent",
-                      "api-reference/endpoint/update-agent"
-                    ]
+                      "api-reference/endpoint/update-agent",
+                      "api-reference/endpoint/block-list"
+                    ] 
                   },
                   {
                     "group": "Call Management",
                     "pages": [
+                      "api-reference/endpoint/list-calls",
                       "api-reference/endpoint/get-call",
-                      "api-reference/endpoint/report-call-error"
+                      "api-reference/endpoint/report-call-error",
+                      "api-reference/endpoint/set-post-call-outcome"
                     ]
                   },
                   {
@@ -311,8 +311,7 @@
       {
         "tab": "Webhook Reference",
         "icon": "webhook",
-        "pages": [
-          "webhook-reference/Intro",
+        "groups": [
           {
             "group": "Webhook Reference",
             "pages": [
