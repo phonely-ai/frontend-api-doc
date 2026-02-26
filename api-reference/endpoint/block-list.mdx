@@ -1,0 +1,190 @@
+---
+title: "Block List"
+openapi: "GET /agent-block-list"
+---
+
+Manage blocked phone numbers for an agent. This endpoint allows you to retrieve, add, and remove phone numbers from an agent's block list.
+
+### GET - List Blocked Phone Numbers
+
+Retrieves the list of blocked phone numbers for a specific agent.
+
+**Method:** `GET`  
+**Endpoint:** `/api/agent-block-list`  
+**Headers:**
+
+- `X-Authorization`: Your API key (required)
+
+**Query Parameters:**
+
+- `uid` (string, required): Your user ID
+- `agentId` (string, required): The ID of the agent whose block list you want to retrieve
+
+**Success Response (200):**
+
+```json
+{
+  "blockList": ["+1234567890", "+0987654321"]
+}
+```
+
+**Error Responses:**
+
+- `400 Bad Request`: Invalid search params (missing uid or agentId)
+- `401 Unauthorized`: Invalid or missing API key, or insufficient permissions
+- `500 Internal Server Error`: Server error
+
+### POST - Add Phone Numbers to Block List
+
+Adds phone numbers to an agent's block list.
+
+**Method:** `POST`  
+**Endpoint:** `/api/agent-block-list`  
+**Headers:**
+
+- `X-Authorization`: Your API key (required)
+- `Content-Type`: `application/json`
+
+**Request Body:**
+
+```json
+{
+  "uid": "string",
+  "agentId": "string",
+  "numbers": ["+1234567890", "+0987654321"]
+}
+```
+
+**Parameters:**
+
+- `uid` (string, required): Your user ID
+- `agentId` (string, required): The ID of the agent
+- `numbers` (string[], required): Array of phone numbers to add to the block list
+
+**Success Response (200):**
+
+```json
+{
+  "message": "Block list updated successfully",
+  "added": ["+1234567890"],
+  "failed": [
+    {
+      "number": "+0987654321",
+      "reason": "Number already in block list"
+    }
+  ]
+}
+```
+
+**Response Fields:**
+
+- `message` (string): Success message
+- `added` (string[]): Array of phone numbers that were successfully added
+- `failed` (array): Array of objects containing numbers that failed to be added and the reason
+  - `number` (string): The phone number that failed
+  - `reason` (string): Reason for failure (e.g., "Invalid phone number format", "Number already in block list")
+
+**Error Responses:**
+
+- `400 Bad Request`: Invalid request body or numbers parameter
+- `401 Unauthorized`: Invalid or missing API key, or insufficient permissions
+- `500 Internal Server Error`: Server error
+
+### DELETE - Remove Phone Numbers from Block List
+
+Removes phone numbers from an agent's block list.
+
+**Method:** `DELETE`  
+**Endpoint:** `/api/agent-block-list`  
+**Headers:**
+
+- `X-Authorization`: Your API key (required)
+- `Content-Type`: `application/json`
+
+**Request Body:**
+
+```json
+{
+  "uid": "string",
+  "agentId": "string",
+  "numbers": ["+1234567890", "+0987654321"]
+}
+```
+
+**Parameters:**
+
+- `uid` (string, required): Your user ID
+- `agentId` (string, required): The ID of the agent
+- `numbers` (string[], required): Array of phone numbers to remove from the block list
+
+**Success Response (200):**
+
+```json
+{
+  "message": "Block list updated successfully",
+  "removed": ["+1234567890"],
+  "failed": [
+    {
+      "number": "+0987654321",
+      "reason": "Number not found in block list"
+    }
+  ]
+}
+```
+
+**Response Fields:**
+
+- `message` (string): Success message
+- `removed` (string[]): Array of phone numbers that were successfully removed
+- `failed` (array): Array of objects containing numbers that failed to be removed and the reason
+  - `number` (string): The phone number that failed
+  - `reason` (string): Reason for failure (e.g., "Number not found in block list")
+
+**Error Responses:**
+
+- `400 Bad Request`: Invalid request body or numbers parameter
+- `401 Unauthorized`: Invalid or missing API key, or insufficient permissions
+- `500 Internal Server Error`: Server error
+
+### Example
+
+**GET - List blocked numbers:**
+
+```bash
+curl -X GET "https://app.phonely.ai/api/agent-block-list?uid=user123&agentId=agent456" \
+  -H "X-Authorization: your-api-key"
+```
+
+**POST - Add numbers to block list:**
+
+```bash
+curl -X POST "https://app.phonely.ai/api/agent-block-list" \
+  -H "X-Authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "uid": "user123",
+    "agentId": "agent456",
+    "numbers": ["+1234567890", "+0987654321"]
+  }'
+```
+
+**DELETE - Remove numbers from block list:**
+
+```bash
+curl -X DELETE "https://app.phonely.ai/api/agent-block-list" \
+  -H "X-Authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "uid": "user123",
+    "agentId": "agent456",
+    "numbers": ["+1234567890"]
+  }'
+```
+
+### Notes
+
+- Phone numbers must be in valid format (E.164 format recommended, e.g., `+1234567890`)
+- Phone numbers are validated before being added to the block list
+- Duplicate numbers will be rejected when adding
+- Only numbers that exist in the block list can be removed
+- The API returns both successful and failed operations, allowing you to handle partial failures gracefully

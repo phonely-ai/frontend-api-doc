@@ -336,6 +336,231 @@
         ]
       }
     },
+    "/calls/{agentId}": {
+      "get": {
+        "summary": "List calls by agent ID",
+        "description": "Retrieves a list of calls for a specific agent with comprehensive filtering and pagination options",
+        "parameters": [
+          {
+            "name": "agentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the agent whose calls you want to retrieve"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 100
+            },
+            "description": "Maximum number of results to return"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of results to skip for pagination"
+          },
+          {
+            "name": "customer_phone_number",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by customer phone number"
+          },
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by campaign ID"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["COMPLETED", "FAILED", "ENDED", "IN_PROGRESS"]
+              }
+            },
+            "description": "Filter by call status (can specify multiple values)"
+          },
+          {
+            "name": "sentiment",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["Positive", "Negative", "Neutral"]
+              }
+            },
+            "description": "Filter by sentiment (can specify multiple values)"
+          },
+          {
+            "name": "call_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["inboundPhoneCall", "outboundPhoneCall", "webCall", "dailyCall"]
+              }
+            },
+            "description": "Filter by call type (can specify multiple values)"
+          },
+          {
+            "name": "outcome",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Filter by call outcome (can specify multiple values)"
+          },
+          {
+            "name": "ended_reason",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Filter by call ended reason (can specify multiple values)"
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Filter by call mode (can specify multiple values)"
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Filter calls after this date (ISO 8601 datetime format)"
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Filter calls before this date (ISO 8601 datetime format)"
+          },
+          {
+            "name": "min_duration",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            },
+            "description": "Minimum call duration in seconds"
+          },
+          {
+            "name": "max_duration",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            },
+            "description": "Maximum call duration in seconds"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCallsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Agent ID is missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - You do not have access to this agent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
     "/import-number": {
       "post": {
         "summary": "Import number",
@@ -499,6 +724,201 @@
         }
       }
     },
+    "/agent-block-list": {
+      "get": {
+        "summary": "List blocked phone numbers",
+        "description": "Retrieves the list of blocked phone numbers for a specific agent",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "User ID"
+          },
+          {
+            "name": "agentId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the agent whose block list you want to retrieve"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlockListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid search params",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Add phone numbers to block list",
+        "description": "Adds phone numbers to an agent's block list",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlockListRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlockListUpdateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body or numbers parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Remove phone numbers from block list",
+        "description": "Removes phone numbers from an agent's block list",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlockListRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlockListDeleteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body or numbers parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
     "/report-call-error": {
       "post": {
         "summary": "Report an issue with a call",
@@ -557,6 +977,123 @@
           },
           "404": {
             "description": "Call or agent not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/calls/{agentId}/{callIdOrPhone}": {
+      "patch": {
+        "summary": "Set post call outcome",
+        "description": "Set post call outcome fields for a call identified by either call ID or phone number.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "agentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the agent"
+          },
+          {
+            "name": "callIdOrPhone",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the call or the E.164 phone number"
+          },
+          {
+            "name": "preference",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "first",
+                "last"
+              ],
+              "default": "last"
+            },
+            "description": "first: first time that someone called in, last: latest call from someone"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCallOutcomeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Call outcome updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCallOutcomeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
             "content": {
               "application/json": {
                 "schema": {
@@ -1510,6 +2047,49 @@
   },
   "components": {
     "schemas": {
+      "UpdateCallOutcomeRequest": {
+        "type": "object",
+        "properties": {
+          "custom_call_outcome": {
+            "type": "string",
+            "description": "The outcome label (e.g., Sold, No Sale)"
+          },
+          "custom_call_outcome_value": {
+            "type": "number",
+            "description": "The monetary value associated with the outcome"
+          },
+          "custom_call_metadata": {
+            "type": "object",
+            "description": "Additional custom metadata for the call"
+          }
+        }
+      },
+      "UpdateCallOutcomeResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "call_id": {
+            "type": "string"
+          },
+          "agent_id": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "preference": {
+            "type": "string"
+          },
+          "updated_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "AgentRequest": {
         "type": "object",
         "required": ["uid", "agentId"],
@@ -1796,6 +2376,155 @@
           }
         }
       },
+      "ListCallsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CallItem"
+            },
+            "description": "Array of call objects matching the filter criteria"
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total number of calls matching the filters (not limited by pagination)"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The limit value used in the request"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the request"
+          }
+        }
+      },
+      "CallItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the call"
+          },
+          "agentId": {
+            "type": "string",
+            "description": "ID of the agent that handled the call"
+          },
+          "business_phone_number": {
+            "type": "string",
+            "description": "The business phone number used for the call"
+          },
+          "customer_phone_number": {
+            "type": "string",
+            "description": "The customer's phone number"
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime when the call started"
+          },
+          "ended_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime when the call ended"
+          },
+          "duration": {
+            "type": "number",
+            "description": "Call duration in seconds"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["COMPLETED", "FAILED", "ENDED", "IN_PROGRESS"],
+            "description": "Call status"
+          },
+          "recording_url": {
+            "type": "string",
+            "description": "URL to access the call recording"
+          },
+          "ended_reason": {
+            "type": "string",
+            "description": "Reason why the call ended"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["inboundPhoneCall", "outboundPhoneCall", "webCall", "dailyCall"],
+            "description": "Type of call"
+          },
+          "mode": {
+            "type": "string",
+            "description": "Call mode"
+          },
+          "read": {
+            "type": "boolean",
+            "description": "Whether the call has been read"
+          },
+          "c_sentiment": {
+            "type": "string",
+            "enum": ["Positive", "Negative", "Neutral"],
+            "description": "Customer sentiment analysis result"
+          },
+          "c_outcome": {
+            "type": "string",
+            "description": "Call outcome classification"
+          },
+          "c_topic": {
+            "type": "string",
+            "description": "Topic identified during the call"
+          },
+          "ab_test_type": {
+            "type": "string",
+            "description": "A/B test variant"
+          },
+          "ab_test_id": {
+            "type": "string",
+            "description": "ID of the A/B test"
+          },
+          "ab_test_success": {
+            "type": "boolean",
+            "description": "Whether the A/B test was successful"
+          },
+          "draft_agent_version": {
+            "type": "string",
+            "nullable": true,
+            "description": "Version of draft agent used, if any"
+          },
+          "draft_agent_id": {
+            "type": "string",
+            "nullable": true,
+            "description": "ID of draft agent used, if any"
+          },
+          "workflow_path_history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkflowAction"
+            },
+            "description": "Array of workflow actions executed during the call"
+          },
+          "campaign_id": {
+            "type": "string",
+            "nullable": true,
+            "description": "ID of the campaign associated with the call, if any"
+          }
+        }
+      },
+      "WorkflowAction": {
+        "type": "object",
+        "properties": {
+          "actionId": {
+            "type": "string",
+            "description": "ID of the workflow action"
+          },
+          "workflowId": {
+            "type": "string",
+            "description": "ID of the workflow"
+          },
+          "readableName": {
+            "type": "string",
+            "description": "Human-readable name of the action"
+          }
+        }
+      },
       "TranscriptEntry": {
         "type": "object",
         "properties": {
@@ -1806,6 +2535,98 @@
           "role": {
             "type": "string",
             "description": "Role of the speaker (e.g., assistant, user)"
+          }
+        }
+      },
+      "BlockListResponse": {
+        "type": "object",
+        "properties": {
+          "blockList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of blocked phone numbers"
+          }
+        }
+      },
+      "BlockListRequest": {
+        "type": "object",
+        "required": ["uid", "agentId", "numbers"],
+        "properties": {
+          "uid": {
+            "type": "string",
+            "description": "User ID"
+          },
+          "agentId": {
+            "type": "string",
+            "description": "The ID of the agent"
+          },
+          "numbers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of phone numbers to add or remove from the block list"
+          }
+        }
+      },
+      "BlockListUpdateResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Success message"
+          },
+          "added": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of phone numbers that were successfully added"
+          },
+          "failed": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BlockListFailure"
+            },
+            "description": "Array of numbers that failed to be added and the reason"
+          }
+        }
+      },
+      "BlockListDeleteResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Success message"
+          },
+          "removed": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of phone numbers that were successfully removed"
+          },
+          "failed": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BlockListFailure"
+            },
+            "description": "Array of numbers that failed to be removed and the reason"
+          }
+        }
+      },
+      "BlockListFailure": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "string",
+            "description": "The phone number that failed"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Reason for failure"
           }
         }
       },

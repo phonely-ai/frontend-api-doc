@@ -1,0 +1,77 @@
+---
+title: "List Calls"
+openapi: "GET /calls/{agentId}"
+---
+
+Retrieves a list of calls for a specific agent with comprehensive filtering and pagination options. This endpoint allows you to query call history, filter by various criteria, and paginate through results.
+
+### Request
+
+**Method:** `GET`  
+**Endpoint:** `/api/calls/{agentId}`  
+**Headers:**
+
+- `X-Authorization`: Your API key (required)
+
+**Path Parameters:**
+
+- `agentId` (string, required): The ID of the agent whose calls you want to retrieve
+
+### Notes
+
+- Array filters can be specified multiple times in the query string to filter by multiple values
+- All date parameters should be in ISO 8601 format (e.g., `2024-01-01T00:00:00Z`)
+- Duration values are in seconds
+- Phone numbers should be URL-encoded (e.g., `+1234567890` becomes `%2B1234567890`)
+- The `total` field in the response indicates the total count of matching calls, which may be greater than the number of items returned based on the `limit` parameter
+
+### Examples
+
+**Basic Request:**
+
+```bash
+curl -X GET "https://app.phonely.ai/api/calls/agent123" \
+  -H "X-Authorization: your-api-key"
+```
+
+**With Pagination:**
+
+```bash
+curl -X GET "https://app.phonely.ai/api/calls/agent123?limit=50&offset=0" \
+  -H "X-Authorization: your-api-key"
+```
+
+**With Single Value Filters:**
+
+```bash
+curl -X GET "https://app.phonely.ai/api/calls/agent123?customer_phone_number=%2B1234567890&campaign_id=campaign456" \
+  -H "X-Authorization: your-api-key"
+```
+
+**With Array Filters:**
+
+```bash
+curl -X GET "https://app.phonely.ai/api/calls/agent123?status=completed&status=in-progress&sentiment=positive" \
+  -H "X-Authorization: your-api-key"
+```
+
+**With Date Range:**
+
+```bash
+curl -X GET "https://app.phonely.ai/api/calls/agent123?start_date=2024-01-01T00:00:00Z&end_date=2024-12-31T23:59:59Z" \
+  -H "X-Authorization: your-api-key"
+```
+
+**With Duration Range:**
+
+```bash
+curl -X GET "https://app.phonely.ai/api/calls/agent123?min_duration=60&max_duration=300" \
+  -H "X-Authorization: your-api-key"
+```
+
+**Complex Query (Multiple Filters):**
+
+```bash
+curl -X GET "https://app.phonely.ai/api/calls/agent123?limit=25&offset=0&status=completed&sentiment=positive&sentiment=neutral&call_type=inbound&start_date=2024-01-01T00:00:00Z&min_duration=30" \
+  -H "X-Authorization: your-api-key"
+```
