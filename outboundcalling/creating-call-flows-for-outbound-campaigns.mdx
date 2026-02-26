@@ -1,15 +1,11 @@
 ---
-title: " Create Workflows for Outbound Campaigns"
+title: " Workflows "
 description: "Learn how to create call flows for outbound campaigns"
 ---
 
-Outbound call flows in Phonely allow you to automate how your AI agent interacts with leads from greeting and information collection to follow-up messages and task triggers. You can create call flows either by using prebuilt templates or by building from scratch. This guide walks you through both methods in detail, explaining key settings, filters, and publishing steps.
+Outbound call flows  allow you to automate how your AI agent interacts with leads from greeting and information collection to follow-up messages and task triggers. You can create call flows either by using prebuilt templates or by building from scratch.
 
-### Understanding Outbound Call Flows
-
-A **call flow** defines the logic your AI agent follows during outbound calls — what it says, how it responds to user input, and what actions (like making calls, sending an SMS, email, or API request) it performs afterward. Each call flow can be used in a **campaign**, and a campaign determines how and when these calls are triggered.
-
-## Navigating to Outbound Call Campaigns
+A call flow defines the logic your AI agent follows during outbound calls, what it says, how it responds to user input, and what actions (like making calls, sending an SMS, email, or API request) it performs afterward. Each call flow can be used in a campaign, and a campaign determines how and when these calls are triggered.
 
 <Steps>
   <Step title="From the Phonely dashboard">
@@ -23,7 +19,7 @@ A **call flow** defines the logic your AI agent follows during outbound calls �
   </Step>
 </Steps>
 
-## Creating a Call Flow Using Templates
+## Creating Workflows From Templates
 
 Templates provide prebuilt logic for common outbound use cases. Each one includes predefined prompts, logic branches, and post-call actions.
 
@@ -31,19 +27,19 @@ Templates provide prebuilt logic for common outbound use cases. Each one include
 
 <Steps>
   <Step title="Open the Template Library">
-    When you click **New Flow**, a **Choose a Template** window appears.\
-    Here, you can:
+    When you click **New Flow**, a choose a template window appears.\
+    Here, you can browse All templates or view Recommended ones.
 
-    - Browse All templates or view Recommended ones.
-    - Search by keywords or filter templates by:
-      - **Integrations** – e.g., Send SMS, Zapier, Make, Send Email.
-      - **Industries** – e.g., Banking, Insurance, Healthcare.
-      - **Use Cases** – e.g., Appointment Scheduling, Payment Processing, Refund Requests.
+    Search by keywords or filter templates by:
+
+    - **Integrations** – e.g., Send SMS, Zapier, Make, Send Email.
+    - **Industries** – e.g., Banking, Insurance, Healthcare.
+    - **Use Cases** – e.g., Appointment Scheduling, Payment Processing, Refund Requests.
 
     These filters help you quickly locate a template that fits your specific campaign purpose.
   </Step>
   <Step title=" Explore Template Details">
-    Click on a template to preview its structure.\
+    Click on a template to preview its structure.    \
     The preview shows:
 
     - A flow diagram outlining each step (call prompts, responses, actions).
@@ -56,21 +52,24 @@ Templates provide prebuilt logic for common outbound use cases. Each one include
     For example, the Advanced Outbound AI Appointment Booking template helps businesses like construction or handyman services automatically schedule jobs. It calls the prospect, confirms details, and follows up with SMS or email notifications.
   </Step>
   <Step title="Customize the Template">
-    Once you click **Use this Template**, Phonely loads the flow into the visual editor.
+    Once you click Use this Template, Phonely loads the flow into the visual editor.
 
     Here you can:
 
     - Edit each node (e.g., greeting, data collection, verification).
     - Modify text prompts, logic conditions, or connected integrations.
     - Add or remove actions such as:
-      - **Send SMS**
-      - **Send Email**
-      - **Transfer Call**
-      - **API Request**
-      - **Connect to Google Sheets**
-      - **Run custom code**
 
-    You can also toggle whether the flow is **turned on** at the top left.
+      <Expandable title="Actions">
+        - Send SMS
+        - Send Email
+        - Transfer Call
+        - API Request
+        - Connect to Google Sheets
+        - Run custom code
+      </Expandable>
+
+    You can also toggle whether the flow is turned on at the top left.
   </Step>
   <Step title="Test and Refine the Flow">
     Before publishing:
@@ -87,7 +86,7 @@ Templates provide prebuilt logic for common outbound use cases. Each one include
   </Step>
 </Steps>
 
-## Creating a Call Flow from Scratch
+## Creating Workflows from Scratch
 
 If you prefer full control over the conversation design, you can start from scratch.
 
@@ -96,11 +95,10 @@ If you prefer full control over the conversation design, you can start from scra
 <Steps>
   <Step title="Choose “Start from Scratch”">
     From the **Choose Template** window, click **Start from Scratch**.\
-    You’ll see a blank canvas with a single node: **Make Call**.
+    You’ll see a blank canvas with a single block: **Make Call**.
   </Step>
   <Step title="Add Flow Components">
-    Click the **\+** icon below _Make Call_ to add new elements.\
-    You can select from two main categories:
+    Click the **\+** icon below Make Call to add new elements. You can select from two main categories:
 
     #### **Flow Blocks**
 
@@ -122,19 +120,16 @@ If you prefer full control over the conversation design, you can start from scra
     - **Build a Custom Action** – Create an advanced custom integration.
   </Step>
   <Step title="Connect and Configure">
-    Drag connectors between nodes to define the call logic.\
-    Each node can have conditions.\
-    The visual editor lets you zoom, pan, and adjust spacing for clarity.
+    Drag connectors between nodes to define the call logic. The visual editor lets you zoom, pan, and adjust spacing for clarity.
   </Step>
   <Step title="Review Flow Settings">
     As with templates, configure **Flow Settings** to add supporting context, link relevant documents, and apply agent tone guidelines.
 
-    Drag connectors between nodes to define the call logic. \
-    Each node can have conditions. \
+    Drag connectors between nodes to define the call logic. Each node can have conditions. \
     The visual editor lets you zoom, pan, and adjust spacing for clarity.
   </Step>
   <Step title="Test and Publish">
-    Use **Place Phone Call** to run test interactions.\
+    Use Place Phone Call to run test interactions.\
     Once the logic and tone are verified:
 
     - Click **Publish** to activate the flow.

@@ -1,131 +1,107 @@
 ---
-title: "WorkFlow Builder Controls"
+title: "Toolbar Quick Actions "
 description: "Learn how to navigate, organize, and manage your workflows using the canvas toolset"
 ---
 
-Learn how to move around the Flow canvas, add sticky notes, organize your nodes, export your flow layout, and track your edit history using the tools available in the left and bottom toolbars. These controls make it easy to navigate large flows, adjust positions, and revert changes as you work.                             
+The toolbar provides quick-access actions that help you build, organize, and edit workflows efficiently.
+
+### ➕ Add Block
+
+The **Add Block** button opens the block selector, allowing you to insert new blocks into your workflow. Opens the full block library, grouped by **Live Call** and **Post Call** actions.
+
+Click the ➕ icon, then select the block you want to add (for example: Talk, Collect, Filter, API Request).
 
 <img
-  src="/assets/canvas-controls.png"
-  alt="Canvas Controls Pn"
-  title="Canvas Controls Pn"
-  style={{ width:"66%" }}
+  src="/assets/list-of-available-blocks.png"
+  alt="List Of Available Blocks"
+  title="List Of Available Blocks"
+  style={{ width:"54%" }}
 />
 
-Each tool serves a different purpose, and understanding them will make editing faster and more intuitive.
+### Sticky Note
 
-## Canvas Toolbar
+The Sticky Note button lets you add non-executable notes directly onto the canvas.
 
-The vertical toolbar on the left provides your main navigation and interaction modes.
+- Click the Sticky Note icon to add a note to the canvas.
+- Type directly inside the note to add text.
+- Choose a color to visually categorize notes (for example: logic explanation, TODO, warning).
 
-### 📝 Sticky Notes
+Drag the note anywhere on the canvas.
 
-Sticky Notes allow you to leave visual annotations directly inside your workflow. Use them to document logic, mark TODO items, explain decision points, or collaborate with teammates.
+<img
+  src="/assets/adding-a-new-sticky-note.png"
+  alt="Adding A New Sticky Note"
+  title="Adding A New Sticky Note"
+  style={{ width:"82%" }}
+/>
 
-**How to add one:**
+### Organize Blocks
 
-1. Click the **Note** icon from the left toolbar.
-2. A note appears on the canvas, click inside to type.
-3. Choose a color from the palette to categorize or highlight notes.
-4. Drag to reposition anywhere on the canvas.
+The Auto-Arrange button automatically reorganizes all nodes on the canvas into a cleaner layout.
 
-### 🖐️ **Pan**
+- Repositions blocks to reduce overlaps and crossing connections.
+- Aligns nodes into a readable structure.
+- Preserves all connections and logic exactly as-is.
 
-Use this mode when you want to move the entire canvas instead of moving nodes.
+<img
+  src="/assets/organize-blocks-canvas.png"
+  alt="Organize Blocks Canvas"
+  title="Organize Blocks Canvas"
+  style={{ width:"83%" }}
+/>
 
-When to use it:
+### Replace Invalid Variables
 
-- Navigating large flows.
-- Panning around to find other sections.
-- Reviewing branches without disturbing blocks.
+The replace invalid variables button helps you quickly resolve variables that are no longer valid due to flow changes, deleted blocks, or renamed variables.
 
-**How it works:**\
-Click the hand icon, click and drag anywhere  the whole canvas moves.\
-Nodes stay in place.
+When a variable becomes invalid, it is visually highlighted in red within block fields. Clicking the **Replace Invalid Variables** action opens a dialog that shows which variables are affected and where they are used. From there, you can select a valid replacement variable to update all affected nodes at once.
 
-### ➤ Pointer
+<img
+  src="/assets/how-to-replace-invalid-variable.gif"
+  alt="How To Replace Invalid Variable"
+  title="How To Replace Invalid Variable"
+  style={{ width:"94%" }}
+/>
 
-Pointer mode allows you to select, reposition, and interact with individual nodes.
+You can also trigger this action by clicking directly on an invalid variable inside a block field.
 
-**Use this to:**
+### Keyboard Shortcuts
 
-- Move nodes.
-- Click into blocks to open the editor.
-- Create or remove connections.
-- Highlight multiple nodes (click + shift).
+The Keyboard Shortcuts button opens a reference panel showing all supported keyboard actions.
 
-This is the primary mode for editing your workflow structure.
+- Editing shortcuts (undo, redo, copy, paste, delete).
+- Selection shortcuts (single select, multi-select, box select).
+- Navigation shortcuts (pan, zoom).
 
-### ⬇️ Export
+<img
+  src="/assets/add-keyboard-shortcuts.png"
+  alt="Add Keyboard Shortcuts"
+  title="Add Keyboard Shortcuts"
+  style={{ width:"60%" }}
+/>
 
-This tool lets you export your current canvas view as a PNG image.
+## Change History, Undo, and Redo
 
-Useful for:
-
-Sharing flow diagrams with teams.
-
-- Sharing flow diagrams with team members.
-- Including flow visuals in documentation or presentations.
-- Capturing a snapshot before major edits.
-
-The export captures exactly what you see on the screen.
-
-## 🗂 Auto-Arrange
-
-Automatically arranges your nodes for a cleaner, more readable layout.
-
-**What it does:  **         
-
-- Repositions nodes into a tidy structure.
-- Reduces visual clutter.
-- Helps you see long flows more clearly.
-
-### ↶ Undo
-
-Reverts your most recent action.
-
-Undo supports actions like:
-
-- Moving a node
-- Reconnecting blocks
-- Deleting or adding a connection
-- Adjusting layout position
-
-Great when you make a mistake or want to quickly revert a change.
-
-### ↷ Redo
-
-Restores an action you previously undone.
-
-Useful when:
-
-- You undo too far
-- You want to compare two changes
-- You change your mind mid-edit
+The Flow Builder automatically tracks edits you make to your workflow, giving you confidence to experiment without worrying about losing work. Change History, along with Undo and Redo actions, helps you review recent edits and quickly recover from mistakes.
 
 ### Change History
 
-The Change History window displays a running log of your recent edits, helpful for reviewing what changed, undoing mistakes, or debugging complex workflows.
+The **Change History** panel shows a chronological list of recent updates made to the flow, such as moving blocks, rearranging logic, or editing nodes.
 
-Examples of recorded events include:
+Each entry clearly describes what changed (for example, _“Moved node Wrap Up”_) and includes a timestamp indicating when the action occurred. This makes it easy to understand how the flow evolved over time, especially during active editing sessions or collaborative reviews.
 
-- Node moved.     
-- Nodes connected or disconnected.  
-- Blocks added or deleted.  
-- Layout adjustments.  
+Change History is especially useful when:
 
-This makes it easy to see exactly what changed during editing.       
+- You want to confirm what was modified recently
+- You need to trace why a flow behaves differently than expected
+- You’re reviewing changes before testing or publishing
 
-<img
-  src="/assets/change-history.png"
-  alt="Change History Pn"
-  title="Change History Pn"
-  style={{ width:"88%" }}
-/>
+![Change History Undo Redo 1](/assets/change-history-undo-redo-1.png)
 
-### Version Publishing & Release Notes
+### Undo and Redo
 
-When you publish a new version, Phonely automatically compares the changes against the previous version.       \
-The AI then generates release notes based on the diff, summarizing what’s new or updated.
+The **Undo** and **Redo** buttons let you step backward or forward through recent actions on the canvas.
 
-This gives teams quick insight into what changed, improves collaboration, and keeps workflow history clear and auditable.                
+Undo allows you to instantly reverse your last action, such as moving a block, deleting a node, or adjusting connections. Redo restores an action that was just undone, making it easy to experiment and compare layouts or logic changes.
+
+These controls work in real time and apply only to the current editing session, helping you quickly correct mistakes without disrupting the rest of your workflow.

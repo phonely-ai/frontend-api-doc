@@ -1,0 +1,258 @@
+---
+title: "Performance"
+description: "The performance page helps you understand how your agent is performing over time."
+---
+
+The Performance page gives you a clear view of how your agent is performing over time. It shows how many calls your agent handles and how those calls break down by outcome, topic, end reason, status, call type, and sentiment, so you can quickly understand what’s working and where attention is needed.
+
+<iframe src="https://www.youtube.com/embed/7x4ur9XUaBQ" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
+
+From the left sidebar:
+
+1. Go to the **Analytics** **section**.
+2. Select **Performance**.
+
+At the top right of the page, you can switch between:
+
+- **Performance** – high-level analytics and trends
+- **Call Paths** – a visual view of how calls move through your workflows
+
+![Perfomance View Page Phonely](/assets/perfomance-view-page-phonely.png)
+
+## Page layout
+
+The performance page is organized into a few key sections:
+
+1. **Top controls** – date range selector and agent selector
+2. **Views** – Predefined views such as **overview**, **weekly trends**, and **daily performance** are available by default. These views can be customized. You can also create additional custom views for more tailored analysis.
+3. **Chart controls** – options to change time granularity, measurement type, and grouping
+4. **Filters** – refine data by status, outcome, call type, sentiment, and more
+5. **Charts & breakdowns**
+   - A main performance chart showing call volume over time
+   - Summary charts for call outcomes, call topics, and end call reasons
+
+## Controls
+
+The top controls let you define which data you’re viewing and how it’s organized before diving into the charts.
+
+### Date range selector
+
+Use the date range dropdown to control the time period included in all charts and metrics on the page. **Preset ranges include**: Last 24 hours, Last 7 days, Last 30 days, or Last 90 days
+
+If you need a specific window of time, switch to **Custom** to select exact start and end dates.
+
+### Agent selector
+
+The agent selector lets you choose which agent’s performance data is displayed. Includes a **Search agents…** field for quick lookup. All charts and breakdowns update instantly when you change the selected agent.
+
+![Selecting An Agent Perfomance Tab](/assets/selecting-an-agent-perfomance-tab.png)
+
+### Views
+
+Views control how performance data is grouped, filtered, and visualized on the performance page. They let you shape your analytics workspace around the questions you want to answer, whether that’s monitoring overall efficiency, tracking trends over time, or drilling into specific outcomes.
+
+You can save multiple perfomance views and switch between them instantly, no need to reset filters or charts each time. For example, create and reuse views for:
+
+- Transfer rate
+- Containment rate
+- Custom outcome-based reporting
+
+This makes it easy to move between different performance perspectives and focus on what matters most in the moment.
+
+**To create a new view:**
+
+Click **\+ Add view** to create a new view.
+
+Open the view dropdown (next to a view name) to either rename or delete a view.
+
+![Custom Perfomance Views](/assets/custom-perfomance-views.gif)
+
+This makes it easy to create views tailored to specific use cases, such as tracking daily volume, monitoring outcomes, or reviewing performance during a campaign.
+
+## Filters
+
+Filters allow you to narrow down the calls included in your performance charts, helping you focus on specific scenarios, outcomes, or behaviors.
+
+To access filters, click **Filter** in the top-right corner of the performance chart area.\
+This opens a slide-out panel containing all available filtering options.
+
+The filters panel controls which calls are included in the charts and breakdowns.\
+Each filter group displays:
+
+- A list of available values
+- The number of calls associated with each value
+- A **Select all** option for quick selection
+
+### Available filter categories
+
+The following filter groups are available:
+
+<Expandable title="Available Filters">
+  - Status - Filter by the current call state (for example, Ended).
+  - Call Outcome - Filter by how calls concluded within your workflow.
+  - Call Type - Filter by how the call was initiated (for example, Web Call).
+  - Ended Reason - Filter by who or what ended the call.
+  - Sentiment - Filter calls by detected sentiment (for example, Neutral).
+</Expandable>
+
+<img
+  src="/assets/filters-perfomance-analytics.png"
+  alt="Filters Perfomance Analytics"
+  title="Filters Perfomance Analytics"
+  style={{ width:"53%" }}
+/>
+
+At the bottom of the panel:
+
+- Click **Apply** to update the charts using your selected filters
+- Click **Cancel** to close the panel without making changes
+
+Once applied, all charts and metrics on the performance page reflect your selected filters, allowing for more focused analysis.
+
+## Performance charts
+
+The performance chart is the primary visualization on the page. It shows how call volume changes over time based on your selected configuration.
+
+The chart automatically reflects the currently selected: date range, agent, view, or filters
+
+In the top-left corner of the chart, you’ll see a quick summary that includes:
+
+- **Total calls** within the selected date range
+- **Average calls per day**, calculated across the displayed period
+
+This summary updates dynamically as you adjust filters, views, or grouping options.
+
+### Chart controls
+
+The controls in the top-right corner of the chart allow you to customize how data is displayed.
+
+#### Time granularity
+
+Use the dropdown to control how call data is grouped over time. You can switch between:
+
+- **Daily** -  Displays the average calls per day.
+- **Weekly** - Displays the average calls per week.
+
+![Daily Perfomance View](/assets/daily-perfomance-view.png)
+
+#### Measurement mode
+
+Use the measurement dropdown to switch between:
+
+- **Absolute** – Displays raw call counts
+- **Percentage** – Displays each category as a percentage of total calls
+
+This is useful when comparing relative performance across categories rather than raw volume.
+
+#### Grouping
+
+Click **Group** to split the chart into multiple categories, displayed as stacked or grouped bars instead of a single total.
+
+When grouping is active, the button shows a badge (for example, **Group 3**) indicating how many groups are currently configured.
+
+### Hover tooltips
+
+Hovering over a bar reveals a detailed tooltip that provides deeper insight into that data point, including:
+
+- The specific date
+- Call count for each configured group
+- Percentage contribution of each group
+- Total number of calls for that day/week
+
+![Perfomance Tool Tips](/assets/perfomance-tool-tips.png)
+
+## Grouping with Category Groups
+
+Category groups let you organize related values into custom buckets, making it easier to compare meaningful segments instead of individual data points.
+
+For example, you may want to understand what percentage of your total conversations result in appointments being booked. To do this, you create two groups:
+
+- **Group 1: Appointments Booked**\
+  Includes end reason: appointment booked
+- **Group 2: Total Conversations**\
+  Includes all end reasons
+
+This allows you to directly compare how many calls resulted in appointments versus the total number of calls handled.
+
+To configure grouping:
+
+- Click **Group** in the chart controls.
+- The **Category Groups** modal opens.
+- Click **\+ Add Group** to create a new group.
+
+![Perfomance Groups Phonely](/assets/perfomance-groups-phonely.gif)
+
+Each group represents a reporting bucket. For every group, you can define the following:
+
+#### Group name
+
+Provide a clear, descriptive name for the group. By default, groups are labeled _Group 1_, _Group 2_, and so on, but you can rename them to match your reporting needs (for example, _Successful Calls_, _Escalations_, or _Drop-offs_).
+
+#### Group type
+
+Choose what dimension the group is based on. Available options include: call outcome, call topic, end reason, status, call type, sentiment.
+
+This determines which values are available for selection within the group.
+
+#### Group values
+
+Select the specific values that belong in the group.\
+Each value displays the number of calls associated with it, helping you understand its impact before adding it.
+
+You can include multiple values in a single group. The interface shows how many values are currently selected.
+
+At the bottom of the modal:
+
+- **Apply** updates the chart using your grouping configuration
+- **Cancel** closes the modal without saving changes
+- **Clear All** removes all group selections (when available)
+- Use the **trash icon** next to a group to remove it.
+
+Once applied, grouped data appears directly in the Performance chart, allowing you to compare trends and distributions at a higher level.
+
+## Call Charts
+
+At the bottom of the **Overview** tab, you’ll find a set of breakdown charts that summarize how calls are distributed for the selected date range, agent, and filters.
+
+These charts provide an at-a-glance view of call behavior without needing to drill into individual records.
+
+![Outcomes Topics End Call Reasons](/assets/outcomes-topics-end-call-reasons.png)
+
+### Call Outcomes
+
+This chart shows how calls are categorized by outcome, helping you understand what your agent is successfully accomplishing (for example, completed tasks, clarifications, or hang-ups).
+
+### Call Topics
+
+This chart highlights the topics callers are reaching out about most often, giving you insight into common intents and areas of demand.
+
+### End Call Reasons
+
+This chart breaks down how calls concluded, such as whether the call was ended by the caller, the assistant, or another system condition.
+
+Each breakdown card displays the total number of calls included in that category, making it easy to compare volumes across categories at a glance.
+
+These charts aren’t just visual summaries, they’re fully interactive.
+
+- **Click any slice** of the chart (for example, _customer-ended calls_ or _forwarded calls at 3:00 PM_)
+- A slide-in panel opens from the right
+- You’ll see the **exact calls** behind that data point, including the call summaries, timestamps, durations, and detected topics or outcomes.
+
+This makes it easy to move from **trend \>  evidence \>  action** in seconds.
+
+> Want to compare forwarded calls vs calls that reached the end?\
+> Want to define your own success metric and see how it trends over time?\
+> Done, and you can always click through to review the real conversations behind the numbers.
+
+<img
+  src="/assets/call-details-from-charts.png"
+  alt="Call Details From Charts"
+  title="Call Details From Charts"
+  style={{ width:"83%" }}
+/>
+
+#### Opening a call
+
+Clicking on any call in the list opens the highlights view for that call. This gives you a detailed, end-to-end snapshot of the interaction, including: call summary, caller details, call stats, and call Flow
+
+This makes it easy to move from **high-level trends** to **specific examples** in just a few clicks, so you can validate insights, review edge cases, and quickly understand why a call was successful or where it broke down.

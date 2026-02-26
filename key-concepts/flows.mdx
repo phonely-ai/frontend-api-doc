@@ -1,36 +1,55 @@
 ---
-title: "Using Call Flows"
+title: "Call Flows"
 description: "Build complex conversations, connect with your tools and more with flows"
 ---
 
-Flows are the visual blueprints that define exactly how your AI phone agent behaves, from the greeting, to data collection, to decisions, actions, and the final call outcome.\
-They describe what the agent says, what it asks, what it stores, what APIs it calls, and how the conversation moves forward.                          
+Flows are the visual blueprints that define exactly how your AI phone agent behaves, from the greeting, to data collection, to decisions, actions, and the final call outcome. They describe what the agent says, what it asks, what it stores, what APIs it calls, and how the conversation moves forward.
 
 ## What Are Flows?
 
-Flows are made of several core elements:   
+A Flow is a visual representation of a live phone conversation. It controls the entire lifecycle of a call  from greeting to resolution.
+
+Flows are made of several core elements:
 
 ### 1. Blocks
 
-Each block represents a single action or behavior, such as:
+Blocks are the individual steps in your workflow. Each block performs one clear function, such as:
 
-- Speaking to the caller
-- Asking a question and capturing input
-- Calling an API
-- Making a decision based on conditions
-- Transferring the call
-- Ending the call.   
+- Speaking to the caller (Talk)
+- Collecting information (Collect).
+- Applying logic or conditions (Filter, Time Filter)
+- Calling an external system (API Request, Google Sheets, Code)
+- Transferring or ending a call (Transfer Flow, End Call)
+- Sending messages (Email, SMS)
+- Running post-call actions.
 
-### 2. Connections (Edges)
+Blocks are intentionally focused complex behavior is created by connecting blocks together, not by overloading a single block.
 
-Edges determine which path the call takes next.\
-They can include:
+### 2. Connections & Exit  Conditions
 
-- Simple transitions (always go to the next step)
-- Conditional transitions (go to the next block only if a variable meets a condition)
-- Confirmation requirements
+Connections determine how the conversation moves forward.
 
-### 3. Call Memory (Variables)
+An edge can represent:
+
+- A simple continuation (always go next)
+- A conditional path (only proceed if a condition is met)
+- An exit outcome (success, failure, escalation, etc)
+
+#### Exit condition tooltips
+
+When you hover over a connection handle or edge, Phonely now displays a tooltip explaining which condition is applied, why the edge exists or what will cause the call to take that path.
+
+<Frame>
+  <img
+    src="/assets/edge-tool-tip-message.png"
+    alt="Edge Tool Tip Message"
+    style={{ width:"79%" }}
+  />
+</Frame>
+
+This makes large or complex flows easier to understand and debug at a glance.
+
+### 3. Variables
 
 Variables store information during the call, such as:
 
@@ -38,7 +57,16 @@ Variables store information during the call, such as:
 - API responses.
 - System-generated data (timestamp, outcomes, etc.)
 
-They act as the agent's short-term working memory for the duration of the call.
+<Frame>
+  <img
+    src="/assets/list-of-available-variables.png"
+    alt="List Of Available Variables"
+    title="List Of Available Variables"
+    style={{ width:"65%" }}
+  />
+</Frame>
+
+They act as the agent’s short-term working memory for the duration of the call.
 
 ## Canvas Controls
 
@@ -46,64 +74,82 @@ Phonely includes several canvas tools to help you navigate and organize large wo
 
 You'll find tools for:
 
-- Switching between **Hand Mode** (drag canvas) and **Pointer Mode** (select/move nodes)
-- **Exporting** the flow as a PNG
-- **Organizing nodes** into a cleaner layout
-- **Undo/Redo** actions
-- Viewing your **change history**
+- Add new blocks
+- Using sticky notes
+- Organizing blocks
+- Replacing invalid variables
+- Undo/Redo actions
+- Viewing your change history
 
-See the dedicated [Navigation & Editing Tools in the Flow Builder guide](/key-concepts/flow-canvas-controls) for more details.
+See the dedicated [toolbar quick actions guide](/key-concepts/flow-canvas-controls) for more details.
 
-## Core Concepts
-
-### How to Create a Flow
+## Create a Flow
 
 1. Go to the agent design page.
-1. Click the **\+** to create a new workflow or select an existing workflow and click the Edit button. 
-2. **Add blocks.** Click the **+** button between existing blocks or at the end of a chain to insert a new block.
+1. Click the **\+** to create a new workflow or select an existing workflow and click the **Edit** button.
+2. Click the “**\+**” button between existing blocks or at the end of a chain to insert a new block.
+4. New blocks are **auto-positioned** to keep the layout readable.
 
-<img
-  src="/assets/adding-a-new-block-phonely.png"
-  alt="Adding A New Block Phonely Pn"
-  title="Adding A New Block Phonely Pn"
-  style={{ width:"85%" }}
-/>
+The canvas is where you visually design and manage your workflow.
 
-**3. Configure a Block**
+<Frame>
+  <img
+    src="/assets/how-to-add-a-new-block.png"
+    alt="How To Add A New Block"
+    title="How To Add A New Block"
+    style={{ width:"65%" }}
+  />
+</Frame>
 
-Click any block in your Flow to open its configuration panel.\
-Each block contains different settings, and the options you see will depend on the type of block you're setting up.
+5. Click any block in your flow to open its configuration panel. Each block contains different settings, and the options you see will depend on the type of block you’re setting up.
 
 <Tip>
   Blocks have different setup and configuration requirements. For example, a Talk block includes questions and answers, Collect blocks include questions and variables, while API Request blocks include payload, headers, and response mapping.
 </Tip>
 
-<img
-  src="/assets/how-to-configure-a-block.png"
-  alt="How To Configure A Block Pn"
-  title="How To Configure A Block Pn"
-  style={{ width:"87%" }}
-/>
+<Frame>
+  <img
+    src="/assets/example-configuring-a-collect-block.png"
+    alt="Example Configuring A Collect Block"
+    title="Example Configuring A Collect Block"
+    style={{ width:"87%" }}
+  />
+</Frame>
 
-**4. Connect blocks**\
-When a new block is added, Phonely automatically creates a connection. You can change connections between blocks by hovering over an edge, clicking the **X** button, and then placing your cursor over the output node of one block and dragging the edge to connect to the input node of another block.
+6. Connect blocks. You can change connections between blocks by hovering over an edge clicking the **X** button, and then place your cursor over the output node of one block and drag the edge to connect to the input node of another block.
+7. Save your changes. Every save creates a new version you can review or revert.
+8. Publish when ready. Publishing makes the version live for real callers.
 
-**5. Edit an edge**
+### Copy & Paste Across Tabs
 
-Hover over an edge and click the edit button to open the edit slide-in panel. Here you can:
+You can now select one or multiple blocks. Copy them and then paste them into another open Phonely tab. This allows you to reuse logic across flows and build variations without starting from scratch.
 
-![How To Edit An Edge Pn](/assets/how-to-edit-an-edge.png)
+<Frame>
+  <img
+    src="/assets/selecting-blocks-copy-paste.png"
+    alt="Selecting Blocks Copy Paste"
+    title="Selecting Blocks Copy Paste"
+    style={{ width:"94%" }}
+  />
+</Frame>
 
-- Specify the variables that must exist before allowing passage through this edge. The workflow will only proceed if all specified variables are present.
-- Specify the variables that should be confirmed before allowing passage through this edge. The workflow will only proceed if all specified variables are confirmed.
+### Configure Blocks
 
-**6. Save your changes**\
-Every save creates a **new version** you can review or revert.
+Click any block to open its configuration panel. Each block type exposes only the settings that matter, for example:
 
-**7. Publish when ready**\
-Publishing makes the version live for real callers.
+- Talk blocks → prompts, voice settings
+- Collect blocks → questions, variables, validation
+- API blocks → endpoints, headers, payloads, mappings
 
-## Call variables
+This keeps configuration focused and avoids unnecessary complexity.
+
+### Save, Version, and Publish
+
+Every save creates a new **version**. Versions can be reviewed or reverted.
+
+When publishing, Phonely compares the new version to the previous on and generates release notes summarize what changed.
+
+### Call variables
 
 <AccordionGroup>
   <Accordion title="What are call variables?">
@@ -137,9 +183,7 @@ Variables in Phonely can store different types of data. Choose the appropriate t
 | **duration**   | `string`   | Time spans                                 |
 | **custom**     | `any`      | User-defined schema                        |
 
----
-
-## Call outcome tagging
+### Call outcome tagging
 
 <Info>
   Outcome tags enable analytics, reporting, and automations after the call ends.
@@ -147,21 +191,28 @@ Variables in Phonely can store different types of data. Choose the appropriate t
 
 <Card title="Automatic">
   System applies defaults like `completed`, `failed`, `lead_qualified`, `appointment_schedule,` or `transferred`.
-</Card>
 
-<Card title="Custom">
+  **Custom**
+
   Set custom tags in End Call blocks for downstream workflows.
-</Card>
 
-<Card title="Conditional">
+  **Conditional**
+
   Apply tags only when conditions on variables are met.
 </Card>
+
+<Frame>
+  <img
+    src="/assets/outcome-tagging-end-block.png"
+    alt="Outcome Tagging End Block"
+    title="Outcome Tagging End Block"
+    style={{ width:"89%" }}
+  />
+</Frame>
 
 <Tip>
   Some examples of tags that you can use include: **appointment_scheduled**, **lead_qualified,** **customer_satisfied, escalation_needed, no_show_followup**, etc.
 </Tip>
-
----
 
 ## Testing & best practices
 
@@ -220,87 +271,7 @@ Variables in Phonely can store different types of data. Choose the appropriate t
 
 ## Common patterns & workflows
 
-<Tabs>
-  <Tab title="Customer Service">
-    <Steps>
-      <Step title="Start & welcome">
-        
-      </Step>
-      <Step title="Collect issue details">
-        
-      </Step>
-      <Step title="Filter by issue type">
-        
-      </Step>
-      <Step title="API request for account/order">
-        
-      </Step>
-      <Step title="Provide resolution">
-        
-      </Step>
-      <Step title="Confirm satisfaction">
-        
-      </Step>
-      <Step title="Route to human if needed">
-        
-      </Step>
-      <Step title="End with summary">
-        
-      </Step>
-    </Steps>
-  </Tab>
-  <Tab title="Appointment Booking">
-    <Steps>
-      <Step title="Start & identify caller">
-        
-      </Step>
-      <Step title="Collect preferences (date/time/location)">
-        
-      </Step>
-      <Step title="API: check availability">
-        
-      </Step>
-      <Step title="Confirm details with caller">
-        
-      </Step>
-      <Step title="API: book appointment">
-        
-      </Step>
-      <Step title="Send SMS confirmation">
-        
-      </Step>
-      <Step title="End call">
-        
-      </Step>
-    </Steps>
-  </Tab>
-  <Tab title="Lead Qualification">
-    <Steps>
-      <Step title="Start & introduce purpose">
-        
-      </Step>
-      <Step title="Collect lead information">
-        
-      </Step>
-      <Step title="Assess interest/fit">
-        
-      </Step>
-      <Step title="Filter: qualified vs. nurture">
-        
-      </Step>
-      <Step title="Transfer to sales when qualified">
-        
-      </Step>
-      <Step title="End & follow-up">
-        
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
-
----
-
-# Troubleshooting guide
+## Troubleshooting guide
 
 <AccordionGroup>
   <Accordion title="Flow not responding">
@@ -320,15 +291,9 @@ Variables in Phonely can store different types of data. Choose the appropriate t
   </Accordion>
 </AccordionGroup>
 
----
-
-# Conclusion
+## Conclusion
 
 You now have the essentials to design reliable, natural AI phone experiences:
-
-- Start simple, iterate quickly.
-- Integrate systems as needed.
-- Test rigorously and monitor outcomes.
 
 <Steps>
   <Step title="Start simple">

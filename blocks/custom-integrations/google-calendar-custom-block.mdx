@@ -3,7 +3,7 @@ title: "Custom Google Calendar Block"
 description: "Learn how to setup the entire appointment booking workflow using the custom google calendar block"
 ---
 
-The Custom Google Calendar block lets you set up an entire appointment-booking workflow in just a few clicks. Instead of manually creating multiple blocks and connecting them together, this block bundles the full appointment flow for you:
+The custom Google calendar block lets you set up an entire appointment-booking workflow in just a few clicks. Instead of manually creating multiple blocks and connecting them together, this block bundles the full appointment flow for you:
 
 - **Get Availability**
 - **Select Appointment Slot**
@@ -11,59 +11,48 @@ The Custom Google Calendar block lets you set up an entire appointment-booking w
 
 This makes appointment scheduling fast to set up, even for non-technical users, while still allowing complete customization if needed.
 
-## Add the Custom Google Calendar Block
-
 1. Open your Flow.
 2. Click any **\+** connector to add a new block.
-3. Under **Custom Actions**, select: Google Calendar (Custom Google Calendar).
+3. Under **Custom Actions**, select Google Calendar.
 
 <img
-  src="/assets/custom-google-calendar-block.png"
-  alt="Custom Google Calendar Block Pn"
-  title="Custom Google Calendar Block Pn"
-  style={{ width:"73%" }}
+  src="/assets/google-calendar-custom-actions.png"
+  alt="Google Calendar Custom Actions"
+  title="Google Calendar Custom Actions"
+  style={{ width:"57%" }}
 />
 
 This adds a single block containing the full appointment workflow.
 
 The block includes two output paths:
 
-- **Success:** Appointment successfully created.
+- **Success**: Appointment successfully created.
 - **Fail:** Calendar error, missing info, or scheduling failure.
 
-  <img
-    src="/assets/google-calendar-custom-block.png"
-    alt="Google Calendar Custom Block Pn"
-    title="Google Calendar Custom Block Pn"
-    style={{ width:"88%" }}
-  />
+<img
+  src="/assets/fail-or-succeed-custom-google-calendar-block.png"
+  alt="Fail Or Succeed Custom Google Calendar Block"
+  title="Fail Or Succeed Custom Google Calendar Block"
+  style={{ width:"87%" }}
+/>
 
 ## Connect Your Google Account
 
-1. Click **“Connect to Google Calendar.”**
-   - A pop-up will appear prompting you to link your Google account.
-2. Select the Google account you want to connect.
-   - Choose from the list of accounts or click **“Use another account”** if not listed.
-3. Review the permissions requested and click **“Continue.”**
-   - This authorizes Phonely to securely access your calendar.
+1. Click “**Connect to Google Calendar.**” A pop-up will appear prompting you to link your Google account.
+2. Select the Google account you want to connect. Choose from the list of accounts or click **“Use another account”** if not listed.
+3. Review the permissions requested and click “Continue.” This authorizes Phonely to securely access your calendar.
 4. Once authenticated, Phonely will display **Reconnect** and the Continue button should now be activated.
 
 ## Configure the Custom Google Calendar Block
 
-After selecting the **Custom Google Calendar** action and connecting your Google account, the **Configure** tab allows you to define how appointments should be created. This block comes pre-wired with all logic needed to fetch availability, present options to the caller, and book the selected slot.                                                                                                                                                                                                                                           \
+After selecting the **Custom Google Calendar** action and connecting your Google account, the **Configure** tab allows you to define how appointments should be created. This block comes pre-wired with all logic needed to fetch availability, present options to the caller, and book the selected slot.                                                                                                                                                                                                                               \
 Your job is simply to fill in basic scheduling details.
 
 ### 1. Duration
 
-Define how long each appointment slot should be.
+Define how long each appointment slot should be. For example you can enter: `15m, 30m, or 1h 30m etc`This value determines how each time slot is generated and displayed to the caller.
 
-Examples you can enter: `15m, 30m, or 1h 30m etc`
-
-This value determines how each time slot is generated and displayed to the caller.2. Event Title
-
-Enter the title that should appear on the Google Calendar event.
-
-This is what both you and the caller will see on the calendar invite.
+Enter the title that should appear on the Google Calendar event. This is what both you and the caller will see on the calendar invite.
 
 ### 2. Event Description
 
@@ -73,23 +62,17 @@ Add optional additional details that should appear inside the calendar event.
 
 Set which days and hours callers are allowed to book.
 
-Each day includes:
+<Card title="Scheduling Actions">
+  Day Toggle: Enable or disable booking for that day (e.g., disable weekends).
 
-**Day** **Toggle**: Enable or disable booking for that day (e.g., disable weekends).
+  Time Ranges: For each enabled day, you can define one or more availability windows.
 
-**Time** **Ranges**: For each enabled day, you can define one or more availability windows:
+  Clock icon: quickly adjust time
 
-<Expandable title="Example">
-  **9:00 am to 12:00 pm**
+  **✕**  to  remove the current window
 
-  **1:00 pm to 5:00 pm**
-</Expandable>
-
-Options per day:
-
-- **Clock icon:** quickly adjust time
-- **✕**  to  remove the current window
-- **\+**  to add another window (useful for breaks, split shifts, etc.).
+  **\+**  to add another window
+</Card>
 
 Phonely will automatically:
 
@@ -107,16 +90,14 @@ Click **Done** Your Google Calendar block is now fully configured and ready to h
 
 If you want full control, custom prompts, more conditions, storing the slots, or adjusting logic, you can turn the block into an editable group.
 
-### How to Edit the Block
-
 1. Click the **⋮ menu** on the Google Calendar block.
 2. Select **Edit**.
 
 <img
-  src="/assets/edit-google-calendar-block.png"
-  alt="Edit Google Calendar Block Pn"
-  title="Edit Google Calendar Block Pn"
-  style={{ width:"90%" }}
+  src="/assets/edit-or-delete-the-custom-google-action.png"
+  alt="Edit Or Delete The Custom Google Action"
+  title="Edit Or Delete The Custom Google Action"
+  style={{ width:"93%" }}
 />
 
 The block expands into a full workflow group containing:
@@ -126,12 +107,12 @@ The block expands into a full workflow group containing:
 - Select Appointment Slot
 - Make Appointment
 
-  <img
-    src="/assets/edit-calendar-block.png"
-    alt="Edit Calendar Block Pn"
-    title="Edit Calendar Block Pn"
-    style={{ width:"92%" }}
-  />
+<img
+  src="/assets/expanded-custom-google-calendar-block.png"
+  alt="Expanded Custom Google Calendar Block"
+  title="Expanded Custom Google Calendar Block"
+  style={{ width:"91%" }}
+/>
 
 You can now:
 
@@ -141,9 +122,12 @@ You can now:
 - Change fallback logic (e.g., if no slots available).
 - Add conditions.
 - Save slots for later use.
-- Change how API responses are parsed.
 
-![Custom Google Calendar Block Gi](/assets/custom-google-calendar-block.gif)
+<img
+  src="/assets/custom-google-calendar-block.gif"
+  alt="Custom Google Calendar Block Gi"
+  style={{ width:"98%" }}
+/>
 
 ### Publishing or Reverting Edits
 
@@ -151,4 +135,4 @@ Inside the group’s top-right corner menu you will see:
 
 - **Cancel editing** – revert to the original single block.
 - **Save as Draft** – changes only apply to this Flow.
-- **Publish to Marketplace** – make this integration reusable across your workspace.
+- **Publish to Marketplace** – make this integration reusable across your workspace

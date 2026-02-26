@@ -3,63 +3,130 @@ title: "Send Email"
 description: "Send emails automatically after a call has ended for follow-up communications and lead notification"
 ---
 
-In this tutorial, we'll guide you through the Post Call Send Email Block in Phonely. This block allows your AI agent to automatically gather customer contact information (like name, email, and phone number) during a call and then dispatch an email containing these details, along with other relevant call information, after the call has ended.
+The **Send Email** block allows your Phonely agent to send an email automatically after a call. It’s commonly used to deliver call summaries, confirmations, follow-ups, receipts, or next-step instructions using information collected during the conversation.
 
-The Post-Call Send Email Block serves as a vital tool for automating follow-up communications, lead notification, and ensuring that crucial call details are captured and delivered both to your customer, and back to your team instantly. It is triggered exclusively as a post-call action, offering unique flexibility in how you capture and share information even if the caller doesn't complete the entire workflow.         
+<iframe src="https://www.youtube.com/embed/_j_6r0RBb3I" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
 
-![Post Call Send Email Example](/assets/post-call-send-email-block.png)
+This block supports dynamic variables, multiple recipients, and both plain-text and HTML email content.
 
-## Key Features of the Post-Call Send Email Block
+1. Open **Agent Design** from your Phonely dashboard.
+2. Create a new flow or select an existing one to edit.
+3. Ensure the flow has a **trigger condition** defined (for example, when a caller asks for a callback or appointment).
 
-1. **Automated Email Dispatch**: Sends emails automatically from your Phonely agent to a specified recipient after the call has ended.
-2. **Variable-Rich Content**: Dynamically compose email subject lines and body content by embedding variables from the ongoing conversation (e.g., caller's name, provided email, phone number, call summary, dashboard URL to the call recording).
-3. **Plain Text or HTML**: Choose between sending emails in plain text format or with rich HTML formatting for enhanced presentation.
-4. **Flexible Triggering**:
-   - **Post Call Action**: Triggers the email after the call has ended. Post-call emails are highly valuable as they can be configured to send even if the caller doesn't complete the entire workflow, acting as a preemptive notification.
-5. **Custom Recipient & Sender**: Define the recipient email address and the "From" name that appears on the email.
-6. **Variable Formatting**: Utilizes Phonely's variable formatting capabilities, ensuring captured data (like phone numbers) is presented in a desired style.
+### Gather Required Information
 
-## How to Use the Post Call Send Email Block
+Before sending an email, your workflow should collect the information you want to include.
 
-Implementing the Post Call Send Email Block involves setting up your workflow to gather information, adding the block, and configuring its content and recipient.
+1. Add a **Prompt Block** or **Multi-Ask Block** early in the flow.
+2. Instruct the AI to collect details such as:
+   - Name
+   - Email address
+   - Phone number
+   - Appointment intent or reason for calling
+3. Store these responses as variables with appropriate types (text, email, phone, date, etc.).
 
-**1. Create or Edit a Workflow**
+These variables become available for use inside the Send Email block.
 
-1. Access the Workflows Page from your Phonely Dashboard.
-2. Create a New Flow, or select an existing one to edit.
-3. Ensure a Trigger Condition is Set: Define a trigger for your workflow (e.g., "when someone asks for a callback" or "wants to speak to a person"). This ensures the flow initiates under specific circumstances.
+## Configure the Send Email Block
 
-**2. Gather Necessary Information (e.g., using a Prompt Block)**
+### To (Required)
 
-1. Add a Prompt Block (or a Multi-Ask Block) early in your workflow.
-2. Instruct the AI to gather specific contact information that you want to include in the email (e.g., name, email address, phone number).
-3. Define Variables: Ensure you define variables within your Prompt Block (e.g., caller_name, caller_email, caller_phone_number) and specify their types.
+Specify one or more recipients.
 
-**3. Adding the Post-Call Email block**
+You can:
 
-1. In your workflow, hover over the node on the right of any block, click the '+' where it says 'add post call action', and select 'Send Email Message' (you'll see a Gmail logo, but it sends to any valid email address).
-2. This connection will appear to the right of your block, as a dotted line. This means you can connect it anywhere in your flow, and the email will be sent automatically after the call, even if the caller doesn't complete the entire workflow path, ensuring preemptive notification.
+- Enter a static email address (e.g. `support@company.com`)
+- Insert a variable (e.g. **Caller Email**)
+- Add multiple recipients using **Add Email**
 
-**4. Configure the Email Content**
+<img
+  src="/assets/send-email-post-call.png"
+  alt="Send Email Post Call"
+  title="Send Email Post Call"
+  style={{ width:"90%" }}
+/>
 
-1. Click on the Send Email Block to open its settings.
-2. Format: Choose between "Plain Text" or "HTML" format for your email content.
-3. Compose Subject & Body: Enter your desired subject line and message content.
+This allows you to notify either caller, internal teams, or both simultaneously.
 
-**Dynamic Content**
+### Subject (Required)
 
-Crucially, you can embed any variables you have previously stored in your workflow. For example:
+Enter the email subject line.
 
-- **Subject**: New call from [caller_name] - Callback Requested
-- **Body**:
-  - New call from: [caller_name]
-  - Email: [caller_email]
-  - Phone Number: [caller_phone_number]
-  - Summary of Conversation: [summary] (Phonely can capture a live summary)
-  - Link to Call: [dashboard_url] (Provides a direct link to the call recording in your Phonely dashboard).
+Supports:
 
-4. Set Email Recipient: Specify the email address to which this automated email should be sent. If you want to send this to your team, you can send to a static email address. If you want to send this to your customer, you can select the email variable that was earlier defined in the call.
-5. Set From Name: Define the name that will appear as the sender of the email.
+- Static text
+- Variables for personalization
+
+### Body (Required)
+
+Define the email content.
+
+You can:
+
+- Write plain text or formatted content
+- Embed variables captured during the call
+- Include AI-generated summaries or dashboard links
+
+## Using Variables in Email Fields
+
+All fields in the Send Email block support variables.
+
+You can insert variables by:
+
+- Typing `@` inside any input field
+- Selecting from the **Available Variables** panel
+
+Available variables include:
+
+- Custom variables you defined
+- Auto-Gather variables (e.g. Caller Email, Appointment Time)
+- Post-call variables such as summaries or call metadata
+
+Variable formatting ensures data like phone numbers, dates, and emails are consistently structured.
+
+## Advanced Settings
+
+Expand **Advanced Settings** to control formatting and sender details.
+
+### Body Type
+
+Choose how the email body is rendered:
+
+- **Plain Text**\
+  Best for simple notifications and internal alerts.
+- **HTML**\
+  Recommended for:
+  - Structured summaries
+  - Branded emails
+  - Rich layouts and links
+
+<img
+  src="/assets/send-email-post-call-1.png"
+  alt="Send Email Post Call 1"
+  title="Send Email Post Call 1"
+  style={{ width:"85%" }}
+/>
+
+### From Name
+
+Set the sender name shown in the recipient’s inbox. If left blank, it will default to 'Phonely
+
+## Saving and Continuing
+
+Once all required fields are completed:
+
+- Click **Continue** to move to the Test step
+- Any missing required fields will be flagged before proceeding
+
+## Testing the Send Email Block
+
+The **Test** tab sends a real email using your current configuration.
+
+During testing, Phonely display the recipient email, from name, subject, body type, rendered email content.
+
+A success message confirms delivery.
+
+> Testing sends a real email. You can skip this step if you’re confident in your setup.
 
 ## Example Use Case
 
@@ -70,17 +137,16 @@ Here's an example workflow to illustrate the process of using the Post Call Send
    - Instruct AI to: "Get the caller's name, email, and best callback phone number. Inform them that an appointment scheduling link will be sent to their email"
    - Store variables: customer_name (text), customer_email (email), callback_phone (phone).
 3. **Action 2 (Post Call Send Email Block)**:
-   - Recipient: [email@example.com](mailto:email@example.com) (or select customer_email variable for customer notifications).
-   - From Name: Phonely AI Agent.
-   - Subject: Appointment Scheduling for [customer_name]
-   - Body:
-     - Customer Name: [customer_name]
-     - Email: [customer_email]
-     - Callback Phone: [callback_phone]
-     - Conversation Summary: [summary]
-     - Appointment Scheduling Link: [example@cal.com](mailto:example@cal.com)
-4. **Action 3 (End Call Block)**: Graciously end the call after collecting information and dispatching the email.
+   1. Recipient: [email@example.com](mailto:email@example.com) (or select customer_email variable for customer notifications).
+   2. From Name: Phonely AI Agent.
+   3. Subject: Appointment Scheduling for [customer_name]
+   4. Body:
+      - Customer Name: [customer_name]
+      - Email: [customer_email]
+      - Callback Phone: [callback_phone]
+      - Conversation Summary: [summary]
+      - Appointment Scheduling Link: [example@cal.com](mailto:example@cal.com)
 
-## Conclusion
+Conclusion
 
 The Post Call Send Email Block in Phonely is an incredibly efficient feature for automating lead capture, follow-up notifications, and essential data delivery to your team. By strategically integrating this block into your workflows, you can ensure that no critical information is missed, even when live agents are unavailable, significantly enhancing your business's responsiveness and customer experience.

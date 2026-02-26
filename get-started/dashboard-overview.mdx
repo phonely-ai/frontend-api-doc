@@ -1,30 +1,27 @@
 ---
-title: "Dashboard Overview"
+title: "Dashboard"
 description: "Learn how to use the Dashboard to monitor your agent performance and customer interactions"
 ---
 
-The **Phonely Dashboard** is where you monitor how your agents are performing, understand your call activity, and extract insights about your conversations. It provides real-time and historical analytics so you can evaluate efficiency, identify patterns, and improve your overall communication strategy.
+The dashboard is where you monitor how your agents are performing, understand your call activity, and extract insights about your conversations. It provides real-time and historical analytics so you can evaluate efficiency, identify patterns, and improve your overall communication strategy.
 
 Every chart, metric, and filter on the dashboard is designed to help you answer key questions such as:
 
-- How many calls are we handling?
-- When are we busiest?
-- What are people calling about?
-- How well are our agents and flows performing?
-- What outcomes and sentiments are our calls producing?
+<Expandable title="Content" defaultOpen="true">
+  - How many calls are we handling?
+  - When are we busiest?
+  - What are people calling about?
+  - How well are our agents and flows performing?
+  - What outcomes and sentiments are our calls producing?
+</Expandable>
 
-This guide walks you through every part of the dashboard, what each metric means, how filters work, and how to interpret the insights you see.
+At the top of your dashboard, you’ll find  controls that determine what data you’re viewing. These filters ensure your analytics remain relevant and focused on specific agents, date ranges, or metrics.
 
-## Overview and Controls
+### Select an Agent
 
-At the top of your dashboard, you’ll find global controls that determine what data you’re viewing. These filters ensure your analytics remain relevant and focused on specific agents, date ranges, or metrics.
+You can view performance data for one or multiple agents simultaneously. Each agent represents a distinct AI assistant with its own phone number, and workflows.
 
-### Selecting Agents
-
-You can view performance data for one or multiple agents simultaneously.\
-Each agent represents a distinct AI assistant with its own phone number, workflows, and call flows.
-
-To select agents:
+To select an agent:
 
 1. Click the **Select Agents** dropdown.
 2. Choose the agents you’d like to include.
@@ -32,11 +29,11 @@ To select agents:
 
 This is particularly useful when comparing multiple agents.
 
-![Dashboard Overview Pn](/assets/dashboard-overview.png)
+![Select Agent Dashboard](/assets/select-agent-dashboard.png)
 
-### Choosing a Date Range
+### Choose a Date Range
 
-Under your overview section, you’ll see a **date picker** that lets you define the time period for your analytics.
+Under your overview section, you’ll see a date picker that lets you define the time period for your analytics.
 
 You can choose from:
 
@@ -47,77 +44,70 @@ Once you click **Apply**, all graphs and data will refresh to match the selected
 This flexibility helps you analyze trends over time, compare performance across weeks, or investigate specific events (e.g., a new campaign launch).
 
 <img
-  src="/assets/date-range-filter.png"
-  alt="Date Range Filter Pn"
-  style={{ width:"95%" }}
+  src="/assets/date-range-filter-dashboard.png"
+  alt="Date Range Filter Dashboard"
+  title="Date Range Filter Dashboard"
+  style={{ width:"68%" }}
 />
 
-### Filtering Metrics
+### Filter Categories
 
 Some widgets on the dashboard have their own filters, allowing you to focus on certain metrics or categories within the chart. For instance, in today's metrics section under the second card, you can filter by _Total Calls_, _Total Duration_, _Total Actions, Call Topics, and Call Out Comes_.
 
-<img
-  src="/assets/todays-metrics-dashboard.png"
-  alt="Todays Metrics Dashboard Pn"
-  style={{ width:"97%" }}
-/>
+![Total Calls Duration And Actions 1](/assets/total-calls-duration-and-actions-1.png)
 
 ## Today’s Metrics
 
-The **Today** section of your dashboard gives you a quick, real-time snapshot of daily call activity. It’s designed for teams that need an immediate view of what’s happening now, without filtering through larger time ranges.
+The today section of your dashboard gives you a quick, real-time snapshot of daily call activity. It’s designed for teams that need an immediate view of what’s happening now, without filtering through larger time ranges.
 
 This view is refreshed continuously throughout the day and includes only calls that occurred within the current calendar day.
 
 ### Call Volume
 
-The **Call Volume** card displays the total number of calls handled by your agents today.\
+The call volume section displays the total number of calls handled by your agents today.\
 It breaks down into:
 
-- **Inbound Calls:** Calls received by your agents.
-- **Outbound Calls:** Calls initiated by your agents (e.g., through outbound campaigns or redial flows).
+- **Inbound calls:** Calls received by your agents.
+- **Outbound calls:** Calls initiated by your agents (e.g., through outbound campaigns or redial flows).
 
-![Todays Metrics Phonely Pn](/assets/todays-metrics-phonely.png)
+![New Call Volume](/assets/new-call-volume.png)
 
-The graph helps you visualize call trends as the day progresses.\
-For example, a gradual rise in the inbound curve means your team is receiving calls consistently, while spikes indicate busy periods.
+The graph helps you visualize call trends as the day progresses. For example, a gradual rise in the inbound curve means your team is receiving calls consistently, while spikes indicate busy periods.
 
-### Call Insights - **Call Topics , Outcomes & Total Calls, Actions and Duration**
+### Call Insights
 
-This card provides a snapshot of today’s call metrics, helping you understand what’s happening in real time.
+This card provides a snapshot of today’s call metrics, helping you understand what’s happening in real time. This card can display one of several metrics, controlled by the dropdown menu in the card header. Click the chevron and choose what you want to see:
 
-This card can display one of several metrics, controlled by the dropdown menu in the card header. Click the chevron and choose what you want to see:
+- **Total calls** – Total number of calls in the selected period.
+- **Total actions** – Total number of actions based on user intent.
+- **Total duration** – Aggregate talk time for the selected period.
 
-- **Call Outcomes** – Trend of resolved, missed, transferred, voicemail, etc.
-- **Call Topics** – Count of categorized topics (e.g., _Appointment Request_, _Billing Inquiry_, _Support Ticket_) detected by Phonely’s AI from call transcripts.
-- **Total Calls** – Total number of calls in the last 24 hours.
-- **Total Actions** – Number of in-flow actions performed by agents/flows (e.g., send SMS/email, transfer, API call).
-- **Total Duration** – Aggregate talk time for the selected period.
+![Total Calls Topics And Actions 1](/assets/total-calls-topics-and-actions-1.png)
 
 ## Periodic Metrics
 
 ### Call Volume
 
-The **Call Volume** chart tracks the total number of calls made and received by Phonely during the selected period. It distinguishes between:
+The call volume chart tracks the total number of calls made and received by Phonely during the selected period. It distinguishes between:
 
 - **Inbound calls** (received by your agents) and
 - **Outbound calls** (initiated by your agents).
 
 You can use this visualization to identify trends and patterns in your call traffic:
 
-- A sudden drop in inbound calls might indicate routing issues or downtime.
-- A sudden drop in outbound calls might indicate routing issues or downtime.
+- A sudden drop in inbound or outbound calls might indicate routing issues or downtime.
 - A sharp increase may reflect a successful campaign or seasonal surge.
 
-![Call Volume Metrics Phonely Pn](/assets/call-volume-metrics-phonely.png)
+![New Call Volume](/assets/new-call-volume.png)
 
 By analyzing call volume over time, you can make informed decisions about staffing, flow optimization, and scaling your agents.
 
 ### Peak Times
 
-The **Peak Times** section identifies when most calls occur during the day.\
+The peak times section identifies when most calls occur during the day.\
 Each bar represents an hour block, helping you pinpoint your busiest hours.
 
-![Peak Times Metric Phonely Pn](/assets/peak-times-metric-phonely.png)
+![New Peak Times](/images/new-peak-times.png)
 
 This information is essential for:
 
@@ -127,66 +117,47 @@ This information is essential for:
 
 For example, if your calls peak between 3 PM and 5 PM, you can plan automated follow-ups or redials during quieter hours.
 
+### Usage & Overage
+
+The usage section shows a real-time summary of how many call minutes your workspace has used and how that usage impacts billing.
+
+It displays your current usage, a forecasted month-end estimate, and your current month spend at a glance. You’ll also see an estimate of cost savings compared to human agents, helping quantify the value of automation.
+
+On the right, the current billing cycle card breaks down your active billing period, total minutes used, projected usage, and any overage minutes or costs. If you remain within your plan limits, overage values stay at zero.
+
+![Phonely Usage](/images/phonely-usage.png)
+
 ### End Call Reasons
 
-The **End Call Reasons** widget automatically categorizes why each call ended.\
+The end call reasons widget automatically categorizes why each call ended.\
 Common end reasons include:
 
-- **Customer Ended** – The caller hung up intentionally.
-- **Silence Timeout** – The call ended because there was no activity for a set duration.
-- **Agent Ended** – Phonely or your AI flow ended the call based on logic or timeout.
-- **Transfer or Voicemail** – The call was redirected or logged to voicemail.
+- **Customer ended** – The caller hung up intentionally.
+- **Silence timeout** – The call ended because there was no activity for a set duration.
+- **Agent ended** – Phonely or your AI flow ended the call based on logic or timeout.
+- **Transfer or voicemail** – The call was redirected or logged to voicemail.
 
-<img
-  src="/assets/end-call-reasons-metric.png"
-  alt="End Call Reasons Metric Pn"
-  title="End Call Reasons Metric Pn"
-  style={{ width:"90%" }}
-/>
+![End Call Reasons Dashboard](/assets/end-call-reasons-dashboard.png)
 
-Understanding end call reasons helps you identify friction points. If you notice frequent timeouts, your script or flow may need adjustments. If many customers hang up early, consider revising your greeting or routing logic.
-
-### Call Topics
-
-The **Call Topics** section organizes calls by detected intent or purpose.\
-Phonely uses natural language understanding to interpret what each call was about.
-
-<img
-  src="/assets/call-topics-metrics-phonely.png"
-  alt="Call Topics Metrics Phonely Pn"
-  title="Call Topics Metrics Phonely Pn"
-  style={{ width:"89%" }}
-/>
-
-These insights help you:
-
-- Understand what’s driving your call volume.
-- See how well your routing or automation aligns with real customer needs.
-- Identify new opportunities for automation or FAQs.
-
-For instance, if “Order Status” becomes your most frequent topic, you might introduce a dedicated flow or quick-response feature to handle it automatically.
+Understanding end call reasons helps you identify friction points. If you notice frequent timeouts, your script or flow may need adjustments. If many customers hang up early, consider revising your routing logic.
 
 ### Call Actions
 
-**Call Actions** represent the most common steps or automations your agents triggered during calls.\
+Call actions represent the most common steps or automations your agents triggered during calls.\
 These actions could include:
 
 - Sending follow-up emails or SMS messages.
 - Creating or updating records in connected systems (like Google Sheets or Zapier).
 - Running code blocks or transferring calls.
 
-<img
-  src="/assets/call-actions.png"
-  alt="Call Actions Pn"
-  style={{ width:"87%" }}
-/>
+![Top Actions In The Dashboard](/assets/top-actions-in-the-dashboard.png)
 
 This section shows which automations are most active and how often they occur.\
 It’s an excellent indicator of workflow effectiveness, if a critical action rarely appears, it might mean users aren’t reaching that stage or an integration isn’t firing properly.
 
 ### Call Outcomes
 
-**Call Outcomes** summarize what happened at the end of each call.\
+Call outcomes summarize what happened at the end of each call.\
 Unlike “End Call Reasons” (which describe how the call technically ended), outcomes describe the business result.
 
 Examples of call outcomes:
@@ -197,20 +168,18 @@ Examples of call outcomes:
 - Lead qualified
 - No answer
 
-These outcomes are vital for measuring success. They help teams assess whether conversations are achieving their goals and whether call flows are converting effectively.\
-Monitoring trends in call outcomes also helps you evaluate changes over time - for example, after tweaking scripts or updating your AI prompts.
-
 ### Call Sentiment
 
-The **Call Sentiment** section analyzes caller emotions and tone throughout the conversation.\
-Each call is categorized as **Positive**, **Neutral**, or **Negative** based on the caller’s language and sentiment.
+The call sentiment section analyzes caller emotions and tone throughout the conversation. Each call is categorized as Positive, Neutral, or Negative based on the caller’s language and sentiment.
 
 This insight helps you gauge customer satisfaction without manually reviewing transcripts.\
-If you notice a rise in negative sentiment, it could indicate a confusing workflow, an unhelpful agent tone, or recurring product issues. On the other hand, consistently positive sentiments is a strong indicator that your AI agent are providing effective support.
+If you notice a rise in negative sentiment, it could indicate a confusing workflow, an unhelpful agent tone, or recurring product issues.
+
+On the other hand, consistently positive sentiments is a strong indicator that your AI agent are providing effective support.
 
 ### Agent Breakdown
 
-The **Agent Breakdown** chart compares performance across all active agents.\
+The agent breakdown chart compares performance across all active agents.\
 You can toggle between several views:
 
 - **Inbound** – Total received calls per agent.
@@ -220,10 +189,13 @@ You can toggle between several views:
 
 This visualization helps identify high-performing agents or those handling the largest share of traffic.
 
-## Exporting Reports
+## Export Reports
 
-Once you’ve applied your desired filters and date range, click **Export Report** in the top-right corner.\
-This generates a detailed report you can share with your team or management.\
-Exports are ideal for weekly reviews, quarterly reports, or comparing campaign performance.
+Once you’ve applied your desired filters and date range, click Export Report in the top-right corner. This generates a CSV file with details you can use for reporting and analytics.
 
-![Export Dashboard Report Pn](/assets/export-dashboard-report.png)
+<img
+  src="/assets/dashboard-report-phonely.png"
+  alt="Dashboard Report Phonely"
+  title="Dashboard Report Phonely"
+  style={{ width:"88%" }}
+/>

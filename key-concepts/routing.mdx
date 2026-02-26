@@ -1,17 +1,78 @@
 ---
-title: "Call Routing"
+title: "Smart Call Routing"
 description: "Learn how to configure call routing, transfer, and escalation in Phonely to combine AI automation with reliable human handoffs."
 ---
 
-Most calls can be automated with Phonely’s AI agents, but no automation system covers every scenario. A frustrated customer, a request for a specific team member, or a policy that requires human sign-off are all situations where escalation is necessary. Phonely makes it simple to design call flows that are both efficient and flexible: the AI handles routine calls while ensuring humans are available when needed.
+Call routing in Phonely controls where a conversation goes next, whether that means escalating to a human, moving the caller to a different conversational path, or gracefully handling situations where no one is available.
+
+Unlike traditional IVR systems that rely on rigid menus and deep branching trees, Phonely uses intent-aware routing. The agent continuously understands what the caller wants and dynamically routes the call without breaking the conversation.
+
+This makes routing feel natural to callers while keeping workflows clean and easy to maintain.
+
+<iframe src="https://www.youtube.com/embed/fiOGivt92EA" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
+
+## Why Routing Matters (Even With AI)
+
+While Phonely can automate the majority of conversations, real-world use cases often require human intervention or specialized handling, such as:
+
+- A customer asking about something the AI hasn’t been trained on
+- A frustrated caller requesting a human
+- A sales lead needing a live handoff
+- A support request that belongs to a specific team
+- Calls that should behave differently based on time of day
+
+Routing ensures the right outcome happens at the right moment, without forcing callers through menus or restarting calls.
 
 <Info>
   Escalation is not a fallback of last resort. It is a deliberate part of your call design, ensuring every customer journey has a safe path to resolution.
 </Info>
 
-## Transfer Types
+## How Routing Works
 
-Phonely supports two kinds of transfers, both available through the **Transfer Call** block.
+Routing in Phonely is built around **workflows (flows)**. A call always starts in one flow, but it doesn’t have to stay there. Depending on what the caller says, what the AI detects, or what conditions you define, Phonely can:
+
+- Listens continuously to the conversation
+- Detects intent, sentiment, and keywords
+- Decides when a routing action is needed
+- Executes the routing seamlessly
+- Fall back gracefully if no one is available
+
+This makes routing both **predictable** and **adaptive**, without locking you into rigid IVR-style menus
+
+From the caller’s perspective, it feels like a single uninterrupted conversation, even when the system is switching paths or escalating behind the scenes.
+
+## Routing Outcomes in Phonely
+
+At a high level, routing in Phonely leads to one of two outcomes:
+
+1. **The call is routed to a human or external destination**
+2. **The call is routed to another internal workflow**
+
+Both happen without ending the call, and both are handled using purpose-built routing blocks that centralize logic instead of spreading it across large flows.
+
+## Transfer Calls
+
+When a call needs to be handed off to a person or department, Phonely performs a live call transfer.
+
+This routing approach is commonly used for:
+
+- Customer support escalation
+- Sales handoffs
+- Requests for specific people
+- Situations where the AI determines human help is required
+
+Phonely does more than simply forward the call. It can:
+
+- Decide _who_ should receive the call based on what the caller says
+- Try multiple destinations automatically if someone doesn’t answer
+- Control whether the handoff is immediate or introduced with context
+- Manage what the caller hears while waiting
+- Detect whether a person, voicemail, or IVR answered
+- Gracefully recover if no one is available
+
+All of this happens within a single routing action, instead of requiring complex branching logic.
+
+Phonely supports two kinds of transfers, both available through the [Transfer Call](/key-concepts/blocks/live-call-actions/transfer-flow-new) block.
 
 <CardGroup cols={2}>
   <Card title="Cold Transfer" icon="phone-off">
@@ -30,59 +91,112 @@ Phonely supports two kinds of transfers, both available through the **Transfer C
   </Card>
 </CardGroup>
 
+## Transfer Flows
+
+Not all routing leads to a human. In many scenarios, the correct outcome is to move the caller to a different conversational flow using [transfer flow](/blocks/live-call-actions/transfer-flow-new), such as:
+
+- Switching from appointment scheduling to billing workflow
+- Moving from general inquiries to technical support workflows
+- Escalating from self-service to a structured escalation workflow
+
+In these cases, Phonely routes the caller between workflows, while keeping the call active and the conversation coherent.
+
+This allows teams to design modular, reusable flows that can be shared across agents and updated in one place, without duplicating logic.
+
 ## Global Transfer Flows
 
-Transfers don’t always happen in predictable places. A caller may ask for support halfway through an appointment booking flow, or the AI may detect frustration at any point. For these cases, Phonely supports **Global Flows**.
+Transfers don’t always happen in predictable places. A caller may ask for support halfway through an appointment booking flow, or the AI may detect frustration at any point. For these cases, Phonely supports global flows.
 
-<AccordionGroup>
-  <Accordion title="When to use Global Flows">
-    Use a Global Flow when you want escalation to be available at any time, regardless of where the caller is in the conversation.
-  </Accordion>
-  <Accordion title="How to configure">
-    Create a new flow, mark it as global, and define the triggers that should cause calls to jump into it. Add transfer logic inside that flow just as you would in any other.
-  </Accordion>
-</AccordionGroup>
+A global flow can be triggered at any point during a conversation, regardless of which flow the caller is currently in. When a global condition is met, Phonely immediately exits the current flow and routes into the global one.
 
-## Adding Conditions
+This is ideal for escalation scenarios, such as:
 
-Transfers can be made conditional. The most common example is business hours: you may want to route calls to your support team between 9 AM and 9 PM, but after hours the AI should handle them differently.
+- The caller asks to speak to a human
+- The caller sounds frustrated
+- The caller asks for support, sales, or a specific person
 
-<Steps>
-  <Step title="Add a Time Filter block">
-    Place the block before your Transfer Call block in the flow.
-  </Step>
-  <Step title="Set your business hours">
-    Define the days and hours when transfers are allowed.
-  </Step>
-  <Step title="Configure fallback">
-    Outside of business hours, route the caller to a Talk block that explains the team is unavailable and offers to take a message.
-  </Step>
-</Steps>
+For example, if a caller says:
 
-This ensures that transfers only occur when someone is available to answer. Similar conditions can be applied to frustration detection, caller intent, or other business rules.
+> “I want to talk to support”\
+> or\
+> “This is frustrating, can I speak to someone?”
 
-## Example Flow
+Phonely can instantly route them into a **Transfer Flow**, even if they’re mid-conversation in another workflow. [Learn how you can configure global routing here](/blocks/flow-blocks/start-flow).
 
-Here’s how escalation can be built into an appointment scheduling flow:
+## Intelligent Decision-Making During Routing
 
-<Tabs>
-  <Tab title="Step 1: Confirm intent">
-    Use a Talk block to ask the caller who they want to speak with - for example, customer support, technical support, or a specific person.
-  </Tab>
-  <Tab title="Step 2: Route by choice">
-    Create a Transfer Call block for each option. Assign the correct phone number to each destination.
-  </Tab>
-  <Tab title="Step 3: Handle with care">
-    Configure each Transfer Call block as a warm transfer so the caller is introduced before being connected.
-  </Tab>
-  <Tab title="Step 4: Protect against failure">
-    Enable voicemail detection. Add a Talk block after failed transfers to let the caller know no one is available and log their message.
-  </Tab>
-</Tabs>
+A key difference between Phonely and traditional systems is **how routing decisions are made**.
+
+Routing decisions are not based on hard-coded branches. Instead, they are driven by:
+
+- Natural language conditions (described in plain text)
+- AI interpretation of caller intent
+- Clarifying questions when intent is ambiguous
+- Global routing rules applied consistently across workflows
+
+This allows routing logic to evolve naturally as your business grows, without requiring constant rewiring of flows.
+
+## Handling Failure, Wait Time, and Edge Cases
+
+Routing isn’t just about success paths, it’s also about handling what happens when things don’t go as planned.
+
+Phonely routing supports:
+
+- Automatic retries when a destination doesn’t answer
+- Intelligent fallbacks when no one is available
+- Custom messaging during wait time
+- Detection of voicemail vs real humans
+- Safe exits back into the conversation if a transfer fails
+
+The caller is never dropped into silence or dead ends. If a route fails, the agent continues the conversation naturally and guides the caller to the next best outcome.
+
+## Routing Based on Time and Availability
+
+Sometimes routing should only happen during specific times.
+
+For example:
+
+- Transfer calls only between 9:00 AM and 9:00 PM
+- Handle after-hours calls differently
+
+To do this, use a [Time Filter](/blocks/flow-blocks/time-filter) block.
+
+The Time Filter lets you define:
+
+- Days of the week
+- Time windows
+- Timezone-aware behavior
+
+Inside business hours, you can transfer the call. Outside business hours, you can:
+
+- Inform the caller no one is available
+- Take a message
+- Send an email or Slack notification
+- Schedule a callback
+
+This keeps routing realistic and avoids sending callers to unanswered lines.
+
+## Handling Transfer Failures Gracefully
+
+Not every transfer succeeds, and Phonely lets you plan for that. Within the [Transfer Call](/blocks/live-call-actions/new-transfer-call) block, you can define what happens if:
+
+- No one answers
+- Voicemail is detected
+- The transfer fails
+- An IVR system is reached
+
+In these cases, you can route the call to:
+
+- A Talk block to explain the situation
+- A Collect block to take a message
+- An Email or Slack notification
+- A callback or follow-up workflow
+
+This ensures the caller is never left hanging.
 
 ## Advanced Options
 
-Transfer Call blocks come with additional controls that improve reliability.
+Transfer call blocks come with additional controls that improve reliability.
 
 | **Option**              | **Type**  | **Description**                                                                                                       |
 | :---------------------- | :-------- | :-------------------------------------------------------------------------------------------------------------------- |
@@ -105,7 +219,7 @@ Phonely’s transfer features are flexible, but good design makes them effective
   Failing to set fallbacks can result in dropped calls. Always define what should happen if a transfer does not complete.
 </Warning>
 
-Call routing, transfers, and escalation transform AI automation from a closed system into a flexible, human-aware experience. Cold transfers are fast, warm transfers are professional, Global Flows provide responsiveness at any point, and Time Filters give you control over when transfers should occur. By layering in advanced options such as voicemail detection and transfer failure handling, you can design flows that never leave a caller unsupported.
+Call routing, transfers, and escalation transform AI automation from a closed system into a flexible, human-aware experience. Cold transfers are fast, warm transfers are professional, Global Flows provide responsiveness at any point, and time filters give you control over when transfers should occur. By layering in advanced options such as voicemail detection and transfer failure handling, you can design flows that never leave a caller unsupported.
 
 <Info>
   For more detail, see our guides on [Warm Transfers](/blocks/warm-transfer) and [Time Filters](/blocks/time-filter).

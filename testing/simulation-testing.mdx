@@ -1,5 +1,5 @@
 ---
-title: "Simulation Testing in Phonely"
+title: "Simulation Testing "
 description: "Description of your new file."
 ---
 
@@ -20,7 +20,7 @@ Simulation Testing helps you:
 - Preview how your agent handles different tones and behaviors.
 - Ensure your agent behaves consistently after updates.
 
-Unlike A/B tests, simulation tests **do not use real customers** and **do not affect live call routing**.
+Simulation tests do not use real customers and do not affect live call routing.
 
 ## Where to Access Simulation Testing
 
@@ -29,13 +29,13 @@ To open the simulation workspace:
 1. Go to your **Phonely Dashboard**.
 2. Click the **Simulation Testing** tab at the top (beside A/B Testing).
 3. You will see two sub-tabs:
-   - **Test Cases** – Create and configure simulations.
-   - **Results** – Review past simulation outputs.
+   - **Test Cases** – Create and configure simulations.        
+   - **Results** – Review past simulation outputs.    
 
 The main screen shows:
 
-- **Test Cases** at the top.
-- **Data Sources** (optional call recordings) at the bottom.
+- Test Cases at the top.
+- Data Sources (optional call recordings) at the bottom.
 
 ![Simulated Testing Pn](/assets/simulated-testing.png)
 
@@ -47,9 +47,13 @@ Clicking Config opens the editor, where you can update the case name, descriptio
 
 The **Run** button immediately triggers the simulation using the settings you’ve configured.
 
-![Test Cases Overview Phonely Pn](/assets/test-cases-overview-phonely.png)
+<img
+  src="/assets/test-main-page.png"
+  alt="Test Main Page"
+  style={{ width:"95%" }}
+/>
 
-If you want to remove a test case entirely, click the ellipsis\*\*(⋮)\*\*  in the top-right corner of the card, this reveals a **Delete** option that lets you safely remove test cases you no longer need.
+If you want to remove a test case entirely, click the ellipsis (⋮)  in the top-right corner of the card, this reveals a **Delete** option that lets you safely remove test cases you no longer need.
 
 This layout makes it easy to adjust, execute, and clean up simulation tests as you iterate on your agent’s behavior.
 
@@ -57,17 +61,17 @@ This layout makes it easy to adjust, execute, and clean up simulation tests as y
 
 Follow these steps to build your first simulation:
 
-1. Go to **Simulation Testing \> Test Cases**
-2. Click the **\+** card
+1. Go to **Simulation Testing \> Test Cases**.
+2. Click the **\+** card.
 3. A modal window titled **Add Test Case** will appear.
 
 <img
-  src="/assets/create-simulated-test-case.png"
-  alt="Create Simulated Test Case Pn"
-  style={{ width:"96%" }}
+  src="/assets/add-test-form.png"
+  alt="Add Test Form"
+  style={{ width:"94%" }}
 />
 
-Fill in the following details:    
+Fill in the following details:
 
 **Case Name**
 
@@ -83,7 +87,7 @@ Explain the goal of the simulation.
 
 Example:
 
-> “Simulates a conversation where a customer asks about pricing and plan options.”
+> _“Simulates a conversation where a customer asks about pricing and plan options.”_
 
 ## **Configure Test Parameters**
 
@@ -91,19 +95,18 @@ Two sliders allow you to define the nature and quantity of simulations:
 
 ### **Test Instance**
 
-Defines **how many conversations** to generate.
+Defines how many conversations to generate.
 
-- Range: **1–25** per run
-- Up to **1000** total runs (billed at \$0.10 per run)
+- Range: 1–25 per run
+- Up to 1000 total runs (billed at \$0.10 per run)
 
 ### **Variance**
 
 Controls the randomness of the simulated customer behavior.
 
-- **1 = Low Variance**\
-  Conversations stay similar across runs
-- **10 = High Variance**\
-  Conversations differ dramatically (ideal for stress testing)
+**1 = Low Variance:** Conversations stay similar across runs
+
+**10 = High Variance:** Conversations differ dramatically (ideal for stress testing)
 
 Higher variance helps reveal weaknesses in:
 
@@ -119,32 +122,26 @@ You can attach any of the following:
 
 - Call Recordings
 - Phonely’s Calls (past real calls)
-- AI Evaluators (AI-generated callers)
+- AI Evaluators
 
-Each of these appears as a tab at the top-right of the Data Sources panel.
-
-You can attach one data source or mix multiple types depending on how complex your test case is.
+Each of these appears as a tab at the top-right of the Data Sources panel. You can attach one data source or mix multiple types depending on how complex your test case is.
 
 ### Call Recordings
 
 Call Recordings allow you to upload audio files that represent real customer speech.\
 This is useful when you want the AI to react to real-world phrasing, accents, pacing, or emotional tone.
 
-When you choose **Call Recordings**, Phonely displays an empty table until you upload something.
+When you choose Call Recordings, Phonely displays an empty table until you upload something.
 
 To upload:
 
 1. Click **Upload Files**
 2. Enter a recording name (e.g., “Customer refund call”)
 3. Choose **Inbound** or **Outbound**
-   - Inbound means the agent speaks first
-   - Outbound means the customer speaks first
 4. Drag or browse to add audio files
 5. Press **Upload**
 
-Uploaded recordings appear in a list. Select the checkboxes to attach them to a test case.
-
-Phonely automatically transcribes and uses the audio during the simulation.
+Uploaded recordings appear in a list. Select the checkboxes to attach them to a test case. Phonely automatically transcribes and uses the audio during the simulation.
 
 ### Phonely’s Calls
 
@@ -160,18 +157,16 @@ You simply select any past call and link it to a test case. Phonely replays the 
 
 ### AI Evaluators
 
-AI Evaluators are the most advanced and flexible data source.\
-Instead of using audio recordings, an evaluator _acts_ as the customer during simulation.
+AI Evaluators are the most flexible data source. Instead of using audio recordings, an evaluator acts as the customer during simulation.
 
 To create one:
 
-1. Click **Add Evaluator**
-2. Give it a name
+1. Click **Add Evaluator** and give it a name.
 3. Choose a conversation style such as Casual, Angry, Frustrated, Happy, Distracted, Sad, or Demanding
-4. Write **detailed instructions** — this defines how the evaluator behaves\
-   Example: “Act like a customer trying to book a flight but constantly changing their mind.”
+4. Write detailed instructions, this defines how the evaluator behaves\
+   Example: _“Act like a customer trying to book a flight but constantly changing their mind.”_
 5. Define the **success criteria**\
-   Example: “Success means the agent confirms date, destination, and seat type.”
+   Example: “_Success means the agent confirms date, destination, and seat type.”_
 6. Click **Add**
 
 Once created, the evaluator appears in the list and you can link it to any test case.

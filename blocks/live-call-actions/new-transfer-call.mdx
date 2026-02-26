@@ -1,17 +1,15 @@
 ---
-title: "Transfer Call Block"
+title: "Transfer Calls"
 description: "Learn how you can transfer calls seamlessly using the new transfer call block"
 ---
 
 ## What is it?
 
-The **Transfer Call** block lets your agent seamlessly hand off a live call to another person, department, or fallback destination. Phonely’s updated transfer flow dramatically simplifies call routing by replacing large, branching, hard-to-manage flows with a single intelligent block that can handle warm transfers, cold transfers, failover logic, caller triage, and on-hold experiences—all in one place.
+The Transfer Call block lets your agent seamlessly hand off a live call to another person, department, or fallback destination. This dramatically simplifies call routing by replacing large, branching, hard-to-manage flows with a single intelligent block that can handle warm transfers, cold transfers, failover logic, caller triage, and on-hold experience, all in one place.
 
-This guide walks you through everything you can do inside the updated **Transfer Call** block, how it works, and how to set it up step-by-step.
+This guide walks you through everything you can do inside the updated Transfer Call block, how it works, and how to set it up step-by-step.
 
-<iframe src="https://www.youtube.com/embed/AykOOGnQf2Q" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
-
-## Why the New Transfer is More Useful
+## What is new ?
 
 Before this update, businesses had to create giant spider-web flows just to transfer a caller to the right person. A typical setup looked like:
 
@@ -33,7 +31,7 @@ The new transfer block condenses ALL of this into one simple module:
 
 Instead of 30+ blocks, you now need **one**.
 
-## How the Transfer Call Block Works
+## How it works
 
 The Transfer Call block has three main sections:
 
@@ -53,190 +51,382 @@ Let’s walk through each part in detail.
 
 ## Setup - Choose the Type of Transfer
 
-At the Setup step, you decide which transfer style your agent will perform.
+At the setup step, you decide which transfer style your agent will perform.
 
 ### Cold Transfer
 
-The agent transfers the caller immediately with **no introduction**.\
-Best for:
+A cold transfer hands the caller off immediately to another phone number without an introduction. The agent does not brief the recipient, once the transfer begins, Phonely connects the caller to the destination directly.
 
-- Quick internal routing.
-- When the person receiving the call does not need context.
+Cold transfers are best when you want fast routing and the receiving person or team does not need context from the agent (for example: reception, front-desk routing, “press 0” style handoffs, or sending callers to a shared support line).
 
-### Warm Transfer
+<Steps>
+  <Step title="Choose Cold Transfer in Setup">
+    Open the Transfer Call block.
 
-The agent briefly introduces the caller and shares context before completing the transfer.\
-Best for:
+    In the Setup step, under Action, select Cold Transfer.
 
-- Customer support escalations.
-- Sales handoffs.
-- Complex or high-value callers.
+    Click Continue.
+  </Step>
+  <Step title="Configure destinations in On Transfer">
+    In the on transfer step, you define where Phonely can transfer the caller.
 
-Selecting the correct transfer type determines how Phonely behaves when initiating the handoff.
+    <Frame>
+      ![Cold Transfer Configuration Options](/assets/cold-transfer-configuration-options.png)
+    </Frame>
+    Each transfer destination can include:
 
-## On Transfer
+    #### **Transition Condition**
 
-This section is the heart of the transfer flow. Here, you can define exactly how Phonely determines who to transfer to and in what order.
+    This is the rule that decides when this destination should be used. It’s typically written as a natural phrase that maps to caller intent.
 
-### Adding Transfer Destinations
+    Example conditions:
 
-Each destination includes:
+    - “If the caller says sales”
+    - “If the caller asks for support”
+    - “If the caller mentions billing”
 
-- **Condition**: keywords such as _“support,” “sales,” “billing”_ that trigger this route. For example if the caller says support or Michael use this destination.
-- **Phone Number**: the number Phonely will dial.
-- **Pre-Transfer Message**: the message the agent says before transferring (e.g., _“Let me connect you to Pam.”_)
-- **Failover Toggle**: enables automatic retry if the call goes to voicemail or isn’t answered.
+    If you don’t set a condition, the destination shows as no condition set, which is a signal that routing logic hasn’t been defined for that destination yet.
 
-<img
-  src="/assets/transfer-flow-block.png"
-  alt="Transfer Flow Block Pn"
-  title="Transfer Flow Block Pn"
-  className="mx-auto"
-  style={{ width:"67%" }}
-/>
+    #### **Phone Number**
 
-You can add as many destinations as you need. For example:
+    Enter the destination number in **E.164 format**. Format: `+[country code][phone number]`
 
-1. Destination 1 → Lisa
-2. Destination 2 → Michael
-3. Destination 3 → Dwight
-4. Destination 4 → Pam
+    Examples:
 
-Phonely’s AI handles the decision-making automatically—no need to build complex “if caller says X” branches manually.
+    - US: `+12125551234`
+    - Australia: `+61412345678`
 
-## Failover Routing (Automatic Retry Logic)
+    This is the number Phonely will dial when that destination is selected.
 
-Failover is one of the most powerful features.
+    #### **Pre Transfer Message**
 
-When enabled, Phonely:
+    This is the short message the caller hears right before the transfer starts (for example, “Please hold while I connect you.”).
 
-1. Tries the first number.
-2. If no one picks up → moves to the next.
-3. Repeats until someone answers.
-4. If all fail → exits the block, allowing you to play a fallback message.
+    You can configure it as:
 
-<img
-  src="/assets/failover-in-transfer-flow.png"
-  alt="Failover In Transfer Flow Pn"
-  title="Failover In Transfer Flow Pn"
-  style={{ width:"75%" }}
-/>
+    - **Fixed**: you write the exact message Phonely should say every time.\
+      Example: “Please hold while I connect you to the right person.”
+    - **Promptable**: you provide an instruction and Phonely generates a brief message.\
+      Example prompt: “Generate a brief transfer message to inform the caller you are transferring them now.”
 
-**Example:**
+    This message is only for the caller experience, it does not introduce the caller to the recipient (that’s warm transfer behavior).
 
-- Try Pam
-- If Pam doesn’t pick up → call Michael
-- If Michael doesn’t pick up → call Dwight
-- If Dwight doesn’t pick up → call Jim
-- If nobody picks up → agent returns to flow (e.g., “Sorry, no one is available right now.”)
+    #### Add multiple destinations
 
-All this happens automatically with a simple toggle.
+    Click **Add Transfer Destination** to include additional numbers. This lets you build practical routing like:
 
-## Customize the Caller’s On-Hold Experience
+    - Sales line (if caller says “sales”)
+    - Support line (if caller says “support”)
+    - Billing line (if caller says “billing”)
 
-When the agent starts the transfer, the caller may need to wait briefly. Phonely lets you design this experience with three modes:
+    <Frame>
+      ![Addtransferdestination](/assets/addtransferdestination.png)
+    </Frame>
+  </Step>
+  <Step title="Optional - Call Outcome Tagging">
+    Use call outcome tagging to label the call when the transfer path is triggered. You can select an existing outcome or type a custom one.
 
-**On Hold Chat**
+    Examples:
 
-Phonely continues talking to the customer while completing the transfer.
+    - `cold_transfer_sales`
+    - `cold_transfer_support`
+    - `cold_transfer_billing`
 
-**On Hold Music**
+    This is useful later for analytics because you can filter or group calls by transfer outcomes.
+  </Step>
+  <Step title="Routing tab (Cold transfer)">
+    **No routing options available for cold transfer.**
 
-Phonely plays hold music with periodic reminder messages such as:\
-_“Thanks for holding. We're still connecting you.”_
+    That’s expected, cold transfers connect the caller directly, so there are no extra routing behaviors to configure in that step.
 
-You can set:
+    Click **Done** to finish.
+  </Step>
+</Steps>
 
-- **Reminder message**
-- **Reminder frequency (seconds)**
+## Warm Transfer (Enhanced)
 
-**Both (Chat + Music)**
+A warm transfer connects the caller to a human with context. Instead of transferring immediately, Phonely first reaches out to the recipient (the outbound leg), confirms the connection, and can deliver a short intro before bridging both parties together. This is ideal when the person receiving the call needs a quick handoff summary (for example: escalations, high-value leads, or complex support issues).
 
-Phonely mixes live conversation with hold music for a more dynamic waiting experience.
+Warm transfer is best for:
 
-<img
-  src="/assets/transfer-call-on-hold-experience.png"
-  alt="Transfer Call On Hold Experience Pn"
-  title="Transfer Call On Hold Experience Pn"
-  style={{ width:"75%" }}
-/>
+- Support escalations where the agent should summarize the issue first
+- Sales handoffs where the rep should know the caller’s intent before speaking
+- VIP callers where you want a smoother, higher-touch experience
 
-## When Connection Is Established
+<Steps>
+  <Step titleSize="h3" title="Choose Warm Transfer in Setup">
+    Open the Transfer Call block.
 
-Once the transfer connects to a human or voicemail, you can define advanced behaviors:
+    In the setup step, under Action, select warm transfer and click **Continue**.
 
-### Warm Transfer Attempt Duration
+    <Frame>
+      ![Choosecoldorwarmtransfer](/assets/choosecoldorwarmtransfer.png)
+    </Frame>
+  </Step>
+  <Step titleSize="h3" title="Configure destinations in On Transfer">
+    In the **on transfer** step, you define who the call can be transferred to and how Phonely should introduce the transfer.
 
-How long Phonely should attempt the warm introduction before switching to cold transfer.
+    Each **Transfer Destination** includes:
 
-**Detect who answered:** When enabled, Phonely will detect if a person, voicemail, or IVR answered before proceeding. When disabled, Phonely immediately speaks after detecting any audio.
+    **Transition Condition**
 
-**Detection timeout:** The maximum time allowed for the other end to speak before being detected as an IVR, voicemail, or a person.
+    This tells Phonely when to use this destination.
 
-**Message to caller (inbound):** After detecting a person on the line, this message is played to the inbound caller before transferring them to the outbound destination.
+    Examples:
 
-**Message to recipient (outbound):** After detecting a person on the line, this message is played to the outbound destination before connecting the inbound caller to them.
+    - “if the caller says sales”
+    - “if the caller says support”
+    - “if the caller asks for billing”
 
-**Post transfer message:** After connecting the inbound caller to the outbound destination, this message is played to both parties before the agent disconnects.
+    You can add multiple destinations so Phonely can route to the right number based on what the caller says.
 
-**Warm transfer duration:** The maximum duration in seconds that Phonely will attempt to complete the warm transfer.
+    **Phone Number**
 
-### Call Outcome Tagging
+    Enter the destination number in **E.164 format**:
 
-Automatically tag the call based on:
+    - Format: `+[country code][phone number]`
+    - Examples:
+      - US: `+12125551234`
+      - Australia: `+61412345678`
 
-- Transfer result
-- Destination
-- Human-answered detection
+    <Frame>
+      ![Warmtransferconfigurationoption 1](/assets/warmtransferconfigurationoption-1.png)
+    </Frame>
+    **Pre Transfer Message (Inbound)**
 
-This is ideal for reporting, analytics, and CRM syncing.
+    This is the message spoken to the **caller** before the transfer starts.
 
-<img
-  src="/assets/transfer-call-advanced-settings.png"
-  alt="Transfer Call Advanced Settings Pn"
-  title="Transfer Call Advanced Settings Pn"
-  style={{ width:"79%" }}
-/>
+    You can set it to:
 
----
+    - **Fixed** (consistent wording every time)\
+      Example: “Please hold while I connect you to support.”
+    - **Promptable** (Phonely generates a brief message from your prompt)\
+      Example prompt: “Generate a brief transfer message to inform the caller you are transferring them now.”
 
-## Putting It All Together: Example Workflow
+    **Enable Failover (Optional)**
 
-**Scenario:** Caller wants to reach someone in the support team.
+    Enable **Failover** if you want automatic retries when the primary number fails.
 
-**Setup:**  Choose **Warm Transfer**.
+    When enabled:
 
-### On Transfer
+    - If the first number doesn’t answer, the system will try the failover numbers in order until one succeeds.
 
-Add destinations:
+    Use this when you don’t want callers to hit dead ends during escalation (for example, route to another rep, then a manager, then a shared line).
 
-1. Pam
-   - Number: +1…
-   - Pre-transfer message: “Let me connect you to Pam.”
-   - Enable failover
-2. Michael: Number: +1…
-3. Dwight: Number: +1…
-4. Jim: Number: +1…
+    To add backup numbers, enable **Enable Failover**, then click **Add Failover Number**.
 
-<img
-  src="/assets/transfer-call-example.png"
-  alt="Transfer Call Example Pn"
-  title="Transfer Call Example Pn"
-  style={{ width:"65%" }}
-/>
+    <Frame>
+      ![Pretransfermessage 1](/assets/pretransfermessage-1.png)
+    </Frame>
+    **Add Transfer Destination**
 
-### Hold Experience
+    Click **Add Transfer Destination** to define additional departments/people (for example Sales + Support), each with its own condition, number, and message.
+  </Step>
+  <Step titleSize="h3" title="Configure the caller’s hold experience (While Waiting for Connection)">
+    Warm transfers often require a few seconds while Phonely connects to the recipient. The **While Waiting for Connection** section controls what the caller experiences during that wait.
 
-Use On Hold Music
+    Under **Customer Experience While on Hold**, choose one option:
 
-Reminder message: “Thanks for holding, we’re still connecting you.”
+    - **On** **Hold** **Chat**: Phonely continues chatting with the caller while waiting.
+    - **On** **Hold** **Music**: Phonely plays hold music with periodic reminder messages.
+    - **Both** (**Chat + Music**): Combines conversation with hold music and reminders.
 
-Reminder every 20 seconds
+    If you choose **On Hold Music**, configure:
 
-### Connection Behavior
+    <Frame>
+      ![Onholdmusic](/assets/onholdmusic.png)
+    </Frame>
+    **Reminder Message**
 
-Warm Transfer Attempt Duration: 45 seconds.
+    This is the message played periodically to remind the caller they’re still being connected.
 
-Add call outcome tags.
+    You can set it to:
 
----
+    Fixed example:“Thanks for holding. We’re still connecting you.”
+
+    Promptable example prompt: “Generate a brief 3–5 words reminder message to let the caller know you are still working on connecting them.”
+
+    **Reminder Frequency**
+
+    Controls how often the reminder message plays (in seconds).
+
+    Example: every **20 seconds**.
+  </Step>
+  <Step titleSize="h3" title="Configure what happens when the recipient answers (When Connection is Established)">
+    This section controls how Phonely behaves once the outbound destination picks up, this is the “warm” part of the warm transfer.
+
+    #### **Ask Outbound Leg for Permission (Optional)**
+
+    Enable this if you want the recipient to explicitly accept the transfer before the caller is bridged in.
+
+    When enabled, your outbound prompt should be a clear yes/no request, for example:\
+    “Say **yes** if you can take this call now.”
+
+    This is useful when you want to avoid dumping calls onto a busy rep.
+
+    <Frame>
+      ![Posttransfer](/assets/posttransfer.png)
+    </Frame>
+    #### **Detection Timeout**
+
+    Controls how long Phonely waits to detect what answered on the outbound side (human, voicemail, or IVR). Lower values detect faster; higher values may be more reliable in noisy environments.
+
+    #### **Message to Caller (Inbound)**
+
+    Message played to the caller once a human is detected (before the bridge happens).\
+    Example: “Great, I’ve reached someone, connecting you now.”
+
+    #### **Message to Recipient (Outbound)**
+
+    Message played to the recipient after a human is detected, typically a short handoff summary.\
+    Example: “I have a customer asking for support with their account. I’m connecting them now.”
+
+    #### **Post Transfer Message**
+
+    Message played to both parties right after the bridge (before Phonely disconnects).\
+    Example: “You’re both connected now. I’ll drop off.”
+  </Step>
+  <Step titleSize="h3" title="Advanced Settings (Warm Transfer)">
+    #### **Warm Transfer Attempt Duration**
+
+    This controls the maximum time (in seconds) Phonely will attempt to complete the warm transfer before it times out.
+
+    Use a shorter duration when you want fast routing; use a longer duration when your recipients often take time to answer.
+
+    <Frame>
+      ![Warmtransferadvancedsetings](/assets/warmtransferadvancedsetings.png)
+    </Frame>
+    #### **Call Outcome Tagging**
+
+    Select an existing outcome or type a custom one to categorize the transfer for analytics.
+
+    Examples:
+
+    - `warm_transfer_support`
+    - `warm_transfer_sales`
+    - `warm_transfer_escalation`
+
+    #### **Human Answered Call Outcome Tagging**
+
+    Add tags specifically when a human answers.
+
+    - `human_answered_support`
+    - `human_answered_sales`
+    - `handoff_success`
+
+    This helps you distinguish “transfer attempted” from “transfer successfully connected to a person.”
+  </Step>
+  <Step titleSize="h3" title="Routing">
+    After you finish setup and on transfer, the final step is routing.
+
+    This section controls what Phonely should do when the outbound number does not connect cleanly to a human, especially when the destination is an IVR menu or voicemail.
+
+    In short, routing defines how Phonely behaves when it reaches the destination phone system.
+
+    In the **Routing** tab for warm transfer, you can configure:
+
+    - IVR Detection
+    - IVR Detection Prompt
+    - Voicemail Detection
+
+    These settings help you decide whether Phonely should continue the transfer attempt, interact with an IVR, or exit when voicemail/IVR is detected.
+
+    ### **1) IVR Detection**
+
+    IVR Detection tells Phonely what to do if the transfer destination answers with an automated phone menu (Interactive Voice Response), such as:
+
+    - “Press 1 for Sales”
+
+    Available options 
+
+    - None
+    - Transfer on IVR Detection
+    - Exit on IVR Detection
+
+    <Frame>
+      ![Ivrdetectionprompt 1](/assets/ivrdetectionprompt-1.png)
+    </Frame>
+    **None**
+
+    Phonely does not apply a special IVR handling behavior.
+
+    Use this when:
+
+    - you expect a direct human answer,
+    - or the destination line is a direct extension/cell phone.
+
+    **Transfer on IVR Detection**
+
+    Phonely proceeds when an IVR is detected (used with an IVR prompt so it can navigate the menu).
+
+    Use this when:
+
+    - the destination number is a company line with a menu,
+    - and you want Phonely to handle that menu instead of failing the transfer.
+
+    You set:
+
+    - **IVR Detection:** Transfer on IVR Detection
+    - **IVR Detection Prompt:** `Press 2 for technical support`
+
+    This allows Phonely to continue the transfer flow through the IVR.
+
+    When IVR handling is enabled, you can provide an IVR Detection Prompt.
+
+    This field tells Phonely how to navigate the menu it hears. Use a short instruction that matches the destination’s menu path.
+
+    Without a clear IVR prompt, Phonely may detect an IVR but not know how to proceed to the correct destination.
+
+    <Frame>
+      ![Ivrdetectionprompt](/assets/ivrdetectionprompt.png)
+    </Frame>
+    This is especially useful when:
+
+    - you are transferring to a shared business line,
+    - the menu is predictable,
+    - and you want the warm transfer to still reach the intended team.
+
+    **Exit on IVR Detection**
+
+    Phonely stops the transfer attempt when an IVR is detected.
+
+    Use this when:
+
+    - you only want to transfer to a live person directly,
+    - and automated menus are considered a failed transfer path.
+
+    **Example:**\
+    You are routing VIP calls to an account manager’s direct line. If that line forwards to a company IVR after hours, you may not want the caller trapped in a phone tree.\
+    Set **Exit on IVR Detection** so the flow can return and handle the caller with a fallback message.
+
+    ### 2) Voicemail Detection
+
+    Voicemail Detection tells Phonely what to do if the destination line reaches voicemail instead of a person.
+
+    Options include:
+
+    - **None**
+    - **Exit on Voicemail Detection**
+
+    <Frame>
+      ![Voicemaildetection](/assets/voicemaildetection.png)
+    </Frame>
+    **None**
+
+    Phonely does not apply a special voicemail exit behavior.
+
+    **Exit on Voicemail Detection**
+
+    Phonely exits the transfer attempt when voicemail is detected.
+
+    Use this when you do **not** want callers sent to voicemail.\
+    For urgent support calls, you may want:
+
+    - **Voicemail Detection:** Exit on Voicemail Detection\
+      So the caller is not dropped into a mailbox. Instead, Phonely can continue with a fallback path like:
+
+    > “No one is available right now. I can schedule a callback or take a message.”
+  </Step>
+</Steps>
+
+Click **Done** to finish your setup. 

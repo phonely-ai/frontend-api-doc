@@ -3,38 +3,101 @@ title: "Start Flow"
 description: "The essential foundation that initiates every inbound call workflow"
 ---
 
-In this guide, we'll introduce you to Phonely's Start Flow Block, the very first element in any inbound call flow.
+The start flow block defines how and when a workflow begins in Phonely. It does not speak to the caller directly, but it controls which flow is entered, under what conditions, and on which channels (Inbound, Outbound, or SMS).
 
-## Key Functions
-
-While seemingly simple, the Start Flow Block serves a crucial purpose for inbound call flows:
-
-**Initiating the Workflow** - It acts as the trigger for your automated call process. When a call is received, Phonely immediately looks to the Start Flow Block to know what to do next.
-
-**Setting the Stage** - Although it doesn't directly interact with the caller, the Start Flow Block often leads directly to the first point of interaction, usually a Talk Block where your AI agent will greet the caller.
-
-**Defining the Beginning** - It clearly marks the beginning of your defined call flow, making it easy to understand the logical progression of your automation.
-
-**Foundation for All Automation** - You cannot build any automated call workflow in Phonely without a Start Flow Block. It's the essential foundation upon which all other blocks and logic are built.
+Every workflow must have a Start Flow block. It is the anchor that determines when your logic is activated and how the agent transitions into the rest of the flow.
 
 <img
   src="/assets/start-flow-block.png"
   alt="Start Flow Block example"
-  style={{ width:"95%" }}
+  style={{ width:"86%" }}
 />
 
-## Basic Usage
+## What the Start Flow Does
 
-Using the Start Flow Block is straightforward:
+The Start Flow block determines three critical things:
 
-**It's Automatically Included** - When you create a new inbound workflow in the Agent Design tab, a Start Flow Block is automatically added to your canvas. You don't need to manually select or add it.
+1. It defines when the workflow is triggered. Phonely evaluates the Start Flow whenever a call or message comes in (or is initiated outbound) and decides whether this flow should run.
+2. It controls how the flow is entered. A workflow can either start automatically as the primary entry point, or be triggered conditionally during an ongoing conversation.
+3. It specifies which communication types can activate the flow, such as inbound calls, outbound calls, or SMS conversations.
 
-**Connect to the Next Step** - The primary action you'll take with the Start Flow Block is to connect it to the next block in your desired call flow. This is typically a Talk Block, where you'll define the initial prompt for your AI agent to have a conversation with the caller.
+### Add a Start Flow
 
-You do this by dragging a connector line from the output node (usually a small circle) on the Start Flow Block to the input node of your next block.
+When you create a new workflow from scratch in Phonely, the Start Flow block is added automatically to the canvas.
 
-**Example:** Imagine a simple workflow: `[Start Flow Block] --> [Talk Block: "How can I help you today?"]`
+You do not need to manually insert it or select it from the block library. Phonely always includes a Start Flow block because every workflow must have a clear entry point.
 
-In this example, when a call comes in, the Start Flow Block initiates the workflow, and immediately directs the call to the Talk Block, where the AI agent delivers the initial greeting.
+When the workflow opens:
 
-In essence, the Start Flow Block is the silent but essential beginning of every automated phone conversation in Phonely. It ensures that every call enters your carefully crafted workflow, ready to be handled by your AI agent. As you build more complex workflows, remember that the Start Flow Block is always the first step in providing a seamless and automated experience for your callers.
+- The start flow block is already present on the canvas
+- It is ready to be configured as a **First Flow**, **Global Flow**, or both.
+- Your only required action is to connect it to the next block, typically a Greeting Message, Collect, or Talk block.
+
+<img
+  src="/assets/configuring-a-start-block.png"
+  alt="Configuring A Start Block"
+  title="Configuring A Start Block"
+  style={{ width:"65%" }}
+/>
+
+## Set as First Flow
+
+When **Set as First Flow** is enabled, Phonely will always start with this workflow whenever an **inbound call** is received. Only one workflow per agent can be set as the First Flow.
+
+<Note>
+  This option is not available for outbound calls.
+</Note>
+
+The **Greeting Message** field is where you write the first thing the agent says when the call begins (for example: “Hello, how can I help you?”).
+
+If call recording is enabled for the agent, you must include a recording disclosure in your greeting. The tooltip in the UI explicitly warns that you must state the call is being recorded, and that you can remove this requirement by disabling call recordings in settings.
+
+<img
+  src="/assets/set-start-flow-advanced-settings.png"
+  alt="Set Start Flow Advanced Settings"
+  title="Set Start Flow Advanced Settings"
+  style={{ width:"65%" }}
+/>
+
+Under **Advanced Settings**, you can add Answers (keywords). These are used to create branching paths for the greeting message.
+
+This means you can type one or more keywords a caller might say (each entry is added when you press **Enter**), and then route the call differently based on the caller’s response right after the greeting.
+
+## Set as Global Flow
+
+Set as Global Flow allows this workflow to be triggered at any point during a conversation, as long as its trigger condition is met.
+
+Unlike First Flow, a Global Flow does not start the call. Instead, it acts as an interrupt or handoff that Phonely can transfer into dynamically.
+
+<img
+  src="/assets/set-start-flow-as-global.png"
+  alt="Set Start Flow As Global"
+  title="Set Start Flow As Global"
+  style={{ width:"90%" }}
+/>
+
+Once enabled, Phonely continuously evaluates the trigger condition and transfers into this flow when appropriate.
+
+### Trigger Condition
+
+The Trigger Condition defines why this workflow should activate.
+
+This is written in natural language and describes what the caller says or intends. For example, “When someone mentions needing help with a specific product.”
+
+Phonely uses this condition to decide whether to enter the workflow, especially when the flow is marked as a Global Flow.
+
+Keep trigger conditions:
+
+- Clear and specific
+- Focused on intent, not exact phrasing
+- Narrow enough to avoid accidental transfers
+
+## Channel Selection (Inbound, Outbound, SMS)
+
+The channel checkboxes determine where this workflow is allowed to run.
+
+- Inbound: By selecting, Phonely can trigger this global workflow during any inbound call when the trigger condition is met.
+- Outbound: By selecting, Phonely can trigger this global workflow during any outbound call when the trigger condition is met.
+- SMS: By selecting, Phonely can trigger this global workflow during any text conversations when the trigger condition is met.
+
+You can enable one, two, or all three depending on how the workflow should be used.

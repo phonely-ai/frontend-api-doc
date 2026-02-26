@@ -3,12 +3,11 @@ title: "Collect"
 description: "Efficiently gather multiple pieces of information from callers in a natural, conversational manner"
 ---
 
-The Collect block lets your agent gather multiple pieces of information back-to-back, like name, phone number, email, order number, etc.\
-Think of it as a **mini-form inside a conversation**. The agent asks each question, stores the answers as variables, and only moves forward once all required details are captured.
+The collect block lets your agent gather multiple pieces of information back-to-back, like name, phone number, email, order number, etc. Think of it as a mini-form inside a conversation. The agent asks each question, stores the answers as variables, and only moves forward once all required details are captured.
 
-## When to Use the Collect Block
+## When to Use it
 
-Use it when you need to gather **several related inputs in a sequence**, such as:
+Use it when you need to gather several related inputs in a sequence, such as:
 
 - Customer contact details (name, phone, email)
 - Appointment information (date, time, location)
@@ -23,7 +22,7 @@ Instead of stacking multiple Ask Blocks, Collect handles them in one step, creat
 - If the caller already gave the info earlier, the agent confirms instead of repeating.
 - Once completed, each answer becomes a variable you can use anywhere in the workflow.
 
-## Setup - Two Ways to Build
+## How to Set it Up
 
 ### Generate with AI
 
@@ -34,12 +33,12 @@ Instead of stacking multiple Ask Blocks, Collect handles them in one step, creat
    Gather the caller's name, email, and phone number.
    ```
 
-<img
-  src="/assets/collect-block-in-phonely.png"
-  alt="Collect Block In Phonely Pn"
-  style={{ width:"85%" }}
-/>
-
+   <img
+     src="/assets/configure-google-calendar-block-1.png"
+     alt="Configure Google Calendar Block 1"
+     title="Configure Google Calendar Block 1"
+     style={{ width:"92%" }}
+   />
 3. Click **Generate with AI**.
 4. Review the generated questions → edit if needed.
 5. Click **Done**.
@@ -55,25 +54,25 @@ Great for quick intake flows or prototyping.
 | Field             | What you enter                                                                              |
 | :---------------- | :------------------------------------------------------------------------------------------ |
 | **Variable Name** | The variable name used later (e.g., `customer_name`)                                        |
-| **Type**          | Text, Phone, Email, Number, Date, URL, Regex, Enum, etc.                                    |
+| **Type**          | Text, Phone, Email, Number, Date, URL, Regular expression, Enum, etc.                       |
 | **Question**      | The instruction for the AI (e.g., "Ask the caller for their name")                          |
 | **Required**      | When enabled, AI will ensure this information is collected before moving to the next block. |
 | **Confirm**       | When enabled, the AI will confirm the variable with the caller before proceeding.           |
 | **Spell Back**    | When enabled, the AI will spell out the confirmed information letter by letter.             |
 
 <img
-  src="/assets/new-collect-block.png"
-  alt="New Collect Block Pn"
-  title="New Collect Block Pn"
-  style={{ width:"81%" }}
+  src="/assets/choosing-variable-type.png"
+  alt="Choosing Variable Type"
+  title="Choosing Variable Type"
+  style={{ width:"74%" }}
 />
 
 4. Click **Add Question** for more fields.
-5. Save \> **Done**
+5. Save \> **Done**.
 
 Manual mode is ideal if you want strict formatting, specific wording, or typed inputs.
 
-## Example Form Setup
+**Examples**
 
 | Variable Name | Type  | Question                       |
 | :------------ | :---- | :----------------------------- |
@@ -83,7 +82,7 @@ Manual mode is ideal if you want strict formatting, specific wording, or typed i
 
 Use them to personalize responses, perform lookups, send follow-ups, or pass into APIs.
 
-## Using Collected Data Later
+## Using Collected Data
 
 You can reference collected values anywhere using **@variable_name**. [Learn more about variables here](/key-concepts/variables).
 
@@ -91,6 +90,15 @@ Examples:
 
 - Talk block → `Nice to meet you, @name!`
 - API request → Send payload containing @phone
+<<<<<<< HEAD
+- CRM logging → Store @reason for support ticket routing Advanced Options
+
+**Validation & Format Control**\
+Regular expression & custom types allow enforcing patterns (emails, numbers, state codes).
+
+**Call Outcome Tagging**\
+Add tags for reporting, funnels, A/B testing, analytics.
+=======
 - CRM logging → Store @reason for support ticket routing
 
 ## Advanced Options
@@ -98,3 +106,4 @@ Examples:
   Regex & custom types allow enforcing patterns (emails, numbers, state codes).
 - **Call Outcome Tagging**\
   Add tags for reporting, funnels, A/B testing, analytics.
+>>>>>>> origin/main

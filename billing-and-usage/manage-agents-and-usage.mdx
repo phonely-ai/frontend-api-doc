@@ -1,18 +1,17 @@
 ---
-title: "Access Usage Data & Delete Agents"
+title: "Agent Usage Data"
 description: "Learn how to access agents usage data and how to delete agents"
 ---
 
-The **Agents** page provides a centralized overview of all AI agents under your organization.\
-From here, you can monitor call activity, download usage data, and manage agents, including removing outdated or unused ones.
-
-### Accessing the Agents Page
+The Agents page provides a centralized overview of all AI agents under your organization.\
+From here, you can monitor call activity, download usage data, and manage agents.
 
 <Steps>
   <Step title="Click your profile icon (bottom-left corner of the dashboard).">
     
   </Step>
   <Step title="    From the dropdown menu, select Settings.">
+  ![Accessing Agent Usage Data Gi](/assets/accessing-agent-usage-data.gif)
     
   </Step>
   <Step title="Switch to the agents tab.">
@@ -22,16 +21,15 @@ From here, you can monitor call activity, download usage data, and manage agents
     - **Name**: The agent's display name.
     - **Phone Number:** The number assigned to the agent (if any).
     - **Agent ID:** A unique identifier.
-    - **Deployment:** Indicates whether the agent is live in Production or Enterprise.
+    - **Deployment:** Indicates whether the agent  is live in Production or Enterprise.
     - **Call Minutes (Monthly):** Total minutes the agent has used this month.
-    - **Updated At:** Shows when the agent was las modified or deployed.
+    - **Updated At:** Shows when the agent was last modified or deployed.
   </Step>
   <Step title="Click the organization button at top to switch between different organizations.">
     
   </Step>
 </Steps>
 
-![Accessing Agent Usage Data Gi](/assets/accessing-agent-usage-data.gif)
 
 ### Agent Usage Data
 
@@ -40,29 +38,16 @@ Each agent’s monthly activity is automatically logged and displayed in this ta
 1. Review each agent’s **Call Minutes (Monthly)** to see current usage.
 3. To download a detailed report:
    - Click the **Download usage data** button (top right of the table).
-   - The data file will include each agent's totals usage time, deployment details, and activity timestamps.
+   - The data file will include each agent's total usage time, deployment details, and activity timestamps.
 
-![Agent Usage Table Pn](/assets/agent-usage-table.png)
+<img
+  src="/assets/agent-usage-page.png"
+  alt="Agent Usage Page"
+  style={{ width:"98%" }}
+/>
 
-3. Open the downloaded file in your preferred spreadsheet tool (e.g., Excel or Google Sheets) to analyze or share with your team.    
+3. Open the downloaded file in your preferred spreadsheet tool (e.g., Excel or Google Sheets) to analyze or share with your team.
 
 <Tip>
   Usage data helps you track which agents handle the most calls, making it easier to allocate minutes or identify agents that may need scaling adjustments.
 </Tip>
-
-### Deleting Agents
-
-If an agent is no longer needed, you can safely delete it from your organization. Deleting an agent permanently removes its configurations, workflows, and logs associated with that agent. \
-You can delete one or multiple agents at once.
-
-1. On the **Agents** page, locate the agent(s) you want to remove.
-2. Click the checkbox next to each agent’s name to select them.
-3. Once selected, a toolbar will appear at the top of the list showing how many agents are selected.
-4. Click **Delete agents**.
-5. Confirm the deletion in the prompt that appears.
-
-   <Tip>
-     Deleted agents cannot be recovered. If you need to reuse a configuration later, consider duplicating the agent before deleting it.
-   </Tip>
-
-![Deleting An Agent Gi](/assets/deleting-an-agent.gif)

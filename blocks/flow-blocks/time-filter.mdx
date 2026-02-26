@@ -3,11 +3,11 @@ title: "Time Filter"
 description: "Dynamically filter conversations and apply different routing instructions based on time of day"
 ---
 
-In this page, we'll guide you through the Time Filter Block in Phonely. This block allows your AI agent to dynamically filter the conversation and apply different routing instructions based upon the time of day. It's an essential tool for managing caller experiences during and outside of specific operating hours, lunch breaks, or other time-sensitive scenarios.
+This block allows your AI agent to dynamically filter the conversation and apply different routing instructions based upon the time of day. It's an essential tool for managing caller experiences during and outside of specific operating hours, lunch breaks, or other time-sensitive scenarios.
 
 ## What is it?
 
-The Time Filter Block essentially acts as a gatekeeper, directing the conversational flow down different paths depending on whether the current time falls within or outside of predefined time ranges. This ensures callers receive appropriate assistance regardless of when they call.
+The time filter block essentially acts as a gatekeeper, directing the conversational flow down different paths depending on whether the current time falls within or outside of predefined time ranges. This ensures callers receive appropriate assistance regardless of when they call.
 
 <iframe src="https://www.youtube.com/embed/TVERxl2hbS8" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
 
@@ -41,25 +41,33 @@ Using the Time Filter Block involves defining your operational hours and connect
     Select the "Time Filter Block" from the available options.
 
     <img
-      src="/assets/choosing-time-filter-block.png"
-      alt="Choosing Time Filter Block Pn"
-      title="Choosing Time Filter Block Pn"
-      style={{ width:"82%" }}
+      src="/assets/time-filter-options.png"
+      alt="Time Filter Options"
+      title="Time Filter Options"
+      style={{ width:"64%" }}
     />
   </Step>
   <Step title="Configure Time Ranges">
     Within the block's settings, you will see a calendar interface to define your time ranges.
 
-    - **Set Daily Hours**: For each day of the week, adjust the sliders or input exact times to set the desired "open" hours.
+    - **Set Daily Hours**: For each day of the week, input exact times to set the desired "open" hours.
     - **Add Multiple Ranges**: If you have breaks or multiple shifts within a day (e.g., open from 9 AM-12 PM and 1 PM-5 PM), click the + button to add additional time blocks for that specific day.
     - **Disconnect Times**: If you want no action to occur during a specific time block, ensure it is disconnected from any output path. The AI will not route through any "true" path for disconnected times.
+
+    <img
+      src="/assets/time-filter-configure-slots.png"
+      alt="Time Filter Configure Slots"
+      title="Time Filter Configure Slots"
+      style={{ width:"91%" }}
+    />
+    
   </Step>
   <Step title="Define Outcome Paths">
     Connect subsequent blocks from the "True" path for actions that should occur when the time falls within your configured range(s).
 
     Connect subsequent blocks from the "False" path for actions that should occur when the time falls outside your configured range(s).
 
-    ![Timefilterphonely Pn](/images/timefilterphonely.png)
+    
   </Step>
 </Steps>
 

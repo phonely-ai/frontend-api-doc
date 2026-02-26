@@ -3,7 +3,7 @@ title: "Overview"
 description: "Learn how to use post call actions in phonely"
 ---
 
-Post Call Actions are a powerful type of block that trigger specific automations after a phone conversation has concluded. Unlike Live Call Actions, which happen in real-time during the call, Post Call Actions are designed to process and pass information once the call has finished.
+Post call actions are a powerful type of block that trigger specific automations after a phone conversation has concluded. Unlike Live Call Actions which happen in real-time during the call, Post Call Actions are designed to process and pass information once the call has finished.
 
 ## What are Post Call Actions?
 
@@ -13,9 +13,9 @@ Post Call Actions are actions that are taken after a phone conversation is compl
 
 ## Key Features and Purpose
 
-**Trigger After Call**: The core function of a Post Call Action is to activate after the call has ended or reached a specific termination point in the workflow.
+**Trigger After Call**: The core function of a post call Action is to activate after the call has ended or reached a specific termination point in the workflow.
 
-**Access to Rich Call Data**: Post Call Actions have access to a broader set of variables generated throughout the entire conversation, including:
+**Access to Rich Call Data**: Post call actions have access to a broader set of variables generated throughout the entire conversation, including:
 
 - AI-generated summary of the call
 - Full call transcript
@@ -35,16 +35,16 @@ Adding a Post Call Action to your workflow is straightforward:
 
 <Steps>
   <Step title="Access Your Workflow">
-    Navigate to your desired workflow in Phonely's Agent Design tab.
+    Navigate to your desired workflow in Phonely's agent design tab.
   </Step>
   <Step title="Click the Plus Button:">
     Click the + button that appears to the right-hand side of any block in your call flow.
   </Step>
   <Step title="Select Action">
-    A menu will pop up with a series of pre-built Post Call Action blocks (e.g., "Send Email," "Send Text Message," "Zapier"). Select the desired action.        
+    A menu will pop up with a series of pre-built Post Call Action blocks (e.g., "Send Email," "Send Text Message," "Zapier"). Select the desired action.
   </Step>
   <Step title="Configure & Connect:">
-    Once added, configure the settings of the Post Call Action block and ensure it is connected to the appropriate node in your workflow. You will know that your Post Call Action has successfully connected if there is a dotted line connected to your previous block.     
+    Once added, configure the settings of the Post Call Action block and ensure it is connected to the appropriate node in your workflow. You will know that your Post Call Action has successfully connected if there is a dotted line connected to your previous block.
 
     ![Post Call Actions Overview Pn](/images/post-call-actions-overview.png)
   </Step>
@@ -54,9 +54,9 @@ Adding a Post Call Action to your workflow is straightforward:
 
 It's crucial to understand the trigger mechanism for Post Call Actions:
 
-**A Post Call Action is only triggered if the conversation successfully reaches the specific node to which that Post Call Action is attached.       **
+A Post Call Action is only triggered if the conversation successfully reaches the specific node to which that Post Call Action is attached.      
 
-**Example**: If you have a Post Call "Send Text Message" connected to a specific "Appointment Confirmed" block, the text message will only be sent after the call finishes AND the caller successfully navigated to and completed the "Appointment Confirmed" block.    
+**Example**: If you have a Post Call "Send Text Message" connected to a specific "Appointment Confirmed" block, the text message will only be sent after the call finishes AND the caller successfully navigated to and completed the "Appointment Confirmed" block.
 
 **Global vs. Specific**: If a Post Call Action is attached to the main "Start Flow" node (the far right node on your workflow canvas), it will be triggered for every conversation that starts that workflow. If it's attached to a node deeper in the workflow, it will only trigger if that specific path is taken.
 
