@@ -314,7 +314,7 @@
         "tab": "Webhook Reference",
         "icon": "webhook",
         "pages": [
-          "webhook-reference/Intro",
+          "webhook-reference/intro",
           {
             "group": "Webhook Reference",
             "pages": [
