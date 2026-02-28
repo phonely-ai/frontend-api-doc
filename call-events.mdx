@@ -16,19 +16,22 @@ After you open your call history page, you can switch into the events-level view
   ![Eventsbutton](/assets/eventsbutton.png)
 </Frame>
 
-Instead of only showing what the call outcome was, this page helps you understand why something happened.
+## What you can do from this page
 
-For example, you can use it to check whether:
+The call events page helps you move beyond the final call outcome and inspect what actually happened during execution.
 
-- an API request succeeded or failed,
-- a request returned `200` or another status code,
-- an event happened during **Pre Call**, **Live Call**, or **Post Call**,
-- a workflow action was slow (high execution time),
-- a specific call ID had a failing event.
+For example, you can use it to:
+
+- confirm whether an action ran successfully
+- identify failed workflow actions
+- review events by **Pre Call**, **Live Call**, or **Post Call**
+- find slow events using execution time
+- inspect specific events tied to one **Call ID**
+- review integration behavior
+- inspect code block input and output
+- understand transfer and telephony behavior step by step
 
 In short, this page is your event-level debugging and monitoring workspace.
-
-## Page layout overview
 
 The page is split into two main working areas: a **filter sidebar** on the left and an **events table** on the right. There are also controls at the top-right for refreshing results, customizing filters, and switching views.
 
@@ -36,39 +39,188 @@ The page is split into two main working areas: a **filter sidebar** on the left 
   ![Eventspage](/assets/eventspage.png)
 </Frame>
 
-### Filter panel
+## Page layout
 
-The left panel contains collapsible filter sections, such as:
+The page is organized into a few main areas that work together.
 
-- Time Range
-- Event Status
-- Status Code
-- Event Type
-- Execution Stage
-- Execution Time
-- Call ID
+### Top query bar and event timeline
 
-These filters let you narrow down results quickly so you’re not scanning every event manually.
+At the top of the page, you’ll see a search/query bar and a timeline summary.
 
-### Events table
+The search/query bar can display filters directly as query-style expressions, such as:
 
-The main table lists event records matching your selected filters. Some of the columns include:
+- `event_type:telephony`
+- `event_type:api_request`
+- `event_type:code`
 
-- Call ID
-- Event Name
-- Date
-- Success
-- Status
-- Event Type
-- Execution Stage
-- Method
-- Execution Time
+Below that, the timeline gives you a visual summary of event activity across the selected time range. This helps you quickly spot where activity happened and where failures may have occurred before you even inspect the table.
+
+You may also see a row count such as:`4.0k of 4.9k rows`
+
+<Frame>
+  ![Searchtableeventsdata](/assets/searchtableeventsdata.png)
+</Frame>
+
+This tells you how many records are currently shown after filters are applied.
+
+<Columns cols={2}>
+  <Column>
+    <Card icon="sparkles" title="Filter panel">
+      The left panel contains collapsible filter sections, such as:
+
+      - Time Range
+      - Event Status
+      - Status Code
+      - Event Type
+      - Execution Stage
+      - Execution Time
+      - Call ID
+    </Card>
+  </Column>
+  <Column>
+    <Card icon="sparkles" title="Events table">
+      The main table lists event records matching your selected filters. Some of the columns include:
+
+      - Call ID
+      - Event name
+      - Date
+      - Success
+      - Status
+      - Event type
+      - Execution stage
+      - Method
+      - Execution time
+    </Card>
+  </Column>
+</Columns>
 
 Each row represents a single event execution (for example, one API request during a live call).
 
+These filters let you isolate the exact events you care about without scanning the full log manually.
+
+## Understanding event types
+
+One of the most important things to understand is that **Call Events is not only for API requests**. It can include multiple event types in the same system. Your screenshots show at least these event types:
+
+- **Telephony**
+- **API Request**
+- **Code**
+- **Block Change**
+- **State Change**
+
+Each type helps you inspect a different layer of workflow behavior.
+
+## Telephony events
+
+**Telephony** events capture call-system activity and transfer behavior. These events are useful when you want to understand what happened during the conversation or during call routing.
+
+Examples shown in the screenshots include event names such as:
+
+- **End Call Beginning**
+- **Transfer Failed**
+- **Silence Timeout Activated**
+- **Participant Left Conference Room**
+- **Participant Entered Conference Room**
+- **Started Outbound Leg Transfer Process**
+- **Outbound Leg Dialed Out**
+- **Conference Room Started**
+- **Transfer Call Started**
+- **IVR Detected**
+- **User Entered Call**
+
+The Telephony table can also include more specific classifications such as:
+
+- **Telephony Type**
+  - `end_call`
+  - `conversation`
+  - `transfer`
+- **Telephony Metadata**
+  - structured event metadata such as timestamps and other telephony-related details
+
+### When to use Telephony events
+
+Use these events when you want to troubleshoot:
+
+- transfers that failed
+- silence timeout behavior
+- IVR detection
+- conference room behavior
+- outbound leg dialing
+- end-call handling
+- participant join/leave activity
+
+These events are especially valuable for debugging **warm transfer**, **cold transfer**, hold behavior, and call lifecycle issues.
+
+## API Request events
+
+**API Request** events help you inspect outbound requests made by the workflow.
+
+For these events, the table and detail panel can show data such as:
+
+- **Status**
+- **Method**
+- **Execution Stage**
+- **Execution Time**
+- **Request URL**
+- **Response Code**
+- **API Response Body**
+
+### What API Request events help you verify
+
+These events are useful when you need to confirm:
+
+- whether a request was sent
+- whether it succeeded or failed
+- what HTTP method was used
+- which endpoint was called
+- what response code was returned
+- what payload came back
+- how long the request took
+
+### Example use cases
+
+Use API Request events to troubleshoot:
+
+- CRM sync failures
+- webhook delivery problems
+- lookup requests during live calls
+- post-call integrations
+- slow external services
+
+---
+
+## Code events
+
+**Code** events help you inspect what happened inside a code block.
+
+In the screenshots, the detail panel for a Code event includes:
+
+- **Event Type**
+- **Execution Stage**
+- **Execution Time**
+- **Code Block Input**
+- **Input**
+- **Code Block Output**
+
+This makes the Events page a very useful debugging tool when you are using custom logic in workflows.
+
+### What Code events help you verify
+
+Use these events when you want to inspect:
+
+- what inputs were passed into the code block
+- what code ran
+- what output the code returned
+- whether the code succeeded
+- how long the code execution took
+
+### Why this matters
+
+Instead of guessing whether your transformation logic worked, you can inspect the exact input/output pair recorded for that event.
+
 ## View Event Details
 
-After reviewing events in the table, you can click any event row to open a detailed side panel with full execution information.
+After reviewing events in the table, you can click any event row to open a detailed side panel with full execution information. 
 
 1. Go to the **Call Events** page.
 2. Use filters (optional) to narrow down the events you want to inspect.
@@ -83,7 +235,7 @@ This is especially useful when you want to inspect:
 - request/response details for API events
 - timing and status information for troubleshooting
 
-This panel lets you inspect the selected event without leaving the Events page.
+This panel lets you inspect the selected event without leaving the events page.
 
 ## Event Details panel
 
@@ -107,25 +259,13 @@ These fields help you understand event timing and responsiveness:
 
 - **Event Started:** Timestamp for when the event began.
 - **Event Ended:** Timestamp for when the event completed.
-- **Execution Time:** Total time taken to execute the event (for example, `41.70ms`.
+- **Execution Time:** Total time taken to execute the event (for example, `41.70ms`
 
 This is particularly helpful for diagnosing slow actions or identifying latency in external integrations.
 
-## Why Event Details matter
-
-The Event Details panel is one of the most important tools for debugging and verification because it helps you answer questions like:
-
-- Did the API request actually fire during the call?
-- Did it succeed or fail?
-- Which workflow and call triggered it?
-- How long did it take?
-- What response came back from the external system?
-
-Instead of guessing what happened, you can inspect the exact event record and response data directly from the events page.
-
 ## Customize the Events Table
 
-The **column/options menu** (opened from the icon next to **Refresh**) lets you control what fields are available on the page and in what order they appear. This makes the Events page easier to use when you want to focus on a specific troubleshooting workflow.
+The column/options menu (opened from the icon next to Refresh) lets you control what fields are available on the page and in what order they appear. This makes the Events page easier to use when you want to focus on a specific troubleshooting workflow.
 
 Use this menu to:
 
