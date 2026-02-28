@@ -65,7 +65,7 @@ This tells you how many records are currently shown after filters are applied.
 
 <Columns cols={2}>
   <Column>
-    <Card icon="sparkles" title="Filter panel">
+    <Card icon="align-horizontal-distribute-start" title="Filter panel">
       The left panel contains collapsible filter sections, such as:
 
       - Time Range
@@ -78,25 +78,20 @@ This tells you how many records are currently shown after filters are applied.
     </Card>
   </Column>
   <Column>
-    <Card icon="sparkles" title="Events table">
+    <Card icon="align-horizontal-justify-start" title="Events table">
       The main table lists event records matching your selected filters. Some of the columns include:
 
-      - Call ID
-      - Event name
-      - Date
+      - Event name and Date
       - Success
       - Status
       - Event type
       - Execution stage
-      - Method
-      - Execution time
+      - Method and Execution time
     </Card>
   </Column>
 </Columns>
 
-Each row represents a single event execution (for example, one API request during a live call).
-
-These filters let you isolate the exact events you care about without scanning the full log manually.
+Each row represents a single event execution (for example, one API request during a live call). These filters let you isolate the exact events you care about without scanning the full log manually.
 
 ## Understanding event types
 
@@ -220,7 +215,7 @@ Instead of guessing whether your transformation logic worked, you can inspect th
 
 ## View Event Details
 
-After reviewing events in the table, you can click any event row to open a detailed side panel with full execution information. 
+After reviewing events in the table, you can click any event row to open a detailed side panel with full execution information.
 
 1. Go to the **Call Events** page.
 2. Use filters (optional) to narrow down the events you want to inspect.
