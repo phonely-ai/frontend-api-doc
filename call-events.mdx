@@ -251,50 +251,22 @@ When troubleshooting an API Request event, it usually helps to review the detail
 
 When the selected event is a code event, the details panel focuses on the code execution itself. This makes it possible to inspect the exact logic that ran and compare the input values against the final output.
 
-### Code event fields
-
 Code events include the common fields listed above, and may also include:
 
 - **Code block Input -** The actual code that was executed inside the block.
 - **Input -** The values passed into the code block at runtime.
 - **Code block output -** The final output returned by the code block.
 
-### Why this is useful
+The code event detail view is one of the best tools for debugging workflow logic because it lets you inspect:
 
-The Code event detail view is one of the best tools for debugging workflow logic because it lets you inspect:
+- What code was executed
+- What values the code received
+- What output it produced
+- Whether the output matched your expectations
 
-- what code was executed
-- what values the code received
-- what output it produced
-- whether the output matched your expectations
-
-This is especially useful for:
-
-- data transformations
-- formatting logic
-- calculations
-- variable preparation before passing values to another block or integration
-
-### What to check in a Code event detail view
-
-When reviewing a Code event, compare these sections carefully:
-
-1. **Code Block Input**\
-   Confirm the code itself is the version you expected to run.
-2. **Input**\
-   Check the actual values passed into the block.
-3. **Code Block Output**\
-   Confirm the returned values match what the workflow should use next.
-4. **Execution Time**\
-   Review how long the block took to execute.
-
-If the workflow output is wrong, this panel helps you determine whether the issue came from:
-
-- the code itself,
-- the input values,
-- or the returned output.
-
----
+<Frame>
+  ![Eventtypecoderequest 1](/assets/eventtypecoderequest-1.png)
+</Frame>
 
 ## Telephony event details
 
@@ -306,8 +278,6 @@ Depending on the telephony event, the table and associated event record can incl
 - **Telephony Type**
 - **Telephony Metadata**
 
-### Telephony-specific information
-
 Telephony events can describe actions such as:
 
 - a transfer starting
@@ -317,19 +287,13 @@ Telephony events can describe actions such as:
 - silence timeout activation
 - end-call behavior starting
 
-The metadata recorded with these events can help reconstruct what happened during the live call and in what order.
+The metadata recorded with these events can help reconstruct what happened during the live call and in what order. Telephony event details help you debug workflow behavior such as:
 
-### Why this is useful
-
-Telephony event details help you debug workflow behavior that is not related to external APIs or code, such as:
-
-- why a transfer failed
-- whether IVR was detected
-- when a participant entered or left a transfer conference
-- when a call started ending
-- whether silence timeout was triggered
-
-### What to check in a Telephony event detail view
+- Why a transfer failed
+- Whether IVR was detected
+- When a participant entered or left a transfer conference
+- When a call started ending
+- Whether silence timeout was triggered
 
 When reviewing telephony events, focus on:
 
@@ -347,8 +311,6 @@ When reviewing telephony events, focus on:
    Review the structured metadata for timestamps and other telephony-related details.
 
 For call transfer issues, telephony event details are often the most useful records in the system.
-
----
 
 ## Block Change and State Change events
 
