@@ -63,35 +63,35 @@ You may also see a row count such as:`4.0k of 4.9k rows`
 
 This tells you how many records are currently shown after filters are applied.
 
-<Columns cols={2}>
-  <Column>
-    <Card icon="align-horizontal-distribute-start" title="Filter panel">
-      The left panel contains collapsible filter sections, such as:
+### Side Panel
 
-      - Time Range
-      - Event Status
-      - Status Code
-      - Event Type
-      - Execution Stage
-      - Time
-      - Call ID
-    </Card>
-  </Column>
-  <Column>
-    <Card icon="align-horizontal-justify-start" title="Events table">
-      The main table lists event records matching your selected filters. Some of the columns include:
+The left-side panel provides collapsible filter sections that help you narrow down and isolate specific events quickly. These filters make it easier to focus on exactly what you need when troubleshooting or analyzing call behavior.
 
-      - Event name and Date
-      - Success
-      - Status
-      - Event type
-      - Execution stage
-      - Method and Execution time
-    </Card>
-  </Column>
-</Columns>
+Available filter options typically include:
 
-Each row represents a single event execution (for example, one API request during a live call). These filters let you isolate the exact events you care about without scanning the full log manually.
+- **Time Range** – View events within a specific date and time window.
+- **Event Status** – Filter by success, failure, or other execution outcomes.
+- **Status Code** – Narrow results by specific HTTP response codes.
+- **Event Type** – Show only certain types of events, such as Telephony, API Request, or Code.
+- **Execution Stage** – Filter based on where the event is in its lifecycle (e.g., started, completed).
+- **Time** – Sort or refine events based on their execution timestamps.
+
+Using these filters together allows you to quickly pinpoint issues, identify patterns, and review only the most relevant event data.
+
+### Events Table
+
+The main Events table displays all event records that match your selected filters. It provides a structured overview of what occurred during the call, allowing you to quickly scan and identify relevant activity.
+
+Common columns in the table include:
+
+- **Event name & date** – The name of the event and the exact timestamp when it occurred.
+- **Success** – Indicates whether the event completed successfully.
+- **Status** – Shows the overall outcome or state of the event.
+- **Event type** – Identifies the category of the event (such as Telephony, API Request, or Code).
+- **Execution stage** – Displays where the event is in its lifecycle (for example, started or completed).
+- **Method & execution time** – For applicable events, shows the method used and how long the action took to execute.
+
+Each row represents a single event execution for example, one API request during a live call. These filters let you isolate the exact events you care about without scanning the full log manually.
 
 ## Understanding event types
 
@@ -167,7 +167,7 @@ These events are useful when you need to confirm:
 
 ## Code events
 
-Code events give you visibility into what happened inside a code block during execution. They allow you to inspect how inputs were processed, how long the logic ran, and what output was produced. 
+Code events give you visibility into what happened inside a code block during execution. They allow you to inspect how inputs were processed, how long the logic ran, and what output was produced.
 
 The event detail panel typically includes:
 
