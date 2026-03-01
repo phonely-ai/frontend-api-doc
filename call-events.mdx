@@ -73,7 +73,7 @@ This tells you how many records are currently shown after filters are applied.
       - Status Code
       - Event Type
       - Execution Stage
-      - Execution Time
+      -  Time
       - Call ID
     </Card>
   </Column>
@@ -95,15 +95,17 @@ Each row represents a single event execution (for example, one API request durin
 
 ## Understanding event types
 
-One of the most important things to understand is that **Call Events is not only for API requests**. It can include multiple event types in the same system. Your screenshots show at least these event types:
+Call Events is not limited to API requests. It captures multiple types of system-level actions that occur during a call, giving you full visibility into how your workflow executed behind the scenes.
 
-- **Telephony**
-- **API Request**
-- **Code**
-- **Block Change**
-- **State Change**
+Common event types include:
 
-Each type helps you inspect a different layer of workflow behavior.
+- **Telephony** – Actions related to call handling, such as dialing, connecting, transferring, or ending a call.
+- **API Request** – Outbound or inbound requests to external systems, including status codes, response times, and success or failure details.
+- **Code** – Execution of custom code blocks within your workflow, useful for debugging logic or data transformations.
+- **Block Change** – Movement between workflow blocks, helping you trace the exact path the call followed.
+- **State Change** – Updates to variables or session state that influence how the flow progresses.
+
+Each event type represents a different layer of your workflow’s behavior, allowing you to troubleshoot issues, validate logic, and confirm that every part of the system is working as expected.
 
 ## Telephony events
 
