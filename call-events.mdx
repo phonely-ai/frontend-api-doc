@@ -206,12 +206,12 @@ Most events include a shared set of top-level fields that help identify and trac
 - **Call ID -** The unique ID of the call this event belongs to. This is useful when you want to correlate several events from the same call.
 - **Workflow ID -** The workflow associated with the event execution.
 - Event Type - The category of event that occurred, such as API Request, Code, or Telephony.
-- **Block Name -** The workflow block that generated the event, when applicable. This is especially useful for action blocks such as API Request blocks.
+- **Block name -** The workflow block that generated the event, when applicable. This is especially useful for action blocks such as API Request blocks.
 - **Success -** Indicates whether the event completed successfully (`true`) or failed (`false`).
-- **Execution Stage -** Shows when the event happened in the call lifecycle, such as: pre call, live call or post call.
-- **Event Started -** The timestamp when the event began.
-- **Event Ended -** The timestamp when the event completed.
-- **Execution Time -** The total time taken to execute the event.
+- **Execution stage -** Shows when the event happened in the call lifecycle, such as: pre call, live call or post call.
+- **Event started -** The timestamp when the event began.
+- **Event ended -** The timestamp when the event completed.
+- **Execution time -** The total time taken to execute the event.
 
 These fields are the foundation of the detail view and should usually be reviewed first before moving into event-specific data.
 
@@ -221,16 +221,15 @@ When the selected event is an API request, the details panel expands to include 
 
 In addition to the shared fields above, API Request events can include:
 
-- **Request Method -** The HTTP method used by the request, such as `GET`, `POST`, `PATCH`, or `PUT`
+- **Request method -** The HTTP method used by the request, such as `GET`, `POST`, `PATCH`, or `PUT`
 - **Request URL -** The endpoint URL that the workflow called.
-- **Response Code -** The returned HTTP status code, such as `200`, `405`, `500`, or `503`.
-- **API Response Body -** The response payload returned by the external service.
+- **Response code -** The returned HTTP status code, such as `200`, `405`, `500`, or `503`.
+- **API Response body -** The response payload returned by the external service.
 
 The response body can be displayed in a structured response section. Depending on the event and response type, this area may show:
 
 - The type of returned data (for example, `json`)
-
-  The actual response body
+- The actual response body
 - A structured/table-like view
 - A raw object/JSON-style view
 
@@ -256,12 +255,9 @@ When the selected event is a code event, the details panel focuses on the code e
 
 Code events include the common fields listed above, and may also include:
 
-- **Code Block Input**\
-  The actual code that was executed inside the block.
-- **Input**\
-  The values passed into the code block at runtime.
-- **Code Block Output**\
-  The final output returned by the code block.
+- **Code block Input -** The actual code that was executed inside the block.
+- **Input -** The values passed into the code block at runtime.
+- **Code block output -** The final output returned by the code block.
 
 ### Why this is useful
 
