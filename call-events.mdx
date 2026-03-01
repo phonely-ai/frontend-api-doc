@@ -16,8 +16,6 @@ After you open your call history page, you can switch into the events-level view
   ![Eventsbutton](/assets/eventsbutton.png)
 </Frame>
 
-## What you can do from this page
-
 The call events page helps you move beyond the final call outcome and inspect what actually happened during execution.
 
 For example, you can use it to:
@@ -41,7 +39,7 @@ The page is split into two main working areas: a **filter sidebar** on the left 
 
 ## Page layout
 
-The page is organized into a few main areas that work together.
+The page is organized into the following main areas:
 
 ### Top query bar and event timeline
 
@@ -93,7 +91,7 @@ Common columns in the table include:
 
 Each row represents a single event execution for example, one API request during a live call. These filters let you isolate the exact events you care about without scanning the full log manually.
 
-## Understanding event types
+## Event types
 
 Call Events is not limited to API requests. It captures multiple types of system-level actions that occur during a call, giving you full visibility into how your workflow executed behind the scenes.
 
@@ -131,7 +129,7 @@ Common examples of telephony event names include:
   ![Event;typetelephony](/assets/event;typetelephony.png)
 </Frame>
 
-Use these events when you want to troubleshoot transfers that failed, silence timeout behavior, IVR detection, conference room behavior, outbound leg dialing, end-call handling, and participant join/leave activity
+Use these events when you want to troubleshoot transfers that failed, silence timeout behavior, IVR detection, conference room behavior, outbound leg dialing, end-call handling, and participant join/leave activity. 
 
 These events are especially valuable for debugging warm transfer, cold transfer, hold behavior, and call lifecycle issues.
 
@@ -153,15 +151,17 @@ These details make it easier to diagnose integration issues, validate external d
 
 These events are useful when you need to confirm:
 
-- whether a request was sent
-- whether it succeeded or failed
-- what HTTP method was used
-- which endpoint was called
-- what response code was returned
-- what payload came back
-- how long the request took
+<Expandable title="Use Cases">
+  - Whether a request was sent
+  - Whether it succeeded or failed
+  - What HTTP method was used
+  - Which endpoint was called
+  - What response code was returned
+  - What payload came back
+  - How long the request took
+</Expandable>
 
-## Code events
+### Code events
 
 Code events give you visibility into what happened inside a code block during execution. They allow you to inspect how inputs were processed, how long the logic ran, and what output was produced.
 
@@ -174,15 +174,21 @@ The event detail panel typically includes:
 - **Input** – The evaluated variables or payload at runtime.
 - **Code Block Output** – The result returned after the logic was executed.
 
+<Frame>
+  ![Eventtypecoderequest](/assets/eventtypecoderequest.png)
+</Frame>
+
 This makes the events page especially valuable when working with custom logic, calculations, or data transformations, as it allows you to trace issues precisely and confirm that your workflow behaves as intended.
 
 Use these events when you want to inspect:
 
-- What inputs were passed into the code block
-- What code ran
-- What output the code returned
-- Whether the code succeeded
-- How long the code execution took
+<Expandable title="Use Cases">
+  - What inputs were passed into the code block
+  - What code ran
+  - What output the code returned
+  - Whether the code succeeded
+  - How long the code execution took
+</Expandable>
 
 ## View Event Details
 
