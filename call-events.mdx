@@ -73,7 +73,7 @@ This tells you how many records are currently shown after filters are applied.
       - Status Code
       - Event Type
       - Execution Stage
-      -  Time
+      - Time
       - Call ID
     </Card>
   </Column>
@@ -107,34 +107,25 @@ Common event types include:
 
 Each event type represents a different layer of your workflow’s behavior, allowing you to troubleshoot issues, validate logic, and confirm that every part of the system is working as expected.
 
-## Telephony events
+### Telephony events
 
-**Telephony** events capture call-system activity and transfer behavior. These events are useful when you want to understand what happened during the conversation or during call routing.
+Telephony events record activity handled directly by the call system, including how the call was connected, routed, transferred, or ended. These events help you understand what occurred at the infrastructure level during the conversation.
 
-Examples shown in the screenshots include event names such as:
+They are especially useful when troubleshooting call routing issues, investigating unexpected disconnections, or verifying whether a transfer was successfully completed.
 
-- **End Call Beginning**
-- **Transfer Failed**
-- **Silence Timeout Activated**
-- **Participant Left Conference Room**
-- **Participant Entered Conference Room**
-- **Started Outbound Leg Transfer Process**
-- **Outbound Leg Dialed Out**
-- **Conference Room Started**
-- **Transfer Call Started**
-- **IVR Detected**
-- **User Entered Call**
+Common examples of telephony event names include:
 
-The Telephony table can also include more specific classifications such as:
-
-- **Telephony Type**
-  - `end_call`
-  - `conversation`
-  - `transfer`
-- **Telephony Metadata**
-  - structured event metadata such as timestamps and other telephony-related details
-
-### When to use Telephony events
+- End call beginning
+- Transfer failed
+- Silence timeout activated
+- Participant left conference room
+- Participant entered conferencerRoom
+- Started outbound leg transfer process
+- Outbound leg dialed out
+- Conference room started
+- Transfer call started
+- IVR detected
+- User entered call
 
 Use these events when you want to troubleshoot:
 
@@ -146,23 +137,23 @@ Use these events when you want to troubleshoot:
 - end-call handling
 - participant join/leave activity
 
-These events are especially valuable for debugging **warm transfer**, **cold transfer**, hold behavior, and call lifecycle issues.
+These events are especially valuable for debugging warm transfer, cold transfer, hold behavior, and call lifecycle issues.
 
-## API Request events
+### API Request Events
 
-**API Request** events help you inspect outbound requests made by the workflow.
+API Request events give you visibility into outbound calls your workflow makes to external systems. They allow you to confirm whether a request was sent successfully, how long it took, and what response was returned.
 
-For these events, the table and detail panel can show data such as:
+For each API Request event, the table and detail view can include information such as:
 
-- **Status**
-- **Method**
-- **Execution Stage**
-- **Execution Time**
-- **Request URL**
-- **Response Code**
-- **API Response Body**
+- **Status** – Indicates whether the request succeeded or failed.
+- **Method** – The HTTP method used (for example, GET, POST, PUT, or DELETE).
+- **Execution Stage** – Shows whether the request is starting, in progress, or completed.
+- **Execution Time** – The total time taken for the request to execute.
+- **Request URL** – The endpoint that was called.
+- **Response Code** – The HTTP status code returned by the external service.
+- **API Response Body** – The payload returned in the response.
 
-### What API Request events help you verify
+These details make it easier to diagnose integration issues, validate external data exchanges, and ensure your workflow is communicating correctly with third-party systems.
 
 These events are useful when you need to confirm:
 
@@ -174,46 +165,28 @@ These events are useful when you need to confirm:
 - what payload came back
 - how long the request took
 
-### Example use cases
-
-Use API Request events to troubleshoot:
-
-- CRM sync failures
-- webhook delivery problems
-- lookup requests during live calls
-- post-call integrations
-- slow external services
-
----
-
 ## Code events
 
-**Code** events help you inspect what happened inside a code block.
+Code events give you visibility into what happened inside a code block during execution. They allow you to inspect how inputs were processed, how long the logic ran, and what output was produced. 
 
-In the screenshots, the detail panel for a Code event includes:
+The event detail panel typically includes:
 
-- **Event Type**
-- **Execution Stage**
-- **Execution Time**
-- **Code Block Input**
-- **Input**
-- **Code Block Output**
+- **Event Type** – Identifies the action as a code execution.
+- **Execution Stage** – Indicates whether the code is starting, running, or completed.
+- **Execution Time** – Shows how long the code block took to run.
+- **Code Block Input** – Displays the data passed into the code block.
+- **Input** – The evaluated variables or payload at runtime.
+- **Code Block Output** – The result returned after the logic was executed.
 
-This makes the Events page a very useful debugging tool when you are using custom logic in workflows.
-
-### What Code events help you verify
+This makes the events page especially valuable when working with custom logic, calculations, or data transformations, as it allows you to trace issues precisely and confirm that your workflow behaves as intended.
 
 Use these events when you want to inspect:
 
-- what inputs were passed into the code block
-- what code ran
-- what output the code returned
-- whether the code succeeded
-- how long the code execution took
-
-### Why this matters
-
-Instead of guessing whether your transformation logic worked, you can inspect the exact input/output pair recorded for that event.
+- What inputs were passed into the code block
+- What code ran
+- What output the code returned
+- Whether the code succeeded
+- How long the code execution took
 
 ## View Event Details
 
@@ -226,19 +199,17 @@ After reviewing events in the table, you can click any event row to open a detai
 
 This is especially useful when you want to inspect:
 
-- what exactly happened during an event
-- whether an action succeeded or failed
-- the execution stage (Pre Call, Live Call, Post Call)
-- request/response details for API events
-- timing and status information for troubleshooting
+- What exactly happened during an event
+- Whether an action succeeded or failed
+- The execution stage (Pre Call, Live Call, Post Call)
+- Request/response details for API events
+- Timing and status information for troubleshooting
 
 This panel lets you inspect the selected event without leaving the events page.
 
 ## Event Details panel
 
-The Event Details panel provides a full breakdown of the selected event. Depending on the event type (for example, **API Request**), the fields shown may vary.
-
-### Core event information
+The event details panel provides a full breakdown of the selected event. Depending on the event type (for example, **API Request**), the fields shown may vary.
 
 These fields help identify and trace the event:
 
