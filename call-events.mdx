@@ -129,7 +129,7 @@ Common examples of telephony event names include:
   ![Event;typetelephony](/assets/event;typetelephony.png)
 </Frame>
 
-Use these events when you want to troubleshoot transfers that failed, silence timeout behavior, IVR detection, conference room behavior, outbound leg dialing, end-call handling, and participant join/leave activity. 
+Use these events when you want to troubleshoot transfers that failed, silence timeout behavior, IVR detection, conference room behavior, outbound leg dialing, end-call handling, and participant join/leave activity.
 
 These events are especially valuable for debugging warm transfer, cold transfer, hold behavior, and call lifecycle issues.
 
@@ -192,36 +192,187 @@ Use these events when you want to inspect:
 
 ## View Event Details
 
-After reviewing events in the table, you can click any event row to open a detailed side panel with full execution information.
+The event details panel gives you the full record for a selected event. It is the most detailed view on the Call Events page and is especially useful when you need to trace what happened, confirm whether an action ran successfully, and inspect the exact data that was captured during execution.
 
-1. Go to the **Call Events** page.
-2. Use filters (optional) to narrow down the events you want to inspect.
-3. In the **events table**, click the row for the event you want to review.
-4. An **Event Details** panel opens on the right side of the page.
+To open it, click any row in the Events table. The panel opens on the right side of the page and updates based on the event you selected.
 
-This is especially useful when you want to inspect:
+Because different event types record different kinds of data, the fields shown in the panel will vary. However, all event details are built around the same goal: helping you understand what happened, when it happened, and what data was involved.
 
-- What exactly happened during an event
-- Whether an action succeeded or failed
-- The execution stage (Pre Call, Live Call, Post Call)
-- Request/response details for API events
-- Timing and status information for troubleshooting
+### Common event fields
 
-This panel lets you inspect the selected event without leaving the events page.
+Most events include a shared set of top-level fields that help identify and trace the record:
 
-## Event Details panel
+- **Event ID -** A unique identifier for the specific event record.
+- **Call ID -** The unique ID of the call this event belongs to. This is useful when you want to correlate several events from the same call.
+- **Workflow ID -** The workflow associated with the event execution.
+- Event Type - The category of event that occurred, such as API Request, Code, or Telephony.
+- **Block Name -** The workflow block that generated the event, when applicable. This is especially useful for action blocks such as API Request blocks.
+- **Success -** Indicates whether the event completed successfully (`true`) or failed (`false`).
+- **Execution Stage -** Shows when the event happened in the call lifecycle, such as: pre call, live call or post call. 
+- **Event Started -** The timestamp when the event began.
+- **Event Ended -** The timestamp when the event completed.
+- **Execution Time -** The total time taken to execute the event.
 
-The event details panel provides a full breakdown of the selected event. Depending on the event type (for example, **API Request**), the fields shown may vary.
+These fields are the foundation of the detail view and should usually be reviewed first before moving into event-specific data.
 
-These fields help identify and trace the event:
+### API Request event details
 
-- **Event ID:** A unique identifier for the specific event record.
-- **Call ID:** The unique ID of the call this event belongs to.\
-  Useful when correlating multiple events from the same call.
-- **Workflow ID:** The workflow associated with the event execution.
-- **Event Type:** The type of event that occurred (for example, **API Request**).
-- **Success:** Indicates whether the event completed successfully (`true` / `false`).
-- **Execution Stage:** Shows when the event happened in the call lifecycle, such as **Pre Call, Live Call, or Post Call.**
+When the selected event is an **API Request**, the details panel expands to include request and response information. This is the most useful view when you want to troubleshoot integrations or verify that your workflow called the correct endpoint and received the expected response.
+
+In addition to the shared fields above, API Request events can include:
+
+- **Request Method -** The HTTP method used by the request, such as `GET`, `POST`, `PATCH`, or `PUT`
+- **Request URL -** The endpoint URL that the workflow called.
+- **Response Code -** The returned HTTP status code, such as `200`, `405`, `500`, or `503`.
+- **API Response Body -** The response payload returned by the external service.
+
+The response body can be displayed in a structured response section. Depending on the event and response type, this area may show:
+
+- The type of returned data (for example, `json`)
+
+  The actual response body
+- A structured/table-like view
+- A raw object/JSON-style view
+
+<Frame>
+  ![Eventdetailsapirequest](/assets/eventdetailsapirequest.png)
+</Frame>
+
+When troubleshooting an API Request event, it usually helps to review the details in this order:
+
+1. Success - Confirm whether the event succeeded or failed.
+2. Execution stage - Confirm whether it ran in Pre Call, Live Call, or Post Call.
+3. Execution time - Check whether it took longer than expected.
+4. Request method and Request URL\
+   Confirm the request was sent to the correct endpoint using the intended method.
+5. Response code - Review whether the service returned success or an error.
+6. API response body - Inspect the returned payload to confirm the workflow.
+
+## Code event details
+
+When the selected event is a code event, the details panel focuses on the code execution itself. This makes it possible to inspect the exact logic that ran and compare the input values against the final output.
+
+### Code event fields
+
+Code events include the common fields listed above, and may also include:
+
+- **Code Block Input**\
+  The actual code that was executed inside the block.
+- **Input**\
+  The values passed into the code block at runtime.
+- **Code Block Output**\
+  The final output returned by the code block.
+
+### Why this is useful
+
+The Code event detail view is one of the best tools for debugging workflow logic because it lets you inspect:
+
+- what code was executed
+- what values the code received
+- what output it produced
+- whether the output matched your expectations
+
+This is especially useful for:
+
+- data transformations
+- formatting logic
+- calculations
+- variable preparation before passing values to another block or integration
+
+### What to check in a Code event detail view
+
+When reviewing a Code event, compare these sections carefully:
+
+1. **Code Block Input**\
+   Confirm the code itself is the version you expected to run.
+2. **Input**\
+   Check the actual values passed into the block.
+3. **Code Block Output**\
+   Confirm the returned values match what the workflow should use next.
+4. **Execution Time**\
+   Review how long the block took to execute.
+
+If the workflow output is wrong, this panel helps you determine whether the issue came from:
+
+- the code itself,
+- the input values,
+- or the returned output.
+
+---
+
+## Telephony event details
+
+Telephony events focus on call-system behavior and call routing activity. These events are especially important for troubleshooting live call handling, transfers, end-call behavior, participant changes, and conversation state changes.
+
+Depending on the telephony event, the table and associated event record can include fields such as:
+
+- **Event Name**
+- **Telephony Type**
+- **Telephony Metadata**
+
+### Telephony-specific information
+
+Telephony events can describe actions such as:
+
+- a transfer starting
+- an outbound leg dialing out
+- a participant entering or leaving a conference room
+- IVR detection
+- silence timeout activation
+- end-call behavior starting
+
+The metadata recorded with these events can help reconstruct what happened during the live call and in what order.
+
+### Why this is useful
+
+Telephony event details help you debug workflow behavior that is not related to external APIs or code, such as:
+
+- why a transfer failed
+- whether IVR was detected
+- when a participant entered or left a transfer conference
+- when a call started ending
+- whether silence timeout was triggered
+
+### What to check in a Telephony event detail view
+
+When reviewing telephony events, focus on:
+
+1. **Event Name**\
+   The specific call-system action that occurred.
+2. **Telephony Type**\
+   The broader telephony category, such as:
+   - end call
+   - conversation
+   - transfer
+   - warm transfer
+3. **Execution Stage**\
+   Usually useful for understanding whether the activity happened during the live call.
+4. **Telephony Metadata**\
+   Review the structured metadata for timestamps and other telephony-related details.
+
+For call transfer issues, telephony event details are often the most useful records in the system.
+
+---
+
+## Block Change and State Change events
+
+Some workflows also record **Block Change** and **State Change** events. These help trace how the workflow progressed internally.
+
+### Block Change
+
+A Block Change event helps show when the workflow moved from one block or action context to another.
+
+### State Change
+
+A State Change event helps track changes in workflow or execution state as the call progressed.
+
+Even if these event types contain fewer request/response-style details than API Request events, they are still useful because they help explain **how the workflow moved through its logic**.
+
+---
+
+## Why the Event Details panel matters
+
+The Events table helps you scan activity quickly, but the **Event Details** panel is where you do serious
 
 ### Timing and performance details
 
