@@ -281,18 +281,11 @@ Depending on the telephony event, the table and associated event record can incl
 Telephony events can describe actions such as:
 
 - A transfer starting
-- An outbound leg dialing out
+- An outbound call dialing out
 - A participant entering or leaving a conference room
 - IVR detection
 - Silence timeout activation
 - End-call behavior starting
-
-The metadata recorded with these events can help reconstruct what happened during the live call and in what order. Telephony event details help you debug workflow behavior such as:
-
-- Why a transfer failed
-- Whether IVR was detected
-- When a participant entered or left a transfer conference
-- When a call started ending
 - Whether silence timeout was triggered
 
 ## Customize the Events Table
