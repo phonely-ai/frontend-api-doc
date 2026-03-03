@@ -31,7 +31,7 @@ You can use it to:
 
 In short, this page is your event-level debugging and monitoring workspace.
 
-The page is split into two main working areas: a **filter sidebar** on the left and an **events table** on the right. There are also controls at the top-right for refreshing results, customizing filters, and switching views.
+The page is split into two main working areas: a filter sidebar on the left and an events table on the right. There are also controls at the top-right for refreshing results, customizing filters, and switching views.
 
 <Frame>
   ![Eventspage](/assets/eventspage.png)
@@ -41,19 +41,25 @@ The page is split into two main working areas: a **filter sidebar** on the left 
 
 The page is organized into the following main areas:
 
-### Top query bar and event timeline
+### Search Table Data
 
-At the top of the page, you’ll see a search/query bar and a timeline summary.
+The search data table field lets you quickly find and filter event records without manually expanding each filter section in the left panel. This is useful when you already know the type of data you want to inspect, such as a specific event type, status code, execution stage, or event name, and want to narrow the table faster.
 
-The search/query bar can display filters directly as query-style expressions, such as:
+As you type in the search bar, Phonely displays matching filterable fields and values in a suggestion panel. For example, you may see searchable options such as:
 
-- `event_type:telephony`
-- `event_type:api_request`
-- `event_type:code`
+<Accordion title="Show options">
+  - `date`
+  - `is_success`
+  - `api_response_code`
+  - `event_type`
+  - `execution_stage`
+  - `execution_time`
+  - `event_name`
+</Accordion>
 
-Below that, the timeline gives you a visual summary of event activity across the selected time range. This helps you quickly spot where activity happened and where failures may have occurred before you even inspect the table.
+You can use the arrow keys to move through the suggestions and press **Enter** to apply the selected query.
 
-You may also see a row count such as:`4.0k of 4.9k rows`
+Searching the table is helpful when you want to narrow results without clicking through multiple filter sections. This makes the search bar a fast alternative to manual filtering, especially when working with large event datasets.
 
 <Frame>
   ![Searchtableeventsdata](/assets/searchtableeventsdata.png)
