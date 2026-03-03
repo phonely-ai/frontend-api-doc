@@ -2,9 +2,9 @@
 title: "Call Events"
 ---
 
-The call events page is where you troubleshoot what happened behind the scenes during your calls. While the calls view shows the conversation outcome (for example, Customer Ended Call or Greeting Hangup), Call Events shows the technical actions executed during the call, such as an API Request, whether it succeeded, what status code it returned, and how long it took.
+The Call Events page gives you a detailed technical view of what happened before, during, and after a call. Instead of focusing only on the final call outcome, it shows the individual events recorded as your workflow runs, such as telephony activity, API requests, code execution, block changes, and state changes.
 
-This is especially useful when you are building workflows that use actions like API Request, Code, or other event-driven steps and you want to confirm that everything is running as expected.
+This makes the page especially useful when you need to troubleshoot workflow behavior, validate integrations, or understand why a call followed a specific path. By reviewing events, you can see not only **what** happened, but also **when** it happened, whether it succeeded, and what data was involved.
 
 After you open your call history page, you can switch into the events-level view from the top-right controls.
 
@@ -228,7 +228,7 @@ In addition to the shared fields above, API Request events can include:
 
 The response body can be displayed in a structured response section. Depending on the event.  and response type, this area may show:
 
-- The type of returned data 
+- The type of returned data
 - The actual response body
 - A structured/table-like view
 - A raw object/JSON-style view
@@ -323,7 +323,7 @@ Each item in the list includes a checkbox.
 
 Each row in the options panel includes a **drag handle** (the dotted grip icon).
 
-Use it to drag items up or down and change the display order of the columns. 
+Use it to drag items up or down and change the display order of the columns.
 
 ### Pagination / incremental loading
 
