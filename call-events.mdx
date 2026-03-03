@@ -4,7 +4,7 @@ title: "Call Events"
 
 The call events page is where you troubleshoot what happened behind the scenes during your calls. While the calls view shows the conversation outcome (for example, Customer Ended Call or Greeting Hangup), Call Events shows the technical actions executed during the call, such as an API Request, whether it succeeded, what status code it returned, and how long it took.
 
-This is especially useful when you are building workflows that use actions like **API Request**, **Code**, or other event-driven steps and you want to confirm that everything is running as expected.
+This is especially useful when you are building workflows that use actions like API Request, Code, or other event-driven steps and you want to confirm that everything is running as expected.
 
 After you open your call history page, you can switch into the events-level view from the top-right controls.
 
@@ -18,16 +18,16 @@ After you open your call history page, you can switch into the events-level view
 
 The call events page helps you move beyond the final call outcome and inspect what actually happened during execution.
 
-For example, you can use it to:
+You can use it to:
 
-- confirm whether an action ran successfully
-- identify failed workflow actions
-- review events by **Pre Call**, **Live Call**, or **Post Call**
-- find slow events using execution time
-- inspect specific events tied to one **Call ID**
-- review integration behavior
-- inspect code block input and output
-- understand transfer and telephony behavior step by step
+- Confirm whether an action ran successfully
+- Identify failed workflow actions
+- Review events by Pre Call, Live Call, or Post Call
+- Find slow events using execution time
+- Inspect specific events tied to one Call ID
+- Review integration behavior
+- Inspect code block input and output
+- Understand transfer and telephony behavior step by step
 
 In short, this page is your event-level debugging and monitoring workspace.
 
@@ -51,7 +51,7 @@ The search/query bar can display filters directly as query-style expressions, su
 - `event_type:api_request`
 - `event_type:code`
 
-Below that, the timeline gives you a visual summary of event activity across the selected time range. This helps you quickly spot where activity happened and where failures may have occurred before you even inspect the table.
+Below that, the timeline gives you a visual summary of event activity across the selected time range. This helps you quickly spot where activity happened and where failures may have occurred before you even inspect the table.              
 
 You may also see a row count such as:`4.0k of 4.9k rows`
 
@@ -78,7 +78,7 @@ Using these filters together allows you to quickly pinpoint issues, identify pat
 
 ### Events Table
 
-The main Events table displays all event records that match your selected filters. It provides a structured overview of what occurred during the call, allowing you to quickly scan and identify relevant activity.
+The main events table displays all event records that match your selected filters. It provides a structured overview of what occurred during the call, allowing you to quickly scan and identify relevant activity.
 
 Common columns in the table include:
 
@@ -87,15 +87,15 @@ Common columns in the table include:
 - **Status** – Shows the overall outcome or state of the event.
 - **Event type** – Identifies the category of the event (such as Telephony, API Request, or Code).
 - **Execution stage** – Displays where the event is in its lifecycle (for example, started or completed).
-- **Method & execution time** – For applicable events, shows the method used and how long the action took to execute.
+- **Method & execution time** – For applicable events, shows the method used and how long the action took to execute.                                  
 
 Each row represents a single event execution for example, one API request during a live call. These filters let you isolate the exact events you care about without scanning the full log manually.
 
 ## Event types
 
-Call Events is not limited to API requests. It captures multiple types of system-level actions that occur during a call, giving you full visibility into how your workflow executed behind the scenes.
+Call events is not limited to API requests. It captures multiple types of system-level actions that occur during a call, giving you full visibility into how your workflow executed behind the scenes.
 
-Common event types include:
+Common event types include:                                                          
 
 - **Telephony** – Actions related to call handling, such as dialing, connecting, transferring, or ending a call.
 - **API Request** – Outbound or inbound requests to external systems, including status codes, response times, and success or failure details.
@@ -117,7 +117,7 @@ Common examples of telephony event names include:
 - Transfer failed
 - Silence timeout activated
 - Participant left conference room
-- Participant entered conferencerRoom
+- Participant entered conferencerRoom.                       
 - Started outbound leg transfer process
 - Outbound leg dialed out
 - Conference room started
@@ -147,7 +147,7 @@ For each API Request event, the table and detail view can include information su
 - **Response Code** – The HTTP status code returned by the external service.
 - **API Response Body** – The payload returned in the response.
 
-These details make it easier to diagnose integration issues, validate external data exchanges, and ensure your workflow is communicating correctly with third-party systems.
+These details make it easier to diagnose integration issues, validate external data exchanges, and ensure your workflow is communicating correctly with third-party systems.                                                                                                                  
 
 These events are useful when you need to confirm:
 
@@ -178,7 +178,7 @@ The event detail panel typically includes:
   ![Eventtypecoderequest](/assets/eventtypecoderequest.png)
 </Frame>
 
-This makes the events page especially valuable when working with custom logic, calculations, or data transformations, as it allows you to trace issues precisely and confirm that your workflow behaves as intended.
+This makes the events page especially valuable when working with custom logic, calculations, or data transformations, as it allows you to trace issues precisely and confirm that your workflow behaves as intended.                                                                                                                          
 
 Use these events when you want to inspect:
 
@@ -192,9 +192,9 @@ Use these events when you want to inspect:
 
 ## View Event Details
 
-The event details panel gives you the full record for a selected event. It is the most detailed view on the Call Events page and is especially useful when you need to trace what happened, confirm whether an action ran successfully, and inspect the exact data that was captured during execution.
+The event details panel gives you the full record for a selected event. It is the most detailed view on the call events page and is especially useful when you need to trace what happened, confirm whether an action ran successfully, and inspect the exact data that was captured during execution.
 
-To open it, click any row in the Events table. The panel opens on the right side of the page and updates based on the event you selected.
+To open it, click any row in the events table. The panel opens on the right side of the page and updates based on the event you selected. 
 
 Because different event types record different kinds of data, the fields shown in the panel will vary. However, all event details are built around the same goal: helping you understand what happened, when it happened, and what data was involved.
 
