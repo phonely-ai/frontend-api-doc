@@ -51,7 +51,7 @@ The search/query bar can display filters directly as query-style expressions, su
 - `event_type:api_request`
 - `event_type:code`
 
-Below that, the timeline gives you a visual summary of event activity across the selected time range. This helps you quickly spot where activity happened and where failures may have occurred before you even inspect the table.              
+Below that, the timeline gives you a visual summary of event activity across the selected time range. This helps you quickly spot where activity happened and where failures may have occurred before you even inspect the table.
 
 You may also see a row count such as:`4.0k of 4.9k rows`
 
@@ -87,7 +87,7 @@ Common columns in the table include:
 - **Status** – Shows the overall outcome or state of the event.
 - **Event type** – Identifies the category of the event (such as Telephony, API Request, or Code).
 - **Execution stage** – Displays where the event is in its lifecycle (for example, started or completed).
-- **Method & execution time** – For applicable events, shows the method used and how long the action took to execute.                                  
+- **Method & execution time** – For applicable events, shows the method used and how long the action took to execute.
 
 Each row represents a single event execution for example, one API request during a live call. These filters let you isolate the exact events you care about without scanning the full log manually.
 
@@ -95,7 +95,7 @@ Each row represents a single event execution for example, one API request during
 
 Call events is not limited to API requests. It captures multiple types of system-level actions that occur during a call, giving you full visibility into how your workflow executed behind the scenes.
 
-Common event types include:                                                          
+Common event types include:
 
 - **Telephony** – Actions related to call handling, such as dialing, connecting, transferring, or ending a call.
 - **API Request** – Outbound or inbound requests to external systems, including status codes, response times, and success or failure details.
@@ -117,7 +117,7 @@ Common examples of telephony event names include:
 - Transfer failed
 - Silence timeout activated
 - Participant left conference room
-- Participant entered conferencerRoom.                       
+- Participant entered conferencerRoom.
 - Started outbound leg transfer process
 - Outbound leg dialed out
 - Conference room started
@@ -147,7 +147,7 @@ For each API Request event, the table and detail view can include information su
 - **Response Code** – The HTTP status code returned by the external service.
 - **API Response Body** – The payload returned in the response.
 
-These details make it easier to diagnose integration issues, validate external data exchanges, and ensure your workflow is communicating correctly with third-party systems.                                                                                                                  
+These details make it easier to diagnose integration issues, validate external data exchanges, and ensure your workflow is communicating correctly with third-party systems.
 
 These events are useful when you need to confirm:
 
@@ -178,7 +178,7 @@ The event detail panel typically includes:
   ![Eventtypecoderequest](/assets/eventtypecoderequest.png)
 </Frame>
 
-This makes the events page especially valuable when working with custom logic, calculations, or data transformations, as it allows you to trace issues precisely and confirm that your workflow behaves as intended.                                                                                                                          
+This makes the events page especially valuable when working with custom logic, calculations, or data transformations, as it allows you to trace issues precisely and confirm that your workflow behaves as intended.
 
 Use these events when you want to inspect:
 
@@ -194,7 +194,7 @@ Use these events when you want to inspect:
 
 The event details panel gives you the full record for a selected event. It is the most detailed view on the call events page and is especially useful when you need to trace what happened, confirm whether an action ran successfully, and inspect the exact data that was captured during execution.
 
-To open it, click any row in the events table. The panel opens on the right side of the page and updates based on the event you selected. 
+To open it, click any row in the events table. The panel opens on the right side of the page and updates based on the event you selected.
 
 Because different event types record different kinds of data, the fields shown in the panel will vary. However, all event details are built around the same goal: helping you understand what happened, when it happened, and what data was involved.
 
@@ -226,9 +226,9 @@ In addition to the shared fields above, API Request events can include:
 - **Response code -** The returned HTTP status code, such as `200`, `405`, `500`, or `503`.
 - **API Response body -** The response payload returned by the external service.
 
-The response body can be displayed in a structured response section. Depending on the event and response type, this area may show:
+The response body can be displayed in a structured response section. Depending on the event.  and response type, this area may show:
 
-- The type of returned data (for example, `json`)
+- The type of returned data 
 - The actual response body
 - A structured/table-like view
 - A raw object/JSON-style view
@@ -316,23 +316,14 @@ This is especially useful when you want to prioritize fields like Call ID, Execu
 
 Each item in the list includes a checkbox.
 
-- **Checked** = the field is enabled/visible on the page
-- **Unchecked** = the field is hidden from the current layout
-
-Depending on the field, enabling/disabling it may affect:
-
-- the **left filter panel** (which filters are shown), and/or
-- the **Events table** (which columns are available/shown)
-
-This helps you reduce clutter and keep only the fields relevant to your current investigation.
+- **Checked** = the column is visible on the table
+- **Unchecked** = the column is hidden from the table
 
 ### Reorder fields
 
 Each row in the options panel includes a **drag handle** (the dotted grip icon).
 
-Use it to drag items up or down and change the display order.
-
-Reordering can make the page much faster to use, especially during repeated debugging sessions.
+Use it to drag items up or down and change the display order of the columns. 
 
 ### Pagination / incremental loading
 
@@ -340,7 +331,7 @@ If more records exist than are currently shown, use **Load More** to fetch addit
 
 ### Sorting events
 
-Some table headers like event time and date include sorting controls. You can use sorting to quickly answer questions like:
+Some table headers like event time and date include sorting controls. Use these to sort events in ascending or descending order. Sorting allows you quickly answer questions like:
 
 - What are the newest events?
 - Which events took the longest?
