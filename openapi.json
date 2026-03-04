@@ -1822,44 +1822,6 @@
         ]
       }
     },
-    "/get-all-agents": {
-      "get": {
-        "summary": "Get all agents",
-        "description": "Retrieves a comprehensive list of all agents across all organizations, organized by organization. This endpoint is typically used for administrative purposes.",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAllAgentsResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/get-invoices": {
       "post": {
         "summary": "Get invoices",

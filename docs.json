@@ -252,7 +252,6 @@
                     "pages": [
                       "api-reference/endpoint/get-agent",
                       "api-reference/endpoint/get-agents",
-                      "api-reference/endpoint/get-all-agents",
                       "api-reference/endpoint/duplicate-agent",
                       "api-reference/endpoint/update-agent"
                     ]
