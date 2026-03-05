@@ -53,9 +53,9 @@ There is also an **Add Column** action in the table header. This is where you cr
 
 When you click **Add view**, you can create a new view in two different ways. You can describe the view you want in plain language and use AI suggestions to generate a starting point, or you can choose to build the view manually.
 
-The AI-assisted flow is useful when you already know the question you want to answer but do not want to set up the table from scratch. In the **Create Data View** dialog, you can type a request like:
+The AI-assisted flow is useful when you already know the question you want to answer but do not want to set up the table from scratch. 
 
-_Show daily total calls, success rate, and negative sentiment rate._
+In the **Create Data View** dialog, you can type a request like: _Show daily total calls, success rate, and negative sentiment rate._
 
 You can also choose from suggested examples such as:
 
@@ -79,15 +79,17 @@ In the **Create Data View** flow, choose **Build Manually**.
 
 This opens the manual builder, where you can define the view name, preview the table, choose a grouping, and add columns before publishing the view.
 
-At the top of the builder, enter a **View Name**. This is the label that will appear as the saved tab in Data Tables, so it should describe what the view is intended to show. For example, names like **Total Calls by Day**, **Appointment Booked Rate by Week**, or **Negative Sentiment by Prompt Version** make the purpose of the table clear.
+At the top of the builder, enter a **View Name**. This is the label that will appear as the saved tab in data tables, so it should describe what the view is intended to show. For example, names like _Total Calls by Day, Appointment Booked Rate by Week, or Negative Sentiment by Prompt Versio_n make the purpose of the table clear.
 
 <Frame>
   ![Totalcallsbytheday](/assets/totalcallsbytheday.png)
 </Frame>
 
-Below the name, you’ll see a **Preview** section. This gives you an early look at how the table will appear once saved. The preview only shows a limited sample of rows, which makes it easier to test the structure of the view before publishing it.
+Below the name, you’ll see a **Preview** section. This gives you an early look at how the table will appear once saved. The preview only shows a limited sample of rows, which makes it easier to test the structure of the view before publishing it. 
 
-Inside the preview, the first thing to configure is the **Group** dropdown. This controls how the rows in the table are split. You can choose from grouping options such as **Prompt Version**, **Customer Phone**, **Agent Phone**, or time-based groupings like **Daily** and **Weekly**. When you change the grouping, the preview updates immediately so you can see how the row structure changes.
+Inside the preview, the first thing to configure is the **Group** dropdown. This controls how the rows in the table are split. 
+
+You can choose from grouping options such as **Prompt Version**, **Customer Phone**, **Agent Phone**, or time-based groupings like **Daily** and **Weekly**. When you change the grouping, the preview updates immediately so you can see how the row structure changes.
 
 <Frame>
   ![Datatablegroups](/assets/datatablegroups.png)
@@ -97,7 +99,7 @@ For example, if you select **Daily**, each row in the preview represents a day. 
 
 Once the grouping looks right, you can add metrics by clicking **Add Column**. This opens the Add Column dialog, where you define the metric name and the formula. After saving the column, it appears in the preview so you can confirm that it is calculating what you expect.
 
-### Metric Name
+## Metric Name
 
 The metric name is the visible label of the column in the table. It should describe the value clearly enough that someone can understand it without reading the formula.
 
@@ -107,13 +109,13 @@ This matters because a technically correct formula can still produce a confusing
   If a formula returns a percentage, include `%` or the word **Rate** in the name. If a formula returns minutes, mention **min** in the name.
 </Tip>
 
-### Formula
+## Formula
 
 The formula defines how the metric is calculated for each row group. This is the most important part of a metric column.
 
 The formula language supports arithmetic expressions and variable references, so you can calculate counts, percentages, ratios, and averages.
 
-**Supported operators**
+ **Operators**
 
 You can use:
 
@@ -126,18 +128,25 @@ You can use:
 
 This means you can build both simple and more advanced expressions.
 
-### Core metrics
+When you click into the **Formula** field, a suggestion menu appears. This picker helps you browse available variables without memorizing them.
+
+It is organized into sections such as:
+
+- Core Metrics
+- Outcomes
+- And other available namespaces
+
+For example, it may show:
+
+- `@total` - Total calls in group
+
+### Common Variables
 
 The formula system includes built-in core variables.
 
-<AccordionGroup>
-  <Accordion title="@total">
-    Returns the total number of calls in the current row group.
-  </Accordion>
-  <Accordion title="@duration">
-    Returns the average call duration for the current row group, in seconds.
-  </Accordion>
-</AccordionGroup>
+**@total:** Returns the total number of calls in the current row group.
+
+**@duration:** Returns the average call duration for the current row group, in seconds.
 
 ### Namespaced variables
 
@@ -211,9 +220,7 @@ These are useful for analyzing caller intent, routing outcomes, or topic trends.
 
 ### Sentiment variables
 
-Sentiment variables count calls by sentiment classification.
-
-Supported values include:
+Sentiment variables count calls by sentiment classification. Supported values include:
 
 <Expandable title="property">
   | Sentiment Variable    | Description                                             |
@@ -227,9 +234,7 @@ These are especially useful for experience and quality monitoring.
 
 ### End reason variables
 
-End reason variables count calls by how they ended.
-
-Examples include:
+End reason variables count calls by how they ended. Examples include:
 
 <Expandable title="property">
   | End Reason Variable                         | Description                                                                  |
@@ -245,78 +250,56 @@ Examples include:
 
 These are useful when you want to monitor call completion patterns or operational failure modes.
 
-## Use the formula picker
-
-When you click into the **Formula** field, a suggestion menu appears. This picker helps you browse available variables without memorizing them.
-
-It is organized into sections such as:
-
-- **Core Metrics**
-- **Outcomes**
-- and other available namespaces
-
-For example, it may show:
-
-- `@total` - Total calls in group
-- `@duration` - Avg duration (seconds)
-- `@outcome.Appointment_Confirmed` - Outcome count
-- `@outcome.Appointment_Details_Collected` — Outcome count
-
-This makes formula building much faster and reduces naming mistakes.
-
 ## Excluding calls by metadata key
 
-You can append exclusions with the syntax:
+The formula system also supports exclusions using the `-@{variable}` pattern. This removes calls that contain the specified custom metadata key before the metric is calculated.
 
-- `-@{variable}`
-
-Example:
+For example:
 
 ```
 (-@outcome.success / @total) * 100
 ```
 
-This excludes calls that contain that metadata key before computing the metric.
+This excludes calls containing the `outcome.success` metadata key before computing the metric.
 
-Use this when you want to remove a certain subset of calls from the calculation rather than count them as part of the numerator or denominator.
+Use exclusions when you want to remove a known subset of calls from the calculation rather than count them as part of the numerator or denominator.n.   
 
-# Targets
+## Targets and KPI comparison
+
+Targets are optional, but they are very useful when a metric represents a KPI rather than a descriptive value.
+
+When **include target** is enabled for a metric, you define a direction and a target value.
 
 Targets are optional, but they are important when a metric represents a KPI rather than just a descriptive value.
 
 When **Include Target** is enabled, the metric can be evaluated against a threshold. This helps you quickly distinguish healthy values from values that need attention.
 
-A target includes two parts:
+A target includes two parts, the direction and the target value.
 
-- the **direction**
-- the **target value**
+### Target direction
 
-## Target direction
+The direction tells the table how to interpret success. If the direction is **Above (**`>=`**)**, the metric is considered green when the value is at or above the target.
 
-The direction tells the table how to interpret success.
-
-### Above (`>=`)
+**Above (**`>=`**)**
 
 Use this when higher values are better.
 
 Examples:
 
-- Success Rate should be above 75
-- Appointment Booked Rate should be above 20
+- Success rate should be above 75
+- Appointment booked rate should be above 20
 
-### Below (`<=`)
+**Below (**`<=`**)**
 
-Use this when lower values are better.
+Use this when lower values are better. If the direction is **Below (**`<=`**)**, the metric is considered green when the value is at or below the target. 
 
 Examples:
 
-- Negative Sentiment Rate should be below 10
-- Avg Duration (min) should be below 4
-- Voicemail Rate should be below 5
+- Negative sentiment rate should be below 10
+- Avg duration (min) should be below 4
+- Voicemail rate should be below 5
 
----
-
-## Target value
+### Target value
 
 The target value is the numeric threshold the metric is compared against.
 
@@ -328,9 +311,7 @@ For example:
 
 The value should match the unit and scale of your formula.
 
----
-
-## Choosing good targets
+**Choosing good targets**
 
 Targets work best when the metric reflects a real business benchmark. Not every metric needs one.
 
@@ -340,28 +321,20 @@ A target is useful when:
 - the team already has a known goal
 - you want to scan the table for rows that are off target
 
-A target is less useful when:
+To save the column to the view click the **Add Column** button. 
 
-- the metric is exploratory
-- there is no meaningful threshold yet
-- the metric is included for context only
+## Add More Columns
 
-You can continue adding more columns until the preview shows the exact combination of metrics you need. For example, a manually built daily view might include:
-
-- **Total Calls**
-- **Appointment Confirmed %**
-- **Negative Sentiment %**
-
-A prompt-version view might instead include:
-
-- **Total Calls**
-- **Avg Duration (min)**
-- **Call Escalated %**
+You can continue adding more columns until the preview shows the exact combination of metrics you need. 
 
 As you build, use the preview to confirm that both the grouping and the columns make sense together. If something looks off, you can change the grouping, update a metric, or go back and adjust the formula before publishing.
 
 When the view is ready, click **Publish** to save it. The new view will then appear as a tab in Data Tables, where you can switch to it anytime like any other saved view.
 
 If you decide not to keep the changes, click **Cancel**. If you want to return to the earlier setup step in the builder, use **Back**.
+
+<Frame>
+  ![Publishdataview](/assets/publishdataview.png)
+</Frame>
 
 A good way to build manually is to start with one grouping and one simple metric, confirm the preview looks correct, then add more columns gradually. This helps keep the table focused and makes it easier to spot issues before the view is published.
