@@ -53,7 +53,7 @@ There is also an **Add Column** action in the table header. This is where you cr
 
 When you click **Add view**, you can create a new view in two different ways. You can describe the view you want in plain language and use AI suggestions to generate a starting point, or you can choose to build the view manually.
 
-The AI-assisted flow is useful when you already know the question you want to answer but do not want to set up the table from scratch. 
+The AI-assisted flow is useful when you already know the question you want to answer but do not want to set up the table from scratch.
 
 In the **Create Data View** dialog, you can type a request like: _Show daily total calls, success rate, and negative sentiment rate._
 
@@ -79,15 +79,15 @@ In the **Create Data View** flow, choose **Build Manually**.
 
 This opens the manual builder, where you can define the view name, preview the table, choose a grouping, and add columns before publishing the view.
 
-At the top of the builder, enter a **View Name**. This is the label that will appear as the saved tab in data tables, so it should describe what the view is intended to show. For example, names like _Total Calls by Day, Appointment Booked Rate by Week, or Negative Sentiment by Prompt Versio_n make the purpose of the table clear.
+At the top of the builder, enter a **View Name**. This is the label that will appear as the saved tab in data tables, so it should describe what the view is intended to show. For example, names like \_Total Calls by Day, Appointment Booked Rate by Week, or Negative Sentiment by Prompt Versio_n make the purpose of the table clear.
 
 <Frame>
   ![Totalcallsbytheday](/assets/totalcallsbytheday.png)
 </Frame>
 
-Below the name, you’ll see a **Preview** section. This gives you an early look at how the table will appear once saved. The preview only shows a limited sample of rows, which makes it easier to test the structure of the view before publishing it. 
+Below the name, you’ll see a **Preview** section. This gives you an early look at how the table will appear once saved. The preview only shows a limited sample of rows, which makes it easier to test the structure of the view before publishing it.
 
-Inside the preview, the first thing to configure is the **Group** dropdown. This controls how the rows in the table are split. 
+Inside the preview, the first thing to configure is the **Group** dropdown. This controls how the rows in the table are split.
 
 You can choose from grouping options such as **Prompt Version**, **Customer Phone**, **Agent Phone**, or time-based groupings like **Daily** and **Weekly**. When you change the grouping, the preview updates immediately so you can see how the row structure changes.
 
@@ -115,7 +115,7 @@ The formula defines how the metric is calculated for each row group. This is the
 
 The formula language supports arithmetic expressions and variable references, so you can calculate counts, percentages, ratios, and averages.
 
- **Operators**
+**Operators**
 
 You can use:
 
@@ -262,7 +262,7 @@ For example:
 
 This excludes calls containing the `outcome.success` metadata key before computing the metric.
 
-Use exclusions when you want to remove a known subset of calls from the calculation rather than count them as part of the numerator or denominator.n.   
+Use exclusions when you want to remove a known subset of calls from the calculation rather than count them as part of the numerator or denominator.n.
 
 ## Targets and KPI comparison
 
@@ -271,8 +271,6 @@ Targets are optional, but they are very useful when a metric represents a KPI ra
 When **include target** is enabled for a metric, you define a direction and a target value.
 
 Targets are optional, but they are important when a metric represents a KPI rather than just a descriptive value.
-
-When **Include Target** is enabled, the metric can be evaluated against a threshold. This helps you quickly distinguish healthy values from values that need attention.
 
 A target includes two parts, the direction and the target value.
 
@@ -291,13 +289,17 @@ Examples:
 
 **Below (**`<=`**)**
 
-Use this when lower values are better. If the direction is **Below (**`<=`**)**, the metric is considered green when the value is at or below the target. 
+Use this when lower values are better. If the direction is **Below (**`<=`**)**, the metric is considered green when the value is at or below the target.
 
 Examples:
 
 - Negative sentiment rate should be below 10
 - Avg duration (min) should be below 4
 - Voicemail rate should be below 5
+
+<Frame>
+  ![Targetdirection](/assets/targetdirection.png)
+</Frame>
 
 ### Target value
 
@@ -321,11 +323,11 @@ A target is useful when:
 - the team already has a known goal
 - you want to scan the table for rows that are off target
 
-To save the column to the view click the **Add Column** button. 
+To save the column to the view click the **Add Column** button.
 
 ## Add More Columns
 
-You can continue adding more columns until the preview shows the exact combination of metrics you need. 
+You can continue adding more columns until the preview shows the exact combination of metrics you need.
 
 As you build, use the preview to confirm that both the grouping and the columns make sense together. If something looks off, you can change the grouping, update a metric, or go back and adjust the formula before publishing.
 
