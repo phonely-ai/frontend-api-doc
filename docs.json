@@ -201,7 +201,8 @@
               "perfomance",
               "post-call-outcomes",
               "call-paths",
-              "call-events"
+              "call-events",
+              "data-tables"
             ]
           },
           {
