@@ -213,11 +213,9 @@ Along the bottom of the page, you’ll see the available workflows.
 
 This makes it easy to compare how different workflows perform, without leaving the Call Path page.
 
-## Understanding the flow diagram
-
 The canvas shows your workflow as a connected set of nodes (blocks) and paths.
 
-### Paths (connections)
+## Paths (connections)
 
 The connections between blocks represent transitions callers took between steps.
 
@@ -226,17 +224,17 @@ Typically:
 - Thicker / more prominent paths indicate higher call volume.
 - End nodes on the right often represent where calls concluded (for example: Customer Ended Call, Silence Timeout, Assistant Ended Call).
 
-### Nodes (blocks)
+## Nodes (blocks)
 
 Each node (block) in **Call Path** represents a step in your workflow. When you click a node, Phonely opens a **right-side panel** that lets you inspect what the node is, what it’s configured to do, and how calls behaved at that step.
 
 What you see depends on the node type
 
-#### Start node
+### Start node
 
-The Start node is the entry point for the flow. Currently, it does not show additional node-level details in the panel. 
+The Start node is the entry point for the flow. Currently, it does not show additional node-level details in the panel.
 
-#### Action nodes 
+### Action nodes
 
 Action nodes show the most detail because they represent an actual workflow step (for example: collect details, route, API request, transfer, etc.).
 
@@ -324,14 +322,6 @@ The metrics tab summarizes how calls behaved at that node for the currently sele
   </Step>
 </Steps>
 
----
+### End nodes
 
-#### End nodes
-
-**End** nodes summarize where calls terminate. When you click an end node, the panel shows **simple call volume analytics** so you can quickly understand how many calls ended there and how significant that end point is relative to the rest of the flow.
-
----
-
-#### Switch Flow nodes
-
-A **Switch Flow** node is a navigation jump between workflows. Clicking it takes you directly to the target workflow—this behaves the same as selecting that workflow from the tabs at the bottom of the page.
+End nodes summarize where calls terminate. When you click an end node, the panel shows simple call volume analytics so you can quickly understand how many calls ended there and how significant that end point is relative to the rest of the flow.
