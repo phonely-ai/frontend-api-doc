@@ -61,7 +61,7 @@ This is especially useful right after publishing changes, so you can compare beh
 
 ### Filter (call-level filters)
 
-Click the **Filter** (top-right) button. The filters panel allows you to narrow down the set of calls displayed in the Call Paths view. By applying filters, you can focus on specific call behaviors, time ranges, outcomes, or call characteristics. This is especially useful when you want to investigate patterns such as short calls, after-hours activity, calls that ended unexpectedly, or calls related to specific customer intents.
+The filters panel allows you to narrow down the set of calls displayed in the call paths view. By applying filters, you can focus on specific call behaviors, time ranges, outcomes, or call characteristics. This is especially useful when you want to investigate patterns such as short calls, after-hours activity, calls that ended unexpectedly, or calls related to specific customer intents.
 
 To open the panel, click **Filters** in the top-right corner of the page. After selecting the desired criteria, click **Apply** to refresh the view using only the calls that match the selected filters.
 
@@ -75,7 +75,7 @@ You can use the preset options:
 - **1–5 min** – medium-length interactions that typically represent quick inquiries
 - **\> 5 min** – longer conversations that may indicate complex issues or detailed support interactions
 
-You can also adjust the duration slider to define a custom range between 0 seconds and 60+ minutes. This allows you to precisely isolate calls within a specific time window.
+You can also adjust the duration slider to define a custom range between 0 seconds and 60+ minutes. This allows you to precisely isolate calls within a specific duration.
 
 **Day of Week**
 
@@ -95,6 +95,10 @@ When days are selected, the system will display only calls that occurred on thos
 
 Click **Reset** to clear the day selection.
 
+<Frame>
+  ![Durationandtimeofthedayfilters](/assets/durationandtimeofthedayfilters.png)
+</Frame>
+
 **Time of Day**
 
 The time of day filter lets you focus on calls within a specific time window during the day.
@@ -107,9 +111,7 @@ Quick options include:
 - **Business Hours** – commonly used working hours (default **9:00 AM – 5:00 PM**)
 - **After Hours** – calls that occur outside standard working hours
 
-You can also manually set a custom range using the from and to dropdowns. For example from: 9:00 AM to: 5:00 PM
-
-The panel will confirm the selection with a message such as “Showing calls from 9:00 AM to 5:00 PM.”
+You can also manually set a custom range using the from and to dropdowns. For example from: 9:00 AM to: 5:00 PM. The panel will confirm the selection with a message such as “Showing calls from 9:00 AM to 5:00 PM.”
 
 Click **Reset** to restore the default time range.
 
@@ -172,7 +174,7 @@ This can help you compare behavior between web-initiated and phone-initiated con
 
 The ended reason filter explains why the call ended.
 
-<Expandable title="Examples">
+<Expandable title="Ended Reason Examples">
   - **customer-ended-call** – the caller hung up
   - **assistant-ended-call** – the AI assistant intentionally ended the call
   - **user-ended-call** – the user triggered call termination through the interface
