@@ -199,10 +199,12 @@
             "group": "PERFORMANCE",
             "pages": [
               "perfomance",
+              "data-tables",
+              "old-call-paths",
               "post-call-outcomes",
-              "call-paths",
               "call-events",
-              "data-tables"
+              "call-path",
+              "call-path-1"
             ]
           },
           {
