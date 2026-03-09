@@ -1,0 +1,346 @@
+---
+title: "Data Tables"
+---
+
+The **Data Tables** tab in Performance lets you build custom table views of call performance. Instead of looking at a single chart, you can create saved views that break calls into groups and calculate one or more metrics for each group.
+
+This is useful when you want to answer questions like:
+
+- How many calls came from each prompt version?
+- What is the success rate by day or week?
+- Which customer phone numbers have the longest average call duration?
+- How often does a specific outcome, topic, sentiment, or end reason appear?
+
+A data table view gives you a flexible way to analyze performance using your own groupings and formulas.
+
+## What a data table view ?
+
+A view is a saved table configuration. Each view includes:
+
+- A grouping, which determines how the rows are split
+- One or more metric columns, which determine what each column calculates
+- Optional targets for each metric, so you can compare results against a goal
+
+You can create multiple views for the same agent and switch between them using tabs.
+
+For example, one view might show total calls by prompt version
+
+> Another might show success rate by day
+>
+> Another might show negative sentiment rate by hour
+>
+> Each of these is a separate saved view.
+
+1. From the left sidebar go to the **Analytics** section.
+2. Select **Performance**.
+3. In the top-right area, switch from **Performance** to **Data Tables**.
+4. You’ll see the current saved view as a tab.
+5. Use the date range selector at the top to control the time window for the table.
+
+The page can also include a metric selector such as **Duration**, depending on your current Performance settings
+
+## How the page is organized
+
+The data tables page is built around a saved view. At the top, you’ll see controls such as the date range and any global performance selector currently applied. Below that, the main data table area includes the active view tab, an **Add view** button, the **Group** selector, and the metric columns.
+
+The active view name appears as a tab. This makes it easy to keep several saved views and switch between them without rebuilding them each time.
+
+Inside the table, the first column is usually the grouping column. For example, if the grouping is **Prompt Version**, the first column lists values such as `v2.4`, `v1.5` The remaining columns are metric columns, such as **Total Calls** or any custom formulas you add.
+
+There is also an **Add Column** action in the table header. This is where you create new metrics.
+
+## Create a data view
+
+When you click **Add view**, you can create a new view in two different ways. You can describe the view you want in plain language and use AI suggestions to generate a starting point, or you can choose to build the view manually.
+
+The AI-assisted flow is useful when you already know the question you want to answer but do not want to set up the table from scratch.
+
+In the **Create Data View** dialog, you can type a request like: _Show daily total calls, success rate, and negative sentiment rate._
+
+You can also choose from suggested examples such as:
+
+- Show total calls by day
+- Track appointment booked rate by week
+- Compare sales vs appointment confirmed by day
+- Show avg duration by customer phone number
+- Show negative sentiment rate by hour
+
+If the suggestions are not quite right, you can refresh them or choose **Build Manually** instead.
+
+The manual flow gives you full control. You create the view, choose the grouping, add metric columns, and save it. This is the best option when you want a very specific setup or already know the exact formulas you want to use.
+
+## Build a view manually
+
+If you want full control over how the table is set up, you can build a view manually instead of using the AI-generated suggestions. This is the best option when you already know how you want the rows to be grouped and which metrics you want to calculate.
+
+To start, open **Data Tables** and click **Add view**.
+
+In the **Create Data View** flow, choose **Build Manually**.
+
+This opens the manual builder, where you can define the view name, preview the table, choose a grouping, and add columns before publishing the view.
+
+At the top of the builder, enter a **View Name**. This is the label that will appear as the saved tab in data tables, so it should describe what the view is intended to show. For example, names like \_Total Calls by Day, Appointment Booked Rate by Week, or Negative Sentiment by Prompt Versio_n make the purpose of the table clear.
+
+<Frame>
+  ![Totalcallsbytheday](/assets/totalcallsbytheday.png)
+</Frame>
+
+Below the name, you’ll see a **Preview** section. This gives you an early look at how the table will appear once saved. The preview only shows a limited sample of rows, which makes it easier to test the structure of the view before publishing it.
+
+Inside the preview, the first thing to configure is the **Group** dropdown. This controls how the rows in the table are split.
+
+You can choose from grouping options such as **Prompt Version**, **Customer Phone**, **Agent Phone**, or time-based groupings like **Daily** and **Weekly**. When you change the grouping, the preview updates immediately so you can see how the row structure changes.
+
+<Frame>
+  ![Datatablegroups](/assets/datatablegroups.png)
+</Frame>
+
+For example, if you select **Daily**, each row in the preview represents a day. If you choose **Prompt Version**, each row represents one prompt version instead. This lets you decide whether the view should answer a time-based question, a caller-based question, or a workflow-comparison question.
+
+Once the grouping looks right, you can add metrics by clicking **Add Column**. This opens the Add Column dialog, where you define the metric name and the formula. After saving the column, it appears in the preview so you can confirm that it is calculating what you expect.
+
+## Metric Name
+
+The metric name is the visible label of the column in the table. It should describe the value clearly enough that someone can understand it without reading the formula.
+
+This matters because a technically correct formula can still produce a confusing report if the column name is vague.
+
+<Tip>
+  If a formula returns a percentage, include `%` or the word **Rate** in the name. If a formula returns minutes, mention **min** in the name.
+</Tip>
+
+## Formula
+
+The formula defines how the metric is calculated for each row group. This is the most important part of a metric column.
+
+The formula language supports arithmetic expressions and variable references, so you can calculate counts, percentages, ratios, and averages.
+
+<Frame>
+  ![Dataformulas](/assets/dataformulas.png)
+</Frame>
+
+### **Operators**
+
+You can use:
+
+- `+` add
+- `-` subtract
+- `*` multiply
+- `/` divide
+- `%` modulo
+- `(` `)` parentheses
+
+This means you can build both simple and more advanced expressions.
+
+When you click into the **Formula** field, a suggestion menu appears. This picker helps you browse available variables without memorizing them.
+
+It is organized into sections such as:
+
+- Core Metrics
+- Outcomes
+- And other available namespaces
+
+For example, it may show:
+
+- `@total` - Total calls in group
+
+### Common Variables
+
+The formula system includes built-in core variables.
+
+**@total:** Returns the total number of calls in the current row group.
+
+**@duration:** Returns the average call duration for the current row group, in seconds.
+
+### Namespaced variables
+
+Beyond core metrics, the system supports namespaced variables. These let you count calls within the row group that match a specific metadata category.
+
+Supported namespaces include:
+
+- `@outcome.<value>`
+- `@topic.<value>`
+- `@sentiment.<value>`
+- `@ended_reason.<value>`
+
+These variables return counts, which means they are especially useful for percentages and ratios.
+
+### Outcome variables
+
+Outcome variables count calls that include a specific outcome.
+
+Examples include:
+
+<Expandable title="Examples">
+  | Outcome Variable                             | Description                                                                          |
+  | :------------------------------------------- | :----------------------------------------------------------------------------------- |
+  | `@outcome.Additional_Assistance_Requested`   | Counts calls where the caller requested further help beyond the initial interaction. |
+  | `@outcome.Appointment_Confirmed`             | Counts calls where an appointment was successfully confirmed.                        |
+  | `@outcome.Appointment_Details_Collected`     | Counts calls where the necessary appointment details were gathered.                  |
+  | `@outcome.Appointment_Preferences_Collected` | Counts calls where the caller’s appointment preferences were collected.              |
+  | `@outcome.Appointment_Slots_Offered`         | Counts calls where available appointment slots were offered to the caller.           |
+  | `@outcome.Assistance_Requested`              | Counts calls where the caller asked for help or support.                             |
+  | `@outcome.Availability_Collected`            | Counts calls where availability information was captured from the caller.            |
+  | `@outcome.Buyer_Details_Collected`           | Counts calls where buyer-related details were collected.                             |
+  | `@outcome.Call_Escalated`                    | Counts calls that were escalated to a human agent or another support path.           |
+  | `@outcome.Caller_Details_Collected`          | Counts calls where the caller’s identifying details were gathered.                   |
+  | `@outcome.Consultation_Booking_Offered`      | Counts calls where a consultation booking was offered.                               |
+  | `@outcome.Contact_Details_Collected`         | Counts calls where contact information such as phone or email was collected.         |
+  | `@outcome.hello`                             | Counts calls tagged with the custom outcome `hello`.                                 |
+  | `@outcome.Inquiry_Clarified`                 | Counts calls where the caller’s request or issue was clearly identified.             |
+  | `@outcome.Order_Information_Collected`       | Counts calls where order-related details were collected.                             |
+  | `@outcome.Order_Lookup_Details_Collected`    | Counts calls where enough information was gathered to look up an order.              |
+  | `@outcome.Order_Status_Provided`             | Counts calls where the caller was given their order status.                          |
+  | `@outcome.order_tracked`                     | Counts calls tagged with the custom outcome `order_tracked`.                         |
+  | `@outcome.Personal_Details_Collected`        | Counts calls where personal information was collected from the caller.               |
+  | `@outcome.Return_Eligibility_Determined`     | Counts calls where return eligibility was checked or confirmed.                      |
+  | `@outcome.Return_Requested`                  | Counts calls where the caller requested a return.                                    |
+  | `@outcome.sales`                             | Counts calls tagged with the custom outcome `sales`.                                 |
+  | `@outcome.Standup_Information_Collected`     | Counts calls where standup-related information was collected.                        |
+  | `@outcome.Support_Option_Selected`           | Counts calls where a support option was selected.                                    |
+  | `@outcome.Website_Redirected`                | Counts calls where the caller was redirected to a website.                           |
+  | `@outcome.Website_Referral_Provided`         | Counts calls where a website referral or web resource was provided.                  |
+  | `@outcome.Your_are_the_best`                 | Counts calls tagged with the custom outcome `Your_are_the_best`.                     |
+</Expandable>
+
+Use these when you want to measure how often a specific workflow result appears.
+
+### Topic variables
+
+Topic variables count calls tagged with a specific call topic.
+
+Examples include:
+
+<Expandable title="Examples">
+  | Topic Variable                                   | Description                                                                                         |
+  | :----------------------------------------------- | :-------------------------------------------------------------------------------------------------- |
+  | `@topic.appointment_booked`                      | Counts calls where the caller successfully booked an appointment during the conversation.           |
+  | `@topic.callback_requested`                      | Counts calls where the caller requested a callback.                                                 |
+  | `@topic.caller_asked_to_speak_to_representative` | Counts calls where the caller asked to speak to a human representative or needed escalation to one. |
+  | `@topic.caller_transferred`                      | Counts calls that were transferred                                                                  |
+</Expandable>
+
+These are useful for analyzing caller intent, routing outcomes, or topic trends.
+
+### Sentiment variables
+
+Sentiment variables count calls by sentiment classification. Supported values include:
+
+<Expandable title="property">
+  | Sentiment Variable    | Description                                             |
+  | :-------------------- | :------------------------------------------------------ |
+  | `@sentiment.positive` | Counts calls classified as having a positive sentiment. |
+  | `@sentiment.neutral`  | Counts calls classified as having a neutral sentiment.  |
+  | `@sentiment.negative` | Counts calls classified as having a negative sentiment. |
+</Expandable>
+
+These are especially useful for experience and quality monitoring.
+
+### End reason variables
+
+End reason variables count calls by how they ended. Examples include:
+
+<Expandable title="property">
+  | End Reason Variable                         | Description                                                                  |
+  | :------------------------------------------ | :--------------------------------------------------------------------------- |
+  | `@ended_reason.assistant-ended-call`        | Counts calls that were ended by the assistant.                               |
+  | `@ended_reason.assistant-forwarded-call`    | Counts calls where the assistant forwarded the call to another destination.  |
+  | `@ended_reason.customer-ended-call`         | Counts calls that were ended by the customer.                                |
+  | `@ended_reason.hangup-during-warm-transfer` | Counts calls where the caller hung up during a warm transfer attempt.        |
+  | `@ended_reason.max-duration-reached`        | Counts calls that ended because the maximum call duration limit was reached. |
+  | `@ended_reason.silence-timeout`             | Counts calls that ended due to a silence timeout.                            |
+  | `@ended_reason.voicemail`                   | Counts calls that ended because the call reached voicemail.                  |
+</Expandable>
+
+These are useful when you want to monitor call completion patterns or operational failure modes.
+
+## Excluding calls by metadata key
+
+The formula system also supports exclusions using the `-@{variable}` pattern. This removes calls that contain the specified custom metadata key before the metric is calculated.
+
+For example:
+
+```text
+(-@outcome.success / @total) * 100
+```
+
+This excludes calls containing the `outcome.success` metadata key before computing the metric.
+
+Use exclusions when you want to remove a known subset of calls from the calculation rather than count them as part of the numerator or denominator.n.
+
+## Targets and KPI comparison
+
+Targets are optional, but they are very useful when a metric represents a KPI rather than a descriptive value.
+
+When **include target** is enabled for a metric, you define a direction and a target value.
+
+Targets are optional, but they are important when a metric represents a KPI rather than just a descriptive value.
+
+A target includes two parts, the direction and the target value.
+
+### Target direction
+
+The direction tells the table how to interpret success. If the direction is **Above (**`>=`**)**, the metric is considered green when the value is at or above the target.
+
+**Above (**`>=`**)**
+
+Use this when higher values are better.
+
+Examples:
+
+- Success rate should be above 75
+- Appointment booked rate should be above 20
+
+**Below (**`<=`**)**
+
+Use this when lower values are better. If the direction is **Below (**`<=`**)**, the metric is considered green when the value is at or below the target.
+
+Examples:
+
+- Negative sentiment rate should be below 10
+- Avg duration (min) should be below 4
+- Voicemail rate should be below 5
+
+<Frame>
+  ![Targetdirection](/assets/targetdirection.png)
+</Frame>
+
+### Target value
+
+The target value is the numeric threshold the metric is compared against.
+
+For example:
+
+- if the metric is a percentage, the target might be `75`
+- if the metric is minutes, the target might be `4`
+- if the metric is a raw count, the target might be `20`
+
+The value should match the unit and scale of your formula.
+
+**Choosing good targets**
+
+Targets work best when the metric reflects a real business benchmark. Not every metric needs one.
+
+A target is useful when:
+
+- the metric is tied to a KPI
+- the team already has a known goal
+- you want to scan the table for rows that are off target
+
+To save the column to the view click the **Add Column** button.
+
+## Add More Columns
+
+You can continue adding more columns until the preview shows the exact combination of metrics you need.
+
+As you build, use the preview to confirm that both the grouping and the columns make sense together. If something looks off, you can change the grouping, update a metric, or go back and adjust the formula before publishing.
+
+When the view is ready, click **Publish** to save it. The new view will then appear as a tab in Data Tables, where you can switch to it anytime like any other saved view.
+
+If you decide not to keep the changes, click **Cancel**. If you want to return to the earlier setup step in the builder, use **Back**.
+
+<Frame>
+  ![Publishdataview](/assets/publishdataview.png)
+</Frame>
+
+A good way to build manually is to start with one grouping and one simple metric, confirm the preview looks correct, then add more columns gradually. This helps keep the table focused and makes it easier to spot issues before the view is published.
