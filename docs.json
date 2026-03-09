@@ -203,8 +203,7 @@
               "old-call-paths",
               "post-call-outcomes",
               "call-events",
-              "call-path",
-              "call-path-1"
+              "call-path"
             ]
           },
           {
