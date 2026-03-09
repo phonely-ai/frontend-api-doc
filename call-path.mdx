@@ -228,11 +228,19 @@ Typically:
 
 ### Nodes (blocks)
 
-Each block represents a step in the workflow. Clicking a node opens a right-side panel where you can inspect that node in detail.
+Each node (block) in **Call Path** represents a step in your workflow. When you click a node, Phonely opens a **right-side panel** that lets you inspect what the node is, what it’s configured to do, and how calls behaved at that step.
 
-## Details and Metrics
+What you see depends on the node type
 
-When you click any node in Call Path, a right-side panel opens with two tabs: Details and Metrics. Together, these tabs answer two different questions:
+#### Start node
+
+The Start node is the entry point for the flow. Currently, it does not show additional node-level details in the panel. 
+
+#### Action nodes 
+
+Action nodes show the most detail because they represent an actual workflow step (for example: collect details, route, API request, transfer, etc.).
+
+When you click an action node a right-side panel opens with two tabs: Details and Metrics. Together, these tabs answer two different questions:
 
 - **Details** = _What is this node configured to do (right now)?_
 - **Metrics** = _What actually happened here in the selected calls?_
@@ -315,3 +323,15 @@ The metrics tab summarizes how calls behaved at that node for the currently sele
     Use this to understand the most common routing outcome after the node and to identify unexpected paths.
   </Step>
 </Steps>
+
+---
+
+#### End nodes
+
+**End** nodes summarize where calls terminate. When you click an end node, the panel shows **simple call volume analytics** so you can quickly understand how many calls ended there and how significant that end point is relative to the rest of the flow.
+
+---
+
+#### Switch Flow nodes
+
+A **Switch Flow** node is a navigation jump between workflows. Clicking it takes you directly to the target workflow—this behaves the same as selecting that workflow from the tabs at the bottom of the page.
