@@ -133,6 +133,12 @@
                 "pages": [
                   "key-concepts/manage-workflow-versions"
                 ]
+              },
+              {
+                "group": "Workflow Checklist",
+                "pages": [
+                  "workflow-checklist"
+                ]
               }
             ]
           },
