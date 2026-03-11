@@ -127,22 +127,15 @@ You can use:
 - `-` subtract
 - `*` multiply
 - `/` divide
-- `%` modulo
 - `(` `)` parentheses
 
 This means you can build both simple and more advanced expressions.
 
-When you click into the **Formula** field, a suggestion menu appears. This picker helps you browse available variables without memorizing them.
+When you click into the **Formula** field, a suggestion menu appears. This picker helps you browse available variables. It is organized into sections such as core metrics, outcomes, call topics,   end reasons, and sentiment. 
 
-It is organized into sections such as:
-
-- Core Metrics
-- Outcomes
-- And other available namespaces
-
-For example, it may show:
-
-- `@total` - Total calls in group
+<Tip>
+  Variables such as`@total`, `@duration`, `@sentiment.<value>`, and `@ended_reason.<value>` are always available. Variables such as`@outcome.<value>` only appears for outcomes in the agent’s latest published version, and `@topic.<value>` only appears for topics currently configured for the agent
+</Tip>
 
 ### Common Variables
 
@@ -167,7 +160,7 @@ These variables return counts, which means they are especially useful for percen
 
 ### Outcome variables
 
-Outcome variables count calls that include a specific outcome.
+Outcome variables count calls that include a specific outcome from the agent’s latest published version. Only outcomes that exist in the latest published version appear in the formula picker.
 
 Examples include:
 
@@ -207,7 +200,7 @@ Use these when you want to measure how often a specific workflow result appears.
 
 ### Topic variables
 
-Topic variables count calls tagged with a specific call topic.
+Topic variables count calls tagged with a specific call topic that is **currently set for the agent**. Only topics that are configured for the agent appear in the formula picker.
 
 Examples include:
 
@@ -344,3 +337,21 @@ If you decide not to keep the changes, click **Cancel**. If you want to return t
 </Frame>
 
 A good way to build manually is to start with one grouping and one simple metric, confirm the preview looks correct, then add more columns gradually. This helps keep the table focused and makes it easier to spot issues before the view is published.
+
+## Drill-down on click
+
+After you **publish** a data table view, you can drill into the calls behind any metric by clicking a cell in the table. This opens a call list panel showing the calls included in that value, along with a short summary, timestamp, and call duration, so you can quickly move from “the number” to the actual conversations that produced it.
+
+For ratio-based formulas (for example, `(@sentiment.negative / @total) * 100`), drill-down focuses on the **numerator-side calls**, the calls that contribute to the top part of the formula. This is intentional: it makes it easy to inspect exactly which calls drove the percentage, without forcing you to sift through every call in the denominator group.
+
+<Frame>
+  ![Viewnumeratorsidecalls](/assets/viewnumeratorsidecalls.png)
+</Frame>
+
+Drill-down is especially useful when you want to:
+
+- validate that a metric is counting the right calls
+- investigate spikes or drops in a rate (success rate, negative sentiment rate, voicemail rate, etc.)
+- review the exact calls contributing to a specific outcome, topic, sentiment, or end reason
+
+If you need to compare across groups, click different cells in the table to open the corresponding call lists and review the underlying call sets side-by-side.
