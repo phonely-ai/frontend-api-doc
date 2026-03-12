@@ -114,6 +114,12 @@
                 ]
               },
               {
+                "group": "Workflow Checklist",
+                "pages": [
+                  "checklist"
+                ]
+              },
+              {
                 "group": "Flow Settings",
                 "pages": [
                   "agent-design/flow-settings"
@@ -136,7 +142,9 @@
               },
               {
                 "group": "Workflow Checklist",
-                "pages": []
+                "pages": [
+                  "key-concepts/workflow-checklist-1"
+                ]
               }
             ]
           },
@@ -189,7 +197,8 @@
           {
             "group": "KEY CONCEPTS",
             "pages": [
-              "key-concepts/flow-canvas-controls"
+              "key-concepts/flow-canvas-controls",
+              "key-concepts/workflow-checklist-1"
             ]
           },
           {
