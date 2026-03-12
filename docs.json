@@ -114,12 +114,6 @@
                 ]
               },
               {
-                "group": "Workflow Checklist",
-                "pages": [
-                  "checklist"
-                ]
-              },
-              {
                 "group": "Flow Settings",
                 "pages": [
                   "agent-design/flow-settings"
@@ -135,15 +129,15 @@
                 ]
               },
               {
-                "group": "Workflow Versions",
-                "pages": [
-                  "key-concepts/manage-workflow-versions"
-                ]
-              },
-              {
                 "group": "Workflow Checklist",
                 "pages": [
                   "key-concepts/workflow-checklist-1"
+                ]
+              },
+              {
+                "group": "Workflow Versions",
+                "pages": [
+                  "key-concepts/manage-workflow-versions"
                 ]
               }
             ]
