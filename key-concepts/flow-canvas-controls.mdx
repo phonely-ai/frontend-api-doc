@@ -11,12 +11,14 @@ The **Add Block** button opens the block selector, allowing you to insert new bl
 
 Click the ➕ icon, then select the block you want to add (for example: Talk, Collect, Filter, API Request).
 
-<img
-  src="/assets/list-of-available-blocks.png"
-  alt="List Of Available Blocks"
-  title="List Of Available Blocks"
-  style={{ width:"54%" }}
-/>
+<Frame>
+  <img
+    src="/images/addanewblockstoyourworkflow.png"
+    alt="Addanewblockstoyourworkflow"
+    title="Addanewblockstoyourworkflow"
+    style={{ width:"54%" }}
+  />
+</Frame>
 
 ### Sticky Note
 
@@ -28,27 +30,31 @@ The Sticky Note button lets you add non-executable notes directly onto the canva
 
 Drag the note anywhere on the canvas.
 
-<img
-  src="/assets/adding-a-new-sticky-note.png"
-  alt="Adding A New Sticky Note"
-  title="Adding A New Sticky Note"
-  style={{ width:"82%" }}
-/>
+<Frame>
+  <img
+    src="/assets/stickynotes.png"
+    alt="Stickynotes"
+    title="Stickynotes"
+    style={{ width:"94%" }}
+  />
+</Frame>
 
 ### Organize Blocks
 
-The Auto-Arrange button automatically reorganizes all nodes on the canvas into a cleaner layout.
+The Auto-arrange button automatically reorganizes all nodes on the canvas into a cleaner layout.
 
 - Repositions blocks to reduce overlaps and crossing connections.
 - Aligns nodes into a readable structure.
 - Preserves all connections and logic exactly as-is.
 
-<img
-  src="/assets/organize-blocks-canvas.png"
-  alt="Organize Blocks Canvas"
-  title="Organize Blocks Canvas"
-  style={{ width:"83%" }}
-/>
+<Frame>
+  <img
+    src="/assets/organizeblocksinaworkflow.png"
+    alt="Organizeblocksinaworkflow"
+    title="Organizeblocksinaworkflow"
+    style={{ width:"81%" }}
+  />
+</Frame>
 
 ### Replace Invalid Variables
 
@@ -67,30 +73,60 @@ You can also trigger this action by clicking directly on an invalid variable ins
 
 ### Keyboard Shortcuts
 
-The Keyboard Shortcuts button opens a reference panel showing all supported keyboard actions.
+The keyboard shortcuts button opens a reference panel showing all supported keyboard actions.
 
 - Editing shortcuts (undo, redo, copy, paste, delete).
 - Selection shortcuts (single select, multi-select, box select).
 - Navigation shortcuts (pan, zoom).
 
-<img
-  src="/assets/add-keyboard-shortcuts.png"
-  alt="Add Keyboard Shortcuts"
-  title="Add Keyboard Shortcuts"
-  style={{ width:"60%" }}
-/>
+<Frame>
+  <img
+    src="/assets/keyboardshortcutsworkflowcanvas-1.png"
+    alt="Keyboardshortcutsworkflowcanvas 1"
+    title="Keyboardshortcutsworkflowcanvas 1"
+    style={{ width:"59%" }}
+  />
+</Frame>
+
+### Outcome Focus
+
+Outcome focus helps you visually trace where specific outcomes are being tagged inside a workflow. It lets you select one or more outcomes and instantly highlights the matching action blocks, while softly dimming all other blocks so you can focus on the relevant parts of the flow.
+
+How it works:
+
+Click the **Outcome focus** button from the toolbar.
+
+Use the search outcomes… field to quickly find an outcome by name.
+
+Select one or more outcomes (checkboxes).
+
+The canvas updates immediately:
+
+- Matching outcome-tagging action blocks are highlighted
+- Non-matching blocks fade/grey out, making the relevant routing paths easier to follow
+- Click **Clear** (top-right of the panel) to remove the highlight and return the canvas to normal.
+
+When to use it:
+
+- Verifying that the correct blocks are tagging the intended outcomes.
+- Auditing a workflow with many outcome tags (e.g., sales vs support vs returns).
+- Debugging analytics by confirming where an outcome is set in the call flow.
+
+<Frame>
+  ![Selectspecifiedcalloutcomes](/assets/selectspecifiedcalloutcomes.png)
+</Frame>
 
 ## Change History, Undo, and Redo
 
-The Flow Builder automatically tracks edits you make to your workflow, giving you confidence to experiment without worrying about losing work. Change History, along with Undo and Redo actions, helps you review recent edits and quickly recover from mistakes.
+The workflow builder automatically tracks edits you make to your workflow, giving you confidence to experiment without worrying about losing work. Change History, along with Undo and Redo actions, helps you review recent edits and quickly recover from mistakes.
 
 ### Change History
 
-The **Change History** panel shows a chronological list of recent updates made to the flow, such as moving blocks, rearranging logic, or editing nodes.
+The **Change History** panel shows a chronological list of recent updates made to the workflow, such as moving blocks, rearranging logic, or editing nodes.
 
 Each entry clearly describes what changed (for example, _“Moved node Wrap Up”_) and includes a timestamp indicating when the action occurred. This makes it easy to understand how the flow evolved over time, especially during active editing sessions or collaborative reviews.
 
-Change History is especially useful when:
+Change history is especially useful when:
 
 - You want to confirm what was modified recently
 - You need to trace why a flow behaves differently than expected
