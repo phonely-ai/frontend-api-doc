@@ -130,9 +130,7 @@
               },
               {
                 "group": "Workflow Checklist",
-                "pages": [
-                  "key-concepts/workflow-checklist-1"
-                ]
+                "pages": []
               },
               {
                 "group": "Workflow Versions",
