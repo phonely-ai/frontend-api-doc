@@ -185,6 +185,16 @@
                   "blocks/custom-integrations/custom-actions",
                   "blocks/custom-integrations/google-calendar-custom-block"
                 ]
+              },
+              {
+                "group": "Pre-Call Actions",
+                "pages": [
+                  "filter",
+                  "code",
+                  "api-requests",
+                  "webhook",
+                  "end-call"
+                ]
               }
             ]
           },
