@@ -207,7 +207,6 @@
               "perfomance",
               "call-path",
               "data-tables",
-              "old-call-paths",
               "post-call-outcomes",
               "call-events"
             ]
