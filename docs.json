@@ -130,7 +130,9 @@
               },
               {
                 "group": "Workflow Checklist",
-                "pages": []
+                "pages": [
+                  "workflow-checklist-1"
+                ]
               },
               {
                 "group": "Workflow Versions",
@@ -189,8 +191,7 @@
           {
             "group": "KEY CONCEPTS",
             "pages": [
-              "key-concepts/flow-canvas-controls",
-              "key-concepts/workflow-checklist-1"
+              "key-concepts/flow-canvas-controls"
             ]
           },
           {
