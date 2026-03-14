@@ -6,10 +6,12 @@ The **Data Tables** tab in Performance lets you build custom table views of call
 
 This is useful when you want to answer questions like:
 
-- How many calls came from each prompt version?
-- What is the success rate by day or week?
-- Which customer phone numbers have the longest average call duration?
-- How often does a specific outcome, topic, sentiment, or end reason appear?
+<Expandable title="Examples">
+  - How many calls came from each prompt version?
+  - What is the success rate by day or week?
+  - Which customer phone numbers have the longest average call duration?
+  - How often does a specific outcome, topic, sentiment, or end reason appear?
+</Expandable>
 
 A data table view gives you a flexible way to analyze performance using your own groupings and formulas.
 
@@ -55,7 +57,7 @@ When you click **Add view**, you can create a new view in two different ways. Yo
 
 The AI-assisted flow is useful when you already know the question you want to answer but do not want to set up the table from scratch.
 
-In the **Create Data View** dialog, you can type a request like: _Show daily total calls, success rate, and negative sentiment rate._
+In the **Create Data View** dialog, you can type a request like: Show daily total calls, success rate, and negative sentiment rate.
 
 You can also choose from suggested examples such as:
 
@@ -79,7 +81,9 @@ In the **Create Data View** flow, choose **Build Manually**.
 
 This opens the manual builder, where you can define the view name, preview the table, choose a grouping, and add columns before publishing the view.
 
-At the top of the builder, enter a **View Name**. This is the label that will appear as the saved tab in data tables, so it should describe what the view is intended to show. For example, names like \_Total Calls by Day, Appointment Booked Rate by Week, or Negative Sentiment by Prompt Versio_n make the purpose of the table clear.
+At the top of the builder, enter a **View Name**. 
+
+This is the label that will appear as the saved tab in data tables, so it should describe what the view is intended to show. For example, names like \_Total Calls by Day, Appointment Booked Rate by Week, or Negative Sentiment by Prompt Versio_n make the purpose of the table clear.
 
 <Frame>
   ![Totalcallsbytheday](/assets/totalcallsbytheday.png)
@@ -131,7 +135,7 @@ You can use:
 
 This means you can build both simple and more advanced expressions.
 
-When you click into the **Formula** field, a suggestion menu appears. This picker helps you browse available variables. It is organized into sections such as core metrics, outcomes, call topics,   end reasons, and sentiment. 
+When you click into the **Formula** field, a suggestion menu appears. This picker helps you browse available variables. It is organized into sections such as core metrics, outcomes, call topics,   end reasons, and sentiment.
 
 <Tip>
   Variables such as`@total`, `@duration`, `@sentiment.<value>`, and `@ended_reason.<value>` are always available. Variables such as`@outcome.<value>` only appears for outcomes in the agent’s latest published version, and `@topic.<value>` only appears for topics currently configured for the agent
