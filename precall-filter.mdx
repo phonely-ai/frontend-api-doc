@@ -2,7 +2,7 @@
 title: "Filter"
 ---
 
-The **Pre-Call Filter** action determines how a call should be routed **before the conversation begins**.
+The Pre-Call Filter action determines how a call should be routed before the conversation begins.
 
 Instead of sending every caller into the same Start Flow, the Filter allows you to branch the call into different paths based on predefined conditions.
 
@@ -37,9 +37,9 @@ When the filter runs:
 4. The process continues until a case matches
 5. If none match, the call follows the else path
 
-Because of this behavior, **case order matters**.
+Because of this behavior, case order matters.
 
-You should structure your cases from most specific to most general, and treat Else as the fallback route. This makes the filter useful for **preparing the correct path before the AI agent starts speaking**.
+You should structure your cases from most specific to most general, and treat Else as the fallback route. This makes the filter useful for preparing the correct path before the AI agent starts speaking.
 
 ### Set Up a Pre-Call Filter Block
 
@@ -64,7 +64,7 @@ Click the **Filter block** to open the Filter configuration panel. Under **Cases
   ![Precallfilter](/images/precallfilter.png)
 </Frame>
 
-A **case** represents the routing path the call will take if its conditions are met.
+A case represents the routing path the call will take if its conditions are met.
 
 Think of a case as:
 
@@ -176,7 +176,7 @@ Click the dropdown that shows **“is equal to”** to see other comparison opti
     False path: route to **general scheduling**
   </Step>
   <Step title="is not equal to">
-    Use this when **one value should be handled differently while all other values follow another path**.
+    Use this when one value should be handled differently while all other values follow another path.
 
     Example: Prevent transfers for everyone except VIP callers.
 
@@ -233,7 +233,7 @@ Click the dropdown that shows **“is equal to”** to see other comparison opti
     This allows routing decisions to be based on meaning rather than exact wording.
   </Step>
   <Step title="does not match condition (AI)">
-    The inverse of the previous operator. This condition is true when the caller’s request **does not match the defined intent**.
+    The inverse of the previous operator. This condition is true when the caller’s request does not match the defined intent.
 
     Examples:
 
@@ -248,7 +248,7 @@ Click the dropdown that shows **“is equal to”** to see other comparison opti
 
 ### Enter the Comparison Value
 
-Under the comparison dropdown, select the correct **data type** for the value you want to compare.
+Under the comparison dropdown, select the correct data type for the value you want to compare.
 
 | Data Type   | When to Use                                             |
 | :---------- | :------------------------------------------------------ |
@@ -262,39 +262,45 @@ After selecting the type, enter the comparison value.
 
 A case can contain more than one condition. When you add multiple conditions, you must define how they are evaluated together.
 
-| Logic Option | Description                                               |
-| :----------- | :-------------------------------------------------------- |
-| **AND**      | All conditions must be true for the case to match         |
-| **OR**       | Only one condition needs to be true for the case to match |
+| Logic Option | Description                                               | |
+| :----------- | :-------------------------------------------------------- | --- |
+| **AND**      | All conditions must be true for the case to match         | |
+| **OR**       | Only one condition needs to be true for the case to match | |
 
-Example (**AND**) - verify caller information before routing:
+<Frame>
+  ![Precallfilterconditions](/assets/precallfilterconditions.png)
+</Frame>
 
-```text
-caller_name exists  
-caller_phone exists
-```
+Example (**AND**) - verify caller information before routing
 
-Logic: **AND**\
-\
-This case only matches if both pieces of information are available.
+<Expandable title="Example">
+  ```text
+  caller_name exists  
+  caller_phone exists
+  ```
 
-Example (**OR**) - route to billing support:
+  Logic: **AND**\
+  This case only matches if both pieces of information are available.
+</Expandable>
 
-```text
-AI match: caller wants a refund  
-AI match: caller is asking about charges
-```
+Example (**OR**) - route to billing support
 
-Logic: **OR**\
-\
-Either signal qualifies the call for the billing path.
+<Expandable title="Example">
+  ```text
+  AI match: caller wants a refund  
+  AI match: caller is asking about charges
+  ```
 
-Additional examples:
+  Logic: **OR**\
+  Either signal qualifies the call for the billing path.
 
-```text
-AND → caller_name = John AND caller_phone = 123456
-OR  → caller_name = John OR caller_name = Jane
-```
+  Additional examples:
+
+  ```text
+  AND → caller_name = John AND caller_phone = 123456
+  OR  → caller_name = John OR caller_name = Jane
+  ```
+</Expandable>
 
 These logical combinations allow you to build more precise routing rules inside a single case.
 
@@ -319,9 +325,7 @@ You can choose how the interim message is generated:
 **Fixed**\
 You write the exact message Phonely should say each time.
 
-Example:
-
-> “One moment while I check that.”
+> Example: “One moment while I check that.”
 
 **Promptable**\
 You provide a prompt and Phonely generates a short interim message automatically based on that instruction.
@@ -363,15 +367,15 @@ Click **Done** to confirm your configuration and close the Filter panel.
 
 Once saved:
 
-- The **Pre-Call Filter block** will display its routing outputs on the canvas.
-- Each **Case** output represents a possible routing path.
+- The pre-call filter block will display its routing outputs on the canvas.
+- Each case output represents a possible routing path.
 - The **Else** output acts as the fallback route if no cases match.
 
 You can then connect each output to the appropriate workflow path before the Start Flow.
 
 ### Example: Using Variables in Pre-Call Filter Logic
 
-Suppose a **Pre-Call API Request** retrieved the caller’s location data and returned the following variables:
+Suppose a pre-call API request retrieved the caller’s location data and returned the following variables:
 
 - `caller_phone`
 - `caller_zip_code`

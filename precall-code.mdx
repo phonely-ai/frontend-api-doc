@@ -39,13 +39,15 @@ Use the Pre-Call Code action when you need to perform logic before the caller he
 
 Common uses include:
 
-- Evaluating caller eligibility
-- Transforming values returned from another Pre-Call Action
-- Creating new variables for routing
-- Formatting phone numbers or other fields
-- Assigning customer tiers
-- Applying custom business rules
-- Preparing values used later in Filters, API requests, transfers, or messaging
+<Expandable title="Example Usecases">
+  - Evaluating caller eligibility
+  - Transforming values returned from another Pre-Call Action
+  - Creating new variables for routing
+  - Formatting phone numbers or other fields
+  - Assigning customer tiers
+  - Applying custom business rules
+  - Preparing values used later in Filters, API requests, transfers, or messaging
+</Expandable>
 
 This action is especially helpful when the logic is too complex for a simple condition check.
 
@@ -85,7 +87,7 @@ To add a Pre-Call Code action:
     The **Configure** step is where you define the variables your code will use and write the Python logic.
   </Step>
   <Step title="Configure Input Variables">
-    At the top of the configuration panel, you can define **Input Variables**. These are the values passed into your Python function. 
+    At the top of the configuration panel, you can define **Input Variables**. These are the values passed into your Python function.
 
     <Tip>
       You’ll notice default variables like `arg1` and `arg2` when adding a Code Block. Feel free to rename or remove them to match your workflow’s actual input variables.
@@ -231,9 +233,7 @@ This helps avoid silence at the start of the call.
 
 ### Post Interim Message Delay
 
-Adds a delay after the interim message before the flow continues.
-
-This can make the interaction feel more natural.
+Adds a delay after the interim message before the flow continues. This can make the interaction feel more natural.
 
 ### Interim Message Prompt
 
@@ -266,12 +266,21 @@ Validation checks that the Python code is syntactically correct.
 
 If validation succeeds:
 
-- the Configure step is marked complete
-- you can proceed to Test
+- The Configure step is marked complete
+- Click Continue to proceed to **Test**
+
+<Frame>
+  <img
+    src="/assets/precallcodevalidation.png"
+    alt="Precallcodevalidation"
+    title="Precallcodevalidation"
+    style={{ width:"83%" }}
+  />
+</Frame>
 
 Validation helps catch mistakes before you use the block in a live workflow.
 
-## Test your Code 
+## Test your Code
 
 Use the **Test** step to confirm that your code behaves as expected.
 
