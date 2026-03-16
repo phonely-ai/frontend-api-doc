@@ -12,7 +12,7 @@ These conditions evaluate information such as:
 - variables returned by other Pre-Call actions (API Request, Code, etc.)
 - system variables or previously defined values
 
-The goal is simple: **decide the correct path for the call before the AI agent begins speaking.**
+The goal is simple: decide the correct path for the call before the AI agent begins speaking.
 
 This allows your workflows to start with the correct logic already in place.
 
@@ -20,7 +20,7 @@ This allows your workflows to start with the correct logic already in place.
 
 A Filter does not evaluate a single yes/no rule
 
-Instead, it evaluates **Cases**. Each case represents a possible routing path. Inside each case, you define **Conditions** that determine when that case should be used.
+Instead, it evaluates **cases**. Each case represents a possible routing path. Inside each case, you define **conditions** that determine when that case should be used.
 
 In simple terms:
 
@@ -31,91 +31,15 @@ In simple terms:
 
 When the filter runs:
 
-1. Phonely checks **Case 1**
-2. If its conditions match, the call follows **Case 1**
-3. If not, Phonely checks **Case 2**
+1. Phonely checks case 1
+2. If its conditions match, the call follows case 1
+3. If not, Phonely checks case 2
 4. The process continues until a case matches
-5. If none match, the call follows the **Else** path
+5. If none match, the call follows the else path
 
 Because of this behavior, **case order matters**.
 
-You should structure your cases from most specific to most general, and treat Else as the fallback route.
-
-## When the Pre-Call Filter Runs
-
-The Pre-Call Filter runs before the Start Flow begins.
-
-Execution order:
-
-```yaml
-Incoming Call
-      ↓
-Pre-Call Filter
-      ↓
-Selected Case Path
-      ↓
-Start Flow
-```
-
-This makes the filter useful for **preparing the correct path before the AI agent starts speaking**.
-
-## When to Use a Pre-Call Filter
-
-Use a Pre-Call Filter when the call should begin differently depending on available data.
-
-Common examples include:
-
-<AccordionGroup>
-  <Accordion title="Business Hours Routing">
-    Send callers to different paths depending on time of day or day of week.
-
-    Example:
-
-    - Business hours → normal support path
-    - After hours → closed-hours message or voicemail path
-  </Accordion>
-  <Accordion title="Geographic Routing">
-    Route callers by region, country, or supported market.
-
-    Example:
-
-    - USA callers → US workflow
-    - UK callers → UK workflow
-    - Unsupported region → end call path
-  </Accordion>
-  <Accordion title="Customer Tier Routing">
-    Send high-priority or premium customers into a faster support path.
-
-    Example:
-
-    - `customer_tier = VIP` → priority support
-    - Else → standard support
-  </Accordion>
-  <Accordion title="Eligibility Checks">
-    Allow only valid callers to continue.
-
-    Example:
-
-    - `is_verified = true` → continue
-    - Else → verification path or end call
-  </Accordion>
-  <Accordion title="Spam or Risk Screening">
-    Block or redirect suspicious calls before the conversation starts.
-
-    Example:
-
-    - `spam_score > 80` → block path
-    - Else → continue normally
-  </Accordion>
-  <Accordion title="Routing Based on API Results">
-    Use values returned by a Pre-Call API Request.
-
-    Example:
-
-    - `subscription_status = active` → support flow
-    - `subscription_status = expired` → renewal flow
-  </Accordion>
-</AccordionGroup>
+You should structure your cases from most specific to most general, and treat Else as the fallback route. This makes the filter useful for **preparing the correct path before the AI agent starts speaking**.
 
 ### Set Up a Pre-Call Filter Block
 
@@ -123,7 +47,7 @@ Pre-Call actions must be added **above the Start Flow**.
 
 <Steps>
   <Step title="Set the Start Flow">
-    Open your **Flow Editor** and select the block that should run when a call [begins.In](http://begins.In) the configuration panel on the right, enable **Set as First Flow**.
+    Open your **Flow Editor** and select the block that should run when a call begins. In the configuration panel on the right, enable **Set as First Flow**.
 
     When this option is checked, Phonely will always start the workflow with this block whenever a call is received. Once it is set, the system enables the **Pre-Call Actions** area above the Start Flow.
   </Step>
@@ -137,7 +61,7 @@ Pre-Call actions must be added **above the Start Flow**.
 Click the **Filter block** to open the Filter configuration panel. Under **Cases**, you will see **Case 1** by default.
 
 <Frame>
-  ![Precallfilter 1](/assets/precallfilter-1.png)
+  ![Precallfilter](/images/precallfilter.png)
 </Frame>
 
 A **case** represents the routing path the call will take if its conditions are met.
@@ -372,7 +296,7 @@ AND → caller_name = John AND caller_phone = 123456
 OR  → caller_name = John OR caller_name = Jane
 ```
 
-These logical combinations allow you to build more precise routing rules inside a single case. 
+These logical combinations allow you to build more precise routing rules inside a single case.
 
 ## Configure Advanced Settings
 
@@ -472,5 +396,63 @@ If the conditions do not match, the call follows the **Else** path. For example,
 > “Sorry, we couldn’t find a nearby store based on your location. Please check your ZIP code and try again.”
 
 Using Pre-Call Filters this way ensures callers are directed to the correct workflow before the AI agent begins the conversation.
+
+## When to Use a Pre-Call Filter
+
+Use a Pre-Call Filter when the call should begin differently depending on available data.
+
+Common examples include:
+
+<AccordionGroup>
+  <Accordion title="Business Hours Routing">
+    Send callers to different paths depending on time of day or day of week.
+
+    Example:
+
+    - Business hours → normal support path
+    - After hours → closed-hours message or voicemail path
+  </Accordion>
+  <Accordion title="Geographic Routing">
+    Route callers by region, country, or supported market.
+
+    Example:
+
+    - USA callers → US workflow
+    - UK callers → UK workflow
+    - Unsupported region → end call path
+  </Accordion>
+  <Accordion title="Customer Tier Routing">
+    Send high-priority or premium customers into a faster support path.
+
+    Example:
+
+    - `customer_tier = VIP` → priority support
+    - Else → standard support
+  </Accordion>
+  <Accordion title="Eligibility Checks">
+    Allow only valid callers to continue.
+
+    Example:
+
+    - `is_verified = true` → continue
+    - Else → verification path or end call
+  </Accordion>
+  <Accordion title="Spam or Risk Screening">
+    Block or redirect suspicious calls before the conversation starts.
+
+    Example:
+
+    - `spam_score > 80` → block path
+    - Else → continue normally
+  </Accordion>
+  <Accordion title="Routing Based on API Results">
+    Use values returned by a Pre-Call API Request.
+
+    Example:
+
+    - `subscription_status = active` → support flow
+    - `subscription_status = expired` → renewal flow
+  </Accordion>
+</AccordionGroup>
 
 ---

@@ -194,10 +194,7 @@
                   "precall-webhook",
                   "precall-end-call",
                   "precall-api-request",
-                  "filter",
-                  "api-requests",
-                  "webhook",
-                  "end-call"
+                  "api-requests"
                 ]
               }
             ]
