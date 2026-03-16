@@ -1,5 +1,5 @@
 ---
-title: "API Requests"
+title: "Precall API Request"
 ---
 
 The API Request Pre-Call Action allows your Phonely agent to communicate with external systems before the conversation begins.
@@ -53,9 +53,7 @@ The returned data can then be stored in variables and used throughout the call.
 
 Pre-Call Actions can only be added at the very beginning of a workflow, before the conversation flow starts. This starting point is the **Start Flow**.
 
-The **Start Flow** is the block that runs first when a call is answered. By default, this block may be labeled **Greeting Message**, but it can be renamed to match your workflow.
-
-Pre-Call Actions are added above the Start Flow, so this block must be configured first before the option to add Pre-Call Actions becomes available.
+The **Start Flow** is the block that runs first when a call is answered. Pre-Call Actions are added above the Start Flow, so this block must be configured first before the option to add Pre-Call Actions becomes available.
 
 <Steps>
   <Step title="Set the Start Flow">
@@ -66,7 +64,7 @@ Pre-Call Actions are added above the Start Flow, so this block must be configure
     When this option is checked, Phonely will always start the workflow with this block whenever a call is received. Once it is set, the system enables the **Pre-Call Actions** area above the Start Flow.
 
     <Frame>
-      ![Startflowprecall](/assets/startflowprecall.png)
+      ![Startflowprecall](/images/startflowprecall.png)
     </Frame>
   </Step>
   <Step title="Add a Pre-Call Action">
@@ -75,9 +73,13 @@ Pre-Call Actions are added above the Start Flow, so this block must be configure
     Click this **➕ button**.
   </Step>
   <Step title="Select API Request">
-    From the list of available Pre-Call Actions, select **API Reques.**            
+    From the list of available Pre-Call Actions, select **API Request.**            
 
     The API Request configuration panel will open, allowing you to configure how the external API should be called before the conversation begins.
+
+    <Frame>
+      ![Precalloptions](/assets/precalloptions.png)
+    </Frame>
   </Step>
 </Steps>
 
@@ -89,16 +91,20 @@ Phonely allows two ways to configure the API call:
 
 ### Option 1 — Import from cURL
 
-If you already have a request from tools like **Postman**, **API documentation**, or **terminal commands**, you can paste it directly.
+If you already have a request from tools like Postman, API documentation, or terminal commands, you can paste it directly.
 
 Paste the cURL command into the **cURL Command** field and click **Import from cURL**.
 
 Example:
 
-```text
+```json
 curl -X GET "https://api.example.com/customer?phone=123456789"
 -H "Content-Type: application/json"
 ```
+
+<Frame>
+  ![Samplecurlcommand](/assets/samplecurlcommand.png)
+</Frame>
 
 Phonely automatically extracts:
 
@@ -110,11 +116,22 @@ Phonely automatically extracts:
 
 These values are then populated in the **Configure** tab.
 
+<Frame>
+  ![Configuringprecallapirequestfields](/assets/configuringprecallapirequestfields.png)
+</Frame>
+
 ### Option 2 — Build Manually
 
 If you don’t have a cURL command, select **Build Manually**.
 
 You will then configure the request step-by-step in the **Configure** section.
+
+<img
+  src="/assets/configure-api-request-manually.png"
+  alt="Configure Api Request Manually"
+  title="Configure Api Request Manually"
+  style={{ width:"72%" }}
+/>
 
 ## Configure
 
@@ -150,9 +167,14 @@ This URL represents the destination where your request is processed.
 
 ### Headers
 
-Headers provide additional metadata required by the API.
+Headers provide additional metadata required by the API. Click **Add** to create key-value pairs.
 
-Click **Add** to create key-value pairs.
+<img
+  src="/assets/configure-header-for-api-request.png"
+  alt="Configure Header For Api Request"
+  title="Configure Header For Api Request"
+  style={{ width:"96%" }}
+/>
 
 Common examples include:
 
@@ -167,6 +189,13 @@ Headers are often required for authentication and data formatting.
 
 Query parameters allow you to send additional information through the URL.
 
+<img
+  src="/assets/configure-query-parameters-in-phonely.png"
+  alt="Configure Query Parameters In Phonely"
+  title="Configure Query Parameters In Phonely"
+  style={{ width:"95%" }}
+/>
+
 Example:
 
 ```text
@@ -179,9 +208,36 @@ In the interface, these appear as key-value pairs:
 | :---------- | :---- |
 | customer_id | 123   |
 
+### Body (For POST, PUT, PATCH Requests)
+
+For **POST**, **PUT**, or **PATCH** requests, you can define a request body. Phonely supports multiple body types, selectable directly in the UI.
+
+Enter the endpoint where the request should go. This is the destination for your data.
+
+#### Supported Body Types
+
+**None**\
+Use this when the request does not require a body.
+
+Headers define metadata or authentication details for your API call. Click **\+ Add** to add key-value pairs such as:
+
+**x-www-form-urlencoded**\
+Use this when the API expects traditional form data. Each key-value pair is sent as form data, commonly required by legacy systems or OAuth flows.
+
+**JSON**\
+Use this when sending structured data in JSON format (most modern APIs).\
+You can switch the editor to **Code** mode to write raw JSON directly.
+
 ## Advanced Settings
 
 The **Advanced Settings** section allows you to control how the API request behaves during execution.
+
+<img
+  src="/assets/api-request-block-advanced-settings.png"
+  alt="Api Request Block Advanced Settings"
+  title="Api Request Block Advanced Settings"
+  style={{ width:"61%" }}
+/>
 
 ### Enable Error Handling
 

@@ -189,6 +189,11 @@
               {
                 "group": "Pre-Call Actions",
                 "pages": [
+                  "precall-filter",
+                  "precall-code",
+                  "precall-webhook",
+                  "precall-end-call",
+                  "precall-api-request",
                   "filter",
                   "code",
                   "api-requests",
@@ -218,7 +223,8 @@
               "call-path",
               "data-tables",
               "post-call-outcomes",
-              "call-events"
+              "call-events",
+              "old-call-paths"
             ]
           },
           {
