@@ -195,7 +195,6 @@
                   "precall-end-call",
                   "precall-api-request",
                   "filter",
-                  "code",
                   "api-requests",
                   "webhook",
                   "end-call"
