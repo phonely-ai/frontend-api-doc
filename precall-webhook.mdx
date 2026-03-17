@@ -111,3 +111,84 @@ Use this test step to confirm that:
 <Frame>
   ![Testingprecallwebhook](/assets/testingprecallwebhook.png)
 </Frame>
+
+## Real-World Examples
+
+### 1. Call Transfer with Context
+
+A telecom or IVR system transfers a caller to Phonely.
+
+Before transfer, it sends:
+
+```text
+{
+  "agentId": "support-agent",
+  "phoneNumber": "+254700000000",
+  "customer_name": "Jane",
+  "issue": "billing_error",
+  "priority": "high"
+}
+```
+
+**Result:**
+
+- Call is routed immediately
+- Phonely starts with context
+- No need for initial questioning
+
+---
+
+### 2. CRM-Based Personalization
+
+Your backend detects an incoming call and enriches it with CRM data.
+
+```text
+{
+  "customer_name": "Michael",
+  "plan": "enterprise",
+  "account_manager": "Sarah"
+}
+```
+
+**Result:**
+
+- Personalized greeting
+- Enterprise-level routing
+- Context-aware responses
+
+---
+
+### 3. Lead Qualification
+
+A marketing system sends pre-qualified lead data:
+
+```text
+{
+  "lead_source": "Google Ads",
+  "budget": "10000",
+  "interest": "premium_plan"
+}
+```
+
+**Result:**
+
+- Routed directly to sales
+- Tailored conversation
+
+---
+
+### 4. Fraud Detection
+
+A risk system evaluates the caller:
+
+```text
+{
+  "risk_score": 92,
+  "flagged": true
+}
+```
+
+**Result:**
+
+- Trigger verification flow
+- Apply stricter handling
