@@ -52,7 +52,12 @@ Pre-Call actions must be added **above the Start Flow**.
     When this option is checked, Phonely will always start the workflow with this block whenever a call is received. Once it is set, the system enables the **Pre-Call Actions** area above the Start Flow.
   </Step>
   <Step title="Click the ➕ Add a pre-call action button above the Start Flow.">
-    Select **Filter** from the list of available Pre-Call Actions. The Filter configuration panel opens on the right. When added, the Filter block appears on the canvas with outputs for each case plus an **Else** output.
+    Select **Filter** from the list of available Pre-Call Actions. The Filter configuration panel opens on the right. 
+
+    <Frame>
+      ![Precallfilterblock](/assets/precallfilterblock.png)
+    </Frame>
+    When added, the Filter block appears on the canvas with outputs for each case plus an **Else** output.
   </Step>
 </Steps>
 
@@ -86,7 +91,7 @@ Click the filter block to open its configuration panel. Under **Cases**, locate 
 
 ### Choose Available Variables
 
-Click inside **Define Field** to open the **Available Variables panel**.
+Click inside define field to open the **Available Variables panel**.
 
 Here you will find variables that can be used in the filter logic:
 
@@ -134,7 +139,7 @@ Click the dropdown that shows **“is equal to”** to see other comparison opti
 
     Example: Customer profile was not found during a Pre-Call lookup.
 
-    Condition:
+    Condition: 
 
     ```text
     Define Field: customer_id  
@@ -147,9 +152,9 @@ Click the dropdown that shows **“is equal to”** to see other comparison opti
     This helps prevent workflows from continuing when required data is missing.
   </Step>
   <Step title="is equal to">
-    Use this when you want **exact matching**. This is best for categories, flags, status fields, or known inputs.
+    Use this when you want exact matching. This is best for categories, flags, status fields, or known inputs.
 
-    Example: Route premium customers.
+    Example: Route premium customers.    
 
     Condition:
 
@@ -195,8 +200,7 @@ Click the dropdown that shows **“is equal to”** to see other comparison opti
     True path (not VIP): continue AI self-serve workflow\
     False path (VIP): transfer to live agent or escalation queue
 
-    Why it’s useful:\
-    It protects human agent time while still allowing VIP customers priority handling.
+    Why it’s useful: It protects human agent time while still allowing VIP customers priority handling.
   </Step>
   <Step title="is an array containing">
     Used when the variable is a list or array and you need to check whether it includes a specific value.
@@ -260,7 +264,7 @@ After selecting the type, enter the comparison value.
 
 ### Add Multiple Conditions Inside the Same Case (AND vs OR)
 
-A case can contain more than one condition. When you add multiple conditions, you must define how they are evaluated together.
+A case can contain more than one condition. When you add multiple conditions, you must define how they are evaluated together. 
 
 | Logic Option | Description                                               | |
 | :----------- | :-------------------------------------------------------- | --- |
