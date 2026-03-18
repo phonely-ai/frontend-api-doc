@@ -134,7 +134,7 @@ Use **GET** to retrieve a customer profile.
 
 ### API URL
 
-Enter the API endpoint where the request will be sent.
+Enter the API endpoint where the request will be sent. 
 
 Example:
 
@@ -155,7 +155,7 @@ Headers provide additional metadata required by the API. Click **Add** to create
   style={{ width:"96%" }}
 />
 
-Common examples include:
+Common header examples include:
 
 | Header | Example Value |
 | :-- | :-- |
@@ -276,9 +276,7 @@ Example prompt:
 
 ### Post Interim Message Delay
 
-Adds a small delay after the interim message before the API request continues.
-
-This makes the interaction feel more natural.
+Adds a small delay after the interim message before the API request continues. This makes the interaction feel more natural.
 
 ### Call Outcome Tagging
 
@@ -296,15 +294,20 @@ These tags help categorize calls in dashboards and reports.
 
 After configuration, use the **Test** step to validate the request.
 
-Click **Test** to send the request exactly as configured.
-
-Phonely will display the API response immediately.
-
-If successful, you may see a response like:
+Click **Test** to send the request exactly as configured. Phonely will display the API response immediately. If successful, you may see a response like:
 
 ```text
 Status: 200 OK
 ```
+
+<Frame>
+  <img
+    src="/assets/testprecallapirequest.png"
+    alt="Testprecallapirequest"
+    title="Testprecallapirequest"
+    style={{ width:"59%" }}
+  />
+</Frame>
 
 If the request fails, the system displays the error message to help troubleshoot issues such as:
 
