@@ -134,7 +134,7 @@ Use **GET** to retrieve a customer profile.
 
 ### API URL
 
-Enter the API endpoint where the request will be sent. 
+Enter the API endpoint where the request will be sent.
 
 Example:
 
@@ -189,23 +189,21 @@ In the interface, these appear as key-value pairs:
 
 ### Body (For POST, PUT, PATCH Requests)
 
-For **POST**, **PUT**, or **PATCH** requests, you can define a request body. Phonely supports multiple body types, selectable directly in the UI.
-
-Enter the endpoint where the request should go. This is the destination for your data.
+For **POST**, **PUT**, or **PATCH** requests, you can define a request body. Phonely supports multiple body types, selectable directly in the UI. Enter the endpoint where the request should go. This is the destination for your data.
 
 #### Supported Body Types
 
-**None**\
-Use this when the request does not require a body.
-
-Headers define metadata or authentication details for your API call. Click **\+ Add** to add key-value pairs such as:
-
-**x-www-form-urlencoded**\
-Use this when the API expects traditional form data. Each key-value pair is sent as form data, commonly required by legacy systems or OAuth flows.
-
-**JSON**\
-Use this when sending structured data in JSON format (most modern APIs).\
-You can switch the editor to **Code** mode to write raw JSON directly.
+<Steps>
+  <Step title="None">
+    Use this when the request does not require a body. Headers define metadata or authentication details for your API call.
+  </Step>
+  <Step title="x-www-form-urlencoded">
+    Use this when the API expects traditional form data. Each key-value pair is sent as form data, commonly required by legacy systems or OAuth flows.
+  </Step>
+  <Step title="JSON">
+    Use this when sending structured data in JSON format (most modern APIs). You can switch the editor to **Code** mode to write raw JSON directly.
+  </Step>
+</Steps>
 
 ## Advanced Settings
 
@@ -225,16 +223,14 @@ When enabled, the system can detect failed requests and handle them gracefully.
 Example scenarios:
 
 - API unavailable
-- authentication error
-- invalid request
+- Authentication error
+- Invalid request
 
 Instead of breaking the flow, you can define fallback logic.
 
 ### Retry on Failure
 
-If the API request fails due to temporary issues, Phonely will automatically retry the request.
-
-This helps prevent interruptions caused by short network or server delays.
+If the API request fails due to temporary issues, Phonely will automatically retry the request. This helps prevent interruptions caused by short network or server delays.
 
 ### Timeout Duration
 
@@ -262,17 +258,18 @@ This prevents silence during longer API requests.
 
 Two options are available:
 
-**Fixed**
+<Steps>
+  <Step title="Fixed">
+    The message is predefined and always the same.
+  </Step>
+  <Step title="Promptable">
+    Phonely dynamically generates a short message using AI based on the configured prompt.
 
-The message is predefined and always the same.
+    Example prompt:
 
-**Promptable**
-
-Phonely dynamically generates a short message using AI based on the configured prompt.
-
-Example prompt:
-
-> Generate a friendly 3–7 word interim message telling the caller you are working on their request.
+    > Generate a friendly 3–7 word interim message telling the caller you are working on their request.
+  </Step>
+</Steps>
 
 ### Post Interim Message Delay
 
@@ -311,10 +308,10 @@ Status: 200 OK
 
 If the request fails, the system displays the error message to help troubleshoot issues such as:
 
-- incorrect endpoint
-- missing authentication
-- invalid parameters
-- server errors
+- Incorrect endpoint
+- Missing authentication
+- Invalid parameters
+- Server errors
 
 Testing ensures the request works correctly before publishing the workflow.
 
