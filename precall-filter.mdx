@@ -24,9 +24,9 @@ Instead, it evaluates **cases**. Each case represents a possible routing path. I
 
 In simple terms:
 
-| Component      | Purpose                                    |
-| :------------- | :----------------------------------------- |
-| **Cases**      | Define where the call can go               |
+| Component | Purpose |
+| :-- | :-- |
+| **Cases** | Define where the call can go |
 | **Conditions** | Define when the call should take that path |
 
 When the filter runs:
@@ -57,6 +57,7 @@ Pre-Call actions must be added **above the Start Flow**.
     <Frame>
       ![Precallfilterblock](/assets/precallfilterblock.png)
     </Frame>
+
     When added, the Filter block appears on the canvas with outputs for each case plus an **Else** output.
   </Step>
 </Steps>
@@ -83,35 +84,11 @@ Each condition is a rule that tells Phonely what to evaluate before deciding whi
 
 Click the filter block to open its configuration panel. Under **Cases**, locate **Condition 1** inside a case. You will see three main fields:
 
-| Field                             | Description                                                                                                                                                                                                                       |
-| :-------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Define Field**                  | The variable or data point you want to evaluate (e.g., `caller_phone`, `customer_name`, `plan_type`).                                                                                                                             |
-| **Comparison Operator**           | Defines how the field is compared. Options include:<br />• exists<br />• doesn’t exist<br />• is equal to<br />• is not equal to<br />• is an array containing<br />• matches condition (AI)<br />• does not match condition (AI) |
-| **Value Type & Comparison Value** | Select the data type (**String**, **Number**, or **Boolean**) and specify the value to compare against. AI-based operators do not require a value type because they evaluate natural-language conditions.                         |
-
-### Choose Available Variables
-
-Click inside define field to open the **Available Variables panel**.
-
-Here you will find variables that can be used in the filter logic:
-
-**Call Variables**\
-System-generated details such as caller ID, phone number, or other call metadata.
-
-**Custom Variables**\
-Variables you have defined manually in your workflow.
-
-**Auto-Gather Variables (Beta)**\
-Variables collected automatically when the workflow requires information such as name, email, or date.
-
-**Collect Caller Details**\
-Inputs gathered earlier in the workflow using **Collect** or **Ask Exactly** blocks (for example `caller_name` or `caller_phone`).
-
-In a **Pre-Call Filter**, these variables typically come from:
-
-- system call metadata
-- values returned from earlier **Pre-Call API Request** or **Code** actions
-- existing workflow variables
+| Field | Description |
+| :-- | :-- |
+| **Define Field** | The variable or data point you want to evaluate (e.g., `caller_phone`, `customer_name`, `plan_type`). |
+| **Comparison Operator** | Defines how the field is compared. Options include:<br />• exists<br />• doesn’t exist<br />• is equal to<br />• is not equal to<br />• is an array containing<br />• matches condition (AI)<br />• does not match condition (AI) |
+| **Value Type & Comparison Value** | Select the data type (**String**, **Number**, or **Boolean**) and specify the value to compare against. AI-based operators do not require a value type because they evaluate natural-language conditions. |
 
 ### Select the Comparison Operator
 
@@ -154,74 +131,45 @@ Click the dropdown that shows **“is equal to”** to see other comparison opti
   <Step title="is equal to">
     Use this when you want exact matching. This is best for categories, flags, status fields, or known inputs.
 
-    Example: Route premium customers.    
-
-    Condition:
-
-    ```text
-    Define Field: plan_type  
-    Comparison: is equal to  
-    Value: premium
-    ```
+    Allow verified customers to continue.\
+    `verification_status is equal to verified`
 
     True path: route to priority support Start Flow\
     False path: route to standard support Start Flow
-
-    Example: Route based on appointment type.
-
-    Condition:
-
-    ```text
-    Define Field: appointment_type  
-    Comparison: is equal to  
-    Value: dentist
-    ```
-
-    True path: route to **dental scheduling flow**\
-    False path: route to **general scheduling**
   </Step>
   <Step title="is not equal to">
     Use this when one value should be handled differently while all other values follow another path.
 
-    Example: Prevent transfers for everyone except VIP callers.
+    > Prevent unverified callers from entering the workflow.
 
-    Use case: Only VIP callers should be routed to a human agent, while others stay in the AI flow.
+    Example:
 
-    Condition:
-
-    ```text
-    Define Field: customer_tier  
-    Comparison: is not equal to  
-    Value: VIP
-    ```
+    - **Define Field:** `verification_status`
+    - **Comparison:** `is not equal to`
+    - **Value:** `verified`
 
     Paths:
 
-    True path (not VIP): continue AI self-serve workflow\
-    False path (VIP): transfer to live agent or escalation queue
+    - **True path:** send caller to verification or fallback path
+    - **False path:** continue to the Start Flow
 
     Why it’s useful: It protects human agent time while still allowing VIP customers priority handling.
   </Step>
   <Step title="is an array containing">
     Used when the variable is a list or array and you need to check whether it includes a specific value.
 
-    Example: Escalate calls flagged for escalation.
+    > Block callers with a known risk tag.
 
-    Use case: A previous automation added tags to the call.
+    Example:
 
-    Condition:
+    - **Define Field:** `risk_tags`
+    - **Comparison:** `is an array containing`
+    - **Value:** `blocked_caller`
 
-    ```text
-    Define Field: call_tags  
-    Comparison: is an array containing  
-    Value: needs_escalation
-    ```
+    Paths:
 
-    True path: transfer to escalation queue and tag outcome **“escalated”**\
-    False path: continue standard workflow
-
-    Why it’s useful:\
-    You can keep routing logic simple while using tags as signals to trigger different paths.
+    - **True path:** route to block or end call path
+    - **False path:** continue normally
   </Step>
   <Step title="matches condition (AI)">
     Uses AI to determine whether a variable semantically matches a natural-language condition.
@@ -229,9 +177,9 @@ Click the dropdown that shows **“is equal to”** to see other comparison opti
     Examples:
 
     ```text
-    caller wants to book an appointment
-    caller is asking for refund
-    caller needs technical support
+    caller is attempting to access a restricted service
+    caller is requesting account access without verification
+    caller appears suspicious or fraudulent
     ```
 
     This allows routing decisions to be based on meaning rather than exact wording.
@@ -242,8 +190,8 @@ Click the dropdown that shows **“is equal to”** to see other comparison opti
     Examples:
 
     ```text
-    caller is not asking about appointments
-    caller is not requesting order status
+    caller is not verified
+    caller is not eligible for this service
     ```
 
     These AI-based conditions are useful when routing depends on intent rather than exact values.
@@ -254,56 +202,39 @@ Click the dropdown that shows **“is equal to”** to see other comparison opti
 
 Under the comparison dropdown, select the correct data type for the value you want to compare.
 
-| Data Type   | When to Use                                             |
-| :---------- | :------------------------------------------------------ |
-| **String**  | For text values such as names, statuses, or categories  |
-| **Number**  | For numeric comparisons such as amounts or counts       |
+| Data Type | When to Use |
+| :-- | :-- |
+| **String** | For text values such as names, statuses, or categories |
+| **Number** | For numeric comparisons such as amounts or counts |
 | **Boolean** | For true/false logic (for example `is_verified = true`) |
 
 After selecting the type, enter the comparison value.
 
 ### Add Multiple Conditions Inside the Same Case (AND vs OR)
 
-A case can contain more than one condition. When you add multiple conditions, you must define how they are evaluated together. 
+A case can contain more than one condition. When you add multiple conditions, you must define how they are evaluated together.
 
-| Logic Option | Description                                               | |
-| :----------- | :-------------------------------------------------------- | --- |
-| **AND**      | All conditions must be true for the case to match         | |
-| **OR**       | Only one condition needs to be true for the case to match | |
+| Logic Option | Description |  |
+| :-- | :-- | --- |
+| **AND** | All conditions must be true for the case to match |  |
+| **OR** | Only one condition needs to be true for the case to match |  |
 
 <Frame>
   ![Precallfilterconditions](/assets/precallfilterconditions.png)
 </Frame>
 
-Example (**AND**) - verify caller information before routing
+Example (**AND**) - verify caller eligibility before continuing
 
 <Expandable title="Example">
-  ```text
-  caller_name exists  
-  caller_phone exists
-  ```
-
-  Logic: **AND**\
-  This case only matches if both pieces of information are available.
+  `customer_id exists`\
+  `verification_status is equal to verified`
 </Expandable>
 
-Example (**OR**) - route to billing support
+Example (**OR**) - screen risky callers
 
 <Expandable title="Example">
-  ```text
-  AI match: caller wants a refund  
-  AI match: caller is asking about charges
-  ```
-
-  Logic: **OR**\
-  Either signal qualifies the call for the billing path.
-
-  Additional examples:
-
-  ```text
-  AND → caller_name = John AND caller_phone = 123456
-  OR  → caller_name = John OR caller_name = Jane
-  ```
+  `risk_flag is equal to true`\
+  `caller_reputation is equal to blocked`
 </Expandable>
 
 These logical combinations allow you to build more precise routing rules inside a single case.
@@ -358,10 +289,10 @@ This is helpful for analytics because it allows you to track how often certain r
 
 Example outcome tags:
 
-- `vip_escalation`
-- `billing_routed`
-- `missing_required_info`
-- `appointment_booking_path`
+- `eligible_caller`
+- `verification_required`
+- `risk_flagged`
+- `blocked_caller`
 
 These tags provide visibility into how calls are being routed before the conversation begins.
 
@@ -381,16 +312,17 @@ You can then connect each output to the appropriate workflow path before the Sta
 
 Suppose a pre-call API request retrieved the caller’s location data and returned the following variables:
 
-- `caller_phone`
-- `caller_zip_code`
+- `customer_id`
+- `verification_status`
+- `risk_score`
 
 You can use a **Pre-Call Filter** to determine which store location the caller should be routed to before the conversation begins.
 
 Example conditions:
 
 ```text
-Condition 1: caller_phone starts with "+1-312"
-Condition 2: caller_zip_code is equal to "60601"
+Condition 1: customer_id exists
+Condition 2: verification_status is equal to verified
 ```
 
 Set the logic to **AND**.
@@ -407,60 +339,34 @@ Using Pre-Call Filters this way ensures callers are directed to the correct work
 
 ## When to Use a Pre-Call Filter
 
-Use a Pre-Call Filter when the call should begin differently depending on available data.
+Use a pre-call filter when the call should begin differently depending on available data. Use a pre-all filter when you need to evaluate the caller before the conversation starts and decide whether the call should continue.
 
-Common examples include:
+The primary use cases for pre-call Filters are:
 
-<AccordionGroup>
-  <Accordion title="Business Hours Routing">
-    Send callers to different paths depending on time of day or day of week.
+### Eligibility Checks
 
-    Example:
+Use a pre-call filter to determine whether the caller meets the requirements to continue into the workflow.
 
-    - Business hours → normal support path
-    - After hours → closed-hours message or voicemail path
-  </Accordion>
-  <Accordion title="Geographic Routing">
-    Route callers by region, country, or supported market.
+Examples include:
 
-    Example:
+- `is_verified = true` → continue to the Start Flow
+- `subscription_status = active` → continue normally
+- `customer_id exists` → continue
+- Else → route to verification, fallback, or end call path
 
-    - USA callers → US workflow
-    - UK callers → UK workflow
-    - Unsupported region → end call path
-  </Accordion>
-  <Accordion title="Customer Tier Routing">
-    Send high-priority or premium customers into a faster support path.
+This is useful when your workflow depends on a caller already being recognized, verified, or approved before the conversation begins.
 
-    Example:
+### Spam or Risk Screening
 
-    - `customer_tier = VIP` → priority support
-    - Else → standard support
-  </Accordion>
-  <Accordion title="Eligibility Checks">
-    Allow only valid callers to continue.
+Use a Pre-Call Filter to block, redirect, or flag suspicious calls before the AI agent begins speaking.
 
-    Example:
+Examples include:
 
-    - `is_verified = true` → continue
-    - Else → verification path or end call
-  </Accordion>
-  <Accordion title="Spam or Risk Screening">
-    Block or redirect suspicious calls before the conversation starts.
+- `spam_score > 80` → block or end call
+- `risk_flag = true` → send to verification path
+- `caller_reputation is equal to blocked` → end call
+- Else → continue normally
 
-    Example:
-
-    - `spam_score > 80` → block path
-    - Else → continue normally
-  </Accordion>
-  <Accordion title="Routing Based on API Results">
-    Use values returned by a Pre-Call API Request.
-
-    Example:
-
-    - `subscription_status = active` → support flow
-    - `subscription_status = expired` → renewal flow
-  </Accordion>
-</AccordionGroup>
+This is useful when you want to screen callers before allowing them into the main workflow.Use values returned by a Pre-Call API Request.
 
 ---
