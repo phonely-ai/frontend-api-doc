@@ -193,8 +193,7 @@
                   "precall-code",
                   "precall-webhook",
                   "precall-end-call",
-                  "precall-api-request",
-                  "api-requests"
+                  "precall-api-request"
                 ]
               }
             ]
