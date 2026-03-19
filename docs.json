@@ -277,10 +277,10 @@
             ]
           },
           {
-            "group": "Organization & Usage",
+            "group": "Voice & Phone",
             "pages": [
-              "api-reference/endpoint/get-orgs",
-              "api-reference/endpoint/get-usage"
+              "api-reference/endpoint/list-voices",
+              "api-reference/endpoint/import-number"
             ]
           },
           {
@@ -295,6 +295,12 @@
             ]
           },
           {
+            "group": "Development",
+            "pages": [
+              "api-reference/endpoint/chat-build"
+            ]
+          },
+          {
             "group": "Billing & Subscription",
             "pages": [
               "api-reference/endpoint/get-invoices",
@@ -302,16 +308,10 @@
             ]
           },
           {
-            "group": "Development",
+            "group": "Organization & Usage",
             "pages": [
-              "api-reference/endpoint/chat-build"
-            ]
-          },
-          {
-            "group": "Voice & Phone",
-            "pages": [
-              "api-reference/endpoint/list-voices",
-              "api-reference/endpoint/import-number"
+              "api-reference/endpoint/get-orgs",
+              "api-reference/endpoint/get-usage"
             ]
           }
         ]
