@@ -1,4 +1,145 @@
 ---
-title: 'End Call'
+title: "End Call"
 ---
 
+The Pre-Call end call action allows you to end a call before the start flow begins.
+
+Use this action when a caller should not continue into the main workflow. Instead of allowing the AI agent to begin the conversation, Phonely plays a short message and then ends the call.
+
+This is useful when the call must be stopped early because the caller is not eligible, the call is unsupported, or a previous Pre-Call Action determined that the workflow should not continue.
+
+A pre-call end call action is commonly used together with other pre-call actions such as:
+
+- **Filter** to block risky or ineligible callers
+- **API request** to check account or eligibility status
+- **Code** to apply custom validation logic
+- **Webhook **to receive data from webhooks
+
+Because it runs before the conversation starts, this action helps you prevent unnecessary call handling and ensure callers only enter workflows they are allowed to access.
+
+The pre-call end call action runs after the call is answered but before the Start Flow begins.
+
+Typical sequence:
+
+```text
+Incoming Call
+      ↓
+Pre-Call Action(s)
+      ↓
+End Call
+      ↓
+Call ends
+```
+
+If this block is reached, the main workflow does not continue.\
+
+## Setup
+
+Pre-Call Actions can only be added above the Start Flow, which is the block that runs first when a call is answered.
+
+To add a Pre-Call End Call action:
+
+<Steps>
+  <Step title="Set the Start Flow" titleSize="h3">
+    Open your **Flow Editor** and select the block that should run first when a call is received.
+
+    In the settings panel on the right, enable **Set as First Flow**. Once this is enabled, the **Add a pre-call action** option appears above the Start Flow.
+  </Step>
+  <Step title="Add the Action" titleSize="h3">
+    Click the **➕** button above the Start Flow.
+
+    <Frame>
+      ![Precallendcallactions](/assets/precallendcallactions.png)
+    </Frame>
+  </Step>
+  <Step title="Select End Call" titleSize="h3">
+    From the list of available Pre-Call Actions, choose **End Call**. The End Call configuration panel opens.
+  </Step>
+  <Step title="Configuring the End Call Action" titleSize="h3">
+    The end call action is simple to configure. Its main purpose is to define the message the caller should hear before the call is ended.
+
+    The configuration includes:
+
+    - **End Call Message**
+    - **Call Outcome Tagging**
+
+    ### End Call Message
+
+    The **End Call Message** is the message Phonely plays immediately before the call ends.
+
+    This should clearly explain that the call cannot continue.
+
+    Example:
+
+    > Unfortunately we cannot answer your call right now. Thanks for calling. Goodbye!
+
+    This message should be short, clear, and polite.
+
+    Because the call ends immediately afterward, avoid long explanations or instructions that require follow-up questions from the caller.
+
+    ### Call Outcome Tagging
+
+    Use **Call Outcome Tagging** to assign an outcome label when the call is ended at this step.
+
+    You can select an existing outcome or type a custom one.
+
+    This is useful for reporting because it helps you track why calls were ended before the conversation began.
+
+    Example outcome tags:
+
+    - `blocked_caller`
+    - `verification_failed`
+    - `ineligible_caller`
+    - `service_unavailable`
+
+    These tags make it easier to review and analyze calls that were ended by pre-call logic.
+  </Step>
+</Steps>
+
+## When to Use a Pre-Call End Call
+
+Use a pre-call end call action when the call should be stopped before the AI agent starts the main conversation.
+
+Common examples include:
+
+### Eligibility Failure
+
+A previous Pre-Call check determines the caller is not allowed to continue.
+
+Example:
+
+- caller is not verified
+- subscription is inactive
+- required customer record was not found
+
+### Spam or Risk Screening
+
+A caller is flagged as suspicious or blocked.
+
+Example:
+
+- spam score is too high
+- blocked caller tag exists
+- risk flag is true
+
+### Unsupported Callers
+
+The caller does not meet service or region requirements.
+
+Example:
+
+- unsupported country
+- unsupported phone number type
+- unsupported account category
+
+### Temporary Service Restrictions
+
+The call cannot be handled at that time.
+
+Example:
+
+- service temporarily unavailable
+- maintenance window
+- pre-call screening requires the call to stop
+
+In these cases, the End Call action lets you play a clear closing message instead of allowing the workflow to continue.
