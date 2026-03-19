@@ -257,7 +257,6 @@
         "tab": "API Reference",
         "icon": "code",
         "pages": [
-          "api-reference/old-introduction",
           "api-reference/introduction",
           {
             "group": "Agent Management",
