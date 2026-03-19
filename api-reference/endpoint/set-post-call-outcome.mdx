@@ -14,8 +14,6 @@ This API allows you to set post call outcome fields for calls by either:
 
 - **API Key**: `X-Authorization` header (for batch jobs)
 
----
-
 ## Example 1: Update by Call ID
 
 ### Using API Key
@@ -35,8 +33,6 @@ curl -X PATCH "https://app.phonely.ai/api/calls/agent123/call456" \
   }'
 ```
 
----
-
 ## Example 2: Update by Phone Number (Last Touch - Default)
 
 ```bash
@@ -52,8 +48,6 @@ curl -X PATCH "https://app.phonely.ai/api/calls/agent123/+14155551234" \
     }
   }'
 ```
-
----
 
 ## Example 3: Update by Phone Number (First Touch)
 
@@ -71,8 +65,6 @@ curl -X PATCH "https://app.phonely.ai/api/calls/agent123/+14155551234?preference
   }'
 ```
 
----
-
 ## Example 4: Partial Update (Only Outcome)
 
 ```bash
@@ -84,16 +76,12 @@ curl -X PATCH "https://app.phonely.ai/api/calls/agent123/call456" \
   }'
 ```
 
----
-
 ## Notes
 
 1. **Phone Number Format**: Phone numbers must be in E.164 format (e.g., `+14155551234`). The `+` sign can be included directly in the URL path.
-
 2. **Preference Parameter**:
    - `first`: Updates the earliest call with the given phone number
    - `last`: Updates the most recent call (default)
-
 3. **Partial Updates**: You can provide any combination of the three fields:
    - `custom_call_outcome` (string)
    - `custom_call_outcome_value` (number)
