@@ -146,6 +146,16 @@
             "group": "ACTIONS & INTEGRATIONS",
             "pages": [
               {
+                "group": "Pre-Call Actions",
+                "pages": [
+                  "precall-filter",
+                  "precall-code",
+                  "precall-webhook",
+                  "precall-end-call",
+                  "precall-api-request"
+                ]
+              },
+              {
                 "group": "Live Call Actions",
                 "pages": [
                   "blocks/live-call-actions/api-request",
@@ -184,16 +194,6 @@
                 "pages": [
                   "blocks/custom-integrations/custom-actions",
                   "blocks/custom-integrations/google-calendar-custom-block"
-                ]
-              },
-              {
-                "group": "Pre-Call Actions",
-                "pages": [
-                  "precall-filter",
-                  "precall-code",
-                  "precall-webhook",
-                  "precall-end-call",
-                  "precall-api-request"
                 ]
               }
             ]
