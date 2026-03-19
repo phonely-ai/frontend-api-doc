@@ -151,8 +151,8 @@
                   "precall-filter",
                   "precall-code",
                   "precall-webhook",
-                  "precall-end-call",
-                  "precall-api-request"
+                  "precall-api-request",
+                  "precall-end-call"
                 ]
               },
               {
