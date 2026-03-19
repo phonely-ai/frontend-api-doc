@@ -21,21 +21,73 @@ Phonely combines three core systems that work together in every call.
 
 When a call comes in, Phonely follows your flow in real time, collecting variables, making decisions, calling APIs, transferring calls, scheduling appointments, or taking payments.
 
-<CardGroup cols={3}>
-  <Card icon="lightbulb" iconType="solid" href="/key-concepts/plan-your-agent" cta="Learn best practices" title="Plan your agent">
-    Define what your agent should accomplish before building. Clear planning helps automate accurately, handle edge cases, and deliver consistent results.
-  </Card>
-  <Card icon="workflow" iconType="solid" href="/key-concepts/flows" cta="Learn flow basics" title="Build the call flow">
-    Create visual call flows that connect prompts, logic, and tools. Flows turn scripts into structured, executable conversations with control.
-  </Card>
-  <Card icon="chart-line" iconType="solid" href="/testing" cta="Learn about analytics" title="Test, Analyze, Scale">
-    Validate your agents before going live. Test workflows, review outcomes and summaries, compare, and use insights to refine behavior and scale with confidence.
-  </Card>
-</CardGroup>
+<Columns cols={3}>
+  <Column>
+    <Card title="Create an agent" icon="list-checks" iconType="solid" href="key-concepts/create-duplicate-agents" cta="Learn how to create an agent">
+      Create a new agent to manage calls, collect data, and automate workflows for a specific business area or campaign.
+    </Card>
+  </Column>
+  <Column>
+    <Card title="Pick your voice" icon="mic" iconType="solid" href="/key-concepts/plan-your-agent" cta="Learn about voices">
+      Choose from built-in voices, bring in voices from supported providers, or clone a custom voice that matches your brand and customer experience.
+    </Card>
+  </Column>
+  <Column>
+    <Card title="Add your knowledge" icon="book" iconType="solid" href="/key-concepts/plan-your-agent" cta="Learn about knowledge ">
+      Upload FAQs, SOPs, pricing details, and policy documents so Phonely can answer questions using your real business content during calls.
+    </Card>
+  </Column>
+</Columns>
+
+<Columns cols={3}>
+  <Column>
+    <Card title="Build the call flow" icon="workflow" iconType="solid" href="/key-concepts/plan-your-agent" cta="Learn about workflows">
+      Build the conversation visually with blocks for speaking, asking questions, collecting data, checking logic, calling APIs, routing, and ending calls.
+    </Card>
+  </Column>
+  <Column>
+    <Card title="Capture key variables" icon="variable" iconType="solid" href="/key-concepts/plan-your-agent" cta="Learn about variables">
+      Collect caller details such as name, phone number, email, or order number, then reuse them in logic, integrations, follow-ups, and reporting.
+    </Card>
+  </Column>
+  <Column>
+    <Card title="Route and transfer" icon="variable" iconType="solid" href="/key-concepts/plan-your-agent" cta="Learn about routing">
+      Send callers to the right path using routing, warm or cold transfers, escalation logic, and fallback handling to keep calls moving toward resolution
+    </Card>
+  </Column>
+</Columns>
+
+<Columns cols={3}>
+  <Column>
+    <Card title="Connect your tools" icon="chart-line" iconType="solid" href="/testing" cta="Learn about integrations">
+      Trigger actions across calendars, APIs, sheets, webhooks, payments, email, and SMS using the same variables collected during the conversation.
+    </Card>
+  </Column>
+  <Column>
+    <Card title="Analyze call performance" icon="chart-line" iconType="solid" href="/testing" cta="Learn about analytics">
+      Use analytics to monitor outcomes, compare trends, review call paths, inspect data tables, and understand workflow events in more detail.
+    </Card>
+  </Column>
+  <Column>
+    <Card title="Test, Analyze, Scale" icon="chart-line" iconType="solid" href="/testing" cta="Test and publish">
+      Validate your agents before going live. Test workflows, review outcomes and summaries, compare, and use insights to refine behavior and scale with confidence.
+    </Card>
+  </Column>
+</Columns>
 
 ## Let's build your agent right now.
 
 Building voice AI agents has never been easier. Get started in just a few simple steps to build the AI that can automate anything, repeatedly, every single time.
+
+### Create and Agent
+
+Agents are the core of your Phonely workspace. Each agent represents a virtual assistant that can manage calls, collect data, and automate workflows using custom call flows, knowledge sources, and integrations.
+
+You can create a new agent from scratch to handle a specific business area or campaign. Navigate to the top of the main menu under the Agent section, click **Create Agent**. In the **New Agent** window, choose **Create**.
+
+<Frame>
+  ![How To Create Agent And Duplicate Agent Gi](/assets/how-to-create-agent-and-duplicate-agent.gif)
+</Frame>
 
 ### Pick a voice
 
@@ -53,7 +105,7 @@ This allows your agent to respond accurately without hard-coding every answer in
 
 ### Design the Call Flow
 
-Open the Workflow Builder and begin laying out how the call should work. Flows are visual. Each block represents something the agent does:
+Open the workflow builder and begin laying out how the call should work. Flows are visual. Each block represents something the agent does:
 
 <Expandable title="Examples">
   - speak to the caller
@@ -144,18 +196,36 @@ From here, you're ready to explore the deeper concepts that power every Phonely 
 Learn the core concepts used to answer millions of calls by selecting one of the following components below.
 
 <CardGroup cols={3}>
-  <Card icon="workflow" iconType="solid" href="/key-concepts/flows" cta="Understand how flows work" title="Learn about Flows">
+  <Card title="Learn about Flows" icon="workflow" iconType="solid" href="/key-concepts/flows" cta="Understand how flows work">
     Design call scripts, connect integrations, and automate logic using Phonely’s visual flow builder at scale.
   </Card>
-  <Card icon="phone" iconType="solid" href="/outboundcalling/createaoutboundcallingcampaign/" cta="Build your first outbound campaign" title="Outbound Calling">
+
+  <Card title="Outbound Calling" icon="phone" iconType="solid" href="/outboundcalling/createaoutboundcallingcampaign/" cta="Build your first outbound campaign">
     Automate reminders, reactivations, and follow-up calls using the same building blocks as inbound flows.
   </Card>
-  <Card icon="shuffle" iconType="solid" href="/testing/ab-testing" cta="Learn how to test your agents" title="A/B Testing">
+
+  <Card title="A/B Testing" icon="shuffle" iconType="solid" href="/testing/ab-testing" cta="Learn how to test your agents">
     Test prompts, voices, and routing strategies, compare results, and deploy the best-performing setup.
   </Card>
 </CardGroup>
 
----
+<Columns cols={3}>
+  <Column>
+    <Card title="Review structured call data" icon="lightbulb" iconType="solid" href="/data-tables" cta="Learn best practices">
+      Use Data Tables to analyze calls in a structured format. Filter, sort, and review detailed records such as outcomes, durations, sentiments, call types, and other captured metadata..
+    </Card>
+  </Column>
+  <Column>
+    <Card title="Review call paths" icon="lightbulb" iconType="solid" href="/call-path" cta="Learn best practices">
+      Use Call Paths to see how calls progress through your agent. Identify the most common routes, compare different paths, and understand where callers drop off, convert, escalate, or succeed.
+    </Card>
+  </Column>
+  <Column>
+    <Card title="Track performance " icon="lightbulb" iconType="solid" href="/perfomance" cta="Learn best practices">
+      Use the Performance view to monitor how your agent is performing over time. Review key metrics, compare outcomes, and identify patterns that help you improve call handling and overall workflow quality.
+    </Card>
+  </Column>
+</Columns>
 
 ## FAQ
 
@@ -164,6 +234,7 @@ Learn the core concepts used to answer millions of calls by selecting one of the
     Most users build a working voice agent in under **10 minutes** using the Quick Start tutorial.\
     If you’re connecting integrations or APIs, expect another few minutes to authenticate and map variables.
   </Accordion>
+
   <Accordion title="What if my business uses multiple software tools?">
     You can connect multiple integrations inside a single flow. For example, pull appointment data from Google Calendar, send confirmations via SMS, and log the interaction in HubSpot, all in one call.
 
@@ -171,12 +242,15 @@ Learn the core concepts used to answer millions of calls by selecting one of the
       If you don’t see your integration listed, you can **import any API directly from a cURL command** to make it work instantly.
     </Tip>
   </Accordion>
+
   <Accordion title="Can I test my agent before deploying it?">
     Yes. Use the **Test** button on the agent design page or call your assigned Phonely number. You can hear the agent in real time, confirm it follows your call flows, and review analytics immediately after.
   </Accordion>
+
   <Accordion title="What if the AI gets something wrong on a call?">
     Check the **Call History** tab to view transcripts, summaries, and reasoning for every decision the AI made. From there, you can retrain your flow or tweak prompts. Each call is logged with topic, sentiment, and variable data for easy troubleshooting.
   </Accordion>
+
   <Accordion title="How do I connect my existing phone number?">
     You can forward, port, or provision a new number with Phonely.\
     Most users forward their existing line to their Phonely number during setup to start testing immediately.

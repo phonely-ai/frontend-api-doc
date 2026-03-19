@@ -1,5 +1,5 @@
 ---
-title: "API Requests"
+title: "API Request"
 ---
 
 The API Request Pre-Call Action allows your Phonely agent to communicate with external systems before the conversation begins.
@@ -28,34 +28,11 @@ Conversation Workflow
 
 This ensures any retrieved data is available to the agent from the very first message.
 
-## What the API Request Can Do
-
-The Pre-Call API Request allows your system to interact with external services such as:
-
-- CRM systems
-- Customer databases
-- Order management platforms
-- Fraud detection services
-- Authentication systems
-- Analytics platforms
-
-It can be used to:
-
-- Retrieve customer information using the caller’s phone number
-- Verify account status
-- Load order or subscription data
-- Trigger CRM events
-- Send call start notifications to other systems
-
-The returned data can then be stored in variables and used throughout the call.
-
 ## How to Add a Pre-Call API Request
 
-Pre-Call Actions can only be added **at the very beginning of a workflow**, before the conversation flow starts. This starting point is the **Start Flow**.
+Pre-Call Actions can only be added at the very beginning of a workflow, before the conversation flow starts. This starting point is the **Start Flow**.
 
-The **Start Flow** is the block that runs first when a call is answered. By default, this block may be labeled **Greeting Message**, but it can be renamed to match your workflow.
-
-Pre-Call Actions are added above the Start Flow, so this block must be configured first before the option to add Pre-Call Actions becomes available.
+The **Start Flow** is the block that runs first when a call is answered. Pre-Call Actions are added above the Start Flow, so this block must be configured first before the option to add Pre-Call Actions becomes available.
 
 <Steps>
   <Step title="Set the Start Flow">
@@ -66,7 +43,7 @@ Pre-Call Actions are added above the Start Flow, so this block must be configure
     When this option is checked, Phonely will always start the workflow with this block whenever a call is received. Once it is set, the system enables the **Pre-Call Actions** area above the Start Flow.
 
     <Frame>
-      ![Startflowprecall](/assets/startflowprecall.png)
+      ![Startflowprecall](/images/startflowprecall.png)
     </Frame>
   </Step>
   <Step title="Add a Pre-Call Action">
@@ -75,9 +52,13 @@ Pre-Call Actions are added above the Start Flow, so this block must be configure
     Click this **➕ button**.
   </Step>
   <Step title="Select API Request">
-    From the list of available Pre-Call Actions, select **API Request**.
+    From the list of available Pre-Call Actions, select **API Request.**            
 
     The API Request configuration panel will open, allowing you to configure how the external API should be called before the conversation begins.
+
+    <Frame>
+      ![Precalloptions](/assets/precalloptions.png)
+    </Frame>
   </Step>
 </Steps>
 
@@ -89,16 +70,20 @@ Phonely allows two ways to configure the API call:
 
 ### Option 1 — Import from cURL
 
-If you already have a request from tools like **Postman**, **API documentation**, or **terminal commands**, you can paste it directly.
+If you already have a request from tools like Postman, API documentation, or terminal commands, you can paste it directly.
 
 Paste the cURL command into the **cURL Command** field and click **Import from cURL**.
 
 Example:
 
-```text
+```json
 curl -X GET "https://api.example.com/customer?phone=123456789"
 -H "Content-Type: application/json"
 ```
+
+<Frame>
+  ![Samplecurlcommand](/assets/samplecurlcommand.png)
+</Frame>
 
 Phonely automatically extracts:
 
@@ -110,11 +95,22 @@ Phonely automatically extracts:
 
 These values are then populated in the **Configure** tab.
 
+<Frame>
+  ![Configuringprecallapirequestfields](/assets/configuringprecallapirequestfields.png)
+</Frame>
+
 ### Option 2 — Build Manually
 
 If you don’t have a cURL command, select **Build Manually**.
 
 You will then configure the request step-by-step in the **Configure** section.
+
+<img
+  src="/assets/configure-api-request-manually.png"
+  alt="Configure Api Request Manually"
+  title="Configure Api Request Manually"
+  style={{ width:"72%" }}
+/>
 
 ## Configure
 
@@ -150,22 +146,34 @@ This URL represents the destination where your request is processed.
 
 ### Headers
 
-Headers provide additional metadata required by the API.
+Headers provide additional metadata required by the API. Click **Add** to create key-value pairs.
 
-Click **Add** to create key-value pairs.
+<img
+  src="/assets/configure-header-for-api-request.png"
+  alt="Configure Header For Api Request"
+  title="Configure Header For Api Request"
+  style={{ width:"96%" }}
+/>
 
-Common examples include:
+Common header examples include:
 
-| Header        | Example Value       |
-| :------------ | :------------------ |
-| Content-Type  | application/json    |
-| Authorization | Bearer YOUR_API_KEY |
+| Header | Example Value |
+| :-- | :-- |
+| Content-Type | application/json |
+| Authorization | Bearer YOUR\_API\_KEY |
 
 Headers are often required for authentication and data formatting.
 
 ### Query Parameters
 
 Query parameters allow you to send additional information through the URL.
+
+<img
+  src="/assets/configure-query-parameters-in-phonely.png"
+  alt="Configure Query Parameters In Phonely"
+  title="Configure Query Parameters In Phonely"
+  style={{ width:"95%" }}
+/>
 
 Example:
 
@@ -175,13 +183,38 @@ https://api.example.com/orders?customer_id=123
 
 In the interface, these appear as key-value pairs:
 
-| Key         | Value |
-| :---------- | :---- |
-| customer_id | 123   |
+| Key | Value |
+| :-- | :-- |
+| customer\_id | 123 |
+
+### Body (For POST, PUT, PATCH Requests)
+
+For **POST**, **PUT**, or **PATCH** requests, you can define a request body. Phonely supports multiple body types, selectable directly in the UI. Enter the endpoint where the request should go. This is the destination for your data.
+
+#### Supported Body Types
+
+<Steps>
+  <Step title="None">
+    Use this when the request does not require a body. Headers define metadata or authentication details for your API call.
+  </Step>
+  <Step title="x-www-form-urlencoded">
+    Use this when the API expects traditional form data. Each key-value pair is sent as form data, commonly required by legacy systems or OAuth flows.
+  </Step>
+  <Step title="JSON">
+    Use this when sending structured data in JSON format (most modern APIs). You can switch the editor to **Code** mode to write raw JSON directly.
+  </Step>
+</Steps>
 
 ## Advanced Settings
 
 The **Advanced Settings** section allows you to control how the API request behaves during execution.
+
+<img
+  src="/assets/api-request-block-advanced-settings.png"
+  alt="Api Request Block Advanced Settings"
+  title="Api Request Block Advanced Settings"
+  style={{ width:"61%" }}
+/>
 
 ### Enable Error Handling
 
@@ -190,16 +223,14 @@ When enabled, the system can detect failed requests and handle them gracefully.
 Example scenarios:
 
 - API unavailable
-- authentication error
-- invalid request
+- Authentication error
+- Invalid request
 
 Instead of breaking the flow, you can define fallback logic.
 
 ### Retry on Failure
 
-If the API request fails due to temporary issues, Phonely will automatically retry the request.
-
-This helps prevent interruptions caused by short network or server delays.
+If the API request fails due to temporary issues, Phonely will automatically retry the request. This helps prevent interruptions caused by short network or server delays.
 
 ### Timeout Duration
 
@@ -227,23 +258,22 @@ This prevents silence during longer API requests.
 
 Two options are available:
 
-**Fixed**
+<Steps>
+  <Step title="Fixed">
+    The message is predefined and always the same.
+  </Step>
+  <Step title="Promptable">
+    Phonely dynamically generates a short message using AI based on the configured prompt.
 
-The message is predefined and always the same.
+    Example prompt:
 
-**Promptable**
-
-Phonely dynamically generates a short message using AI based on the configured prompt.
-
-Example prompt:
-
-> Generate a friendly 3–7 word interim message telling the caller you are working on their request.
+    > Generate a friendly 3–7 word interim message telling the caller you are working on their request.
+  </Step>
+</Steps>
 
 ### Post Interim Message Delay
 
-Adds a small delay after the interim message before the API request continues.
-
-This makes the interaction feel more natural.
+Adds a small delay after the interim message before the API request continues. This makes the interaction feel more natural.
 
 ### Call Outcome Tagging
 
@@ -261,21 +291,47 @@ These tags help categorize calls in dashboards and reports.
 
 After configuration, use the **Test** step to validate the request.
 
-Click **Test** to send the request exactly as configured.
-
-Phonely will display the API response immediately.
-
-If successful, you may see a response like:
+Click **Test** to send the request exactly as configured. Phonely will display the API response immediately. If successful, you may see a response like:
 
 ```text
 Status: 200 OK
 ```
 
+<Frame>
+  <img
+    src="/assets/testprecallapirequest.png"
+    alt="Testprecallapirequest"
+    title="Testprecallapirequest"
+    style={{ width:"59%" }}
+  />
+</Frame>
+
 If the request fails, the system displays the error message to help troubleshoot issues such as:
 
-- incorrect endpoint
-- missing authentication
-- invalid parameters
-- server errors
+- Incorrect endpoint
+- Missing authentication
+- Invalid parameters
+- Server errors
 
 Testing ensures the request works correctly before publishing the workflow.
+
+## UseCases
+
+The Pre-Call API Request allows your system to interact with external services such as:
+
+- CRM systems
+- Customer databases
+- Order management platforms
+- Fraud detection services
+- Authentication systems
+- Analytics platforms
+
+It can be used to:
+
+- Retrieve customer information using the caller’s phone number
+- Verify account status
+- Load order or subscription data
+- Trigger CRM events
+- Send call start notifications to other systems
+
+The returned data can then be stored in variables and used throughout the call.
