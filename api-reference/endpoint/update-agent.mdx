@@ -3,19 +3,19 @@ title: "Update Agent"
 openapi: "POST /update-agent"
 ---
 
-## Update Agent
-
 Updates various settings and configurations for an existing agent.
 
 ### Request
 
-**Method:** `POST`  
-**Endpoint:** `/api/update-agent`  
+**Method:** `POST`\
+**Endpoint:** `/api/update-agent`\
 **Headers:**
+
 - `X-Authorization`: Your API key (required)
 - `Content-Type`: `application/json`
 
 **Request Body:**
+
 ```json
 {
   "uid": "string",
@@ -30,6 +30,7 @@ Updates various settings and configurations for an existing agent.
 ```
 
 **Parameters:**
+
 - `uid` (string, required): Your user ID
 - `agentId` (string, required): The ID of the agent to update
 - `voiceId` (string, optional): ID of the voice to use for the agent
@@ -42,6 +43,7 @@ Updates various settings and configurations for an existing agent.
 ### Response
 
 **Success Response (200):**
+
 ```json
 {
   "success": true
@@ -49,6 +51,7 @@ Updates various settings and configurations for an existing agent.
 ```
 
 **Error Responses:**
+
 - `400 Bad Request`: Invalid request body, invalid voice ID, agent name too long, greeting message too long, invalid conversation style, or agent already in organization
 - `401 Unauthorized`: Invalid or missing API key, or insufficient permissions
 - `500 Internal Server Error`: Server error
