@@ -17,7 +17,9 @@ At the top right of the page, you can switch between:
 - **Performance** – high-level analytics and trends
 - **Call Paths** – a visual view of how calls move through your workflows
 
-![Perfomance View Page Phonely](/assets/perfomance-view-page-phonely.png)
+<Frame>
+  ![Overviewperfomancepage](/assets/overviewperfomancepage.png)
+</Frame>
 
 ## Page layout
 
@@ -92,7 +94,7 @@ Each filter group displays:
 
 - A list of available values
 - The number of calls associated with each value
-- A **Select all** option for quick selection
+- A select all option for quick selection
 
 ### Available filter categories
 
@@ -155,6 +157,39 @@ Use the measurement dropdown to switch between:
 
 This is useful when comparing relative performance across categories rather than raw volume.
 
+### Goal
+
+Use Goal to add a target line to the chart. When enabled, the chart displays a horizontal dashed line showing the selected target value. This makes it easier to compare actual performance against your expected call volume.
+
+When a goal is active, the goal button shows a badge indicating the current target value. This means the chart is displaying a target of 10 calls for each bar in the chart.
+
+To configure a goal:
+
+1. Click **Goal** in the chart controls.
+2. In the target panel, enter the number of calls you want to use as the target.
+3. You can also use the **Quick set** options to apply a preset value such as 25, 50, 100, or 250.
+4. Click **Apply** to update the chart.
+
+Once applied:
+
+- The target line appears across the chart
+- The target label appears on the right side of the chart
+- The summary above the chart reflects the active goal value
+
+<Frame>
+  ![Performancetargets](/assets/performancetargets.png)
+</Frame>
+
+#### Clearing or changing a target
+
+Inside the target panel:
+
+- **Clear** removes the current target
+- **Cancel** closes the panel without applying changes
+- **Apply** saves the target value and updates the chart
+
+Use goals when you want to quickly see whether weekly or daily performance is meeting a defined threshold.
+
 #### Grouping
 
 Click **Group** to split the chart into multiple categories, displayed as stacked or grouped bars instead of a single total.
@@ -197,7 +232,7 @@ Each group represents a reporting bucket. For every group, you can define the fo
 
 #### Group name
 
-Provide a clear, descriptive name for the group. By default, groups are labeled _Group 1_, _Group 2_, and so on, but you can rename them to match your reporting needs (for example, _Successful Calls_, _Escalations_, or _Drop-offs_).
+Provide a clear, descriptive name for the group. By default, groups are labeled Group 1, Group 2, and so on, but you can rename them to match your reporting needs (for example, Successful Calls, Escalations, or Drop-offs).
 
 #### Group type
 
