@@ -319,6 +319,7 @@
       {
         "tab": "Webhook Reference",
         "icon": "webhook",
+        "hidden": true,
         "pages": [
           "webhook-reference/intro",
           {
