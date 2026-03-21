@@ -1,20 +1,28 @@
 ---
 title: "Post Call Webhook"
+description: "How the Phonely post-call webhook is delivered and how to configure the receiving endpoint."
 openapi: "POST /to_your_webhook_url"
 ---
 
-The post call webhook allows you to receive real-time notifications after each call ends. This webhook sends a POST request to your specified URL containing detailed information about the completed call.
+## Delivery Model
 
-## Request Format
+Phonely sends a `POST` request to the configured webhook URL after a call completes.
 
-When a call ends, our system will send a POST request to your configured URL. The request body will contain data in JSON format.
+## Receiver Requirements
 
-## Security Considerations
+- The receiver must accept HTTPS requests.
+- The receiver must be ready to parse JSON request bodies.
+- The receiver should log failed deliveries for later retry or debugging.
 
-To ensure the security of your webhook, we recommend: Using an HTTPS URL
+## Setup Procedure
 
-## Configuring the Webhook
+1. Open the target agent.
+2. Open `/agent/{agentId}?tab=settings`.
+3. Add the webhook URL in the webhook configuration area.
+4. Save the configuration.
+5. Run a test call and confirm the webhook is received.
 
-[AGENT PAGE](https://app.phonely.ai/agent/)
+## Error Handling
 
-You can configure the post call webhook URL in the "Agent" > "Setting" > "General" > "Webhook" section of your control panel.
+- IF the receiver returns a non-success status code, THEN treat the delivery as failed and inspect the receiver logs.
+- IF the webhook endpoint is changed, THEN re-run a test call before using it in production.

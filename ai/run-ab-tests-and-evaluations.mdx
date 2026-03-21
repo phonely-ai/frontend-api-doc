@@ -1,0 +1,34 @@
+---
+title: "AI Run A/B Tests And Evaluations"
+description: "Deterministic procedure for running Phonely A/B tests and evaluation tests."
+---
+
+## Choose The Correct Testing Mode
+
+- Use `/testing/ab-test` for live traffic split testing between a base agent and a test agent.
+- Use `/testing/evaluation` for evaluator-driven or recording-driven test runs.
+
+## Run An A/B Test
+
+1. Open `/testing/ab-test`.
+2. Create a test in the `Planned` column.
+3. Set the category, end criteria, traffic split, and success criteria.
+4. Edit the generated test agent.
+5. Start the test.
+6. Monitor `Planned`, `In Progress`, and `Completed` states.
+
+## Run An Evaluation Test
+
+1. Open `/testing/evaluation`.
+2. Create a new test case.
+3. Attach evaluators, recordings, or prior calls.
+4. Set run count or variance parameters if available.
+5. Run the test case.
+6. Review results in the evaluation results view.
+
+## Rules
+
+- ALWAYS keep the A/B variant limited to the intended change.
+- NEVER treat A/B testing and evaluation testing as the same feature.
+- IF the task requires live call traffic split, THEN use A/B testing.
+- IF the task requires synthetic or evaluator-driven validation, THEN use evaluation testing.

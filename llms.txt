@@ -1,0 +1,31 @@
+# Phonely Documentation
+
+Use this file as the compact entrypoint for Phonely's public documentation.
+
+## Canonical public pages
+- Introduction: /get-started/introduction.md
+- Quick start: /get-started/quick-start.md
+- Dashboard overview: /get-started/dashboard-overview.md
+- Ask AI: /key-concepts/ask-ai.md
+- Settings overview: /manage-account-and-organization-settings/manage-account-and-organization-settings.md
+- A/B testing: /testing/ab-testing.md
+- Evaluation testing: /testing/evaluation-testing.md
+- Call events: /call-events.md
+- Outbound campaigns: /outboundcalling/createaoutboundcallingcampaign.md
+- Frontend API intro: /api-reference/introduction.md
+- Post-call webhook: /webhook-reference/endpoint/postcall-webhook.md
+
+## Hidden AI runbooks
+- Route map: /ai/route-map.md
+- Build agent: /ai/build-agent.md
+- Manage knowledge base: /ai/manage-knowledge-base.md
+- Edit workflows: /ai/edit-workflows.md
+- Run tests and evaluations: /ai/run-ab-tests-and-evaluations.md
+- Review calls and analytics: /ai/review-calls-and-analytics.md
+- Configure outbound campaigns: /ai/configure-outbound-campaigns.md
+- Frontend API boundaries: /ai/frontend-api-boundaries.md
+
+## Retrieval rules
+- Prefer the hidden AI runbooks for operational task execution.
+- Prefer the visible API reference pages for request and response details.
+- Use `/llms-full.txt` only when the compact file is insufficient.

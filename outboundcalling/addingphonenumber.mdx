@@ -1,5 +1,22 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: "Add Outbound Phone Numbers"
+description: "Exact procedure for attaching a phone number to an outbound-capable Phonely agent."
 ---
 
+## Preconditions
+
+- The agent already exists.
+- The user has permission to manage phone numbers.
+
+## Procedure
+
+1. Open `/agent/{agentId}` or `/settings?tab=numbers`.
+2. Start the phone number assignment flow.
+3. Choose the number source.
+4. Attach the number to the agent.
+5. Confirm the number appears on the agent before launching a campaign.
+
+## Rules
+
+- ALWAYS attach a phone number before launching an outbound campaign.
+- IF the number is not attached to the agent, THEN do not continue to campaign launch.

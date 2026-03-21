@@ -1,5 +1,21 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: "Start Campaigns From Webhooks"
+description: "How to configure outbound campaign automation when contacts are supplied by webhook or API."
 ---
 
+## Use This Page For
+
+Use this flow when the campaign should be triggered from an external system instead of a manual CSV upload.
+
+## Procedure
+
+1. Open `/campaign/{agentId}`.
+2. Create or open a campaign.
+3. Choose the webhook or API-based contact source.
+4. Configure the inbound payload mapping.
+5. Validate one sample payload before launch.
+
+## Rules
+
+- ALWAYS confirm the payload contains the fields required by the campaign.
+- ALWAYS test the webhook path before enabling production traffic.
