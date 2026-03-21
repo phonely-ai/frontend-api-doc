@@ -44,8 +44,9 @@ This docs set covers:
 
 ## Authoring Rules
 
-- Prefer deterministic task docs over marketing copy.
+- Keep visible docs human-friendly and product-accurate.
+- Use hidden `ai/*.mdx` pages for stricter agent runbooks.
 - Keep one canonical page per concept.
 - Add `title` and `description` to every indexed MDX page.
-- Use `noindex: true` for legacy aliases or out-of-scope pages.
+- Use `.mintignore` or `noindex: true` for legacy, duplicate, or out-of-scope pages.
 - Keep hidden AI runbooks public-safe. Hidden does not mean secret.

@@ -1,12 +1,12 @@
 ---
-title: "AI Run A/B Tests And Evaluations"
-description: "Deterministic procedure for running Phonely A/B tests and evaluation tests."
+title: "AI Run A/B Tests"
+description: "Deterministic guide for the current Phonely testing surface and the legacy evaluation route."
 ---
 
-## Choose The Correct Testing Mode
+## Current Testing Surface
 
 - Use `/testing/ab-test` for live traffic split testing between a base agent and a test agent.
-- Use `/testing/evaluation` for evaluator-driven or recording-driven test runs.
+- Treat `/testing/evaluation` as a legacy route. It exists in code, but it is currently unused in product flows.
 
 ## Run An A/B Test
 
@@ -17,18 +17,13 @@ description: "Deterministic procedure for running Phonely A/B tests and evaluati
 5. Start the test.
 6. Monitor `Planned`, `In Progress`, and `Completed` states.
 
-## Run An Evaluation Test
+## Legacy Evaluation Route
 
-1. Open `/testing/evaluation`.
-2. Create a new test case.
-3. Attach evaluators, recordings, or prior calls.
-4. Set run count or variance parameters if available.
-5. Run the test case.
-6. Review results in the evaluation results view.
+- Only reference `/testing/evaluation` if the user explicitly asks about legacy evaluation workflows.
+- Do not route general testing questions to `/testing/evaluation`.
 
 ## Rules
 
 - ALWAYS keep the A/B variant limited to the intended change.
-- NEVER treat A/B testing and evaluation testing as the same feature.
+- NEVER present `/testing/evaluation` as the primary testing path in the current product.
 - IF the task requires live call traffic split, THEN use A/B testing.
-- IF the task requires synthetic or evaluator-driven validation, THEN use evaluation testing.

@@ -13,17 +13,17 @@ Use this page to map a user task to the correct Phonely frontend route.
 | --- | --- | --- |
 | `/dashboard` | Default landing and high-level summary | Dashboard can redirect into agent-specific views. |
 | `/agent/{agentId}` | Agent workspace | Build tab is only available on agent pages. |
-| `/agent/{agentId}?tab=agent-design` | Voice, guidelines, and base agent configuration | Default agent tab. |
 | `/agent/{agentId}?tab=knowledge-base` | Documents, websites, and recordings | Use for KB tasks. |
 | `/agent/{agentId}?tab=workflows` | Workflow editor and automation logic | Use for canvas edits. |
 | `/agent/{agentId}?tab=settings` | Advanced agent settings | Hidden for viewer UX. |
 | `/performance/{agentId}` | Analytics, charts, and data tables | Use for KPI analysis. |
 | `/call-paths/{agentId}` | Call path visualization | Use for branch/path debugging. |
 | `/call-history/{agentId}` | Call list, recordings, and transcripts | Use for call review. |
+| `/agent-review/{orgId}` | Issue triage and team review | `/agent-review` redirects to the first available organization. |
 | `/event/{agentId}` | Event-level execution log | Use for integration and workflow debugging. |
 | `/campaign/{agentId}` | Outbound campaigns | Use for outbound flow and campaign work. |
-| `/testing/ab-test` | A/B testing index | Redirects into agent-specific flows when an agent is selected. |
-| `/testing/evaluation` | Evaluation testing index | Use for evaluator-based or recording-based tests. |
+| `/testing/ab-test` | A/B testing index | This is the active testing surface in the current product. |
+| `/testing/evaluation` | Legacy evaluation route | Exists in code, but is currently unused in product flows. |
 | `/settings` | Workspace settings shell | Use query param `tab` for specific tabs. |
 
 ## Settings Tabs
@@ -36,7 +36,7 @@ Use these tab values on `/settings`:
 | `plan-and-billing` | Billing and subscription management |
 | `notifications` | Notification rules |
 | `agents` | Agent administration |
-| `numbers` | Phone number administration |
+| `numbers` | Phone number administration, including `Available Numbers` and `DNC Numbers` |
 | `admin` | Admin settings |
 | `admin-orgs` | Organization management |
 | `admin-custom-actions` | Custom action administration |
@@ -60,6 +60,8 @@ Use these exact labels in the in-app side panel:
 - IF the task edits knowledge sources, THEN use `/agent/{agentId}?tab=knowledge-base`.
 - IF the task edits workflow logic, THEN use `/agent/{agentId}?tab=workflows`.
 - IF the task reviews a call transcript or recording, THEN use `/call-history/{agentId}`.
+- IF the task manages flagged issues, statuses, severities, or review notes, THEN use `/agent-review/{orgId}`.
 - IF the task debugs event-level execution, THEN use `/event/{agentId}`.
 - IF the task configures outbound dialing or campaigns, THEN use `/campaign/{agentId}`.
+- IF the task asks for current testing guidance, THEN use `/testing/ab-test`.
 - IF the task manages workspace billing or notification rules, THEN use `/settings?tab=...`.

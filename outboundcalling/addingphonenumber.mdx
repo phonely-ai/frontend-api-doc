@@ -1,22 +1,43 @@
 ---
-title: "Add Outbound Phone Numbers"
-description: "Exact procedure for attaching a phone number to an outbound-capable Phonely agent."
+title: "Add Phone Numbers"
+description: "Attach phone numbers to an outbound campaign and import numbers from Twilio when needed."
 ---
 
-## Preconditions
+Every outbound campaign needs at least one phone number before it can place calls. Phonely lets you choose numbers already attached to the agent, assign unused workspace numbers, or import new numbers from Twilio.
 
-- The agent already exists.
-- The user has permission to manage phone numbers.
+## Where To Add Numbers
 
-## Procedure
+- Open `/campaign/{agentId}` and create or edit a campaign.
+- In the `Add Phone Numbers` step, click `Add Phone Numbers`.
+- Use `/settings?tab=numbers` when you want to review workspace numbers outside a campaign.
 
-1. Open `/agent/{agentId}` or `/settings?tab=numbers`.
-2. Start the phone number assignment flow.
-3. Choose the number source.
-4. Attach the number to the agent.
-5. Confirm the number appears on the agent before launching a campaign.
+## What The Selector Shows
 
-## Rules
+The number picker separates numbers into:
 
-- ALWAYS attach a phone number before launching an outbound campaign.
-- IF the number is not attached to the agent, THEN do not continue to campaign launch.
+- `Agent Phone Numbers`: numbers already associated with the current agent
+- `Unassigned Phone Numbers`: workspace numbers that are available to assign
+- `Import numbers from Twilio`: a modal for bringing in more numbers
+
+You can search by phone number or region before making a selection.
+
+## Add Existing Numbers
+
+1. Open the `Add Phone Numbers` selector from the campaign.
+2. Search or browse the available lists.
+3. Select one or more numbers.
+4. Click `Add to Campaign`.
+5. Confirm the number now appears in the campaign phone number list.
+
+## Import Numbers From Twilio
+
+1. In the selector, click `Import numbers from Twilio`.
+2. Connect the Twilio account in the modal.
+3. Reopen the number selector after the import finishes.
+4. Select the new number and add it to the campaign.
+
+## Before You Launch
+
+- Confirm the campaign has at least one phone number attached.
+- Use numbers that match the routing strategy you plan to use.
+- If the wrong number is attached, remove it before publishing the campaign.

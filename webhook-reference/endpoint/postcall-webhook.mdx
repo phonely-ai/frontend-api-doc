@@ -1,28 +1,40 @@
 ---
 title: "Post Call Webhook"
-description: "How the Phonely post-call webhook is delivered and how to configure the receiving endpoint."
+description: "Reference for receiving Phonely post-call data on your own webhook endpoint."
 openapi: "POST /to_your_webhook_url"
 ---
 
-## Delivery Model
+Phonely can send a `POST` request to your webhook endpoint after a call completes. Use this when you want to forward summaries, transcripts, outcomes, or call links into another system.
 
-Phonely sends a `POST` request to the configured webhook URL after a call completes.
+## Where To Configure It In Phonely
+
+1. Open `/agent/{agentId}?tab=workflows`.
+2. Add the `Send Call Data` post-call action to the workflow.
+3. In the `Configure` tab, enter your webhook URL.
+4. Choose whether to send the full call payload or a custom body.
+5. Open the `Test` tab and send a sample request.
+6. Confirm your receiver returns a success response.
 
 ## Receiver Requirements
 
 - The receiver must accept HTTPS requests.
 - The receiver must be ready to parse JSON request bodies.
-- The receiver should log failed deliveries for later retry or debugging.
+- The receiver should return a `2xx` response after successful processing.
+- The receiver should log failures for later debugging.
 
-## Setup Procedure
+## Payload Contents
 
-1. Open the target agent.
-2. Open `/agent/{agentId}?tab=settings`.
-3. Add the webhook URL in the webhook configuration area.
-4. Save the configuration.
-5. Run a test call and confirm the webhook is received.
+The schema below documents the standard post-call payload. It includes fields such as:
 
-## Error Handling
+- call and agent identifiers
+- transcript text and structured transcript
+- summary, long summary, topic, and sentiment
+- recording and dashboard URLs
+- caller and business phone numbers
+- call start time, end time, duration, and end reason
 
-- IF the receiver returns a non-success status code, THEN treat the delivery as failed and inspect the receiver logs.
-- IF the webhook endpoint is changed, THEN re-run a test call before using it in production.
+## Testing Tips
+
+- Return `200 OK` after storing or accepting the payload.
+- Re-run the `Test` tab any time you change the expected body or the receiver.
+- If the receiver returns a non-success status, inspect the receiver logs before publishing the workflow.

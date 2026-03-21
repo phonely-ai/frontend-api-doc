@@ -150,6 +150,7 @@
             "group": "REVIEW YOUR AGENT",
             "pages": [
               "call-history-ai-analytics/call-history-ai-analytics",
+              "agent-review",
               "call-events"
             ]
           },
@@ -157,7 +158,6 @@
             "group": "TESTING",
             "pages": [
               "testing/ab-testing",
-              "testing/evaluation-testing",
               "testing/test-from-a-block"
             ]
           },

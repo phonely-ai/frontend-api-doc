@@ -1,75 +1,34 @@
-# Post-Call Webhook
+---
+title: "Webhook Reference"
+description: "Overview of the webhook payload Phonely can send to your own endpoint after a call."
+---
 
-The post-call webhook delivers real-time notifications and detailed call data after each call ends, enabling powerful integrations and analytics.
+Use this section when your system is the receiver and Phonely is the sender.
 
-<Card title="Key Benefits" icon="star">
-  - Real-time call data delivery
-  - Rich insights for business intelligence
-  - Integration with existing systems
-  - Enables automated workflows and actions
-</Card>
+Most teams use this reference together with the `Send Call Data` post-call action in the workflow builder. That action sends call data to your endpoint after the call has finished.
 
-## Webhook Data
+## Common Uses
 
-<AccordionGroup>
-  <Accordion title="Call Metadata">
-    - Call duration
-    - Caller and recipient information
-    - Call status (completed, dropped, etc.)
-  </Accordion>
-  <Accordion title="Conversation Analysis">
-    - Sentiment analysis
-    - Key topics discussed
-    - Action items identified
-  </Accordion>
-  <Accordion title="Agent Performance">
-    - Response times
-    - Adherence to script
-    - Customer satisfaction indicators
-  </Accordion>
-</AccordionGroup>
+- Write call summaries into a CRM
+- Trigger follow-up workflows in Zapier, Make, or internal systems
+- Store transcripts, recordings, and dashboard links in a data warehouse
+- Feed QA or analytics systems with finalized call data
 
-## Common Use Cases
+## What Your Receiver Needs
 
-<CardGroup cols={2}>
-  <Card title="CRM Integration" icon="building">
-    Automatically update customer records with call outcomes and next steps.
-  </Card>
-  <Card title="Quality Assurance" icon="clipboard-check">
-    Flag calls for review based on predefined criteria or sentiment analysis.
-  </Card>
-  <Card title="Automated Follow-ups" icon="paper-plane">
-    Trigger follow-up actions based on call content or outcomes.
-  </Card>
-  <Card title="Performance Analytics" icon="chart-line">
-    Feed data into analytics tools for agent performance tracking and training.
-  </Card>
-</CardGroup>
+- An HTTPS endpoint
+- Support for `POST` requests with a JSON body
+- Fast success responses so the sender does not time out
+- Logging for failed deliveries and downstream processing errors
 
-## Security Considerations
+## Recommended Setup Flow
 
-<Warning>
-  To ensure the security of your webhook:
-  - Use HTTPS URLs for your endpoint
-  - Implement proper authentication
-  - Regularly rotate your webhook secrets
-</Warning>
+1. Open `/agent/{agentId}?tab=workflows`.
+2. Add the `Send Call Data` post-call action to the workflow.
+3. Enter the webhook URL in the action configuration.
+4. Use the action's `Test` tab to send a sample payload.
+5. Review the payload against the endpoint reference on the next page.
 
-## Configuring the Webhook
+## Next Step
 
-<Steps>
-  <Step title="Navigate to Settings">
-    Go to "Agent" > "Setting" > "General" in your control panel
-  </Step>
-  <Step title="Find Webhook Section">
-    Locate the "Webhook" section
-  </Step>
-  <Step title="Enter Webhook URL">
-    Input your secure HTTPS webhook URL
-  </Step>
-  <Step title="Save Configuration">
-    Click "Save" to activate your webhook
-  </Step>
-</Steps>
-
-For detailed API specifications and data schemas, refer to our [API Documentation](/api-reference/introduction).
+Open [Post Call Webhook](/webhook-reference/endpoint/postcall-webhook) for the payload schema and receiver-specific guidance.
