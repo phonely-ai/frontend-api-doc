@@ -33,13 +33,20 @@ For example, one view might show total calls by prompt version
 >
 > Each of these is a separate saved view.
 
-1. From the left sidebar go to the **Analytics** section.
-2. Select **Performance**.
-3. In the top-right area, switch from **Performance** to **Data Tables**.
-4. You’ll see the current saved view as a tab.
-5. Use the date range selector at the top to control the time window for the table.
+<Steps>
+  <Step title="From the left sidebar go to the Analytics section.">
+  </Step>
+  <Step title="Select Performance.">
+  </Step>
+  <Step title="In the top-right area, switch from Performance to Data Tables.">
+  </Step>
+  <Step title="You’ll see the current saved view as a tab.">
+  </Step>
+  <Step title="Use the date range selector at the top to control the time window for the table.">
+  </Step>
+</Steps>
 
-The page can also include a metric selector such as **Duration**, depending on your current Performance settings
+The page can also include a metric selector such as duration, depending on your current performance settings.  
 
 ## How the page is organized
 
@@ -81,9 +88,9 @@ In the **Create Data View** flow, choose **Build Manually**.
 
 This opens the manual builder, where you can define the view name, preview the table, choose a grouping, and add columns before publishing the view.
 
-At the top of the builder, enter a **View Name**. 
+At the top of the builder, enter a **View Name**.
 
-This is the label that will appear as the saved tab in data tables, so it should describe what the view is intended to show. For example, names like \_Total Calls by Day, Appointment Booked Rate by Week, or Negative Sentiment by Prompt Versio_n make the purpose of the table clear.
+This is the label that will appear as the saved tab in data tables, so it should describe what the view is intended to show. For example, names like Total Calls by Day, Appointment Booked Rate by Week, or Negative Sentiment by Prompt Version make the purpose of the table clear.
 
 <Frame>
   ![Totalcallsbytheday](/assets/totalcallsbytheday.png)
@@ -169,52 +176,52 @@ Outcome variables count calls that include a specific outcome from the agent’s
 Examples include:
 
 <Expandable title="Examples">
-  | Outcome Variable                             | Description                                                                          |
-  | :------------------------------------------- | :----------------------------------------------------------------------------------- |
-  | `@outcome.Additional_Assistance_Requested`   | Counts calls where the caller requested further help beyond the initial interaction. |
-  | `@outcome.Appointment_Confirmed`             | Counts calls where an appointment was successfully confirmed.                        |
-  | `@outcome.Appointment_Details_Collected`     | Counts calls where the necessary appointment details were gathered.                  |
-  | `@outcome.Appointment_Preferences_Collected` | Counts calls where the caller’s appointment preferences were collected.              |
-  | `@outcome.Appointment_Slots_Offered`         | Counts calls where available appointment slots were offered to the caller.           |
-  | `@outcome.Assistance_Requested`              | Counts calls where the caller asked for help or support.                             |
-  | `@outcome.Availability_Collected`            | Counts calls where availability information was captured from the caller.            |
-  | `@outcome.Buyer_Details_Collected`           | Counts calls where buyer-related details were collected.                             |
-  | `@outcome.Call_Escalated`                    | Counts calls that were escalated to a human agent or another support path.           |
-  | `@outcome.Caller_Details_Collected`          | Counts calls where the caller’s identifying details were gathered.                   |
-  | `@outcome.Consultation_Booking_Offered`      | Counts calls where a consultation booking was offered.                               |
-  | `@outcome.Contact_Details_Collected`         | Counts calls where contact information such as phone or email was collected.         |
-  | `@outcome.hello`                             | Counts calls tagged with the custom outcome `hello`.                                 |
-  | `@outcome.Inquiry_Clarified`                 | Counts calls where the caller’s request or issue was clearly identified.             |
-  | `@outcome.Order_Information_Collected`       | Counts calls where order-related details were collected.                             |
-  | `@outcome.Order_Lookup_Details_Collected`    | Counts calls where enough information was gathered to look up an order.              |
-  | `@outcome.Order_Status_Provided`             | Counts calls where the caller was given their order status.                          |
-  | `@outcome.order_tracked`                     | Counts calls tagged with the custom outcome `order_tracked`.                         |
-  | `@outcome.Personal_Details_Collected`        | Counts calls where personal information was collected from the caller.               |
-  | `@outcome.Return_Eligibility_Determined`     | Counts calls where return eligibility was checked or confirmed.                      |
-  | `@outcome.Return_Requested`                  | Counts calls where the caller requested a return.                                    |
-  | `@outcome.sales`                             | Counts calls tagged with the custom outcome `sales`.                                 |
-  | `@outcome.Standup_Information_Collected`     | Counts calls where standup-related information was collected.                        |
-  | `@outcome.Support_Option_Selected`           | Counts calls where a support option was selected.                                    |
-  | `@outcome.Website_Redirected`                | Counts calls where the caller was redirected to a website.                           |
-  | `@outcome.Website_Referral_Provided`         | Counts calls where a website referral or web resource was provided.                  |
-  | `@outcome.Your_are_the_best`                 | Counts calls tagged with the custom outcome `Your_are_the_best`.                     |
+  | Outcome Variable | Description |
+  | :-- | :-- |
+  | `@outcome.Additional_Assistance_Requested` | Counts calls where the caller requested further help beyond the initial interaction. |
+  | `@outcome.Appointment_Confirmed` | Counts calls where an appointment was successfully confirmed. |
+  | `@outcome.Appointment_Details_Collected` | Counts calls where the necessary appointment details were gathered. |
+  | `@outcome.Appointment_Preferences_Collected` | Counts calls where the caller’s appointment preferences were collected. |
+  | `@outcome.Appointment_Slots_Offered` | Counts calls where available appointment slots were offered to the caller. |
+  | `@outcome.Assistance_Requested` | Counts calls where the caller asked for help or support. |
+  | `@outcome.Availability_Collected` | Counts calls where availability information was captured from the caller. |
+  | `@outcome.Buyer_Details_Collected` | Counts calls where buyer-related details were collected. |
+  | `@outcome.Call_Escalated` | Counts calls that were escalated to a human agent or another support path. |
+  | `@outcome.Caller_Details_Collected` | Counts calls where the caller’s identifying details were gathered. |
+  | `@outcome.Consultation_Booking_Offered` | Counts calls where a consultation booking was offered. |
+  | `@outcome.Contact_Details_Collected` | Counts calls where contact information such as phone or email was collected. |
+  | `@outcome.hello` | Counts calls tagged with the custom outcome `hello`. |
+  | `@outcome.Inquiry_Clarified` | Counts calls where the caller’s request or issue was clearly identified. |
+  | `@outcome.Order_Information_Collected` | Counts calls where order-related details were collected. |
+  | `@outcome.Order_Lookup_Details_Collected` | Counts calls where enough information was gathered to look up an order. |
+  | `@outcome.Order_Status_Provided` | Counts calls where the caller was given their order status. |
+  | `@outcome.order_tracked` | Counts calls tagged with the custom outcome `order_tracked`. |
+  | `@outcome.Personal_Details_Collected` | Counts calls where personal information was collected from the caller. |
+  | `@outcome.Return_Eligibility_Determined` | Counts calls where return eligibility was checked or confirmed. |
+  | `@outcome.Return_Requested` | Counts calls where the caller requested a return. |
+  | `@outcome.sales` | Counts calls tagged with the custom outcome `sales`. |
+  | `@outcome.Standup_Information_Collected` | Counts calls where standup-related information was collected. |
+  | `@outcome.Support_Option_Selected` | Counts calls where a support option was selected. |
+  | `@outcome.Website_Redirected` | Counts calls where the caller was redirected to a website. |
+  | `@outcome.Website_Referral_Provided` | Counts calls where a website referral or web resource was provided. |
+  | `@outcome.Your_are_the_best` | Counts calls tagged with the custom outcome `Your_are_the_best`. |
 </Expandable>
 
 Use these when you want to measure how often a specific workflow result appears.
 
 ### Topic variables
 
-Topic variables count calls tagged with a specific call topic that is **currently set for the agent**. Only topics that are configured for the agent appear in the formula picker.
+Topic variables count calls tagged with a specific call topic that is currently set for the agent. Only topics that are configured for the agent appear in the formula picker.
 
 Examples include:
 
 <Expandable title="Examples">
-  | Topic Variable                                   | Description                                                                                         |
-  | :----------------------------------------------- | :-------------------------------------------------------------------------------------------------- |
-  | `@topic.appointment_booked`                      | Counts calls where the caller successfully booked an appointment during the conversation.           |
-  | `@topic.callback_requested`                      | Counts calls where the caller requested a callback.                                                 |
+  | Topic Variable | Description |
+  | :-- | :-- |
+  | `@topic.appointment_booked` | Counts calls where the caller successfully booked an appointment during the conversation. |
+  | `@topic.callback_requested` | Counts calls where the caller requested a callback. |
   | `@topic.caller_asked_to_speak_to_representative` | Counts calls where the caller asked to speak to a human representative or needed escalation to one. |
-  | `@topic.caller_transferred`                      | Counts calls that were transferred                                                                  |
+  | `@topic.caller_transferred` | Counts calls that were transferred |
 </Expandable>
 
 These are useful for analyzing caller intent, routing outcomes, or topic trends.
@@ -224,10 +231,10 @@ These are useful for analyzing caller intent, routing outcomes, or topic trends.
 Sentiment variables count calls by sentiment classification. Supported values include:
 
 <Expandable title="property">
-  | Sentiment Variable    | Description                                             |
-  | :-------------------- | :------------------------------------------------------ |
+  | Sentiment Variable | Description |
+  | :-- | :-- |
   | `@sentiment.positive` | Counts calls classified as having a positive sentiment. |
-  | `@sentiment.neutral`  | Counts calls classified as having a neutral sentiment.  |
+  | `@sentiment.neutral` | Counts calls classified as having a neutral sentiment. |
   | `@sentiment.negative` | Counts calls classified as having a negative sentiment. |
 </Expandable>
 
@@ -238,15 +245,15 @@ These are especially useful for experience and quality monitoring.
 End reason variables count calls by how they ended. Examples include:
 
 <Expandable title="property">
-  | End Reason Variable                         | Description                                                                  |
-  | :------------------------------------------ | :--------------------------------------------------------------------------- |
-  | `@ended_reason.assistant-ended-call`        | Counts calls that were ended by the assistant.                               |
-  | `@ended_reason.assistant-forwarded-call`    | Counts calls where the assistant forwarded the call to another destination.  |
-  | `@ended_reason.customer-ended-call`         | Counts calls that were ended by the customer.                                |
-  | `@ended_reason.hangup-during-warm-transfer` | Counts calls where the caller hung up during a warm transfer attempt.        |
-  | `@ended_reason.max-duration-reached`        | Counts calls that ended because the maximum call duration limit was reached. |
-  | `@ended_reason.silence-timeout`             | Counts calls that ended due to a silence timeout.                            |
-  | `@ended_reason.voicemail`                   | Counts calls that ended because the call reached voicemail.                  |
+  | End Reason Variable | Description |
+  | :-- | :-- |
+  | `@ended_reason.assistant-ended-call` | Counts calls that were ended by the assistant. |
+  | `@ended_reason.assistant-forwarded-call` | Counts calls where the assistant forwarded the call to another destination. |
+  | `@ended_reason.customer-ended-call` | Counts calls that were ended by the customer. |
+  | `@ended_reason.hangup-during-warm-transfer` | Counts calls where the caller hung up during a warm transfer attempt. |
+  | `@ended_reason.max-duration-reached` | Counts calls that ended because the maximum call duration limit was reached. |
+  | `@ended_reason.silence-timeout` | Counts calls that ended due to a silence timeout. |
+  | `@ended_reason.voicemail` | Counts calls that ended because the call reached voicemail. |
 </Expandable>
 
 These are useful when you want to monitor call completion patterns or operational failure modes.
@@ -320,9 +327,9 @@ Targets work best when the metric reflects a real business benchmark. Not every 
 
 A target is useful when:
 
-- the metric is tied to a KPI
-- the team already has a known goal
-- you want to scan the table for rows that are off target
+- The metric is tied to a KPI
+- The team already has a known goal
+- You want to scan the table for rows that are off target
 
 To save the column to the view click the **Add Column** button.
 
@@ -354,8 +361,8 @@ For ratio-based formulas (for example, `(@sentiment.negative / @total) * 100`), 
 
 Drill-down is especially useful when you want to:
 
-- validate that a metric is counting the right calls
-- investigate spikes or drops in a rate (success rate, negative sentiment rate, voicemail rate, etc.)
-- review the exact calls contributing to a specific outcome, topic, sentiment, or end reason
+- Validate that a metric is counting the right calls
+- Investigate spikes or drops in a rate (success rate, negative sentiment rate, voicemail rate, etc.)
+- Review the exact calls contributing to a specific outcome, topic, sentiment, or end reason
 
 If you need to compare across groups, click different cells in the table to open the corresponding call lists and review the underlying call sets side-by-side.
