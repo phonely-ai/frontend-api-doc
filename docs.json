@@ -235,6 +235,7 @@
       {
         "tab": "Webhook Reference",
         "icon": "webhook",
+        "hidden": true,
         "pages": [
           "webhook-reference/intro",
           "webhook-reference/endpoint/postcall-webhook"

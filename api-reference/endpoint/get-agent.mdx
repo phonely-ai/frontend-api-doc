@@ -4,19 +4,21 @@ description: "Return one API-key-authenticated frontend agent record by agent ID
 openapi: "POST /get-agent"
 ---
 
-## Get Agent
+## Get Agents
 
 Retrieves detailed information about a specific agent.
 
 ### Request
 
-**Method:** `POST`  
-**Endpoint:** `/api/get-agent`  
+**Method:** `POST`\
+**Endpoint:** `/api/get-agent`\
 **Headers:**
+
 - `X-Authorization`: Your API key (required)
 - `Content-Type`: `application/json`
 
 **Request Body:**
+
 ```json
 {
   "uid": "string",
@@ -25,12 +27,14 @@ Retrieves detailed information about a specific agent.
 ```
 
 **Parameters:**
+
 - `uid` (string, required): Your user ID
 - `agentId` (string, required): The ID of the agent to retrieve
 
 ### Response
 
 **Success Response (200):**
+
 ```json
 {
   "uid": "string",
@@ -42,6 +46,7 @@ Retrieves detailed information about a specific agent.
 ```
 
 **Error Responses:**
+
 - `400 Bad Request`: Invalid request body
 - `401 Unauthorized`: Invalid or missing API key, or insufficient permissions
 - `500 Internal Server Error`: Server error
