@@ -1,0 +1,52 @@
+---
+title: "AI Build Agent"
+description: "Exact procedure for creating and configuring a Phonely agent from the frontend."
+---
+
+## Preconditions
+
+- The user is signed in to `app.phonely.ai`.
+- The user can access at least one agent or can create a new one.
+
+## Create or Open an Agent
+
+1. Open `/agent`.
+2. Select an existing agent or create a new agent.
+3. Confirm the active route is `/agent/{agentId}`.
+
+## Configure The Base Agent
+
+1. Open `/agent/{agentId}?tab=agent-design`.
+2. Set voice selection and personality settings.
+3. Configure call settings and compliance settings.
+4. Add or update agent guidelines.
+5. Save changes before switching tabs.
+
+## Add Knowledge Sources
+
+1. Open `/agent/{agentId}?tab=knowledge-base`.
+2. Choose one source type:
+   - Upload documents
+   - Add websites
+   - Add recordings
+3. Confirm the new source appears in the source list and is active.
+
+## Build Workflows
+
+1. Open `/agent/{agentId}?tab=workflows`.
+2. Add or update workflow blocks.
+3. Confirm all required branches are connected.
+4. Confirm required variables and post-call actions are configured.
+
+## Validate The Agent
+
+1. Open the side panel.
+2. Use `Build` for workflow edits.
+3. Use `Help` for product or docs questions.
+4. Use `Test` to run the current agent behavior.
+
+## Exit Conditions
+
+- The agent has a configured voice.
+- The agent has at least one knowledge source when the use case requires KB answers.
+- The workflow canvas contains the required path from entry to completion.

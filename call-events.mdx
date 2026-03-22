@@ -1,15 +1,22 @@
 ---
 title: "Call Events"
+description: "Inspect event-level execution, telephony activity, API requests, and code actions for a specific agent."
 ---
 
-The Call Events page gives you a detailed technical view of what happened before, during, and after a call. Instead of focusing only on the final call outcome, it shows the individual events recorded as your workflow runs, such as telephony activity, API requests, code execution, block changes, and state changes.
+The Call Events page gives you a detailed technical view of what happened before, during, and after a call. Instead of focusing only on the final outcome, it shows the individual events recorded as your workflow runs, such as telephony activity, API requests, code execution, block changes, and state changes.
 
 This makes the page especially useful when you need to troubleshoot workflow behavior, validate integrations, or understand why a call followed a specific path. By reviewing events, you can see not only **what** happened, but also **when** it happened, whether it succeeded, and what data was involved.
 
-After you open your call history page, you can switch into the events-level view from the top-right controls.
+## When To Use Call Events
 
-1. From the left navigation panel, click **Call History** under the call section.
-2. In the top-right section of the page, locate the view toggle/button labeled **Events**.
+- Use **Call Events** when you need event-by-event debugging.
+- Use **Call History** when you want transcripts, recordings, and call-level review.
+- Use **Agent Review** when you are managing flagged issues and team follow-up.
+
+## Open Call Events
+
+1. Open `/event/{agentId}` from the left navigation panel under **Call Events**.
+2. If you are already in **Call History**, you can also use the **Events** button to jump to the same surface.
 3. Use **Refresh** to load the latest event data before starting your review.
 
 <Frame>

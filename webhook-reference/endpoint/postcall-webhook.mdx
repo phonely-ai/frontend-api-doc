@@ -1,20 +1,40 @@
 ---
 title: "Post Call Webhook"
+description: "Reference for receiving Phonely post-call data on your own webhook endpoint."
 openapi: "POST /to_your_webhook_url"
 ---
 
-The post call webhook allows you to receive real-time notifications after each call ends. This webhook sends a POST request to your specified URL containing detailed information about the completed call.
+Phonely can send a `POST` request to your webhook endpoint after a call completes. Use this when you want to forward summaries, transcripts, outcomes, or call links into another system.
 
-## Request Format
+## Where To Configure It In Phonely
 
-When a call ends, our system will send a POST request to your configured URL. The request body will contain data in JSON format.
+1. Open `/agent/{agentId}?tab=workflows`.
+2. Add the `Send Call Data` post-call action to the workflow.
+3. In the `Configure` tab, enter your webhook URL.
+4. Choose whether to send the full call payload or a custom body.
+5. Open the `Test` tab and send a sample request.
+6. Confirm your receiver returns a success response.
 
-## Security Considerations
+## Receiver Requirements
 
-To ensure the security of your webhook, we recommend: Using an HTTPS URL
+- The receiver must accept HTTPS requests.
+- The receiver must be ready to parse JSON request bodies.
+- The receiver should return a `2xx` response after successful processing.
+- The receiver should log failures for later debugging.
 
-## Configuring the Webhook
+## Payload Contents
 
-[AGENT PAGE](https://app.phonely.ai/agent/)
+The schema below documents the standard post-call payload. It includes fields such as:
 
-You can configure the post call webhook URL in the "Agent" > "Setting" > "General" > "Webhook" section of your control panel.
+- call and agent identifiers
+- transcript text and structured transcript
+- summary, long summary, topic, and sentiment
+- recording and dashboard URLs
+- caller and business phone numbers
+- call start time, end time, duration, and end reason
+
+## Testing Tips
+
+- Return `200 OK` after storing or accepting the payload.
+- Re-run the `Test` tab any time you change the expected body or the receiver.
+- If the receiver returns a non-success status, inspect the receiver logs before publishing the workflow.

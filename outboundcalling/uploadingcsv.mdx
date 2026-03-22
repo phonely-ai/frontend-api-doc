@@ -1,5 +1,41 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: "Upload Contacts By CSV"
+description: "Import batch campaign contacts from CSV and map the detected fields to your outbound workflow."
 ---
 
+Use CSV upload when you want to run a batch campaign against a fixed list of contacts.
+
+## Where CSV Upload Lives
+
+- Open `/campaign/{agentId}`.
+- Create or edit a campaign.
+- In the trigger step, choose the `Batch` campaign type.
+- Use the upload area to add one or more CSV files.
+
+## Upload A CSV
+
+1. Open the batch campaign setup.
+2. Click the upload area or drag a file into it.
+3. Upload a `.csv` file.
+4. Wait for Phonely to upload the file and detect the column headers.
+5. Review the detected fields.
+6. Map those fields to the outbound variables used by the selected workflow.
+
+## CSV Requirements
+
+- Only `.csv` files are accepted.
+- The file size limit is 10 MB per file.
+- One row should represent one contact.
+- Include the fields you plan to map, such as phone number, name, or any campaign-specific values.
+
+## What Phonely Detects Automatically
+
+After upload, Phonely parses the CSV and trims the column headers. Those headers become the available fields for outbound variable mapping.
+
+If you upload multiple CSV files, Phonely combines the detected fields across all successful uploads.
+
+## Common Problems
+
+- If the file is not a CSV, Phonely rejects it immediately.
+- If the file has no valid headers, the upload is marked as an error.
+- If your workflow expects variables that are not present in the CSV, update the file or change the variable mapping before launch.

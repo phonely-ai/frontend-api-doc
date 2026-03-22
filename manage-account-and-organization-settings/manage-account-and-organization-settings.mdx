@@ -1,0 +1,81 @@
+---
+title: "Settings Overview"
+description: "Overview of the Settings workspace, including profile, billing, notifications, agents, and numbers."
+---
+
+Settings is where you manage your personal account details and workspace-level configuration. Open `/settings` and use the tabs at the top of the page to switch between areas.
+
+## Main Tabs
+
+| Tab | Route | Use it for |
+| --- | --- | --- |
+| Profile | `/settings?tab=profile` | Your name, avatar, phone number, password, and API key |
+| Plan & Billing | `/settings?tab=plan-and-billing` | Plan details, invoices, checkout flows, and billing history |
+| Notifications | `/settings?tab=notifications` | Usage alerts, recipients, and notification logs |
+| Agents | `/settings?tab=agents` | Workspace agent list, usage data, and agent cleanup |
+| Numbers | `/settings?tab=numbers` | Workspace phone numbers and DNC numbers |
+
+## Profile
+
+Open `/settings?tab=profile` to manage your personal settings.
+
+This tab includes:
+
+- Your display name, avatar, and phone number
+- Password reset controls
+- Your API key, which you can reveal and copy for API requests
+
+## Plan & Billing
+
+Open `/settings?tab=plan-and-billing` to review workspace billing.
+
+Use this tab to:
+
+- Review the current plan
+- Start or complete checkout flows
+- Review invoices and billing history
+
+## Notifications
+
+Open `/settings?tab=notifications` to manage usage alerts for the workspace.
+
+From this tab you can:
+
+- Create a new notification with `Add Notification`
+- Edit or delete an existing notification
+- Open execution logs to see when an alert fired
+
+## Agents
+
+Open `/settings?tab=agents` to manage the workspace agent list.
+
+This table is used for:
+
+- Reviewing all agents in the organization
+- Checking monthly call minutes and deployment state
+- Downloading usage data
+- Deleting agents when they are no longer needed
+
+## Numbers
+
+Open `/settings?tab=numbers` to manage workspace phone numbers.
+
+This tab has two built-in views:
+
+- `Available Numbers` for active workspace numbers
+- `DNC Numbers` for the do-not-call list
+
+## Admin-Only Tabs
+
+Admins may also see:
+
+- `/settings?tab=admin`
+- `/settings?tab=admin-orgs`
+- `/settings?tab=admin-custom-actions`
+- `/settings?tab=admin-flow-templates`
+- `/settings?tab=admin-selector-options`
+- `/settings?tab=admin-changelog`
+
+## Viewer Access
+
+If the current user inherits viewer UX, only the `Profile` tab is available.
