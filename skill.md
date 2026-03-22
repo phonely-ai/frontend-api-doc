@@ -35,4 +35,3 @@ Use this skill when answering questions or executing tasks that rely on `docs.ph
 1. Read the matching visible product page.
 2. Read the most specific AI runbook under `/ai/` when the task needs deterministic execution details.
 3. Read the matching API reference or webhook reference page if the task involves requests or payloads.
-4. Fall back to `/llms-full.txt` if the compact docs are insufficient.
