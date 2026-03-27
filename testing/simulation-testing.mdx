@@ -5,13 +5,13 @@ description: "Description of your new file."
 
 Simulation Testing allows you to test your AI agents using fully synthetic, AI-generated phone conversations. Instead of relying solely on real inbound calls, you can run hundreds of controlled simulations to see how your agent behaves under different scenarios, before any customer ever interacts with it.
 
-This guide explains what Simulation Testing is, how to create and run simulation test cases, and how to review results to improve your agent’s performance.
+This guide explains what simulation testing is, how to create and run simulation test cases, and how to review results to improve your agent’s performance.
 
 ## What Is Simulation Testing?
 
-Simulation Testing uses AI to generate realistic phone conversations between a virtual “customer” and your Phonely agent. These simulations behave like real calls, including intent changes, interruptions, topic variations, and unexpected questions.
+Simulation testing uses AI to generate realistic phone conversations between a virtual “customer” and your Phonely agent. These simulations behave like real calls, including intent changes, interruptions, topic variations, and unexpected questions.
 
-Simulation Testing helps you:
+Simulation testing helps you:
 
 - Validate workflows before going live.
 - Detect misconfigurations, routing errors, and dead-ends.
@@ -26,18 +26,22 @@ Simulation tests do not use real customers and do not affect live call routing.
 
 To open the simulation workspace:
 
-1. Go to your **Phonely Dashboard**.
-2. Click the **Simulation Testing** tab at the top (beside A/B Testing).
-3. You will see two sub-tabs:
-   - **Test Cases** – Create and configure simulations.        
-   - **Results** – Review past simulation outputs.    
+<Steps>
+  <Step title="Go to your Phonely Dashboard.">
+  </Step>
+  <Step title="Click the Simulation Testing tab at the top (beside A/B Testing).">
+  </Step>
+  <Step title="You will see two sub-tabs:">
+    - **Test Cases** – Create and configure simulations.
+    - **Results** – Review past simulation outputs.
+  </Step>
+  <Step title="The main screen shows:">
+    - Test cases at the top.
+    - Data sources (optional call recordings) at the bottom.
 
-The main screen shows:
-
-- Test Cases at the top.
-- Data Sources (optional call recordings) at the bottom.
-
-![Simulated Testing Pn](/assets/simulated-testing.png)
+    ![Simulated Testing Pn](/assets/simulated-testing.png)
+  </Step>
+</Steps>
 
 ## Test Cases Overview
 
@@ -61,33 +65,36 @@ This layout makes it easy to adjust, execute, and clean up simulation tests as y
 
 Follow these steps to build your first simulation:
 
-1. Go to **Simulation Testing \> Test Cases**.
-2. Click the **\+** card.
-3. A modal window titled **Add Test Case** will appear.
+<Steps>
+  <Step title="Go to Simulation Testing > Test Cases.">
+  </Step>
+  <Step title="Click the + card.">
+  </Step>
+  <Step title="A modal window titled Add Test Case will appear.">
+    <img
+      src="/assets/add-test-form.png"
+      alt="Add Test Form"
+      style={{ width:"94%" }}
+    />
+  </Step>
+  <Step title="Fill in the following details:">
+    **Case Name**
 
-<img
-  src="/assets/add-test-form.png"
-  alt="Add Test Form"
-  style={{ width:"94%" }}
-/>
+    A short, descriptive label such as:
 
-Fill in the following details:
+    - “Support Call – Device Setup”
+    - “Customer Asking About Plans”
+    - “Lead Qualification Script”
 
-**Case Name**
+    **Description**
 
-A short, descriptive label such as:
+    Explain the goal of the simulation.
 
-- “Support Call – Device Setup”
-- “Customer Asking About Plans”
-- “Lead Qualification Script”
+    Example:
 
-**Description**
-
-Explain the goal of the simulation.
-
-Example:
-
-> _“Simulates a conversation where a customer asks about pricing and plan options.”_
+    > _“Simulates a conversation where a customer asks about pricing and plan options.”_
+  </Step>
+</Steps>
 
 ## **Configure Test Parameters**
 
@@ -161,15 +168,22 @@ AI Evaluators are the most flexible data source. Instead of using audio recordin
 
 To create one:
 
-1. Click **Add Evaluator** and give it a name.
-3. Choose a conversation style such as Casual, Angry, Frustrated, Happy, Distracted, Sad, or Demanding
-4. Write detailed instructions, this defines how the evaluator behaves\
-   Example: _“Act like a customer trying to book a flight but constantly changing their mind.”_
-5. Define the **success criteria**\
-   Example: “_Success means the agent confirms date, destination, and seat type.”_
-6. Click **Add**
-
-Once created, the evaluator appears in the list and you can link it to any test case.
+<Steps>
+  <Step title="Click Add Evaluator and give it a name.">
+  </Step>
+  <Step title="Choose a conversation style ">
+    Such as Casual, Angry, Frustrated, Happy, Distracted, Sad, or Demanding
+  </Step>
+  <Step title="Write detailed instructions, this defines how the evaluator behaves">
+    Example: _“Act like a customer trying to book a flight but constantly changing their mind.”_
+  </Step>
+  <Step title="Define the success criteria">
+    Example: “_Success means the agent confirms date, destination, and seat type.”_
+  </Step>
+  <Step title="Click Add">
+    Once created, the evaluator appears in the list and you can link it to any test case.
+  </Step>
+</Steps>
 
 Evaluators produce extremely realistic interactions because they generate natural, dynamic dialogue instead of repeating fixed audio.
 
@@ -177,12 +191,17 @@ Evaluators produce extremely realistic interactions because they generate natura
 
 After saving the test case:
 
-1. Find the test card
-2. Click **Run**
-3. Phonely will begin generating simulated calls
-4. Progress indicators will appear
-
-You can continue working while simulations run in the background.
+<Steps>
+  <Step title="Find the test card">
+  </Step>
+  <Step title="Click Run">
+  </Step>
+  <Step title="Phonely will begin generating simulated calls">
+  </Step>
+  <Step title="Progress indicators will appear">
+    You can continue working while simulations run in the background.
+  </Step>
+</Steps>
 
 ## Reviewing Simulation Results
 

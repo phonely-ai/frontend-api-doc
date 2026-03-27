@@ -57,7 +57,6 @@
             "pages": [
               "get-started/introduction",
               "get-started/quick-start",
-              "get-started/dashboard-overview",
               "key-concepts/ask-ai"
             ]
           },
@@ -109,6 +108,18 @@
                   "blocks/flow-blocks/end-call"
                 ]
               },
+
+              {
+               "group": "Pre-Call Actions",
+               "pages": [
+                 "precall/precall-filter",
+                 "precall/precall-code",
+                 "precall/precall-webhook",
+                 "precall/precall-api-request",
+                 "precall/precall-end-call"
+               ]
+             },
+
               {
                 "group": "Live Call Actions",
                 "pages": [

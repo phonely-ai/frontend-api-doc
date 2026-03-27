@@ -262,13 +262,26 @@ The response body can be displayed in a structured response section. Depending o
 
 When troubleshooting an API Request event, it usually helps to review the details in this order:
 
-1. Success - Confirm whether the event succeeded or failed.
-2. Execution stage - Confirm whether it ran in Pre Call, Live Call, or Post Call.
-3. Execution time - Check whether it took longer than expected.
-4. Request method and Request URL\
-   Confirm the request was sent to the correct endpoint using the intended method.
-5. Response code - Review whether the service returned success or an error.
-6. API response body - Inspect the returned payload to confirm the workflow.
+<Steps>
+  <Step title="Success">
+    Confirm whether the event succeeded or failed.
+  </Step>
+  <Step title="Execution stage">
+    Confirm whether it ran in Pre Call, Live Call, or Post Call.
+  </Step>
+  <Step title="Execution time">
+    Check whether it took longer than expected.
+  </Step>
+  <Step title="Request method and Request URL">
+    Confirm the request was sent to the correct endpoint using the intended method.
+  </Step>
+  <Step title="Response code">
+    Review whether the service returned success or an error.
+  </Step>
+  <Step title="API response body">
+    Inspect the returned payload to confirm the workflow.
+  </Step>
+</Steps>
 
 ### Code event details
 
@@ -323,13 +336,18 @@ Use this menu to:
 
 This is especially useful when you want to prioritize fields like Call ID, Execution Stage, or Execution Time without scrolling through a long filter panel.
 
-1. Go to the **Events** page.
-2. Click the columns button (next to Refresh).
-3. The options panel opens with:
-   - a search options... bar at the top,
-   - a list of available fields,
-   - checkboxes to enable/disable each field,
-   - and drag handles for reordering.
+<Steps>
+  <Step title="Go to the Events page.">
+  </Step>
+  <Step title="Click the columns button (next to Refresh).">
+  </Step>
+  <Step title="The options panel opens with:">
+    - A search options... bar at the top,
+    - A list of available fields,
+    - Checkboxes to enable/disable each field,
+    - And drag handles for reordering.
+  </Step>
+</Steps>
 
 <Frame>
   ![Selectandsearchcolumns](/assets/selectandsearchcolumns.png)
