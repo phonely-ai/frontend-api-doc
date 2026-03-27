@@ -1,0 +1,44 @@
+---
+title: "AI Edit Workflows"
+description: "Deterministic workflow editing procedure for the Phonely workflow canvas."
+---
+
+## Open The Workflow Canvas
+
+1. Navigate to `/agent/{agentId}?tab=workflows`.
+2. Confirm the active workflow is the one you intend to edit.
+
+## Standard Editing Flow
+
+1. Identify the entry block or source block.
+2. Add or update blocks in execution order.
+3. Connect each block to the next required branch.
+4. Configure block-specific fields.
+5. Save or confirm changes before leaving the page.
+
+## Canonical Flow Blocks
+
+- `Start Flow`
+- `Talk`
+- `Collect`
+- `Ask Exactly`
+- `Filter`
+- `Time Filter`
+- `End Call`
+
+## Canonical Live Call Actions
+
+- `API Request`
+- `Transfer Flow`
+- `Transfer Call`
+- `Payments`
+- `Send SMS`
+- `Send Email`
+- `Run Code Workflow`
+
+## Validation Rules
+
+- ALWAYS ensure every non-terminal block has the required outgoing path.
+- ALWAYS ensure terminal branches end at a valid end state.
+- NEVER leave a required handle disconnected.
+- IF the workflow depends on external data, THEN verify the required variables exist before the action block.

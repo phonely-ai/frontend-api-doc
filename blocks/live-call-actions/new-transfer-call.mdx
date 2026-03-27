@@ -1,26 +1,17 @@
 ---
 title: "Transfer Calls"
-description: "Learn how you can transfer calls seamlessly using the new transfer call block"
+description: "Learn how to configure the Transfer Call block for warm transfers, cold transfers, and failover behavior."
 ---
 
 ## What is it?
 
 The Transfer Call block lets your agent seamlessly hand off a live call to another person, department, or fallback destination. This dramatically simplifies call routing by replacing large, branching, hard-to-manage flows with a single intelligent block that can handle warm transfers, cold transfers, failover logic, caller triage, and on-hold experience, all in one place.
 
-This guide walks you through everything you can do inside the updated Transfer Call block, how it works, and how to set it up step-by-step.
+This guide walks through the current Transfer Call block, how it works, and how to set it up step by step.
 
-## What is new ?
+## What the block can do
 
-Before this update, businesses had to create giant spider-web flows just to transfer a caller to the right person. A typical setup looked like:
-
-- Ask the caller who they want
-- Route them manually to different branches (Dwight → branch A, Michael → branch B, Pam → branch C…)
-- Add fallback logic for every branch (e.g., voicemail → retry → next agent)
-- Repeat this for every destination.
-
-This resulted in huge, messy workflows.
-
-The new transfer block condenses ALL of this into one simple module:
+The Transfer Call block supports:
 
 - Add multiple destiantions.
 - Automatically triage callers with AI.
@@ -28,8 +19,6 @@ The new transfer block condenses ALL of this into one simple module:
 - Choose warm transfer or cold transfer.
 - Customize the caller’s hold experience.
 - Set advanced rules like tagging, timeout durations, and human-answered outcomes.
-
-Instead of 30+ blocks, you now need **one**.
 
 ## How it works
 

@@ -1,0 +1,46 @@
+---
+title: "AI Review Calls And Analytics"
+description: "Route and task guide for call review, performance analytics, and event debugging."
+---
+
+## Review Individual Calls
+
+1. Open `/call-history/{agentId}`.
+2. Filter the call list by date, outcome, or other available dimensions.
+3. Open the target call.
+4. Review transcript, recording, and available AI analysis.
+
+## Review Flagged Issues
+
+1. Open `/agent-review/{orgId}`.
+2. Choose the relevant status tab: `Open`, `In Progress`, `Resolved`, `Cancelled`, or `All`.
+3. Apply the date range, severity, or tag filters.
+4. Open the issue sheet.
+5. Update status, severity, tags, or review note as needed.
+
+## Review Performance Trends
+
+1. Open `/performance/{agentId}`.
+2. Select the required date range.
+3. Review charts or saved views.
+4. Open `Data Tables` when the task requires tabular breakdowns instead of charts.
+
+## Review Call Paths
+
+1. Open `/call-paths/{agentId}`.
+2. Apply the same date and filter context used for the performance review.
+3. Inspect the branch map to identify common or failing paths.
+
+## Review Event Logs
+
+1. Open `/event/{agentId}`.
+2. Filter by event type, status, or time range.
+3. Open a row to inspect the full event payload.
+
+## Rules
+
+- IF the task is transcript or recording review, THEN start in `Call History`.
+- IF the task is issue tracking or review triage, THEN use `Agent Review`.
+- IF the task is metric or trend analysis, THEN start in `Performance`.
+- IF the task is branch/path debugging, THEN use `Call Paths`.
+- IF the task is event-level integration or execution debugging, THEN use `Call Events`.

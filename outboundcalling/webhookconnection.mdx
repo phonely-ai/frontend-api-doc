@@ -1,5 +1,45 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: "Start Campaigns From Webhooks"
+description: "Configure a continuous outbound campaign that receives contacts from an external webhook."
 ---
 
+Use this setup when an external system should push contacts into Phonely in real time instead of uploading a CSV file.
+
+## When To Use This Trigger
+
+- Choose this option for continuous campaigns.
+- Use it when leads arrive from a CRM, signup form, or backend service.
+- Do not use it for one-time list uploads. Use CSV for that.
+
+## Set Up The Webhook Trigger
+
+1. Open `/campaign/{agentId}`.
+2. Create or edit a campaign.
+3. In the trigger step, choose a `Continuous` campaign and select `Webhook`.
+4. Select the outbound call flow that should run for the campaign.
+5. Copy the generated `Webhook URL`.
+6. Send a sample `POST` request with JSON data.
+7. Click `Update Fields` so Phonely can detect the payload fields.
+8. Map the detected fields to the outbound variables used in the workflow.
+
+## Example Payload
+
+```json
+{
+  "phone_number": "+15551234567",
+  "first_name": "Jane",
+  "appointment_id": "apt_123"
+}
+```
+
+## Important Notes
+
+- The receiver must send JSON with `POST`.
+- Phonely updates the available field list only after a successful webhook test.
+- If the payload shape changes later, run `Update Fields` again and review the variable mapping.
+- Test the webhook before turning on production traffic.
+
+## Rules
+
+- ALWAYS confirm the payload includes the fields your workflow expects.
+- NEVER launch the campaign before testing a sample webhook request.

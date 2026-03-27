@@ -11,6 +11,27 @@
   "icons": {
     "library": "lucide"
   },
+  "logo": {
+    "light": "/logo/logo.png",
+    "dark": "/logo/logo-white.png"
+  },
+  "seo": {
+    "indexing": "all"
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "grok",
+      "mcp",
+      "add-mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
   "navigation": {
     "global": {
       "anchors": [
@@ -36,125 +57,69 @@
             "pages": [
               "get-started/introduction",
               "get-started/quick-start",
-              "key-concepts/ask-ai",
-              "get-started/dashboard-overview"
+              "key-concepts/ask-ai"
             ]
           },
           {
             "group": "BUILD YOUR AGENT",
             "pages": [
               {
-                "group": "Create an Agent",
+                "group": "Agent Workspace",
                 "pages": [
                   "key-concepts/create-duplicate-agents",
                   "key-concepts/flows",
-                  "key-concepts/routing"
+                  "key-concepts/routing",
+                  "agent-design/set-agent-guidelines",
+                  "agent-design/call-settings",
+                  "agent-design/flow-settings",
+                  "agent-design/compliance-settings",
+                  "agent-design/add-manage-phone-numbers"
                 ]
-              },
-              {
-                "group": "Call Tagging",
-                "pages": []
               },
               {
                 "group": "Voice",
                 "pages": [
                   "agent-design/voice/voice-selection",
                   "agent-design/voice/add-a-voice",
-                  "agent-design/voice/clone-voice"
-                ]
-              },
-              {
-                "group": "Phone Numbers",
-                "pages": [
-                  "agent-design/add-manage-phone-numbers"
-                ]
-              },
-              {
-                "group": "Agent Settings",
-                "pages": [
-                  "agent-design/call-settings",
+                  "agent-design/voice/clone-voice",
                   "agent-design/voice/voice-and-personality",
-                  "agent-design/voice/advanced-settings",
-                  "call-topics-and-sentiments",
-                  "call-sentiments",
-                  "agent-design/compliance-settings"
+                  "agent-design/voice/advanced-settings"
                 ]
               },
               {
-                "group": "Agent Guidelines",
+                "group": "Knowledge Base",
                 "pages": [
-                  "agent-design/set-agent-guidelines"
+                  "agent-knowledge-base/upload-files",
+                  "agent-knowledge-base/upload-documents",
+                  "agent-knowledge-base/add-websites",
+                  "agent-knowledge-base/import-from-external",
+                  "agent-knowledge-base/managing-data-sources"
                 ]
-              }
-            ]
-          },
-          {
-            "group": "AGENT KNOWLEDGEBASE",
-            "pages": [
-              "agent-knowledge-base/upload-files",
-              "agent-knowledge-base/upload-documents",
-              "agent-knowledge-base/add-websites",
-              "agent-knowledge-base/import-from-external",
-              "agent-knowledge-base/managing-data-sources"
-            ]
-          },
-          {
-            "group": "CALL FLOWS",
-            "pages": [
+              },
               {
-                "group": "Flow Blocks",
+                "group": "Workflow Blocks",
                 "pages": [
                   "blocks/flow-blocks/start-flow",
-                  "blocks/flow-blocks/collect",
                   "blocks/flow-blocks/talk",
+                  "blocks/flow-blocks/collect",
                   "blocks/flow-blocks/ask-exactly",
                   "blocks/flow-blocks/filter",
                   "blocks/flow-blocks/time-filter",
                   "blocks/flow-blocks/end-call"
                 ]
               },
+
               {
-                "group": "Flow Settings",
-                "pages": [
-                  "agent-design/flow-settings"
-                ]
-              },
-              {
-                "group": "Variables",
-                "pages": [
-                  "key-concepts/variables",
-                  "key-concepts/auto-gather-variables",
-                  "key-concepts/replace-invalid-variables",
-                  "home/key-concepts/advanced-variables"
-                ]
-              },
-              {
-                "group": "Workflow Checklist",
-                "pages": [
-                  "checklist"
-                ]
-              },
-              {
-                "group": "Workflow Versions",
-                "pages": [
-                  "key-concepts/manage-workflow-versions"
-                ]
-              }
-            ]
-          },
-          {
-            "group": "ACTIONS & INTEGRATIONS",
-            "pages": [
-              {
-                "group": "Pre-Call Actions",
-                "pages": [
-                  "precall-filter",
-                  "precall-code",
-                  "precall-webhook",
-                  "precall-api-request",
-                  "precall-end-call"
-                ]
-              },
+               "group": "Pre-Call Actions",
+               "pages": [
+                 "precall/precall-filter",
+                 "precall/precall-code",
+                 "precall/precall-webhook",
+                 "precall/precall-api-request",
+                 "precall/precall-end-call"
+               ]
+             },
+
               {
                 "group": "Live Call Actions",
                 "pages": [
@@ -168,7 +133,7 @@
                 ]
               },
               {
-                "group": "Post Call Actions",
+                "group": "Post-Call Actions",
                 "pages": [
                   "blocks/post-call-actions/post-call-overview",
                   "blocks/post-call-actions/post-call-send-email",
@@ -178,74 +143,51 @@
                   "blocks/post-call-actions/connect-to-google-drive",
                   "blocks/post-call-actions/google-sheet-add-row"
                 ]
-              },
-              {
-                "group": "Live Call Integrations",
-                "pages": [
-                  "blocks/live-call-integrations/zapier-live",
-                  "blocks/live-call-integrations/google-sheet-live",
-                  "blocks/live-call-integrations/google-calendar",
-                  "blocks/live-call-integrations/microsoft-outlook",
-                  "blocks/live-call-integrations/slack"
-                ]
-              },
-              {
-                "group": "Custom Actions",
-                "pages": [
-                  "blocks/custom-integrations/custom-actions",
-                  "blocks/custom-integrations/google-calendar-custom-block"
-                ]
               }
             ]
           },
           {
-            "group": "KEY CONCEPTS",
+            "group": "OPTIMIZE YOUR AGENT",
             "pages": [
-              "key-concepts/flow-canvas-controls"
+              "performance",
+              "data-tables",
+              "call-path",
+              "post-call-outcomes",
+              "call-sentiments",
+              "call-topics-and-sentiments"
+            ]
+          },
+          {
+            "group": "REVIEW YOUR AGENT",
+            "pages": [
+              "call-history-ai-analytics/call-history-ai-analytics",
+              "agent-review",
+              "call-events"
+            ]
+          },
+          {
+            "group": "TESTING",
+            "pages": [
+              "testing/ab-testing",
+              "testing/test-from-a-block"
             ]
           },
           {
             "group": "OUTBOUND CALLS",
             "pages": [
               "outboundcalling/createaoutboundcallingcampaign",
-              "outboundcalling/creating-call-flows-for-outbound-campaigns"
+              "outboundcalling/creating-call-flows-for-outbound-campaigns",
+              "outboundcalling/addingphonenumber",
+              "outboundcalling/uploadingcsv",
+              "outboundcalling/webhookconnection",
+              "outboundcalling/avoidmarkedasspamlikely"
             ]
           },
           {
-            "group": "PERFORMANCE",
+            "group": "SETTINGS & BILLING",
             "pages": [
-              "perfomance",
-              "call-path",
-              "data-tables",
-              "post-call-outcomes",
-              "call-events",
-              "old-call-paths"
-            ]
-          },
-          {
-            "group": "CALL HISTORY & ANALYTICS",
-            "pages": [
-              "call-history-ai-analytics/call-history-ai-analytics"
-            ]
-          },
-          {
-            "group": "TESTING",
-            "pages": [
-              "testing/test-from-a-block",
-              "testing/ab-testing",
-              "testing/simulation-testing"
-            ]
-          },
-          {
-            "group": "ACCOUNT & ORGANIZATION SETTINGS",
-            "pages": [
-              "manage-account-and-organization-settings/organization-settings",
-              "manage-account-and-organization-settings/delete-agents"
-            ]
-          },
-          {
-            "group": "BILLING & USAGE",
-            "pages": [
+              "manage-account-and-organization-settings/manage-account-and-organization-settings",
+              "manage-account-and-organization-settings/delete-agents",
               "billing-and-usage/plans-and-billing-history",
               "billing-and-usage/manage-agents-and-usage",
               "billing-and-usage/usage-notifications"
@@ -277,40 +219,25 @@
             ]
           },
           {
-            "group": "Voice & Phone",
-            "pages": [
-              "api-reference/endpoint/list-voices",
-              "api-reference/endpoint/import-number"
-            ]
-          },
-          {
             "group": "Knowledge Base",
             "pages": [
               "api-reference/endpoint/agent-documents",
-              "api-reference/endpoint/post-agent-documents",
-              "api-reference/endpoint/delete-agent-documents",
-              "api-reference/endpoint/agent-websites",
-              "api-reference/endpoint/post-agent-websites",
-              "api-reference/endpoint/delete-agent-websites"
+              "api-reference/endpoint/agent-websites"
             ]
           },
           {
-            "group": "Development",
+            "group": "Voice & Phone",
             "pages": [
-              "api-reference/endpoint/chat-build"
+              "api-reference/endpoint/list-voices",
+              "api-reference/endpoint/import-number",
+              "api-reference/endpoint/block-list"
             ]
           },
           {
-            "group": "Billing & Subscription",
-            "pages": [
-              "api-reference/endpoint/get-invoices",
-              "api-reference/endpoint/get-subscription"
-            ]
-          },
-          {
-            "group": "Organization & Usage",
+            "group": "Organization & Billing",
             "pages": [
               "api-reference/endpoint/get-orgs",
+              "api-reference/endpoint/get-invoices",
               "api-reference/endpoint/get-usage"
             ]
           }
@@ -322,23 +249,13 @@
         "hidden": true,
         "pages": [
           "webhook-reference/intro",
-          {
-            "group": "Webhook Reference",
-            "pages": [
-              "webhook-reference/intro",
-              "webhook-reference/endpoint/postcall-webhook"
-            ]
-          }
+          "webhook-reference/endpoint/postcall-webhook"
         ]
       }
     ]
   },
   "interaction": {
     "drilldown": true
-  },
-  "logo": {
-    "light": "/logo/logo.png",
-    "dark": "/logo/logo-white.png"
   },
   "navbar": {
     "links": [

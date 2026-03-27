@@ -1,30 +1,31 @@
 ---
 title: "Introduction"
+description: "Get your API key and start using Phonely's frontend API."
 ---
 
-Before you begin integrating Phonely into your application, you need to obtain your API key. This key is essential for authenticating your requests to the Phonely API.
+These API docs cover the frontend endpoints that are authenticated with your Phonely API key.
 
-<Steps>
-  <Step title="Log in to your Phonely account">
-    Visit [app.phonely.ai](https://app.phonely.ai) and log in with your credentials.
-  </Step>
-  <Step title="Navigate to User Settings">
-    Once logged in, click on your profile icon in the top right corner and select "User Settings" from the dropdown menu.
-  </Step>
-  <Step title="Locate your API Key">
-    In the User Settings page, find the "API Key" section. Your unique API key should be displayed here.
-  </Step>
-  <Step title="Copy your API Key">
-    Click the "Copy" button next to your API key to copy it to your clipboard. You will need this key for all API requests.
-  </Step>
-</Steps>
+## Get Your API Key
+
+1. Sign in to the Phonely app.
+2. Open `/settings?tab=profile`.
+3. Find the `API Key` field.
+4. Reveal and copy the key.
+
+## Authenticate Requests
+
+Send the API key in the `X-Authorization` header.
+
+```bash
+curl https://api.phonely.ai/agents \
+  -H "X-Authorization: YOUR_API_KEY"
+```
+
+## Keep The Scope In Mind
+
+- These docs cover the API-key-authenticated frontend API surface.
+- Internal-only routes and services that use a different authentication model are out of scope here.
 
 <Warning>
-  Keep your API key confidential. Do not share it publicly or include it in any public repositories.
+  Keep your API key confidential. Do not share it publicly or commit it to source control.
 </Warning>
-
-<Card title="Quick Access" icon="bolt" href="https://app.phonely.ai/settings">
-  Click here to go directly to your User Settings page.
-</Card>
-
-Once you have your API key, you are ready to start making requests to the Phonely API. In the next sections, we will guide you through making your first API call and exploring the various endpoints available.
