@@ -58,8 +58,8 @@
               "get-started/introduction",
               "get-started/quick-start",
               "key-concepts/ask-ai",
-              "get-started/home-mdx"
-
+              "get-started/home-mdx",
+              "get-started/navigation-and-shortcuts"
             ]
           },
           {
@@ -110,18 +110,16 @@
                   "blocks/flow-blocks/end-call"
                 ]
               },
-
               {
-               "group": "Pre-Call Actions",
-               "pages": [
-                 "precall/precall-filter",
-                 "precall/precall-code",
-                 "precall/precall-webhook",
-                 "precall/precall-api-request",
-                 "precall/precall-end-call"
-               ]
-             },
-
+                "group": "Pre-Call Actions",
+                "pages": [
+                  "precall/precall-filter",
+                  "precall/precall-code",
+                  "precall/precall-webhook",
+                  "precall/precall-api-request",
+                  "precall/precall-end-call"
+                ]
+              },
               {
                 "group": "Live Call Actions",
                 "pages": [
