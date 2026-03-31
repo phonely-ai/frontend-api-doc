@@ -75,7 +75,8 @@
                   "agent-design/call-settings",
                   "agent-design/flow-settings",
                   "agent-design/compliance-settings",
-                  "agent-design/add-manage-phone-numbers"
+                  "agent-design/add-manage-phone-numbers",
+                  "agent-design/workflow-collaboration"
                 ]
               },
               {
