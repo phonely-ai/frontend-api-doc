@@ -1,5 +1,11 @@
 # Exclude media files to avoid large file push issues
 assets/
 images/
-logo/
+logo/*
+!logo/logo-small.png
+!logo/logo-white.png
+!logo/logo.png
+!logo/logo-purple.png
+!logo/logo-small-purple.svg
+!logo/logo-small-white.svg
 node_modules/

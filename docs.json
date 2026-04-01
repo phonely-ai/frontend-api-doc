@@ -1,18 +1,24 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "palm",
+  "theme": "maple",
   "name": "Phonely Documentation",
   "colors": {
     "primary": "#6B0099",
-    "light": "#FAFAFA",
-    "dark": "#1A1A1C"
+    "light": "#9B30FF",
+    "dark": "#4A0069"
   },
-  "favicon": "/logo/logo-small.png",
+  "styling": {
+    "eyebrows": "breadcrumbs"
+  },
+  "favicon": {
+    "light": "/logo/logo-small-purple.svg",
+    "dark": "/logo/logo-small-white.svg"
+  },
   "icons": {
     "library": "lucide"
   },
   "logo": {
-    "light": "/logo/logo.png",
+    "light": "/logo/logo-purple.png",
     "dark": "/logo/logo-white.png"
   },
   "seo": {
@@ -151,13 +157,7 @@
             "pages": [
               "call-history-ai-analytics/call-history-ai-analytics",
               "agent-review",
-              "call-events"
-            ]
-          },
-          {
-            "group": "TESTING",
-            "pages": [
-              "testing/ab-testing",
+              "call-events",
               "testing/test-from-a-block"
             ]
           },
@@ -170,6 +170,12 @@
               "outboundcalling/uploadingcsv",
               "outboundcalling/webhookconnection",
               "outboundcalling/avoidmarkedasspamlikely"
+            ]
+          },
+          {
+            "group": "TESTING",
+            "pages": [
+              "testing/ab-testing"
             ]
           },
           {
