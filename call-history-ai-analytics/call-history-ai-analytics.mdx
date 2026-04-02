@@ -27,8 +27,8 @@ These insights help teams monitor performance, debug workflows, and optimize cus
 | Feature                                | Description                                                                                                                                                                                                         |
 | :------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Comprehensive Call Logging**         | Every inbound, outbound, and web call is automatically logged with duration, call type, detected topic, outcome, sentiment, and end reason for full visibility into each interaction.                               |
-| **Call List Navigation**               | Browse large call histories with continuous loading, bulk selection, and read or unread indicators for faster review.                                                                                               |
-| **Advanced Filtering & Views**         | Narrow results by date range, duration, call type, outcome, sentiment, status, ended reason, and unread state, and quickly focus on in-progress or on-hold calls when needed.                                     |
+| **Modernized Call History Experience** | The Call History page has been redesigned for speed and clarity, featuring infinite scroll (no pagination), auto-refresh every 10 seconds, and smoother day-to-day navigation.                                      |
+| **Advanced Filtering & Views**         | Quickly narrow results using a redesigned filter module with support for date range, duration, call type, outcome, sentiment, status, and end reason, plus dedicated views for in-progress calls and calls on hold. |
 | **Read & Unread Call Tracking**        | Easily distinguish new calls from reviewed ones with clear read/unread indicators, bulk selection, and “select all” actions for faster triage.                                                                      |
 | **Context at a Glance**                | Instantly see sentiment indicators and a short AI-generated recap of why the caller reached out, helping you prioritize which calls to open first.                                                                  |
 | **Playback Controls**                  | Replay any call, adjust playback speed, or download audio recordings for QA or training.                                                                                                                            |
@@ -47,16 +47,16 @@ Use the filters panel to narrow your call list and focus on specific scenarios.
 
 ### Available Filters
 
-| Filter Category    | Options                                                                                                                                                                   |
-| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Date Range**     | Today, Yesterday, Last 7 days, Last 14 days, Last 30 days, Last 90 days, Custom range (calendar picker)                                                                   |
-| **Duration**       | Presets: \< 1 min, 1–5 min, \> 5 min<br />Adjustable duration slider (0:00 → 60:00+)                                                                                      |
-| **Status**         | Completed, Failed, Ended, Queued, In Progress, In Warm Transfer                                                                                                           |
-| **Call Outcome**   | Greeting Hangup<br />Identify Purpose<br />Collect Info<br />Appointment Booking<br />Legal Matter<br />Custom workflow outcomes (e.g., _Solar Appointment Confirmation_) |
-| **Call Type**      | Inbound<br />Outbound<br />Web Call                                                                                                                                       |
-| **Ended Reason**   | Customer Ended<br />Phonely Ended<br />Silence Timeout<br />Call Transfer<br />Hangup During Warm Transfer<br />Voicemail<br />Max Duration                               |
-| **Sentiment**      | Positive<br />Neutral<br />Negative                                                                                                                                       |
-| **Calls Per Page** | 100, 250, 500, 1,000, 2,500, 5,000                                                                                                                                        |
+| Filter Category | Options |
+| :-- | :-- |
+| **Date Range** | Today, Yesterday, Last 7 days, Last 14 days, Last 30 days, Last 90 days, Custom range (calendar picker) |
+| **Duration** | Presets: \< 1 min, 1–5 min, \> 5 min<br />Adjustable duration slider (0:00 → 60:00\+) |
+| **Status** | Completed, Failed, Ended, Queued, In Progress, In Warm Transfer |
+| **Call Outcome** | Greeting Hangup<br />Identify Purpose<br />Collect Info<br />Appointment Booking<br />Legal Matter<br />Custom workflow outcomes (e.g., _Solar Appointment Confirmation_) |
+| **Call Type** | Inbound<br />Outbound<br />Web Call |
+| **Ended Reason** | Customer Ended<br />Phonely Ended<br />Silence Timeout<br />Call Transfer<br />Hangup During Warm Transfer<br />Voicemail<br />Max Duration |
+| **Sentiment** | Positive<br />Neutral<br />Negative |
+| **Calls Per Page** | 100, 250, 500, 1,000, 2,500, 5,000 |
 
 Once you’ve selected your filters, click **Apply** to immediately update the call list.
 
@@ -75,7 +75,7 @@ These tabs allow you to analyze the call from both a conversation overview persp
 
 ## Conversation Panel
 
-The **Conversation Panel** appears on the left side of the Call Detail view. It displays the full interaction between the caller and the Phonely agent in a chronological, chat-style format. This view allows you to review exactly what was said during the call while also seeing where the conversation moved through different workflow blocks.
+The conversation panel appears on the left side of the Call Detail view. It displays the full interaction between the caller and the Phonely agent in a chronological, chat-style format. This view allows you to review exactly what was said during the call while also seeing where the conversation moved through different workflow blocks.
 
 <Frame>
   ![Conversationpanel](/assets/conversationpanel.png)
@@ -122,7 +122,7 @@ The **Conversation Panel** appears on the left side of the Call Detail view. It 
   <Step title="Editing Responses and Providing Feedback">
     You can use the **thumbs up** or **thumbs down** icons shown above a Phonely message to indicate whether the response was correct or needs improvement.
 
-    Selecting a feedback option marks the response and enables additional review options. After providing feedback, an **Edit** option appears next to the response.
+    Clicking the feedback button marks the response and enables additional review options. After providing feedback, an **Edit** option appears next to the response.
 
     Click the **Edit** button to open the response editor, where you can modify how the agent should respond in similar situations.
 
@@ -135,6 +135,7 @@ The **Conversation Panel** appears on the left side of the Call Detail view. It 
     <Frame>
       ![Createtestorsubmitfeedback](/assets/createtestorsubmitfeedback.png)
     </Frame>
+
     Issue categories help identify patterns in responses that may require improvement, such as:
 
     <Expandable title="Issue Categories">
@@ -146,6 +147,7 @@ The **Conversation Panel** appears on the left side of the Call Detail view. It 
       - Spelled-out numbers
       - Overly verbose etc.
     </Expandable>
+
     When one or more responses are selected, an **Actions** menu becomes available.
 
     From the **Actions** menu you can perform tasks such as:
@@ -192,10 +194,20 @@ The **call details** section shows structured metadata about the call.
 
 These fields include:
 
-1. **Caller Number -** Displays the phone number associated with the call.
-2. **Ended Reason -** Indicates why the call ended.
-3. **Topics -** Shows the detected topic or intent of the conversation.
-4. **Outcome -** Displays the final outcome reached during the workflow.
+<Steps>
+  <Step title="Caller Number">
+    Displays the phone number associated with the call.
+  </Step>
+  <Step title="Ended Reason">
+    Indicates why the call ended
+  </Step>
+  <Step title="Topics">
+    Shows the detected topic or intent of the conversation
+  </Step>
+  <Step title="Outcome">
+    Displays the final outcome reached during the workflow.
+  </Step>
+</Steps>
 
 ### Actions Timeline
 
@@ -203,7 +215,7 @@ The actions section displays the workflow steps that occurred during the call. E
 
 ### Duration Timeline
 
-The **Duration timeline** provides a visual representation of how the call progressed over time. Each colored segment represents a workflow block executed during the call.
+The duration timeline provides a visual representation of how the call progressed over time. Each colored segment represents a workflow block executed during the call.
 
 Hovering over a segment reveals details such as: block name, duration and number of conversation turns.  This view helps iden
 
@@ -211,12 +223,9 @@ Hovering over a segment reveals details such as: block name, duration and number
 
 The **Blocks** tab provides a structured, execution-level view of how the call moved through your workflow. It shows every block that ran, when it ran, how long it took, and whether it completed successfully, making it ideal for debugging, auditing, and optimization.
 
-<img
-  src="/assets/blocks-tab-call-history.png"
-  alt="Blocks Tab Call History"
-  title="Blocks Tab Call History"
-  style={{ width:"94%" }}
-/>
+<Frame>
+  ![Blockstabcallanalytics](/assets/blockstabcallanalytics.png)
+</Frame>
 
 ### Block Execution Overview
 

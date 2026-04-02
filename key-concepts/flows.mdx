@@ -84,23 +84,29 @@ See the dedicated [toolbar quick actions guide](/key-concepts/flow-canvas-contro
 
 ## Create a Flow
 
-1. Go to the agent design page.
-1. Click the **\+** to create a new workflow or select an existing workflow and click the **Edit** button.
-2. Click the “**\+**” button between existing blocks or at the end of a chain to insert a new block.
-4. New blocks are **auto-positioned** to keep the layout readable.
+<Steps>
+  <Step title="Go to the agent design page.">
+  </Step>
+  <Step title="Click the + to create a new workflow or select an existing workflow and click the Edit button.">
+  </Step>
+  <Step title="Click the “+” button between existing blocks or at the end of a chain to insert a new block.">
+  </Step>
+  <Step title="New blocks are auto-positioned to keep the layout readable.">
+    The canvas is where you visually design and manage your workflow.
 
-The canvas is where you visually design and manage your workflow.
-
-<Frame>
-  <img
-    src="/assets/how-to-add-a-new-block.png"
-    alt="How To Add A New Block"
-    title="How To Add A New Block"
-    style={{ width:"65%" }}
-  />
-</Frame>
-
-5. Click any block in your flow to open its configuration panel. Each block contains different settings, and the options you see will depend on the type of block you’re setting up.
+    <Frame>
+      <img
+        src="/assets/how-to-add-a-new-block.png"
+        alt="How To Add A New Block"
+        title="How To Add A New Block"
+        style={{ width:"65%" }}
+      />
+    </Frame>
+  </Step>
+  <Step title="Click any block in your flow to open its configuration panel. ">
+    Each block contains different settings, and the options you see will depend on the type of block you’re setting up.
+  </Step>
+</Steps>
 
 <Frame>
   <img
@@ -140,11 +146,13 @@ When publishing, review the version details and confirm the version you want to 
   <Accordion title="What are call variables?">
     Variables are dynamic containers that persist for the duration of the call - like the agent's working memory.
   </Accordion>
+
   <Accordion title="How to set variables">
     Use Collect blocks for caller input, API Request blocks for external data, or add custom variables via the Variable modal.
   </Accordion>
+
   <Accordion title="How to access variables">
-    Reference by name with @variable_name or select from the Variable modal. Use them in prompts, conditions, and API payloads.
+    Reference by name with @variable\_name or select from the Variable modal. Use them in prompts, conditions, and API payloads.
   </Accordion>
 </AccordionGroup>
 
@@ -152,21 +160,21 @@ When publishing, review the version details and confirm the version you want to 
 
 Variables in Phonely can store different types of data. Choose the appropriate type when collecting information from callers or storing data from API responses.
 
-| Type           | Data Type  | Description                                |
-| :------------- | :--------- | :----------------------------------------- |
-| **text**       | `string`   | General text                               |
-| **number**     | `number`   | Numeric values                             |
-| **date**       | `ISO date` | Dates in ISO format                        |
-| **time**       | `HH:mm`    | Times in 24-hour format                    |
-| **name**       | `string`   | Caller names                               |
-| **email**      | `string`   | Email addresses                            |
-| **phone**      | `string`   | Phone numbers                              |
-| **url**        | `string`   | Web addresses                              |
-| **address**    | `object`   | Street, city, region, postal code, country |
-| **currency**   | `number`   | Monetary values                            |
-| **percentage** | `number`   | Percent values                             |
-| **duration**   | `string`   | Time spans                                 |
-| **custom**     | `any`      | User-defined schema                        |
+| Type | Data Type | Description |
+| :-- | :-- | :-- |
+| **text** | `string` | General text |
+| **number** | `number` | Numeric values |
+| **date** | `ISO date` | Dates in ISO format |
+| **time** | `HH:mm` | Times in 24-hour format |
+| **name** | `string` | Caller names |
+| **email** | `string` | Email addresses |
+| **phone** | `string` | Phone numbers |
+| **url** | `string` | Web addresses |
+| **address** | `object` | Street, city, region, postal code, country |
+| **currency** | `number` | Monetary values |
+| **percentage** | `number` | Percent values |
+| **duration** | `string` | Time spans |
+| **custom** | `any` | User-defined schema |
 
 ### Call outcome tagging
 
@@ -200,8 +208,6 @@ This means you only need to tag the blocks that represent meaningful endpoints o
 {/* TODO: Add a GIF showing the "Test from here" feature — right-clicking a block, selecting "Test from here," and hearing the agent respond. This is a unique feature and showing it visually would be a strong selling point. */}
 
 ## Testing & best practices
-
-### Test your Flows
 
 <Tabs>
   <Tab title="Simulation">
@@ -242,11 +248,13 @@ This means you only need to tag the blocks that represent meaningful endpoints o
 
 <AccordionGroup>
   <Accordion title="Conversation design">
-    Keep prompts natural and concise, offer clear next steps, plan for interruptions, and confirm critical data before proceeding.
+    Keep prompts natural and concise, offer clear next steps, plan for interruptions, and confirm critical data before proceeding. 
   </Accordion>
+
   <Accordion title="Technical hygiene">
     Test all branches, add fallback edges, watch performance metrics, and keep external dependencies resilient.
   </Accordion>
+
   <Accordion title="Variable management">
     Use descriptive names, validate inputs, handle missing data gracefully, and scrub sensitive data when not needed.
   </Accordion>
@@ -258,15 +266,19 @@ This means you only need to tag the blocks that represent meaningful endpoints o
   <Accordion title="Flow not responding">
     Verify block connections, confirm required variables are set, test blocks individually, and check API auth/endpoints.
   </Accordion>
+
   <Accordion title="Poor call quality">
     Review Talk block voice settings, try alternate voices, adjust rate and pauses, and check variable interpolation.
   </Accordion>
+
   <Accordion title="Transfer failures">
     Confirm destination numbers/agents, test fallbacks, and verify timing and availability windows.
   </Accordion>
+
   <Accordion title="Variable issues">
     Check spelling/case, ensure values are set before use, validate data types, and test prompts using variables.
   </Accordion>
+
   <Accordion title="API integration problems">
     Test endpoints in isolation, verify credentials and headers, confirm request/response schemas, and watch rate limits/timeouts.
   </Accordion>
