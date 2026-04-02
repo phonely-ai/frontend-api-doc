@@ -38,9 +38,9 @@ mint dev --port 3333
 
 This docs set covers:
 
-- Phonely frontend routes and task flows
-- public product behavior
-- frontend and API-key-authenticated endpoints documented under `api-reference`
+- Phonely frontend routes and task flows. 
+- public product behavior. 
+- frontend and API-key-authenticated endpoints documented under `api-reference`. 
 
 ## Authoring Rules
 
