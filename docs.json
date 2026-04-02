@@ -57,8 +57,8 @@
             "pages": [
               "get-started/introduction",
               "get-started/quick-start",
-              "key-concepts/ask-ai",
               "get-started/home-mdx",
+              "key-concepts/ask-ai",
               "get-started/navigation-and-shortcuts"
             ]
           },
