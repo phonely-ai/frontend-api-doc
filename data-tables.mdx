@@ -14,16 +14,16 @@ The **Data Tables** tab in Performance lets you create saved table views that gr
 ## Quick Answers Data Tables Can Give You
 
 <CardGroup cols={2}>
-  <Card title="Volume & Trends">
+  <Card title="Volume and Trends">
     How many calls came in today, this week, or this month? Which prompt version receives the most traffic?
   </Card>
-  <Card title="Success & Outcomes">
+  <Card title="Success and Outcomes">
     What percentage of calls result in an appointment booked? Which outcomes appear most often?
   </Card>
-  <Card title="Quality & Sentiment">
+  <Card title="Quality and Sentiment">
     What is the negative sentiment rate by day? Are specific customer phone numbers consistently unhappy?
   </Card>
-  <Card title="Operations & Failures">
+  <Card title="Operations and Failures">
     How often do calls end due to silence timeout or max duration? What is the voicemail rate by agent phone number?
   </Card>
 </CardGroup>
@@ -41,96 +41,7 @@ A **view** is a saved table configuration. Each view contains:
 | **Sort** | Which column to sort by and in which direction |
 | **Targets** | Optional thresholds for each metric to flag rows that miss a KPI |
 
-For example, one view might show total calls by prompt version
-
-> Another might show success rate by day
->
-> Another might show negative sentiment rate by hour
->
-> Each of these is a separate saved view.
-
-<Steps>
-  <Step title="From the left sidebar go to the Analytics section.">
-  </Step>
-  <Step title="Select Performance.">
-  </Step>
-  <Step title="In the top-right area, switch from Performance to Data Tables.">
-  </Step>
-  <Step title="You’ll see the current saved view as a tab.">
-  </Step>
-  <Step title="Use the date range selector at the top to control the time window for the table.">
-  </Step>
-</Steps>
-
-The page can also include a metric selector such as duration, depending on your current performance settings.  
-
-## How the page is organized
-
-The data tables page is built around a saved view. At the top, you’ll see controls such as the date range and any global performance selector currently applied. Below that, the main data table area includes the active view tab, an **Add view** button, the **Group** selector, and the metric columns.
-
-The active view name appears as a tab. This makes it easy to keep several saved views and switch between them without rebuilding them each time.
-
-Inside the table, the first column is usually the grouping column. For example, if the grouping is **Prompt Version**, the first column lists values such as `v2.4`, `v1.5` The remaining columns are metric columns, such as **Total Calls** or any custom formulas you add.
-
-There is also an **Add Column** action in the table header. This is where you create new metrics.
-
-## Create a data view
-
-When you click **Add view**, you can create a new view in two different ways. You can describe the view you want in plain language and use AI suggestions to generate a starting point, or you can choose to build the view manually.
-
-The AI-assisted flow is useful when you already know the question you want to answer but do not want to set up the table from scratch.
-
-In the **Create Data View** dialog, you can type a request like: Show daily total calls, success rate, and negative sentiment rate.
-
-You can also choose from suggested examples such as:
-
-- Show total calls by day
-- Track appointment booked rate by week
-- Compare sales vs appointment confirmed by day
-- Show avg duration by customer phone number
-- Show negative sentiment rate by hour
-
-If the suggestions are not quite right, you can refresh them or choose **Build Manually** instead.
-
-The manual flow gives you full control. You create the view, choose the grouping, add metric columns, and save it. This is the best option when you want a very specific setup or already know the exact formulas you want to use.
-
-## Build a view manually
-
-If you want full control over how the table is set up, you can build a view manually instead of using the AI-generated suggestions. This is the best option when you already know how you want the rows to be grouped and which metrics you want to calculate.
-
-To start, open **Data Tables** and click **Add view**.
-
-In the **Create Data View** flow, choose **Build Manually**.
-
-This opens the manual builder, where you can define the view name, preview the table, choose a grouping, and add columns before publishing the view.
-
-At the top of the builder, enter a **View Name**.
-
-This is the label that will appear as the saved tab in data tables, so it should describe what the view is intended to show. For example, names like Total Calls by Day, Appointment Booked Rate by Week, or Negative Sentiment by Prompt Version make the purpose of the table clear.
-
-<Frame>
-  ![Totalcallsbytheday](/assets/totalcallsbytheday.png)
-</Frame>
-
-Below the name, you’ll see a **Preview** section. This gives you an early look at how the table will appear once saved. The preview only shows a limited sample of rows, which makes it easier to test the structure of the view before publishing it.
-
-Inside the preview, the first thing to configure is the **Group** dropdown. This controls how the rows in the table are split.
-
-You can choose from grouping options such as **Prompt Version**, **Customer Phone**, **Agent Phone**, or time-based groupings like **Daily** and **Weekly**. When you change the grouping, the preview updates immediately so you can see how the row structure changes.
-
-<Frame>
-  ![Datatablegroups](/assets/datatablegroups.png)
-</Frame>
-
-For example, if you select **Daily**, each row in the preview represents a day. If you choose **Prompt Version**, each row represents one prompt version instead. This lets you decide whether the view should answer a time-based question, a caller-based question, or a workflow-comparison question.
-
-Once the grouping looks right, you can add metrics by clicking **Add Column**. This opens the Add Column dialog, where you define the metric name and the formula. After saving the column, it appears in the preview so you can confirm that it is calculating what you expect.
-
-## Metric Name
-
-The metric name is the visible label of the column in the table. It should describe the value clearly enough that someone can understand it without reading the formula.
-
-This matters because a technically correct formula can still produce a confusing report if the column name is vague.
+You can create multiple views per agent. Each appears as a tab you can switch between instantly.
 
 <Tip>
   If an agent has no views yet, Phonely automatically creates a default **"Total Calls by Day"** view to get you started.
@@ -150,6 +61,12 @@ This matters because a technically correct formula can still produce a confusing
   </Step>
 </Steps>
 
+## How the Page Is Organized
+
+The data tables page is built around a saved view. At the top you see the date range and any global performance selector. Below that is the main data table with the active view tab, an **Add view** button, the **Group** selector, and the metric columns.
+
+Inside the table, the first column is the grouping column (e.g., dates or prompt versions). The remaining columns are metrics. An **Add Column** button in the header lets you create new metrics inline.
+
 ## Grouping Options
 
 The **Group** selector determines how rows are split. Choose one:
@@ -165,8 +82,12 @@ The **Group** selector determines how rows are split. Choose one:
 | **Customer Phone** | A unique caller phone number | Per-caller analysis |
 | **Agent Phone** | A Phonely phone number | Comparing lines or departments |
 
+<Frame>
+  ![Datatablegroups](/assets/datatablegroups.png)
+</Frame>
+
 <Info>
-  Time granularity options are filtered automatically based on your selected date range. For example, "Monthly" won't appear if the date range is only a few days.
+  Time granularity options are filtered automatically based on your selected date range. For example, "Monthly" will not appear if the date range is only a few days.
 </Info>
 
 ## Creating a View
@@ -201,6 +122,10 @@ Click **+ Add view** to open the creation dialog. You have two paths:
   </Tab>
 </Tabs>
 
+<Frame>
+  ![Totalcallsbytheday](/assets/totalcallsbytheday.png)
+</Frame>
+
 {/* TODO: Add a screenshot or short GIF showing the AI-assisted creation flow: typing a prompt, seeing suggestion chips, and the generated preview appearing. */}
 
 ## Metric Columns
@@ -219,13 +144,15 @@ The metric name is the column header. Make it descriptive enough that someone ca
 
 Formulas define how each metric is calculated per row group. They support arithmetic expressions with variable references.
 
-**Operators:**
-
-`+` &nbsp; `-` &nbsp; `*` &nbsp; `/` &nbsp; `%` (modulo) &nbsp; `(` `)` parentheses
+**Operators:** `+` `-` `*` `/` `%` (modulo) `(` `)` parentheses
 
 **Max formula length:** 500 characters.
 
 When you click into the formula field, an autocomplete menu appears (triggered by `@`) showing all available variables organized by category.
+
+<Frame>
+  ![Dataformulas](/assets/dataformulas.png)
+</Frame>
 
 {/* TODO: Add a screenshot of the formula autocomplete popover showing the grouped variable categories (Core, Outcomes, Topics, Sentiment, End Reasons). */}
 
@@ -245,36 +172,37 @@ Always available, regardless of agent configuration.
 Namespaced variables count calls matching a specific metadata category within the row group. They return **counts**, making them ideal for percentages and ratios.
 
 <AccordionGroup>
-  <Accordion title="Outcome Variables — @outcome.<value>">
+  <Accordion title="Outcome Variables -- @outcome.value">
     Count calls that include a specific outcome from the agent's **latest published version**. Only outcomes present in the published flows appear in the autocomplete.
 
     **Example formulas:**
+    ```text
+    (@outcome.Appointment_Confirmed / @total) * 100    
     ```
-    (@outcome.Appointment_Confirmed / @total) * 100
+    ```text
     @outcome.Call_Escalated + @outcome.Assistance_Requested
     ```
   </Accordion>
-
-  <Accordion title="Custom Call Outcome Variables — @custom_call_outcome.<value>">
+  <Accordion title="Custom Call Outcome Variables -- @custom_call_outcome.value">
     Count calls matching a custom call outcome value. These are populated from observed values in your call data.
 
     **Example formula:**
-    ```
+    ```text
     (@custom_call_outcome.sale_completed / @total) * 100
     ```
   </Accordion>
-
-  <Accordion title="Topic Variables — @topic.<value>">
+  <Accordion title="Topic Variables -- @topic.value">
     Count calls tagged with a specific call topic **currently configured for the agent**. Only active topics appear in the autocomplete.
 
     **Example formulas:**
-    ```
+    ```text
     (@topic.appointment_booked / @total) * 100
+    ```
+    ```text
     @topic.callback_requested
     ```
   </Accordion>
-
-  <Accordion title="Sentiment Variables — @sentiment.<value>">
+  <Accordion title="Sentiment Variables -- @sentiment.value">
     Count calls by sentiment classification. Three fixed values:
 
     | Variable | Description |
@@ -284,18 +212,12 @@ Namespaced variables count calls matching a specific metadata category within th
     | `@sentiment.negative` | Negative sentiment count |
 
     **Example formula:**
-    ```
+    ```text
     (@sentiment.negative / @total) * 100
     ```
   </Accordion>
-
-<Expandable title="property">
-  | Sentiment Variable | Description |
-  | :-- | :-- |
-  | `@sentiment.positive` | Counts calls classified as having a positive sentiment. |
-  | `@sentiment.neutral` | Counts calls classified as having a neutral sentiment. |
-  | `@sentiment.negative` | Counts calls classified as having a negative sentiment. |
-</Expandable>
+  <Accordion title="End Reason Variables -- @ended_reason.value">
+    Count calls by how they ended.
 
     | Variable | Meaning |
     | :--- | :--- |
@@ -308,16 +230,15 @@ Namespaced variables count calls matching a specific metadata category within th
     | `@ended_reason.voicemail` | Call reached voicemail |
 
     **Example formula:**
-    ```
+    ```text
     (@ended_reason.voicemail / @total) * 100
     ```
   </Accordion>
-
-  <Accordion title="Block Variables — @block.<actionId>__<workflowId>">
+  <Accordion title="Block Variables -- @block.actionId__workflowId">
     Count calls that passed through a specific workflow block. These are populated from the published inbound workflow's action nodes.
 
     **Example formula:**
-    ```
+    ```text
     (@block.transfer_call_123__wf_abc123 / @total) * 100
     ```
   </Accordion>
@@ -330,12 +251,12 @@ Exclusions remove calls from the calculation **before** the metric is computed. 
 | Syntax | Effect |
 | :--- | :--- |
 | `-@{metadata_key}` | Exclude calls with a specific custom metadata key |
-| `-@outcome.<value>` | Exclude calls with a specific outcome |
-| `-@topic.<value>` | Exclude calls with a specific topic |
+| `-@outcome.value` | Exclude calls with a specific outcome |
+| `-@topic.value` | Exclude calls with a specific topic |
 
 **Example:** Calculate success rate excluding calls that have a `lead_id` metadata key:
 
-```
+```text
 (@outcome.success / @total) * 100 -@{lead_id}
 ```
 
@@ -378,6 +299,10 @@ Each target has two parts:
   </Card>
 </CardGroup>
 
+<Frame>
+  ![Targetdirection](/assets/targetdirection.png)
+</Frame>
+
 The target value should match the unit and scale of your formula. If the formula returns a percentage, set the target as a percentage (e.g., `75`). If it returns minutes, set the target in minutes (e.g., `4`).
 
 <Tip>
@@ -412,8 +337,13 @@ Click any **metric cell** to open a slide-over panel showing the individual call
     - Click any call to open the full **Call Details** modal
     - Validate that a metric is counting the right calls
     - Investigate spikes or drops in a rate
+    - Compare across groups by clicking different cells
   </Accordion>
 </AccordionGroup>
+
+<Frame>
+  ![Viewnumeratorsidecalls](/assets/viewnumeratorsidecalls.png)
+</Frame>
 
 ## Managing Views
 
@@ -427,36 +357,28 @@ Click the dropdown menu on a view tab and select **Delete**. You cannot delete t
 
 ### Exporting to CSV
 
-Click **Export CSV** in the view tabs bar. Phonely fetches all rows (not just the visible page) and downloads a CSV file named `{view_name}_{timestamp}.csv`.
+Click **Export CSV** in the view tabs bar. Phonely fetches all rows (not just the visible page) and downloads a CSV file named with the view name and a timestamp.
 
 ## Building Effective Views
 
-As you build, use the preview to confirm that both the grouping and the columns make sense together. If something looks off, you can change the grouping, update a metric, or go back and adjust the formula before publishing.
-
-When the view is ready, click **Publish** to save it. The new view will then appear as a tab in Data Tables, where you can switch to it anytime like any other saved view.
-
-If you decide not to keep the changes, click **Cancel**. If you want to return to the earlier setup step in the builder, use **Back**.
+<Steps>
+  <Step title="Start simple">
+    Begin with one grouping and one metric (e.g., Daily + Total Calls). Confirm the preview looks right before adding complexity.
+  </Step>
+  <Step title="Add metrics incrementally">
+    Add one column at a time. Check the preview after each addition to catch formula errors early.
+  </Step>
+  <Step title="Set targets for KPIs">
+    Only add targets for metrics tied to a real business goal. Too many targets create visual noise.
+  </Step>
+  <Step title="Use drill-down to validate">
+    After publishing, click a few cells to confirm the underlying calls match your expectations.
+  </Step>
+  <Step title="Name views clearly">
+    Use names like "Daily Success Rate" or "Weekly Sentiment by Prompt" so teammates can find the right view without opening each one.
+  </Step>
+</Steps>
 
 <Frame>
   ![Publishdataview](/assets/publishdataview.png)
 </Frame>
-
-A good way to build manually is to start with one grouping and one simple metric, confirm the preview looks correct, then add more columns gradually. This helps keep the table focused and makes it easier to spot issues before the view is published.
-
-## Drill-down on click
-
-After you **publish** a data table view, you can drill into the calls behind any metric by clicking a cell in the table. This opens a call list panel showing the calls included in that value, along with a short summary, timestamp, and call duration, so you can quickly move from “the number” to the actual conversations that produced it.
-
-For ratio-based formulas (for example, `(@sentiment.negative / @total) * 100`), drill-down focuses on the **numerator-side calls**, the calls that contribute to the top part of the formula. This is intentional: it makes it easy to inspect exactly which calls drove the percentage, without forcing you to sift through every call in the denominator group.
-
-<Frame>
-  ![Viewnumeratorsidecalls](/assets/viewnumeratorsidecalls.png)
-</Frame>
-
-Drill-down is especially useful when you want to:
-
-- Validate that a metric is counting the right calls
-- Investigate spikes or drops in a rate (success rate, negative sentiment rate, voicemail rate, etc.)
-- Review the exact calls contributing to a specific outcome, topic, sentiment, or end reason
-
-If you need to compare across groups, click different cells in the table to open the corresponding call lists and review the underlying call sets side-by-side.
