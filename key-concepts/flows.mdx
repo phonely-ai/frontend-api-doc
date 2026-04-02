@@ -5,9 +5,8 @@ description: "Build complex conversations, connect with your tools and more with
 
 Flows are the visual blueprints that define exactly how your AI phone agent behaves, from the greeting, to data collection, to decisions, actions, and the final call outcome. They describe what the agent says, what it asks, what it stores, what APIs it calls, and how the conversation moves forward.
 
-## What Are Flows?
+{/* TODO: Add a hero GIF (~8s) showing the flow builder in action — dragging blocks, connecting them, and the resulting conversation flow. This is the core product surface. Mintlify places product screenshots inside <Frame> with light/dark variants right after the intro text. A looping GIF of someone building a simple 3-block flow would be perfect. */}
 
-A Flow is a visual representation of a live phone conversation. It controls the entire lifecycle of a call  from greeting to resolution.
 
 Flows are made of several core elements:
 
@@ -103,10 +102,6 @@ The canvas is where you visually design and manage your workflow.
 
 5. Click any block in your flow to open its configuration panel. Each block contains different settings, and the options you see will depend on the type of block you’re setting up.
 
-<Tip>
-  Blocks have different setup and configuration requirements. For example, a Talk block includes questions and answers, Collect blocks include questions and variables, while API Request blocks include payload, headers, and response mapping.
-</Tip>
-
 <Frame>
   <img
     src="/assets/example-configuring-a-collect-block.png"
@@ -132,16 +127,6 @@ You can now select one or multiple blocks. Copy them and then paste them into an
     style={{ width:"94%" }}
   />
 </Frame>
-
-### Configure Blocks
-
-Click any block to open its configuration panel. Each block type exposes only the settings that matter, for example:
-
-- Talk blocks → prompts, voice settings
-- Collect blocks → questions, variables, validation
-- API blocks → endpoints, headers, payloads, mappings
-
-This keeps configuration focused and avoids unnecessary complexity.
 
 ### Save, Version, and Publish
 
@@ -189,17 +174,17 @@ Variables in Phonely can store different types of data. Choose the appropriate t
   Outcome tags enable analytics, reporting, and automations after the call ends.
 </Info>
 
-<Card title="Automatic">
-  System applies defaults like `completed`, `failed`, `lead_qualified`, `appointment_schedule,` or `transferred`.
+Call outcomes are configured at the **block level**. Each block in your workflow can have an outcome tag assigned to it. When a call ends on that block, the call is tagged with that block's outcome.
 
-  **Custom**
+If the block where the call ends does not have an outcome tag set, Phonely falls back to the **last block the call visited** that had an outcome defined.
 
-  Set custom tags in End Call blocks for downstream workflows.
+This means you only need to tag the blocks that represent meaningful endpoints or milestones in your flow — you don't need to tag every block.
 
-  **Conditional**
-
-  Apply tags only when conditions on variables are met.
-</Card>
+<Steps>
+  <Step title="Open any block in your workflow" />
+  <Step title="Find the Call Outcome Tagging field in the block settings" />
+  <Step title="Select an existing outcome or type a custom one" />
+</Steps>
 
 <img
   src="/assets/outcome-tagging-end-block.png"
@@ -209,8 +194,10 @@ Variables in Phonely can store different types of data. Choose the appropriate t
 />
 
 <Tip>
-  Some examples of tags that you can use include: **appointment_scheduled**, **lead_qualified,** **customer_satisfied, escalation_needed, no_show_followup**, etc.
+  Some examples of tags that you can use include: **appointment scheduled**, **lead qualified,** **customer satisfied, escalation needed, no show followup**, etc.
 </Tip>
+
+{/* TODO: Add a GIF showing the "Test from here" feature — right-clicking a block, selecting "Test from here," and hearing the agent respond. This is a unique feature and showing it visually would be a strong selling point. */}
 
 ## Testing & best practices
 

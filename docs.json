@@ -60,15 +60,17 @@
         "groups": [
           {
             "group": "GET STARTED",
+            "icon": "rocket",
             "pages": [
               "get-started/introduction",
               "get-started/quick-start",
-              "get-started/dashboard-overview",
+              "get-started/home-overview",
               "key-concepts/ask-ai"
             ]
           },
           {
             "group": "BUILD YOUR AGENT",
+            "icon": "hammer",
             "pages": [
               {
                 "group": "Agent Workspace",
@@ -143,6 +145,7 @@
           },
           {
             "group": "OPTIMIZE YOUR AGENT",
+            "icon": "chart-line",
             "pages": [
               "performance",
               "data-tables",
@@ -154,6 +157,7 @@
           },
           {
             "group": "REVIEW YOUR AGENT",
+            "icon": "search",
             "pages": [
               "call-history-ai-analytics/call-history-ai-analytics",
               "agent-review",
@@ -163,6 +167,7 @@
           },
           {
             "group": "OUTBOUND CALLS",
+            "icon": "phone-outgoing",
             "pages": [
               "outboundcalling/createaoutboundcallingcampaign",
               "outboundcalling/creating-call-flows-for-outbound-campaigns",
@@ -174,12 +179,14 @@
           },
           {
             "group": "TESTING",
+            "icon": "flask-conical",
             "pages": [
               "testing/ab-testing"
             ]
           },
           {
             "group": "SETTINGS & BILLING",
+            "icon": "settings",
             "pages": [
               "manage-account-and-organization-settings/manage-account-and-organization-settings",
               "manage-account-and-organization-settings/delete-agents",

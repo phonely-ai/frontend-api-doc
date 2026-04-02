@@ -11,7 +11,7 @@ Use this page to map a user task to the correct Phonely frontend route.
 
 | Route | Use this route for | Notes |
 | --- | --- | --- |
-| `/dashboard` | Default landing and high-level summary | Dashboard can redirect into agent-specific views. |
+| `/home` | Default landing, AI chat, and high-level overview | Combines conversational AI with call metrics and recent activity. |
 | `/agent/{agentId}` | Agent workspace | Build tab is only available on agent pages. |
 | `/agent/{agentId}?tab=knowledge-base` | Documents, websites, and recordings | Use for KB tasks. |
 | `/agent/{agentId}?tab=workflows` | Workflow editor and automation logic | Use for canvas edits. |
@@ -50,8 +50,7 @@ Use these exact labels in the in-app side panel:
 
 | Tab | Availability | Purpose |
 | --- | --- | --- |
-| `Build` | Only on `/agent/{agentId}` | Build or modify workflows and agent content |
-| `Help` | Available globally | Search docs and explain product behavior |
+| `Assistant` | Available globally | Build agents, modify workflows, and answer questions about the platform or your agent |
 | `Test` | Available globally | Interact with the active agent in test mode |
 
 ## Route Selection Rules

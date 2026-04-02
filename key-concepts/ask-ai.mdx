@@ -1,73 +1,42 @@
 ---
 title: "Ask AI"
-description: "Learn how to use the Ask AI assistant to build, understand, and test call workflows directly inside the workflow Builder."
+description: "Ask AI is an in-context assistant embedded directly into Phonely’s flow builder. It helps you design and understand call flows and it answers questions about Phonely's platform"
 ---
 
-Ask AI is an in-context assistant embedded directly into Phonely’s flow builder. It helps you design, understand, and test call flows without leaving the canvas,  turning natural language prompts into actionable guidance while you build.
-
-Instead of switching between docs, videos, and trial-and-error, Ask AI lets you ask questions exactly where you’re working and get answers tailored to your current flow.
-
-## Where You’ll Find Ask AI
-
-On the workflow canvas, you’ll see a floating Ask AI button in the bottom corner, giving you quick access to AI assistance while actively designing workflows.
+#TODO:Replace
 
 ![Accessing Ask Ai](/assets/accessing-ask-ai.gif)
 
-## Ask AI Modes: Build, Help, and Test
+## Ask AI Modes: Assistant and Test
 
-Ask AI adapts based on what you’re trying to do, using three dedicated modes at the top of the panel.
+Ask AI has two dedicated modes at the top of the panel.
 
-### Build Mode
+### Assistant
 
-**Purpose:** Help you design and modify workflows.
+The Assistant tab is your all-in-one AI partner for building agents and understanding how they work. You can ask it to design entire agents, modify workflows, or answer questions about both the platform and your specific agent — all in the same conversation.
 
-When the Build tab is active, Ask AI focuses on _construction and logic_. It understands flows, blocks, and common patterns.
+**Building agents** — Ask the Assistant to create or modify agents and their workflows:
 
-You can ask things like:
+- “Build me a customer support agent that handles returns and exchanges.”
+- “Add an escalation path if the order lookup fails.”
+- “Set up a post-call email summary for every completed appointment.”
 
-- “Build a basic order tracking workflow.”
-- “What’s the best way to collect an email before an API request?”
-- “How do I add escalation if the lookup fails?”
+**Getting help** — Ask the Assistant about the platform or your agent’s current behavior:
 
-This is especially useful when starting from a blank canvas or when refactoring a complex flow.
-
-<img
-  src="/assets/build-as-ai.png"
-  alt="Build As Ai"
-  title="Build As Ai"
-  style={{ width:"57%" }}
-/>
-
-### Help Mode
-
-**Purpose:** Explain how Phonely works.
-
-In Help, Ask AI behaves like a contextual documentation assistant. It explains features, settings, and concepts in plain language.
-
-Examples:
-
+- “Why is the agent moving on without asking for the user’s phone number?”
+- “What languages does the agent understand right now?”
 - “What’s the difference between live-call and post-call actions?”
 - “How do call outcomes differ from call topics?”
-- “What does Auto-gather actually do?”
 
-This mode is ideal when you’re unsure why something behaves a certain way or want clarity without digging through docs.
-
-<img
-  src="/assets/help-ask-ai.png"
-  alt="Help Ask Ai"
-  title="Help Ask Ai"
-  style={{ width:"55%" }}
-/>
+{/* TODO: Add a screenshot of the Assistant tab */}
 
 ### Test Mode
 
-**Purpose:** Simulate and validate behavior.
-
-The Test tab mirrors how your agent speaks during a real call. You’ll see the agent’s greeting (for example, _“Thank you for calling Phonely! How can I help you today?”_) and can interact as if you’re a caller.
+The Test tab simulates your agent like a real call. You’ll see the agent’s greeting (for example, _“Thank you for calling Phonely! How can I help you today?”_ and can interact as if you’re a caller.
 
 You can:
 
-- Type responses to simulate caller input
+- Type responses to simulate caller input OR switch to talk to speak to it
 - Restart tests instantly
 - Observe how prompts, branches, and logic behave in real time
 
