@@ -7,7 +7,6 @@ Flows are the visual blueprints that define exactly how your AI phone agent beha
 
 {/* TODO: Add a hero GIF (~8s) showing the flow builder in action — dragging blocks, connecting them, and the resulting conversation flow. This is the core product surface. Mintlify places product screenshots inside <Frame> with light/dark variants right after the intro text. A looping GIF of someone building a simple 3-block flow would be perfect. */}
 
-
 Flows are made of several core elements:
 
 ### 1. Blocks
@@ -105,21 +104,26 @@ See the dedicated [toolbar quick actions guide](/key-concepts/flow-canvas-contro
   </Step>
   <Step title="Click any block in your flow to open its configuration panel. ">
     Each block contains different settings, and the options you see will depend on the type of block you’re setting up.
+
+    <Frame>
+      <img
+        src="/assets/example-configuring-a-collect-block.png"
+        alt="Example Configuring A Collect Block"
+        title="Example Configuring A Collect Block"
+        style={{ width:"87%" }}
+      />
+    </Frame>
+  </Step>
+  <Step title="Connect blocks">
+    You can change connections between blocks by hovering over an edge clicking the **X** button, and then place your cursor over the output node of one block and drag the edge to connect to the input node of another block.
+  </Step>
+  <Step title="Save your changes.">
+    Every save creates a new version you can review or revert.
+  </Step>
+  <Step title="Publish when ready.">
+    Publishing makes the version live for real callers.
   </Step>
 </Steps>
-
-<Frame>
-  <img
-    src="/assets/example-configuring-a-collect-block.png"
-    alt="Example Configuring A Collect Block"
-    title="Example Configuring A Collect Block"
-    style={{ width:"87%" }}
-  />
-</Frame>
-
-6. Connect blocks. You can change connections between blocks by hovering over an edge clicking the **X** button, and then place your cursor over the output node of one block and drag the edge to connect to the input node of another block.
-7. Save your changes. Every save creates a new version you can review or revert.
-8. Publish when ready. Publishing makes the version live for real callers.
 
 ### Copy & Paste Across Tabs
 
@@ -189,9 +193,12 @@ If the block where the call ends does not have an outcome tag set, Phonely falls
 This means you only need to tag the blocks that represent meaningful endpoints or milestones in your flow — you don't need to tag every block.
 
 <Steps>
-  <Step title="Open any block in your workflow" />
-  <Step title="Find the Call Outcome Tagging field in the block settings" />
-  <Step title="Select an existing outcome or type a custom one" />
+  <Step title="Open any block in your workflow">
+  </Step>
+  <Step title="Find the Call Outcome Tagging field in the block settings">
+  </Step>
+  <Step title="Select an existing outcome or type a custom one">
+  </Step>
 </Steps>
 
 <img
