@@ -72,6 +72,7 @@ To add a Pre-Call Code action:
     <Frame>
       ![Chooseprecallaction](/assets/chooseprecallaction.png)
     </Frame>
+
     ```text
     Setup → Configure → Test
     ```
@@ -99,6 +100,7 @@ To add a Pre-Call Code action:
     <Tip>
       You’ll notice default variables like `arg1` and `arg2` when adding a Code Block. Feel free to rename or remove them to match your workflow’s actual input variables.
     </Tip>
+
     You can:
 
     - rename them
@@ -112,10 +114,10 @@ To add a Pre-Call Code action:
 
     Example:
 
-    | Variable name | Set variables         |
-    | :------------ | :-------------------- |
-    | caller_phone  | caller_phone_number   |
-    | account_type  | customer_account_type |
+    | Variable name | Set variables |
+    | :-- | :-- |
+    | caller\_phone | caller\_phone\_number |
+    | account\_type | customer\_account\_type |
 
     This allows your Python code to access values collected or generated earlier in the workflow.
   </Step>
@@ -143,7 +145,7 @@ To add a Pre-Call Code action:
 
     ### **Example: Assign a Customer Tier**
 
-    The example below checks a customer’s account type and returns a tier that can be used later in the workflow.
+    The example below checks a customer’s account type and returns a tier that can be used later in the workflow. 
 
     <Frame>
       <img
@@ -153,6 +155,7 @@ To add a Pre-Call Code action:
         style={{ width:"74%" }}
       />
     </Frame>
+
     In this example:
 
     - the block receives `account_type`
@@ -170,7 +173,7 @@ To add a Pre-Call Code action:
 
     This is the required function signature for the Code action.
 
-    - `input_dict` contains all variables passed into the block
+    - `Input_dict` contains all variables passed into the block
     - the function must return a dictionary of outputs
 
     ### Reading Inputs
@@ -181,7 +184,7 @@ To add a Pre-Call Code action:
 
     This retrieves the input variable from the dictionary.
 
-    If the mapped workflow variable contains `"premium"`, that value becomes available in the code.
+    If the mapped workflow variable contains `"premium"`, that value becomes available in the code. 
 
     ### Applying Logic
 

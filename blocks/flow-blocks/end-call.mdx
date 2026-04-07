@@ -32,10 +32,9 @@ Use this block in scenarios such as:
 
 <Steps>
   <Step title="Add the End Call Block">
-    1. In your flow builder, click the **“+”** icon at the point where you want to end the conversation.
+    1. In your flow builder, click the **“\+”** icon at the point where you want to end the conversation.
     2. Under **Flow Actions**, select **End Call**.
     3. The block will appear with a clear label and an icon representing a phone hang-up.
-
        ![Configuring An End Block](/assets/configuring-an-end-block.png)
   </Step>
   <Step title="Configure the End Call Message">
@@ -48,7 +47,6 @@ Use this block in scenarios such as:
     - Use AI to generate a goodbye message automatically based on conversation context.
     - The model analyzes what has been said and creates a natural, polite closing line.
     - Example prompt:
-
       > _“Generate an appropriate goodbye message based on the conversation context to be spoken immediately before ending the call. The user will not say anything after you speak.”_
 
     Best for adaptive flows where closing messages depend on the situation.
@@ -56,14 +54,13 @@ Use this block in scenarios such as:
     #### **Option 2: Fixed Message**
 
     - Write your own static closing line.
-    - Example:
-
+    - Example. 
       > “Thank you for calling. Have a great day!”
 
     Best for consistent, predefined call closings.
   </Step>
   <Step title="Call Outcome Tagging">
-    This allows you to tag the call with **keywords** that describe its result (e.g., _completed_, _failed_verification_, _voicemail_, _no_response_).
+    This allows you to tag the call with **keywords** that describe its result (e.g., _completed_, _failed\_verification_, _voicemail_, _no\_response_).
 
     **Example usage:**
 

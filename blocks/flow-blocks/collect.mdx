@@ -50,18 +50,18 @@ Great for quick intake flows or prototyping.
 
 ### Build Manually
 
-1. Add a **Collect** block.
-2. Click **Build Manually**.
+1. Add a **Collect** block 
+2. Click **Build Manually**
 3. For each item you want to collect:
 
-| Field             | What you enter                                                                              |
-| :---------------- | :------------------------------------------------------------------------------------------ |
-| **Variable Name** | The variable name used later (e.g., `customer_name`)                                        |
-| **Type**          | Text, Phone, Email, Number, Date, URL, Regular expression, Enum, etc.                       |
-| **Question**      | The instruction for the AI (e.g., "Ask the caller for their name")                          |
-| **Required**      | When enabled, AI will ensure this information is collected before moving to the next block. |
-| **Confirm**       | When enabled, the AI will confirm the variable with the caller before proceeding.           |
-| **Spell Back**    | When enabled, the AI will spell out the confirmed information letter by letter.             |
+| Field | What you enter |
+| :-- | :-- |
+| **Variable Name** | The variable name used later (e.g., `customer_name`) |
+| **Type** | Text, Phone, Email, Number, Date, URL, Regular expression, Enum, etc. |
+| **Question** | The instruction for the AI (e.g., "Ask the caller for their name") |
+| **Required** | When enabled, AI will ensure this information is collected before moving to the next block. |
+| **Confirm** | When enabled, the AI will confirm the variable with the caller before proceeding. |
+| **Spell Back** | When enabled, the AI will spell out the confirmed information letter by letter. |
 
 <img
   src="/assets/choosing-variable-type.png"
@@ -71,23 +71,23 @@ Great for quick intake flows or prototyping.
 />
 
 4. Click **Add Question** for more fields.
-5. Save > **Done**.
+5. Save \> **Done**.
 
 Manual mode is ideal if you want strict formatting, specific wording, or typed inputs.
 
 **Examples**
 
-| Variable Name | Type  | Question                       |
-| :------------ | :---- | :----------------------------- |
-| name          | Text  | Ask the caller for their name  |
-| phone         | Phone | Request contact phone number   |
-| reason        | Text  | Ask why they are calling today |
+| Variable Name | Type | Question |
+| :-- | :-- | :-- |
+| name | Text | Ask the caller for their name |
+| phone | Phone | Request contact phone number |
+| reason | Text | Ask why they are calling today |
 
 Use them to personalize responses, perform lookups, send follow-ups, or pass into APIs.
 
 ## Using Collected Data
 
-You can reference collected values anywhere using **@variable_name**. [Learn more about variables here](/key-concepts/variables).
+You can reference collected values anywhere using **@variable\_name**. [Learn more about variables here](/key-concepts/variables).
 
 Examples:
 

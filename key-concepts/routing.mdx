@@ -41,12 +41,13 @@ The [Transfer Call](/blocks/live-call-actions/new-transfer-call) block hands a l
 {/* TODO: Add a side-by-side visual comparing Cold vs Warm transfer. Cold: Caller -> Phonely disconnects -> Destination rings. Warm: Caller on hold -> Phonely dials destination -> AI introduces caller -> Parties connected. */}
 
 <CardGroup cols={2}>
-  <Card icon="phone-off" title="Cold Transfer">
-    The call is forwarded immediately to the destination number. Phonely disconnects from the call as soon as the transfer is initiated -- no introduction, no context sharing.
+  <Card title="Cold Transfer" icon="phone-off">
+    The call is forwarded immediately to the destination number. Phonely disconnects from the call as soon as the transfer is initiated - no introduction, no context sharing.
 
     Use cold transfers when speed is more important than context: forwarding general inquiries to a receptionist line, or emergency situations where immediate connection is critical.
   </Card>
-  <Card icon="phone-forwarded" title="Warm Transfer">
+
+  <Card title="Warm Transfer" icon="phone-forwarded">
     Phonely places the caller on hold, dials the destination, and introduces the caller with context before connecting the parties.
 
     Use warm transfers when context matters: "Hi Sarah, I have John on the line regarding a billing question about his March invoice."
@@ -57,9 +58,10 @@ The [Transfer Call](/blocks/live-call-actions/new-transfer-call) block hands a l
 
 ### Multiple Destinations and Conditional Routing
 
-A single Transfer Call block can define **multiple destinations**, each with its own routing condition. When the block is reached, the AI evaluates what the caller said and routes to the matching destination.
+A single transfer call block can define multiple destinations, each with its own routing condition. When the block is reached, the AI evaluates what the caller said and routes to the matching destination.
 
 For example, a single block can route:
+
 - Sales inquiries to `+1 (555) 100-0001`
 - Billing questions to `+1 (555) 100-0002`
 - Technical support to `+1 (555) 100-0003`
@@ -70,15 +72,15 @@ When multiple destinations are configured, Phonely automatically prompts the cal
 
 ### Failover Numbers
 
-Each destination can optionally enable **failover**. When failover is turned on, you provide one or more backup phone numbers. If the primary number does not answer, Phonely automatically tries each failover number in sequence before falling back to the failure path.
+Each destination can optionally enable failover. When failover is turned on, you provide one or more backup phone numbers. If the primary number does not answer, Phonely automatically tries each failover number in sequence before falling back to the failure path.
 
 ### Warm Transfer Options
 
 Warm transfers come with several options that control the caller experience while the transfer is in progress:
 
 | **Option** | **Description** |
-| :--- | :--- |
-| **Pre-Transfer Message** | A message spoken to the caller before the transfer begins (e.g., "Let me connect you with our billing team"). Supports `fixed` text or `promptable` mode where the AI generates the message. |
+| :-- | :-- |
+| **Pre-Transfer Message** | A message spoken to the caller before the transfer begins (e.g., "Let me connect you with our billing team"). Supports fixed text or promptable mode where the AI generates the message. |
 | **Post-Transfer Message** | A message spoken to the destination after connection (e.g., introducing the caller and summarizing the reason for the call). |
 | **Outbound Leg Message** | A message spoken to the recipient when they pick up, before the parties are connected. |
 | **Inbound Leg Message** | A message spoken to the caller while the transfer is being set up. |
@@ -94,7 +96,7 @@ Warm transfers come with several options that control the caller experience whil
 Transfer Call blocks include AI-powered detection that classifies what answered the outbound call:
 
 | **Option** | **Type** | **Description** |
-| :--- | :--- | :--- |
+| :-- | :-- | :-- |
 | **Voicemail Detection** | `boolean` | Uses an AI classifier to detect if the destination went to voicemail. When detected, the transfer is marked as failed and the caller is brought back into the flow via the `Voicemail Detected` output. Custom detection prompts can be provided. |
 | **IVR Detection** | `boolean` | Detects if the destination number has an automated phone tree (IVR). Uses both string matching for common IVR phrases and an AI classifier. |
 | **Transfer on IVR** | `boolean` | When IVR is detected and this is enabled, Phonely connects the caller directly to the IVR instead of treating it as a failure. When disabled, IVR detection triggers the `IVR Detected` output. |
@@ -104,14 +106,14 @@ Transfer Call blocks include AI-powered detection that classifies what answered 
 
 ### Transfer Call Outcomes
 
-The Transfer Call block has four possible output paths that you can wire to subsequent blocks:
+The transfer call block has four possible output paths that you can wire to subsequent blocks:
 
-1. **Transfer Failed** -- the destination did not answer, or the timeout was reached
-2. **Voicemail Detected** -- voicemail was detected at the destination (requires `detectVoicemail`)
-3. **IVR Detected** -- an IVR was detected and `transferOnIVR` is disabled (requires `detectIVR`)
-4. **SMS Route** -- the transfer is handled via SMS instead of voice
+1. **Transfer Failed** - the destination did not answer, or the timeout was reached
+2. **Voicemail Detected** - voicemail was detected at the destination (requires `detectVoicemail`)
+3. **IVR Detected** - an IVR was detected and `transferOnIVR` is disabled (requires `detectIVR`)
+4. **SMS Route** - the transfer is handled via SMS instead of voice
 
-You can also define custom **Transfer Answered Call Outcomes** for when the transfer connects successfully.
+You can also define custom transfer answered call outcomes for when the transfer connects successfully. 
 
 ## Transfer Flows
 
@@ -119,47 +121,50 @@ The [Transfer Flow](/blocks/live-call-actions/transfer-flow-new) block moves the
 
 Common use cases:
 
-- Switching from appointment scheduling to a billing workflow
-- Moving from general inquiries to a specialized technical support workflow
-- Escalating from a self-service flow to a structured escalation workflow
+- Switching from appointment scheduling to a billing workflow. 
+- Moving from general inquiries to a specialized technical support workflow. 
+- Escalating from a self-service flow to a structured escalation workflow. 
 
 ### Single vs. Multiple Destinations
 
-When a Transfer Flow block has a **single destination**, the caller is moved directly to the target workflow.
+When a Transfer Flow block has a single destination, the caller is moved directly to the target workflow. 
 
-When **multiple destinations** are configured, Phonely auto-generates a routing prompt that asks the caller what they need, then matches their response to the `transitionCondition` defined on each target workflow. The matched workflow is activated.
+When multiple destinations are configured, Phonely auto-generates a routing prompt that asks the caller what they need, then matches their response to the `transitionCondition` defined on each target workflow. The matched workflow is activated.
 
 Each destination specifies:
-- **Workflow ID** -- which workflow to transfer to
-- **Transition Condition** -- stored in the target workflow's `meta.transitionCondition`, used by the AI to match caller intent
+
+- **Workflow ID** - which workflow to transfer to
+- **Transition Condition** - stored in the target workflow's `meta.transitionCondition`, used by the AI to match caller intent
 
 ### Interim Messages
 
-Transfer Flow blocks support an optional **interim message** spoken to the caller during the transition (e.g., "One moment while I connect you with our scheduling system"). The message can be `fixed` or `promptable`, and an optional delay can be configured before it plays.
+Transfer flow blocks support an optional **interim message** spoken to the caller during the transition (e.g., "One moment while I connect you with our scheduling system"). The message can be `fixed` or `promptable`, and an optional delay can be configured before it plays.
 
 ## Global Flows
 
 Not all routing happens at predictable points in a conversation. A caller may ask for support halfway through an appointment booking, or express frustration at any time. **Global Flows** handle these cases.
 
-A Global Flow is a workflow marked as globally available. The AI monitors every turn of the conversation for conditions that match a global flow's trigger, and can switch to it from any point in any active workflow.
+A global flow is a workflow marked as globally available. The AI monitors every turn of the conversation for conditions that match a global flow's trigger, and can switch to it from any point in any active workflow.
 
 {/* TODO: Add a screenshot of the Receive Call trigger node showing the Global Workflow toggle with inbound/outbound/SMS checkboxes. */}
 
 <AccordionGroup>
   <Accordion title="When to use Global Flows">
-    Use a Global Flow when you want a routing path to be available **at any point** in the conversation, regardless of which block the caller is currently in.
+    Use a global flow when you want a routing path to be available **at any point** in the conversation, regardless of which block the caller is currently in.
 
     Examples: emergency escalation, "speak to a manager" requests, frustration detection, or switching to a completely different topic mid-call.
   </Accordion>
+
   <Accordion title="How to configure">
     1. Create a new workflow (or open an existing one).
     2. Select the **Receive Call** trigger node at the start of the flow.
     3. Enable the **Global Workflow** toggle.
     4. Choose which channels the global flow applies to: **Inbound**, **Outbound**, and/or **SMS**.
-    5. Build the flow as normal -- add Talk blocks, Transfer Call blocks, or any other blocks.
+    5. Build the flow as normal - add Talk blocks, Transfer Call blocks, or any other blocks.
 
     The AI will automatically consider this flow as a possible routing target during every conversation turn. When the caller's intent matches the global flow's purpose, the system switches to it.
   </Accordion>
+
   <Accordion title="How it works under the hood">
     For every workflow marked as global, the AI state manager adds a `squad_switch` transition as a possible state during conversation. The LLM evaluates whether the caller's current intent matches a global flow's transition condition, and if so, activates it. The default workflow always takes priority over global flows when both match.
   </Accordion>
@@ -211,7 +216,7 @@ Here is how to build an escalation-ready appointment scheduling flow:
 ### Transfer Call Block Options
 
 | **Option** | **Type** | **Default** | **Description** |
-| :--- | :--- | :--- | :--- |
+| :-- | :-- | :-- | :-- |
 | **warmTransfer** | `boolean` | `false` | Enable warm transfer mode (cold when disabled) |
 | **destinations** | `array` | -- | Array of destinations, each with a condition, phone number, pre-transfer message, and optional failover numbers |
 | **postTransferMessage** | `tagify` | -- | Message spoken after transfer connects (warm only) |
@@ -233,7 +238,7 @@ All message fields (pre-transfer, post-transfer, outbound leg, inbound leg, hold
 ### Transfer Flow Block Options
 
 | **Option** | **Type** | **Description** |
-| :--- | :--- | :--- |
+| :-- | :-- | :-- |
 | **destinations** | `array` | One or more target workflows (each with a `workflowId`) |
 | **interimMessageEnabled** | `boolean` | Play a message during the transition |
 | **interimMessage** | `string` | The transition message text |
@@ -243,7 +248,7 @@ All message fields (pre-transfer, post-transfer, outbound leg, inbound leg, hold
 ### Time Filter Block Options
 
 | **Option** | **Type** | **Description** |
-| :--- | :--- | :--- |
+| :-- | :-- | :-- |
 | **mondayAvailability** through **sundayAvailability** | `object` | Per-day config with `isAvailable` toggle and `timeRanges` array of `{startTime, endTime}` pairs |
 
 ## Best Practices
