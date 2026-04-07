@@ -132,20 +132,24 @@ A success message confirms delivery.
 
 Here's an example workflow to illustrate the process of using the Post Call Send Email Block for callback requests:
 
-1. **Trigger**: Customer says "I want to schedule an appointment with Joe"
-2. **Action 1 (Prompt Block)**:
-   - Instruct AI to: "Get the caller's name, email, and best callback phone number. Inform them that an appointment scheduling link will be sent to their email"
-   - Store variables: customer_name (text), customer_email (email), callback_phone (phone).
-3. **Action 2 (Post Call Send Email Block)**:
-   1. Recipient: [email@example.com](mailto:email@example.com) (or select customer_email variable for customer notifications).
-   2. From Name: Phonely AI Agent.
-   3. Subject: Appointment Scheduling for [customer_name]
-   4. Body:
-      - Customer Name: [customer_name]
-      - Email: [customer_email]
-      - Callback Phone: [callback_phone]
-      - Conversation Summary: [summary]
-      - Appointment Scheduling Link: [example@cal.com](mailto:example@cal.com)
+**Trigger**: Customer says "I want to schedule an appointment with Joe"
+
+**Action 1 (Prompt Block)**:
+
+- Instruct AI to: "Get the caller's name, email, and best callback phone number. Inform them that an appointment scheduling link will be sent to their email"
+- Store variables: customer\_name (text), customer\_email (email), callback\_phone (phone).
+
+**Action 2 (Post Call Send Email Block)**:
+
+1. Recipient: [email@example.com](mailto:email@example.com) (or select customer\_email variable for customer notifications).
+2. From Name: Phonely AI Agent.
+3. Subject: Appointment Scheduling for \[customer\_name\]
+4. Body:
+   - Customer Name: \[customer\_name\]
+   - Email: \[customer\_email\]
+   - Callback Phone: \[callback\_phone\]
+   - Conversation Summary: \[summary\]
+   - Appointment Scheduling Link: [example@cal.com](mailto:example@cal.com)
 
 Conclusion
 
