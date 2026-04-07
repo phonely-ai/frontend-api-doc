@@ -1,37 +1,58 @@
 # Phonely Docs Skill
 
-Use this skill when answering questions or executing tasks that rely on `docs.phonely.ai`.
+Use this skill when writing or updating pages at `docs.phonely.ai`.
 
-## Scope
-- This documentation set covers Phonely's public product UI and the frontend/API-key-authenticated API surface.
-- Visible pages are written for humans first and should remain easy to read.
-- Hidden `/ai/` pages exist to make execution steps more deterministic for agents.
+## Audience
 
-## Always
-- Use exact UI labels from the app when possible: `Build`, `Help`, `Test`, `Agent Design`, `Knowledge Base`, `Settings`, `Performance`, `Call History`, `Call Events`, `Outbound Calls`.
-- Use exact route and tab values when they are known.
-- Prefer one canonical page per concept.
-- Prefer visible canonical pages for user-facing explanations.
+Phonely customers: business owners, ops managers, and support leads who use AI phone agents to handle calls. They care about what a feature does for them, not how it works internally. Write for someone who has never read the codebase.
 
-## Never
-- Do not invent undocumented routes, tabs, or auth schemes.
-- Do not treat hidden AI runbooks as private or secret. They must remain public-safe.
+## Voice and Tone
 
-## Route map
+- Direct, clear, helpful. No marketing fluff, no filler paragraphs.
+- Explain the benefit before the mechanics. Lead with "why this matters to you" then show "how to use it."
+- Use second person ("you") and active voice.
+- Keep sentences short. One idea per sentence.
+
+## Customer-First Writing
+
+When documenting a new feature:
+1. Start with the problem it solves or the value it delivers for the customer.
+2. Show how to use it with concrete steps.
+3. Include a GIF or screenshot for any feature that involves visual interaction.
+4. End with practical examples of what customers can do with it.
+
+Do not:
+- Lead with implementation details, data structures, or internal terminology.
+- Describe what the system does technically (e.g., "sends data as a visual attachment"). Describe what the customer experiences (e.g., "shows you a summary of each call").
+- Copy changelog language directly. Changelogs describe what changed for developers; docs describe what's possible for customers.
+
+## UI Labels
+
+Use exact labels from the app: `Build`, `Help`, `Test`, `Agent Design`, `Knowledge Base`, `Settings`, `Performance`, `Call History`, `Call Events`, `Outbound Calls`.
+
+## Route Map
+
 - `/agent/{agentId}`: agent workspace
 - `/agent/{agentId}?tab=knowledge-base`: knowledge base tab
 - `/agent/{agentId}?tab=workflows`: workflows tab
 - `/agent/{agentId}?tab=settings`: agent settings tab
 - `/performance/{agentId}`: analytics and data tables
 - `/call-history/{agentId}`: call list and transcripts
-- `/agent-review/{orgId}`: issue review workspace for a specific organization
+- `/agent-review/{orgId}`: issue review workspace
 - `/event/{agentId}`: call events
 - `/campaign/{agentId}`: outbound campaigns
-- `/testing/ab-test`: current testing surface
-- `/testing/evaluation`: legacy route kept in code, not part of current product flows
+- `/testing/ab-test`: testing surface
 - `/settings?tab=profile|plan-and-billing|notifications|agents|numbers`: workspace settings
 
-## Retrieval order
-1. Read the matching visible product page.
-2. Read the most specific AI runbook under `/ai/` when the task needs deterministic execution details.
-3. Read the matching API reference or webhook reference page if the task involves requests or payloads.
+## Page Types
+
+- **Visible pages** (`/get-started/`, `/blocks/`, etc.): customer-facing, written for humans.
+- **Hidden AI pages** (`/ai/`): deterministic runbooks for agents. Still public-safe.
+- **API/Webhook pages**: show auth, headers, request/response shapes, error codes.
+
+## Rules
+
+- One canonical page per concept.
+- Use exact route and tab values when known.
+- Do not invent undocumented routes, tabs, or auth schemes.
+- Prefer visible pages for customer-facing explanations.
