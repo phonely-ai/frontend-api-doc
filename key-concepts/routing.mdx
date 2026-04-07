@@ -20,7 +20,7 @@ During a live call, the AI:
 - Continuously listens to the conversation and tracks the current block in the flow
 - Detects caller intent, sentiment, and keywords to determine when routing is needed
 - Evaluates conditions (time-of-day, caller input, variable values) to pick the right path
-- Executes routing seamlessly -- the caller hears a single uninterrupted conversation
+- Executes routing seamlessly - the caller hears a single uninterrupted conversation
 - Falls back gracefully when a transfer destination is unavailable
 
 Routing is both **predictable** (you design the paths) and **adaptive** (the AI picks the right one), without locking you into rigid IVR-style menus.
@@ -29,8 +29,8 @@ Routing is both **predictable** (you design the paths) and **adaptive** (the AI 
 
 At a high level, routing in Phonely leads to one of two outcomes:
 
-1. **Transfer Call** -- the call is handed off to a human or external phone number
-2. **Transfer Flow** -- the call is moved to a different workflow within the same agent
+1. **Transfer Call** - the call is handed off to a human or external phone number
+2. **Transfer Flow** - the call is moved to a different workflow within the same agent
 
 Both happen without ending the call, and both are handled using dedicated routing blocks in the flow builder.
 
@@ -113,7 +113,7 @@ The transfer call block has four possible output paths that you can wire to subs
 3. **IVR Detected** - an IVR was detected and `transferOnIVR` is disabled (requires `detectIVR`)
 4. **SMS Route** - the transfer is handled via SMS instead of voice
 
-You can also define custom transfer answered call outcomes for when the transfer connects successfully. 
+You can also define custom transfer answered call outcomes for when the transfer connects successfully.
 
 ## Transfer Flows
 
@@ -121,13 +121,13 @@ The [Transfer Flow](/blocks/live-call-actions/transfer-flow-new) block moves the
 
 Common use cases:
 
-- Switching from appointment scheduling to a billing workflow. 
-- Moving from general inquiries to a specialized technical support workflow. 
-- Escalating from a self-service flow to a structured escalation workflow. 
+- Switching from appointment scheduling to a billing workflow.
+- Moving from general inquiries to a specialized technical support workflow.
+- Escalating from a self-service flow to a structured escalation workflow.
 
 ### Single vs. Multiple Destinations
 
-When a Transfer Flow block has a single destination, the caller is moved directly to the target workflow. 
+When a Transfer Flow block has a single destination, the caller is moved directly to the target workflow.
 
 When multiple destinations are configured, Phonely auto-generates a routing prompt that asks the caller what they need, then matches their response to the `transitionCondition` defined on each target workflow. The matched workflow is activated.
 
@@ -239,7 +239,7 @@ All message fields (pre-transfer, post-transfer, outbound leg, inbound leg, hold
 
 | **Option** | **Type** | **Description** |
 | :-- | :-- | :-- |
-| **destinations** | `array` | One or more target workflows (each with a `workflowId`) |
+| **Destinations** | `array` | One or more target workflows (each with a `workflowId`) |
 | **interimMessageEnabled** | `boolean` | Play a message during the transition |
 | **interimMessage** | `string` | The transition message text |
 | **interimMessageMode** | `fixed` / `promptable` | How the message is generated |

@@ -15,13 +15,13 @@ The **Add Voice** feature lets you import or connect external voices (for exampl
 </Frame>
 
 <Steps>
-  <Step titleSize="h3" title="Open the Voice Library">
+  <Step title="Open the Voice Library" titleSize="h3">
     Go to the **Voices** section of your Phonely dashboard.
 
     You’ll see:
 
-    - **Featured Voices** — curated, ready-to-use AI voices.
-    - **Explore All Voices** — all available voices, including imported and cloned ones.
+    - **Featured Voices** - curated, ready-to-use AI voices.
+    - **Explore All Voices** - all available voices, including imported and cloned ones.
 
     Click the **\+ Add Voice** button on the upper right or beneath the “Explore All Voices” section.
 
@@ -34,7 +34,7 @@ The **Add Voice** feature lets you import or connect external voices (for exampl
       />
     </Frame>
   </Step>
-  <Step titleSize="h3" title="Choose Your Provider">
+  <Step title="Choose Your Provider" titleSize="h3">
     In the **Add a Voice** window, open the **Provider** dropdown.
 
     Select your preferred provider, such as **11 Labs**.
@@ -48,7 +48,36 @@ The **Add Voice** feature lets you import or connect external voices (for exampl
       style={{ width:"59%" }}
     />
   </Step>
-  <Step titleSize="h3" title="Add the Voice ID">
+  <Step title="Select a model" titleSize="h3">
+    After choosing a provider, open the **Model** dropdown and select the voice model you want to use.
+
+    For example:
+
+    Under **11 Labs**, available models may include:
+
+    - **eleven\_multilingual\_v2**
+    - **eleven\_flash\_v2\_5**
+    - **eleven\_turbo\_v2\_5 (default)**
+
+    Under **Cartesia**, available models may include:
+
+    - **sonic-2**
+    - **sonic-3 (default)**
+
+    Choose the model that best fits your use case. Different models may vary in speed, quality, responsiveness, or multilingual support.
+
+    <Frame>
+      <img
+        src="/assets/select-model.png"
+        alt="Select Model"
+        title="Select Model"
+        style={{ width:"53%" }}
+      />
+    </Frame>
+
+    Use this setting to control how the provider generates speech for that voice. Different models may vary in speed, responsiveness, or multilingual support.
+  </Step>
+  <Step title="Add the Voice ID" titleSize="h3">
     After selecting the provider, you’ll see an **Add ID** field.
 
     Paste your **voice ID** from the provider’s platform (e.g., from your 11 Labs account).
@@ -57,29 +86,30 @@ The **Add Voice** feature lets you import or connect external voices (for exampl
 
     Double-check that the ID is correct to ensure the voice loads successfully.
   </Step>
-  <Step titleSize="h3" title="Select a Language">
+  <Step title="Select a Language" titleSize="h3">
     Choose the **Language** in which the voice will operate.
 
     Available options may include: English, Spanish, French, German, Italian, Portuguese, Russian, Hindi, Dutch, Swedish, and Danish.
 
     Select the language that best matches your voice model or intended audience.
 
-TODO:Replace
-    <img
-      src="/assets/select-language-for-voice.png"
-      alt="Select Language For Voice"
-      title="Select Language For Voice"
-      style={{ width:"58%" }}
-    />
+    <Frame>
+      <img
+        src="/assets/select-voice-language-1.png"
+        alt="Select Voice Language 1"
+        title="Select Voice Language 1"
+        style={{ width:"58%" }}
+      />
+    </Frame>
   </Step>
-  <Step titleSize="h3" title="Confirm and Add the Voice">
+  <Step title="Confirm and Add the Voice" titleSize="h3">
     Review your selections (Provider, ID, Language).
 
     Click **\+ Add Voice** to finalize the process.
 
     The new voice will now appear in your Voice Library under _Explore All Voices_.
   </Step>
-  <Step titleSize="h3" title="Manage and Use the New Voice">
+  <Step title="Manage and Use the New Voice" titleSize="h3">
     Once added, you can:
 
     - **Preview** the voice by clicking the play button.
