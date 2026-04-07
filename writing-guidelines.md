@@ -33,7 +33,7 @@ When you're reviewing calls, you can select any group of calls and ask AI to
 help you understand what's happening -- why callers are reaching out, where
 conversations go well, and where they don't.
 
-![Analyzing calls with AI](/assets/analyze-with-ai.gif)
+{/* TODO: Add a GIF showing the Analyze with AI flow -- selecting calls, clicking the button, and asking a question. */}
 
 ## How to Use It
 
