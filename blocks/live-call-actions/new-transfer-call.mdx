@@ -64,6 +64,7 @@ Cold transfers are best when you want fast routing and the receiving person or t
     <Frame>
       ![Cold Transfer Configuration Options](/assets/cold-transfer-configuration-options.png)
     </Frame>
+
     Each transfer destination can include:
 
     #### **Transition Condition**
@@ -134,7 +135,7 @@ Cold transfers are best when you want fast routing and the receiving person or t
   </Step>
 </Steps>
 
-## Warm Transfer (Enhanced)
+## Warm Transfer 
 
 A warm transfer connects the caller to a human with context. Instead of transferring immediately, Phonely first reaches out to the recipient (the outbound leg), confirms the connection, and can deliver a short intro before bridging both parties together. This is ideal when the person receiving the call needs a quick handoff summary (for example: escalations, high-value leads, or complex support issues).
 
@@ -145,7 +146,7 @@ Warm transfer is best for:
 - VIP callers where you want a smoother, higher-touch experience
 
 <Steps>
-  <Step titleSize="h3" title="Choose Warm Transfer in Setup">
+  <Step title="Choose Warm Transfer in Setup" titleSize="h3">
     Open the Transfer Call block.
 
     In the setup step, under Action, select warm transfer and click **Continue**.
@@ -154,7 +155,7 @@ Warm transfer is best for:
       ![Choosecoldorwarmtransfer](/assets/choosecoldorwarmtransfer.png)
     </Frame>
   </Step>
-  <Step titleSize="h3" title="Configure destinations in On Transfer">
+  <Step title="Configure destinations in On Transfer" titleSize="h3">
     In the **on transfer** step, you define who the call can be transferred to and how Phonely should introduce the transfer.
 
     Each **Transfer Destination** includes:
@@ -183,6 +184,7 @@ Warm transfer is best for:
     <Frame>
       ![Warmtransferconfigurationoption 1](/assets/warmtransferconfigurationoption-1.png)
     </Frame>
+
     **Pre Transfer Message (Inbound)**
 
     This is the message spoken to the **caller** before the transfer starts.
@@ -209,24 +211,26 @@ Warm transfer is best for:
     <Frame>
       ![Pretransfermessage 1](/assets/pretransfermessage-1.png)
     </Frame>
+
     **Add Transfer Destination**
 
-    Click **Add Transfer Destination** to define additional departments/people (for example Sales + Support), each with its own condition, number, and message.
+    Click **Add Transfer Destination** to define additional departments/people (for example Sales \+ Support), each with its own condition, number, and message.
   </Step>
-  <Step titleSize="h3" title="Configure the caller’s hold experience (While Waiting for Connection)">
+  <Step title="Configure the caller’s hold experience (While Waiting for Connection)" titleSize="h3">
     Warm transfers often require a few seconds while Phonely connects to the recipient. The **While Waiting for Connection** section controls what the caller experiences during that wait.
 
     Under **Customer Experience While on Hold**, choose one option:
 
     - **On** **Hold** **Chat**: Phonely continues chatting with the caller while waiting.
     - **On** **Hold** **Music**: Phonely plays hold music with periodic reminder messages.
-    - **Both** (**Chat + Music**): Combines conversation with hold music and reminders.
+    - **Both** (**Chat \+ Music**): Combines conversation with hold music and reminders.
 
     If you choose **On Hold Music**, configure:
 
     <Frame>
       ![Onholdmusic](/assets/onholdmusic.png)
     </Frame>
+
     **Reminder Message**
 
     This is the message played periodically to remind the caller they’re still being connected.
@@ -243,7 +247,7 @@ Warm transfer is best for:
 
     Example: every **20 seconds**.
   </Step>
-  <Step titleSize="h3" title="Configure what happens when the recipient answers (When Connection is Established)">
+  <Step title="Configure what happens when the recipient answers (When Connection is Established)" titleSize="h3">
     This section controls how Phonely behaves once the outbound destination picks up, this is the “warm” part of the warm transfer.
 
     #### **Ask Outbound Leg for Permission (Optional)**
@@ -258,6 +262,7 @@ Warm transfer is best for:
     <Frame>
       ![Posttransfer](/assets/posttransfer.png)
     </Frame>
+
     #### **Detection Timeout**
 
     Controls how long Phonely waits to detect what answered on the outbound side (human, voicemail, or IVR). Lower values detect faster; higher values may be more reliable in noisy environments.
@@ -277,7 +282,7 @@ Warm transfer is best for:
     Message played to both parties right after the bridge (before Phonely disconnects).\
     Example: “You’re both connected now. I’ll drop off.”
   </Step>
-  <Step titleSize="h3" title="Advanced Settings (Warm Transfer)">
+  <Step title="Advanced Settings (Warm Transfer)" titleSize="h3">
     #### **Warm Transfer Attempt Duration**
 
     This controls the maximum time (in seconds) Phonely will attempt to complete the warm transfer before it times out.
@@ -287,6 +292,7 @@ Warm transfer is best for:
     <Frame>
       ![Warmtransferadvancedsetings](/assets/warmtransferadvancedsetings.png)
     </Frame>
+
     #### **Call Outcome Tagging**
 
     Select an existing outcome or type a custom one to categorize the transfer for analytics.
@@ -307,7 +313,7 @@ Warm transfer is best for:
 
     This helps you distinguish “transfer attempted” from “transfer successfully connected to a person.”
   </Step>
-  <Step titleSize="h3" title="Routing">
+  <Step title="Routing" titleSize="h3">
     After you finish setup and on transfer, the final step is routing.
 
     This section controls what Phonely should do when the outbound number does not connect cleanly to a human, especially when the destination is an IVR menu or voicemail.
@@ -337,6 +343,7 @@ Warm transfer is best for:
     <Frame>
       ![Ivrdetectionprompt 1](/assets/ivrdetectionprompt-1.png)
     </Frame>
+
     **None**
 
     Phonely does not apply a special IVR handling behavior.
@@ -371,6 +378,7 @@ Warm transfer is best for:
     <Frame>
       ![Ivrdetectionprompt](/assets/ivrdetectionprompt.png)
     </Frame>
+
     This is especially useful when:
 
     - you are transferring to a shared business line,
@@ -402,6 +410,7 @@ Warm transfer is best for:
     <Frame>
       ![Voicemaildetection](/assets/voicemaildetection.png)
     </Frame>
+
     **None**
 
     Phonely does not apply a special voicemail exit behavior.
@@ -420,4 +429,4 @@ Warm transfer is best for:
   </Step>
 </Steps>
 
-Click **Done** to finish your setup. 
+Click **Done** to finish your setup.
