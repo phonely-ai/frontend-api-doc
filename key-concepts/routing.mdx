@@ -254,10 +254,10 @@ All message fields (pre-transfer, post-transfer, outbound leg, inbound leg, hold
 ## Best Practices
 
 - **Use warm transfers** in customer-facing scenarios where context matters. The few seconds of introduction make a significant difference in customer experience.
-- **Always wire the failure outputs.** Every Transfer Call block has `Transfer Failed`, `Voicemail Detected`, and `IVR Detected` outputs. Connect them to Talk blocks or alternative routing to ensure no call ends in silence.
+- **Always wire the failure outputs.** Every transfer call block has `Transfer Failed`, `Voicemail Detected`, and `IVR Detected` outputs. Connect them to Talk blocks or alternative routing to ensure no call ends in silence.
 - **Use failover numbers** for critical transfer destinations. If your main support line is busy, failover ensures the caller still reaches someone.
-- **Apply Time Filters** before Transfer Call blocks to avoid ringing phones no one will answer.
-- **Use Global Flows sparingly.** They are powerful but add complexity -- reserve them for truly cross-cutting concerns like emergency escalation or "speak to a manager" requests.
+- **Apply time filters** before Transfer call blocks to avoid ringing phones no one will answer.
+- **Use global flows sparingly.** They are powerful but add complexity -- reserve them for truly cross-cutting concerns like emergency escalation or "speak to a manager" requests.
 - **Prefer multiple destinations in one block** over multiple Transfer Call blocks. A single block with conditions is easier to maintain and lets the AI handle routing automatically.
 
 <Warning>
