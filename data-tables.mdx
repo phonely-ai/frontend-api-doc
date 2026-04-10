@@ -259,111 +259,19 @@ End reason variables count calls by how they ended. Examples include:
 
 These are useful when you want to monitor call completion patterns or operational failure modes.
 
-## Excluding calls by metadata key
+## Data table monitor
 
-The formula system also supports exclusions using the `-@{variable}` pattern. This removes calls that contain the specified custom metadata key before the metric is calculated.
+You can open the **Monitor** action from a data table to configure scheduled Slack reports for that table.
 
-For example:
+Use the monitor dialog to:
 
-```text
-(-@outcome.success / @total) * 100
-```
-
-This excludes calls containing the `outcome.success` metadata key before computing the metric.
-
-Use exclusions when you want to remove a known subset of calls from the calculation rather than count them as part of the numerator or denominator.n.
-
-## Targets and KPI comparison
-
-Targets are optional, but they are very useful when a metric represents a KPI rather than a descriptive value.
-
-When **include target** is enabled for a metric, you define a direction and a target value.
-
-Targets are optional, but they are important when a metric represents a KPI rather than just a descriptive value.
-
-A target includes two parts, the direction and the target value.
-
-### Target direction
-
-The direction tells the table how to interpret success. If the direction is **Above (**`>=`**)**, the metric is considered green when the value is at or above the target.
-
-**Above (**`>=`**)**
-
-Use this when higher values are better.
-
-Examples:
-
-- Success rate should be above 75
-- Appointment booked rate should be above 20
-
-**Below (**`<=`**)**
-
-Use this when lower values are better. If the direction is **Below (**`<=`**)**, the metric is considered green when the value is at or below the target.
-
-Examples:
-
-- Negative sentiment rate should be below 10
-- Avg duration (min) should be below 4
-- Voicemail rate should be below 5
+- Choose the cadence, hourly, daily, or weekly
+- Select the timezone used for scheduling
+- Pause or resume a live monitor
+- Delete a monitor when you no longer need it
 
 <Frame>
-  ![Targetdirection](/assets/targetdirection.png)
+  ![Data table monitor dialog](/assets/data-table-monitor.png)
 </Frame>
 
-### Target value
-
-The target value is the numeric threshold the metric is compared against.
-
-For example:
-
-- if the metric is a percentage, the target might be `75`
-- if the metric is minutes, the target might be `4`
-- if the metric is a raw count, the target might be `20`
-
-The value should match the unit and scale of your formula.
-
-**Choosing good targets**
-
-Targets work best when the metric reflects a real business benchmark. Not every metric needs one.
-
-A target is useful when:
-
-- The metric is tied to a KPI
-- The team already has a known goal
-- You want to scan the table for rows that are off target
-
-To save the column to the view click the **Add Column** button.
-
-## Add More Columns
-
-You can continue adding more columns until the preview shows the exact combination of metrics you need.
-
-As you build, use the preview to confirm that both the grouping and the columns make sense together. If something looks off, you can change the grouping, update a metric, or go back and adjust the formula before publishing.
-
-When the view is ready, click **Publish** to save it. The new view will then appear as a tab in Data Tables, where you can switch to it anytime like any other saved view.
-
-If you decide not to keep the changes, click **Cancel**. If you want to return to the earlier setup step in the builder, use **Back**.
-
-<Frame>
-  ![Publishdataview](/assets/publishdataview.png)
-</Frame>
-
-A good way to build manually is to start with one grouping and one simple metric, confirm the preview looks correct, then add more columns gradually. This helps keep the table focused and makes it easier to spot issues before the view is published.
-
-## Drill-down on click
-
-After you **publish** a data table view, you can drill into the calls behind any metric by clicking a cell in the table. This opens a call list panel showing the calls included in that value, along with a short summary, timestamp, and call duration, so you can quickly move from “the number” to the actual conversations that produced it.
-
-For ratio-based formulas (for example, `(@sentiment.negative / @total) * 100`), drill-down focuses on the **numerator-side calls**, the calls that contribute to the top part of the formula. This is intentional: it makes it easy to inspect exactly which calls drove the percentage, without forcing you to sift through every call in the denominator group.
-
-<Frame>
-  ![Viewnumeratorsidecalls](/assets/viewnumeratorsidecalls.png)
-</Frame>
-
-Drill-down is especially useful when you want to:
-
-- Validate that a metric is counting the right calls
-- Investigate spikes or drops in a rate (success rate, negative sentiment rate, voicemail rate, etc.)
-- Review the exact calls contributing to a specific outcome, topic, sentiment, or end reason
-
-If you need to compare across groups, click different cells in the table to open the corresponding call lists and review the underlying call sets side-by-side.
+When Slack is connected for the agent, the monitor can deliver scheduled report updates into the selected Slack channel.
