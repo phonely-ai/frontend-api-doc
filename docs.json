@@ -310,10 +310,6 @@
       }
     }
   },
-  "scripts": [
-    "/js/custom-toc.js",
-    "/js/responsive-iframes.js"
-  ],
   "stylesheets": [
     "/css/custom.css",
     "/css/variables-table-alignment.css"
