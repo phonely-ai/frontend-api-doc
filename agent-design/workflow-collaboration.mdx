@@ -33,104 +33,48 @@ When remote updates are detected, Phonely displays a banner across the top of th
 
 The banner includes:
 
-#### New remote updates available by \[teammate\]
-
-This lets you know that another teammate has made a newer version of the current flow.
-
-#### Review Changes
-
-Opens the comparison view so you can inspect the differences between your local version and the incoming remote version.
-
-#### Apply Latest
-
-Loads the newest remote version into your editor. Use this when you do not need to keep your current local draft and simply want to move to the latest version.
-
-#### Save Local & Load Latest
-
-Saves your current local work, then loads the incoming remote version. Use this when you want to preserve your current draft before switching to the latest shared version.
+<Steps>
+  <Step title="New remote updates available by [teammate]">
+    This lets you know that another teammate has made a newer version of the current flow.
+  </Step>
+  <Step title="Review Changes">
+    Opens the comparison view so you can inspect the differences between your local version and the incoming remote version.
+  </Step>
+  <Step title="Apply Latest">
+    Loads the newest remote version into your editor. Use this when you do not need to keep your current local draft and simply want to move to the latest version.
+  </Step>
+  <Step title="Save Local & Load Latest">
+    Saves your current local work, then loads the incoming remote version. Use this when you want to preserve your current draft before switching to the latest shared version.
+  </Step>
+</Steps>
 
 ## Review Flow Changes
 
-Click **Review Changes** from the collaboration banner to open the **Review Flow Changes** modal. This is where you compare your current local draft with the incoming remote version side by side.
+Click review changes from the collaboration banner to open the review flow changes modal. This is where you compare your current local draft with the incoming remote version side by side.
 
-At the top of the modal, Phonely shows:
-
-- **Local Draft** — your current local draft
-- **Remote Updates** — the incoming remote version
-
-You will also see a change count such as:
-
-- **1 change detected**
-
-This gives you a quick summary of how many changed areas were found.
-
-## What the comparison modal shows
-
-The comparison modal is designed to help you understand exactly what changed before you apply anything.
-
-It includes:
-
-- a side-by-side comparison layout
-- a list of modified nodes
-- the number of changed fields in each node
-- a **Simple** mode
-- an **Advanced** mode
-- expandable text differences
-- clear color-coded comparison between local and remote content
-
-## Local Draft and Remote Updates
+### Local Draft vs. Remote Updates
 
 At the top of the modal, the comparison is split into two sides:
 
-### Local Draft
+**Local Draft - **This is your current local version of the flow the draft open in your editor.
 
-This is your current local version of the flow — the draft open in your editor.
-
-### Remote Updates
-
-This is the newer version saved remotely by your teammate.
+**Remote Updates -**This is the newer version saved remotely by your teammate.
 
 This layout makes it easy to compare your current work with the incoming version before taking action.
 
 ## Modified Nodes
 
-Below the headers, Phonely lists the nodes that changed under **Modified Nodes**.
+Below the headers, Phonely lists the nodes that changed under modified nodes. Each changed node appears by name and shows how many fields inside that node were modified. To inspect the difference, click the modified node entry to expand it and review the changed content.
 
-Each changed node appears by name, for example:
+Each modified node includes a badge showing how many fields changed.
 
-- **Branch selection**
+## Simple mode
 
-Phonely may also show an internal node identifier such as:
+In simple mode, Phonely shows a readable, side-by-side summary of the change. If the changed text is long, click **Show more** to expand the full content, or **Show less** to collapse it again.
 
-- **PROMPT\_4366832**
+This view is designed for readability. It is best when you want to understand prompt or content changes without reading raw structured data. 
 
-This helps you identify exactly which part of the workflow was modified.
-
-If more than one node changed, each one appears in this section.
-
-## Changed field count
-
-Each modified node includes a badge showing how many fields changed, for example:
-
-- **1 fields**
-
-This tells you how many individual configuration fields inside that node differ between the local and remote versions.
-
-You can expand the node to inspect those differences.
-
-# Simple mode
-
-By default, the comparison view can be shown in **Simple** mode.
-
-Simple mode is described in the modal as:
-
-> **quick non-technical summary**
-
-This view is designed for readability. It is best when you want to understand prompt or content changes without reading raw structured data.
-
-## What Simple mode shows
-
-In Simple mode, changed content is displayed side by side in a more human-readable format.
+In simple mode, changed content is displayed side by side in a more human-readable format.
 
 For example, if a prompt node changed, you may see readable content such as:
 
@@ -142,48 +86,27 @@ The left side shows the local content and the right side shows the incoming remo
 
 This makes it easy to compare edits such as:
 
-- added or removed wording
-- revised instructions
-- prompt clarifications
-- small text changes inside an existing node
-
-In the screenshots you shared, the changed node was **Branch selection**, and the difference was shown inside the `data.frontend.prompt.value` field as readable prompt text.
-
-## Color-coded comparison in Simple mode
-
-Simple mode uses side-by-side color treatment to show what changed.
-
-In the example shown:
-
-- the local version appears in one color
-- the incoming remote version appears in another color
-
-This helps you quickly spot which wording belongs to your current draft and which wording belongs to the remote update.
-
-## Show more / Show less
+- Added or removed wording
+- Revised instructions
+- Prompt clarifications
+- Small text changes inside an existing node
 
 When a changed field contains long content, Phonely may initially show a shortened preview.
 
 Use:
 
-- **Show more** to expand the full content
-- **Show less** to collapse it again
+- Show more to expand the full content
+- Show less to collapse it again
 
 This is especially useful for long prompts, multi-step instructions, or nodes with detailed guidelines.
 
-In the example shown, the prompt initially appeared in a shorter preview, and **Show more** expanded the full comparison.
+## Advanced mode
 
-# Advanced mode
-
-If you need a more technical comparison, switch the modal to **Advanced** mode using the toggle in the top-right area of the comparison view.
+You can also switch from the simplified view to a more technical comparison by turning on the **Advanced** toggle. This opens a Git-style JSON diff so you can inspect the exact structured field changes line by line. To return to the easier, readable comparison, toggle back to **Simple** view.
 
 Advanced mode is described as:
 
-> **Git-style JSON line diff**
-
 This mode is useful when you want to inspect the exact structured data that changed.
-
-## What Advanced mode shows
 
 In Advanced mode, the changed node is displayed as a side-by-side structured diff.
 
@@ -197,48 +120,17 @@ This includes fields such as:
 
 Changed lines are highlighted in a Git-style diff layout so you can see the precise field-level difference.
 
-In the screenshots you shared, the changed value was inside:
-
-- `prompt.value`
-
-The local side showed the earlier text, and the remote side showed the updated version with the changed wording.
-
----
-
-## When to use Advanced mode
-
 Use **Advanced** mode when:
 
-- you want exact field-level differences
-- you are reviewing configuration-heavy changes
-- you need to verify raw node data
-- you are comfortable reading structured diff output
-- the change is too subtle to rely only on the readable summary
+- You want exact field-level differences
+- You are reviewing configuration-heavy changes
+- You need to verify raw node data
+- You are comfortable reading structured diff output
+- The change is too subtle to rely only on the readable summary
 
 Use **Simple** mode when you want a faster, easier review of content changes.
 
----
-
-# Example: reviewing a prompt change
-
-In the images you shared, the changed node was **Branch selection**.
-
-Inside that node, the changed field was the prompt text used to guide the branch-selection behavior. The comparison showed sections such as:
-
-- Objective
-- Steps
-- Guidelines
-
-This is a good example of how Workflow Collaboration helps with prompt review. Instead of guessing what changed, you can directly compare:
-
-- your current local prompt
-- the updated remote prompt
-
-This is especially helpful when collaborating on AI behavior, since even small wording changes can affect how the node performs.
-
----
-
-# Actions you can take after reviewing
+## Actions you can take after reviewing
 
 After inspecting the differences, return to the collaboration banner and choose the next step.
 
@@ -254,8 +146,6 @@ Choose this when:
 
 This updates your editor to the newest shared version.
 
----
-
 ## Save Local & Load Latest
 
 Use **Save Local & Load Latest** when you want to keep your current local work before switching to the remote version.
@@ -268,8 +158,6 @@ Choose this when:
 
 This is the safer choice when you have already made meaningful changes in your editor.
 
----
-
 ## Review Changes again before deciding
 
 If you are unsure which version to keep, use **Review Changes** first.
@@ -280,9 +168,7 @@ This is especially important when:
 - more than one contributor is editing the same flow
 - the latest update may affect logic, routing, or behavior
 
----
-
-# A typical collaboration workflow
+### A typical collaboration workflow
 
 A common workflow looks like this:
 
