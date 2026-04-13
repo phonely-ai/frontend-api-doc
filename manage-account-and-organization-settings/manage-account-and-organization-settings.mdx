@@ -1,6 +1,6 @@
 ---
 title: "Settings Overview"
-description: "Overview of the Settings workspace, including profile, billing, notifications, agents, and numbers."
+description: "Overview of the Settings workspace, including billing, notifications, agents, and numbers."
 ---
 
 Settings is where you manage your personal account details and workspace-level configuration. Open `/settings` and use the tabs at the top of the page to switch between areas.
@@ -9,17 +9,14 @@ Settings is where you manage your personal account details and workspace-level c
 
 | Tab | Route | Use it for |
 | --- | --- | --- |
-| Profile | `/settings?tab=profile` | Your name, avatar, phone number, password, and API key |
 | Plan & Billing | `/settings?tab=plan-and-billing` | Plan details, invoices, checkout flows, and billing history |
 | Notifications | `/settings?tab=notifications` | Usage alerts, recipients, and notification logs |
 | Agents | `/settings?tab=agents` | Workspace agent list, usage data, and agent cleanup |
 | Numbers | `/settings?tab=numbers` | Workspace phone numbers and DNC numbers |
 
-## Profile
+## Account Settings
 
-Open `/settings?tab=profile` to manage your personal settings.
-
-This tab includes:
+Your personal account settings are now located within the **Plan & Billing** tab. This includes:
 
 - Your display name, avatar, and phone number
 - Password reset controls
@@ -76,6 +73,6 @@ Admins may also see:
 - `/settings?tab=admin-selector-options`
 - `/settings?tab=admin-changelog`
 
-## Viewer Access
-
-If the current user inherits viewer UX, only the `Profile` tab is available.
+<Note>
+  If you see a red banner at the top of your agent workspace stating "Unable to process payment," your subscription has a billing issue. Click **Update Payment Info** in the banner to go directly to the billing settings and resolve the issue.
+</Note>
