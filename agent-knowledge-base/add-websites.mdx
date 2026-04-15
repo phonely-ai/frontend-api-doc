@@ -5,6 +5,8 @@ description: "Connect public websites to your Phonely knowledgebase"
 
 You can connect public websites to your agent Knowledge Base, allowing your AI agent to reference and retrieve information directly from online resources. This is useful for linking public documentation, blogs, or FAQs that are regularly updated.
 
+Phonely supports both single website addition and batch scraping for adding multiple URLs at once.
+
 ![Connect Websites To Knowledgebase Gi](/assets/connect-websites-to-knowledgebase.gif)
 
 <Steps>
@@ -52,3 +54,18 @@ You can connect public websites to your agent Knowledge Base, allowing your AI a
     Make sure the toggle next to the website is enabled (green) to allow your AI agent to use it as a knowledge source.
   </Step>
 </Steps>
+
+## Batch Website Scraping
+
+If you have multiple websites to add, use the batch scraping feature to add them all at once instead of adding each URL individually.
+
+1. In the **Add Website** dialog, click **Batch Add**.
+2. Enter multiple URLs, one per line, in the text area provided.
+3. Configure the same advanced options (limit, depth, include/exclude paths) that will apply to all URLs.
+4. Click **Add Websites** to start the batch import.
+
+Phonely will crawl each URL and add them as separate website sources. You can monitor the progress and see any errors for URLs that couldn't be accessed.
+
+<Tip>
+  Batch scraping is useful when onboarding with existing documentation spread across multiple domains or subdomains.
+</Tip>

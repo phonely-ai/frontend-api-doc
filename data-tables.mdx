@@ -41,17 +41,17 @@ For example, one view might show total calls by prompt version
   </Step>
   <Step title="In the top-right area, switch from Performance to Data Tables.">
   </Step>
-  <Step title="You’ll see the current saved view as a tab.">
+  <Step title="You'll see the current saved view as a tab.">
   </Step>
   <Step title="Use the date range selector at the top to control the time window for the table.">
   </Step>
 </Steps>
 
-The page can also include a metric selector such as duration, depending on your current performance settings.  
+The page can also include a metric selector such as duration, depending on your current performance settings.
 
 ## How the page is organized
 
-The data tables page is built around a saved view. At the top, you’ll see controls such as the date range and any global performance selector currently applied. Below that, the main data table area includes the active view tab, an **Add view** button, the **Group** selector, and the metric columns.
+The data tables page is built around a saved view. At the top, you'll see controls such as the date range and any global performance selector currently applied. Below that, the main data table area includes the active view tab, an **Add view** button, the **Group** selector, and the metric columns.
 
 The active view name appears as a tab. This makes it easy to keep several saved views and switch between them without rebuilding them each time.
 
@@ -97,7 +97,7 @@ This is the label that will appear as the saved tab in data tables, so it should
   ![Totalcallsbytheday](/assets/totalcallsbytheday.png)
 </Frame>
 
-Below the name, you’ll see a **Preview** section. This gives you an early look at how the table will appear once saved. The preview only shows a limited sample of rows, which makes it easier to test the structure of the view before publishing it.
+Below the name, you'll see a **Preview** section. This gives you an early look at how the table will appear once saved. The preview only shows a limited sample of rows, which makes it easier to test the structure of the view before publishing it.
 
 Inside the preview, the first thing to configure is the **Group** dropdown. This controls how the rows in the table are split.
 
@@ -146,7 +146,7 @@ This means you can build both simple and more advanced expressions.
 When you click into the **Formula** field, a suggestion menu appears. This picker helps you browse available variables. It is organized into sections such as core metrics, outcomes, call topics,   end reasons, and sentiment.
 
 <Tip>
-  Variables such as`@total`, `@duration`, `@sentiment.<value>`, and `@ended_reason.<value>` are always available. Variables such as`@outcome.<value>` only appears for outcomes in the agent’s latest published version, and `@topic.<value>` only appears for topics currently configured for the agent
+  Variables such as`@total`, `@duration`, `@sentiment.<value>`, and `@ended_reason.<value>` are always available. Variables such as`@outcome.<value>` only appears for outcomes in the agent's latest published version, and `@topic.<value>` only appears for topics currently configured for the agent
 </Tip>
 
 ### Common Variables
@@ -172,7 +172,7 @@ These variables return counts, which means they are especially useful for percen
 
 ### Outcome variables
 
-Outcome variables count calls that include a specific outcome from the agent’s latest published version. Only outcomes that exist in the latest published version appear in the formula picker.
+Outcome variables count calls that include a specific outcome from the agent's latest published version. Only outcomes that exist in the latest published version appear in the formula picker.
 
 Examples include:
 
@@ -182,17 +182,17 @@ Examples include:
   | `@outcome.Additional_Assistance_Requested` | Counts calls where the caller requested further help beyond the initial interaction. |
   | `@outcome.Appointment_Confirmed` | Counts calls where an appointment was successfully confirmed. |
   | `@outcome.Appointment_Details_Collected` | Counts calls where the necessary appointment details were gathered. |
-  | `@outcome.Appointment_Preferences_Collected` | Counts calls where the caller’s appointment preferences were collected. |
+  | `@outcome.Appointment_Preferences_Collected` | Counts calls where the caller's appointment preferences were collected. |
   | `@outcome.Appointment_Slots_Offered` | Counts calls where available appointment slots were offered to the caller. |
   | `@outcome.Assistance_Requested` | Counts calls where the caller asked for help or support. |
   | `@outcome.Availability_Collected` | Counts calls where availability information was captured from the caller. |
   | `@outcome.Buyer_Details_Collected` | Counts calls where buyer-related details were collected. |
   | `@outcome.Call_Escalated` | Counts calls that were escalated to a human agent or another support path. |
-  | `@outcome.Caller_Details_Collected` | Counts calls where the caller’s identifying details were gathered. |
+  | `@outcome.Caller_Details_Collected` | Counts calls where the caller's identifying details were gathered. |
   | `@outcome.Consultation_Booking_Offered` | Counts calls where a consultation booking was offered. |
   | `@outcome.Contact_Details_Collected` | Counts calls where contact information such as phone or email was collected. |
   | `@outcome.hello` | Counts calls tagged with the custom outcome `hello`. |
-  | `@outcome.Inquiry_Clarified` | Counts calls where the caller’s request or issue was clearly identified. |
+  | `@outcome.Inquiry_Clarified` | Counts calls where the caller's request or issue was clearly identified. |
   | `@outcome.Order_Information_Collected` | Counts calls where order-related details were collected. |
   | `@outcome.Order_Lookup_Details_Collected` | Counts calls where enough information was gathered to look up an order. |
   | `@outcome.Order_Status_Provided` | Counts calls where the caller was given their order status. |
@@ -350,9 +350,27 @@ If you decide not to keep the changes, click **Cancel**. If you want to return t
 
 A good way to build manually is to start with one grouping and one simple metric, confirm the preview looks correct, then add more columns gradually. This helps keep the table focused and makes it easier to spot issues before the view is published.
 
+## Ask AI in Data Tables
+
+When working with data table metrics, you can use **Ask AI** to analyze the calls behind any value directly from the table view.
+
+1. Click on any metric cell in your data table.
+2. The call list panel opens showing the relevant calls.
+3. Click **Analyze with AI** to ask questions about the selected calls.
+
+Ask AI understands the context of your data table view and can help you:
+
+- Understand why certain metrics are trending up or down
+- Identify patterns across grouped calls
+- Get insights on specific outcomes or sentiments
+
+<Frame>
+  {/* TODO: Add GIF showing Ask AI from data table drill-down - clicking a cell, viewing calls, and asking AI for analysis. */}
+</Frame>
+
 ## Drill-down on click
 
-After you **publish** a data table view, you can drill into the calls behind any metric by clicking a cell in the table. This opens a call list panel showing the calls included in that value, along with a short summary, timestamp, and call duration, so you can quickly move from “the number” to the actual conversations that produced it.
+After you **publish** a data table view, you can drill into the calls behind any metric by clicking a cell in the table. This opens a call list panel showing the calls included in that value, along with a short summary, timestamp, and call duration, so you can quickly move from "the number" to the actual conversations that produced it.
 
 For ratio-based formulas (for example, `(@sentiment.negative / @total) * 100`), drill-down focuses on the **numerator-side calls**, the calls that contribute to the top part of the formula. This is intentional: it makes it easy to inspect exactly which calls drove the percentage, without forcing you to sift through every call in the denominator group.
 
