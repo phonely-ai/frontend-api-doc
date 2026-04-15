@@ -9,7 +9,9 @@ Most calls can be automated with Phonely's AI agents, but no automation system c
   Escalation is not a fallback of last resort. It is a deliberate part of your call design, ensuring every customer journey has a safe path to resolution.
 </Info>
 
-{/* TODO: Add an architecture diagram showing the routing decision flow: Caller -> AI Intent Detection -> [Transfer Call to Human | Transfer Flow to Another Workflow | Stay in Current Flow | Global Flow Override]. A single flowchart replaces paragraphs of explanation. */}
+<Frame>
+  <img src="/assets/architecture-diagram3.png" alt="Routing decision flow diagram" />
+</Frame>
 
 ## How Routing Works
 
@@ -38,7 +40,9 @@ Both happen without ending the call, and both are handled using dedicated routin
 
 The [Transfer Call](/blocks/live-call-actions/new-transfer-call) block hands a live call off to a person, department, or external number. It supports two modes: **cold transfer** and **warm transfer**.
 
-{/* TODO: Add a side-by-side visual comparing Cold vs Warm transfer. Cold: Caller -> Phonely disconnects -> Destination rings. Warm: Caller on hold -> Phonely dials destination -> AI introduces caller -> Parties connected. */}
+<Frame>
+  <img src="/assets/cold-warm-transfer.png" alt="Cold vs Warm transfer comparison" />
+</Frame>
 
 <CardGroup cols={2}>
   <Card title="Cold Transfer" icon="phone-off">
@@ -68,7 +72,9 @@ For example, a single block can route:
 
 When multiple destinations are configured, Phonely automatically prompts the caller to clarify who they want to reach, then routes based on the matched condition.
 
-{/* TODO: Add a screenshot of the Transfer Call block configuration showing multiple destinations with conditions in the flow builder. */}
+<Frame>
+  <img src="/assets/multi-destination-block.gif" alt="Transfer Call block with multiple destinations" />
+</Frame>
 
 ### Failover Numbers
 
@@ -102,7 +108,9 @@ Transfer Call blocks include AI-powered detection that classifies what answered 
 | **Transfer on IVR** | `boolean` | When IVR is detected and this is enabled, Phonely connects the caller directly to the IVR instead of treating it as a failure. When disabled, IVR detection triggers the `IVR Detected` output. |
 | **Detection Timeout** | `number` | How long (in seconds) to wait before classifying the answering party (default: 0.3s). |
 
-{/* TODO: Add a diagram showing the detection flow: Outbound call answered -> AI classifies (Human / IVR / Voicemail) -> Each outcome routes to a different output handle on the block. */}
+<Frame>
+  <img src="/assets/AI-classification-2.png" alt="AI classification flow diagram" />
+</Frame>
 
 ### Transfer Call Outcomes
 
@@ -146,7 +154,9 @@ Not all routing happens at predictable points in a conversation. A caller may as
 
 A global flow is a workflow marked as globally available. The AI monitors every turn of the conversation for conditions that match a global flow's trigger, and can switch to it from any point in any active workflow.
 
-{/* TODO: Add a screenshot of the Receive Call trigger node showing the Global Workflow toggle with inbound/outbound/SMS checkboxes. */}
+<Frame>
+  <img src="/assets/receive-call-trigger.png" alt="Receive Call trigger node with Global Workflow toggle" />
+</Frame>
 
 <AccordionGroup>
   <Accordion title="When to use Global Flows">
@@ -192,7 +202,9 @@ For more complex conditions beyond time-of-day, use the **Filter** block. It sup
 
 ## Example Flow
 
-{/* TODO: Add a screenshot of a real routing flow in the Phonely builder showing the pattern described below: Receive Call -> Talk (confirm intent) -> Transfer Call (multiple destinations with failover) -> Talk (fallback on failure). */}
+<Frame>
+  <img src="/assets/example-flow-route.png" alt="Routing flow in the Phonely builder" />
+</Frame>
 
 Here is how to build an escalation-ready appointment scheduling flow:
 

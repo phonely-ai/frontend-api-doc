@@ -5,7 +5,9 @@ description: "Build custom table views to group, measure, and compare call perfo
 
 The **Data Tables** tab in Performance lets you create saved table views that group calls and calculate metrics for each group. Instead of reading a single chart, you define the grouping and the formulas -- Phonely handles the aggregation.
 
-{/* TODO: Add a screenshot of the Data Tables tab showing a populated view with multiple metric columns, target indicators, and the view tabs bar at the top. */}
+<Frame>
+  ![Data Tables tab](/assets/phonely-datatables.png)
+</Frame>
 
 <Info>
   Data Tables is one of two tabs inside the **Performance** page. The other is the standard Performance charts view. Switch between them using the toggle in the top-right corner.
@@ -126,7 +128,9 @@ Click **+ Add view** to open the creation dialog. You have two paths:
   ![Totalcallsbytheday](/assets/totalcallsbytheday.png)
 </Frame>
 
-{/* TODO: Add a screenshot or short GIF showing the AI-assisted creation flow: typing a prompt, seeing suggestion chips, and the generated preview appearing. */}
+<Frame>
+  ![Create data view](/assets/create-data-view.gif)
+</Frame>
 
 ## Metric Columns
 
@@ -151,10 +155,8 @@ Formulas define how each metric is calculated per row group. They support arithm
 When you click into the formula field, an autocomplete menu appears (triggered by `@`) showing all available variables organized by category.
 
 <Frame>
-  ![Dataformulas](/assets/dataformulas.png)
+  ![Formula autocomplete](/assets/formula-autocomplete.gif)
 </Frame>
-
-{/* TODO: Add a screenshot of the formula autocomplete popover showing the grouped variable categories (Core, Outcomes, Topics, Sentiment, End Reasons). */}
 
 ### Core Variables
 
@@ -318,8 +320,6 @@ For time-based groupings, the default sort is by date (newest first). For other 
 ## Drill-Down
 
 Click any **metric cell** to open a slide-over panel showing the individual calls that produced that value.
-
-{/* TODO: Add a screenshot of the drill-down calls panel showing the call list with summary, timestamp, duration, and review status. */}
 
 <AccordionGroup>
   <Accordion title="How drill-down filtering works">

@@ -63,6 +63,7 @@
             "icon": "rocket",
             "pages": [
               "get-started/introduction",
+              "key-concepts/plan-your-agent",
               "get-started/quick-start",
               "get-started/home-overview",
               "key-concepts/ask-ai",
@@ -78,6 +79,7 @@
                 "pages": [
                   "key-concepts/create-duplicate-agents",
                   "key-concepts/flows",
+                  "key-concepts/variables",
                   "key-concepts/routing",
                   "agent-design/set-agent-guidelines",
                   "agent-design/call-settings",
