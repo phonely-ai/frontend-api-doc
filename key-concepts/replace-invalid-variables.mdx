@@ -7,9 +7,21 @@ As your workflows evolve, variables can occasionally become invalid. This usuall
 
 ### How invalid variables appear
 
-Invalid variables are visually flagged directly in the builder. You’ll see them highlighted inline within text fields (for example, in descriptions, messages, or API payloads), along with a warning indicator. Hovering over the variable shows a tooltip explaining that the variable is no longer valid and needs to be replaced.
+Invalid variables are visually flagged directly in the builder. You'll see them highlighted inline within text fields (for example, in descriptions, messages, or API payloads), along with a warning indicator. Hovering over the variable shows a tooltip explaining that the variable is no longer valid and needs to be replaced.
 
 ![Invalid Variables Tool Tip](/assets/invalid-variables-tool-tip.png)
+
+### Invalid variable indicators on hidden containers
+
+When a block contains invalid variables inside collapsed sections or multi-step forms, Phonely displays red indicator icons to help you locate the issue without expanding every section:
+
+- **Step tabs**: Red alert icons appear on step indicators when that step contains invalid variables
+- **Advanced Settings**: A red alert icon appears on the Advanced Settings trigger when collapsed fields contain invalid variables
+- **Collapsed array/object items**: Red alert icons and highlighting appear on collapsed array or object items that contain invalid variables
+
+{/* TODO: Add screenshot showing invalid variable indicators on step tabs, Advanced Settings, and collapsed form items. */}
+
+These indicators make it easy to spot exactly where invalid variables are hiding in complex blocks, so you can navigate directly to the fields that need attention.
 
 ### Ways to replace an invalid variable
 
@@ -26,9 +38,9 @@ Both approaches lead to the same replacement workflow.
 
 ### Using the Replace Invalid Variable dialog
 
-When the dialog opens, Phonely shows you exactly what needs fixing and where it’s used.
+When the dialog opens, Phonely shows you exactly what needs fixing and where it's used.
 
-First, you’ll see the **invalid variable** that is currently referenced, along with a list of the blocks or nodes where it appears. This helps you understand the impact of the change before making it.
+First, you'll see the **invalid variable** that is currently referenced, along with a list of the blocks or nodes where it appears. This helps you understand the impact of the change before making it.
 
 Next, choose a **replacement variable** from the dropdown. Search is supported, making it easy to find the correct variable even in large workflows.
 
