@@ -1,5 +1,3 @@
-# Exclude media files to avoid large file push issues
-assets/
 logo/*
 !logo/logo-small.png
 !logo/logo-white.png
