@@ -13,7 +13,7 @@ When this action runs, it:
 - Returns output variables
 - Makes those output variables available to the Start Flow and the rest of the conversation
 
-This makes the Pre-Call Code action useful when you need more flexibility than a standard Filter or API Request can provide. Currently, the Code action supports Python.
+This makes the Pre-Call Code action useful when you need more flexibility than a standard Filter or API Request can provide. Currently, the code action supports Python.
 
 ## When This Action Runs
 
@@ -72,6 +72,7 @@ To add a Pre-Call Code action:
     <Frame>
       ![Chooseprecallaction](/assets/chooseprecallaction.png)
     </Frame>
+
     ```text
     Setup → Configure → Test
     ```
@@ -82,9 +83,7 @@ To add a Pre-Call Code action:
 
 <Steps>
   <Step title="Add a New Block">
-    In the **Setup** step, select the type of code action you want to run.
-
-    For this action, choose **Run Python.** Once selected, click **Continue** to move to the Configure step.
+    In the **Setup** step, select the type of code action you want to run. For this action, choose **Run Python.** Once selected, click **Continue** to move to the configure step.
 
     <Frame>
       ![Precallcodeblock 1](/assets/precallcodeblock-1.png)
@@ -99,6 +98,7 @@ To add a Pre-Call Code action:
     <Tip>
       You’ll notice default variables like `arg1` and `arg2` when adding a Code Block. Feel free to rename or remove them to match your workflow’s actual input variables.
     </Tip>
+
     You can:
 
     - rename them
@@ -112,10 +112,10 @@ To add a Pre-Call Code action:
 
     Example:
 
-    | Variable name | Set variables         |
-    | :------------ | :-------------------- |
-    | caller_phone  | caller_phone_number   |
-    | account_type  | customer_account_type |
+    | Variable name | Set variables |
+    | :-- | :-- |
+    | caller\_phone | caller\_phone\_number |
+    | account\_type | customer\_account\_type |
 
     This allows your Python code to access values collected or generated earlier in the workflow.
   </Step>
@@ -143,7 +143,7 @@ To add a Pre-Call Code action:
 
     ### **Example: Assign a Customer Tier**
 
-    The example below checks a customer’s account type and returns a tier that can be used later in the workflow.
+    The example below checks a customer’s account type and returns a tier that can be used later in the workflow. 
 
     <Frame>
       <img
@@ -153,6 +153,7 @@ To add a Pre-Call Code action:
         style={{ width:"74%" }}
       />
     </Frame>
+
     In this example:
 
     - the block receives `account_type`
@@ -170,7 +171,7 @@ To add a Pre-Call Code action:
 
     This is the required function signature for the Code action.
 
-    - `input_dict` contains all variables passed into the block
+    - `Input_dict` contains all variables passed into the block
     - the function must return a dictionary of outputs
 
     ### Reading Inputs
@@ -181,7 +182,7 @@ To add a Pre-Call Code action:
 
     This retrieves the input variable from the dictionary.
 
-    If the mapped workflow variable contains `"premium"`, that value becomes available in the code.
+    If the mapped workflow variable contains `"premium"`, that value becomes available in the code. 
 
     ### Applying Logic
 
@@ -220,7 +221,7 @@ To add a Pre-Call Code action:
 
 ## Advanced Settings
 
-The Pre-Call Code action includes advanced settings similar to other Phonely actions.
+The pre-call code action includes advanced settings similar to other Phonely actions.
 
 ### Enable Error Handling
 
@@ -271,8 +272,8 @@ Validation checks that the Python code is syntactically correct.
 
 If validation succeeds:
 
-- The Configure step is marked complete
-- Click Continue to proceed to **Test**
+- The configure step is marked complete
+- Click continue to proceed to **Test**
 
 <Frame>
   <img

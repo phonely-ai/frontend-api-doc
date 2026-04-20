@@ -107,37 +107,36 @@ Enable this option to add subtle vocal elements, such as _“hmm,” “uh,” �
 
 ## Phonetic Dictionary
 
-The Phonetic Dictionary allows you to fine-tune pronunciation for specific words, names, or brands ensuring your agent says them correctly and naturally.
+The Phonetic Dictionary lets you control exactly how your agent pronounces specific words. This is useful for:
 
-This is especially helpful for:
+- Brand names (e.g., “Phonely”)
+- Acronyms (e.g., “HIPAA”, “API”)
+- Foreign names or domain-specific terms
 
-- Company names (e.g., “Phonely” pronounced as “Fone-lee”).
-- Acronyms (e.g., “MFA” pronounced “Em-Eff-Ay”).
-- Foreign or uncommon names.
+Phonely uses **IPA (International Phonetic Alphabet)** notation. Under the hood, pronunciations are passed to the voice engine as IPA phonemes formatted with pipe-separated symbols in double angle brackets (e.g., `<<ˈ|dʒ|ə|m|ˈ|b|ə|ˈ|l|aɪ|ˈ|ə>>` for jambalaya).
 
-You define how a word should be pronounced using phonemes (sound-based syllables). Phonely supports standard phonetic notation systems, such as MFA (Montreal Forced Aligner).
-
-### How to Add a New Word
+### How to Add an Entry
 
 <Steps>
+  <Step title="Open your agent and go to Agent Settings > Voice & Personality.">
+  </Step>
   <Step title="Scroll to the Phonetic Dictionary section.">
   </Step>
-  <Step title="In the Word field, type the term you want to adjust.">
+  <Step title="In the Word field, type the word you want to adjust.">
   </Step>
-  <Step title="In the Phonemes field, enter the pronunciation.">
+  <Step title="In the Phonemes field, enter the IPA pronunciation.">
   </Step>
-  <Step title="Click + Add Word to save it.">
-    <Note>
-      Example: /f oʊ n l i/
-    </Note>
+  <Step title="Click the + button to save the entry.">
   </Step>
 </Steps>
 
 <Frame>
-  ![Phonetic Dictionary Settings](/assets/phonetic-dictionary-settings.png)
+  <img src="/assets/phonetic-dictionary-updated.png" alt="Phonetic Dictionary table with example entries" />
 </Frame>
 
-You can add as many words as needed, and they’ll apply globally across all calls for that agent.
+### Writing IPA Phonemes
+
+IPA phonemes represent individual sounds. For example, the word “Phonely” can be represented as `<<ˈ|f|oʊ|n|l|i>>`.
 
 <Tip>
   Use this feature to maintain consistent pronunciation for your brand and technical terms.

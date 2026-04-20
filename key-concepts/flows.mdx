@@ -5,9 +5,9 @@ description: "Build complex conversations, connect with your tools and more with
 
 Flows are the visual blueprints that define exactly how your AI phone agent behaves, from the greeting, to data collection, to decisions, actions, and the final call outcome. They describe what the agent says, what it asks, what it stores, what APIs it calls, and how the conversation moves forward.
 
-## What Are Flows?
-
-A Flow is a visual representation of a live phone conversation. It controls the entire lifecycle of a call  from greeting to resolution.
+<Frame>
+  <img src="/assets/call-flow.gif" alt="Flow builder in action" />
+</Frame>
 
 Flows are made of several core elements:
 
@@ -106,25 +106,26 @@ See the dedicated [toolbar quick actions guide](/key-concepts/flow-canvas-contro
   </Step>
   <Step title="Click any block in your flow to open its configuration panel. ">
     Each block contains different settings, and the options you see will depend on the type of block you’re setting up.
+
+    <Frame>
+      <img
+        src="/assets/example-configuring-a-collect-block.png"
+        alt="Example Configuring A Collect Block"
+        title="Example Configuring A Collect Block"
+        style={{ width:"87%" }}
+      />
+    </Frame>
+  </Step>
+  <Step title="Connect blocks">
+    You can change connections between blocks by hovering over an edge clicking the **X** button, and then place your cursor over the output node of one block and drag the edge to connect to the input node of another block.
+  </Step>
+  <Step title="Save your changes.">
+    Every save creates a new version you can review or revert.
+  </Step>
+  <Step title="Publish when ready.">
+    Publishing makes the version live for real callers.
   </Step>
 </Steps>
-
-<Tip>
-  Blocks have different setup and configuration requirements. For example, a Talk block includes questions and answers, Collect blocks include questions and variables, while API Request blocks include payload, headers, and response mapping.
-</Tip>
-
-<Frame>
-  <img
-    src="/assets/example-configuring-a-collect-block.png"
-    alt="Example Configuring A Collect Block"
-    title="Example Configuring A Collect Block"
-    style={{ width:"87%" }}
-  />
-</Frame>
-
-6. Connect blocks. You can change connections between blocks by hovering over an edge clicking the **X** button, and then place your cursor over the output node of one block and drag the edge to connect to the input node of another block.
-7. Save your changes. Every save creates a new version you can review or revert.
-8. Publish when ready. Publishing makes the version live for real callers.
 
 ### Copy & Paste Across Tabs
 
@@ -138,16 +139,6 @@ You can now select one or multiple blocks. Copy them and then paste them into an
     style={{ width:"94%" }}
   />
 </Frame>
-
-### Configure Blocks
-
-Click any block to open its configuration panel. Each block type exposes only the settings that matter, for example:
-
-- Talk blocks → prompts, voice settings
-- Collect blocks → questions, variables, validation
-- API blocks → endpoints, headers, payloads, mappings
-
-This keeps configuration focused and avoids unnecessary complexity.
 
 ### Save, Version, and Publish
 
@@ -197,17 +188,20 @@ Variables in Phonely can store different types of data. Choose the appropriate t
   Outcome tags enable analytics, reporting, and automations after the call ends.
 </Info>
 
-<Card title="Automatic">
-  System applies defaults like `completed`, `failed`, `lead_qualified`, `appointment_schedule,` or `transferred`.
+Call outcomes are configured at the **block level**. Each block in your workflow can have an outcome tag assigned to it. When a call ends on that block, the call is tagged with that block's outcome.
 
-  **Custom**
+If the block where the call ends does not have an outcome tag set, Phonely falls back to the **last block the call visited** that had an outcome defined.
 
-  Set custom tags in End Call blocks for downstream workflows.
+This means you only need to tag the blocks that represent meaningful endpoints or milestones in your flow, you don't need to tag every block.
 
-  **Conditional**
-
-  Apply tags only when conditions on variables are met.
-</Card>
+<Steps>
+  <Step title="Open any block in your workflow">
+  </Step>
+  <Step title="Find the Call Outcome Tagging field in the block settings">
+  </Step>
+  <Step title="Select an existing outcome or type a custom one">
+  </Step>
+</Steps>
 
 <img
   src="/assets/outcome-tagging-end-block.png"
@@ -217,8 +211,12 @@ Variables in Phonely can store different types of data. Choose the appropriate t
 />
 
 <Tip>
-  Some examples of tags that you can use include: **appointment\_scheduled**, **lead\_qualified,** **customer\_satisfied, escalation\_needed, no\_show\_followup**, etc.
+  Some examples of tags that you can use include: **appointment scheduled**, **lead qualified,** **customer satisfied, escalation needed, no show followup**, etc.
 </Tip>
+
+<Frame>
+  <img src="/assets/run-test-from-here.gif" alt="Test from here feature" />
+</Frame>
 
 ## Testing & best practices
 

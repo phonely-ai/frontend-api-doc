@@ -1,18 +1,24 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "palm",
+  "theme": "maple",
   "name": "Phonely Documentation",
   "colors": {
     "primary": "#6B0099",
-    "light": "#FAFAFA",
-    "dark": "#1A1A1C"
+    "light": "#9B30FF",
+    "dark": "#4A0069"
   },
-  "favicon": "/logo/logo-small.png",
+  "styling": {
+    "eyebrows": "breadcrumbs"
+  },
+  "favicon": {
+    "light": "/logo/logo-small-purple.svg",
+    "dark": "/logo/logo-small-white.svg"
+  },
   "icons": {
     "library": "lucide"
   },
   "logo": {
-    "light": "/logo/logo.png",
+    "light": "/logo/logo-purple.png",
     "dark": "/logo/logo-white.png"
   },
   "seo": {
@@ -54,22 +60,26 @@
         "groups": [
           {
             "group": "GET STARTED",
+            "icon": "rocket",
             "pages": [
               "get-started/introduction",
+              "key-concepts/plan-your-agent",
               "get-started/quick-start",
-              "get-started/home-mdx",
+              "get-started/home-overview",
               "key-concepts/ask-ai",
               "get-started/navigation-and-shortcuts"
             ]
           },
           {
             "group": "BUILD YOUR AGENT",
+            "icon": "hammer",
             "pages": [
               {
                 "group": "Agent Workspace",
                 "pages": [
                   "key-concepts/create-duplicate-agents",
                   "key-concepts/flows",
+                  "key-concepts/variables",
                   "key-concepts/routing",
                   "agent-design/set-agent-guidelines",
                   "agent-design/call-settings",
@@ -149,6 +159,7 @@
           },
           {
             "group": "OPTIMIZE YOUR AGENT",
+            "icon": "chart-line",
             "pages": [
               "performance",
               "data-tables",
@@ -160,21 +171,17 @@
           },
           {
             "group": "REVIEW YOUR AGENT",
+            "icon": "search",
             "pages": [
               "call-history-ai-analytics/call-history-ai-analytics",
               "agent-review",
-              "call-events"
-            ]
-          },
-          {
-            "group": "TESTING",
-            "pages": [
-              "testing/ab-testing",
+              "call-events",
               "testing/test-from-a-block"
             ]
           },
           {
             "group": "OUTBOUND CALLS",
+            "icon": "phone-outgoing",
             "pages": [
               "outboundcalling/createaoutboundcallingcampaign",
               "outboundcalling/creating-call-flows-for-outbound-campaigns",
@@ -185,7 +192,15 @@
             ]
           },
           {
+            "group": "TESTING",
+            "icon": "flask-conical",
+            "pages": [
+              "testing/ab-testing"
+            ]
+          },
+          {
             "group": "SETTINGS & BILLING",
+            "icon": "settings",
             "pages": [
               "manage-account-and-organization-settings/manage-account-and-organization-settings",
               "manage-account-and-organization-settings/delete-agents",
@@ -297,10 +312,6 @@
       }
     }
   },
-  "scripts": [
-    "/js/custom-toc.js",
-    "/js/responsive-iframes.js"
-  ],
   "stylesheets": [
     "/css/custom.css",
     "/css/variables-table-alignment.css"

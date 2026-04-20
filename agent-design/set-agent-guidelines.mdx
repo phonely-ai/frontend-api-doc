@@ -1,128 +1,74 @@
 ---
 title: "Set Agent Guidelines"
-description: "Learn how to define your AI agent’s tone, personality, and behavior using Phonely’s Agent Guidelines for more natural, consistent conversations."
+description: "Define your AI agent's tone, personality, and behavior using structured guideline sections that persist across all flows."
 ---
 
-Agent Guidelines define how your AI phone agent behaves, speaks, and reacts during conversations. Think of them as your agent’s training manual, they determine its personality, tone, and general knowledge that applies across all flows.
+Agent guidelines define how your AI phone agent behaves, speaks, and reacts during conversations. They act as a persistent system prompt, context that stays active throughout the conversation, regardless of which flow block or sub-flow the agent is in.
 
-![Configure Agent Guidelines Gi](/assets/configure-agent-guidelines.gif)
+<Frame>
+  <img src="/assets/agent-design.png" alt="Agent Design page" />
+</Frame>
+
+## Opening the Guidelines Editor
 
 <Steps>
-  <Step title="From the left sidebar, click Agent Design.">
-    
+  <Step title="Open your agent and navigate to Agent Design.">
   </Step>
-  <Step title="On the main panel, you’ll see the Set agent guidelines card beside the “Choose a voice” section.">
-    ![Acessing Agent Guidelines](/assets/acessing-agent-guidelines.png)
+  <Step title="Find the Set agent guidelines card next to the Choose a voice section.">
   </Step>
   <Step title="Click Configure to open the Guidelines Editor.">
-    
-  </Step>
-  <Step title="At the top right of the editor, switch between Voice and SMS tabs depending on which channel you want to define behavior for.">
-    
   </Step>
 </Steps>
 
-<Tip>
-  The _Voice_ tab defines spoken behavior during calls, while _SMS_ defines written tone for text interactions.
-</Tip>
+The editor opens as a full-screen modal with a sidebar on the left listing your configured sections and a rich text editor on the right for the selected section.
 
-## What Guidelines Do
+<Frame>
+  <img src="/assets/guidelines-editor-modal.png" alt="Guidelines Editor modal" />
+</Frame>
 
-Agent Guidelines serve as a persistent “system prompt” - context that stays active throughout the conversation, regardless of which flow block or sub-flow the agent is in.
+## Guideline Sections
 
-They’re used to:
+Guidelines are organized into **predefined section types**. You don't need to use every section - add only the ones that make sense for your agent. Click the **Add** button at the bottom of the sidebar to add a new section.
 
-- Set the overall personality and tone of your AI Agent.
-- Provide general knowledge or context that applies everywhere.
-- Include common rebuttals or fallback responses.
-- Define how to handle special scenarios (e.g., upset customers).
+| Section | Purpose | Example |
+| :-- | :-- | :-- |
+| **Rebuttals** | Responses the agent should give when callers raise common objections. The AI will address the objection before continuing with the conversation flow. | _"I need to think about it" → respond with..._ |
+| **Out of Scope Questions** | How the agent should respond when it doesn't have enough information to answer a question. | _"Let the caller know that a licensed agent will be able to help answer all their questions."_ |
+| **General Info** | Business information like hours, location, services, and policies that the agent can reference at any time. | _"Business hours: Mon–Fri 9am–5pm..."_ |
+| **Never Do** | Behaviors, actions, or responses the agent should avoid. | _"Never say you can call the person back."_ |
+| **Response Style** | Tone, personality traits, and communication style. | _"Be concise and direct. Match the customer's emotional tone."_ |
+| **Objective** | The primary goals the agent should work towards during conversations. | _"Qualify the caller and transfer them to a licensed agent."_ |
+| **Misc** | Anything that doesn't fit in the other categories. | Additional instructions or edge-case handling. |
 
-Unlike flow-specific content, guidelines are always accesible to the agent - they act as its permanent memory.
+### Managing Sections
 
-## Structure you Guidelines
+- **Add a section**: Click the **\+** button at the bottom of the sidebar and select a section type.
+- **Delete a section**: Hover over a section in the sidebar and click the trash icon. This permanently deletes the section and its content.
+- **Switch between sections**: Click any section in the sidebar to view and edit it.
+- **Reorder**: Sections are inserted after the currently selected section. Select a section first, then add a new one to place it below.
 
-You can structure your guidelines into several clear sections. Here are some common examples of how you can structure your Guidelines document. You don’t need to include every section mentioned below, simply use the ones that make sense for your business and agent type.
+### Editing Content
 
-<Steps>
-  <Step title="Your Role">
-    Define the role and purpose of your agent. Example:
+Each section opens a rich text editor where you can write and format your guidelines using headings, lists, bold, and other standard formatting. Changes **auto-save** shortly after you stop typing - you'll see an "Unsaved changes" indicator at the bottom of the editor while a save is in progress.
 
-    **Your Role**\
-    As the AI receptionist for Phonely, you are the first point of contact for customers. You represent a friendly, lively, and playful support agent who occasionally tells light jokes.
+The footer also shows who last updated the section and when.
 
-    <Expandable title="Examples of Objectives">
-      - Assist with customer queries and guide them to next steps.
-      - Keep tone conversational and upbeat.
-      - Resolve issues efficiently and accurately every time.
-    </Expandable>
-  </Step>
-  <Step title="Conversational Tips">
-    Specify stylistic preferences or phrases to avoid.
+## Per-Flow Control
 
-    <Expandable title="Examples">
-      - Don’t say “Correct” - say “Right.”
-      - Avoid being overly apologetic.
-      - Keep sentences short and natural.
-      - Match the customer’s emotional tone.
-    </Expandable>
-  </Step>
-  <Step title="Your Personality">
-    Describe the agent’s communication style.
+By default, guidelines are included in every flow. However, each flow has an **Include Guidelines** toggle in its flow settings that you can turn off if a specific flow should not use the agent-level guidelines.
 
-    <Expandable title="Examples">
-      You are the digital face of **"X Organization"**, embodying:
+This is useful when a flow has specialized instructions that conflict with the general guidelines, or when you want to keep a flow's prompt lean.
 
-      - Friendly & Warm: Greet customers enthusiastically.
-      - Conversational & Relaxed: Speak like a helpful friend, not a robot.
-      - Empathetic & Understanding: Listen actively and acknowledge frustration.
-      - Engaging & Curious: Ask thoughtful follow-ups to show interest.
-    </Expandable>
-  </Step>
-  <Step title="Common Rebuttals">
-    Prepare responses to frequent objections or concerns. This ensures your agent always stays calm and confident. Here are some examples for reference:
-
-    | Caller Concern                      | Recommended Response                                                                                                     |
-    | :---------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
-    | “We already have a call center.”    | “Phonely doesn’t replace your team, it handles repetitive calls so your agents can focus on higher-value conversations.” |
-    | “AI doesn’t sound human enough.”    | “Our voices are trained for natural, real-time interaction most callers can’t tell it’s AI.”                             |
-    | “Do you comply with HIPAA or GDPR?” | “Yes, Phonely meets strict data standards, with SOC 2-ready infrastructure and configurable compliance options.”         |
-    | “How is this better than an IVR?”   | “Unlike IVRs, Phonely understands natural language, handles dynamic tasks, and never forces callers to press buttons.”   |
-    | “Will this replace jobs?”           | “Phonely handles routine calls so teams can focus on complex, rewarding work.”                                           |
-  </Step>
-  <Step title="Important Information">
-    Include static company details that the AI may need to share.
-
-    <Expandable title="Examples">
-      - Important Information
-      - Website: [www.phonely.ai](http://www.phonely.ai)
-      - Help Center: [help.phonely.ai](http://help.phonely.ai)
-      - Live Demo: [app.phonely.ai](http://app.phonely.ai)
-      - Phone: +1 (415) 915-8520
-      - Address: 81 Langton St, San Francisco, CA 94103, USA
-    </Expandable>
-  </Step>
-  <Step title=" Handling Specific Scenarios">
-    Define how your Agent should behave in sensitive or special situations.
-
-    <Expandable title="Example: Handling an Unhappy Customer (The LEARN Framework)">
-      1. **Listen**: Actively listen without interrupting.
-      2. **Empathize**: Acknowledge frustration. Example: “I understand how that could be frustrating.”
-      3. **Apologize**: Offer a genuine apology. Example: “I’m sorry this happened,  let’s fix it together.”
-      4. **Ensure Follow-Up**: Assure escalation to a team member.
-      5. **Reassure**: End positively: “We’ll resolve this quickly for you.”
-    </Expandable>
-    <Expandable title="Example: Handling Inappropriate Requests">
-      If a caller shares something unprofessional, politely redirect and maintain professionalism.
-    </Expandable>
-  </Step>
-</Steps>
+<Frame>
+  <img src="/assets/flow-settings-modal.png" alt="Flow settings modal with Include Guidelines toggle" />
+</Frame>
 
 ## Guidelines vs Knowledge Base
 
-| Feature              | Purpose                                                                         | Use Case                                                                            |
-| :------------------- | :------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------- |
-| **Agent Guidelines** | Always-on context that defines tone, behavior, and personality.                 | Agent’s character, conversation tips, rebuttals, key info, and recurring scenarios. |
-| **Knowledge Base**   | Stored documents or pages that the agent searches when asked factual questions. | FAQs, pricing details, technical docs, or detailed product info.                    |
+| Feature | Purpose | Use Case |
+| :-- | :-- | :-- |
+| **Agent Guidelines** | Always-on context that defines tone, behavior, and personality. Injected directly into the system prompt. | Agent's character, rebuttals, restrictions, objectives, and general business info. |
+| **Knowledge Base** | Stored documents and pages that the agent searches when asked factual questions. | FAQs, pricing details, technical docs, or detailed product info. |
 
 <Tip>
   Think of Guidelines as the brain of your agent, while the Knowledge Base is its library.

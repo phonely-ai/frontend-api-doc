@@ -5,7 +5,7 @@ Use this file as the compact entrypoint for Phonely's public documentation.
 ## Canonical public pages
 - Introduction: /get-started/introduction.md
 - Quick start: /get-started/quick-start.md
-- Dashboard overview: /get-started/dashboard-overview.md
+- Home overview: /get-started/home-overview.md
 - Ask AI: /key-concepts/ask-ai.md
 - Call history and analytics: /call-history-ai-analytics/call-history-ai-analytics.md
 - Agent review: /agent-review.md

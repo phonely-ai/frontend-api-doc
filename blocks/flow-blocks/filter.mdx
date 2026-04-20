@@ -25,7 +25,7 @@ In simple terms:
 
 When the filter block runs, Phonely evaluates your cases top to bottom, and selects the first case whose conditions are met. If none of the cases match, the call falls through to the Else path.
 
-This ordering matters. If Case 1 is too broad, it can “catch” calls that you intended for Case 2. That’s why filter blocks work best when you structure your cases from most specific to most general, and treat Else as your safe fallback.
+This ordering matters. If Case 1 is too broad, it can “catch” calls that you intended for Case 2. That’s why filter blocks work best when you structure your cases from most specific to most general, and treat else as your safe fallback.
 
 ![Filter Block Phonely Gi](/assets/filter-block-phonely.gif)
 
@@ -33,11 +33,11 @@ This ordering matters. If Case 1 is too broad, it can “catch” calls that you
 
 Here are common scenarios where the filter block is useful:
 
-1. **Routing based on caller type:** Direct callers to different paths depending on who they are. For example, If caller_type = existing_customer, route to account manager; otherwise, to sales intake.
-2. **Time-based call handling:** Handle calls differently based on time or day. For example, If current_time is after 6 PM, route to after-hours voicemail; else continue to live agent.
-3. **Service level routing**: Serve customers according to their plan or service tier. For example, If plan_type = premium, send to priority support; if not, route to standard support.
-4. **Geographic routing**: Route calls based on caller location or language preference. For example, If caller_country = USA, connect to US team; if caller_country = South Africa, route to Cape Town Team.
-5. **Priority-based escalation**: Automatically escalate high-priority or urgent cases. For example, If ticket_urgency = High and customer_status = VIP, route to sscalation queue.
+1. **Routing based on caller type:** Direct callers to different paths depending on who they are. For example, If caller\_type = existing\_customer, route to account manager; otherwise, to sales intake.
+2. **Time-based call handling:** Handle calls differently based on time or day. For example, If current\_time is after 6 PM, route to after-hours voicemail; else continue to live agent.
+3. **Service level routing**: Serve customers according to their plan or service tier. For example, If plan\_type = premium, send to priority support; if not, route to standard support.
+4. **Geographic routing**: Route calls based on caller location or language preference. For example, If caller\_country = USA, connect to US team; if caller\_country = South Africa, route to Cape Town Team.
+5. **Priority-based escalation**: Automatically escalate high-priority or urgent cases. For example, If ticket\_urgency = High and customer\_status = VIP, route to sscalation queue.
 
 ## How routing works in the Filter block
 
@@ -56,7 +56,7 @@ Here’s the routing behavior to keep in mind:
 
 ## Set Up a Filter Block
 
-In your flow, click the **“+”** icon after any existing block.
+In your flow, click the **“\+”** icon after any existing block.
 
 Under **Flow Actions**, choose **Filter**. The Filter block will appear with two output paths: **Case 1** and **Else**.
 
@@ -78,11 +78,11 @@ Each condition is a rule that tells Phonely what to check. Click the filter bloc
 
 You’ll see three main fields:
 
-| Field                             | Description                                                                                                                                                                                                                                                   |
-| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Define Field**                  | The variable or data point you want to evaluate (e.g., `caller_phone`, `customer_name`, `response`).                                                                                                                                                          |
-| **Comparison Operator**           | Defines how the field is compared, options include:<br />• **exists**<br />• **doesn’t exist**<br />• **is equal to**<br />• **is not equal to**<br />• **is an array containing**<br />• **matches condition (AI)**<br />• **does not match condition (AI)** |
-| **Value Type & Comparison Value** | Select the data type (String, Number, or Boolean) and specify the value to compare against. AI-based operators do not require a value type, they evaluate natural-language intent statements.                                                                 |
+| Field | Description |
+| :-- | :-- |
+| **Define Field** | The variable or data point you want to evaluate (e.g., `caller_phone`, `customer_name`, `response`). |
+| **Comparison Operator** | Defines how the field is compared, options include:<br />• **exists**<br />• **doesn’t exist**<br />• **is equal to**<br />• **is not equal to**<br />• **is an array containing**<br />• **matches condition (AI)**<br />• **does not match condition (AI)** |
+| **Value Type & Comparison Value** | Select the data type (String, Number, or Boolean) and specify the value to compare against. AI-based operators do not require a value type, they evaluate natural-language intent statements. |
 
 ### Choose Available Variables
 
@@ -185,7 +185,7 @@ Click the dropdown that says **“is equal to”** to see other options:
     Used when the variable is a list and you need to check if it contains a specific item.
 
     <Expandable title="Example">
-      Escalate “angry customer” calls detected by sentiment + topic tagging
+      Escalate “angry customer” calls detected by sentiment \+ topic tagging
 
       **Use case:** You tag calls that need a softer handoff (e.g., escalation) based on automation rules.
 
@@ -195,15 +195,14 @@ Click the dropdown that says **“is equal to”** to see other options:
       - Comparison: **is an array containing**
       - Value: `needs_escalation`
 
-      **True path:** Transfer to escalation queue + add outcome tag “escalated”\
+      **True path:** Transfer to escalation queue \+ add outcome tag “escalated”\
       **False path:** Continue AI containment flow
 
-      Why it’s useful:\
-      You can keep your flow simple while using tags as the “signal” to trigger escalation.
+      Why it’s useful: You can keep your flow simple while using tags as the “signal” to trigger escalation.
     </Expandable>
   </Step>
   <Step title="matches condition (AI)">
-    Uses AI to evaluate whether the caller’s message or extracted intent semantically_matches\_  a natural-language condition you define.
+    Uses AI to evaluate whether the caller’s message or extracted intent semantically\_matches\_  a natural-language condition you define.
 
     <Expandable title="Examples">
       - “caller wants to book an appointment”
@@ -227,11 +226,11 @@ These AI-powered options are ideal when you want logic based on intent, not exac
 
 Under the comparison dropdown, click the small menu and choose the correct type of the value you want to compare against.
 
-| Data Type   | When to Use                                         |
-| :---------- | :-------------------------------------------------- |
-| **String**  | For text values like names or words.                |
-| **Number**  | For numeric comparisons like age, amount, or count. |
-| **Boolean** | For true/false logic (e.g., `is_verified = true`).  |
+| Data Type | When to Use |
+| :-- | :-- |
+| **String** | For text values like names or words. |
+| **Number** | For numeric comparisons like age, amount, or count. |
+| **Boolean** | For true/false logic (e.g., `is_verified = true`). |
 
 Then enter your comparison value.
 
@@ -239,10 +238,10 @@ Then enter your comparison value.
 
 A case can contain more than one condition. When you add multiple conditions, you must choose how they combine:
 
-| Logic Option | Description                                                |
-| :----------- | :--------------------------------------------------------- |
-| **And**      | All conditions must be true for the case to match.         |
-| **Or**       | Only one condition needs to be true for the case to match. |
+| Logic Option | Description |
+| :-- | :-- |
+| **And** | All conditions must be true for the case to match. |
+| **Or** | Only one condition needs to be true for the case to match. |
 
 **Example (AND): Verify caller before routing**
 
@@ -260,8 +259,8 @@ AI match: “caller is asking about charges”
 Logic: **OR** meaning: either signal qualifies for billing.
 
 <Expandable title="Examples">
-  - And → caller_name = John **and** caller_phone = 123456
-  - Or → caller_name = John **or** caller_name = Jane
+  - And → caller\_name = John **and** caller\_phone = 123456
+  - Or → caller\_name = John **or** caller\_name = Jane
 </Expandable>
 
 ## Configure Advanced Settings
@@ -322,8 +321,8 @@ Let’s say your **Collect block** gathered two inputs from the caller:
 You can then use a filter block to determine which store location the caller should be routed to based on these values.
 
 <Expandable title="Conditions">
-  - **Condition 1:** caller_phone starts with "+1-312" (Chicago area code).
-  - **Condition 2:** caller_zip_code is equal to "60601" (Downtown Chicago ZIP code).
+  - **Condition 1:** caller\_phone starts with "\+1-312" (Chicago area code).
+  - **Condition 2:** caller\_zip\_code is equal to "60601" (Downtown Chicago ZIP code).
 </Expandable>
 
 Set **Logic** to **And**.

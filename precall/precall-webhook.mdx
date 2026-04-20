@@ -13,9 +13,7 @@ Unlike API Requests, which retrieve data during execution, webhooks provide **pr
 - Skip unnecessary questions
 - Execute logic based on external systems
 
-Con
-
-Pre-Call Actions can only be added **above the Start Flow**, which is the block that runs first when a call is answered.
+Pre-Call actions can only be added **above the Start Flow**, which is the block that runs first when a call is answered.
 
 To add a Pre-Call Webhook action:
 
@@ -45,6 +43,7 @@ To add a Pre-Call Webhook action:
     <Frame>
       ![Selectcustomwebhook](/images/selectcustomwebhook.png)
     </Frame>
+
     Click **Continue** to move to the next step.
   </Step>
   <Step title="Configure the Webhook Endpoint">
@@ -54,9 +53,9 @@ To add a Pre-Call Webhook action:
 
     From this section, you can also use:
 
-    - **Copy cURL** to copy a sample request
-    - **Copy API Key** if authentication details are needed
-    - **Copy** to copy the webhook URL directly
+    - Copy cURL to copy a sample request
+    - Copy API Key if authentication details are needed
+    - Copy to copy the webhook URL directly 
 
     <Frame>
       <img
@@ -72,7 +71,7 @@ To add a Pre-Call Webhook action:
 
     This setting controls how long Phonely should wait for webhook data before continuing with default values.
 
-    If the webhook data arrives within this wait period, it becomes available in the workflow. If it does not arrive in time, Phonely proceeds without it.
+    If the webhook data arrives within this wait period, it becomes available in the workflow. If it does not arrive in time, Phonely proceeds without it. 
   </Step>
   <Step title="Continue">
     Click the continue button to proceed to testing. 
@@ -86,7 +85,7 @@ Use the **Test** step to verify that your external system can successfully send 
 To test the webhook:
 
 1. Copy the webhook URL shown in the **Configure** step.
-2. Send a **POST** request to that URL.
+2. Send a **POST** request to that URL .
 3. Include a JSON body with the required fields shown below.
 
 Example test payload:
@@ -121,10 +120,10 @@ In this example, `customer_name`, `priority`, and `issue_type` would all become 
 
 Use this test step to confirm that:
 
-- the webhook endpoint is reachable
-- the payload is structured correctly
-- the required fields are included
-- the cached values can be used in the workflow as expected
+- The webhook endpoint is reachable
+- The payload is structured correctly
+- The required fields are included
+- The cached values can be used in the workflow as expected
 
 <Frame>
   ![Testingprecallwebhook](/assets/testingprecallwebhook.png)

@@ -63,16 +63,33 @@ nav, [role="navigation"],
     overscroll-behavior: contain;
 }
 
-/* Additional isolation for main content area */
-main, .content, [role="main"], .main-content,
-.mintlify-doc-content,
-.mintlify-doc-content > div,
-[data-mintlify-doc-content],
-article, .article-content {
-    overscroll-behavior: contain;
+/* TOC filtering is now handled by JavaScript */
+
+/* Card hover lift effect */
+[class*="Card"] a,
+a[class*="card"] {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* TOC filtering is now handled by JavaScript */
+[class*="Card"] a:hover,
+a[class*="card"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.dark [class*="Card"] a:hover,
+.dark a[class*="card"]:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.24);
+}
+
+/* Better heading spacing for visual hierarchy */
+article h2 {
+    margin-top: 2.5rem;
+}
+
+article h3 {
+    margin-top: 1.75rem;
+}
 
 /* CSS Custom Properties for responsive iframe configuration */
 :root {

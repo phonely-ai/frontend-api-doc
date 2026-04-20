@@ -3,20 +3,35 @@ title: "Compliance Settings"
 description: "Learn how to configure Phonely’s Compliance settings to meet recording, privacy, and regulatory requirements for your business. "
 ---
 
-These settings are designed to give you full control over recordings, data handling, and privacy - especially important for businesses operating in regulated industries such as healthcare, finance, or customer support.      
+These settings are designed to give you full control over recordings, data handling, and privacy - especially important for businesses operating in regulated industries such as healthcare, finance, or customer support.
 
-1. Go to **Agent Design \> Settings** from the left sidebar.
-2. Click the **Compliance** tab.
-3. Each option can be enabled or disabled depending on your operational needs.
+<Steps>
+  <Step title="Go to Agent Design > Settings from the left sidebar.">
+  </Step>
+  <Step title="Click the Compliance tab.">
+  </Step>
+  <Step title="Each option can be enabled or disabled depending on your operational needs.">
+  </Step>
+</Steps>
 
-   ![Compliance Settings Phonely Gi](/assets/compliance-settings-phonely.gif)
+![Compliance Settings Phonely Gi](/assets/compliance-settings-phonely.gif)
 
 ### Call Recordings
 
 This setting determines whether Phonely records calls made or received by your agent.
 
-- **When enabled:** Full audio recordings are captured and stored securely.
-- **When disabled:** Calls are not recorded, but transcripts will still be generated using Phonely’s speech-to-text engine.This is useful for organizations that want conversational insight without retaining audio files.
+<Columns cols={2}>
+  <Column>
+    <Card title="When enabled" icon="check-check">
+      Full audio recordings are captured, retained, and stored securely for playback, review, compliance, and quality assurance.
+    </Card>
+  </Column>
+  <Column>
+    <Card title="When disabled" icon="lasso-select">
+      Calls are not recorded, but transcripts will still be generated using Phonely's speech-to-text engine.
+    </Card>
+  </Column>
+</Columns>
 
 Use this setting to comply with jurisdictions that require explicit consent for call recording.
 
@@ -43,8 +58,8 @@ Enable this only if your operations require HIPAA-grade protections.
 
 Personally Identifiable Information (PII) redaction removes sensitive details from both:
 
-- call recordings
-- call transcripts
+- Call recordings
+- Call transcripts
 
 Phonely automatically detects and redacts data such as names, emails, credit card numbers, SSNs, or addresses.
 
