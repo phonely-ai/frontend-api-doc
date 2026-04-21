@@ -3,22 +3,26 @@ title: "Call History and Analytics"
 description: "Learn to leverage Phonely's call history and analytics features for optimized call management and insights."
 ---
 
-Phonely’s Call History and Analytics dashboard provide a centralized view of every conversation that occurs in Phonely. Each call is automatically logged with detailed metadata - including call duration, sentiment, outcomes, and transcripts - helping you understand not just what happened, but why.
+Phonely's Call History and Analytics dashboard provide a centralized view of every conversation that occurs in Phonely. Each call is automatically logged with detailed metadata - including call duration, sentiment, outcomes, and transcripts - helping you understand not just what happened, but why.
 
 These insights help teams monitor performance, debug workflows, and optimize customer interactions at scale.
 
 <iframe src="https://www.youtube.com/embed/7x4ur9XUaBQ" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
 
 <Tip>
-  Leverage Phonely’s call history tools to gain visibility, analyze, and optimize call outcomes, improving both operational efficiency and customer satisfaction.
+  Leverage Phonely's call history tools to gain visibility, analyze, and optimize call outcomes, improving both operational efficiency and customer satisfaction.
 </Tip>
 
 1. From the left navigation panel, click **Call History** under the call section.
-2. You’ll see a table view listing all calls made or received by your Phonely agents.
+2. You'll see a table view listing all calls made or received by your Phonely agents.
 
 <Tip>
-  A colored indicator next to each call reflects its read status, helping you quickly distinguish new calls from those you’ve already reviewed.
+  A colored indicator next to each call reflects its read status, helping you quickly distinguish new calls from those you've already reviewed.
 </Tip>
+
+### Call Review Indicators
+
+When you give a call a thumbs-up or thumbs-down review from the call detail view, that feedback is visible directly in the call list. Calls reviewed by a user show a small <Icon icon="thumbs-up" size={14} /> or <Icon icon="thumbs-down" size={14} /> icon next to the caller's phone number, so you can quickly see which calls have been reviewed and their outcome at a glance.
 
 <Frame>
   <img src="/assets/drill-down-experience.gif" alt="Call history drill-down experience" />
@@ -31,8 +35,8 @@ These insights help teams monitor performance, debug workflows, and optimize cus
 | **Comprehensive Call Logging**         | Every inbound, outbound, and web call is automatically logged with duration, call type, detected topic, outcome, sentiment, and end reason for full visibility into each interaction.                               |
 | **Modernized Call History Experience** | The Call History page has been redesigned for speed and clarity, featuring infinite scroll (no pagination), auto-refresh every 10 seconds, and smoother day-to-day navigation.                                      |
 | **Advanced Filtering & Views**         | Quickly narrow results using a redesigned filter module with support for date range, duration, call type, outcome, sentiment, status, and end reason, plus dedicated views for in-progress calls and calls on hold. |
-| **Read & Unread Call Tracking**        | Easily distinguish new calls from reviewed ones with clear read/unread indicators, bulk selection, and “select all” actions for faster triage.                                                                      |
-| **Context at a Glance**                | Instantly see sentiment indicators and a short AI-generated recap of why the caller reached out, helping you prioritize which calls to open first.                                                                  |
+| **Read & Unread Call Tracking**        | Easily distinguish new calls from reviewed ones with clear read/unread indicators, bulk selection, and "select all" actions for faster triage.                                                                      |
+| **Context at a Glance**                | Instantly see sentiment indicators, thumbs-up/down review status, and a short AI-generated recap of why the caller reached out, helping you prioritize which calls to open first.                                    |
 | **Playback Controls**                  | Replay any call, adjust playback speed, or download audio recordings for QA or training.                                                                                                                            |
 | **Powerful Global Search**             | Search across call outcomes, transcripts, and phone numbers to quickly locate specific conversations or patterns.                                                                                                   |
 | **Detailed Call Insights**             | Open any call to review summaries, full transcripts, and how the conversation progressed through individual workflow blocks.                                                                                        |
@@ -76,7 +80,7 @@ Use the filters panel to narrow your call list and focus on specific scenarios.
 | Filter Category | Options |
 | :-- | :-- |
 | **Date Range** | Today, Yesterday, Last 7 days, Last 14 days, Last 30 days, Last 90 days, Custom range (calendar picker) |
-| **Duration** | Presets: \< 1 min, 1–5 min, \> 5 min<br />Adjustable duration slider (0:00 → 60:00\+) |
+| **Duration** | Presets: \< 1 min, 1-5 min, \> 5 min<br />Adjustable duration slider (0:00 → 60:00\+) |
 | **Status** | Completed, Failed, Ended, Queued, In Progress, In Warm Transfer |
 | **Call Outcome** | Greeting Hangup<br />Identify Purpose<br />Collect Info<br />Appointment Booking<br />Legal Matter<br />Custom workflow outcomes (e.g., _Solar Appointment Confirmation_) |
 | **Call Type** | Inbound<br />Outbound<br />Web Call |
@@ -84,7 +88,7 @@ Use the filters panel to narrow your call list and focus on specific scenarios.
 | **Sentiment** | Positive<br />Neutral<br />Negative |
 | **Calls Per Page** | 100, 250, 500, 1,000, 2,500, 5,000 |
 
-Once you’ve selected your filters, click **Apply** to immediately update the call list.
+Once you've selected your filters, click **Apply** to immediately update the call list.
 
 ## Reviewing Call Details
 
@@ -92,8 +96,8 @@ Click any call in the call history table to open the call detail view. This page
 
 The call detail view is organized into two primary areas:
 
-- **Conversation panel** – shows the interaction between the caller and the Phonely agent.
-- **Insights panel** – displays call summaries, metadata, and workflow execution details.
+- **Conversation panel** - shows the interaction between the caller and the Phonely agent.
+- **Insights panel** - displays call summaries, metadata, and workflow execution details.
 
 At the top of the insights panel you will find two tabs the **highlights** and **blocks** tabs.
 
@@ -109,18 +113,18 @@ The conversation panel appears on the left side of the Call Detail view. It disp
 
 <Steps>
   <Step title="Conversation Bubbles">
-    The main body of each Phonely message shows the exact response that was delivered during the call. This allows you to inspect the wording used by the agent and compare it with the caller’s response. Each message is shown as a conversation bubble, making it easy to distinguish between the two participants:
+    The main body of each Phonely message shows the exact response that was delivered during the call. This allows you to inspect the wording used by the agent and compare it with the caller's response. Each message is shown as a conversation bubble, making it easy to distinguish between the two participants:
 
-    - **Phonely** – responses generated by the AI agent.
-    - **Caller** – responses spoken by the caller.
+    - **Phonely** - responses generated by the AI agent.
+    - **Caller** - responses spoken by the caller.
 
     Messages appear in the order they occurred during the call, allowing you to follow the flow of the conversation from start to finish.
   </Step>
   <Step title="Workflow Blocks in the Conversation">
     Below a Phonely message, additional metadata chips  appear. These chips provide more context about the workflow step. They include:
 
-    - **Block tag** – shows the workflow block that generated the response, such as main routing or end call
-    - **Variable count** – shows how many variables were stored or used in that step, such as **3 variables**
+    - **Block tag** - shows the workflow block that generated the response, such as main routing or end call
+    - **Variable count** - shows how many variables were stored or used in that step, such as **3 variables**
 
     These labels help connect the conversation directly to the workflow logic that produced the response.
   </Step>
@@ -141,16 +145,16 @@ The conversation panel appears on the left side of the Call Detail view. It disp
   <Step title="Message Controls">
     Agent messages may include additional controls that allow you to interact with the response. These controls can include:
 
-    - **Play** – play the audio for that specific response
-    - **Copy** – copy the message text
-    - **Feedback controls** – provide feedback on the quality of the response
+    - **Play** - play the audio for that specific response
+    - **Copy** - copy the message text
+    - **Feedback controls** - provide feedback on the quality of the response
   </Step>
   <Step title="Editing Responses and Providing Feedback">
     You can use the **thumbs up** or **thumbs down** icons shown above a Phonely message to indicate whether the response was correct or needs improvement.
 
     Clicking the feedback button marks the response and enables additional review options. After providing feedback, an **Edit** option appears next to the response.
 
-    Click the **Edit** button to open the response editor, where you can modify how the agent should respond in similar situations.
+    Click the **Edit** button to open the response editor, where you can modify how the agent should respond in similar situations.
 
     In the editor you can:
 
@@ -178,8 +182,8 @@ The conversation panel appears on the left side of the Call Detail view. It disp
 
     From the **Actions** menu you can perform tasks such as:
 
-    - **Create test** – generate a test case based on the selected response.
-    - **Submit feedback** – record feedback for workflow review.
+    - **Create test** - generate a test case based on the selected response.
+    - **Submit feedback** - record feedback for workflow review.
   </Step>
   <Step title="Call Playback">
     At the bottom of the conversation panel, an **audio player** allows you to listen to the full call recording while reviewing the conversation.
@@ -196,7 +200,7 @@ The conversation panel appears on the left side of the Call Detail view. It disp
 
 ## Highlights Tab
 
-The Highlights tab provides a concise, structured overview of the entire call at a glance. It’s designed to help you quickly understand what happened during the conversation, what actions were taken, and how the call concluded, without needing to review the full transcript.
+The Highlights tab provides a concise, structured overview of the entire call at a glance. It's designed to help you quickly understand what happened during the conversation, what actions were taken, and how the call concluded, without needing to review the full transcript.
 
 This tab is useful when you want to quickly understand what happened during a call without reviewing the entire transcript.
 
@@ -208,7 +212,7 @@ This tab is useful when you want to quickly understand what happened during a ca
 
 At the top of the page, Phonely generates a clear, human-readable summary of the call.
 
-- Describes the caller’s intent (for example, _order status inquiry_ or _appointment booking_)
+- Describes the caller's intent (for example, _order status inquiry_ or _appointment booking_)
 - Explains what the AI attempted and what ultimately happened
 - Highlights key outcomes, such as whether a record was found, and action succeeded, or a fallback was triggered
 
@@ -257,11 +261,11 @@ The **Blocks** tab provides a structured, execution-level view of how the call m
 
 At the top level, the Blocks tab displays a table with one row per executed block, including:
 
-- **Block Name** – The label of the block as defined in your workflow (for example, _Greeting Message_, _Talk_, _API Request_)
-- **Block** – The specific workflow block instance that was executed.
-- **Timestamp** – The exact time the block started during the call.
-- **Duration** – How long the block ran.
-- **Status** – Execution result (for example, _Completed_).
+- **Block Name** - The label of the block as defined in your workflow (for example, _Greeting Message_, _Talk_, _API Request_)
+- **Block** - The specific workflow block instance that was executed.
+- **Timestamp** - The exact time the block started during the call.
+- **Duration** - How long the block ran.
+- **Status** - Execution result (for example, _Completed_).
 
 This view gives you a chronological summary of the entire call flow from start to finish.
 
@@ -271,20 +275,20 @@ Click the arrow next to any block to expand it and view detailed execution data.
 
 Each expanded block includes:
 
-- **Timestamp** – When each event occurred.
-- **Event Type** – What kind of action took place.
-- **Data** – The payload, message, or response associated with the event.
+- **Timestamp** - When each event occurred.
+- **Event Type** - What kind of action took place.
+- **Data** - The payload, message, or response associated with the event.
 
 ### Event Types You May See
 
 Depending on the block type, expanded views may include:
 
-- **AI Speech** – Messages spoken by the agent.
-- **User Input** – Transcribed caller responses.
-- **Referenced Knowledge Base** – Knowledge or documents referenced during the block.
-- **Block Transition** – Movement between workflow blocks.
-- **API / Webhook Requests** – Outbound requests with full request and response details.
-- **System Actions** – Internal workflow or execution events.
+- **AI Speech** - Messages spoken by the agent.
+- **User Input** - Transcribed caller responses.
+- **Referenced Knowledge Base** - Knowledge or documents referenced during the block.
+- **Block Transition** - Movement between workflow blocks.
+- **API / Webhook Requests** - Outbound requests with full request and response details.
+- **System Actions** - Internal workflow or execution events.
 
 ### API Request Visibility
 
@@ -304,8 +308,8 @@ This makes it easy to verify integrations, troubleshoot failures, and confirm do
 
 At the bottom of expanded sections, you may see:
 
-- **Total Events** – Number of events recorded for that block.
-- **Duration** – Total execution time for the block.
+- **Total Events** - Number of events recorded for that block.
+- **Duration** - Total execution time for the block.
 
 ## Exporting Selected Calls and Running Reports
 

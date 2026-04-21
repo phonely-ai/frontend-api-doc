@@ -16,42 +16,62 @@ Agent guidelines define how your AI phone agent behaves, speaks, and reacts duri
   </Step>
   <Step title="Find the Set agent guidelines card next to the Choose a voice section.">
   </Step>
-  <Step title="Click Configure to open the Guidelines Editor.">
+  <Step title="Click Configure to open the full-page Guidelines Editor.">
   </Step>
 </Steps>
 
-The editor opens as a full-screen modal with a sidebar on the left listing your configured sections and a rich text editor on the right for the selected section.
+The editor opens as a dedicated full-page view with a sidebar on the left listing your configured sections (grouped by category) and a rich text editor on the right for the selected section. Click **Back to Agent Design** in the sidebar to return to the main Agent Design page.
 
-<Frame>
-  <img src="/assets/guidelines-editor-modal.png" alt="Guidelines Editor modal" />
-</Frame>
+{/* TODO: Add screenshot of the new full-page guidelines editor showing sidebar categories and editor area. */}
 
 ## Guideline Sections
 
-Guidelines are organized into **predefined section types**. You don't need to use every section - add only the ones that make sense for your agent. Click the **Add** button at the bottom of the sidebar to add a new section.
+Guidelines are organized into **predefined section types** grouped by category. You don't need to use every section — add only the ones that make sense for your agent. Click **Add Section** at the bottom of the sidebar to add a new section.
+
+### Behavior & Goals
+
+Sections that shape how your agent acts during every call.
 
 | Section | Purpose | Example |
 | :-- | :-- | :-- |
-| **Rebuttals** | Responses the agent should give when callers raise common objections. The AI will address the objection before continuing with the conversation flow. | _"I need to think about it" → respond with..._ |
-| **Out of Scope Questions** | How the agent should respond when it doesn't have enough information to answer a question. | _"Let the caller know that a licensed agent will be able to help answer all their questions."_ |
-| **General Info** | Business information like hours, location, services, and policies that the agent can reference at any time. | _"Business hours: Mon–Fri 9am–5pm..."_ |
-| **Never Do** | Behaviors, actions, or responses the agent should avoid. | _"Never say you can call the person back."_ |
-| **Response Style** | Tone, personality traits, and communication style. | _"Be concise and direct. Match the customer's emotional tone."_ |
-| **Objective** | The primary goals the agent should work towards during conversations. | _"Qualify the caller and transfer them to a licensed agent."_ |
-| **Misc** | Anything that doesn't fit in the other categories. | Additional instructions or edge-case handling. |
+| **Objective** | The primary goal your agent works toward on every call — like qualifying leads, booking appointments, or collecting information. | _"Qualify the caller and transfer them to a licensed agent."_ |
+| **Response Style** | Tone, personality, and how the agent sounds — friendly, professional, concise, etc. | _"Be concise and direct. Match the customer's emotional tone."_ |
+| **Never Do** | Hard rules the agent must never break — things it should never say, promise, or do. | _"Never say you can call the person back."_ |
+
+### Knowledge & Responses
+
+Sections that provide information and pre-written answers the agent can draw on.
+
+| Section | Purpose | Example |
+| :-- | :-- | :-- |
+| **General Info** | Business details the agent can reference anytime — hours, location, services, policies. | _"Business hours: Mon–Fri 9am–5pm..."_ |
+| **Rebuttals** | Pre-written responses to common objections to keep the conversation moving. | _"When the caller says 'I need to think about it', respond with..."_ |
+| **Out of Scope** | What the agent should do when it doesn't know the answer — transfer, take a message, or redirect. | _"Let the caller know that a team member will follow up with an answer."_ |
+
+### Other
+
+| Section | Purpose | Example |
+| :-- | :-- | :-- |
+| **Custom** | Create your own guideline section with a custom name for anything that doesn't fit the categories above. You can add multiple custom sections. | _Pricing Rules, Escalation Steps, Regional Policies, etc._ |
+
+### Custom Sections
+
+When you select **Custom** from the Add Section dropdown, you'll be prompted to enter a name for your new section. This lets you create as many purpose-specific sections as you need — for example, "Pricing Rules", "Escalation Steps", or "Regional Policies".
+
+Custom sections can be **renamed** at any time by hovering over the section in the sidebar and clicking the pencil icon.
 
 ### Managing Sections
 
-- **Add a section**: Click the **\+** button at the bottom of the sidebar and select a section type.
+- **Add a section**: Click **Add Section** at the bottom of the sidebar and select a section type from the dropdown.
 - **Delete a section**: Hover over a section in the sidebar and click the trash icon. This permanently deletes the section and its content.
+- **Rename a custom section**: Hover over a custom section in the sidebar and click the pencil icon to change its name.
 - **Switch between sections**: Click any section in the sidebar to view and edit it.
-- **Reorder**: Sections are inserted after the currently selected section. Select a section first, then add a new one to place it below.
 
 ### Editing Content
 
-Each section opens a rich text editor where you can write and format your guidelines using headings, lists, bold, and other standard formatting. Changes **auto-save** shortly after you stop typing - you'll see an "Unsaved changes" indicator at the bottom of the editor while a save is in progress.
+Each section opens a rich text editor where you can write and format your guidelines using headings, lists, bold, and other standard formatting. Changes **auto-save** as you type — you'll see a "Saving..." indicator at the bottom-right of the editor while a save is in progress, which changes to "Saved" once complete.
 
-The footer also shows who last updated the section and when.
+The footer also shows who last updated the section and when. When you click **Back to Agent Design**, any pending changes are saved automatically.
 
 ## Per-Flow Control
 

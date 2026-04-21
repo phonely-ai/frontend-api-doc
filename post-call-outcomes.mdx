@@ -216,6 +216,29 @@ Example scenario: AI agent books an appointment.
   </Step>
 </Steps>
 
+## Viewing Post-Call Outcomes in Agent Settings
+
+Every time you record a post-call outcome via the API, it is automatically tracked in the agent's **Post-Call Outcomes** registry. You can view this registry in Agent Settings:
+
+<Steps>
+  <Step title="Open your agent and go to Agent Design > Settings.">
+  </Step>
+  <Step title="Switch to the Call Tagging tab.">
+  </Step>
+  <Step title="Scroll down to the Post-Call Outcomes section.">
+  </Step>
+</Steps>
+
+This section shows a read-only grid of every outcome label that has been recorded for the agent, along with:
+
+- **Total calls** — how many calls have been tagged with that outcome
+- **First recorded** — the date the outcome was first seen
+- **Last recorded** — the date the outcome was most recently recorded
+
+The registry updates automatically whenever a new outcome is set through the API. You do not need to configure or manage it manually.
+
+{/* TODO: Add screenshot of the Post-Call Outcomes registry in Agent Settings > Call Tagging. */}
+
 ## Viewing Post-Call Outcomes in Analytics
 
 Once post-call outcomes are set using the API, webhook, or integration, they automatically appear in the performance page, where you can track, compare, and analyze results over time.
