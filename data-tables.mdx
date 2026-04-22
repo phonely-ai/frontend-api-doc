@@ -246,6 +246,58 @@ Namespaced variables count calls matching a specific metadata category within th
   </Accordion>
 </AccordionGroup>
 
+### Aggregation Functions
+
+Aggregation functions let you calculate statistics like percentiles, medians, sums, and filtered averages — going beyond the default average that core variables return.
+
+**Available functions:** `avg`, `sum`, `min`, `max`, `median`, `p75`, `p90`, `p95`, `p99`
+
+**Syntax:**
+
+| Form | Meaning |
+| :--- | :--- |
+| `func(@numeric_var)` | Aggregate over **all** calls in the row group |
+| `func(@numeric_var, @filter)` | Aggregate over only calls matching the filter |
+
+The first argument must be a numeric variable (`@duration`, `@total_transfer_duration`, or `@custom_call_outcome_value`). The optional second argument is any categorical filter variable (`@outcome.*`, `@topic.*`, `@sentiment.*`, `@ended_reason.*`, `@custom_call_outcome.*`, `@block.*`).
+
+#### Using the Function Picker
+
+Type **`func`** in the formula field to open a guided three-step picker:
+
+<Steps>
+  <Step title="Pick a function">
+    Choose the aggregation you need (e.g., `p95`, `median`, `avg`).
+  </Step>
+  <Step title="Pick the numeric variable">
+    Select which metric to aggregate — duration, transfer duration, or custom outcome value.
+  </Step>
+  <Step title="Pick a filter (optional)">
+    Narrow the calculation to a subset of calls (e.g., only successful calls). Click **Skip (all calls)** to aggregate across every call.
+  </Step>
+</Steps>
+
+{/* TODO: Add GIF showing the func picker three-step flow: typing func, selecting a function, picking a variable, and choosing a filter. */}
+
+#### When to Use Functions vs Plain Variables
+
+- `@duration` returns the **average duration across all calls** (equivalent to `avg(@duration)`).
+- Use functions when you need a **different aggregation** (median, percentile, sum, min, max) or a **filtered subset** of calls.
+- Functions compose with arithmetic, so you can build ratios, differences, and unit conversions.
+
+#### Example Formulas with Functions
+
+| Goal | Formula |
+| :--- | :--- |
+| 95th percentile call duration | `p95(@duration)` |
+| Median duration of successful calls | `median(@duration, @outcome.success)` |
+| Average duration of billing calls | `avg(@duration, @topic.billing)` |
+| Total minutes of billing calls | `sum(@duration, @topic.billing) / 60` |
+| Longest transfer for qualified calls | `max(@total_transfer_duration, @outcome.qualified)` |
+| Duration difference: failed vs success | `avg(@duration, @outcome.failed) - avg(@duration, @outcome.success)` |
+| Transfer time % for successful calls | `avg(@total_transfer_duration, @outcome.success) / avg(@duration, @outcome.success) * 100` |
+| Weighted avg duration of A or B outcomes | `(avg(@duration, @outcome.A) * @outcome.A + avg(@duration, @outcome.B) * @outcome.B) / (@outcome.A + @outcome.B)` |
+
 ### Exclusion Directives
 
 Exclusions remove calls from the calculation **before** the metric is computed. Append them to the end of a formula.
