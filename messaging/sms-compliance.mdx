@@ -1,0 +1,49 @@
+---
+title: "SMS Compliance"
+description: "Understand SMS compliance status for Phonely and imported phone numbers."
+---
+
+SMS compliance shows whether a phone number is ready to send SMS through your registered messaging campaign. Use it to confirm which numbers can support AI SMS before enabling SMS follow-up or messaging workflows.
+
+{/* TODO: Add a screenshot of the Phone Numbers table showing the SMS Compliance column and number owner badges. */}
+
+## Where to Check SMS Compliance
+
+<Steps>
+  <Step title="Open your agent.">
+  </Step>
+  <Step title="Go to Agent Design > Settings.">
+  </Step>
+  <Step title="Select Phone Numbers.">
+  </Step>
+  <Step title="Review the SMS Compliance column in the phone numbers table.">
+  </Step>
+</Steps>
+
+The table shows **Yes** when the number is SMS-compliant and **No** when it is not ready for SMS.
+
+## Number Owner Badges
+
+Each phone number shows whether it is a **Phonely Number** or an **External Number**.
+
+| Owner | How SMS compliance works |
+| :-- | :-- |
+| **Phonely Number** | Complete A2P 10DLC registration in **Settings > Messaging**. Approved Phonely numbers are managed through the Phonely registration flow. |
+| **External Number** | Complete verification with the external provider, such as Twilio, then refresh the compliance status in Phonely. |
+
+## Refresh External Number Compliance
+
+Imported numbers can be refreshed after you complete verification with the external provider.
+
+<Steps>
+  <Step title="Open the actions menu for the external phone number.">
+  </Step>
+  <Step title="Select Refresh SMS Compliance.">
+  </Step>
+  <Step title="Wait for the table to update the SMS Compliance value.">
+  </Step>
+</Steps>
+
+<Note>
+  **Refresh SMS Compliance** is only available for external numbers. Phonely numbers use the A2P 10DLC registration status from **Settings > Messaging**.
+</Note>
