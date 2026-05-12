@@ -59,3 +59,46 @@ You can:
 - Observe how prompts, branches, and logic behave in real time
 
 This makes Ask AI a powerful companion to test your agent, helping you debug conversational issues before publishing.
+
+## Restore Recent Ask AI Chats
+
+Ask AI saves completed assistant chats so you can return to recent work without rebuilding the conversation from scratch. Use chat history when you want to revisit a workflow change, continue a previous troubleshooting thread, or recover context from an earlier analysis.
+
+{/* TODO: Add a screenshot of the Ask AI chat history menu showing recent sessions, the refresh action, and the remove chat control. */}
+
+To restore a chat:
+
+1. Open Ask AI.
+2. Click the **Chat history** clock icon.
+3. Select a recent chat from the **Chat history** menu.
+
+The restored chat includes the previous messages and relevant context from that session. If a past chat included an unfinished confirmation, Ask AI marks that confirmation as expired so you can choose whether to run the action again in the current session.
+
+### Remove a Saved Chat
+
+Use **Remove chat** from the chat history menu to hide a saved Ask AI session from your history. Removing a chat does not change your agent, workflow, calls, or settings.
+
+## Test API Request Blocks From Chat
+
+When you are editing a workflow, Ask AI can help test an existing **API Request** block from the Assistant chat. This is useful when you want to verify the block's test configuration, inspect the returned response, or create updated response variables without leaving the conversation.
+
+Ask AI always shows a confirmation card before running an API Request test because the request can contact an external service.
+
+<Steps>
+  <Step title="Open the workflow that contains the API Request block.">
+  </Step>
+  <Step title="Ask AI to test the specific API Request block.">
+  </Step>
+  <Step title="Review the confirmation card, including the request method and Test URL.">
+  </Step>
+  <Step title="Click Run test to send the request.">
+  </Step>
+  <Step title="Review the result in chat and in the block's test response.">
+  </Step>
+</Steps>
+
+<Note>
+  Ask AI uses the block's **Test Configuration** fields for API Request tests. It does not fall back to the runtime URL configured for live calls.
+</Note>
+
+Successful tests can update the API Request block's response variables so downstream blocks can use the latest response shape. Failed tests save the test response for review but do not update output variables.
