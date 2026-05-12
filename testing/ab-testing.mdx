@@ -25,15 +25,43 @@ This gives you clear, data-driven insights into what changes actually improve pe
 1. Go to your Phonely menu and click to open Testing .
 2. Choose A/B Testing from the top navigation bar.
 
-You'll see three sections:
+The A/B tests page opens with a toolbar and two view options:
+
+- **Kanban view** groups tests into status columns.
+- **Table view** shows every test in a sortable table.
+- **Filter** narrows tests by category, success criteria, end criteria, or winner.
+- **New test** opens the test setup window.
+
+{/* TODO: Replace older A/B testing visuals with a screenshot of the current A/B tests toolbar showing Kanban view, Table view, Filter, and New test. */}
+
+In Kanban view, you'll see three sections:
 
 - **Planned** – Tests you've set up but haven't started yet.
 - **In Progress** – Tests currently running on live calls.
 - **Completed** – Finished tests where you can review performance results.
 
+## A/B Test Dashboard Views
+
+Use **Kanban view** when you want to manage tests by stage. Planned tests show setup actions, in-progress tests show live progress, and completed tests show result summaries.
+
+Use **Table view** when you want to compare many tests at once. The table includes:
+
+| Column | What it shows |
+| :-- | :-- |
+| **Name** | The test name. |
+| **Status** | Planned, Running, or Completed. |
+| **Date** | The started or completed date when available. |
+| **Progress** | Calls completed or days elapsed against the end criteria. |
+| **Control** | The control agent success rate. |
+| **Variant** | The variant agent success rate. |
+| **Delta** | The percentage-point difference between variant and control. |
+| **Winner** | The winning arm for completed tests, when one can be determined. |
+
+Use **Filter** to focus the list before reviewing results. Filters can include test category, success criteria, end criteria, and completed-test winner.
+
 ## Creating a New A/B Test
 
-Click create a new test in the Planned section to begin. A step-by-step setup window will appear.
+Click **New test** in the toolbar or **Create a new test** in the Planned section to begin. A step-by-step setup window will appear.
 
 **Name and Describe Your Test**
 
@@ -153,6 +181,8 @@ Your test will then appear under in progress, showing live metrics such as:
 
 Calls will automatically be divided between your Base Agent and Test Agent.
 
+If an agent already has an active test, finish or terminate that test before starting another one for the same agent.
+
 ![Execute An Ab Test Gi](/assets/execute-an-ab-test.gif)
 
 ## Monitoring and Analyzing Results
@@ -172,8 +202,12 @@ Click **View Results** to analyze:
 - Performance metrics (success rate, duration, end reason distribution).
 - Comparative insights between Base and Test agents.
 - Which version achieved better alignment with your success criteria.
+- The calls assigned to each arm, so you can inspect the underlying conversations.
+- Statistical details such as chance variant wins, confidence interval, z-score, and p-value when enough calls exist.
 
 The variant with the higher success percentage is your winning configuration, which you can apply to your main agent for future calls.
+
+You can also click **Ask AI to explain** in the results detail view to get a plain-language explanation of the statistical result for that test.
 
 ## How Phonely Calculates A/B Test Results
 
