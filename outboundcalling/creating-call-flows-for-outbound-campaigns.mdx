@@ -118,6 +118,12 @@ If you prefer full control over the conversation design, you can start from scra
     - **Code** – Add custom logic using scripts.
     - **Google Sheets / Gmail** – Log data or send messages directly.
     - **Build a Custom Action** – Create an advanced custom integration.
+
+    #### **Pre-Call Actions**
+
+    Outbound workflows also support pre-call actions above the **Make Call** block. Use them to prepare data before Phonely places the outbound call, such as calling an API, running code, applying a filter, or sending a setup SMS when your workflow requires it.
+
+    Only one pre-call chain can connect into the **Make Call** block. Connect the final pre-call action to the top handle of **Make Call**, then continue building the answered-call path from the bottom handle.
   </Step>
   <Step title="Connect and Configure">
     Drag connectors between nodes to define the call logic. The visual editor lets you zoom, pan, and adjust spacing for clarity.
