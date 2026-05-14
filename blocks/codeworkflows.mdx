@@ -19,6 +19,20 @@ When a Code Block runs, it:
   Currently, Code Blocks only support Python
 </Danger>
 
+<Info>
+  **Supported Python libraries**
+
+  The Code Block runtime only supports a fixed set of standard-library imports:
+
+  - `math`
+  - `datetime`
+  - `json`
+  - `random`
+  - `time`
+
+  Importing any other library, or using `__import__` to load one dynamically, will fail validation. Stick to the libraries above when writing or asking the AI to generate code.
+</Info>
+
 <iframe src="https://www.loom.com/embed/d9eb80087ffb4880bc6321edad4a9b1a" title="Loom video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
 
 ## When to Use

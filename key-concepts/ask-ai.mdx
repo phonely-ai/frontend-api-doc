@@ -59,3 +59,13 @@ You can:
 - Observe how prompts, branches, and logic behave in real time
 
 This makes Ask AI a powerful companion to test your agent, helping you debug conversational issues before publishing.
+
+#### Talk-mode test sessions persist while a web call is active
+
+When you start a talk-mode test, Ask AI opens the Test panel and runs a live web call against your agent. While that web call is in progress:
+
+- Closing the side panel or switching to the Assistant tab no longer ends the call. The transcript and call state are preserved.
+- Re-opening the Ask AI panel takes you straight back into the Test tab in talk mode for the active call, so you can pick up the conversation where you left off.
+- Switching between chat and talk modes from the input bar no longer auto-starts a web call. You have to click **Start Test** to begin a new talk-mode session.
+
+{/* TODO: Add screenshot showing reopening the Ask AI side panel into an active talk-mode test call. */}
