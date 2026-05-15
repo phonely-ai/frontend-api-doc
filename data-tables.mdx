@@ -146,9 +146,11 @@ The metric name is the column header. Make it descriptive enough that someone ca
 
 ### Formula Language
 
-Formulas define how each metric is calculated per row group. They support arithmetic expressions with variable references.
+Formulas define how each metric is calculated per row group. Each formula must be a complete **numeric expression** -- the value that fills the cell. Predicates (`@topic.billing`, `@outcome.success`, list groups, AND/OR/NOT) describe *which calls match* and only appear inside `count(...)`, `pct(...)`, or as a filter argument to an aggregate.
 
-**Operators:** `+` `-` `*` `/` `%` (modulo) `(` `)` parentheses
+**Numeric operators:** `+` `-` `*` `/` `%` (modulo) `(` `)` parentheses
+
+**Predicate operators (inside `count(...)`, `pct(...)`, or aggregate filters):** `AND`, `OR`, `NOT`
 
 **Max formula length:** 500 characters.
 
@@ -164,62 +166,94 @@ Always available, regardless of agent configuration.
 
 | Variable | Returns | Description |
 | :--- | :--- | :--- |
-| `@total` | Count | Total calls in the row group |
+| `count()` | Count | Total calls in the row group |
 | `@duration` | Average (seconds) | Average call duration |
 | `@custom_call_outcome_value` | Average | Average custom call outcome value |
 | `@total_transfer_duration` | Average (seconds) | Average total transfer duration |
 
-### Namespaced Variables
+<Info>
+  `@total` and `@count` are accepted as aliases for `count()` and continue to work in saved formulas. New formulas should use `count()`.
+</Info>
 
-Namespaced variables count calls matching a specific metadata category within the row group. They return **counts**, making them ideal for percentages and ratios.
+### Predicate Functions
+
+A **predicate** describes which calls to count. To turn a predicate into a number you can put in a cell, wrap it in one of the predicate functions.
+
+| Function | Returns | Description |
+| :--- | :--- | :--- |
+| `count()` | Number | Total calls in the row group |
+| `count(predicate)` | Number | Number of calls matching the predicate |
+| `pct(predicate)` | Percentage | Percentage of calls matching the predicate (0--100) |
+
+**Examples:**
+
+```text
+count(@outcome.Appointment_Confirmed)
+```
+
+```text
+pct(@sentiment.negative)
+```
+
+```text
+count(@outcome.Call_Escalated OR @outcome.Assistance_Requested)
+```
+
+<Warning>
+  A bare predicate such as `@topic.billing` or `@topic[billing, support]` is **not** a valid formula on its own. Wrap it in `count(...)`, `pct(...)`, or use it as the filter argument to an aggregate (see [Aggregate Functions](#aggregate-functions)).
+</Warning>
+
+### Category Predicates
+
+Category predicates match calls by metadata category and are populated from the agent's configuration and observed data.
 
 <AccordionGroup>
-  <Accordion title="Outcome Variables -- @outcome.value">
-    Count calls that include a specific outcome from the agent's **latest published version**. Only outcomes present in the published flows appear in the autocomplete.
+  <Accordion title="Outcome Predicates -- @outcome.value">
+    Matches calls that include a specific outcome from the agent's **latest published version**. Only outcomes present in the published flows appear in the autocomplete.
 
     **Example formulas:**
     ```text
-    (@outcome.Appointment_Confirmed / @total) * 100    
+    pct(@outcome.Appointment_Confirmed)
     ```
     ```text
-    @outcome.Call_Escalated + @outcome.Assistance_Requested
+    count(@outcome.Call_Escalated OR @outcome.Assistance_Requested)
     ```
   </Accordion>
-  <Accordion title="Custom Call Outcome Variables -- @custom_call_outcome.value">
-    Count calls matching a custom call outcome value. These are populated from observed values in your call data.
+  <Accordion title="Custom Call Outcome Predicates -- @custom_call_outcome.value">
+    Matches calls with a specific custom call outcome value. Values are populated from observed data.
 
     **Example formula:**
     ```text
-    (@custom_call_outcome.sale_completed / @total) * 100
+    pct(@custom_call_outcome.sale_completed)
     ```
   </Accordion>
-  <Accordion title="Topic Variables -- @topic.value">
-    Count calls tagged with a specific call topic **currently configured for the agent**. Only active topics appear in the autocomplete.
+  <Accordion title="Topic Predicates -- @topic.value">
+    Matches calls tagged with a specific call topic **currently configured for the agent**. Only active topics appear in the autocomplete.
 
     **Example formulas:**
     ```text
-    (@topic.appointment_booked / @total) * 100
+    pct(@topic.appointment_booked)
     ```
     ```text
-    @topic.callback_requested
+    count(@topic.callback_requested)
     ```
   </Accordion>
-  <Accordion title="Sentiment Variables -- @sentiment.value">
-    Count calls by sentiment classification. Three fixed values:
+  <Accordion title="Sentiment Predicates -- @sentiment.value">
+    Matches calls by sentiment classification. Three fixed values:
 
     | Variable | Description |
     | :--- | :--- |
-    | `@sentiment.positive` | Positive sentiment count |
-    | `@sentiment.neutral` | Neutral sentiment count |
-    | `@sentiment.negative` | Negative sentiment count |
+    | `@sentiment.positive` | Positive sentiment |
+    | `@sentiment.neutral` | Neutral sentiment |
+    | `@sentiment.negative` | Negative sentiment |
 
     **Example formula:**
     ```text
-    (@sentiment.negative / @total) * 100
+    pct(@sentiment.negative)
     ```
   </Accordion>
-  <Accordion title="End Reason Variables -- @ended_reason.value">
-    Count calls by how they ended.
+  <Accordion title="End Reason Predicates -- @ended_reason.value">
+    Matches calls by how they ended.
 
     | Variable | Meaning |
     | :--- | :--- |
@@ -233,54 +267,140 @@ Namespaced variables count calls matching a specific metadata category within th
 
     **Example formula:**
     ```text
-    (@ended_reason.voicemail / @total) * 100
+    pct(@ended_reason.voicemail)
     ```
   </Accordion>
-  <Accordion title="Block Variables -- @block.actionId__workflowId">
-    Count calls that passed through a specific workflow block. These are populated from the published inbound workflow's action nodes.
+  <Accordion title="Block Predicates -- @block.actionId__workflowId">
+    Matches calls that passed through a specific workflow block. Block tokens are populated from the published inbound workflow's action nodes.
 
     **Example formula:**
     ```text
-    (@block.transfer_call_123__wf_abc123 / @total) * 100
+    pct(@block.transfer_call_123__wf_abc123)
+    ```
+  </Accordion>
+  <Accordion title="Metadata Predicates -- @metadata.key">
+    Matches calls that carry a custom metadata key. Use with `NOT` to **exclude** calls with that key from a metric.
+
+    **Example formulas:**
+    ```text
+    count(@metadata.lead_id)
+    ```
+    ```text
+    pct(@outcome.success AND NOT @metadata.test_call)
     ```
   </Accordion>
 </AccordionGroup>
 
-### Exclusion Directives
+### Combining Predicates with AND, OR, NOT
 
-Exclusions remove calls from the calculation **before** the metric is computed. Append them to the end of a formula.
+Inside a `count(...)`, `pct(...)`, or aggregate filter, combine multiple predicates with logical operators.
 
-| Syntax | Effect |
+| Operator | Meaning |
 | :--- | :--- |
-| `-@{metadata_key}` | Exclude calls with a specific custom metadata key |
-| `-@outcome.value` | Exclude calls with a specific outcome |
-| `-@topic.value` | Exclude calls with a specific topic |
+| `AND` | Calls matching **both** predicates |
+| `OR` | Calls matching **either** predicate |
+| `NOT` | Calls **not** matching the predicate |
 
-**Example:** Calculate success rate excluding calls that have a `lead_id` metadata key:
+**Examples:**
 
 ```text
-(@outcome.success / @total) * 100 -@{lead_id}
+count(@topic.billing AND @sentiment.negative)
 ```
 
-<Info>
-  Exclusion shorthand: `-@sentiment.negative` (no space, unary minus attached to a sentiment or end-reason variable) expands to `(@total - @sentiment.negative)`. This is a subtraction, not an exclusion directive.
-</Info>
+```text
+pct(@outcome.success OR @outcome.qualified)
+```
+
+```text
+count(@topic.appointment_booked AND NOT @ended_reason.voicemail)
+```
+
+### List Sugar for Same-Family OR
+
+When combining several values from the **same family** with `OR`, use the bracket shorthand. `@topic[billing, support]` is equivalent to `@topic.billing OR @topic.support`.
+
+```text
+count(@topic[billing, support, pricing])
+```
+
+```text
+pct(@outcome[booked, qualified])
+```
+
+<Note>
+  List sugar only works within one family. Use `OR` to combine across families: `count(@topic[billing, support] OR @outcome.escalated)`.
+</Note>
+
+### Excluding Calls with NOT
+
+To remove calls from a metric, wrap the predicate in `NOT` and combine with `AND`.
+
+**Example:** Success rate excluding calls flagged with the `lead_id` metadata key:
+
+```text
+pct(@outcome.success AND NOT @metadata.lead_id)
+```
+
+**Example:** Negative sentiment rate excluding voicemails:
+
+```text
+pct(@sentiment.negative AND NOT @ended_reason.voicemail)
+```
+
+<Warning>
+  The legacy exclusion shorthand `-@{metadata_key}` is no longer accepted. Use `NOT @metadata.<key>` inside a predicate function instead.
+</Warning>
 
 ### Example Formulas
 
 | Goal | Formula |
 | :--- | :--- |
-| Total calls | `@total` |
-| Appointment booked rate (%) | `(@outcome.Appointment_Confirmed / @total) * 100` |
-| Negative sentiment rate (%) | `(@sentiment.negative / @total) * 100` |
-| Average duration in minutes | `@duration / 60` |
-| Voicemail rate (%) | `(@ended_reason.voicemail / @total) * 100` |
-| Customer hangup rate (%) | `(@ended_reason.customer-ended-call / @total) * 100` |
-| Combined escalation count | `@outcome.Call_Escalated + @topic.callback_requested` |
+| Total calls | `count()` |
+| Appointment booked rate (%) | `pct(@outcome.Appointment_Confirmed)` |
+| Negative sentiment rate (%) | `pct(@sentiment.negative)` |
+| Average duration in minutes | `avg(@duration) / 60` |
+| Voicemail rate (%) | `pct(@ended_reason.voicemail)` |
+| Customer hangup rate (%) | `pct(@ended_reason.customer-ended-call)` |
+| Combined escalation count | `count(@outcome.Call_Escalated OR @topic.callback_requested)` |
+| Billing or support call count | `count(@topic[billing, support])` |
+| Success rate excluding test calls | `pct(@outcome.success AND NOT @metadata.test_call)` |
 
 <Warning>
   Division by zero returns `0`. Missing variables default to `0`. Formulas are validated both client-side and server-side before saving.
 </Warning>
+
+### Aggregate Functions
+
+Aggregate functions compute a numeric statistic across calls. The first argument is a numeric measure (`@duration`, `@total_transfer_duration`, or `@custom_call_outcome_value`). An optional second argument is a predicate that narrows the calculation to a subset of calls.
+
+| Function | Returns |
+| :--- | :--- |
+| `avg`, `sum`, `min`, `max`, `median` | The named statistic |
+| `p75`, `p90`, `p95`, `p99` | The named percentile |
+
+**Shape:** `func(@measure)` or `func(@measure, predicate)`
+
+**Examples:**
+
+```text
+avg(@duration)
+```
+
+```text
+p95(@duration, @outcome.success)
+```
+
+```text
+sum(@total_transfer_duration, @topic[billing, support]) / 60
+```
+
+```text
+avg(@duration, @outcome.failed) - avg(@duration, @outcome.success)
+```
+
+<Note>
+  `count` and `pct` only accept a predicate -- not a numeric measure. Use `avg(@duration)` for average duration, not `count(@duration)`.
+</Note>
 
 ## Targets
 
@@ -325,10 +445,11 @@ Click any **metric cell** to open a slide-over panel showing the individual call
   <Accordion title="How drill-down filtering works">
     The drill-down extracts variables from the metric formula and uses them as filters:
 
-    - **Simple formulas** (no division): shows all calls matching any referenced variable
-    - **Ratio formulas** (with `/`): shows only the **numerator-side calls** -- the ones that drove the percentage
+    - **`count(predicate)` and `pct(predicate)`**: shows calls matching the predicate (including `AND`, `OR`, `NOT`, and list sugar).
+    - **Filtered aggregates** like `avg(@duration, predicate)`: shows calls matching the filter predicate.
+    - **Ratio formulas** such as `count(predicate) / count() * 100`: shows the **numerator-side calls** -- the ones that drove the percentage.
 
-    For example, `(@sentiment.negative / @total) * 100` drills into the negative-sentiment calls only, not every call in the denominator.
+    For example, `pct(@sentiment.negative)` drills into the negative-sentiment calls only, not every call in the row group.
 
     The date range is scoped to the row's time bucket, and group-based filters (prompt version, phone number) are applied automatically.
   </Accordion>
