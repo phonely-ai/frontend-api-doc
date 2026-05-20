@@ -78,6 +78,14 @@ Invite team members to collaborate within your organization. Each member can acc
     **Admin**
 
     Admins have full access to everything in the organization. Use this role for users who need to manage workspace settings, resources, and member access.
+
+    **Call history only**
+
+    Call-history-only users have a restricted experience scoped to call history. Ask AI, call exports, run-report actions, and other workspace pages are hidden, and they are automatically redirected to `/call-history` when they sign in or navigate elsewhere. Use this role for stakeholders who only need to review call recordings, transcripts, and outcomes without touching agent configuration.
+
+    {/* TODO: Add screenshot showing the role selector dropdown including the new "Call history only" option in Organization Settings > Members. */}
+
+    This role is assigned from the member row in `Settings > Organization > Members` by opening the role dropdown next to a teammate and choosing `Call history only`. Picking any other role (`Admin`, `Member`, or `Viewer`) restores standard access. Admin users cannot be downgraded to call history only.
   </Step>
   <Step title="Click Invite.">
     Once invited, the member will receive an email invitation to join your organization.

@@ -79,3 +79,15 @@ Admins may also see:
 ## Viewer Access
 
 If the current user inherits viewer UX, only the `Profile` tab is available.
+
+## Call History Only Access
+
+Users with the `Call history only` role have a restricted experience scoped to call history:
+
+- Sidebar navigation, the home page, and the agent switcher "Create Agent" entry are hidden, leaving only the call history view available.
+- Ask AI is disabled everywhere it would otherwise appear, including the command palette (`⌘K`), the assistant side panel trigger, and the `Analyze with AI` action on selected calls. The `/api/assistant` endpoint also rejects these users with an HTTP 403.
+- Call export and `Run Report` actions on the call list are hidden, so these users can review history but cannot export it.
+- Customize sidebar, latest news, help center, community, and settings entries in the profile menu are hidden; only `Log out` remains.
+- Signing in or navigating to any other route automatically redirects to `/call-history` for the user's first accessible agent.
+
+Admins assign or revoke this role from `Settings > Organization > Members`. See [Account and Organization Settings](/manage-account-and-organization-settings/organization-settings) for the role picker.
