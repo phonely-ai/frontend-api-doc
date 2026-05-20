@@ -127,3 +127,50 @@ To filter calls by topic:
 />
 
 The call history table updates to show only calls associated with the selected topics.
+
+## Analytics Fields
+
+Analytics Fields let you define your own structured tags that Phonely's AI extracts from each future call. Use them when call outcomes, topics, and sentiment don't capture what you need to track, such as the reason callers dropped off, the product they asked about, or a numeric observation like the number of times the caller repeated themselves.
+
+Once defined, analytics fields are available for [Performance](/performance) charts (including [pinned charts from Ask AI](/performance#pinned-charts-from-ask-ai)) so you can monitor those values over time.
+
+<Note>
+  Analytics fields apply to **future calls only**. They don't backfill historical calls. Plan to wait for new calls to come in before charts based on a new field have data.
+</Note>
+
+{/* TODO: Add a screenshot of the Analytics Fields section in Agent Settings > Call Tagging, showing a field with type, description, and options. */}
+
+### Add an Analytics Field
+
+1. From the left sidebar, open the agent and go to **Settings**.
+2. Open the **Call Tagging** tab.
+3. Find the **Analytics Fields** section and click **Add field**.
+4. Enter a **Label** that describes what the field tracks (for example, *Dropoff reason*).
+5. Choose a **Type**:
+   - **Category** - the AI picks one option per call from your list.
+   - **Multi-category** - the AI can pick more than one option per call.
+   - **Number** - the AI extracts a numeric value from the call.
+6. In the field **Description**, tell the AI exactly what to extract. Be specific - this is the instruction the model follows on every call.
+7. For **Category** and **Multi-category** fields, add the options the AI is allowed to choose from. Give each option a clear label and an optional description that explains when it should be selected.
+8. Toggle a field or option off to stop using it without deleting your configuration.
+
+Changes save automatically.
+
+### Use Analytics Fields in Performance
+
+After a field is defined and new calls have been processed:
+
+- **Category** and **Multi-category** fields can be used as a dimension when you ask Ask AI to build a chart (for example, *"Calls by dropoff reason for the last 30 days"*).
+- **Number** fields can be used as a measure with operations like average, sum, min, max, or percentiles.
+
+See [Pinned charts from Ask AI](/performance#pinned-charts-from-ask-ai) for how to turn a question into a chart that lives in your Performance view.
+
+Analytics fields are not currently exposed as Performance view filter controls. Use the existing filters (status, outcome, topic, end reason, call type, sentiment) to narrow down calls, and use analytics fields as chart dimensions and measures.
+
+### Edit or remove an Analytics Field
+
+All edits happen in **Settings > Call Tagging > Analytics Fields**:
+
+- **Edit** - update the label, description, type, or options. Existing extracted values stay attached to past calls.
+- **Disable** - toggle the field off to pause extraction without losing the configuration.
+- **Delete** - remove the field entirely. Past calls keep any values that were already extracted, but the field no longer appears in charts and Ask AI.

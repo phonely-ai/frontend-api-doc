@@ -298,3 +298,45 @@ This makes it easy to move from **trend \>  evidence \>  action** in seconds.
 Clicking on any call in the list opens the highlights view for that call. This gives you a detailed, end-to-end snapshot of the interaction, including: call summary, caller details, call stats, and call Flow
 
 This makes it easy to move from **high-level trends** to **specific examples** in just a few clicks, so you can validate insights, review edge cases, and quickly understand why a call was successful or where it broke down.
+
+## Pinned charts from Ask AI
+
+The built-in Performance, Call Outcomes, Call Topics, and End Call Reasons charts cover the most common questions. When you want something more specific, ask Ask AI to build a chart for you and pin it to the current view alongside the system charts.
+
+{/* TODO: Add a GIF showing the Ask AI panel proposing a chart preview and the user clicking Pin to add it to the current Performance view. */}
+
+Use pinned charts when you want to:
+
+- Track a single metric that the built-in charts don't surface, such as calls by prompt version or calls by business phone number.
+- Compare ranking or distribution across categories like outcomes, topics, end reasons, statuses, call types, sentiments, or custom call outcomes.
+- Watch a trend over time with a different time grain than the main Performance chart.
+
+### Create a chart with Ask AI
+
+1. On the **Performance** page for a specific agent, open **Ask AI**.
+2. Describe the chart you want, for example "Show calls by outcome over the last 7 days" or "Top call topics this month".
+3. Ask AI replies with a chart preview card in the chat. Review the title, chart type (bar, line, or pie), and the data it covers.
+4. Click **Pin to view** on the preview to add the chart to the active Performance view.
+
+Pinned charts share the view's filters, route agent, and timezone. If you asked for a relative window such as "last 7 days", the pinned chart keeps that window; otherwise it follows the view's current date range.
+
+### Manage pinned charts
+
+Pinned charts appear below the built-in charts on the Performance page.
+
+- **Reorder**: drag a pinned chart card to a new position in the grid.
+- **Resize**: hover the right edge of a pinned chart and drag to change its width.
+- **Remove**: click the trash icon in the top right of the chart to remove it from the view.
+
+Pinned charts belong to the active Performance view. Switching views shows that view's own set of pinned charts.
+
+### What Ask AI can chart
+
+Ask AI builds single-dimension charts on top of your call data. It can chart:
+
+- **Categorical dimensions**: outcome, topic, end reason, status, call type, sentiment, custom call outcome, prompt version, customer phone number, and business phone number.
+- **Time trends**: started-at time using 15-minute, hourly, daily, weekly, or monthly grain.
+- **Measures**: call count, average or percentile call duration, total transfer duration, and custom call outcome values.
+- **Analytics-derived fields** you've configured for the agent. See [Analytics Fields](/call-topics-and-sentiments#analytics-fields) for how to set those up.
+
+Ask AI only creates simple single-series charts. If you ask for a multi-dimension or multi-series breakdown, it will explain the limitation and point you at the built-in controls when they cover the question.
