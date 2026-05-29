@@ -78,6 +78,49 @@ You can:
 - **Mark Favorites:** Click the heart icon to save preferred voices.
 - **View Usage Metrics:** Review voice usage metrics to understand call volume, duration, and overall AI voice consumption.
 
+## Filter to Your Voices Only
+
+The **Mine** filter pill on the voice library toolbar narrows the all-voices table to voices you own — anything you added via **Add by Provider** or cloned from audio. Each matching row also shows a **Mine** badge so you can spot them at a glance when the filter is off.
+
+{/* TODO: Add a screenshot of the voice library toolbar showing the Mine filter pill active with badged rows. */}
+
+A voice counts as "yours" if you created it directly, or if it belongs to your organization. Public, featured, and platform-provided voices are excluded from this view.
+
+<Tip>
+  Use the **Mine** filter to quickly find a voice you just added without scrolling through the full library.
+</Tip>
+
+## Try a Voice Before You Commit
+
+The voice picker includes a **Test Agent** panel that lets you preview the currently focused voice with your agent's own configuration — without leaving the picker or saving any changes.
+
+{/* TODO: Add a screenshot of the Test Agent panel with the waveform visualization and editable sample text. */}
+
+The panel uses:
+
+- **Editable sample text** — defaults to your agent's greeting, but you can type anything up to 500 characters to hear how the voice handles your specific phrasing.
+- **The agent's phonetic dictionary** — any pronunciations you've configured are applied during preview, so brand names and technical terms sound the way you want them to.
+- **Office noise mix** — when you've set a background ambient sound, the preview plays with that mix so the voice sounds the way it will in production.
+- **Your selected speed** — the speed slider value is applied to the preview, letting you audition pacing changes in real time.
+
+Click **Play** to hear the voice; a 3-second scrolling waveform shows the audio in motion. Edit the sample text and play again to compare results without leaving the screen.
+
+## Speed: Per-Provider Ranges
+
+The speed slider's effective range adapts to the voice you have focused, because each TTS provider supports a different speech-rate window:
+
+| Provider | Speed Range | Notes |
+| :-- | :-- | :-- |
+| ElevenLabs | 0.7 – 1.2 | Narrow window; best for natural pacing. |
+| Cartesia | 0.6 – 1.5 | Wider range; supports both slow and brisk delivery. |
+| Rime | 0.5 – 1.5 | Widest range; can go very slow or very fast. |
+
+`1.0` is normal speed on every provider. When you switch voices between providers, your saved speed is remapped so the *relative* position around `1.0` is preserved — a speed near the top of ElevenLabs's range will land near the top of Cartesia's or Rime's range after switching, rather than getting clipped or reset.
+
+<Tip>
+  If you don't see your previously saved speed exactly mirrored after switching to a new provider, that's expected — the slider position is remapped proportionally so the perceived pacing stays consistent.
+</Tip>
+
 After customizing, your chosen voice appears at the top of the **Agent Design** screen as the active voice. This voice will be used for all calls made by your agent.
 
 <Tip>

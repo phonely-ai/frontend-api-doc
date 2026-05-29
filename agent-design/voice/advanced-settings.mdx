@@ -44,6 +44,21 @@ The transcriber setting allows you to choose which speech-to-text service Phonel
 
 From the dropdown, you can select your preferred transcription provider (e.g., Phonely (Recommended), Deepgram, Flux, Gladia, Soniox). Each provider may differ slightly in latency, accuracy, and language handling.
 
+### Transcriber Languages
+
+When your selected transcriber supports multi-language transcription, a **Transcriber Languages** section appears underneath the transcriber dropdown so you can tell the transcriber which languages to expect on calls. Picking the right set helps the transcriber detect language faster and reduces misrecognition for accented or code-switched speech.
+
+{/* TODO: Add a screenshot of the Transcriber Languages multi-select shown beneath a Gladia / Soniox transcriber selection. */}
+
+Language selection is currently available for the following transcribers:
+
+- **Gladia**
+- **Soniox**
+
+For other transcribers, this section is hidden because the transcriber either auto-detects language or supports a single language.
+
+Available languages include: English, French, Spanish, German, Italian, Portuguese, Dutch, Polish, Russian, Japanese, Chinese, Arabic, and Hindi. Pick one or more from the multi-select; an empty selection lets the transcriber fall back to its default behavior.
+
 ## Response Delay
 
 Defines how long the agent waits after the agent waits after a user finishes speaking before responding. This helps avoid awkward overlaps or overly long pauses between sentences.

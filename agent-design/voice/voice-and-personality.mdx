@@ -141,3 +141,41 @@ IPA phonemes represent individual sounds. For example, the word “Phonely” ca
 <Tip>
   Use this feature to maintain consistent pronunciation for your brand and technical terms.
 </Tip>
+
+### Three-Field Entry: Word, Pronunciation, Phonemes
+
+Each dictionary entry now has three inputs instead of two, giving you a friendlier way to capture pronunciation alongside the raw IPA:
+
+| Field | What it's for | Example |
+| :-- | :-- | :-- |
+| **Word** | The word in your script that should be re-pronounced. Matched in agent output. | `Phonely` |
+| **Pronunciation** | Your own phonetic respelling — a memo for yourself or your team in plain letters. | `foh-nuh-lee` |
+| **Phonemes** | The IPA phonemes the voice engine actually uses. Auto-suggested from the pronunciation. | `<<ˈ|f|oʊ|n|l|i>>` |
+
+Only the **Phonemes** field changes how your agent speaks at runtime — the **Pronunciation** field is saved alongside it as a human-readable reference and is not used by the voice engine.
+
+### Auto-Suggesting Phonemes
+
+You don't have to write IPA by hand anymore. As you type into the **Pronunciation** field, Phonely runs a phoneme generator in your browser and fills in the **Phonemes** field with a suggested IPA respelling — already formatted with the `<<...>>` and pipe separators the voice engine expects.
+
+{/* TODO: Add a screenshot of a phonetic dictionary row with the Word, Pronunciation, and Phonemes inputs, showing an auto-suggested IPA value. */}
+
+If the first suggestion isn't quite right, click the **regenerate** icon next to the Phonemes field to cycle through alternative variants:
+
+- **American English** pronunciation
+- **British English** pronunciation
+- **Scottish English** pronunciation
+
+Duplicate suggestions are skipped automatically, so you only see distinct options. You can also edit the Phonemes field directly at any time — manual edits take precedence over the suggestions.
+
+<Tip>
+  The phoneme generator covers most English words. For names, made-up brand terms, or anything the generator struggles with, type the closest English-sounding spelling into **Pronunciation** (for example, `kar-tee-zhuh` for *Cartesia*) and let the suggestion fall into place.
+</Tip>
+
+### Preview a Pronunciation in Place
+
+Next to the **Phonemes** field, an inline **Play** button previews just the current word with your in-progress IPA — so you can hear how it sounds before saving the entry. The preview runs at normal speed with background sound off, so what you hear is the pronunciation in isolation.
+
+<Tip>
+  Use the inline Play button to iterate on tricky words. Tweak the IPA, hit Play, repeat — no need to save the entry and run a full test call.
+</Tip>
