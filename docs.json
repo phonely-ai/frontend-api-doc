@@ -226,6 +226,12 @@
             ]
           },
           {
+            "group": "Web SDK",
+            "pages": [
+              "api-reference/web-sdk"
+            ]
+          },
+          {
             "group": "Call Management",
             "pages": [
               "api-reference/endpoint/list-calls",
