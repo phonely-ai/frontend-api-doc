@@ -9,9 +9,20 @@ Test from here removes that friction. It allows you to jump directly into a spec
 
 This is especially useful for long or complex flows where re-testing from the start would slow you down.
 
+### Choose a test mode
+
+When you open the **Test from here** dialog, you can choose between two modes:
+
+| Mode | What it opens | Best for |
+| :--- | :--- | :--- |
+| **Chat** | A web chat session in the Ask AI / Test panel | Testing text-based conversation flows |
+| **Voice** | A web call session in the Test panel | Testing voice prompts and audio behavior |
+
+Both modes start the conversation from the selected block with the same mocked live variables you provide in the dialog. Choose the mode that best matches how callers will reach your agent.
+
 ### Start from a specific block
 
-To begin, locate the block you want to test in the Flow Builder canvas. Open the block’s context menu (the three-dot menu) and select **test from here**. This tells Phonely to treat the selected node as the entry point for the test.
+To begin, locate the block you want to test in the Flow Builder canvas. Open the block's context menu (the three-dot menu) and select **test from here**. This tells Phonely to treat the selected node as the entry point for the test.
 
 <img
   src="/assets/test-here.gif"
@@ -24,7 +35,7 @@ Once selected, a test setup dialog appears.
 
 ### Providing test inputs
 
-In the Test from here modal, you’ll see fields for key call context values such as the customer phone number, the Phonely phone number, and caller metadata like ZIP code. These values act as dummy data that simulate a real inbound call.
+In the Test from here modal, you'll see fields for key call context values such as the customer phone number, the Phonely phone number, and caller metadata like ZIP code. These values act as dummy data that simulate a real inbound call.
 
 Enter realistic values here if your downstream logic depends on them, for example, when testing personalization, routing rules, or integrations that rely on caller metadata. When ready, click **Run test** to start the simulation.
 
@@ -41,7 +52,7 @@ After launching the test, Phonely opens the **Test** panel and begins the conver
 
 As the conversation progresses, the panel shows:
 
-- The agent’s spoken responses
+- The agent's spoken responses
 - Your replies
 - When variables are captured and stored
 - Any connected actions, such as database lookups or HTTP requests
@@ -57,16 +68,16 @@ This makes it easy to verify that prompts sound natural, variables are confirmed
 
 ### Validate variables and integrations
 
-One of the most powerful aspects of **test from here** is visibility. When the agent captures information, like an order number or email, you’ll see a confirmation that variables were stored successfully. If the flow includes external integrations (for example, a Google Sheets lookup or a support ticket creation), you can immediately see whether those steps execute correctly and how the agent responds to success or failure.
+One of the most powerful aspects of **test from here** is visibility. When the agent captures information, like an order number or email, you'll see a confirmation that variables were stored successfully. If the flow includes external integrations (for example, a Google Sheets lookup or a support ticket creation), you can immediately see whether those steps execute correctly and how the agent responds to success or failure.
 
 This tight feedback loop helps you catch issues early, before publishing your flow.
 
 ### Restart and iterate quickly
 
-If something doesn’t work as expected, you don’t need to exit the builder or restart the entire flow. You can:
+If something doesn't work as expected, you don't need to exit the builder or restart the entire flow. You can:
 
 - Restart the test from the same node
 - Adjust prompts, conditions, or variables
 - Run test from here again to confirm your fix
 
-This makes iteration fast and keeps you focused on the part of the flow you’re actively improving. It’s the fastest way to ensure each part of your call flow works exactly as intended before you publish.
+This makes iteration fast and keeps you focused on the part of the flow you're actively improving. It's the fastest way to ensure each part of your call flow works exactly as intended before you publish.
