@@ -6,3 +6,7 @@ logo/*
 !logo/logo-small-purple.svg
 !logo/logo-small-white.svg
 node_modules/
+
+# Editor and OS cruft
+.idea/
+.DS_Store
