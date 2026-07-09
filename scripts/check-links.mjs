@@ -41,6 +41,14 @@ function isMintignored(relPath) {
   });
 }
 
+function safeStat(path) {
+  try {
+    return statSync(path);
+  } catch {
+    return null; // broken symlink or unreadable entry — treat as absent
+  }
+}
+
 // --- case-sensitive existence check (Windows fs lies about case)
 const dirCache = new Map();
 function listDir(dir) {
@@ -75,8 +83,9 @@ function hasPageBeneath(relDir) {
     return false;
   }
   return entries.some((name) => {
-    const full = join(dir, name);
-    if (statSync(full).isDirectory()) return hasPageBeneath(`${relDir}/${name}`);
+    const st = safeStat(join(dir, name));
+    if (!st) return false;
+    if (st.isDirectory()) return hasPageBeneath(`${relDir}/${name}`);
     return name.endsWith('.mdx') && !isMintignored(`${relDir}/${name}`);
   });
 }
@@ -85,7 +94,9 @@ function hasPageBeneath(relDir) {
 function walk(dir, out = []) {
   for (const name of readdirSync(dir)) {
     const full = join(dir, name);
-    if (statSync(full).isDirectory()) {
+    const st = safeStat(full);
+    if (!st) continue;
+    if (st.isDirectory()) {
       if (!SKIP_DIRS.has(name)) walk(full, out);
     } else if (name.endsWith('.mdx')) {
       out.push(full);
@@ -101,9 +112,12 @@ const LINK_PATTERNS = [
 ];
 
 function extractRefs(content) {
+  // Example paths inside code are not real links — strip fenced blocks and
+  // inline code before matching.
+  const prose = content.replace(/```[\s\S]*?```/g, '').replace(/`[^`\n]*`/g, '');
   const refs = new Set();
   for (const pattern of LINK_PATTERNS) {
-    for (const match of content.matchAll(pattern)) {
+    for (const match of prose.matchAll(pattern)) {
       let target = match[1];
       if (!target.startsWith('/') || target.startsWith('//')) continue; // external or protocol-relative
       target = target.split('#')[0].split('?')[0]; // strip anchor and query
