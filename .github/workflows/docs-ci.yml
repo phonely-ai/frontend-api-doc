@@ -1,0 +1,33 @@
+name: Docs CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Strict build validation — catches malformed docs.json / navigation,
+      # the realistic "site down" failure for a Mintlify deploy.
+      - name: Build validation
+        run: npx --no-install mint validate
+
+      - name: OpenAPI spec check
+        run: npx --no-install mint openapi-check openapi.json
+
+      # Custom checker instead of `mint broken-links`, which false-positives
+      # on pages nested in docs.json sub-groups (see scripts/check-links.mjs).
+      - name: Internal links & media references
+        run: node scripts/check-links.mjs
