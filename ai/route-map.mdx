@@ -1,66 +1,148 @@
 ---
 title: "AI Route Map"
-description: "Deterministic route and tab map for the Phonely frontend application."
+description: "Single source of truth for Phonely frontend routes, tabs, and task routing."
 ---
 
 ## Purpose
 
-Use this page to map a user task to the correct Phonely frontend route.
+Use this page to map a user task to the correct Phonely frontend route. This is the canonical route map for docs and docs-agent work; do not duplicate route tables in `skill.md` or `.mintlify/Assistant.md`.
 
-## Main Product Routes
+All routes below were verified against the Next.js App Router under `app/(main)/(routes)/`.
 
-| Route | Use this route for | Notes |
+## Primary Task Routes
+
+| Route | Use this route for | Router source |
 | --- | --- | --- |
-| `/home` | Default landing, AI chat, and high-level overview | Combines conversational AI with call metrics and recent activity. |
-| `/agent/{agentId}` | Agent workspace | Build tab is only available on agent pages. |
-| `/agent/{agentId}?tab=knowledge-base` | Documents, websites, and recordings | Use for KB tasks. |
-| `/agent/{agentId}?tab=workflows` | Workflow editor and automation logic | Use for canvas edits. |
-| `/agent/{agentId}?tab=settings` | Advanced agent settings | Hidden for viewer UX. |
-| `/performance/{agentId}` | Analytics, charts, and data tables | Use for KPI analysis. |
-| `/call-paths/{agentId}` | Call path visualization | Use for branch/path debugging. |
-| `/call-history/{agentId}` | Call list, recordings, and transcripts | Use for call review. |
-| `/agent-review/{orgId}` | Issue triage and team review | `/agent-review` redirects to the first available organization. |
-| `/event/{agentId}` | Event-level execution log | Use for integration and workflow debugging. |
-| `/campaign/{agentId}` | Outbound campaigns | Use for outbound flow and campaign work. |
-| `/testing/ab-test` | A/B testing index | This is the active testing surface in the current product. |
-| `/testing/evaluation` | Legacy evaluation route | Exists in code, but is currently unused in product flows. |
-| `/settings` | Workspace settings shell | Use query param `tab` for specific tabs. |
+| `/home` | Default authenticated landing page, AI chat, high-level metrics, and recent activity | `app/(main)/(routes)/home/page.tsx` |
+| `/agent/{agentId}` | Agent workspace default view, Agent Design, and top-level agent configuration | `app/(main)/(routes)/agent/(routes)/[agentId]/page.tsx` |
+| `/agent/{agentId}?tab=agent-design` | Agent Design tab | `app/(main)/(routes)/agent/(routes)/[agentId]/components/store/use-agent-tab-value-store.tsx` |
+| `/agent/{agentId}?tab=voice` | Voice picker and voice configuration | `app/(main)/(routes)/agent/(routes)/[agentId]/components/store/use-agent-tab-value-store.tsx` |
+| `/agent/{agentId}?tab=guidelines` | Agent guidelines | `app/(main)/(routes)/agent/(routes)/[agentId]/components/store/use-agent-tab-value-store.tsx` |
+| `/agent/{agentId}?tab=knowledge-base` | Documents, websites, recordings, and knowledge source management | `app/(main)/(routes)/agent/(routes)/[agentId]/components/store/use-agent-tab-value-store.tsx` |
+| `/agent/{agentId}?tab=workflows` | Workflow editor and automation logic | `app/(main)/(routes)/agent/(routes)/[agentId]/components/store/use-agent-tab-value-store.tsx` |
+| `/agent/{agentId}?tab=settings` | Agent settings | `app/(main)/(routes)/agent/(routes)/[agentId]/components/store/use-agent-tab-value-store.tsx` |
+| `/performance/{agentId}` | Analytics, charts, data tables, and KPI analysis | `app/(main)/(routes)/performance/(routes)/[agentId]/page.tsx` |
+| `/call-paths/{agentId}` | Call path visualization and branch/path debugging | `app/(main)/(routes)/call-paths/(routes)/[agentId]/page.tsx` |
+| `/call-history/{agentId}` | Call list, recordings, transcripts, highlights, and call review | `app/(main)/(routes)/call-history/(routes)/[agentId]/page.tsx` |
+| `/event/{agentId}` | Event-level execution log and integration/workflow debugging | `app/(main)/(routes)/event/(routes)/[agentId]/page.tsx` |
+| `/agent-review/{orgId}` | Flagged issue triage, statuses, severities, and team review notes | `app/(main)/(routes)/agent-review/(routes)/[orgId]/page.tsx` |
+| `/campaign/{agentId}` | Outbound campaign list and outbound call-flow management | `app/(main)/(routes)/campaign/(routes)/[agentId]/page.tsx` |
+| `/campaign/{agentId}/{campaignId}` | Specific outbound campaign overview, call list, and campaign workflow view | `app/(main)/(routes)/campaign/(routes)/[agentId]/(routes)/[campaignId]/page.tsx` |
+| `/testing/ab-test/{agentId}` | Current A/B testing surface for an agent | `app/(main)/(routes)/testing/ab-test/(routes)/[agentId]/page.tsx` |
+| `/settings` | Workspace settings shell | `app/(main)/(routes)/settings/page.tsx` |
 
-## Settings Tabs
+## Redirect and Index Routes
 
-Use these tab values on `/settings`:
+Use these routes only when you intentionally want the app to select a default destination.
+
+| Route | Behavior | Router source |
+| --- | --- | --- |
+| `/agent` | Redirects to the user's navigation agent or onboarding fallback | `app/(main)/(routes)/agent/page.tsx` |
+| `/performance` | Redirects to `/performance/{agentId}` for the selected/default agent | `app/(main)/(routes)/performance/page.tsx` |
+| `/call-paths` | Redirects to `/call-paths/{agentId}` for the selected/default agent | `app/(main)/(routes)/call-paths/page.tsx` |
+| `/call-history` | Redirects to `/call-history/{agentId}` for the selected/default agent | `app/(main)/(routes)/call-history/page.tsx` |
+| `/campaign` | Redirects to `/campaign/{agentId}` for the selected/default agent | `app/(main)/(routes)/campaign/page.tsx` |
+| `/agent-review` | Redirects to `/agent-review/{orgId}` for the first available organization | `app/(main)/(routes)/agent-review/page.tsx` |
+| `/testing` | Redirects to `/testing/ab-test` | `app/(main)/(routes)/testing/page.tsx` |
+| `/testing/ab-test` | Redirects to `/testing/ab-test/{agentId}` for the selected/default agent | `app/(main)/(routes)/testing/ab-test/page.tsx` |
+| `/dashboard` | Redirects to `/home` | `app/(main)/(routes)/dashboard/page.tsx` |
+
+## Secondary and System Routes
+
+These routes exist in the router but should not be chosen for normal docs tasks unless the user explicitly asks about the listed surface.
+
+| Route | Use this route for | Router source |
+| --- | --- | --- |
+| `/dashboard/dashboard-view` | Legacy dashboard view | `app/(main)/(routes)/dashboard/dashboard-view/page.tsx` |
+| `/onboard` | Onboarding flow | `app/(main)/(routes)/onboard/page.tsx` |
+| `/pricing` | Opens the pricing modal flow | `app/(main)/(routes)/pricing/page.tsx` |
+| `/verify-email` | Email verification flow | `app/(main)/(routes)/verify-email/page.tsx` |
+| `/testing/evaluation` | Legacy evaluation redirect route | `app/(main)/(routes)/testing/evaluation/page.tsx` |
+| `/testing/evaluation/{agentId}` | Legacy evaluation test cases and results | `app/(main)/(routes)/testing/evaluation/(routes)/[agentId]/page.tsx` |
+| `/testing/evaluation/{agentId}/{resultId}` | Legacy evaluation result detail | `app/(main)/(routes)/testing/evaluation/(routes)/[agentId]/(routes)/[resultId]/page.tsx` |
+
+## Agent Tabs
+
+Use these exact `tab` query values on `/agent/{agentId}`.
 
 | Tab value | Purpose |
 | --- | --- |
-| `profile` | Profile and account details |
-| `plan-and-billing` | Billing and subscription management |
-| `notifications` | Notification rules |
-| `agents` | Agent administration |
-| `numbers` | Phone number administration, including `Available Numbers` and `DNC Numbers` |
-| `admin` | Admin settings |
-| `admin-orgs` | Organization management |
-| `admin-custom-actions` | Custom action administration |
-| `admin-flow-templates` | Flow template administration |
-| `admin-selector-options` | Selector option administration |
-| `admin-changelog` | Internal changelog |
+| `agent-design` | Agent Design default tab |
+| `voice` | Voice picker and voice configuration |
+| `guidelines` | Agent guidelines |
+| `knowledge-base` | Documents, websites, and recordings |
+| `workflows` | Workflow editor |
+| `settings` | Agent settings |
+
+## Settings Tabs
+
+Use these exact `tab` query values on `/settings`.
+
+| Tab value | Availability | Purpose |
+| --- | --- | --- |
+| `account` | Standalone | Account profile, preferences, access, and organization details |
+| `team` | Standalone | Team management |
+| `plan-and-billing` | Standalone | Billing and subscription management |
+| `usage-and-cost` | Admin-only standalone | Usage and cost reporting |
+| `notifications` | Standalone | Notification rules |
+| `agents` | Standalone | Agent administration |
+| `numbers` | Standalone | Phone number administration |
+| `messaging` | Standalone | Messaging and A2P setup |
+| `admin` | Admin submenu | Admin settings overview |
+| `admin-orgs` | Admin submenu | Organization administration |
+| `admin-custom-actions` | Admin submenu | Custom action administration |
+| `admin-flow-templates` | Admin submenu | Flow template administration |
+| `admin-selector-options` | Admin submenu | Selector option administration |
+| `admin-changelog` | Admin submenu | Internal changelog administration |
+| `plan-and-billing-preview` | Admin submenu | Enterprise contract preview |
+
+## Campaign Tabs
+
+Use these exact `tab` query values on `/campaign/{agentId}`.
+
+| Tab value | Purpose |
+| --- | --- |
+| `call-flows` | Outbound call-flow list and default campaign index view |
+| `campaigns` | Outbound campaign list |
+| `workflow-canvas` | Outbound workflow canvas |
+| `onboard` | Outbound campaign onboarding flow |
+
+Use these exact `tab` query values on `/campaign/{agentId}/{campaignId}`.
+
+| Tab value | Purpose |
+| --- | --- |
+| `overview` | Campaign overview and calls list |
+| `workflow-canvas` | Campaign workflow canvas |
+
+## Legacy Evaluation Tabs
+
+Use these exact `tab` query values on `/testing/evaluation/{agentId}` only when working on the legacy evaluation surface.
+
+| Tab value | Purpose |
+| --- | --- |
+| `test-cases` | Legacy evaluation test cases |
+| `results` | Legacy evaluation results |
 
 ## Side Panel Tabs
 
-Use these exact labels in the in-app side panel:
+Use these exact side-panel tab values and labels.
 
-| Tab | Availability | Purpose |
-| --- | --- | --- |
-| `Assistant` | Available globally | Build agents, modify workflows, and answer questions about the platform or your agent |
-| `Test` | Available globally | Interact with the active agent in test mode |
+| Tab value | Visible label | Availability | Source |
+| --- | --- | --- | --- |
+| `assistant` | Operator | Available on shell routes where the side panel is enabled | `features/chat/side-panel/ui/app-side-panel.tsx` |
+| `test` | Test Call | Agent-context routes only; hidden when `canAccessTest` is false | `features/chat/side-panel/ui/app-side-panel.tsx` |
 
 ## Route Selection Rules
 
-- IF the task edits agent voice, prompt, or settings, THEN use `/agent/{agentId}`.
+- IF the task edits agent design, voice, guidelines, or settings, THEN use `/agent/{agentId}` with the matching agent tab.
 - IF the task edits knowledge sources, THEN use `/agent/{agentId}?tab=knowledge-base`.
 - IF the task edits workflow logic, THEN use `/agent/{agentId}?tab=workflows`.
-- IF the task reviews a call transcript or recording, THEN use `/call-history/{agentId}`.
-- IF the task manages flagged issues, statuses, severities, or review notes, THEN use `/agent-review/{orgId}`.
+- IF the task reviews a call transcript, recording, or highlight, THEN use `/call-history/{agentId}`.
+- IF the task analyzes call volume, KPIs, data tables, or performance reports, THEN use `/performance/{agentId}`.
+- IF the task investigates call branches or path drop-offs, THEN use `/call-paths/{agentId}`.
 - IF the task debugs event-level execution, THEN use `/event/{agentId}`.
-- IF the task configures outbound dialing or campaigns, THEN use `/campaign/{agentId}`.
-- IF the task asks for current testing guidance, THEN use `/testing/ab-test`.
-- IF the task manages workspace billing or notification rules, THEN use `/settings?tab=...`.
+- IF the task manages flagged issues, statuses, severities, or review notes, THEN use `/agent-review/{orgId}`.
+- IF the task configures outbound dialing, campaigns, or outbound call flows, THEN use `/campaign/{agentId}` or `/campaign/{agentId}/{campaignId}`.
+- IF the task asks for current testing guidance, THEN use `/testing/ab-test/{agentId}`.
+- IF the task asks about legacy evaluations, THEN use `/testing/evaluation/{agentId}`.
+- IF the task manages workspace billing, team, phone numbers, messaging, notifications, agents, or admin settings, THEN use `/settings?tab=...`.

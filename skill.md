@@ -17,16 +17,4 @@ Phonely customers: business owners, ops managers, and support leads. Write for t
 
 ## Route Map
 
-| Route | Page |
-| --- | --- |
-| `/agent/{agentId}` | agent workspace |
-| `/agent/{agentId}?tab=knowledge-base` | knowledge base |
-| `/agent/{agentId}?tab=workflows` | workflows |
-| `/agent/{agentId}?tab=settings` | agent settings |
-| `/performance/{agentId}` | analytics and data tables |
-| `/call-history/{agentId}` | call list and transcripts |
-| `/agent-review/{orgId}` | issue review |
-| `/event/{agentId}` | call events |
-| `/campaign/{agentId}` | outbound campaigns |
-| `/testing/ab-test` | testing |
-| `/settings?tab=...` | workspace settings |
+Use `ai/route-map.mdx` as the single source of truth for frontend routes, query tabs, and task-to-route rules. Do not duplicate route tables here; update `ai/route-map.mdx` when the frontend router changes.
