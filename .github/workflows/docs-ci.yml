@@ -37,6 +37,9 @@ jobs:
       - name: Internal links & media references
         run: node scripts/check-links.mjs
 
+      - name: Frontmatter contract
+        run: node scripts/check-frontmatter.mjs
+
       - name: Orphan media
         run: node scripts/find-orphan-media.mjs --fail-on-orphans
 

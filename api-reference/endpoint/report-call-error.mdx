@@ -1,6 +1,12 @@
 ---
 title: "Report Call Error"
 description: "Report a call issue through the frontend API-key-authenticated error reporting endpoint."
+sources:
+  - "app/api/report-call-error/route.ts"
+  - "app/api/submit-call-error/route.ts"
+  - "lib/api-auth.ts"
+  - "lib/api-client.ts"
+  - "lib/server-firebase-request-auth.ts"
 openapi: "POST /report-call-error"
 ---
 

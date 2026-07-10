@@ -1,6 +1,11 @@
 ---
 title: "Collect"
 description: "Efficiently gather multiple pieces of information from callers in a natural, conversational manner"
+sources:
+  - "features/workflows/model/nodes/question.ts"
+  - "features/workflows/modules/editor/custom-nodes/question/**"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "app/api/generate-with-ai/collect/route.ts"
 ---
 
 The collect block lets your agent gather multiple pieces of information back-to-back, like name, phone number, email, order number, etc. Think of it as a mini-form inside a conversation. The agent asks each question, stores the answers as variables, and only moves forward once all required details are captured.

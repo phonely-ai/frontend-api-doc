@@ -1,6 +1,12 @@
 ---
 title: "Get Organizations"
 description: "Return the organizations accessible to the current API-key-authenticated frontend user."
+sources:
+  - "app/api/get-orgs/route.ts"
+  - "services/org-service.ts"
+  - "lib/api-auth.ts"
+  - "lib/api-client.ts"
+  - "lib/server-firebase-request-auth.ts"
 openapi: "GET /get-orgs"
 ---
 

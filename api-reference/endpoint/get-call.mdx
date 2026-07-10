@@ -1,6 +1,13 @@
 ---
 title: "Get Call"
 description: "Fetch one call record and related details through the frontend API."
+sources:
+  - "app/api/get-call/route.ts"
+  - "app/api/calls/[agentId]/[callId]/route.ts"
+  - "services/call-service.ts"
+  - "lib/api-auth.ts"
+  - "lib/api-client.ts"
+  - "lib/server-firebase-request-auth.ts"
 openapi: "POST /get-call"
 ---
 

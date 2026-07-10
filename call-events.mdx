@@ -1,6 +1,10 @@
 ---
 title: "Call Events"
 description: "Inspect event-level execution, telephony activity, API requests, and code actions for a specific agent."
+sources:
+  - "features/calls/modules/call-events/**"
+  - "app/(main)/(routes)/event/**"
+  - "features/performance/modules/data-tables/**"
 ---
 
 The Call Events page gives you a detailed technical view of what happened before, during, and after a call. Instead of focusing only on the final outcome, it shows the individual events recorded as your workflow runs, such as telephony activity, API requests, code execution, block changes, and state changes.

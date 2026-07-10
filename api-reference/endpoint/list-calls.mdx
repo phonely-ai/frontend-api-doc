@@ -1,6 +1,12 @@
 ---
 title: "List Calls"
 description: "List calls for an agent using the frontend API with API-key authentication."
+sources:
+  - "app/api/calls/[agentId]/route.ts"
+  - "services/call-service.ts"
+  - "lib/api-auth.ts"
+  - "lib/api-client.ts"
+  - "lib/server-firebase-request-auth.ts"
 openapi: "GET /calls/{agentId}"
 ---
 

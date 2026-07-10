@@ -1,5 +1,11 @@
 ---
 title: "Webhook"
+description: "Receive webhook data before a call starts and use it in the workflow."
+sources:
+  - "features/workflows/model/nodes/webhook.ts"
+  - "features/workflows/modules/editor/custom-nodes/webhook/**"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/model/execution-stage.ts"
 ---
 
 The **Webhook Pre-Call Action** allows external systems (such as CRMs, IVRs, backend services, or third-party platforms) to send data into Phonely before a call is processed.
