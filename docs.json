@@ -321,5 +321,139 @@
   "stylesheets": [
     "/css/custom.css",
     "/css/variables-table-alignment.css"
+  ],
+  "redirects": [
+    {
+      "source": "/get-started/home",
+      "destination": "/get-started/home-overview"
+    },
+    {
+      "source": "/get-started/home-mdx",
+      "destination": "/get-started/home-overview"
+    },
+    {
+      "source": "/checklist",
+      "destination": "/workflow-checklist"
+    },
+    {
+      "source": "/key-concepts/workflow-checklist-1",
+      "destination": "/workflow-checklist"
+    },
+    {
+      "source": "/manage-account-and-organization-settings/organization-settings",
+      "destination": "/manage-account-and-organization-settings/manage-account-and-organization-settings"
+    },
+    {
+      "source": "/blocks/covertfile",
+      "destination": "/outboundcalling/createaoutboundcallingcampaign"
+    },
+    {
+      "source": "/blocks/api-request",
+      "destination": "/blocks/live-call-actions/api-request"
+    },
+    {
+      "source": "/blocks/ask-exactly",
+      "destination": "/blocks/flow-blocks/ask-exactly"
+    },
+    {
+      "source": "/blocks/collect",
+      "destination": "/blocks/flow-blocks/collect"
+    },
+    {
+      "source": "/blocks/filter",
+      "destination": "/blocks/flow-blocks/filter"
+    },
+    {
+      "source": "/blocks/time-filter",
+      "destination": "/blocks/flow-blocks/time-filter"
+    },
+    {
+      "source": "/blocks/end-call",
+      "destination": "/blocks/flow-blocks/end-call"
+    },
+    {
+      "source": "/blocks/start-flow",
+      "destination": "/blocks/flow-blocks/start-flow"
+    },
+    {
+      "source": "/blocks/talk",
+      "destination": "/blocks/flow-blocks/talk"
+    },
+    {
+      "source": "/blocks/send-email",
+      "destination": "/blocks/live-call-actions/send-email"
+    },
+    {
+      "source": "/blocks/send-sms",
+      "destination": "/blocks/live-call-actions/send-sms"
+    },
+    {
+      "source": "/blocks/codeflow",
+      "destination": "/blocks/live-call-actions/codeflow"
+    },
+    {
+      "source": "/blocks/codeworkflows",
+      "destination": "/blocks/live-call-actions/codeflow"
+    },
+    {
+      "source": "/blocks/live-call-actions/codeworkflows",
+      "destination": "/blocks/live-call-actions/codeflow"
+    },
+    {
+      "source": "/blocks/post-call-overview",
+      "destination": "/blocks/post-call-actions/post-call-overview"
+    },
+    {
+      "source": "/blocks/post-call-send-email",
+      "destination": "/blocks/post-call-actions/post-call-send-email"
+    },
+    {
+      "source": "/blocks/google-sheet-live",
+      "destination": "/blocks/live-call-integrations/google-sheet-live"
+    },
+    {
+      "source": "/blocks/zapier-live",
+      "destination": "/blocks/live-call-integrations/zapier-live"
+    },
+    {
+      "source": "/blocks/live-call-integrations/google-sheet-add-row",
+      "destination": "/blocks/post-call-actions/google-sheet-add-row"
+    },
+    {
+      "source": "/agent-design/voice/interruption-settings",
+      "destination": "/agent-design/voice/advanced-settings"
+    },
+    {
+      "source": "/old-call-paths",
+      "destination": "/call-path"
+    },
+    {
+      "source": "/blocks/code",
+      "destination": "/blocks/live-call-actions/codeflow"
+    },
+    {
+      "source": "/blocks/transfer-call",
+      "destination": "/blocks/live-call-actions/new-transfer-call"
+    },
+    {
+      "source": "/blocks/live-call-actions/old-transfer-call",
+      "destination": "/blocks/live-call-actions/new-transfer-call"
+    },
+    {
+      "source": "/blocks/warm-transfer",
+      "destination": "/blocks/live-call-actions/new-transfer-call"
+    },
+    {
+      "source": "/blocks/live-call-actions/warm-transfer",
+      "destination": "/blocks/live-call-actions/new-transfer-call"
+    },
+    {
+      "source": "/blocks/transfer-flows",
+      "destination": "/blocks/live-call-actions/transfer-flow-new"
+    },
+    {
+      "source": "/blocks/live-call-actions/transfer-flows",
+      "destination": "/blocks/live-call-actions/transfer-flow-new"
+    }
   ]
 }
