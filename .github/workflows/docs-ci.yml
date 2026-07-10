@@ -36,3 +36,6 @@ jobs:
       # on pages nested in docs.json sub-groups (see scripts/check-links.mjs).
       - name: Internal links & media references
         run: node scripts/check-links.mjs
+
+      - name: Indexing contract
+        run: node scripts/check-indexing-contract.mjs
