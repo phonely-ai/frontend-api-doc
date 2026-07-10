@@ -22,7 +22,10 @@
     "dark": "/logo/logo-white.png"
   },
   "seo": {
-    "indexing": "all"
+    "indexing": "navigable"
+  },
+  "metadata": {
+    "timestamp": true
   },
   "contextual": {
     "options": [
@@ -269,9 +272,26 @@
         "tab": "Webhook Reference",
         "icon": "webhook",
         "hidden": true,
+        "searchable": true,
         "pages": [
           "webhook-reference/intro",
           "webhook-reference/endpoint/postcall-webhook"
+        ]
+      },
+      {
+        "tab": "AI Runbooks",
+        "icon": "bot",
+        "hidden": true,
+        "searchable": true,
+        "pages": [
+          "ai/route-map",
+          "ai/build-agent",
+          "ai/manage-knowledge-base",
+          "ai/edit-workflows",
+          "ai/run-ab-tests-and-evaluations",
+          "ai/review-calls-and-analytics",
+          "ai/configure-outbound-campaigns",
+          "ai/frontend-api-boundaries"
         ]
       }
     ]
