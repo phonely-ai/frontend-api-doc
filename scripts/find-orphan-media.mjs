@@ -9,6 +9,7 @@
  *
  * Usage:
  *   node scripts/find-orphan-media.mjs           human-readable summary
+ *   node scripts/find-orphan-media.mjs --fail-on-orphans
  *   node scripts/find-orphan-media.mjs --paths   orphan paths only (pipe to git rm)
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
@@ -79,4 +80,8 @@ if (process.argv.includes('--paths')) {
   }
   console.log(`\n${orphans.length} orphaned media file(s), ${totalMB} MB total`);
   console.log(`${keptCount} media file(s) referenced and kept`);
+}
+
+if (process.argv.includes('--fail-on-orphans') && orphans.length > 0) {
+  process.exit(1);
 }
