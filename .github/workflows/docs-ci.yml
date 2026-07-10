@@ -37,5 +37,8 @@ jobs:
       - name: Internal links & media references
         run: node scripts/check-links.mjs
 
+      - name: Orphan media
+        run: node scripts/find-orphan-media.mjs --fail-on-orphans
+
       - name: Indexing contract
         run: node scripts/check-indexing-contract.mjs

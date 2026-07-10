@@ -1,20 +1,113 @@
-# Phonely Docs - Contributing Guide
+# Phonely Docs Agent Contract
 
-For full writing guidelines, see `writing-guidelines.md`.
+This file is the operating contract for AI agents that update the Phonely docs. It is behavior, not product knowledge.
 
-## Audience
+The placement policy is: prompts are for behavior, docs are for knowledge, and tools are for live state. Do not put product facts here. When a product fact is needed, read the relevant docs page, hidden runbook, frontend code, API code, or live tool result.
 
-Phonely customers: business owners, ops managers, and support leads. Write for the customer, not the codebase.
+## Required References
 
-## Quick Rules
+- Use `writing-guidelines.md` for page structure, tone, visual placement, and formatting rules. Do not copy those rules here.
+- Use `ai/route-map.mdx` as the single source of truth for frontend routes, query tabs, side-panel labels, and task-to-route selection. Do not copy route or tab tables here.
+- Use the page's own `sources` frontmatter as the first search boundary for code verification. Expand only when the changelog or code references require it.
 
-- Lead with customer value, then show how to use the feature.
-- Use exact UI labels: `Build`, `Help`, `Test`, `Agent Design`, `Knowledge Base`, `Settings`, `Performance`, `Call History`, `Call Events`, `Outbound Calls`.
-- One canonical page per concept.
-- Every page needs `title` and `description` frontmatter.
-- Use `{/* TODO: description */}` for visuals you can't create yet.
-- Do not invent undocumented routes or auth schemes.
+## Audience And Voice
 
-## Route Map
+- Write for Phonely customers: business owners, operations managers, support leads, and team members using the product.
+- Explain what the customer can accomplish before naming implementation details.
+- Use exact UI labels, route names, endpoint names, settings names, and option names only after verifying them against code, an API schema, a live tool result, or a canonical docs page with fresh source coverage.
+- Do not describe internal component names, data structures, feature flags, or service boundaries unless the page is explicitly for developers and the claim is code-cited.
 
-Use `ai/route-map.mdx` as the single source of truth for frontend routes, query tabs, and task-to-route rules. Do not duplicate route tables here; update `ai/route-map.mdx` when the frontend router changes.
+## Claim Traceability
+
+Every concrete claim in a touched page must be traceable to a source.
+
+Concrete claims include:
+
+- numbers, limits, caps, counts, pricing, timing, statuses, and role permissions
+- UI labels, tab labels, button labels, menu names, and option lists
+- routes, query params, redirects, endpoint paths, headers, request fields, and response fields
+- feature availability, plan availability, admin-only behavior, legacy/current status, and default behavior
+- media references and visible UI states shown by screenshots, GIFs, or videos
+
+Rules:
+
+- Cite every concrete product claim to a code location, API schema, or live tool result. A canonical docs page can be used only when it already has fresh source coverage for that claim.
+- Prefer code over stale docs when they disagree.
+- Omit unverifiable claims. Never soften an uncited claim with "typically", "usually", "may", or "should".
+- Do not infer precise values from screenshots, filenames, branch names, comments, or memory.
+- If a page includes tables of options, every row must be covered by the page `sources` or by an inline citation in the table.
+- If code and product copy differ, use the visible product label from code and cite the file.
+
+Canonical example: the old route map claimed the side-panel labels were `Assistant` and `Test`; code showed `Operator` and `Test Call` in `features/chat/side-panel/ui/app-side-panel.tsx`. The plausible uncited claim was wrong, so it had to be corrected or removed.
+
+## Source And Frontmatter Obligations
+
+When touching an indexed MDX page, refresh its frontmatter before editing body content.
+
+Required frontmatter:
+
+```mdx
+---
+title: "Customer-facing page title"
+description: "One sentence describing what the customer can do or learn."
+sources:
+  - "path/or/glob/in/source/repo"
+last-verified: "YYYY-MM-DD"
+---
+```
+
+Rules:
+
+- `sources` must name the real files or tight globs used to verify the page.
+- `last-verified` must be the date the agent verified the touched page against those sources.
+- Do not add broad globs such as `app/**` or `features/**` unless the page truly depends on that whole area.
+- If only a hidden AI runbook is touched, it still needs source coverage for every concrete claim it makes.
+- If a page is legacy, duplicate, or intentionally excluded from indexing, keep that status explicit with the repo's existing `noindex` or `.mintignore` pattern.
+
+## Media Contract
+
+Text is the record. Media illustrates; it must never be required to understand the page.
+
+Rules:
+
+- Never create, rename, or reference a media file that does not exist.
+- Before keeping a media reference, verify the file path exists in the docs repo.
+- If a needed screenshot, GIF, video, or audio clip is missing, leave a TODO comment instead of inventing a path.
+- TODO comments must include a capture spec: surface or route, user state, action sequence, expected end state, and suggested asset type.
+- Do not make numeric or behavioral claims from media alone. Verify those claims in code or omit them.
+- Prefer replacing stale GIF-dependent instructions with text steps and code-verified claims. Defer media regeneration to the media pipeline unless the ticket explicitly asks for media work.
+
+TODO format:
+
+```mdx
+{/* TODO: Capture <asset type> for <route/surface>; state: <required data/account>; steps: <actions>; end state: <visible result>. */}
+```
+
+## Text-As-Record Rules
+
+- A page must fully answer the customer question in text without relying on screenshots, GIFs, videos, or assistant-only context.
+- Put prerequisites before steps.
+- Follow `writing-guidelines.md` for section order and formatting mechanics.
+- If a table repeats another canonical page or runbook, replace it with a link to the canonical source.
+- Keep API examples and endpoint details on API reference pages unless the product page needs a short, cited pointer.
+
+## Scope Discipline
+
+- Let the changelog or ticket decide which pages are in scope.
+- Edit only pages implicated by the changelog, ticket, broken link/media check, or reviewer request.
+- Propose new pages when a concept has no home; do not silently create new user-facing pages.
+- Preserve one canonical page per concept. Merge, redirect, or point rather than duplicating.
+- Keep hidden `ai/` pages for deterministic AI-only runbooks. Keep visible pages customer-readable.
+- Do not move product facts into `.mintlify/Assistant.md`, system prompts, or this file. Those surfaces may point to docs or runbooks, but must not duplicate facts.
+
+## PR Self-Check
+
+Before finalizing a docs PR, verify:
+
+- Every touched page has refreshed `sources` and `last-verified` frontmatter when applicable.
+- Every concrete claim is cited, source-covered, or removed.
+- Every route or tab decision points to `ai/route-map.mdx` instead of a copied table.
+- Every media reference exists, or a TODO with a capture spec replaces it.
+- The page remains useful as text-only documentation.
+- The change does not add a new canonical concept page without explicit reviewer agreement.
+- The docs build, link check, indexing contract check, and orphan-media check pass.
