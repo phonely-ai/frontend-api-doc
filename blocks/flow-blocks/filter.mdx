@@ -1,6 +1,11 @@
 ---
 title: "Filter"
 description: "Route conversation based on conditions and create dynamic conversation paths"
+sources:
+  - "features/workflows/model/nodes/filter-v1.ts"
+  - "features/workflows/modules/editor/custom-nodes/filter/v1/**"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/filter/**"
 ---
 
 The filter block is the routing logic layer in a Phonely call flow. You use it when the next step in the conversation shouldn’t be the same for every caller, because something about the call should change the route.

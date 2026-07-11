@@ -1,6 +1,10 @@
 ---
 title: "Start Flow"
 description: "The essential foundation that initiates every inbound call workflow"
+sources:
+  - "features/workflows/model/nodes/receive-call.ts"
+  - "features/workflows/modules/editor/custom-nodes/receive-call/**"
+  - "features/workflows/model/node-descriptors/index.ts"
 ---
 
 The start flow block defines how and when a workflow begins in Phonely. It does not speak to the caller directly, but it controls which flow is entered, under what conditions, and on which channels (Inbound, Outbound, or SMS).

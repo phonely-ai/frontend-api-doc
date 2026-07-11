@@ -1,6 +1,10 @@
 ---
 title: "Add Phone Numbers"
 description: "Attach phone numbers to an outbound campaign and import numbers from Twilio when needed."
+sources:
+  - "features/campaign/modules/edit-campaign-sheet/phone-number-tab/**"
+  - "features/campaign/api/phone-number-service.ts"
+  - "services/phone-numbers/**"
 ---
 
 Every outbound campaign needs at least one phone number before it can place calls. Phonely lets you choose numbers already attached to the agent, assign unused workspace numbers, or import new numbers from Twilio.

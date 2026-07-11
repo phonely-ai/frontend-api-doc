@@ -1,6 +1,13 @@
 ---
 title: "Set Agent Guidelines"
 description: "Define your AI agent's tone, personality, and behavior using structured guideline sections that persist across all flows."
+sources:
+  - "app/api/agent-guidelines/route.ts"
+  - "features/agents/api/guideline-record-service.ts"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-design/**"
+  - "features/agents/modules/guidelines/**"
+  - "features/agents/model/guidelines.ts"
+  - "features/agents/model/runtime-guideline-sections.ts"
 ---
 
 Agent guidelines define how your AI phone agent behaves, speaks, and reacts during conversations. They act as a persistent system prompt, context that stays active throughout the conversation, regardless of which flow block or sub-flow the agent is in.

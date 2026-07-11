@@ -1,6 +1,12 @@
 ---
 title: "Import Phone Number"
 description: "Import or attach a phone number to an agent through the frontend API."
+sources:
+  - "app/api/import-number/route.ts"
+  - "services/agent-service.ts"
+  - "lib/api-auth.ts"
+  - "lib/api-client.ts"
+  - "lib/server-firebase-request-auth.ts"
 openapi: "POST /import-number"
 ---
 

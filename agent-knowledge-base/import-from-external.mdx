@@ -1,6 +1,11 @@
 ---
 title: "External Sources"
 description: "Connect to external knowledge platforms like LivePro to seamlessly import existing documents and make them available for your AI agent."
+sources:
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/knowledge-base/**"
+  - "features/agents/modules/knowledge-base/**"
+  - "services/knowledge-service.ts"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/knowledge-base/documents/components/import-from-external/**"
 ---
 
 You can connect Phonely to external platforms to automatically import your existing documentation and make it available for your AI agent. This is especially useful if your company already maintains a centralized knowledge base elsewhere, such as LivePro.

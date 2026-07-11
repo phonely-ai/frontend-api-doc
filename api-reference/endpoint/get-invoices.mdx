@@ -1,6 +1,12 @@
 ---
 title: "Get Invoices"
 description: "Return invoice data through the frontend billing API surface."
+sources:
+  - "app/api/get-invoices/route.ts"
+  - "services/billing/**"
+  - "lib/api-auth.ts"
+  - "lib/api-client.ts"
+  - "lib/server-firebase-request-auth.ts"
 openapi: "POST /get-invoices"
 ---
 

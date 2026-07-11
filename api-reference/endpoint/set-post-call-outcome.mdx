@@ -1,6 +1,12 @@
 ---
 title: "Set Post-Call Outcome"
 description: "Set custom call outcome fields for a call using the public frontend API."
+sources:
+  - "app/api/calls/[agentId]/[callId]/route.ts"
+  - "services/agents/use-agent-post-call-outcomes.ts"
+  - "lib/api-auth.ts"
+  - "lib/api-client.ts"
+  - "lib/server-firebase-request-auth.ts"
 openapi: "PATCH /calls/{agentId}/{callIdOrPhone}"
 ---
 

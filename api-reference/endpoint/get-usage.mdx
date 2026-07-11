@@ -1,6 +1,13 @@
 ---
 title: "Get Usage"
 description: "Return usage metrics through the frontend API surface."
+sources:
+  - "app/api/usage/route.ts"
+  - "services/usage-service.ts"
+  - "features/settings/modules/usage-and-cost/**"
+  - "lib/api-auth.ts"
+  - "lib/api-client.ts"
+  - "lib/server-firebase-request-auth.ts"
 openapi: "GET /usage"
 ---
 
