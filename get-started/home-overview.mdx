@@ -1,181 +1,71 @@
 ---
 title: "Home"
-description: "Use the Home page to monitor recent activity, active calls, and workspace-level performance signals."
+description: "Use Home to ask Ask AI for help and review call activity across selected agents and dates."
 sources:
-  - "features/home/**"
-  - "app/(main)/(routes)/home/**"
+  - "features/home/ui/home-page.tsx"
+  - "features/home/ui/home-intro-section.tsx"
+  - "features/home/ui/home-chat.tsx"
+  - "features/home/ui/home-activity-section.tsx"
+  - "features/home/ui/home-live-calls-popover.tsx"
+  - "features/home/ui/home-resolved-outcomes-popover.tsx"
+  - "features/home/constants/home-metric-cards.ts"
+  - "features/home/model/overview/mapper.ts"
+  - "features/home/ui/primitives/date-range-selector.tsx"
+  - "features/home/ui/primitives/multi-agent-selector.tsx"
+last-verified: "2026-07-13"
 ---
 
-The **Home** page gives you a quick way to understand how your Phonely workspace is performing and where to go next. Think of this page as your starting point for daily monitoring and quick navigation.
+Home combines two starting points: an Ask AI prompt for product or agent work, and an overview of recent call activity. Use it when you want to begin with a question or check activity across several agents without opening each agent first.
 
 <Frame>
-  ![Home page](/assets/homepage.png)
+  ![Home with the Ask AI prompt and the beginning of the call activity overview](/assets/home-overview.png)
 </Frame>
 
-The home page helps you answer common questions such as:
+## Ask AI from Home
 
-- How many calls have my agents handled recently?
-- Are call volumes increasing or dropping?
-- What kinds of call outcomes are showing up?
-- Which agents should I review more closely?
-- Do I need to open Call History, Analytics, or Billing next?
-- Can Phonely help me investigate this without searching manually?
+The prompt under **What can Phonely do for you?** opens the app side panel on **Operator**, the Ask AI tab, and sends your request. You can type a request, attach one supported file, or begin with one of the suggested prompts.
 
-## Choose your reporting scope
+Ask AI can help with different kinds of work, so make the requested outcome explicit. For example, ask it to investigate a call pattern, explain a product concept, or help change an agent. Review proposed changes before relying on them in a live call experience.
 
-Before reviewing the numbers on this page, set the scope of the data you want to see.
+## Set the overview scope
 
-You can do this with:
+The overview uses date and agent filters. A change to either filter updates the metrics, recent calls, active calls, and call-volume chart.
 
-- The date range filter
-- The agent filter
+Home starts with **Last 7 days** and all agents you can access selected. If you have access to agents across multiple organizations, narrow the selection before interpreting the totals.
 
-These two controls determine what the rest of the page shows.
+### Choose a date range
 
-### Select a date range
+Select **Today**, **Last 7 days**, **Last 14 days**, **Last 30 days**, or **Last 90 days**. You can also choose a custom range.
 
-Use the date selector to choose the time period you want to review. The date picker includes preset ranges such as: Today, Last 7 days, Last 14 days, Last 30 days or Last 90 days
+### Choose agents
 
-These presets make it easy to switch quickly between common reporting windows.
+Use the agent selector to include one or more agents. You can search by organization, agent name, or business phone number, then select or deselect all agents in the displayed results. The overview shows zeroed or empty states when no agent is selected.
 
-You can also choose a custom date range using the calendar panel. This is useful when you want to review a specific time period that does not match one of the preset options.
+## Read the summary metrics
 
-Choose a shorter range when you want to inspect recent behavior more closely. Choose a longer range when you want a broader overview of trends.
+Home displays these summary cards for the selected scope:
+
+| Card | What it summarizes | Where it leads |
+| :-- | :-- | :-- |
+| **Calls Answered** | Answered-call count | Call History |
+| **Minutes** | Total call minutes | Performance |
+| **Cost Saved** | Estimated savings based on selected call minutes | Plan and Billing |
+| **Resolved** | Calls matching the outcomes selected as resolved | Outcome selection |
+
+**Cost Saved** is an estimate for the selected scope. Use **Plan and Billing** for actual billing information.
+
+Select **Resolved** to choose which observed call outcomes count toward that card. This changes the Home summary for the current view; it does not rename or reconfigure outcomes on your agents. If no outcomes are selected, the card prompts you to set them instead of showing a resolved total.
+
+## Review recent and active calls
+
+**Recent Calls** lists recent calls in the selected scope with their direction, phone number, outcome, sentiment indicator, duration, and relative time. Select a call to open its details, or select **View all** to open Call History.
+
+The active-calls control groups calls currently in progress by agent and identifies calls in conversation or warm transfer. Select a call to inspect its details without leaving Home.
+
+## Compare call volume
+
+**Call Volume** plots inbound and outbound calls over the selected period. Use **View analytics** when you need the deeper Performance view.
 
 <Frame>
-  ![Selectdaterange](/assets/selectdaterange.png)
+  ![Home overview metrics, recent calls, and call volume for the selected date range and agents](/assets/home-metrics.png)
 </Frame>
-
-After you change the date range, the home page updates the overview metrics, recent calls, and call volume chart automatically.
-
-### Filter by agent
-
-Use the agent filter to choose which agent’s metrics you want to view on the Home page.
-
-By default, the page can show data for all agents, but you can narrow the view to one or more selected agents. Once selected, the overview cards, recent calls, and call volume chart update to reflect only those agents.
-
-This is useful when you want to focus on a specific agent instead of reviewing workspace-wide activity.
-
-## Monitor active calls
-
-In the top-right corner of the Home page, Phonely shows an **active calls indicator**. This lets you quickly see how many calls are currently in progress across your workspace.
-
-A green status dot appears next to the count to show that live monitoring is active.
-
-Click the active calls indicator to open the live calls panel. This panel shows the calls that are currently in progress, including the agent handling the call, the caller or phone number, the current status such as In Conversation, and the elapsed call time.
-
-<Frame>
-  <img
-    src="/assets/activecalls.png"
-    alt="Activecalls"
-    title="Activecalls"
-    style={{ width:"93%" }}
-  />
-</Frame>
-
-This is useful when you want to quickly monitor ongoing activity without leaving the Home page. From the panel, you can also use **View Call History** to open the full call history page for deeper review.
-
-## Overview cards for a quick health check
-
-Once your filters are set, the metric cards give you a fast summary of what has happened during that period.
-
-These cards help you answer:
-
-- How many calls were answered
-- How much total call time was handled
-- How much value or cost savings were generated
-- How many calls were resolved
-
-Use these cards as a high-level checkpoint. If a number looks unusual, use the linked action on the card to go deeper.
-
-<Frame>
-  ![Homeoverviewcards](/assets/homeoverviewcards.png)
-</Frame>
-
-### Calls Answered
-
-Use this card to quickly understand handled call volume. This is usually the first number to check when asking:
-
-- Are my agents being used?
-- Was activity higher or lower than expected?
-
-If you want to inspect the actual calls behind this number, open [call history](/call-history-ai-analytics/call-history-ai-analytics).
-
-### Minutes
-
-Use this card when you want to understand total call time, not just count. If you want deeper performance analysis, open [**performance analytics**](/performance).
-
-### Cost Saved
-
-Use this card to understand the value generated by your agents during the selected period.
-
-This is helpful for:
-
-- Internal reporting
-- Operational impact checks
-- Comparing value over time
-
-If you want to understand related charges or billing context, open [**billing**](/billing-and-usage/plans-and-billing-history).
-
-### Resolved
-
-Use this card to see how many calls were marked as resolved.
-
-This is useful when you want to know whether calls are ending successfully, not just being answered. If this number seems low or inaccurate, review your outcomes and classifications.
-
-## Recent Calls
-
-The recent calls section helps you move from summary metrics to real examples. Use it when you want to quickly check:
-
-- What callers are experiencing
-- Which outcomes are appearing most often
-- Whether hangups are happening frequently
-- Whether recent calls look normal
-
-This section is especially useful when the top-level numbers look fine, but you still want to understand what those calls actually were.
-
-Review recent calls when you want to spot patterns such as:
-
-- Many calls ending in Greeting Hangup
-- Repeated Unknown Caller entries
-- Recurring outcomes like Inquiry Clarified
-- Very short calls that may signal drop-offs
-- Specific call types you may want to inspect in detail
-
-If something looks unusual, open view all to go to the full call history page. Click an individual call to view the highlights of a specific call.
-
-<Frame>
-  ![Call Highlights Modal](/assets/call-highlights-modal.png)
-</Frame>
-
-## Call Volume
-
-The call volume chart helps you understand how activity changes over time. Use it when you want to answer questions such as:
-
-- Are calls increasing or dropping?
-- Was there a spike in call traffic?
-- Has activity changed recently?
-- Do inbound and outbound patterns look normal?
-
-<Frame>
-  ![Call volume chart](/assets/call-volume.png)
-</Frame>
-
-This chart is useful because it shows **trend**, not just totals. A spike in the chart may mean:
-
-- Increased customer demand
-- A campaign drove more calls
-- An issue caused more support traffic
-
-If you see a sharp change in volume, open [performance analytics](/performance) to investigate further.
-
-## Keyboard Shortcuts
-
-At the bottom of the page you'll find quick-reference shortcuts:
-
-| Shortcut | Action |
-| :-- | :-- |
-| `Cmd K` | Search |
-| `Cmd J` | AI chat |
-| `Cmd S` | Settings |
-| `?` | All shortcuts |

@@ -1,75 +1,83 @@
 ---
-title: "Agents"
-description: "Learn how to create, duplicate and manage agents in Phonely"
+title: "Create and Duplicate Agents"
+description: "Create an agent from scratch or duplicate an existing agent into an organization."
 sources:
+  - "features/app-shell/ui/agent-switcher.tsx"
   - "features/agents/ui/add-agent-modal.tsx"
-  - "components/agent/agent-creation-modal-wrapper.tsx"
-  - "components/agent/agent-creation-steps/**"
-  - "app/api/duplicate-agent/route.ts"
+  - "components/agent-creation-handler.tsx"
+  - "features/agent-from-recordings/**"
   - "services/agent-service.ts"
-  - "services/agents/list/**"
+  - "phonely-backend/app/agent/routes.py"
+last-verified: "2026-07-13"
 ---
 
-Agents are the core of your Phonely workspace. Each agent represents a virtual assistant that can manage calls, collect data, and automate workflows using custom call flows, knowledge sources, and integrations.
-
-This guide explains how to create, duplicate, and manage agents, as well as how organizations, workflows, and phone numbers fit together in the Phonely ecosystem.
+Create a separate agent when you need an independently configurable call experience. Duplicate an agent when an existing setup is the right starting point for another organization or variation.
 
 <Frame>
-  ![How to create a new agent](/assets/how-to-create-a-new-agent.png)
+  ![New Agent window with Create from Scratch and Duplicate options](/assets/create-agent-options.png)
 </Frame>
 
-### How Agents Work
+<Note>
+  Enterprise workspaces and administrators may also see **From Recordings**. This option accepts a ZIP file of call recordings and uses the resulting transcripts to prepare an initial flow and guidelines. The build runs in the background and should be reviewed before the agent is used with callers.
+</Note>
 
-Each Agent in Phonely acts as an independent assistant with its own:
+## Create an agent from scratch
 
-- [**Primary phone number**](/agent-design/add-manage-phone-numbers) – the number used to handle incoming and outgoing calls.
-- [**Call workflows**](/key-concepts/flows) – logic and conversation paths unique to that agent.
-- [**Knowledge base**](/agent-knowledge-base/managing-data-sources) – information the agent uses to answer questions and make decisions.
-- [**Guidelines**](/agent-design/set-agent-guidelines) – instructions for how the agent should behave and respond.
-- [**Settings**](/agent-design/flow-settings) – configurations for integrations, notifications, and post-call actions.
-- [**Testing**](/testing/ab-testing) - experiment with prompts, voices, and workflows and deploy agents with confidence.
+<Steps>
+  <Step title="Open Create Agent">
+    Open the agent switcher in the top app bar and select **Create Agent** at the bottom of the list.
+  </Step>
+  <Step title="Choose Create from Scratch">
+    The **New Agent** window shows the available creation methods. Select **Create from Scratch**.
+  </Step>
+  <Step title="Enter the agent details">
+    Enter a **Name** and select the **Organization** that should own the agent. Agent names can contain up to 50 characters.
+  </Step>
+  <Step title="Create the agent">
+    Select **Create**. Phonely creates the initial agent and opens it for configuration.
+  </Step>
+</Steps>
 
-### Create a New Agent
+After creation, configure the agent's voice, guidelines, knowledge, flows, and call settings for the experience you want to deliver.
 
-You can create a new agent from scratch to handle a specific business area or campaign.
+## Duplicate an existing agent
 
-1. Navigate to the top of the main menu under the Agent section, click **Create Agent**.
-2. In the **New Agent** window, choose **Create**.
-3. Enter a name for your new agent.
-4. Select the **Organization** this agent belongs to.
-5. Click **Create**.
+<Steps>
+  <Step title="Open Create Agent">
+    Open the agent switcher in the top app bar and select **Create Agent**.
+  </Step>
+  <Step title="Choose Duplicate">
+    In the **New Agent** window, select **Duplicate**.
+  </Step>
+  <Step title="Select the source agent">
+    Use the **Agent** field to find the agent you want to duplicate. You can search the list by agent name, ID, or phone number.
+  </Step>
+  <Step title="Choose the destination organization">
+    Select the **Organization** that should own the duplicated agent.
+  </Step>
+  <Step title="Duplicate the agent">
+    Select **Duplicate**. Phonely opens the new agent when the operation finishes.
+  </Step>
+</Steps>
 
-Your new agent will appear in the agent list under the agent section, ready for configuration.
+Review the duplicated agent before using it with callers. Confirm its shared instructions, knowledge, flows, integrations, phone configuration, and any organization-specific details rather than assuming the copied setup is ready unchanged.
 
-## Create an agent with AI
+### What duplication copies
 
-Use **Create with AI** when you want Phonely to help generate an initial agent setup for you.
+Duplication creates a standalone agent named after the source with **(Copy)** appended. It copies the source agent configuration along with:
 
-This option is useful when you want to get started faster and avoid building everything manually from scratch. Instead of starting with an empty agent, Phonely AI helps create a starting point that you can review and refine.
+- Flows and their published versions
+- Knowledge-base websites and documents
+- Widgets
+- Which copied flow is selected as the default
 
-1. In the main navigation, click **Create Agent**.
-2. In the **New Agent** window, select **Create with AI**.
-3. Enter the information Phonely needs to generate the agent.
-4. Select the organization the agent should belong to, if prompted.
-5. Continue through the AI setup flow and review the generated result.
-6. Save or create the agent.
+The assigned business phone number is not copied. A/B test linkage is also removed so the duplicate does not remain attached to the source agent's test case.
 
-Once the agent is generated, you can continue editing it just like any other agent in Phonely.
+Knowledge-base content finishes copying in the background. Review the duplicate after that process completes, especially before testing answers that depend on documents or websites.
 
-### Duplicate an Agent
+## Choose the right starting point
 
-Duplicating an agent allows you to quickly reuse an existing setup including workflows, integrations, and voice settings without rebuilding from scratch.
-
-1. Navigate to the top of the main menu under the Agent section, click **Create Agent**.
-2. In the modal, select the **Duplicate** option.
-3. Choose the **Agent** you want to duplicate from the dropdown list.
-4. Select the **Organization** to assign the duplicate agent under.
-5. Click **Duplicate**.
-
-Phonely will duplicate the selected agent and append the name (copy) and inherit:
-
-- The existing workflows.
-- The voice and behavior settings.
-- Any knowledge base sources or guidelines from the original.
-
-You can then modify the duplicated agent independently - e.g., assign a new number, tweak prompts, or change post-call actions.
+| Starting point | Use it when |
+| :-- | :-- |
+| **Create from Scratch** | You need a new call experience and want to begin from the initial agent configuration. |
+| **Duplicate** | An existing agent is a useful base and you plan to review and adapt the copy. |

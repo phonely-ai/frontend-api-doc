@@ -1,141 +1,102 @@
 ---
 title: "Introduction"
-description: "Learn how your business can benefit from Phonely"
+description: "Learn what you can do with Phonely and where to begin."
 sources:
-  - "features/home/**"
-  - "components/agent/agent-creation-steps/**"
   - "features/agents/ui/add-agent-modal.tsx"
+  - "features/workflows/modules/editor/**"
+  - "features/agents/modules/guidelines/**"
+  - "features/agents/modules/knowledge-base/**"
+  - "features/campaigns/**"
+last-verified: "2026-07-13"
 ---
 
 ## What is Phonely?
 
 <Frame>
-  ![Phonely flow builder with a live call in progress](/assets/phonely-hero.png)
+  ![Agent Design overview showing Voice, Guidelines, Knowledge Base, and the starter call flow](/assets/getting-started-agent-design-overview.png)
 </Frame>
 
-Phonely is a platform for building voice AI agents that handle phone calls. You design conversations visually, connect your tools, and deploy — no code required.
+Phonely is a platform for building voice AI agents that handle phone calls. You can design conversations visually, connect business tools, test the experience, and review calls without writing the whole system from scratch.
 
-- Make and receive calls on Phonely numbers or your own carrier
-- Route, schedule, and escalate to humans based on rules you define
-- Connect to calendars, CRMs, and any REST API
-- Track calls with analytics, A/B testing, and call path visualization
+- Build inbound and outbound call experiences
+- Route calls and transfer callers based on the rules you define
+- Connect the agent to calendars, CRMs, and APIs
+- Review calls and performance after your agents begin handling conversations
 
 <Info>
-  Want to jump right in? [Get started for free](https://phonely.ai).
+  Want to jump right in? [Get started with Quick Start](/get-started/quick-start).
 </Info>
 
-## **Features you won't find anywhere else**
+## What you can do
 
 <Columns cols={2}>
-  <Card title="Outbound Campaigns" icon="phone" iconType="solid" href="/outboundcalling/createaoutboundcallingcampaign/" cta="Build your first outbound flow">
-    <img
-      src="/images/placeholder-outbound-campaigns.png"
-      alt="Outbound Campaigns"
-      style={{ width: "100%", height: "180px", objectFit: "cover", borderRadius: "8px", pointerEvents: "none" }}
-    />
-
-    Automate reminders, follow-ups, and reactivation campaigns via CSV, Google Sheet, or API.
+  <Card title="Visual Call Design" icon="route" iconType="solid" href="/key-concepts/flows" cta="See how calls are designed">
+    Design what the agent should say and do, including decisions, integrations, transfers, and call endings.
   </Card>
 
-  <Card title="A/B Testing" icon="shuffle" iconType="solid" href="/testing/ab-testing/" cta="Learn about A/B testing">
-    <img
-      src="/images/placeholder-ab-testing.png"
-      alt="A/B Testing"
-      style={{ width: "100%", height: "180px", objectFit: "cover", borderRadius: "8px", pointerEvents: "none" }}
-    />
-
-    Test prompts, voices, and strategies then roll out winning variations in one click.
+  <Card title="A/B Testing" icon="shuffle" iconType="solid" href="/testing/ab-testing/" cta="Explore A/B testing">
+    Test agent changes and compare alternatives before deciding what should handle production calls.
   </Card>
 </Columns>
 
 <Columns cols={2}>
-  <Card title="Realtime AI reasoning" icon="brain-circuit" iconType="solid" href="/key-concepts/plan-your-agent/" cta="See how reasoning works">
-    <img
-      src="/images/placeholder-realtime-reasoning.png"
-      alt="Realtime AI Reasoning"
-      style={{ width: "100%", height: "180px", objectFit: "cover", borderRadius: "8px", pointerEvents: "none" }}
-    />
-
-    See why your AI made each decision in real time no added latency.
+  <Card title="Outbound Campaigns" icon="phone" iconType="solid" href="/outboundcalling/createaoutboundcallingcampaign/" cta="Create a campaign">
+    Reach customers for reminders, follow-ups, confirmations, and other repeatable call tasks.
   </Card>
 
-  <Card title="Advanced AI call analytics" icon="chart-line" iconType="solid" href="/call-history-ai-analytics/call-history-ai-analytics" cta="Explore analytics">
-    <img
-      src="/images/placeholder-call-analytics.png"
-      alt="Advanced AI Call Analytics"
-      style={{ width: "100%", height: "180px", objectFit: "cover", borderRadius: "8px", pointerEvents: "none" }}
-    />
-
-    AI-powered summaries, sentiment tracking, topic clustering, and path analysis.
+  <Card title="Call Review and Analytics" icon="chart-line" iconType="solid" href="/call-history-ai-analytics/call-history-ai-analytics" cta="Review your calls">
+    Inspect completed calls and use performance views to decide what to improve next.
   </Card>
 </Columns>
 
 ## Popular use cases
 
 <CardGroup cols={2}>
-  <Card title="Inbound Support & Escalation" icon="headphones" iconType="solid">
-    Handle customer calls automatically. Route to the right person when needed. Ideal for replacing or augmenting front-line agents.
+  <Card title="Inbound Support and Escalation" icon="headphones" iconType="solid">
+    Answer common questions and route callers to the right person when human help is needed.
   </Card>
 
-  <Card title="Lead Qualification & Sales" icon="phone-call" iconType="solid">
-    Qualify leads 24/7 and warm-transfer to your sales team.
+  <Card title="Lead Qualification and Sales" icon="phone-call" iconType="solid">
+    Collect lead information, qualify requests, and transfer appropriate callers to your team.
   </Card>
 </CardGroup>
 
 <CardGroup cols={2}>
   <Card title="Appointment Scheduling" icon="calendar" iconType="solid">
-    Book, reschedule, or cancel appointments automatically.\
-    Integrate with Google Calendar or your scheduling API
+    Connect a scheduling tool so callers can book or manage appointments during a conversation.
   </Card>
 
-  <Card title="Outbound Reminders & Reactivation" icon="phone-outgoing" iconType="solid">
-    Re-engage customers with automated outbound campaigns. \
-    Send reminders, confirmations, or follow-ups with retry logic and voicemail detection built in.
+  <Card title="Outbound Reminders and Follow-ups" icon="phone-outgoing" iconType="solid">
+    Create outbound call experiences for reminders, confirmations, and follow-up tasks.
   </Card>
 </CardGroup>
 
 ## About Phonely
 
-Built by a team of AI researchers and audio engineers in San Francisco. Backed by Y Combinator. [We're hiring.](https://www.ycombinator.com/companies/phonely/jobs)
+Phonely is built by a team of AI researchers and audio engineers. Phonely is backed by Y Combinator. [See open roles](https://www.ycombinator.com/companies/phonely/jobs).
 
-![IMG 8332 Jp](/images/IMG_8332.jpg)
+![The Phonely team](/images/IMG_8332.jpg)
 
 <CardGroup cols={1}>
   <Card title="Ready to build?" icon="rocket" iconType="solid" href="/get-started/quick-start/" cta="Quick Start">
-    Create your first voice agent in minutes.
+    Customize and test the first agent created during onboarding.
   </Card>
 </CardGroup>
 
-## Frequently Asked Questions
+## Frequently asked questions
 
 <Accordion title="Do I need to know how to code?">
-  No. The Flow Builder is fully no-code - drag-and-drop blocks with prompts.
-
-  For advanced use cases, you can use custom APIs, webhooks, and cURL imports.
+  You can design calls visually without code. For advanced use cases, a flow can also connect to APIs and other business tools.
 </Accordion>
 
-<Accordion title="Can Phonely integrate with my CRM or scheduling software?">
-  Yes. Phonely connects to Google Calendar, HubSpot, Salesforce, Zapier, and any REST API.
-
-  If there’s no native integration, you can import any API from a cURL command using the [API Request block](/blocks/live-call-actions/api-request).
-</Accordion>
-
-<Accordion title="How do I train my AI agent?">
-  Upload your knowledge base (FAQs, SOPs, or website) and define your call flows. Each flow includes talk blocks, integrations, variables, and post-call actions. Ask AI can help generate prompts and connect APIs.
+<Accordion title="How does an agent use business information?">
+  Add reference material to the agent's knowledge base, and use guidelines to define behavior that should apply across its conversations.
 </Accordion>
 
 <Accordion title="Can Phonely make outbound calls?">
-  Yes. Upload a CSV, connect a Google Sheet, or use an API. Outbound campaigns include voicemail detection, retry logic, and DNC compliance tools. See [Outbound Campaigns](/outboundcalling/createaoutboundcallingcampaign).
+  Yes. Create an outbound campaign and connect it to the call experience you want the agent to use. See [Outbound Campaigns](/outboundcalling/createaoutboundcallingcampaign).
 </Accordion>
 
-<Accordion title="What analytics are available?">
-  Call summaries, sentiment analysis, topic clustering, A/B testing results, call path visualization, and performance metrics. See [Analytics](/call-history-ai-analytics/call-history-ai-analytics).
-</Accordion>
-
-<Accordion title="Does Phonely support multiple languages?">
-  Yes. Configure voices for English, Spanish, French, and many others, including regional accents and custom voice cloning.
-</Accordion>
-
-<Accordion title="Is Phonely SOC 2, HIPAA, PCI, or GDPR compliant?">
-  Yes. Data is encrypted in transit and at rest. See [Compliance Settings](/agent-design/compliance-settings) for details.
+<Accordion title="Where can I review completed calls?">
+  Use [Call History](/call-history-ai-analytics/call-history-ai-analytics) to inspect completed calls, then use the performance views when you need broader trends.
 </Accordion>

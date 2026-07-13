@@ -16,6 +16,7 @@ The placement policy is: prompts are for behavior, docs are for knowledge, and t
 - Explain what the customer can accomplish before naming implementation details.
 - Use exact UI labels, route names, endpoint names, settings names, and option names only after verifying them against code, an API schema, a live tool result, or a canonical docs page with fresh source coverage.
 - Do not describe internal component names, data structures, feature flags, or service boundaries unless the page is explicitly for developers and the claim is code-cited.
+- Use `flow` and `flows` as the customer-facing product terms. Capitalize **Call Flows** only when referring to the exact UI label or a title. Keep `workflow` only in code identifiers, source paths, legacy URLs, or API fields where changing it would make the technical reference inaccurate.
 
 ## Claim Traceability
 
@@ -59,6 +60,7 @@ last-verified: "YYYY-MM-DD"
 Rules:
 
 - `sources` must name the real files or tight globs used to verify the page.
+- For sources outside the frontend repository, use a repository-prefixed path such as `phonely-backend/app/agent/routes.py` so the verification boundary remains unambiguous.
 - `last-verified` must be the date the agent verified the touched page against those sources.
 - Do not add broad globs such as `app/**` or `features/**` unless the page truly depends on that whole area.
 - If only a hidden AI runbook is touched, it still needs source coverage for every concrete claim it makes.
@@ -75,7 +77,10 @@ Rules:
 - If a needed screenshot, GIF, video, or audio clip is missing, leave a TODO comment instead of inventing a path.
 - TODO comments must include a capture spec: surface or route, user state, action sequence, expected end state, and suggested asset type.
 - Do not make numeric or behavioral claims from media alone. Verify those claims in code or omit them.
-- Prefer replacing stale GIF-dependent instructions with text steps and code-verified claims. Defer media regeneration to the media pipeline unless the ticket explicitly asks for media work.
+- Prefer replacing stale GIF-dependent instructions with text steps and code-verified claims; media must illustrate a task rather than carry instructions the text omits.
+- During a Phase 2 rebuild, audit media together with content and structure. For each touched page, explicitly keep, replace, remove, or decline media based on the job it performs for the reader.
+- Capture or replace high-value media during Phase 2 when it materially affects comprehension or page design. Phase 4 owns automation and long-term freshness, not the first media decision.
+- A page with unresolved high-value capture specs remains in progress even when its text and build checks pass.
 
 TODO format:
 
@@ -93,12 +98,21 @@ TODO format:
 
 ## Scope Discipline
 
-- Let the changelog or ticket decide which pages are in scope.
-- Edit only pages implicated by the changelog, ticket, broken link/media check, or reviewer request.
+- Let the ticket or named product area define the work boundary. Do not treat a changelog entry as a complete inventory of affected documentation.
+- Within that boundary, discover the affected canonical pages from existing docs, current routes and UI, source code, release history, broken link or media checks, and the customer questions the pages must answer.
+- Treat changelogs and tickets as discovery signals. Verify their claims and fill their omissions from current code and product behavior before editing.
+- Edit only pages supported by that discovery or by a reviewer request; record adjacent gaps separately instead of allowing the ticket to expand without limit.
 - Propose new pages when a concept has no home; do not silently create new user-facing pages.
 - Preserve one canonical page per concept. Merge, redirect, or point rather than duplicating.
 - Keep hidden `ai/` pages for deterministic AI-only runbooks. Keep visible pages customer-readable.
 - Do not move product facts into `.mintlify/Assistant.md`, system prompts, or this file. Those surfaces may point to docs or runbooks, but must not duplicate facts.
+
+## Change Depth
+
+- Preserve the information architecture, voice, and useful conceptual material of foundational pages that do not closely mirror the application UI. Correct inaccurate claims and improve genuine comprehension gaps without rewriting for uniformity.
+- For platform-dependent task pages, update steps, labels, routes, options, and structure as much as current product behavior requires.
+- Do not restructure a page merely because its screenshot or video is stale. Preserve useful text, decide what visual the page actually needs, and replace high-value media during Phase 2 when possible.
+- When a larger rewrite is warranted, be able to name the user problem or factual mismatch it solves. Style preference alone is not sufficient.
 
 ## PR Self-Check
 

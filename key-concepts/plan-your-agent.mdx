@@ -1,113 +1,88 @@
 ---
-title: "Plan your Phonely agent"
-description: "Learn how we build agents that scale to millions of calls a month."
+title: "Plan Your Phonely Agent"
+description: "Plan the main call goal, required knowledge, integrations, and fallback paths before building your agent."
 sources:
-  - "components/agent/agent-creation-steps/**"
-  - "features/workflows/model/templates/**"
-  - "features/agents/ui/add-agent-modal.tsx"
+  - "features/workflows/modules/editor/**"
+  - "features/workflows/model/factories/create-initial-agent-workflow.ts"
+  - "features/workflows/model/execution-stage.ts"
+  - "features/agents/modules/guidelines/**"
+  - "features/agents/modules/knowledge-base/**"
+last-verified: "2026-07-13"
 ---
-
-<Note>
-  For businesses who answer over 2,000 calls per month, we provide white-glove onboarding and agent build-out!
-
-  [Talk to our team →](https://forms.phonely.ai/t/hoGHsk9hDzus)
-</Note>
-
-<Frame>
-  <img src="/assets/planning-workflow2.jpg" alt="5-step planning checklist for building a Phonely agent" />
-</Frame>
 
 ## Save yourself hours in a few minutes
 
-Before we jump into what to do lets set expectations.
+An agent improves through planning, testing, and iteration. Before building, write down what a successful call should accomplish and what information the agent needs to get there.
 
-1. AI can't solve your problems, but you + AI can. Phonely can only do what it knows how to do. If it doesn't know what you want from it, it can't do it
-2. Getting your agent live takes minutes. Getting your agent to be your best employee **will take time**. Expect to spend 1-4 weeks working on  iterations, and testing.
-3. Expect the same outcomes from an AI agent. DON'T expect the same interactions. Phonely isn't a human, while we do everything in our power to make it be one, it will struggle with things humans get right, but it will be great at other things humans are bad at.
+Start with one important call experience instead of trying to handle every possible request immediately. Give less common requests a clear fallback, such as transferring the caller or collecting information for follow-up.
 
-> _Phonely gets stacked up against call centers all the time. Almost always we're able to match or outperform their human agent's performance at 70% cost reduction._
+## Define your main use case
 
-## So how do we make AI agents that can truly handle 100% of calls?
+Think about the most common reasons customers call. Choose one goal, such as scheduling an appointment, qualifying a lead, answering a recurring question, or routing a caller to the right team.
 
-Just like a person, your agent needs to be trained. You can do this by configuring the agent design page in Phonely's dashboard to include all of the information about your business, software, etc. to build your agent. This knowledge base contains all of the information on how to do this, but first we still need a blueprint.
+Write down:
 
-Fortunately, with Phonely's templates, we have taken a lot of the legwork out, and have probably built an AI agent for your use case that should need just a few minutes of tweaking! Check out the templates [here](https://phonely.ai/templates)
+- The questions your staff normally ask
+- The information required from the caller
+- The steps that complete the task
+- The decisions that create different paths
+- The limits or situations that require a human
+- What should happen when the task cannot be completed
 
-![Featured Agent Templates Pn](/assets/featured-agent-templates.png)
+## Plan tools and data
 
-Even if you're using a template, the following is a helpful exercise to go through to help you build your agent:
-
-**Define your 80% use case**
-
-> “If you can’t define a problem clearly, you can’t solve it effectively.”\
-> — _Albert Einstein_
-
-Think about what **80% of your calls** are about, usually 1–3 key reasons (like appointment scheduling or rescheduling).\
-Write down the **questions** your staff ask and the **steps** they take to complete the task.
-
-**Think about your software**
-
-Oftentimes, having the AI integrate with your software is a crucial step of the process. When you're doing this, write down which software you need it to integrate live (during the call) and which software you need after.               
-
-This includes SMS messages, emails, etc., that need to be sent. Using Mural from above will help map this out.
+List the tools the agent needs before or during the call and the actions that should happen afterward. For each integration, record what information it needs, what result the flow expects back, and what should happen if it fails.
 
 <Tip>
-  Pro Tip:
-
-  If Phonely doesn’t already connect to your software, no problem.
-
-  You can import any integration from a cURL request using the [API Request block](/blocks/live-call-actions/api-request).
+  If a flow needs to connect to a service through an API, see the [API Request block](/blocks/live-call-actions/api-request).
 </Tip>
 
-**Gather your knowledge base**
+## Gather your knowledge base
 
-Phonely will integrate with a knowledge base to answer FAQ's via an inbuilt knowledge base. To do this, you need to have a knowledge base handy. If you don't have one premade, you can type your own or connect a website.
+Collect the business information the agent needs to answer customer questions. You can add documents, written information, or website content to the knowledge base.
+
+Keep each type of information in the right place:
+
+- Put shared tone, objectives, and behavioral restrictions in agent guidelines.
+- Put business facts and reference material in the knowledge base.
+- Put ordered conversation steps, decisions, integrations, transfers, and endings in flows.
 
 <Note>
-  If you connect a website, it is handy to remove the unnecessary pages to prevent the AI from grabbing information that isn't relevant
+  When connecting a website, include only the pages that contain useful and current information for the agent.
 </Note>
 
-**Think about your call forwarding**
+## Think about call routing
 
-To get your AI actually answering your calls you have to either forward your existing phone line to a Phonely number, port your number to Phonely, or give your customers Phonely's number. In virtually all carriers there are settings for this, and the easiest way to find out is to google "how to forward numbers on xyz provider".
+Decide how callers reach the agent and when the flow should transfer them to a person or another call experience. Include routing and fallback behavior in your test plan.
 
-**Start simple, nail one use case and scale from there.**
+## Start simple, nail one use case, and scale from there
 
-Oftentimes we see customers come with us wanting everything to be handled right away. Barring enterprise customers, this almost always ends up being a ton of work. To prevent this, we recommend trying to nail one use case, and set up call transferring or, a generic message taking for other use cases. This lets you get comfortable building out one workflow and you can scale incrementally over time.
+Build the shortest complete path first and test it. Then add branches and integrations one at a time. This makes it easier to identify whether an issue comes from the conversation design, business knowledge, or an external service.
 
-## Next Steps
+## Next steps
 
 <Steps>
-  <Step title="Pick a Template">
-    Start with one of our pre-built voice agent templates designed for industries like healthcare, real estate, or insurance.\
-    [Browse templates →](https://phonely.ai/templates)
+  <Step title="Choose a starting point">
+    Start from the initial agent setup or duplicate an existing agent that already matches part of your use case.
   </Step>
-  <Step title="Customize Your Flow">
-    Adjust prompts, voices, and routing in the Flow Builder.\
-    Test and refine until your AI handles the majority of your use cases.
+  <Step title="Customize your flow">
+    Add the main conversation path, required information, integrations, and fallback behavior.
   </Step>
-  <Step title="Launch in Production">
-    Forward your calls to Phonely, monitor the analytics, and iterate on performance.
+  <Step title="Test and improve">
+    Test the successful path, missing information, important branches, integration failures, transfers, and early call endings before using the flow with callers.
   </Step>
 </Steps>
 
----
-
-## Common Questions
+## Common questions
 
 <AccordionGroup>
   <Accordion title="Do I need technical skills to build an agent?">
-    Nope. Phonely’s Flow Builder lets you create production-ready voice agents with no code.\
-    AI-assisted block generation handles most of the logic for you.
+    You can build the main conversation in the visual flow editor. API-based integrations may require technical details from the service you are connecting.
   </Accordion>
-  <Accordion title="Can I integrate my CRM or scheduling software?">
-    Yes. You can connect Google Calendar, HubSpot, Salesforce, or any system that supports API calls directly from the Flow Builder.
+  <Accordion title="How should I teach the agent about my business?">
+    Add reference information to the knowledge base, then use agent guidelines for behavior that should apply across flows.
   </Accordion>
-  <Accordion title="How do I train my agent to answer FAQs?">
-    Upload your FAQs or connect your website to populate the Knowledge Base.\
-    You can also update it anytime as your business evolves.
-  </Accordion>
-  <Accordion title="What if my AI doesn’t understand a customer?">
-    Phonely automatically escalates unclear calls via warm transfer or message capture, ensuring every lead or customer gets handled.
+  <Accordion title="What if the agent cannot complete a request?">
+    Design an explicit fallback path, such as transferring the caller or collecting information for follow-up, and include that path in testing.
   </Accordion>
 </AccordionGroup>
