@@ -1,66 +1,102 @@
 ---
 title: "Ask AI"
-description: "Ask AI is an in-context assistant embedded directly into Phonely’s flow builder. It helps you design and understand call flows and it answers questions about Phonely's platform."
+description: "Work with Ask AI through Operator using the context of your current Phonely page."
 sources:
   - "features/app-shell/ui/ask-ai-search.tsx"
-  - "features/chat/assistant/**"
-  - "features/assistant/**"
+  - "features/app-shell/config/shell-route-rules.ts"
+  - "features/chat/side-panel/ui/app-side-panel.tsx"
+  - "features/chat/assistant/ui/**"
+  - "features/chat/assistant/attachments/**"
+  - "features/chat/assistant/lib/route-capabilities.ts"
+  - "features/chat/assistant/hooks/use-context-sync.ts"
+  - "features/assistant/capabilities/**"
+  - "features/calls/modules/call-details/call-details-modal.tsx"
+  - "features/calls/assistant-capability/lib/call-analysis-handoff.ts"
+  - "features/calls/assistant-capability/services/get-call-details.ts"
+  - "features/workflows/ai/prompt/workflows-prompt-fragment.ts"
   - "app/api/assistant/**"
+last-verified: "2026-07-13"
 ---
 
-Instead of switching between docs, videos, and trial-and-error, Ask AI lets you ask questions exactly where you’re working and get answers tailored to your current flow.
+Ask AI is Phonely's in-product assistant. It appears as **Operator** in the app side panel and works alongside the page you are using.
 
-On the workflow canvas, you’ll see a floating Ask AI button in the bottom corner, giving you quick access to AI assistance while actively designing workflows.
+Use Operator to ask product questions, investigate agent or call behavior, navigate to the right place, and help with supported agent configuration. Its available information and actions depend on the current page, agent, selection, your access, and the capabilities available there.
 
-## Ask AI Modes: Assistant and Test
+## Open Ask AI
 
-Ask AI has two dedicated modes at the top of the panel.
+Ask AI has several entry points:
 
-### Assistant
+- On **Home**, enter a request under **What can Phonely do for you?**
+- On other supported pages, use the **Ask AI** input in the top app bar.
+- Press `Command-/` on macOS or `Ctrl-/` on Windows to open or close Operator.
+- Press `Command-K` or `Ctrl-K` to search Phonely first. If search does not provide the answer, send the request to Ask AI.
 
-The Assistant tab is your all-in-one AI partner for building agents and understanding how they work. You can ask it to design entire agents, modify workflows, or answer questions about both the platform and your specific agent , all in the same conversation.
+The top-bar input also shows navigation and agent results, recent Ask AI chats, and an attachment control when open.
 
-<Frame>
-  <img
-    src="/assets/assistantmode.png"
-    alt="Assistantmode"
-    title="Assistantmode"
-    style={{ width:"68%" }}
-  />
-</Frame>
+## Give Operator a clear task
 
-**Building agents**: Ask the Assistant to create or modify agents and their workflows:
+Good requests state the outcome and relevant scope:
 
-- “Build me a customer support agent that handles returns and exchanges.”
-- “Add an escalation path if the order lookup fails.”
-- “Set up a post-call email summary for every completed appointment.”
+- "Explain the difference between guidelines and the knowledge base."
+- "Open the flow for this agent."
+- "Can you look into this call in detail?"
+- "Why did these selected calls end without an outcome?"
+- "Add a fallback path when the appointment lookup returns no result."
+- "Update the selected guideline section to keep responses concise."
 
-**Getting help**: Ask the Assistant about the platform or your agent’s current behavior:
+If a request could apply to several agents, flows, or calls, name the intended scope. Ask for evidence or the relevant documentation when a product answer needs verification.
 
-- “Why is the agent moving on without asking for the user’s phone number?”
-- “What languages does the agent understand right now?”
-- “What’s the difference between live-call and post-call actions?”
-- “How do call outcomes differ from call topics?”
+## Investigate a call in detail
 
-### [**​**](https://phonely-newest-design.mintlify.app/key-concepts/ask-ai#test-mode)
+From **Call Details**, select **Ask AI** to open a new Operator chat focused on that call. After a Test Call, **Improve with AI** provides a similar handoff so you can explain what you observed and ask Operator to investigate.
 
-### Test Mode
+For a detailed call investigation, Operator can bring together the transcript, path through the flow, captured variables, block-level events, and available runtime events. This is useful when the visible call summary shows the result but not enough evidence to explain why it happened, or when manually correlating events would be difficult.
 
-The Test tab simulates your agent like a real call. You’ll see the agent’s greeting (for example, _“Thank you for calling Phonely! How can I help you today?”_ and can interact as if you’re a caller.
+Start with a request such as "Can you look into this call in detail?" Then add the symptom you observed, expected behavior, or question you want answered. Review the cited evidence and current flow configuration before making a change; some call evidence may be unavailable or incomplete.
 
 <Frame>
-  <img
-    src="/assets/testmode.png"
-    alt="Testmode"
-    title="Testmode"
-    style={{ width:"55%" }}
-  />
+  ![Operator investigating why a notification was not received after a Test Call](/assets/ask-ai-investigate-test-call.png)
 </Frame>
 
-You can:
+## Understand page context
 
-- Type responses to simulate caller input OR switch to talk to speak to it
-- Restart tests instantly
-- Observe how prompts, branches, and logic behave in real time
+Operator follows your navigation context. Depending on the current surface, that context can include the current agent, active flow, selected guideline section, or selected calls. This is why requests such as "explain this flow" or "review these calls" can work without repeating every identifier.
 
-This makes Ask AI a powerful companion to test your agent, helping you debug conversational issues before publishing.
+The conversation can continue as you navigate, while the page context updates to the new surface. Check the current page and selection before using an implicit reference such as "this" or "these."
+
+## Continue or start a chat
+
+Opening Ask AI from the top bar continues the active conversation. Use **New chat** when you want a clean context for an unrelated task.
+
+Use **Chat history** to restore a recent Ask AI session. Removing a chat hides it from that history. Recent chats can also appear in the open top-bar input.
+
+## Add supporting material
+
+You can attach one supported audio recording or document to a request. Wait for the file to finish processing before sending, and explain what you want Operator to do with it.
+
+Attachments supplement the current page context; they do not change which agents or organization data you are allowed to access.
+
+## Review changes before relying on them
+
+Treat Operator as a collaborator rather than an automatic approval step:
+
+1. State the intended caller or business outcome.
+2. Review what Operator inspected and what it changed.
+3. Check the affected configuration in the app.
+4. Test the important paths before relying on the result with callers.
+
+For flows, Operator edits the current draft. Draft auto-save does not publish those changes. Publish when the draft is ready, then test the published experience.
+
+## Operator and Test Call
+
+**Test Call** is a separate tool that shares the app side panel with Operator. It appears when the current page has an agent to test; it is not available on Home or other pages without agent context.
+
+Use the main **Test agent** action for **Web Call** in **Talk** mode. Use the chat icon on the right side of the same button for **Web Chat** in **Chat** mode. Both use the latest published flow, falling back to the draft only when the flow has never been published.
+
+Use [Quick Start](/get-started/quick-start#5-publish-your-draft) for the recommended draft, publish, and testing sequence. Use [Test from a Block](/testing/test-from-a-block) when you need to isolate part of a complex draft without replaying the flow from the beginning.
+
+## Ask AI and documentation
+
+Operator can retrieve Phonely documentation for general product knowledge. When an answer depends on an agent, organization, call, or current selection, it can use the live context and capabilities available on that surface instead.
+
+Documentation explains the product generally; your current Phonely configuration remains the source of truth for your setup.

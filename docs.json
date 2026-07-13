@@ -66,8 +66,8 @@
             "icon": "rocket",
             "pages": [
               "get-started/introduction",
-              "key-concepts/plan-your-agent",
               "get-started/quick-start",
+              "key-concepts/plan-your-agent",
               "get-started/home-overview",
               "key-concepts/ask-ai",
               "get-started/navigation-and-shortcuts"
@@ -113,7 +113,7 @@
                 ]
               },
               {
-                "group": "Workflow Blocks",
+                "group": "Flow Blocks",
                 "pages": [
                   "blocks/flow-blocks/start-flow",
                   "blocks/flow-blocks/talk",

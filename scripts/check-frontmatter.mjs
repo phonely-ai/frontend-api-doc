@@ -36,6 +36,7 @@ function collectPages(value, out = []) {
 }
 
 function parseFrontmatter(text) {
+  text = text.replace(/\r\n/g, '\n');
   if (!text.startsWith('---\n')) return null;
   const end = text.indexOf('\n---', 4);
   if (end === -1) return null;
@@ -94,6 +95,7 @@ function pagePath(route) {
 const docs = JSON.parse(readFileSync(DOCS_JSON, 'utf8'));
 const pages = collectPages(docs.navigation?.tabs ?? []);
 const errors = [];
+const warnings = [];
 
 for (const page of pages) {
   const file = pagePath(page);
@@ -133,12 +135,27 @@ for (const page of pages) {
       }
     }
   }
+
+  if (typeof frontmatter['last-verified'] !== 'string') {
+    // Phase 2 adds this only after a real source review. Do not manufacture a
+    // verification date just to make legacy pages pass CI.
+    warnings.push(`${page}: missing last-verified`);
+  } else {
+    const verified = frontmatter['last-verified'].trim();
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(verified) || Number.isNaN(Date.parse(`${verified}T00:00:00Z`))) {
+      errors.push(`${page}: last-verified must be a valid YYYY-MM-DD date`);
+    }
+  }
 }
 
 if (errors.length > 0) {
   console.error(`Frontmatter lint failed with ${errors.length} error(s):`);
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
+}
+
+if (warnings.length > 0) {
+  console.warn(`Frontmatter lint found ${warnings.length} page(s) awaiting source verification.`);
 }
 
 console.log(`Frontmatter lint passed for ${pages.length} indexed page(s).`);
