@@ -1,107 +1,137 @@
 ---
-title: "Start Flow"
-description: "The essential foundation that initiates every inbound call workflow"
+title: "Flow Triggers"
+description: "Configure the triggers that start the First Flow, other inbound flows, and outbound flows."
 sources:
   - "features/workflows/model/nodes/receive-call.ts"
+  - "features/workflows/model/nodes/initiate-call.ts"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/model/connection.ts"
   - "features/workflows/modules/editor/custom-nodes/receive-call/**"
-  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/initiate-call/**"
+  - "features/workflows/modules/editor/default-initial-elements.tsx"
+  - "features/workflows/modules/editor/hooks/use-auto-save.ts"
+  - "features/workflows/modules/editor/hooks/use-checklist.ts"
+  - "features/workflows/modules/editor/utils/content.ts"
+  - "phonely-backend/app/agent/assistant/workflows.py"
+  - "phonely-backend/app/call/routes.py"
+last-verified: "2026-07-14"
 ---
 
-The start flow block defines how and when a workflow begins in Phonely. It does not speak to the caller directly, but it controls which flow is entered, under what conditions, and on which channels (Inbound, Outbound, or SMS).
+Every flow begins with one fixed trigger. Phonely adds the trigger when you create the flow; it cannot be added from the block picker, deleted, or moved on the canvas.
 
-Every workflow must have a Start Flow block. It is the anchor that determines when your logic is activated and how the agent transitions into the rest of the flow.
+The trigger depends on the flow's direction and role:
 
-<img
-  src="/assets/start-flow-block.png"
-  alt="Start Flow Block example"
-  style={{ width:"86%" }}
-/>
+| Trigger | Flow | How it starts |
+| :-- | :-- | :-- |
+| **Greeting** | Inbound **First Flow** | Incoming call |
+| **Start Flow** | Other inbound flow | Transfer Flow or Global Flow trigger condition |
+| **Make Call** | Outbound flow | Places an outbound call |
 
-## What the Start Flow Does
+## First Flow and its Greeting
 
-The Start Flow block determines three critical things:
+The **First Flow** is the agent's default entry point for inbound calls. Each agent can have only one First Flow, and its trigger appears as **Greeting**.
 
-1. It defines when the workflow is triggered. Phonely evaluates the Start Flow whenever a call or message comes in (or is initiated outbound) and decides whether this flow should run.
-2. It controls how the flow is entered. A workflow can either start automatically as the primary entry point, or be triggered conditionally during an ongoing conversation.
-3. It specifies which communication types can activate the flow, such as inbound calls, outbound calls, or SMS conversations.
+Select Greeting to configure:
 
-### Add a Start Flow
+- **Greeting Message:** The first thing the agent says when it answers an inbound call.
+- **Answers:** Up to six optional routes from the greeting. Expand **Advanced Settings** to add them, then connect each answer to the appropriate next block.
 
-When you create a new workflow from scratch in Phonely, the Start Flow block is added automatically to the canvas.
+### Change the First Flow
 
-You do not need to manually insert it or select it from the block library. Phonely always includes a Start Flow block because every workflow must have a clear entry point.
+A flow must have at least one published version before you can make it the First Flow.
 
-When the workflow opens:
-
-- The start flow block is already present on the canvas
-- It is ready to be configured as a **First Flow**, **Global Flow**, or both.
-- Your only required action is to connect it to the next block, typically a Greeting Message, Collect, or Talk block.
-
-<img
-  src="/assets/configuring-a-start-block.png"
-  alt="Configuring A Start Block"
-  title="Configuring A Start Block"
-  style={{ width:"65%" }}
-/>
-
-## Set as First Flow
-
-When **Set as First Flow** is enabled, Phonely will always start with this workflow whenever an **inbound call** is received. Only one workflow per agent can be set as the First Flow.
+1. Publish the target flow first if it has no published version.
+2. Select its **Start Flow** trigger and enable **Set as First Flow**.
+3. Wait for the First Flow change to auto-save.
+4. Review the **Greeting** and its paths, then publish draft changes before testing.
 
 <Note>
-  This option is not available for outbound calls.
+  Making a flow the First Flow also turns it on and updates the agent's inbound entry point. It does not publish draft changes; publish any later edits separately.
 </Note>
 
-The **Greeting Message** field is where you write the first thing the agent says when the call begins (for example: “Hello, how can I help you?”).
+If call recording is enabled, the editor reminds you to include an appropriate recording disclosure in the greeting. Make sure the wording meets the requirements that apply to your calls.
 
-If call recording is enabled for the agent, you must include a recording disclosure in your greeting. The tooltip in the UI explicitly warns that you must state the call is being recorded, and that you can remove this requirement by disabling call recordings in settings.
+## Start Flow for other inbound flows
+
+An inbound flow that is not the First Flow begins at **Start Flow**. It does not receive a new call or replay the First Flow's greeting. The active conversation enters it in one of two ways:
+
+- **Transfer Flow:** A connected block routes the active call into the flow.
+- **Global Flow:** Phonely enters the flow when its **Trigger Condition** matches in an enabled conversation type.
+
+Connect the Start Flow output to the first block that should run after the conversation enters the flow.
+
+<Note>
+  Transfer Flow keeps the call active, but flow-specific variables do not carry from the source flow to the target flow. Design the target flow to collect or retrieve the data it needs.
+</Note>
+
+### Configure a Global Flow
+
+A **Global Flow** is available from across a conversation instead of only through a connected Transfer Flow block. Use one when a distinct intent should be reachable from multiple parts of the agent.
+
+To configure it:
+
+1. Open another inbound flow and select **Start Flow**.
+2. Enable **Set as Global Flow**.
+3. In **Trigger Condition**, describe when to enter the flow.
+4. Select at least one conversation type: **Inbound**, **Outbound**, or **SMS**.
+5. Turn on the flow, then test conversations that should and should not enter it.
 
 <img
-  src="/assets/set-start-flow-advanced-settings.png"
-  alt="Set Start Flow Advanced Settings"
-  title="Set Start Flow Advanced Settings"
-  style={{ width:"65%" }}
+  src="/assets/flow-triggers-inbound-settings.png"
+  alt="Start Flow settings for an Appointment Booking Global Flow, including its trigger condition and enabled conversation types"
 />
 
-Under **Advanced Settings**, you can add Answers (keywords). These are used to create branching paths for the greeting message.
+Write the Trigger Condition as a clear intent, not a list of exact phrases. Keep it specific and distinct from other Global Flow trigger conditions so the agent can choose the intended flow.
 
-This means you can type one or more keywords a caller might say (each entry is added when you press **Enter**), and then route the call differently based on the caller’s response right after the greeting.
+<Warning>
+  A Global Flow is considered throughout each selected conversation type, not only at a fixed point in the current flow. Use it only when its intent should remain broadly available.
+</Warning>
 
-## Set as Global Flow
+If **Set as Global Flow** is off, the flow can still be entered through a connected Transfer Flow block. Turning the flow off removes it from normal Global Flow routing.
 
-Set as Global Flow allows this workflow to be triggered at any point during a conversation, as long as its trigger condition is met.
+## Make Call for outbound flows
 
-Unlike First Flow, a Global Flow does not start the call. Instead, it acts as an interrupt or handoff that Phonely can transfer into dynamically.
+Every outbound flow begins with **Make Call**. Select the trigger to configure:
+
+- **Phone Number:** The destination to call. Insert a variable when the number is supplied at runtime.
+- **Voice Mail Message:** The message Phonely leaves when voicemail is detected.
+- **Voicemail Call Outcome Tagging:** Outcome tags recorded for calls that reach voicemail. This setting is under **Advanced Settings**.
+
+Make Call provides two outputs:
+
+- **Answered:** Continue the live call path when someone answers.
+- **Voicemail:** Start an optional post-call path for voicemail handling.
 
 <img
-  src="/assets/set-start-flow-as-global.png"
-  alt="Set Start Flow As Global"
-  title="Set Start Flow As Global"
-  style={{ width:"90%" }}
+  src="/assets/flow-triggers-make-call.png"
+  alt="Make Call settings for an outbound flow, with the Answered and Voicemail outputs visible on the canvas"
 />
 
-Once enabled, Phonely continuously evaluates the trigger condition and transfers into this flow when appropriate.
+Connect **Answered** to the first block the agent should run after someone answers. Use the **Voicemail** connection when that outcome needs follow-up work after the call.
 
-### Trigger Condition
+<div style={{ height: "3rem" }} aria-hidden="true" />
 
-The Trigger Condition defines why this workflow should activate.
+<Accordion title="Run actions before Greeting or Make Call">
+  Pre-call blocks are optional. Add one from the connection above **Greeting** or **Make Call** to run it before the agent greets an inbound caller or dials an outbound number.
 
-This is written in natural language and describes what the caller says or intends. For example, “When someone mentions needing help with a specific product.”
+  Use pre-call blocks to prepare or validate data, set variables for later blocks, end an inbound call before the greeting, or prevent an outbound call from being placed.
 
-Phonely uses this condition to decide whether to enter the workflow, especially when the flow is marked as a Global Flow.
+  A failed request does not stop the call automatically. Route the relevant failure result to a pre-call **End Call** block when **Greeting** or **Make Call** should not run.
 
-Keep trigger conditions:
+  **Start Flow** does not support pre-call blocks because the conversation is already active when another inbound flow begins.
+</Accordion>
 
-- Clear and specific
-- Focused on intent, not exact phrasing
-- Narrow enough to avoid accidental transfers
-
-## Channel Selection (Inbound, Outbound, SMS)
-
-The channel checkboxes determine where this workflow is allowed to run.
-
-- Inbound: By selecting, Phonely can trigger this global workflow during any inbound call when the trigger condition is met.
-- Outbound: By selecting, Phonely can trigger this global workflow during any outbound call when the trigger condition is met.
-- SMS: By selecting, Phonely can trigger this global workflow during any text conversations when the trigger condition is met.
-
-You can enable one, two, or all three depending on how the workflow should be used.
+<CardGroup cols={2}>
+  <Card title="Call Flows" icon="route" href="/key-concepts/flows">
+    Understand flow stages, drafts, versions, and the complete editing process.
+  </Card>
+  <Card title="Connections and Routing" icon="git-branch" href="/flow-editor/connections-and-routing">
+    Connect trigger outputs, branches, transfers, and fallback paths.
+  </Card>
+  <Card title="Flow Checklist" icon="clipboard-check" href="/workflow-checklist">
+    Find missing trigger settings and connections before publishing.
+  </Card>
+  <Card title="Test and Publish" icon="rocket" href="/flow-editor/test-and-publish">
+    Test the right version and release reviewed changes safely.
+  </Card>
+</CardGroup>

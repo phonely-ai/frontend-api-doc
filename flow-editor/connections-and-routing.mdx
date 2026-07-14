@@ -1,0 +1,105 @@
+---
+title: "Connections and Routing"
+description: "Connect blocks across pre-call, live call, and post-call stages and give every result a deliberate path."
+sources:
+  - "features/workflows/model/connection.ts"
+  - "features/workflows/model/execution-stage.ts"
+  - "features/workflows/model/variables/incoming-groups.ts"
+  - "features/workflows/model/validation/validate-node.ts"
+  - "features/workflows/modules/editor/hooks/use-canvas-handlers.ts"
+  - "features/workflows/modules/editor/hooks/use-edge-cleanup.ts"
+  - "features/workflows/modules/editor/components/handle/**"
+  - "features/workflows/modules/editor/custom-react-flow.css"
+  - "features/workflows/modules/editor/components/action-market/action-market.tsx"
+  - "features/workflows/modules/editor/custom-nodes/prompt/prompt-action-form.tsx"
+  - "features/workflows/modules/editor/custom-nodes/filter/v2/**"
+  - "phonely-backend/app/agent/assistant/workflows.py"
+  - "phonely-backend/app/agent/assistant/agent_data.py"
+last-verified: "2026-07-14"
+---
+
+Connections control which block can run next. A connection leaves the current block through a **source handle** and enters the next block through a **target handle**. The selected source handle determines which result follows the route.
+
+## Connect blocks on the canvas
+
+1. Hover over a source handle to see what it represents.
+2. Drag from the source handle toward the block you want to run next.
+3. Drop the connection on a compatible target handle.
+
+While you drag, the editor dims and disables incompatible handles, leaving valid target handles active.
+
+<Tip>
+  Select the **+** beside a source handle to add and connect a compatible block in one step. Use **Add block** in the canvas toolbar to place a block without connecting it.
+</Tip>
+
+A live call continuation or named source handle accepts one destination. Create separate named routes to branch. A post-call source handle can connect to multiple post-call blocks.
+
+## Follow the execution stages
+
+Connections follow the three stages in which a call runs.
+
+**Pre-call:** Runs before **Greeting** starts an inbound call or **Make Call** places an outbound call. Connect pre-call blocks to each other, then connect the final route to the trigger's target handle. **Start Flow** does not support pre-call.
+
+**Live call:** Begins at the trigger and continues through the active conversation until the call ends or transfers.
+
+**Post-call:** Runs after the live conversation. Connect only to post-call target handles; the route cannot return to the conversation.
+
+Where a post-call route begins determines which calls trigger it:
+
+- Attach it to the trigger or an early live call block when it should run for every call that reaches that point.
+- Attach it later when it should run only for calls that reach a specific part of the conversation.
+- Connect independent post-call actions directly; chain them when one must follow another.
+
+## Choose a route
+
+- **Continuation:** Run the next block after the current block completes without a named result.
+- **Conversation outcome:** Route from a Talk exit condition that describes a distinct, observable result. Avoid overlapping conditions or instructions for what the agent should ask next.
+- **Data or time result:** Route from a Filter case or Time Filter result when a defined business rule should decide the path.
+- **Action result:** Route from results such as **Success**, **Error**, or another block-specific outcome. Connect every result that requires follow-up or a fallback.
+- **Transfer:** Use **Transfer Flow** to move the active conversation to another flow in the same agent, or **Transfer Call** to hand the call to a phone destination.
+
+<Warning>
+  Transfer Flow keeps the call active, but flow-specific variables from the source flow are not available in the target flow. Collect or retrieve required data in the target flow.
+</Warning>
+
+## Routing and variable availability
+
+Routing determines which block variables are available downstream. During pre-call and live call, a block can use values created by earlier blocks on a route that reaches it. Values created later or on unrelated routes are unavailable.
+
+When routes rejoin, a variable created on only one branch may be empty for calls that took another branch. Keep the block that uses it on the same branch, create the value on every incoming branch, or handle an empty value.
+
+Post-call blocks use **Post Call Variables** instead of **Call Variables**. They can also reference block variables, but a value may be empty when the call did not pass through the block that created it.
+
+Use the variable picker in the destination block to see what can be referenced, then confirm that its incoming routes supply every required value. See [Variables](/flow-editor/variables) for the complete availability model.
+
+## Change a route safely
+
+When restructuring a flow:
+
+1. Remove the current live call connection.
+2. Connect the source handle to the new target handle.
+3. Confirm required routes and fallbacks remain connected and downstream variables remain available.
+
+Resolve [Flow Checklist](/workflow-checklist) errors and test every affected route before publishing.
+
+Renaming an exit condition normally keeps its connection. Deleting an exit condition or Filter case also deletes the connection from that source handle, so recheck the affected routes after either change.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The editor will not accept a connection">
+    Start from a source handle and use a target handle that remains active while you drag. If the intended target is dim, the connection is incompatible or that live call source handle already has a destination.
+  </Accordion>
+  <Accordion title="A route never runs">
+    Confirm that its condition can become true, its source handle is connected, and an earlier block does not end or transfer the call first. For Talk, test several natural ways a caller might express the intended outcome.
+  </Accordion>
+  <Accordion title="The wrong route runs">
+    Make conversation exit conditions or Filter cases more distinct, then confirm that the connection leaves the intended source handle.
+  </Accordion>
+  <Accordion title="A post-call action runs for only some calls">
+    Check which live call block its route begins from. Connect a general action to the trigger or an earlier block, but keep a conditional action connected after the event it depends on.
+  </Accordion>
+  <Accordion title="A variable became invalid after rerouting">
+    The destination may no longer be downstream from the block that creates the value. Restore the required route, move the dependent block, or use a value available on every incoming route.
+  </Accordion>
+</AccordionGroup>
