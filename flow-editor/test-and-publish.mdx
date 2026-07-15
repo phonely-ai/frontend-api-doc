@@ -1,0 +1,134 @@
+---
+title: "Test and Publish"
+description: "Test focused changes, publish a reviewed flow, and verify the version callers will use."
+sources:
+  - "features/workflows/modules/editor/components/controls/auto-save-status.tsx"
+  - "features/workflows/modules/editor/components/controls/save-button-group.tsx"
+  - "features/workflows/modules/editor/components/controls/test-button-group.tsx"
+  - "features/workflows/modules/editor/components/test-from-node-modal.tsx"
+  - "features/workflows/modules/editor/custom-nodes/custom-node-provider.tsx"
+  - "features/workflows/modules/editor/hooks/use-unpublished-changes.ts"
+  - "features/workflows/modules/editor/testing/**"
+  - "features/chat/test/**"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/menu/test-agent-button.tsx"
+last-verified: "2026-07-15"
+---
+
+Use focused tests while editing, then publish and test the flow from its normal entry point. This separates quick checks of the current draft from verification of the version callers will use.
+
+## Understand drafts and versions
+
+| State | What it means |
+| :-- | :-- |
+| **Current draft** | Your latest auto-saved edits; does not replace the published version |
+| **Saved version** | An optional checkpoint; does not replace the published version |
+| **Published version** | The version used by normal tests and live calls |
+
+The auto-save message at the bottom of the editor confirms when the current draft was saved. Auto-save does not create or publish a version.
+
+<Note>
+  If a flow has no published version, Phonely falls back to its current draft. After the first publish, the latest published version is used until you publish again.
+</Note>
+
+Turning a flow on or off is separate from publishing its current draft. Publishing creates a version and turns the flow on. Turning it off does not delete its draft or published version, and turning it on again does not publish newer draft edits.
+
+## Recommended release process
+
+<Steps>
+  <Step title="Edit the draft">
+    Make a focused change and wait for auto-save to finish.
+  </Step>
+  <Step title="Test focused changes when useful">
+    For faster feedback, test a supported block in isolation or use **Test from here** on part of a long inbound flow. These checks are optional and do not replace a complete test.
+  </Step>
+  <Step title="Review the flow">
+    Resolve every block error in the **Flow Checklist**, then review the affected routes, variables, and Flow Settings.
+  </Step>
+  <Step title="Publish">
+    Select **Publish** to create a version from the reviewed draft and make it the version used by normal tests and live calls.
+  </Step>
+  <Step title="Verify the published flow">
+    Test from the normal entry point with Web Chat or Web Call for an inbound flow, or **Place Phone Call** for an outbound flow.
+  </Step>
+</Steps>
+
+When a change depends on phone-specific data or behavior, finish with a phone call: use **Place Phone Call** for an outbound flow or call the agent's phone number for an inbound flow.
+
+<Warning>
+  Tests can trigger connected actions, including messages and external requests. Use test recipients, safe endpoints, and non-production records whenever a tested block or route has side effects.
+</Warning>
+
+## Test focused draft changes
+
+Use focused tests for faster feedback while editing. They do not confirm that the flow can be published or that the complete published path works.
+
+| Test | What it tests | Best for |
+| :-- | :-- | :-- |
+| **Block-level test** | One supported block using its current configuration | Checking the block's inputs and result with sample values |
+| **Test from here** | The current draft from a selected live-call block onward | Checking a downstream path without replaying earlier blocks |
+
+### Test a block in isolation
+
+Some blocks include a **Test** section in their configuration panel. Enter safe sample values for the variables used by the block, run the test, and inspect the resolved input and result.
+
+Some blocks determine their output variables from the test result. For these blocks, run a successful test before using returned values in downstream blocks, and test again whenever the output structure changes.
+
+A block-level test does not run the block's incoming or outgoing connections.
+
+### Test from a selected block
+
+**Test from here** is useful when the changed block is deep inside a long inbound flow.
+
+1. Select the play icon on the live-call block where the test should begin.
+2. Choose **Voice** or **Chat**.
+3. Enter representative values for the available variables the test needs.
+4. Select **Start test**.
+5. Continue in the **Test Call** side panel and verify the downstream route.
+
+The dialog shows only variables that can be available before the selected block. Blank values are not passed into the test. If no earlier values are needed, it displays **No variables needed for this block**.
+
+Test from here applies the draft override to the selected flow. If the route enters another flow, that flow uses its latest published version, or its draft if it has never been published.
+
+A successful partial test does not confirm that blocks before the starting point produce the expected values, that alternate routes work, or that the draft has been published. Always complete the normal release process.
+
+## Review and publish
+
+Open the [Flow Checklist](/workflow-checklist) and resolve every block error before publishing. Then review the affected routes, variable references, and [Flow Settings](/flow-editor/flow-settings).
+
+Publishing can be unavailable when the flow has block errors, a block is not included in the current plan, your role cannot edit the flow, or a newer collaboration update must be resolved.
+
+Select the main **Publish** button to create a version from the current draft and make it live. The adjacent menu provides related version actions:
+
+- **Save as Version** creates a checkpoint without changing the published version.
+- **Version History** opens saved and published versions for review or restoration.
+
+The **Publish** button is disabled when the current draft matches the published version. After publishing, run the appropriate complete-flow test so you are checking the version callers will use.
+
+See [Flow Versions](/flow-editor/versions) for checkpoints and restoration, and [Resolve Remote Flow Updates](/flow-editor/collaboration) for resolving newer remote updates before publishing.
+
+## Verify the published flow
+
+Web Chat and Web Call begin at the agent's First Flow. Choose the test based on the behavior you need to verify.
+
+| Test | How it runs | Best for |
+| :-- | :-- | :-- |
+| **Web Chat** | In-browser chat | Quickly verify prompts, variables, routing, and connected actions across the flow |
+| **Web Call** | In-browser voice | Verify the same flow behavior plus voice, tone, pacing, and interruptions |
+| **Place Phone Call** | Phonely calls a test number | Verify outbound delivery, telephony behavior, and phone-derived data |
+| **Inbound phone call** | A test phone calls the agent | Verify caller data, transfers, and end-to-end telephony behavior |
+
+### Web Chat and Web Call
+
+Use Web Chat for a quick functional pass through the flow. Use Web Call when you also need to evaluate the voice, tone, pacing, and interruption behavior.
+
+For an inbound flow, select the chat icon on the right side of **Test agent** to start Web Chat. Select the main area of the same button to start Web Call. Both open in the **Test Call** tab of the side panel.
+
+The **Operator** tab is Ask AI. It can inspect and help change the agent, but it is separate from the tests in **Test Call**.
+
+Browser-based tests do not always reproduce phone-network data or behavior, such as a real caller number or transfer timing. Use a phone call when the tested behavior depends on that information.
+
+### Run a phone test
+
+**Outbound:** Open the outbound flow and select **Place Phone Call** in the top bar. Enter representative input values, including a destination number you control, then run the test.
+
+**Inbound:** From a phone you control, call the number assigned to the agent. Start at the greeting and exercise the affected path.

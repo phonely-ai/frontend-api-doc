@@ -1,0 +1,84 @@
+---
+title: "Resolve Remote Flow Updates"
+description: "Compare remote flow updates with your local draft and choose whether to preserve local work."
+sources:
+  - "features/workflows/modules/editor/workflow-canvas.tsx"
+  - "features/workflows/modules/editor/hooks/use-workflow-sync-coordinator.ts"
+  - "features/workflows/modules/editor/hooks/use-collaboration.ts"
+  - "features/workflows/modules/editor/hooks/use-workflow-diff-review.ts"
+  - "features/workflows/modules/editor/components/controls/flow-sync-conflict-banner.tsx"
+  - "features/workflows/modules/editor/components/workflow-diff-review-modal.tsx"
+  - "features/workflows/modules/editor/components/controls/save-button-group.tsx"
+  - "features/workflows/modules/editor/components/version-restore-modal.tsx"
+last-verified: "2026-07-15"
+---
+
+When the same flow changes elsewhere while you have it open, Phonely protects both copies instead of silently overwriting one. Compare the drafts, then choose how to load the remote update.
+
+<Warning>
+  Phonely does not merge the two drafts automatically. **Save Local & Load Latest** backs up the local draft before loading the remote draft, but you must manually reapply any changes you still need.
+</Warning>
+
+## When the banner appears
+
+The **New remote updates available** banner appears when a newer shared draft cannot be applied to your open canvas automatically. When available, the banner identifies the other editor.
+
+<img
+  src="/assets/flow-collaboration-remote-updates-banner.png"
+  alt="New remote updates available banner with Review Changes, Apply Latest, and Save Local and Load Latest actions"
+  style={{ width: "100%", margin: "0" }}
+/>
+
+This can happen when a teammate, another browser tab, or another editing session changes the same flow. While the update is unresolved:
+
+- auto-save is paused;
+- publishing and version restoration are blocked; and
+- the canvas continues to show your local draft.
+
+Stop editing and resolve the update before continuing.
+
+## Review the changes
+
+Select **Review Changes** in the banner. The **Review Flow Changes** dialog compares:
+
+- **Local Draft:** the flow currently shown on your canvas.
+- **Remote Updates:** the newer shared draft waiting to be loaded.
+
+| View | Best for |
+| :-- | :-- |
+| **Simple** | Readable changes to prompts, objectives, and block settings |
+| **Advanced** | Exact field-level JSON differences when Simple does not explain a change |
+
+The dialog is read-only and uses the technical terms **node** for a block and **edge** for a connection. Close it when you are ready to choose a resolution from the banner.
+
+## Choose a resolution
+
+| Action | What happens | Use when |
+| :-- | :-- | :-- |
+| **Apply Latest** | Loads the remote draft and discards local differences | You no longer need the local changes, or they already exist in the remote draft |
+| **Save Local & Load Latest** | Creates a **Draft Backup** version, then loads the remote draft | You may need to recover or reapply local changes |
+
+A **Draft Backup** is an unpublished version saved in **Version History**. It is not merged into the remote draft; preview it later and manually reapply any changes you need.
+
+## After loading the remote draft
+
+If you created a **Draft Backup**, reapply any required local changes, then wait for auto-save to finish. Open the [Flow Checklist](/workflow-checklist) and resolve any block errors. Test the affected paths, and publish only after reviewing the updated draft.
+
+<Tip>
+  To reduce conflicts, coordinate changes to shared flows and avoid editing the same flow in multiple tabs. Let Ask AI finish applying a change before editing the affected blocks.
+</Tip>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Publishing or restoring is blocked">
+    Return to the canvas and resolve the **New remote updates available** banner. **Review Changes** only compares the drafts; you must select **Apply Latest** or **Save Local & Load Latest** to resolve the update.
+  </Accordion>
+  <Accordion title="I need local changes after loading the remote draft">
+    If you selected **Save Local & Load Latest**, open [Flow Versions](/flow-editor/versions), preview the **Draft Backup**, and manually reapply the changes you need.
+
+    If you selected **Apply Latest**, the discarded local differences were not saved as a version.
+  </Accordion>
+</AccordionGroup>
+
+See [Flow Versions](/flow-editor/versions) for backups and restoration, and [Test and Publish](/flow-editor/test-and-publish) for validating the resolved draft.

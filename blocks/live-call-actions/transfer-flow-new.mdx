@@ -11,6 +11,10 @@ The Transfer Flow block lets your AI agent route a caller from the current flow 
 
 From the caller’s perspective, the transition is seamless, they remain in the same call while the agent switches conversational context behind the scenes.
 
+<Warning>
+  Flow-specific variables from the source flow are not available in the target flow. Configure the target flow to collect or retrieve any data it needs after the transfer.
+</Warning>
+
 This block supports multiple destinations, centralized transition logic, and a simpler configuration model for complex routing.
 
 ## Key Features

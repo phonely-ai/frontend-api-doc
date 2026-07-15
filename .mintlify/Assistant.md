@@ -10,7 +10,7 @@
 
 ## Retrieval rules
 - Prefer visible product pages for user-facing explanations.
-- Use hidden `/ai/` runbooks when the user asks for exact task execution or when a visible page is too high-level. Available runbooks: `/ai/route-map` (task → exact route), `/ai/build-agent`, `/ai/manage-knowledge-base`, `/ai/edit-workflows`, `/ai/run-ab-tests-and-evaluations`, `/ai/review-calls-and-analytics`, `/ai/configure-outbound-campaigns`, `/ai/frontend-api-boundaries`.
+- Use hidden `/ai/` runbooks when the user asks for exact task execution or when a visible page is too high-level. Available runbooks: `/ai/route-map` (task → exact route), `/ai/build-agent`, `/ai/manage-knowledge-base`, `/ai/edit-flows`, `/ai/run-ab-tests-and-evaluations`, `/ai/review-calls-and-analytics`, `/ai/configure-outbound-campaigns`, `/ai/frontend-api-boundaries`.
 - Treat `/ai/route-map` as the authoritative source for frontend routes, query tabs, and task-to-route selection.
 - Prefer API reference pages for request shapes, headers, and examples.
 - If two pages overlap, use the page with the narrower scope.

@@ -1,0 +1,79 @@
+---
+title: "Block Reference"
+description: "Find the Phonely block that matches your task and see where it can run in a flow."
+sources:
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/hooks/use-actions.ts"
+  - "features/workflows/modules/editor/components/action-market/action-palette.tsx"
+  - "features/workflows/model/execution-stage.ts"
+last-verified: "2026-07-13"
+---
+
+Blocks are the capabilities you connect to build a flow. Choose a block by the result you need, then place it in a supported execution stage.
+
+<Info>
+  The block picker is context-aware. It only shows blocks supported by the flow direction, execution stage, your plan, and any integrations configured for your workspace.
+</Info>
+
+## Conversation and flow control
+
+| Block | Use it to | Supported stage |
+| :-- | :-- | :-- |
+| [Flow triggers](/blocks/flow-blocks/start-flow) | Define how an inbound or outbound flow begins | Entry point |
+| [Talk](/blocks/flow-blocks/talk) | Give the agent a conversational objective and let it respond naturally | Live call |
+| [Collect](/blocks/flow-blocks/collect) | Gather named, structured values from the caller | Live call |
+| [Filter](/blocks/flow-blocks/filter) | Branch based on cases and conditions | Pre-call, live call, post-call |
+| [Time Filter](/blocks/flow-blocks/time-filter) | Route by a weekly availability schedule | Live call |
+| [Transfer Flow](/blocks/live-call-actions/transfer-flow-new) | Move the conversation to another flow in the same agent | Live call |
+| [End Call](/blocks/flow-blocks/end-call) | Stop the call, optionally with a final message | Pre-call, live call |
+
+## Communications and call handling
+
+| Block | Use it to | Supported stage |
+| :-- | :-- | :-- |
+| [Transfer Call](/blocks/live-call-actions/new-transfer-call) | Hand an active call to one or more phone destinations | Live call |
+| [Send SMS](/blocks/live-call-actions/send-sms) | Send a text message using values available to the flow | Pre-call, live call, post-call |
+| [Send Email](/blocks/live-call-actions/send-email) | Send an email during the call or after it ends | Live call, post-call |
+| Email & SMS Notification | Notify configured recipients after a call | Post-call |
+| Redial | Schedule another call after a delay | Post-call |
+| Campaign | Add the caller to a campaign | Post-call |
+
+## Data and automation
+
+| Block | Use it to | Supported stage |
+| :-- | :-- | :-- |
+| [API Request](/blocks/api-request) | Send an HTTP request and use the response in the flow | Pre-call, live call, post-call |
+| [Code](/blocks/live-call-actions/codeflow) | Run Python code to transform or calculate data | Pre-call, live call, post-call |
+| Webhook | Receive external data before an inbound call starts | Pre-call, inbound only |
+| Send Call Data | Send call data to an endpoint after the call | Post-call |
+| Delay | Wait before the next post-call action runs | Post-call |
+| Vision | Perform a task on a webpage during a call | Live call |
+
+## Integration blocks
+
+| Block | Use it to | Supported stage |
+| :-- | :-- | :-- |
+| Google Calendar | Work with calendar availability and events | Live call |
+| Gmail | Send email through a connected Gmail account | Live call, post-call |
+| Google Sheets | Find or add spreadsheet data | Live call, post-call |
+| Google Drive | Store call-related files in Drive | Post-call |
+| Microsoft Outlook | Send email through a connected Outlook account | Live call, post-call |
+| Slack | Send information to a connected Slack workspace | Live call, post-call |
+| Make | Trigger a Make scenario after a call | Post-call |
+| Zapier | Trigger a Zap through a webhook after a call | Post-call |
+| Custom actions | Run workspace-specific live-call actions | Live call |
+
+Integration blocks appear only when the required connection or custom action is available. Their block guides explain editor behavior; connection and authentication guides are covered separately.
+
+## Add a block in the correct stage
+
+- To add a **pre-call** block, use the handle above the flow trigger.
+- To continue a **live-call** path, use an available live-call output or exit-condition handle.
+- To add a **post-call** block, use the post-call handle on the live-call block after which the action should run.
+- To place an unconnected live-call or post-call block, use **Add block** in the canvas toolbar.
+
+If a block supports several stages, use one canonical guide for that block. The guide calls out any fields, variables, outputs, or limits that change by stage.
+
+<Warning>
+  A block being available in the picker does not mean it is ready to publish. Configure its required fields, connect its relevant outputs, and resolve any errors in the [Flow Checklist](/workflow-checklist).
+</Warning>

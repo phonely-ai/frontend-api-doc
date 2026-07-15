@@ -1,0 +1,82 @@
+---
+title: "Flow Versions"
+description: "Save checkpoints, inspect earlier flow configurations, and safely restore a version."
+sources:
+  - "features/workflows/modules/editor/components/controls/save-button-group.tsx"
+  - "features/workflows/modules/editor/components/controls/version-preview-status.tsx"
+  - "features/workflows/modules/editor/components/panels/version-history-side-panel.tsx"
+  - "features/workflows/modules/editor/components/version-preview-overlay.tsx"
+  - "features/workflows/modules/editor/components/version-restore-modal.tsx"
+  - "features/workflows/modules/editor/components/version-edit-modal.tsx"
+  - "features/workflows/modules/editor/components/version-delete-modal.tsx"
+  - "features/workflows/modules/editor/components/workflow-changelog-modal.tsx"
+  - "features/workflows/modules/editor/hooks/use-version-preview.ts"
+last-verified: "2026-07-15"
+---
+
+A version is a read-only snapshot of a flow. Use versions to preserve meaningful checkpoints, compare earlier configurations, and restore a known design without changing the published version.
+
+## Create a version
+
+| Action | Result | Live effect |
+| :-- | :-- | :-- |
+| **Auto-save** | Updates the current draft | None |
+| **Save as Version** | Creates a numbered checkpoint | None |
+| **Publish** | Creates a numbered version from the draft | Makes the new version live |
+
+Select the main **Publish** button to publish the current draft. To create a checkpoint without changing the published version, open the adjacent menu and select **Save as Version**.
+
+Each version receives a number and an initial name such as `Version 4`. Phonely also adds initial release notes; when it can compare the draft with the published version, those notes summarize the detected changes. Review the name and notes when the version marks an important release or decision.
+
+Save a checkpoint when you may need to explain or return to the current design, such as:
+
+- before restructuring a large route;
+- after a reviewed milestone; or
+- before restoring a version or applying remote updates when the current draft must be preserved.
+
+Avoid creating a version for every minor edit. Auto-save already saves the current draft.
+
+## Preview an earlier version
+
+Open the menu beside **Publish** and select **Version History**. The side panel lists **Current Draft** and every numbered version. Each version shows its name, notes, author, and time; a **Published** badge marks the current published version. **Current Draft** is the latest auto-saved flow and is not numbered.
+
+Version History puts the editor into read-only review mode. Select a version to preview its saved canvas, then select a block to inspect its saved configuration. Previewing never changes the current draft.
+
+Select **Current Draft** to view the draft while keeping Version History open, or close the panel to resume editing.
+
+<Tip>
+  Compare routes, block settings, variables, and Flow Settings—not only block names or canvas layout. A configuration change can alter behavior without moving a block.
+</Tip>
+
+## Review the changelog
+
+Select **View Full Changelog** in Version History to review all numbered versions. Each entry shows its name, release notes, author, time, and published status.
+
+If you can manage the flow, select a version name or its release notes to edit them. Use a descriptive name, and review automatically generated notes before relying on them for an important change.
+
+## Restore an earlier version
+
+Restoring replaces the current draft with the selected snapshot. It does not change the published version until you publish the restored draft.
+
+<Warning>
+  This cannot be undone. Save the current draft as a version first if you may need it later.
+</Warning>
+
+1. Preview the version and inspect its routes, variables, and settings.
+2. Select **Restore** from the version menu or preview banner and confirm.
+3. Review and test the restored draft. Publish it only when ready.
+
+Resolve newer remote updates from the collaboration banner before restoring.
+
+## Rename or delete a version
+
+Open a version's menu in Version History to:
+
+- **Rename** its name and update its release notes; or
+- **Delete** an unneeded version.
+
+You can also edit names and release notes directly in the full changelog. These actions require permission to manage the flow; other team members can still preview versions and read the changelog.
+
+The current published version cannot be deleted. Deleting another version is permanent and does not change the current draft or published version.
+
+See [Test and Publish](/flow-editor/test-and-publish) for validating a restored draft, and [Resolve Remote Flow Updates](/flow-editor/collaboration) for preserving work when newer remote updates are available.

@@ -1,130 +1,158 @@
 ---
 title: "Talk"
-description: "Guide to creating and configuring Talk in Phonely workflows"
+description: "Give the agent a conversational objective, extract information, and route when a specific outcome is reached."
 sources:
   - "features/workflows/model/nodes/prompt.ts"
+  - "features/workflows/model/schema/variables.ts"
   - "features/workflows/modules/editor/custom-nodes/prompt/**"
   - "features/workflows/model/node-descriptors/index.ts"
   - "app/api/generate-with-ai/talk/route.ts"
+last-verified: "2026-07-13"
 ---
 
-Think of talk blocks as prompt blocks. Prompts are essentially a set of instructions or questions you give to an AI. Think of them as your AI's to-do list! The prompt tells the AI what to do and what information to gather. They provide a structured way to interact with AI models, enabling fine-grained control over conversational flow within the platform.
+<Info>
+  **Stage:** Live call<br />
+  **Direction:** Inbound and outbound
+</Info>
 
-<iframe src="https://www.youtube.com/embed/E9ynmpyAtT0" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
+The **Talk** block gives the agent an objective for a natural back-and-forth conversation. Use it when the caller may respond in different ways and the agent needs to adapt before the flow continues.
 
-There are **two ways** to configure a Talk Block:
+A Talk block can:
 
-- **Generate with AI** – Phonely automatically generates the prompt, variables, and exit conditions for the block.
-- **Build Manually** – You configure the Talk Block yourself by defining the prompt, exit conditions, and variables.
+- follow a conversational prompt;
+- use variables or knowledge-base context in that prompt;
+- extract structured values while speaking with the caller;
+- continue through one of several exit conditions; and
+- assign a call outcome tag if the call ends on or after that point.
 
-{/* TODO: Add a short GIF showing the "Generate with AI" experience — typing a natural language description, clicking generate, and seeing the prompt + exit conditions + variables auto-populate. This is a wow moment that should be shown, not just described. */}
+Use [Collect](/blocks/flow-blocks/collect) instead when the main goal is a defined set of questions and structured answers. Use Talk when the conversation itself is the task.
 
-## Generate with AI
+## Add a Talk block
 
-In the setup step, describe in plain language what you want the AI to do during this part of the conversation.
+Add Talk from the **Conversation** section of the Live Call block picker. Connect it to the path where the conversation should begin, then select the block to open its two-step configuration.
 
-**Example:**
+## Step 1: Describe the task
 
-> “Greet the caller and ask for their name and phone number.”
+In **Describe what you want the AI to do**, summarize the outcome of this part of the call.
 
-When you generate the block with AI, Phonely automatically creates the prompt, exit conditions, and variables for you. After this, move to Configure to review the generated setup and make any adjustments if needed.
+For example:
 
-## Configure Manually
+> Answer the caller's questions using the knowledge base. If the answer is not available, offer to collect their contact details for follow-up.
 
-The configure tab gives you full control over how the Talk Block behaves. Here, you can **manually** adjust or define:
+From here, choose:
 
-- The prompt the AI uses
-- Exit conditions that determine when to move to the next block
-- Variables used to capture and reuse information
+- **Generate with AI** to create a starting prompt, exit conditions, variables, and call outcome from your description.
+- **Build Manually** to configure those fields yourself.
+
+AI generation creates a draft configuration. Review every generated field and connection before testing or publishing.
+
+## Step 2: Configure the block
+
+### Name
+
+Give the block a short name that describes its purpose on the canvas, such as `Answer business questions` or `Understand the support issue`.
 
 ### Prompt
 
-The Prompt defines the AI’s objective. Write simple directions for the AI to follow in this step. Example: “Greet the caller and ask for their name and reason for calling.”
+The **Prompt** tells the agent what to accomplish while this block is active. Write instructions, not a script of every possible turn.
 
-- Write your prompt directly, or click **Re-Generate** to refine it automatically using AI.
+A useful prompt explains:
 
-This prompt guides the AI throughout the interaction until an exit conditions are met.
+- the goal;
+- what information the agent may use;
+- what it should or should not do; and
+- what to do when the requested result is unavailable.
 
-![How To Create A Talk Block Gi](/assets/how-to-create-a-talk-block.gif)
+Type `@` to insert variables that are available before the block runs or to reference knowledge-base content. You can also select **AI-Generate** to regenerate the configuration from the setup description.
+
+<Tip>
+  Keep the prompt focused on behavior. Put each decision to leave the block in **Exit Conditions** so routing stays visible on the canvas.
+</Tip>
 
 ### Exit Conditions
 
-Exit conditions are the rules that determine when a caller should be moved out of a specific Talk Block and progress to the next block in your workflow.
+An exit condition describes a result that ends this conversational step and exposes a matching output on the block. Connect each output to the block that should run next.
 
-Think of them as the criteria Phonely uses to decide, "Okay, the AI has done what it needs to do in this step, let's move on to the next."
+Good exit conditions describe observable outcomes:
 
-Here's a breakdown of why Exit Conditions are important and how they work:
+- `The caller's question has been answered`
+- `The caller wants to leave their contact details`
+- `The caller asks to speak with a person`
 
-**Guiding the Conversation Flow** - Exit conditions are crucial for creating dynamic and logical call flows. They ensure the conversation doesn't get stuck in one step and moves towards the desired outcome (e.g., scheduling an appointment, gathering information, transferring to a human).
+Talk requires at least one non-empty exit condition. Conditions must be unique, and the editor supports up to ten.
 
-**Triggering the Next Action** - When an exit condition is met, it signals to Phonely to activate the connected block in your workflow. This could be another Talk Block, a Transfer Call block, an End Call block, or any other available block.
+<Warning>
+  Exit conditions can override prompt behavior. If the flow advances too early or chooses the wrong route, make the conditions more specific before adding more instructions to the prompt.
+</Warning>
 
-<img
-  src="/assets/exit-conditions-in-talk-block.png"
-  alt="Exit Conditions In Talk Block"
-  title="Exit Conditions In Talk Block"
-  style={{ width:"62%" }}
-/>
-
-**Based on Caller Input or AI Actions** - Exit conditions can be based on various factors, such as:
-
-- **Keywords or Phrases**: The caller says a specific word or phrase (e.g., "Yes, schedule it," "I need support").
-- **Confirmation**: The AI asks a question and the caller provides a confirming answer.
-- **No Match/Fallback**: The caller's response doesn't match any expected input within a certain number of attempts.
-- **Timeouts**: A certain amount of time passes without any input from the caller.
-- **Variable Values**: A specific piece of information (a variable) has been successfully captured (e.g., the caller's email address).
-
-You have the flexibility to define and adjust exit conditions within each Talk Block to precisely control how your AI agent interacts with callers and progresses through the workflow.
+If several conditions lead to the same next block, the editor warns you to combine them into one condition. A single outcome-focused route is easier for the agent and your team to interpret.
 
 ### Variables
 
-Variables in Phonely are like containers that store information during a phone call. Think of them as temporary digital sticky notes that your Phonely agent can write on, read, and update as the conversation progresses. This allows you to capture and reuse important details throughout the call flow, making your automated conversations more dynamic and personalized.
+Add a variable when the Talk block should extract a value from the conversation for later blocks.
 
-Variables allow you to:
+For each variable, configure:
 
-- Capture caller information (name, reason for calling, preferences)
-- Personalize the conversation
-- Pass information between blocks
-- Maintain context throughout the call
+| Field | Purpose |
+| :-- | :-- |
+| **Name** | The identifier shown in the variable picker. Names must be present and unique within the block. |
+| **Type** | The expected shape, such as text, number, date, email, phone, enum, regex, or a custom format. |
+| **Description** | What the value represents, so the agent knows what to extract. |
+| **Required** | Prevents the agent from leaving the block until the value is collected. |
+| **Confirm** | Asks the caller to confirm a required value before continuing. |
+| **Spell Back** | Spells a confirmed value character by character. |
 
-To add a variable:
+**Confirm** is available only for required variables, and **Spell Back** is available only when confirmation is enabled.
 
-1. Click Add Variable.
-2. Enter a Name (e.g. Caller Name).
-3. Select a Type (Text, Number, etc.)
-4. (Optional) Add a Description.
+After this block runs, its values appear in the variable picker under the block's name. Downstream blocks can reference them with `@`.
 
-<img
-  src="/assets/variables-in-talk-block.png"
-  alt="Variables In Talk Block"
-  title="Variables In Talk Block"
-  style={{ width:"62%" }}
-/>
+<Note>
+  A variable is only available after the Talk block that creates it has run. Keep dependent blocks downstream on a route that passes through this block.
+</Note>
 
-<Expandable title="Example Variables">
-  **Examples of Variable Use:**
+### Call Outcome Tagging
 
-  - Storing the caller's name in a variable called caller_name so your agent can say, "Hello, @caller_name!".
-  - Capturing the reason for the call in a variable called reason_for_call and using it to route the call appropriately.
-  - Saving the selected appointment date and time in variables like appointment_date and appointment_time for confirmation.
-</Expandable>
+Under **Advanced Settings**, add an outcome when calls that reach this block represent a meaningful result in analytics, such as `Question answered` or `Needs follow-up`.
 
-## Advanced Settings - Call Outcome Tagging
+Outcome tagging does not route the live conversation. Use exit conditions and connections for routing.
 
-Call outcome tags let you label how the conversation ended.
+## Example configuration
 
-- Enter one or more keywords
-- Press Enter after each tag
+For a block named **Answer business questions**:
 
-<img
-  src="/assets/call-outcome-tagging-talk-block.png"
-  alt="Call Outcome Tagging Talk Block"
-  title="Call Outcome Tagging Talk Block"
-  style={{ width:"91%" }}
-/>
+- **Prompt:** Use the knowledge base to answer questions about the business. Be concise. If the knowledge base does not contain the answer, explain that a team member can follow up and offer to collect the caller's details.
+- **Exit condition 1:** The caller's question has been answered and they have no more questions.
+- **Exit condition 2:** The caller wants to leave their information for follow-up.
+- **Variable:** `unanswered_question` as text, not required.
 
-These tags are useful for:
+Connect the first exit to the next closing step and the second to a Collect block. This keeps the fallback explicit instead of asking one Talk block to perform the entire call.
 
-- Reporting
-- Analytics
-- Understanding call outcomes at scale
+## Test the Talk block
+
+Test more than the happy path:
+
+1. Ask a question the prompt and knowledge base can answer.
+2. Ask a question that cannot be answered and confirm the fallback route.
+3. Phrase the same intent in several ways to check the exit conditions.
+4. If the block extracts variables, provide valid, ambiguous, and corrected values.
+5. Confirm that required variables are collected and confirmation behaves as expected.
+6. Verify every exit output reaches the intended next block.
+
+On a long flow, use **Test from here** on the Talk block to exercise its draft configuration without starting at the beginning. Complete a full published-flow test before relying on it for live calls.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The block advances too early">
+    Tighten the exit condition so it describes a completed result, not a topic or a word the caller might mention casually.
+  </Accordion>
+  <Accordion title="The conversation does not leave the block">
+    Confirm at least one exit condition can realistically become true, then check that each output is connected. Avoid conditions that require information the prompt never asks for.
+  </Accordion>
+  <Accordion title="The agent does too much in one step">
+    Split the task into focused Talk, Collect, action, or routing blocks. Each block should have a clear completion point.
+  </Accordion>
+  <Accordion title="A variable is missing downstream">
+    Make sure the call path ran through this Talk block before the variable was referenced. Then check the variable name, type, and any invalid-variable warning in the destination field.
+  </Accordion>
+</AccordionGroup>

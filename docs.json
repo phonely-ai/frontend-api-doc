@@ -78,77 +78,109 @@
             "icon": "hammer",
             "pages": [
               {
-                "group": "Agent Workspace",
+                "group": "Agent Setup",
                 "pages": [
-                  "key-concepts/create-duplicate-agents",
-                  "key-concepts/flows",
-                  "key-concepts/variables",
-                  "key-concepts/routing",
-                  "agent-design/set-agent-guidelines",
-                  "agent-design/call-settings",
-                  "agent-design/flow-settings",
-                  "agent-design/compliance-settings",
-                  "agent-design/add-manage-phone-numbers",
-                  "agent-design/workflow-collaboration"
+                  "agent-design/overview"
                 ]
               },
               {
                 "group": "Voice",
                 "pages": [
-                  "agent-design/voice/voice-selection",
-                  "agent-design/voice/add-a-voice",
-                  "agent-design/voice/clone-voice",
-                  "agent-design/voice/voice-and-personality",
-                  "agent-design/voice/advanced-settings"
+                  "agent-design/voice/overview"
                 ]
               },
               {
                 "group": "Knowledge Base",
                 "pages": [
+                  "agent-knowledge-base/overview"
+                ]
+              },
+              {
+                "group": "Flow Editor",
+                "pages": [
+                  "key-concepts/flows",
+                  "blocks/flow-blocks/start-flow",
+                  "flow-editor/connections-and-routing",
+                  "flow-editor/variables",
+                  "flow-editor/flow-settings",
+                  "key-concepts/flow-canvas-controls",
+                  "workflow-checklist",
+                  "flow-editor/test-and-publish",
+                  "flow-editor/versions",
+                  "flow-editor/collaboration"
+                ]
+              },
+              {
+                "group": "Block Reference",
+                "pages": [
+                  "blocks/overview",
+                  {
+                    "group": "Conversation Blocks",
+                    "pages": [
+                      "blocks/conversation-blocks/overview",
+                      "blocks/flow-blocks/talk"
+                    ]
+                  },
+                  {
+                    "group": "Logic and Routing Blocks",
+                    "pages": [
+                      "blocks/logic-and-routing-blocks/overview"
+                    ]
+                  },
+                  {
+                    "group": "Communication Blocks",
+                    "pages": [
+                      "blocks/communication-blocks/overview"
+                    ]
+                  },
+                  {
+                    "group": "Data and Automation Blocks",
+                    "pages": [
+                      "blocks/data-and-automation-blocks/overview",
+                      "blocks/api-request"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Integrations",
+                "pages": [
+                  "integrations/overview"
+                ]
+              },
+              {
+                "group": "Legacy — temporary",
+                "pages": [
+                  "key-concepts/create-duplicate-agents",
+                  "agent-design/set-agent-guidelines",
+                  "agent-design/call-settings",
+                  "agent-design/compliance-settings",
+                  "agent-design/add-manage-phone-numbers",
+                  "agent-design/voice/voice-selection",
+                  "agent-design/voice/add-a-voice",
+                  "agent-design/voice/clone-voice",
+                  "agent-design/voice/voice-and-personality",
+                  "agent-design/voice/advanced-settings",
                   "agent-knowledge-base/upload-files",
                   "agent-knowledge-base/upload-documents",
                   "agent-knowledge-base/add-websites",
                   "agent-knowledge-base/import-from-external",
-                  "agent-knowledge-base/managing-data-sources"
-                ]
-              },
-              {
-                "group": "Flow Blocks",
-                "pages": [
-                  "blocks/flow-blocks/start-flow",
-                  "blocks/flow-blocks/talk",
+                  "agent-knowledge-base/managing-data-sources",
                   "blocks/flow-blocks/collect",
                   "blocks/flow-blocks/ask-exactly",
                   "blocks/flow-blocks/filter",
                   "blocks/flow-blocks/time-filter",
-                  "blocks/flow-blocks/end-call"
-                ]
-              },
-              {
-                "group": "Pre-Call Actions",
-                "pages": [
+                  "blocks/flow-blocks/end-call",
                   "precall/precall-filter",
                   "precall/precall-code",
                   "precall/precall-webhook",
-                  "precall/precall-api-request",
-                  "precall/precall-end-call"
-                ]
-              },
-              {
-                "group": "Live Call Actions",
-                "pages": [
-                  "blocks/live-call-actions/api-request",
+                  "precall/precall-end-call",
                   "blocks/live-call-actions/transfer-flow-new",
                   "blocks/live-call-actions/new-transfer-call",
                   "blocks/live-call-actions/payments",
                   "blocks/live-call-actions/send-sms",
                   "blocks/live-call-actions/send-email",
-                  "blocks/live-call-actions/codeflow"
-                ]
-              },
-              {
-                "group": "Post-Call Actions",
-                "pages": [
+                  "blocks/live-call-actions/codeflow",
                   "blocks/post-call-actions/post-call-overview",
                   "blocks/post-call-actions/post-call-send-email",
                   "blocks/post-call-actions/connect-to-make",
@@ -178,8 +210,7 @@
             "pages": [
               "call-history-ai-analytics/call-history-ai-analytics",
               "agent-review",
-              "call-events",
-              "testing/test-from-a-block"
+              "call-events"
             ]
           },
           {
@@ -287,7 +318,7 @@
           "ai/route-map",
           "ai/build-agent",
           "ai/manage-knowledge-base",
-          "ai/edit-workflows",
+        "ai/edit-flows",
           "ai/run-ab-tests-and-evaluations",
           "ai/review-calls-and-analytics",
           "ai/configure-outbound-campaigns",
@@ -368,8 +399,12 @@
       "destination": "/outboundcalling/createaoutboundcallingcampaign"
     },
     {
-      "source": "/blocks/api-request",
-      "destination": "/blocks/live-call-actions/api-request"
+      "source": "/blocks/live-call-actions/api-request",
+      "destination": "/blocks/api-request"
+    },
+    {
+      "source": "/precall/precall-api-request",
+      "destination": "/blocks/api-request"
     },
     {
       "source": "/blocks/ask-exactly",
