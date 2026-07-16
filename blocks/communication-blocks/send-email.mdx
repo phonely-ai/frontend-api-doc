@@ -1,7 +1,66 @@
 ---
 title: "Send Email"
-description: "Send an email during or after a call."
-searchable: false
+description: "Send an email to one or more recipients."
+sources:
+  - "features/workflows/model/nodes/send-email.ts"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/send-email/**"
+  - "features/workflows/modules/editor/testing/send-email-test-input.ts"
+  - "features/chat/test/ui/action-traces/renderers/email-action-trace.tsx"
+  - "features/calls/modules/transcript/components/workflow/types/email-workflow.tsx"
+  - "app/api/send-email/route.ts"
+  - "phonely-backend/app/agent/live_actions/send_email.py"
+last-verified: "2026-07-16"
 ---
 
-<Warning>This page is a draft scaffold and must be rebuilt before release.</Warning>
+Use **Send Email** to send an email during or after a call. Enter recipient addresses or select them from **Available Variables**.
+
+Use [Email & SMS Notification](/blocks/communication-blocks/email-sms-notification) when you want to send the conversation summary automatically after a call. Use [Gmail](/integrations/gmail) or [Microsoft Outlook](/integrations/microsoft-outlook) when the email should come from a connected provider account.
+
+## Configure the email
+
+| Field | Configuration |
+| :-- | :-- |
+| **To** | Add one or more recipients, using fixed addresses or variables |
+| **Subject** | Write the subject and insert any values it should include |
+| **Body** | Write the message and insert any values it should include |
+
+**To**, **Subject**, and **Body** are required. These fields, along with **From Name**, support variables. Each recipient variable must resolve to a valid email address before the block runs.
+
+Under **Advanced Settings**:
+
+- **Body Type** controls whether the body is sent as **Plain Text** or **HTML**. Select HTML only when the body contains HTML markup.
+- **From Name** changes the sender name shown in the recipient's inbox. If left blank, it defaults to **Phonely**.
+
+Send Email uses `no-reply@phonely.ai` as the sender address. **From Name** does not change that address.
+
+The block can use only variables available before it runs. For other supported options under **Advanced Settings**, see [Common Block Settings](/blocks/common-settings).
+
+## Test the email
+
+Send Email includes a block-level test that previews the resolved message and sends a real email.
+
+1. Complete the **Configure** step and select **Continue**.
+2. Enter sample values for any variables used by the block.
+3. Review the resolved recipients, sender name, subject, and body in **Email Preview**.
+4. Confirm that the recipients are addresses you control, then select **Test**.
+
+A successful test confirms that Phonely accepted the request to send the email. Confirm that the message arrived and that its content and formatting are correct.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A recipient does not receive the email">
+    Confirm that every fixed address and recipient variable resolves to a valid email address. Invalid recipients are omitted; the block fails if none of its recipients are valid. Check the recipient's spam or junk folder as well.
+  </Accordion>
+  <Accordion title="The email contains a missing or incorrect value">
+    Confirm that the variable is available before the Send Email block runs and that its source block stored the expected value. In the block-level test, provide a representative sample value and review **Email Preview** before sending.
+  </Accordion>
+  <Accordion title="HTML appears incorrectly">
+    Set **Body Type** to **HTML** and review the markup for invalid or incomplete tags. Use **Plain Text** when the body does not require HTML formatting.
+  </Accordion>
+  <Accordion title="The email comes from the wrong address">
+    Send Email always uses `no-reply@phonely.ai`. **From Name** changes only the display name. Use [Gmail](/integrations/gmail) or [Microsoft Outlook](/integrations/microsoft-outlook) when the message must come from a connected email account.
+  </Accordion>
+</AccordionGroup>

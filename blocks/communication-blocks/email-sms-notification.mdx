@@ -1,7 +1,50 @@
 ---
 title: "Email & SMS Notification"
-description: "Notify configured recipients after a call."
-searchable: false
+description: "Send a call summary by email, SMS, or both."
+sources:
+  - "features/workflows/model/nodes/notification.ts"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/notification/**"
+  - "app/api/sendNewCallEmail/route.ts"
+  - "components/react-email/emails/phonely-new-call-email.tsx"
+  - "phonely-backend/app/agent/live_actions/notification.py"
+  - "phonely-backend/app/services/email_service.py"
+last-verified: "2026-07-16"
 ---
 
-<Warning>This page is a draft scaffold and must be rebuilt before release.</Warning>
+Use **Email & SMS Notification** to send a Phonely-generated report about a completed call. It runs after a call reaches the live-call block to which it is connected.
+
+Use [Send Email](/blocks/communication-blocks/send-email) or [Send SMS](/blocks/communication-blocks/send-sms) when you need to control the message content.
+
+## Configure recipients
+
+Add recipients to either section:
+
+| Section | What recipients receive |
+| :-- | :-- |
+| **Email Recipients** | A call report with the summary, call details, transcript, and a link to the call |
+| **Phone Numbers** | An SMS containing the caller number, call summary, and a link to the call |
+
+Enter fixed recipients or select values from **Available Variables**. Add as many email addresses and phone numbers as needed, and leave a section empty when you do not want to use that channel.
+
+Each email variable must resolve to a valid email address. Each phone number variable must resolve to a valid number with its country code, such as `+12125551234`.
+
+You configure only the recipients. Phonely controls the notification content and selects the sending address or phone number automatically.
+
+## Verify the notifications
+
+This block does not have a block-level test. Use recipients you control, then complete a test call that reaches the connected live-call block.
+
+Confirm that each configured channel receives the notification and that variable recipients resolve to the intended addresses or numbers.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="No notification is received">
+    Confirm that the call reached the live-call block connected to the notification. Then check that email addresses are valid, phone numbers include their country code, and recipient variables stored the expected values. For missing email, also check the recipient's spam or junk folder.
+  </Accordion>
+  <Accordion title="The notification needs different content">
+    Email & SMS Notification uses Phonely's automatic call report and summary. Use [Send Email](/blocks/communication-blocks/send-email) or [Send SMS](/blocks/communication-blocks/send-sms) when you need to write the message yourself.
+  </Accordion>
+</AccordionGroup>

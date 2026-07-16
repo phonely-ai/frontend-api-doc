@@ -1,7 +1,57 @@
 ---
 title: "Send SMS"
-description: "Send a text message before, during, or after a call."
-searchable: false
+description: "Send a text message to a fixed phone number or one stored in a variable."
+sources:
+  - "features/workflows/model/nodes/send-sms.ts"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/send-sms/**"
+  - "features/workflows/modules/editor/components/form-items/phone-number.tsx"
+  - "features/calls/modules/transcript/components/workflow/types/sms-workflow.tsx"
+  - "phonely-backend/app/agent/live_actions/send_text.py"
+  - "phonely-backend/app/call/call_utils.py"
+last-verified: "2026-07-16"
 ---
 
-<Warning>This page is a draft scaffold and must be rebuilt before release.</Warning>
+Use **Send SMS** to send a text message when the flow reaches the block. Enter a fixed recipient or select a phone number from **Available Variables**. The block can run at the pre-call, live-call, or post-call stage.
+
+Use [Email & SMS Notification](/blocks/communication-blocks/email-sms-notification) instead when you want to send the conversation summary automatically after a call.
+
+## Configure the recipient and message
+
+| Field | Configuration |
+| :-- | :-- |
+| **Phone Number** | Enter a recipient or select a phone number available from the flow |
+| **Content** | Write the message and insert any values it should include |
+
+Both fields are required and support variables. For a fixed recipient, use international format, such as `+12125551234`. When using a variable, make sure its value includes the country code.
+
+Keep the content concise. For example:
+
+> Your appointment is confirmed for `appointment_time`.
+
+Select `appointment_time` from **Available Variables** rather than typing the variable name as plain text.
+
+Phonely selects the sending number automatically for the agent. It cannot be changed in the Send SMS block.
+
+The block can use only variables available before it runs. For supported options under **Advanced Settings**, see [Common Block Settings](/blocks/common-settings).
+
+## Verify delivery
+
+Flow tests execute the block and can send a real SMS. Use a phone number you control and confirm that the recipient, fixed text, and variable values resolve correctly.
+
+During a Web Chat test, expand **Send a text message** in the action trace. After a phone call, open **Call Details**, select **Blocks**, and expand **Send a text message**. Review the recipient, message content, and delivery status.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The message is sent to the wrong number">
+    Check the value selected in **Phone Number** and the value stored for that variable during the call. If the system caller number is not the intended recipient, collect or select the correct phone number earlier in the flow.
+  </Accordion>
+  <Accordion title="The message is not delivered">
+    Confirm that **Phone Number** resolves to a valid number with its country code, then review the delivery status in **Call Details**. A message can be accepted for sending and later fail during delivery.
+  </Accordion>
+  <Accordion title="The message contains a missing or incorrect value">
+    Confirm that the selected variable is available before the Send SMS block runs and that its source block stored the expected value. Test the route that produces that value again.
+  </Accordion>
+</AccordionGroup>

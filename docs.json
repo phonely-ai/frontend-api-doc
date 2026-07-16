@@ -197,16 +197,10 @@
                   "precall/precall-webhook",
                   "precall/precall-end-call",
                   "blocks/live-call-actions/transfer-flow-new",
-                  "blocks/live-call-actions/new-transfer-call",
                   "blocks/live-call-actions/payments",
-                  "blocks/live-call-actions/send-sms",
-                  "blocks/live-call-actions/send-email",
                   "blocks/live-call-actions/codeflow",
                   "blocks/post-call-actions/post-call-overview",
-                  "blocks/post-call-actions/post-call-send-email",
                   "blocks/post-call-actions/connect-to-make",
-                  "blocks/post-call-actions/redial",
-                  "blocks/post-call-actions/campaign",
                   "blocks/post-call-actions/connect-to-google-drive",
                   "blocks/post-call-actions/google-sheet-add-row"
                 ]
@@ -457,11 +451,19 @@
     },
     {
       "source": "/blocks/send-email",
-      "destination": "/blocks/live-call-actions/send-email"
+      "destination": "/blocks/communication-blocks/send-email"
+    },
+    {
+      "source": "/blocks/live-call-actions/send-email",
+      "destination": "/blocks/communication-blocks/send-email"
     },
     {
       "source": "/blocks/send-sms",
-      "destination": "/blocks/live-call-actions/send-sms"
+      "destination": "/blocks/communication-blocks/send-sms"
+    },
+    {
+      "source": "/blocks/live-call-actions/send-sms",
+      "destination": "/blocks/communication-blocks/send-sms"
     },
     {
       "source": "/blocks/codeflow",
@@ -481,7 +483,35 @@
     },
     {
       "source": "/blocks/post-call-send-email",
-      "destination": "/blocks/post-call-actions/post-call-send-email"
+      "destination": "/blocks/communication-blocks/send-email"
+    },
+    {
+      "source": "/blocks/post-call-actions/post-call-send-email",
+      "destination": "/blocks/communication-blocks/send-email"
+    },
+    {
+      "source": "/blocks/sms-and-email-notifications",
+      "destination": "/blocks/communication-blocks/email-sms-notification"
+    },
+    {
+      "source": "/blocks/post-call-actions/sms-and-email-notifications",
+      "destination": "/blocks/communication-blocks/email-sms-notification"
+    },
+    {
+      "source": "/blocks/post-call-actions/redial",
+      "destination": "/blocks/communication-blocks/redial"
+    },
+    {
+      "source": "/blocks/redial",
+      "destination": "/blocks/communication-blocks/redial"
+    },
+    {
+      "source": "/blocks/post-call-actions/campaign",
+      "destination": "/blocks/communication-blocks/campaign"
+    },
+    {
+      "source": "/blocks/campaign",
+      "destination": "/blocks/communication-blocks/campaign"
     },
     {
       "source": "/blocks/google-sheet-live",
@@ -509,19 +539,23 @@
     },
     {
       "source": "/blocks/transfer-call",
-      "destination": "/blocks/live-call-actions/new-transfer-call"
+      "destination": "/blocks/communication-blocks/transfer-call"
     },
     {
       "source": "/blocks/live-call-actions/old-transfer-call",
-      "destination": "/blocks/live-call-actions/new-transfer-call"
+      "destination": "/blocks/communication-blocks/transfer-call"
     },
     {
       "source": "/blocks/warm-transfer",
-      "destination": "/blocks/live-call-actions/new-transfer-call"
+      "destination": "/blocks/communication-blocks/transfer-call"
     },
     {
       "source": "/blocks/live-call-actions/warm-transfer",
-      "destination": "/blocks/live-call-actions/new-transfer-call"
+      "destination": "/blocks/communication-blocks/transfer-call"
+    },
+    {
+      "source": "/blocks/live-call-actions/new-transfer-call",
+      "destination": "/blocks/communication-blocks/transfer-call"
     },
     {
       "source": "/blocks/transfer-flows",

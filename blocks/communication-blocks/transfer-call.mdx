@@ -1,7 +1,141 @@
 ---
 title: "Transfer Call"
 description: "Transfer an active call to one or more phone destinations."
-searchable: false
+sources:
+  - "features/workflows/model/nodes/transfer-call.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/transfer-call/**"
+  - "phonely-backend/app/agent/live_actions/advanced_transfer_call.py"
+  - "phonely-backend/app/agent/live_actions/transfer_call.py"
+  - "phonely-backend/app/custom_llm/state_manager.py"
+  - "voice-infra/app/websocket_streaming/pipelines/warm_transfer_helpers/**"
+  - "voice-infra/app/websocket_streaming/pipelines/state_manager/conversation_state_mixin.py"
+  - "voice-infra/app/websocket_streaming/pipelines/state_manager/edit_state_mixin.py"
+last-verified: "2026-07-16"
 ---
 
-<Warning>This page is a draft scaffold and must be rebuilt before release.</Warning>
+Use **Transfer Call** to send an active call to an external phone destination. Choose a cold transfer for a direct handoff or a warm transfer when Phonely should reach the recipient first and manage the connection.
+
+Use [Transfer Flow](/blocks/flow-control-and-routing/transfer-flow) to continue the call in another inbound flow.
+
+## Choose a transfer type
+
+| Transfer type | What happens | Best for |
+| :-- | :-- | :-- |
+| **Cold Transfer** | Phonely plays the pre-transfer message, then sends the caller directly to the destination | Shared lines or destinations that do not need an introduction |
+| **Warm Transfer** | Phonely calls the destination separately and manages the connection before handing off the caller | Handoffs that need an introduction, permission, or recovery route |
+
+A cold transfer ends the Phonely flow when the handoff begins. A warm transfer can return through a recovery route when the connection is unsuccessful or a configured detection rule is met.
+
+## Configure destinations
+
+Add at least one **Transfer Destination**:
+
+1. Enter the **Phone Number**, including its country code.
+2. Set the **Pre Transfer Message** the caller hears before the handoff.
+3. Add destinations when Phonely needs to choose between people or teams.
+
+For message fields, choose **Fixed** to play the text you enter or **Promptable** to generate a message from your instructions and the conversation context.
+
+With multiple destinations, enter a distinct **Transition Condition** for each one. Phonely compares the conversation with these conditions and may ask a clarifying question before selecting a destination.
+
+| Destination | Transition condition |
+| :-- | :-- |
+| **Sales** | The caller wants pricing, a quote, or to purchase a service |
+| **Support** | The caller needs help with an existing product or service |
+
+Keep the conditions specific and distinguishable. Phone numbers and messages can use variables from earlier in the flow.
+
+For a warm transfer, **Enable Failover** for a destination to try its backup numbers in order when the primary number cannot be connected.
+
+## Configure a warm transfer
+
+Warm transfer settings control what the caller experiences while Phonely reaches the destination and what happens before both parties are connected.
+
+### While waiting for connection
+
+Choose the caller's experience while Phonely calls the destination:
+
+| Option | Caller experience |
+| :-- | :-- |
+| **On Hold Chat** | The agent continues the conversation using the **On Hold Chat Prompt** |
+| **On Hold Music** | Hold music plays while the caller waits |
+| **Both (Chat + Music)** | The agent can continue the conversation while hold music plays |
+
+Use **Reminder Message** and **Reminder Frequency** to update the caller while the transfer is in progress. Keep reminders short and do not suggest that the recipient has answered.
+
+### When connection is established
+
+Warm transfer messages play at different points in the connection:
+
+| Setting | Who hears it | When it plays |
+| :-- | :-- | :-- |
+| **Message to Caller (Inbound)** | Caller | After a person answers, before the connection |
+| **Message to Recipient (Outbound)** | Recipient | After a person answers, before the connection |
+| **Post Transfer Message** | Both parties | After they are connected, before the agent leaves |
+| **Transfer Failed Message for Recipient** | Recipient | If the caller disconnects before the connection is completed |
+
+Enable **Ask Outbound Leg for Permission** when the recipient must accept the transfer. Make **Message to Recipient (Outbound)** a clear yes-or-no question. If the recipient declines, the attempt fails and Phonely tries any configured failover numbers.
+
+**Fast Transfer (Beta)** skips the messages to the caller and recipient and does not wait for recipient permission. After a person answers, Phonely connects both parties and plays only the **Post Transfer Message** before leaving.
+
+### Adjust detection and attempt duration
+
+**Detection Timeout** controls how much audio Phonely uses to determine whether a person, IVR system, or voicemail answered. A shorter value responds faster; a longer value provides more audio for classification.
+
+In **Advanced Settings**, **Warm Transfer Attempt Duration** sets the maximum time Phonely can spend trying to complete the warm transfer.
+
+## Configure warm transfer routing
+
+The **Routing** step controls what happens when Phonely reaches an automated system instead of a person.
+
+| Setting | Behavior | Flow route |
+| :-- | :-- | :-- |
+| **IVR Detection: None** | Applies no special IVR behavior | No IVR-specific route |
+| **Transfer on IVR Detection** | Connects the caller to the detected automated system | Transfer completes |
+| **Exit on IVR Detection** | Stops the attempt when an IVR is detected | **IVR Detected** |
+| **Voicemail Detection: None** | Applies no special voicemail behavior | No voicemail-specific route |
+| **Exit on Voicemail Detection** | Stops the attempt when voicemail is detected | **Voicemail Detected** |
+
+Use **IVR Detection Prompt** and **Voicemail Detection Prompt** to give Phonely additional cues for classifying what answered. These prompts do not tell Phonely how to navigate an IVR menu.
+
+A warm transfer uses **Transfer Failed** after an attempt cannot be completed and any configured failover numbers are exhausted. Connect every route shown on the block to a suitable fallback.
+
+The block makes **Warm Transfer Attempt Duration** available to recovery routes for reporting or later decisions.
+
+For reporting, see [Call Outcome Tagging](/blocks/common-settings#call-outcome-tagging). **Human Answered Call Outcome Tagging** can also apply when a person answers the destination.
+
+## Test the transfer
+
+Use phone numbers you control before relying on the block for live calls:
+
+1. Confirm that each destination number and pre-transfer message are correct.
+2. For multiple destinations, test a clear request for each condition and an ambiguous request that may require clarification.
+3. For a warm transfer, test a human answer and every configured recovery route.
+4. Confirm that the caller and recipient hear the intended messages at the right time.
+5. Complete a real inbound or outbound call to verify the full handoff.
+
+When testing failover, make the primary destination unavailable and confirm that the backup numbers are attempted in order.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Phonely chooses the wrong destination">
+    Compare the destinations' **Transition Conditions**. Make each condition specific and distinguishable, then test clear and ambiguous requests again.
+  </Accordion>
+  <Accordion title="The recipient is not asked for permission">
+    Turn off **Fast Transfer**, enable **Ask Outbound Leg for Permission**, and make **Message to Recipient (Outbound)** a clear yes-or-no question.
+  </Accordion>
+  <Accordion title="An IVR or voicemail recovery route does not run">
+    Confirm that the corresponding IVR or voicemail option is set to **Exit**, then connect the named route shown on the block. **Transfer on IVR Detection** completes the transfer and does not use **IVR Detected**.
+  </Accordion>
+  <Accordion title="A failover number is not attempted">
+    Confirm that the block uses **Warm Transfer** and that the destination has a valid failover number. Failover runs when the primary transfer fails; an IVR or voicemail set to **Exit** follows its named recovery route instead.
+  </Accordion>
+  <Accordion title="The warm transfer times out before an answer">
+    Review **Warm Transfer Attempt Duration** and the destination's availability. Increase the duration only when recipients reasonably need more time to answer.
+  </Accordion>
+  <Accordion title="The wrong participant hears a message">
+    Check which message field is intended for that participant and point in the connection sequence. Then test with separate caller and recipient phones so you can verify both sides.
+  </Accordion>
+</AccordionGroup>
