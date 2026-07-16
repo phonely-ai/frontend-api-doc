@@ -1,7 +1,162 @@
 ---
 title: "Send Call Data"
 description: "Send call data to an HTTP endpoint after a call."
-searchable: false
+sources:
+  - "features/workflows/model/nodes/send-call-data.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/send-call-data/**"
+  - "features/workflows/modules/editor/testing/webhook-test-input.ts"
+  - "features/workflows/modules/editor/testing/run-block-test.ts"
+  - "phonely-backend/app/agent/live_actions/http_request/zapier_make.py"
+  - "phonely-backend/app/call/routes.py"
+  - "phonely-backend/app/integrations/routes.py"
+  - "phonely-backend/app/utils/url_validator.py"
+last-verified: "2026-07-16"
 ---
 
-<Warning>This page is a draft scaffold and must be rebuilt before release.</Warning>
+Use **Send Call Data** to send data from a completed call to a webhook, CRM, analytics service, or automation endpoint.
+
+Send Call Data runs only in post-call. It sends a `POST` request with a JSON body after a call reaches the live-call block to which it is connected.
+
+Use [API Request](/blocks/api-request) in post-call when you need another HTTP method, custom headers or authentication, retries, or response variables.
+
+## Configure the endpoint
+
+Enter a publicly reachable HTTPS endpoint in **Webhook URL**. The endpoint must accept `POST` requests with a JSON body.
+
+Send Call Data does not provide custom headers or authentication. If the endpoint requires them, use API Request instead.
+
+## Choose the payload
+
+Choose whether Phonely sends the full call payload or a custom JSON body:
+
+| Mode | Use it when |
+| :-- | :-- |
+| **Send full call data** | The destination needs the available call record for storage, reporting, or automation |
+| **Custom call data** | The destination needs only selected fields or expects a specific JSON structure |
+
+The full payload can include phone numbers, transcripts and summaries, call timing and outcome, extracted insights, links, action history, and stored variables. Some fields may be empty when the corresponding data was not available for the call.
+
+<Accordion title="Full call data fields">
+
+| Field | Content |
+| :-- | :-- |
+| `businessPhoneNumber` | The agent's phone number for the call |
+| `customerPhoneNumber` | The customer's phone number |
+| `agentId` | The ID of the agent that handled the call |
+| `provider` | The voice provider used for the call |
+| `agentName` | The agent's display name |
+| `transcript` | The conversation messages |
+| `transcriptText` | A plain-text version of the transcript |
+| `summary` | A brief call summary |
+| `longSummary` | A detailed call summary |
+| `ai_success` | Whether the AI successfully handled the call |
+| `sentiment` | The detected conversation sentiment |
+| `topic` | The main topics discussed |
+| `purpose` | The detected reason for the call |
+| `keyPoints` | Important points extracted from the conversation |
+| `mentionedDate` | A date mentioned during the call |
+| `mentionedTime` | A time mentioned during the call |
+| `mentionedEmail` | An email address mentioned during the call |
+| `callerName` | The caller's name, when captured |
+| `unansweredQuestions` | Questions that were not answered |
+| `followUp` | Whether follow-up is needed |
+| `followUpReason` | Why follow-up is needed |
+| `actionItems` | Actions identified from the call |
+| `callDirection` | Whether the call was inbound or outbound |
+| `recordingUrl` | A link to the call recording, when available |
+| `callStarted` | When the call started |
+| `callEnded` | When the call ended |
+| `callDate` | The call date in the agent's timezone |
+| `dashboardUrl` | A link to the call in Phonely |
+| `callId` | The call's identifier |
+| `callDuration` | The call duration in seconds |
+| `total_transfer_duration` | The total transfer hold duration in seconds |
+| `endedReason` | Why the call ended |
+| `callOutcome` | The call outcome |
+| `lastBlock` | The last flow block reached during the call |
+| `callTime` | The original call-start timestamp |
+| `actionList` | Actions performed during the call |
+| `workflowTriggered` | Whether a flow was triggered |
+| `callTransferred` | Whether the call was transferred |
+| `abTestId` | The A/B test ID, when applicable |
+| `abTestName` | The A/B test name, when applicable |
+| `abTestType` | The A/B test variant, when applicable |
+| `storedVariables` | Variables stored while the call ran |
+
+</Accordion>
+
+<Warning>
+  Full call data can contain personal information, conversation content, recording links, and stored variables. Send it only to a trusted endpoint authorized to receive this data.
+</Warning>
+
+### Configure a custom body
+
+Turn off **Send full call data**, then choose how to build the JSON body:
+
+| Mode | Use it when |
+| :-- | :-- |
+| **Manual** | Add typed fields using the visual JSON editor |
+| **Code** | Write the complete JSON structure directly |
+
+Manual fields support strings, numbers, booleans, arrays, objects, and nested values. Both modes support fixed values and variables available at the block.
+
+Select a Manual field or place the cursor in the Code editor, then choose a value from **Available Variables**. Use variables for call details or information collected during the conversation, and fixed values for constants required by the destination.
+
+For example, a custom body might resolve to:
+
+```json
+{
+  "call_id": "550e8400-e29b-41d4-a716-446655440000",
+  "customer_phone": "+12125551234",
+  "outcome": "Appointment booked"
+}
+```
+
+Match the field names, structure, and data types expected by the receiving endpoint.
+
+## Test the request
+
+Run the block test before relying on Send Call Data. The test sends a real `POST` request to the configured endpoint.
+
+1. Enter safe sample values for each variable used in the custom body.
+2. Review **Resolved Input** to confirm the URL and JSON body.
+3. Run the test and inspect **Test Result**.
+4. Confirm in the receiving system that the request arrived with the expected data.
+
+When **Send full call data** is enabled, the test sends representative sample call data. A live call sends the actual data available for that call.
+
+<Warning>
+  Testing can trigger real automation or create records in the receiving system. Use a test endpoint or data that is safe to process.
+</Warning>
+
+## Verify the live behavior
+
+Complete a controlled call that reaches the live-call block connected to Send Call Data, then let the call end.
+
+1. Confirm that the endpoint receives one request after the call.
+2. Check that fixed values and variables resolve correctly.
+3. For full call data, confirm that the fields needed by the destination are present.
+4. For a custom body, confirm that its JSON structure matches the endpoint's requirements.
+
+The endpoint must return HTTP `200` after accepting the live payload. In **Call Details**, expand Send Call Data to review its execution status.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="No request reaches the endpoint">
+    Confirm that the configured HTTPS URL is publicly reachable and accepts `POST` requests. The post-call block runs only when the call reaches the live-call block to which it is connected, so also confirm that the tested call followed that path.
+  </Accordion>
+  <Accordion title="The endpoint rejects the request">
+    Confirm that it accepts JSON with `Content-Type: application/json` and returns HTTP `200`. Send Call Data cannot add custom authorization headers; use a post-call API Request when the endpoint requires them.
+  </Accordion>
+  <Accordion title="The custom payload contains a missing or incorrect value">
+    Check that the variable is available at the block and enter a representative value for it during the block test. Review **Resolved Input**, then confirm that each manual field uses the required data type or that the raw JSON is valid.
+  </Accordion>
+  <Accordion title="The full payload does not contain an expected value">
+    Some fields depend on what occurred or was captured during the call. Complete a representative call and confirm that the source information exists in Call Details. Use a custom body when the destination needs a smaller, stable contract.
+  </Accordion>
+  <Accordion title="The block test succeeds, but live data looks different">
+    Full-payload tests use sample call data. Complete a controlled call to inspect the values produced by a live call.
+  </Accordion>
+</AccordionGroup>

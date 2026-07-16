@@ -1,196 +1,166 @@
 ---
 title: "API Request"
-description: "Send an HTTP request before, during, or after a call and use its response in later blocks."
+description: "Send an HTTP request and use the response in later blocks."
 sources:
   - "features/workflows/model/nodes/http-request.ts"
+  - "features/workflows/model/schema/request.ts"
+  - "features/workflows/model/schema/retry.ts"
+  - "features/workflows/modules/editor/components/request/request.tsx"
   - "features/workflows/modules/editor/custom-nodes/http-request/**"
-  - "features/workflows/model/node-descriptors/index.ts"
-last-verified: "2026-07-13"
+  - "features/workflows/modules/editor/testing/api-request-test-input.ts"
+  - "features/workflows/modules/editor/testing/run-block-test.ts"
+  - "features/workflows/model/variables/flatten-sample-data.ts"
+  - "phonely-backend/app/agent/live_actions/http_request/api_request.py"
+  - "phonely-backend/app/utils/url_validator.py"
+last-verified: "2026-07-16"
 ---
 
-<Info>
-  **Stages:** Pre-call, live call, and post-call<br />
-  **Direction:** Inbound and outbound
-</Info>
+Use **API Request** to read from or send data to an external service. The block can look up account information, create or update a record, or trigger another operation through an HTTP endpoint.
 
-The **API Request** block connects a flow to an HTTP endpoint. Use it to look up information, send data to another system, or trigger an external operation.
+API Request supports `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`.
 
-API Request supports `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`. You can build the request in the editor or import a cURL command, insert variables into its fields, test it with sample values, and use the response in downstream blocks.
+## Choose where it runs
 
-## Choose when the request runs
+Place the block at the stage when the request should run and after any variables it needs become available.
 
-Add the block in the stage where its result is needed:
+| Stage | Use it when |
+| :-- | :-- |
+| **Pre-call** | The result is needed before the call starts |
+| **Live call** | The result affects the active conversation or its routing |
+| **Post-call** | The request should run after a call that reached the connected live-call block |
 
-| Stage | Use it for | Important behavior |
-| :-- | :-- | :-- |
-| **Pre-call** | Load or validate information before the conversation starts. | The timeout can be set from 1 to 5 seconds. Route the result before the flow reaches its trigger. |
-| **Live call** | Read or update external data while speaking with the caller. | The timeout can be set from 1 to 30 seconds. You can give the caller an interim message and route success and error separately. |
-| **Post-call** | Send summaries, outcomes, or collected data after the conversation ends. | The timeout can be set from 1 to 30 seconds. Retry is available; caller-facing interim messages and live-call outcome routing are not. |
+A request can use only variables available before it runs. For example, place a request that needs information collected during the conversation after the Talk or Collect block that collects it.
 
-Choose the earliest stage that has all required variables, but no earlier. For example, a request that needs a phone number collected during the conversation belongs after the block that collects it, not in pre-call.
-
-<Tip>
-  Keep caller-facing requests fast. If the response is not needed during the conversation, place the block in post-call so the caller does not wait for it.
-</Tip>
-
-## Add an API Request block
-
-Open the block picker for the stage where the request should run, choose **API Request**, and connect it to the appropriate path. Select the block to configure it.
-
-Give the block a short, specific name such as `Look up appointment`, `Create support ticket`, or `Send call summary`. The response variables are grouped under this name, so a descriptive label makes them easier to find later.
+If the request is needed only after the call, place it in post-call so the caller does not wait for the external service.
 
 ## Configure the request
 
-### Method and URL
+Select the HTTP method and enter the endpoint in **URL**. Use a publicly reachable HTTPS URL; local addresses and private network endpoints are blocked.
 
-Select the HTTP method and enter the full endpoint URL.
-
-Use:
-
-- `GET` to retrieve data;
-- `POST` to create or submit data;
-- `PUT` or `PATCH` to update data; and
-- `DELETE` to remove data when the receiving API supports it.
-
-The request body is available for `POST`, `PUT`, and `PATCH`.
-
-### Import from cURL
-
-If the API provider gives you a cURL command, select **Import from cURL**, paste the command, and choose **Import**. Phonely fills the method, URL, headers, query parameters, and supported body fields from the command.
-
-Review every imported field before testing. Remove sample credentials or values that should be replaced with variables.
-
-<Warning>
-  Treat API keys, authorization headers, and request or response data as sensitive. Do not expose real credentials in screenshots, examples, or test requests shared with other people.
-</Warning>
-
-### Headers and query parameters
-
-Add the key-value pairs required by the endpoint. Common headers include `Content-Type` and the authorization format required by the API provider.
-
-Add query parameters as separate key-value rows rather than appending them manually when you want them to remain easy to review and update.
-
-### Request body
-
-For `POST`, `PUT`, and `PATCH`, choose one of the supported body types:
-
-| Body type | When to use it |
+| Field | Purpose |
 | :-- | :-- |
-| **None** | The endpoint does not expect a body. |
-| **x-www-form-urlencoded** | The endpoint expects form fields encoded as key-value pairs. |
-| **JSON** | The endpoint expects structured JSON data. Build it with fields or edit the raw JSON body. |
+| **Headers** | Send values required by the endpoint, such as authentication or content type |
+| **Query Parameters** | Add values to the URL as separate key-value pairs |
 
-Follow the receiving API's documentation for its required field names, value types, and content type.
+### Configure a request body
 
-## Insert variables
+For `POST`, `PUT`, and `PATCH`, choose a body type:
 
-Type `@` in supported fields to insert a value produced earlier in the flow. Variables can make the URL, headers, query parameters, form fields, or JSON body dynamic.
+| Body type | Use it when |
+| :-- | :-- |
+| **None** | The endpoint does not expect a body |
+| **x-www-form-urlencoded** | The endpoint expects form fields |
+| **JSON** | The endpoint expects structured JSON |
 
-Values inserted into the URL, headers, and query parameters are sent as text. A variable used in a JSON body can keep a typed value such as a number, boolean, object, or array.
+`GET` and `DELETE` do not include a request body.
 
-<Note>
-  A variable must exist before this block runs. If a request depends on information collected during the call, keep the API Request downstream from the block that creates that value.
-</Note>
+For a JSON body, choose **Manual** to add typed fields or **Code** to edit the raw JSON. Manual fields support strings, numbers, booleans, arrays, objects, and nested values.
 
-## Test the request and inspect its response
+Follow the endpoint's documentation for its required field names, formats, and authentication.
 
-Select **Send test request** before connecting response data to other blocks.
+### Import a cURL command
 
-1. Confirm the URL, method, headers, parameters, and body.
-2. Enter sample values for any variables referenced by the request. For JSON-body variables, select the value type that matches the real data.
-3. Send the request and inspect both the resolved request and the response.
-4. Fix any authentication, validation, or endpoint errors, then test again.
+Select **Import from cURL** beside the URL to populate the supported method, URL, headers, query parameters, and body from a cURL command.
 
-Testing the block does more than confirm connectivity: it also gives the editor a sample response shape. After a successful test, downstream variable pickers can expose response data under the API Request block's name, starting with `response`.
+Import fills only the fields that the editor supports. Review the result, replace sample values with fixed values or variables, and confirm that the request matches the API documentation before testing.
 
-If the API's response shape changes, run the test again and verify every downstream reference before publishing.
+## Use variables in the request
+
+Focus a URL, header, query parameter, form, or JSON field, then select a value from **Available Variables**. The list includes only variables available before the block runs.
+
+Variables inserted into the URL, headers, query parameters, and form fields are sent as text. In a JSON body, they can retain a number, boolean, object, or array type.
+
+Use a [Custom Variable](/flow-editor/variables#use-custom-variables) for a fixed value reused across requests, such as an API key or account ID. Keep credentials out of examples, screenshots, and Ask AI prompts.
+
+## Test and create response variables
+
+Run **Send test request** before using the response in another block. The test sends a real request to the configured endpoint.
+
+1. Enter safe sample values for the variables used by the request.
+2. For a JSON-body variable, choose the same data type it will have when the flow runs.
+3. Select **Show request** to inspect the resolved URL, headers, parameters, and body.
+4. Send the request and inspect the response.
+
+A successful test with a `2xx` JSON response creates variables under the block's name. For example:
+
+```json
+{
+  "customer": {
+    "id": "cus_123",
+    "active": true
+  }
+}
+```
+
+This creates `response` for the complete object, plus `customer`, `customer.id`, and `customer.active`. If the response is a top-level array, its items are available under `output`.
+
+Later blocks can select these values from **Available Variables**. If the response structure changes, test the request again and review downstream fields that reference its variables.
+
+Use a JSON response when later blocks need individual response fields. At runtime, a non-JSON response is stored as text in `response`.
 
 <Warning>
-  Use a safe test endpoint or non-production records when a request creates, updates, sends, charges, or deletes data. A test request is still a real HTTP request.
+  A block test can create, update, send, charge, or delete real data. Use a test endpoint or records that are safe to change.
 </Warning>
 
-## Configure advanced behavior
+## Configure runtime behavior
 
-The available settings depend on the stage:
+Expand **Advanced Settings** to configure timeout, retries, and other options available for the block's stage.
 
-| Setting | Pre-call | Live call | Post-call |
-| :-- | :--: | :--: | :--: |
-| **Timeout** | 1–5 seconds | 1–30 seconds | 1–30 seconds |
-| **Retry on Failure** | Yes | Yes | Yes |
-| **Error Handling** | Yes | Yes | — |
-| **Interim Message** | Yes | Yes | — |
-| **Call Outcome Tagging** | Yes | Yes | — |
+### Timeout duration
 
-### Retry on Failure
+**Timeout Duration** controls how long Phonely waits for the endpoint:
 
-Enable retry for temporary failures. Set the maximum number of attempts from 1 to 10. Retries repeat the request, so only enable them when repeating the operation is safe for the receiving API.
+- Pre-call: 1 to 5 seconds
+- Live call and post-call: 1 to 30 seconds
 
-For operations such as creating a payment, booking, ticket, or record, confirm the endpoint prevents duplicate results before enabling retries.
+Keep live-call requests short. If the request regularly needs more time and can run after the call, move it to post-call.
 
-### Error Handling
+### Retry on failure
 
-For pre-call and live-call requests, enable **Error Handling** when the flow should take a different path after a failed request. The block then exposes **Success** and **Error** connections.
+Enable **Retry on Failure** when another attempt may succeed, then set **Max Attempts** from 1 to 10.
 
-Connect both paths. A useful error route can explain that the information is temporarily unavailable, continue with a safe fallback, transfer the caller, or end the call appropriately.
+Retries can repeat the endpoint's side effects. Before enabling retry for a request that creates a booking, payment, ticket, message, or other record, confirm that the endpoint can safely prevent duplicates.
 
-When Error Handling is disabled, the block uses a single continuation instead of separate success and error paths.
+### Other advanced settings
 
-### Interim Message
+Pre-call and live-call API Request blocks also support interim messages, error routes, and call outcome tagging. See [Common Block Settings](/blocks/common-settings) for how these options affect the caller, connections, and reporting.
 
-For a pre-call or live-call request, use an interim message to avoid unexplained silence while the action runs. Choose a fixed message or a promptable message, and optionally add a short delay after it.
+Post-call API Request blocks provide timeout and retry settings, but not interim messages, error routes, or call outcome tagging.
 
-Keep the message brief and neutral, such as:
+## Verify the complete behavior
 
-> One moment while I check that for you.
+After the block test succeeds:
 
-### Call Outcome Tagging
+1. Confirm that request variables resolve to the intended values.
+2. Test each flow route that can reach the block and confirm a successful response.
+3. If **Error Handling** is enabled, test a controlled failure and its recovery route.
+4. Confirm that downstream blocks receive the expected response fields.
+5. Complete an end-to-end flow test before relying on the request.
 
-For pre-call and live-call requests, add an outcome when reaching this block represents a useful result in call analytics. Outcomes describe call results; they do not replace the block's success and error connections.
-
-## Example: look up an appointment
-
-For a live-call block named **Look up appointment**:
-
-- **Method:** `GET`
-- **URL:** the appointment service's lookup endpoint
-- **Query parameter:** `phone` set to the caller phone-number variable
-- **Timeout:** a short value appropriate for a live conversation
-- **Interim message:** `One moment while I check your appointment.`
-- **Error Handling:** enabled, with both **Success** and **Error** connected
-
-Send a test request with a non-production phone number. Then use the returned appointment fields in a downstream Talk block on the success route. On the error route, ask the caller for another identifier or offer a safe fallback.
-
-## Test the flow
-
-After the request works by itself:
-
-1. Test each incoming route that can reach the block.
-2. Confirm variables resolve to the expected values.
-3. Exercise both success and failure behavior.
-4. Verify retry does not create duplicate external operations.
-5. Confirm downstream blocks receive the expected response fields.
-6. For live calls, listen for excessive silence and adjust the timeout or interim message.
-7. Publish the flow and complete an end-to-end test through the same channel callers will use.
+During a Web Chat test, expand API Request in the action trace. After a phone call, open **Call Details**, select **Blocks**, and expand API Request. Review its status, request, response, and stored variables.
 
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="The test request cannot be sent">
-    Enter a valid URL first. Then check that every variable used by the request has a sample value in the test panel.
+  <Accordion title="The request cannot be sent">
+    Use a valid, publicly reachable HTTPS URL. For a block test, enter a sample value for every variable used by the request, then inspect **Show request** for an unresolved or malformed value.
   </Accordion>
-  <Accordion title="The endpoint returns an authentication error">
-    Compare the authorization header and credential format with the API provider's current documentation. Confirm you did not import an expired sample token.
+  <Accordion title="The endpoint returns an authentication or validation error">
+    Compare the resolved headers, parameters, and body with the endpoint's current documentation. Confirm that credentials are valid and that each field uses the required name, format, and data type.
   </Accordion>
-  <Accordion title="A downstream response variable is missing">
-    Run **Send test request** again and inspect the response. Confirm the downstream block is connected after this API Request and that the response still contains the referenced field.
+  <Accordion title="The endpoint returns data, but the request is marked as failed">
+    API Request treats only `2xx` HTTP status codes as successful. Check the returned status code. If the failure is expected and **Error Handling** is available and enabled, connect the **Error** route; otherwise correct the request or endpoint behavior.
+  </Accordion>
+  <Accordion title="A response variable is missing">
+    Run a successful test with a representative JSON response. If the response shape changed, test again and replace downstream references that no longer exist.
   </Accordion>
   <Accordion title="A JSON value has the wrong type">
-    In the test panel, set JSON-body variables to the same type used in production. Variables in URLs, headers, and query parameters are text; JSON-body variables can preserve typed values.
+    In the manual JSON body, choose the intended field type. For variables used in the JSON body test, select a matching test type. Values outside the JSON body are sent as text.
   </Accordion>
-  <Accordion title="The live call pauses for too long">
-    Reduce the timeout, add a concise interim message, or move the request to post-call if its result is not required during the conversation.
+  <Accordion title="The caller waits too long during a live call">
+    Reduce **Timeout Duration**, use a concise interim message, or move the request to post-call when it is needed only after the call.
   </Accordion>
-  <Accordion title="The same external record is created more than once">
-    Disable retry until the endpoint can safely reject or deduplicate repeated operations. Test with non-production data before enabling it again.
+  <Accordion title="The external operation happens more than once">
+    Disable **Retry on Failure** until the endpoint can safely reject or deduplicate repeated requests. Retest with non-production data.
   </Accordion>
 </AccordionGroup>

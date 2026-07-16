@@ -186,23 +186,7 @@
                   "agent-knowledge-base/upload-documents",
                   "agent-knowledge-base/add-websites",
                   "agent-knowledge-base/import-from-external",
-                  "agent-knowledge-base/managing-data-sources",
-                  "blocks/flow-blocks/collect",
-                  "blocks/flow-blocks/ask-exactly",
-                  "blocks/flow-blocks/filter",
-                  "blocks/flow-blocks/time-filter",
-                  "blocks/flow-blocks/end-call",
-                  "precall/precall-filter",
-                  "precall/precall-code",
-                  "precall/precall-webhook",
-                  "precall/precall-end-call",
-                  "blocks/live-call-actions/transfer-flow-new",
-                  "blocks/live-call-actions/payments",
-                  "blocks/live-call-actions/codeflow",
-                  "blocks/post-call-actions/post-call-overview",
-                  "blocks/post-call-actions/connect-to-make",
-                  "blocks/post-call-actions/connect-to-google-drive",
-                  "blocks/post-call-actions/google-sheet-add-row"
+                  "agent-knowledge-base/managing-data-sources"
                 ]
               }
             ]
@@ -422,24 +406,28 @@
       "destination": "/blocks/api-request"
     },
     {
-      "source": "/blocks/ask-exactly",
-      "destination": "/blocks/flow-blocks/ask-exactly"
-    },
-    {
       "source": "/blocks/collect",
-      "destination": "/blocks/flow-blocks/collect"
+      "destination": "/blocks/conversation-blocks/collect"
     },
     {
       "source": "/blocks/filter",
-      "destination": "/blocks/flow-blocks/filter"
+      "destination": "/blocks/flow-control-and-routing/filter"
     },
     {
       "source": "/blocks/time-filter",
-      "destination": "/blocks/flow-blocks/time-filter"
+      "destination": "/blocks/flow-control-and-routing/time-filter"
     },
     {
       "source": "/blocks/end-call",
-      "destination": "/blocks/flow-blocks/end-call"
+      "destination": "/blocks/flow-control-and-routing/end-call"
+    },
+    {
+      "source": "/precall/precall-filter",
+      "destination": "/blocks/flow-control-and-routing/filter"
+    },
+    {
+      "source": "/precall/precall-end-call",
+      "destination": "/blocks/flow-control-and-routing/end-call"
     },
     {
       "source": "/blocks/start-flow",
@@ -467,19 +455,27 @@
     },
     {
       "source": "/blocks/codeflow",
-      "destination": "/blocks/live-call-actions/codeflow"
+      "destination": "/blocks/data-and-automation-blocks/code"
     },
     {
       "source": "/blocks/codeworkflows",
-      "destination": "/blocks/live-call-actions/codeflow"
+      "destination": "/blocks/data-and-automation-blocks/code"
     },
     {
       "source": "/blocks/live-call-actions/codeworkflows",
-      "destination": "/blocks/live-call-actions/codeflow"
+      "destination": "/blocks/data-and-automation-blocks/code"
+    },
+    {
+      "source": "/blocks/live-call-actions/codeflow",
+      "destination": "/blocks/data-and-automation-blocks/code"
+    },
+    {
+      "source": "/precall/precall-code",
+      "destination": "/blocks/data-and-automation-blocks/code"
     },
     {
       "source": "/blocks/post-call-overview",
-      "destination": "/blocks/post-call-actions/post-call-overview"
+      "destination": "/blocks/overview"
     },
     {
       "source": "/blocks/post-call-send-email",
@@ -515,15 +511,15 @@
     },
     {
       "source": "/blocks/google-sheet-live",
-      "destination": "/blocks/live-call-integrations/google-sheet-live"
+      "destination": "/integrations/google-sheets"
     },
     {
       "source": "/blocks/zapier-live",
-      "destination": "/blocks/live-call-integrations/zapier-live"
+      "destination": "/integrations/zapier"
     },
     {
       "source": "/blocks/live-call-integrations/google-sheet-add-row",
-      "destination": "/blocks/post-call-actions/google-sheet-add-row"
+      "destination": "/integrations/google-sheets"
     },
     {
       "source": "/agent-design/voice/interruption-settings",
@@ -535,7 +531,7 @@
     },
     {
       "source": "/blocks/code",
-      "destination": "/blocks/live-call-actions/codeflow"
+      "destination": "/blocks/data-and-automation-blocks/code"
     },
     {
       "source": "/blocks/transfer-call",
@@ -559,11 +555,11 @@
     },
     {
       "source": "/blocks/transfer-flows",
-      "destination": "/blocks/live-call-actions/transfer-flow-new"
+      "destination": "/blocks/flow-control-and-routing/transfer-flow"
     },
     {
       "source": "/blocks/live-call-actions/transfer-flows",
-      "destination": "/blocks/live-call-actions/transfer-flow-new"
+      "destination": "/blocks/flow-control-and-routing/transfer-flow"
     }
   ]
 }

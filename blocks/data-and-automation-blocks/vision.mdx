@@ -1,7 +1,67 @@
 ---
 title: "Vision"
-description: "Perform a task on a webpage during a call."
-searchable: false
+description: "Start a legacy webpage automation task during a call."
+sources:
+  - "features/workflows/model/nodes/vision.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/vision/**"
+  - "features/workflows/modules/editor/store/use-vision-task-store.tsx"
+  - "app/api/vision/**"
+  - "phonely-backend/app/agent/live_actions/vision.py"
+  - "phonely-backend/app/api/skyvern.py"
+last-verified: "2026-07-16"
 ---
 
-<Warning>This page is a draft scaffold and must be rebuilt before release.</Warning>
+<Warning>
+  Vision is a legacy block and is not recommended for new flows. Website changes may cause its tasks to fail.
+</Warning>
+
+Use **Vision** to start an external webpage automation task during a live call in an inbound or outbound flow. Phonely sends the URL, objective, success criteria, and any additional information to the service.
+
+<Note>
+  The flow continues after the service accepts the task. It does not wait for completion, and later blocks cannot use the task result.
+</Note>
+
+## Configure the task
+
+| Field | Purpose |
+| :-- | :-- |
+| **URL** | The webpage where the task should run |
+| **Objective** | The specific action to attempt |
+| **Success Criteria** | How the automation service should determine that the task succeeded |
+| **Additional Information** | Optional key-value details the task may need |
+
+Keep the objective focused on one task and make the success criteria observable. For example:
+
+- **Objective:** Submit the contact form with the provided customer details
+- **Success Criteria:** The website displays a confirmation that the form was submitted
+
+The objective, success criteria, and additional information can use variables available at the block.
+
+## Test the task
+
+The **Test** tab uses separate test values and starts a real task on the specified webpage.
+
+1. Use a webpage and account that are safe for testing.
+2. Enter a test URL, objective, success criteria, and any additional information.
+3. Select **Initiate Task**.
+4. Review the task status, steps, and available screenshots.
+
+You can cancel the task before it completes. Test again whenever the webpage or its interaction flow changes.
+
+## Limitations
+
+- Websites that require authentication, verification challenges, or unpredictable interactions may not work reliably.
+- Ask AI does not create or configure Vision blocks.
+- Prefer [API Request](/blocks/api-request) or an [integration](/integrations/overview) when the service provides a supported alternative.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The test task does not start">
+    Confirm that the test URL, objective, and success criteria are present. The Test tab uses its own values rather than the values configured for the live flow.
+  </Accordion>
+  <Accordion title="The task fails or stops working">
+    Confirm that the webpage is still accessible and that its layout or interaction flow has not changed. Simplify the objective and success criteria, then run another controlled test.
+  </Accordion>
+</AccordionGroup>
