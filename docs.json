@@ -114,30 +114,43 @@
                 "group": "Block Reference",
                 "pages": [
                   "blocks/overview",
+                  "blocks/common-settings",
                   {
-                    "group": "Conversation Blocks",
+                    "group": "Conversation",
                     "pages": [
-                      "blocks/conversation-blocks/overview",
-                      "blocks/flow-blocks/talk"
+                      "blocks/flow-blocks/talk",
+                      "blocks/conversation-blocks/collect"
                     ]
                   },
                   {
-                    "group": "Logic and Routing Blocks",
+                    "group": "Flow Control and Routing",
                     "pages": [
-                      "blocks/logic-and-routing-blocks/overview"
+                      "blocks/flow-control-and-routing/filter",
+                      "blocks/flow-control-and-routing/time-filter",
+                      "blocks/flow-control-and-routing/transfer-flow",
+                      "blocks/flow-control-and-routing/end-call",
+                      "blocks/flow-control-and-routing/delay"
                     ]
                   },
                   {
-                    "group": "Communication Blocks",
+                    "group": "Calls and Messaging",
                     "pages": [
-                      "blocks/communication-blocks/overview"
+                      "blocks/communication-blocks/transfer-call",
+                      "blocks/communication-blocks/send-sms",
+                      "blocks/communication-blocks/send-email",
+                      "blocks/communication-blocks/email-sms-notification",
+                      "blocks/communication-blocks/redial",
+                      "blocks/communication-blocks/campaign"
                     ]
                   },
                   {
-                    "group": "Data and Automation Blocks",
+                    "group": "Data and Automation",
                     "pages": [
-                      "blocks/data-and-automation-blocks/overview",
-                      "blocks/api-request"
+                      "blocks/api-request",
+                      "blocks/data-and-automation-blocks/code",
+                      "blocks/data-and-automation-blocks/webhook",
+                      "blocks/data-and-automation-blocks/send-call-data",
+                      "blocks/data-and-automation-blocks/vision"
                     ]
                   }
                 ]
@@ -145,7 +158,15 @@
               {
                 "group": "Integrations",
                 "pages": [
-                  "integrations/overview"
+                  "integrations/overview",
+                  "integrations/google-calendar",
+                  "integrations/gmail",
+                  "integrations/google-sheets",
+                  "integrations/google-drive",
+                  "integrations/microsoft-outlook",
+                  "integrations/slack",
+                  "integrations/make",
+                  "integrations/zapier"
                 ]
               },
               {

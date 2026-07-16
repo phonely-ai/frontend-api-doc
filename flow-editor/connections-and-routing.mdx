@@ -55,7 +55,7 @@ Where a post-call route begins determines which calls trigger it:
 - **Continuation:** Run the next block after the current block completes without a named result.
 - **Conversation outcome:** Route from a Talk exit condition that describes a distinct, observable result. Avoid overlapping conditions or instructions for what the agent should ask next.
 - **Data or time result:** Route from a Filter case or Time Filter result when a defined business rule should decide the path.
-- **Action result:** Route from results such as **Success**, **Error**, or another block-specific outcome. Connect every result that requires follow-up or a fallback.
+- **Action result:** Route from results such as [**Success** and **Error**](/blocks/common-settings#error-handling), or another block-specific outcome. Connect every result that requires follow-up or a fallback.
 - **Transfer:** Use **Transfer Flow** to move the active conversation to another flow in the same agent, or **Transfer Call** to hand the call to a phone destination.
 
 <Warning>

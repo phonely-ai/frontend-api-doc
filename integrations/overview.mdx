@@ -1,11 +1,26 @@
 ---
 title: "Integrations"
-description: "Connect Phonely to the services your flows use."
+description: "Connect Phonely to external services and use their actions in a flow."
 searchable: false
+sources:
+  - "features/workflows/model/actions/integrations.ts"
+  - "features/workflows/hooks/use-actions.ts"
+  - "features/workflows/modules/editor/components/action-market/action-palette.tsx"
+last-verified: "2026-07-15"
 ---
 
-<Warning>
-  This page is a draft scaffold for the Build Your Agent restructure. It must be completed and reviewed before release.
-</Warning>
+Integrations are provider-connected capabilities such as Google Calendar, Gmail, Slack, Make, and Zapier. Use this section when a task requires an external account or provider-specific setup.
 
-This section will separate connection and authentication setup from the block guides that use each integration.
+Each integration has one canonical guide covering:
+
+- Available actions and supported execution stages
+- Connecting or selecting an account
+- Configuring the integration block
+- Inputs, variables, and outputs
+- Testing and troubleshooting
+
+Provider-neutral capabilities such as Talk, Filter, Transfer Call, API Request, and Code are documented under [Block Reference](/blocks/overview).
+
+<Warning>
+  The integration guides in this section are draft scaffolds and must be rebuilt before release.
+</Warning>

@@ -1,158 +1,110 @@
 ---
 title: "Talk"
-description: "Give the agent a conversational objective, extract information, and route when a specific outcome is reached."
+description: "Handle a multi-turn conversation, collect information, and route the call by outcome."
 sources:
   - "features/workflows/model/nodes/prompt.ts"
   - "features/workflows/model/schema/variables.ts"
   - "features/workflows/modules/editor/custom-nodes/prompt/**"
+  - "features/workflows/modules/editor/components/tagify/tagify-input.tsx"
   - "features/workflows/model/node-descriptors/index.ts"
+  - "features/calls/model/runtime-trace/workflow-blocks.ts"
+  - "features/calls/modules/call-details/tabs/blocks/call-blocks-tab-block-timeline-item.tsx"
   - "app/api/generate-with-ai/talk/route.ts"
-last-verified: "2026-07-13"
+  - "phonely-backend/app/agent/live_actions/conversation/custom_prompt.py"
+  - "phonely-backend/app/custom_llm/prompts/prompts_v4_0.py"
+last-verified: "2026-07-16"
 ---
 
-<Info>
-  **Stage:** Live call<br />
-  **Direction:** Inbound and outbound
-</Info>
+Choose **Talk** when the agent needs to adapt over several turns, such as answering questions, understanding an issue, or qualifying a caller. It stays active until an exit condition is met and can collect values along the way.
 
-The **Talk** block gives the agent an objective for a natural back-and-forth conversation. Use it when the caller may respond in different ways and the agent needs to adapt before the flow continues.
+Choose [Collect](/blocks/conversation-blocks/collect) for the more focused task of gathering a defined set of fields.
 
-A Talk block can:
+## Describe the task
 
-- follow a conversational prompt;
-- use variables or knowledge-base context in that prompt;
-- extract structured values while speaking with the caller;
-- continue through one of several exit conditions; and
-- assign a call outcome tag if the call ends on or after that point.
+In **Describe what you want the AI to do**, enter a short summary of the goal.
 
-Use [Collect](/blocks/flow-blocks/collect) instead when the main goal is a defined set of questions and structured answers. Use Talk when the conversation itself is the task.
+The worked example below starts with this description:
 
-## Add a Talk block
+> Answer the caller's questions using the knowledge base. If an answer is unavailable, offer to collect their contact details for follow-up.
 
-Add Talk from the **Conversation** section of the Live Call block picker. Connect it to the path where the conversation should begin, then select the block to open its two-step configuration.
+Choose **Generate with AI** to create a starting configuration from your description, or choose **Build Manually** to configure it yourself.
 
-## Step 1: Describe the task
-
-In **Describe what you want the AI to do**, summarize the outcome of this part of the call.
-
-For example:
-
-> Answer the caller's questions using the knowledge base. If the answer is not available, offer to collect their contact details for follow-up.
-
-From here, choose:
-
-- **Generate with AI** to create a starting prompt, exit conditions, variables, and call outcome from your description.
-- **Build Manually** to configure those fields yourself.
-
-AI generation creates a draft configuration. Review every generated field and connection before testing or publishing.
-
-## Step 2: Configure the block
-
-### Name
-
-Give the block a short name that describes its purpose on the canvas, such as `Answer business questions` or `Understand the support issue`.
+## Configure the conversation
 
 ### Prompt
 
-The **Prompt** tells the agent what to accomplish while this block is active. Write instructions, not a script of every possible turn.
+The **Prompt** tells the agent how to handle the conversation while Talk is active. Write directions rather than a script. Include the objective, relevant context or boundaries, and what the agent should do when it cannot complete the task.
 
-A useful prompt explains:
-
-- the goal;
-- what information the agent may use;
-- what it should or should not do; and
-- what to do when the requested result is unavailable.
-
-Type `@` to insert variables that are available before the block runs or to reference knowledge-base content. You can also select **AI-Generate** to regenerate the configuration from the setup description.
-
-<Tip>
-  Keep the prompt focused on behavior. Put each decision to leave the block in **Exit Conditions** so routing stays visible on the canvas.
-</Tip>
+Type `@` and select an available variable or knowledge base source when the prompt needs that information. Adding its name as plain text does not insert the source.
 
 ### Exit Conditions
 
-An exit condition describes a result that ends this conversational step and exposes a matching output on the block. Connect each output to the block that should run next.
+Each **Exit Condition** describes a conversational result that ends the Talk block and creates a source handle. Connect that handle to the block that should run next.
 
-Good exit conditions describe observable outcomes:
+Write conditions as completed, observable outcomes. For example:
 
-- `The caller's question has been answered`
+- `The caller's question has been answered and they have no more questions`
 - `The caller wants to leave their contact details`
 - `The caller asks to speak with a person`
 
-Talk requires at least one non-empty exit condition. Conditions must be unique, and the editor supports up to ten.
+A Talk block requires at least one exit condition and supports up to ten. Conditions must be non-empty and unique.
 
 <Warning>
-  Exit conditions can override prompt behavior. If the flow advances too early or chooses the wrong route, make the conditions more specific before adding more instructions to the prompt.
+  Exit conditions decide when Talk ends and can override instructions in the Prompt. If the block advances too early or takes the wrong route, make the relevant condition more specific before adding more prompt instructions.
 </Warning>
 
-If several conditions lead to the same next block, the editor warns you to combine them into one condition. A single outcome-focused route is easier for the agent and your team to interpret.
+When several conditions lead to the same block, combine them into one outcome-focused condition for clearer routing.
 
 ### Variables
 
-Add a variable when the Talk block should extract a value from the conversation for later blocks.
-
-For each variable, configure:
+Add a variable when the Talk block should extract information from the conversation for later blocks.
 
 | Field | Purpose |
 | :-- | :-- |
-| **Name** | The identifier shown in the variable picker. Names must be present and unique within the block. |
-| **Type** | The expected shape, such as text, number, date, email, phone, enum, regex, or a custom format. |
-| **Description** | What the value represents, so the agent knows what to extract. |
-| **Required** | Prevents the agent from leaving the block until the value is collected. |
-| **Confirm** | Asks the caller to confirm a required value before continuing. |
-| **Spell Back** | Spells a confirmed value character by character. |
+| **Name** | Name shown in **Available Variables**; must be unique within the block |
+| **Type** | Expected format of the value |
+| **Description** | Information the agent should collect |
+| **Required** | Collect the value before leaving the block |
+| **Confirm** | Ask the caller to confirm a required value |
+| **Spell Back** | Spell a confirmed value character by character |
 
-**Confirm** is available only for required variables, and **Spell Back** is available only when confirmation is enabled.
+**Confirm** is available after **Required** is enabled, and **Spell Back** is available after **Confirm** is enabled.
 
-After this block runs, its values appear in the variable picker under the block's name. Downstream blocks can reference them with `@`.
+Collected values appear in **Available Variables** for later blocks on that route. See [Variables](/flow-editor/variables) for types, availability, and troubleshooting.
 
-<Note>
-  A variable is only available after the Talk block that creates it has run. Keep dependent blocks downstream on a route that passes through this block.
-</Note>
+## Example: Answer business questions
 
-### Call Outcome Tagging
+- **Prompt:** Use the knowledge base to answer questions about the business. Keep answers concise. If the answer is unavailable, explain that a team member can follow up and offer to collect the caller's details.
+- **Exit conditions:**
+  - The caller's questions have been answered and they have no more questions
+  - The caller wants to leave their information for follow-up
+- **Variable:** `unanswered_question` — the caller's unanswered question
 
-Under **Advanced Settings**, add an outcome when calls that reach this block represent a meaningful result in analytics, such as `Question answered` or `Needs follow-up`.
+Connect the answered route to [End Call](/blocks/flow-control-and-routing/end-call) and the follow-up route to [Collect](/blocks/conversation-blocks/collect). This keeps the completed and follow-up paths explicit on the canvas.
 
-Outcome tagging does not route the live conversation. Use exit conditions and connections for routing.
+## Test Talk
 
-## Example configuration
+Test the expected outcome and each meaningful alternative. Confirm that Talk:
 
-For a block named **Answer business questions**:
+- remains active while its conversational objective is incomplete;
+- handles different phrasing for the same intent consistently;
+- selects the intended exit condition and route for each outcome; and
+- stores and confirms variables as configured.
 
-- **Prompt:** Use the knowledge base to answer questions about the business. Be concise. If the knowledge base does not contain the answer, explain that a team member can follow up and offer to collect the caller's details.
-- **Exit condition 1:** The caller's question has been answered and they have no more questions.
-- **Exit condition 2:** The caller wants to leave their information for follow-up.
-- **Variable:** `unanswered_question` as text, not required.
+Use **Web Call** when voice behavior matters, such as pacing and interruptions.
 
-Connect the first exit to the next closing step and the second to a Collect block. This keeps the fallback explicit instead of asking one Talk block to perform the entire call.
-
-## Test the Talk block
-
-Test more than the happy path:
-
-1. Ask a question the prompt and knowledge base can answer.
-2. Ask a question that cannot be answered and confirm the fallback route.
-3. Phrase the same intent in several ways to check the exit conditions.
-4. If the block extracts variables, provide valid, ambiguous, and corrected values.
-5. Confirm that required variables are collected and confirmation behaves as expected.
-6. Verify every exit output reaches the intended next block.
-
-On a long flow, use **Test from here** on the Talk block to exercise its draft configuration without starting at the beginning. Complete a full published-flow test before relying on it for live calls.
+For an unexpected result, open **Call Details**, select **Blocks**, and expand Talk to review its conversation turns, selected route, and stored variables.
 
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="The block advances too early">
-    Tighten the exit condition so it describes a completed result, not a topic or a word the caller might mention casually.
-  </Accordion>
   <Accordion title="The conversation does not leave the block">
-    Confirm at least one exit condition can realistically become true, then check that each output is connected. Avoid conditions that require information the prompt never asks for.
+    Confirm that at least one exit condition can become true from the conversation guided by the **Prompt**. If needed, rewrite the condition as a clear result the agent can recognize.
   </Accordion>
-  <Accordion title="The agent does too much in one step">
-    Split the task into focused Talk, Collect, action, or routing blocks. Each block should have a clear completion point.
+  <Accordion title="The agent tries to handle too much">
+    Give the Talk block one conversational objective with clear completion points. Move structured collection, actions, or later decisions into connected blocks.
   </Accordion>
-  <Accordion title="A variable is missing downstream">
-    Make sure the call path ran through this Talk block before the variable was referenced. Then check the variable name, type, and any invalid-variable warning in the destination field.
+  <Accordion title="A Talk variable is empty later">
+    Open **Call Details** and confirm that the call passed through Talk and stored the value. If later blocks always need it, enable **Required**. Otherwise, make sure those blocks can run without it.
   </Accordion>
 </AccordionGroup>

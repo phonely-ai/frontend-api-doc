@@ -1,0 +1,42 @@
+---
+title: "End Call"
+description: "Play a final message and end the call."
+sources:
+  - "features/workflows/model/nodes/end-call.ts"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/end-call/**"
+  - "features/workflows/modules/editor/components/action-market/action-market.tsx"
+  - "phonely-backend/app/agent/live_actions/end_call.py"
+  - "phonely-backend/app/models/flow_blocks/end_call_block_model.py"
+last-verified: "2026-07-16"
+---
+
+Use **End Call** when the agent should play a final message and end the call. It is terminal for the live conversation, so the flow does not continue to another live-call block.
+
+## Configure the closing message
+
+Choose how End Call creates the final message:
+
+| Mode | Behavior |
+| :-- | :-- |
+| **Fixed** | Says the text you enter exactly |
+| **Promptable** | Generates a closing from your instructions and the conversation context |
+
+With **Fixed**, enter the wording in **End Call Message**. With **Promptable**, use **End Call Message Prompt** to describe the closing the agent should generate.
+
+Select values from **Available Variables** when the message or prompt needs information from earlier blocks. Keep the closing concise and do not invite another response—the call ends after the message.
+
+Use End Call's message instead of adding another block only to say goodbye.
+
+## Reject an inbound call before the conversation
+
+Place End Call on a pre-call rejection path when an inbound call should not reach the **Greeting**. It plays a **Fixed** message and ends the call. For example, connect it after a pre-call [Filter](/blocks/flow-control-and-routing/filter) or data check that identifies a blocked, ineligible, or unsupported caller.
+
+Promptable mode is not available for a pre-call End Call block.
+
+## Run post-call blocks
+
+A live-call End Call block can connect to post-call blocks. Those blocks run after calls that reach that End Call block; they do not continue the live conversation.
+
+To record why the call ended, use [Call Outcome Tagging](/blocks/common-settings#call-outcome-tagging).

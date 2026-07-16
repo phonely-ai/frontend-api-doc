@@ -1,0 +1,86 @@
+---
+title: "Common Block Settings"
+description: "Configure caller feedback, failure routes, and call outcome reporting on supported blocks."
+sources:
+  - "features/workflows/modules/editor/components/common/advanced-settings.tsx"
+  - "features/workflows/modules/editor/components/form-items/interim-message.tsx"
+  - "features/workflows/modules/editor/components/form-items/error-handling.tsx"
+  - "features/workflows/modules/editor/components/form-items/outcome.tsx"
+  - "features/workflows/modules/editor/custom-nodes/http-request/**"
+  - "features/workflows/modules/editor/custom-nodes/code/**"
+  - "features/workflows/modules/editor/custom-nodes/payment/**"
+  - "features/workflows/modules/editor/custom-nodes/sell-call/**"
+  - "features/workflows/model/schema/interim-message.ts"
+  - "features/workflows/model/nodes/http-request.ts"
+  - "features/workflows/model/nodes/code.ts"
+  - "phonely-backend/app/agent/live_actions/tool_actions.py"
+  - "phonely-backend/app/custom_llm/state_manager.py"
+  - "phonely-backend/app/agent/post_call/extract_call_insights.py"
+last-verified: "2026-07-16"
+---
+
+Select a block and expand **Advanced Settings** to see any shared options it supports. These supplement the block's main configuration by controlling what the caller hears while it runs, how action failures are routed, or which outcome is recorded for reporting.
+
+Available settings vary by block and execution stage.
+
+| Setting | What it changes |
+| :-- | :-- |
+| **Interim Message** | Tells the caller that an action is in progress |
+| **Enable Error Handling** | Adds separate **Success** and **Error** routes to supported blocks |
+| **Call Outcome Tagging** | Records an outcome for reporting when the call reaches the block |
+
+## Interim messages
+
+Use an **Interim Message** when a block may leave the caller waiting in silence. It tells the caller that Phonely is still working and does not affect routing.
+
+Choose how the message is created:
+
+| Mode | Behavior |
+| :-- | :-- |
+| **Fixed** | Uses the exact message you enter |
+| **Promptable** | Uses your instructions to generate a contextual message |
+
+Keep the message short and neutral. It should acknowledge the wait without claiming that the action has already succeeded. For example:
+
+> One moment while I check that for you.
+
+Enable **Post Interim Message Delay** to pause briefly after the message before the flow continues. Set a delay of up to 60 seconds.
+
+## Error handling
+
+Enable **Error Handling** when the flow needs separate paths for success and failure. The block replaces its single continuation with two routes:
+
+- **Success** runs when the action completes successfully.
+- **Error** runs when the action fails.
+
+Connect **Error** to a useful recovery path, such as trying another method, collecting details for follow-up, or explaining that the action could not be completed.
+
+<Warning>
+  Switching this setting changes the block's source handles. Connections that no longer match are removed, so reconnect the routes shown on the block and review the [Flow Checklist](/workflow-checklist).
+</Warning>
+
+When **Error Handling** is disabled, the block uses one continuation.
+
+## Call outcome tagging
+
+Use **Call Outcome Tagging** when reaching a block represents a result worth tracking, such as `Appointment booked` or `Needs follow-up`. Choose an existing outcome or enter a new one.
+
+Outcome tagging affects reporting, not routing. Use exit conditions, Filter cases, and connections to control what happens next.
+
+If a call reaches multiple tagged blocks, the last tagged block determines its outcome. Tag stable business results rather than routine progress through the flow.
+
+Use [**Focus blocks by call outcome**](/key-concepts/flow-canvas-controls#focus-blocks-by-call-outcome) on the canvas to highlight every block that uses a selected outcome in the current flow.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The caller does not hear the interim message">
+    Open **Advanced Settings** and confirm that **Interim Message** is enabled. For **Fixed**, enter the message to play. For **Promptable**, provide instructions for the message to generate. Then confirm that the call reaches the block.
+  </Accordion>
+  <Accordion title="Success and Error handles are missing">
+    Open **Advanced Settings** and enable **Error Handling**. The block updates automatically to show **Success** and **Error** source handles. Connect each handle to the appropriate next block.
+  </Accordion>
+  <Accordion title="The call has an unexpected outcome">
+    Use [**Outcome Focus**](/key-concepts/flow-canvas-controls#focus-blocks-by-call-outcome) to find the configured blocks, then review the call path to see which ones ran. The last tagged block reached determines the outcome.
+  </Accordion>
+</AccordionGroup>

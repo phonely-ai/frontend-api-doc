@@ -33,8 +33,6 @@ const EXPECTED_SEARCHABLE_PAGES = [
   'api-reference/endpoint/post-agent-websites',
   'billing-and-usage/account',
   'billing-and-usage/teams',
-  'blocks/custom-integrations/custom-actions',
-  'blocks/custom-integrations/google-calendar-custom-block',
   'blocks/live-call-integrations/google-calendar',
   'blocks/live-call-integrations/google-gmail',
   'blocks/live-call-integrations/google-sheet-live',

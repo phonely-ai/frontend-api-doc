@@ -1,0 +1,98 @@
+---
+title: "Collect"
+description: "Ask for a defined set of information and use the caller's answers in later blocks."
+sources:
+  - "features/workflows/model/nodes/multi-ask.ts"
+  - "features/workflows/model/schema/variables.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/multi-ask/**"
+  - "features/workflows/modules/editor/custom-nodes/prompt/components/variables.tsx"
+  - "features/calls/model/runtime-trace/workflow-blocks.ts"
+  - "features/calls/modules/call-details/tabs/blocks/call-blocks-tab-block-timeline-item.tsx"
+  - "app/api/generate-with-ai/collect/route.ts"
+  - "phonely-backend/app/agent/live_actions/conversation/multi_ask.py"
+  - "phonely-backend/app/custom_llm/prompts/prompts_v4_0.py"
+last-verified: "2026-07-16"
+---
+
+Choose **Collect** when the agent needs a defined set of information, such as a caller's name, contact details, or appointment preferences. It asks for the information one item at a time and stores the answers as variables for later blocks.
+
+Each **Question** guides what the agent should ask, but it is not a fixed script. The agent can phrase or rephrase the question naturally. Choose [Talk](/blocks/flow-blocks/talk) when the task needs a more open-ended conversation or different routes based on its outcome.
+
+## Describe the information
+
+In **Describe what information you want the AI to collect**, enter a short summary of the fields you need.
+
+For example:
+
+> Gather the caller's name, email address, phone number, and reason for calling.
+
+Choose **Generate with AI** to create a starting configuration from your description, or choose **Build Manually** to configure each question yourself.
+
+## Configure the questions
+
+Add one question for each value the block should collect. Collect requires at least one question, and every variable name must be unique within the block.
+
+| Field | Purpose |
+| :-- | :-- |
+| **Variable Name** | Name shown in **Available Variables**; must be unique within the block |
+| **Type** | Expected format of the answer |
+| **Question** | Question to ask; the agent may phrase it naturally during the call |
+| **Required** | Collect the answer before leaving the block |
+| **Confirm** | Ask the caller to confirm a required answer |
+| **Spell Back** | Spell a confirmed answer character by character |
+
+**Confirm** is available after **Required** is enabled, and **Spell Back** is available after **Confirm** is enabled.
+
+Choose the type that matches the expected answer. See [Variables](/flow-editor/variables) for available types, formats, and downstream availability.
+
+### Completion and routing
+
+Collect asks for missing information in a conversational style. It can move to the next block after all required answers have been collected and any enabled confirmations are complete.
+
+Enable **Required** for every answer the flow depends on. A question without **Required** does not prevent Collect from continuing.
+
+Collect has one live-call continuation and does not branch by answer. To route using a collected value, connect Collect to a [Filter](/blocks/flow-control-and-routing/filter) and create the cases there.
+
+## Example: Collect caller details
+
+| Variable | Type | Question |
+| :-- | :-- | :-- |
+| `caller_name` | Name | What is your name? |
+| `caller_email` | Email | What email address should we use? |
+| `reason_for_calling` | Text | What can we help you with today? |
+
+Enable **Required** for each answer the flow cannot continue without. For information that is easy to mishear, enable **Confirm** and, when useful, **Spell Back**.
+
+Later blocks on the continuation route can use these answers as variables.
+
+## Test Collect
+
+Try complete, unclear, corrected, and missing answers. Confirm that Collect:
+
+- requests missing information naturally, one question at a time;
+- does not continue until every required answer is collected and any configured confirmation is complete;
+- updates a stored value when the caller corrects it;
+- spells back answers when configured; and
+- makes the collected values available to later blocks.
+
+Use **Web Call** to hear questions, confirmations, and spelled-back answers.
+
+For an unexpected result, open **Call Details**, select **Blocks**, and expand Collect to review its conversation turns and stored variables.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The agent leaves without an answer">
+    Enable **Required** for every answer the flow must collect before continuing. Leave it off only when later blocks can run without that value.
+  </Accordion>
+  <Accordion title="The block does not finish">
+    Check which required answer is still missing or waiting for confirmation. Make the corresponding **Question** clearer and confirm that its **Type** matches the expected response.
+  </Accordion>
+  <Accordion title="The agent does not use the exact question wording">
+    Collect asks questions conversationally and may rephrase them. Write the **Question** as a clear request for one value rather than relying on exact wording.
+  </Accordion>
+  <Accordion title="A collected value is empty later">
+    Open **Call Details** and confirm that Collect stored the value. If later blocks always need it, enable **Required**. Otherwise, make sure those blocks can run without it.
+  </Accordion>
+</AccordionGroup>

@@ -1,79 +1,85 @@
 ---
-title: "Block Reference"
+title: "Overview"
 description: "Find the Phonely block that matches your task and see where it can run in a flow."
 sources:
   - "features/workflows/model/actions/catalog.ts"
   - "features/workflows/hooks/use-actions.ts"
   - "features/workflows/modules/editor/components/action-market/action-palette.tsx"
   - "features/workflows/model/execution-stage.ts"
-last-verified: "2026-07-13"
+last-verified: "2026-07-16"
 ---
 
-Blocks are the capabilities you connect to build a flow. Choose a block by the result you need, then place it in a supported execution stage.
+Blocks are reusable capabilities that handle individual steps in a flow, such as speaking, collecting information, making a decision, sending a request, or processing data. Use this page to compare blocks and see where each can run.
+
+Some blocks also share settings for caller feedback, failure routes, and reporting. See [Common Block Settings](/blocks/common-settings) to configure those options.
 
 <Info>
-  The block picker is context-aware. It only shows blocks supported by the flow direction, execution stage, your plan, and any integrations configured for your workspace.
+  The **Available in** column shows where a block can run. **All stages** means pre-call, live call, and post-call. The block picker filters by the flow direction and stage where you open it.
 </Info>
 
-## Conversation and flow control
+Blocks that connect to external services have one canonical guide under [Integrations](/integrations/overview). Each guide covers both connection setup and using the integration in a flow.
 
-| Block | Use it to | Supported stage |
+Greeting, Start Flow, and Make Call are [flow triggers](/blocks/flow-blocks/start-flow), not reusable blocks. Phonely adds the appropriate trigger when you create a flow.
+
+## Conversation
+
+| Block | Use it to | Available in |
 | :-- | :-- | :-- |
-| [Flow triggers](/blocks/flow-blocks/start-flow) | Define how an inbound or outbound flow begins | Entry point |
-| [Talk](/blocks/flow-blocks/talk) | Give the agent a conversational objective and let it respond naturally | Live call |
-| [Collect](/blocks/flow-blocks/collect) | Gather named, structured values from the caller | Live call |
-| [Filter](/blocks/flow-blocks/filter) | Branch based on cases and conditions | Pre-call, live call, post-call |
-| [Time Filter](/blocks/flow-blocks/time-filter) | Route by a weekly availability schedule | Live call |
-| [Transfer Flow](/blocks/live-call-actions/transfer-flow-new) | Move the conversation to another flow in the same agent | Live call |
-| [End Call](/blocks/flow-blocks/end-call) | Stop the call, optionally with a final message | Pre-call, live call |
+| [Talk](/blocks/flow-blocks/talk) | Handle a multi-turn conversation, collect information, and branch by outcome | Live call |
+| [Collect](/blocks/conversation-blocks/collect) | Collect specific information from the caller in a structured format | Live call |
 
-## Communications and call handling
+## Flow control and routing
 
-| Block | Use it to | Supported stage |
+| Block | Use it to | Available in |
 | :-- | :-- | :-- |
-| [Transfer Call](/blocks/live-call-actions/new-transfer-call) | Hand an active call to one or more phone destinations | Live call |
-| [Send SMS](/blocks/live-call-actions/send-sms) | Send a text message using values available to the flow | Pre-call, live call, post-call |
-| [Send Email](/blocks/live-call-actions/send-email) | Send an email during the call or after it ends | Live call, post-call |
-| Email & SMS Notification | Notify configured recipients after a call | Post-call |
-| Redial | Schedule another call after a delay | Post-call |
-| Campaign | Add the caller to a campaign | Post-call |
+| [Filter](/blocks/flow-control-and-routing/filter) | Route the flow using available data | All stages |
+| [Time Filter](/blocks/flow-control-and-routing/time-filter) | Route the flow based on a weekly schedule | Live call |
+| [Transfer Flow](/blocks/flow-control-and-routing/transfer-flow) | Continue the call in another flow for the same agent | Live call |
+| [End Call](/blocks/flow-control-and-routing/end-call) | End the call with a final message | Pre-call, live call |
+| [Delay](/blocks/flow-control-and-routing/delay) | Wait before running connected post-call blocks | Post-call |
+
+Use [Talk exit conditions](/blocks/flow-blocks/talk#exit-conditions) for conversational outcomes and Filter for data-based routing. Transfer Flow stays within the agent, while [Transfer Call](/blocks/communication-blocks/transfer-call) sends the call to a phone destination.
+
+## Calls and messaging
+
+| Block | Use it to | Available in |
+| :-- | :-- | :-- |
+| [Transfer Call](/blocks/communication-blocks/transfer-call) | Transfer a call to one or more phone numbers | Live call |
+| [Send SMS](/blocks/communication-blocks/send-sms) | Send a text message to a phone number | All stages |
+| [Send Email](/blocks/communication-blocks/send-email) | Send an email to one or more recipients | Live call, post-call |
+| [Email & SMS Notification](/blocks/communication-blocks/email-sms-notification) | Send a call summary by email, SMS, or both | Post-call |
+| [Redial](/blocks/communication-blocks/redial) | Schedule one or more follow-up call attempts | Post-call |
+| [Campaign](/blocks/communication-blocks/campaign) | Add the caller to an outbound campaign | Post-call |
+
+Use Send SMS or Send Email when you control the message content. Use Email & SMS Notification to deliver the conversation summary automatically after the call.
 
 ## Data and automation
 
-| Block | Use it to | Supported stage |
+| Block | Use it to | Available in |
 | :-- | :-- | :-- |
-| [API Request](/blocks/api-request) | Send an HTTP request and use the response in the flow | Pre-call, live call, post-call |
-| [Code](/blocks/live-call-actions/codeflow) | Run Python code to transform or calculate data | Pre-call, live call, post-call |
-| Webhook | Receive external data before an inbound call starts | Pre-call, inbound only |
-| Send Call Data | Send call data to an endpoint after the call | Post-call |
-| Delay | Wait before the next post-call action runs | Post-call |
-| Vision | Perform a task on a webpage during a call | Live call |
+| [API Request](/blocks/api-request) | Send an API request and use the response | All stages |
+| [Code](/blocks/data-and-automation-blocks/code) | Process data with Python and use the output | All stages |
+| [Webhook](/blocks/data-and-automation-blocks/webhook) | Receive data from an external service | Pre-call, inbound only |
+| [Send Call Data](/blocks/data-and-automation-blocks/send-call-data) | Send call data to an endpoint | Post-call |
+| [Vision](/blocks/data-and-automation-blocks/vision) | Perform a task on a webpage | Live call |
 
 ## Integration blocks
 
-| Block | Use it to | Supported stage |
+| Block | Use it to | Available in |
 | :-- | :-- | :-- |
-| Google Calendar | Work with calendar availability and events | Live call |
-| Gmail | Send email through a connected Gmail account | Live call, post-call |
-| Google Sheets | Find or add spreadsheet data | Live call, post-call |
-| Google Drive | Store call-related files in Drive | Post-call |
-| Microsoft Outlook | Send email through a connected Outlook account | Live call, post-call |
-| Slack | Send information to a connected Slack workspace | Live call, post-call |
-| Make | Trigger a Make scenario after a call | Post-call |
-| Zapier | Trigger a Zap through a webhook after a call | Post-call |
-| Custom actions | Run workspace-specific live-call actions | Live call |
+| [Google Calendar](/integrations/google-calendar) | Check availability or create an appointment | Live call |
+| [Gmail](/integrations/gmail) | Send an email from a connected Gmail account | Live call, post-call |
+| [Google Sheets](/integrations/google-sheets) | Search for or add a row in Google Sheets | Live call, post-call |
+| [Google Drive](/integrations/google-drive) | Upload the call recording to Google Drive | Post-call |
+| [Microsoft Outlook](/integrations/microsoft-outlook) | Send an email from a connected Outlook account | Live call, post-call |
+| [Slack](/integrations/slack) | Send a message to a Slack channel | Live call, post-call |
+| [Make](/integrations/make) | Send call data to Make | Post-call |
+| [Zapier](/integrations/zapier) | Send call data to Zapier | Post-call |
 
-Integration blocks appear only when the required connection or custom action is available. Their block guides explain editor behavior; connection and authentication guides are covered separately.
+Use Gmail or Microsoft Outlook when email should come from a connected provider account. Use [Send Email](/blocks/communication-blocks/send-email) for Phonely's built-in email action.
 
-## Add a block in the correct stage
-
-- To add a **pre-call** block, use the handle above the flow trigger.
-- To continue a **live-call** path, use an available live-call output or exit-condition handle.
-- To add a **post-call** block, use the post-call handle on the live-call block after which the action should run.
-- To place an unconnected live-call or post-call block, use **Add block** in the canvas toolbar.
-
-If a block supports several stages, use one canonical guide for that block. The guide calls out any fields, variables, outputs, or limits that change by stage.
+Integration blocks may appear before their connection is configured. Complete the required connection or webhook setup before testing or publishing. Each guide covers setup, configuration, testing, variables, and troubleshooting.
 
 <Warning>
-  A block being available in the picker does not mean it is ready to publish. Configure its required fields, connect its relevant outputs, and resolve any errors in the [Flow Checklist](/workflow-checklist).
+  The picker shows where a block can run, but it does not confirm that the block is fully configured. Complete its required settings and resolve any errors in the [Flow Checklist](/workflow-checklist) before publishing.
 </Warning>

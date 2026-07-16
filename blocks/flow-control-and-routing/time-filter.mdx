@@ -1,0 +1,64 @@
+---
+title: "Time Filter"
+description: "Route calls using the agent's recurring weekly availability."
+sources:
+  - "features/workflows/model/nodes/time-filter.ts"
+  - "features/workflows/model/schema/availability.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/modules/editor/custom-nodes/time-filter/**"
+  - "features/workflows/modules/editor/components/availability/availability.tsx"
+  - "phonely-backend/app/agent/assistant/workflows.py"
+  - "phonely-backend/app/agent/assistant/agent_data.py"
+  - "phonely-backend/app/agent/live_actions/time_block.py"
+  - "phonely-backend/tests/unit/agent/live_actions/test_time_block.py"
+last-verified: "2026-07-16"
+---
+
+Use **Time Filter** to route calls according to a recurring weekly schedule. It is useful for business hours, split shifts, and other availability that repeats each week.
+
+Use [Filter](/blocks/flow-control-and-routing/filter) when the route should depend on data instead of time.
+
+## How Time Filter routes
+
+Time Filter uses the agent's timezone to compare the call's start day and time with the configured schedule:
+
+- **Available** runs when the call starts within an enabled time range.
+- **Unavailable** runs when the call starts outside every range or the day is disabled.
+
+Connect both routes so the call has a defined path during and outside the schedule.
+
+## Configure available times
+
+Under **Available Times**, enable each day when the agent is available and set its time ranges.
+
+- Select **+** to add another range to the same day, such as separate morning and afternoon hours.
+- Select the remove icon beside a range to delete it.
+- Disable a day when the agent is unavailable all day.
+
+Time ranges on the same day cannot overlap. Split overnight availability across two days. For example, represent Sunday 10:00 PM through Monday 2:00 AM with a late Sunday range and an early Monday range.
+
+The schedule repeats weekly. It does not include date-specific exceptions such as holidays.
+
+## Example: Route during support hours
+
+For support hours of 9:00 AM–12:00 PM and 1:00 PM–5:00 PM, Monday through Friday:
+
+1. Enable Monday through Friday and add both ranges to each day.
+2. Disable Saturday and Sunday.
+3. Connect **Available** to the live support path.
+4. Connect **Unavailable** to an after-hours message or follow-up path.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Time Filter always follows Unavailable">
+    Confirm that the call's start day is enabled, has at least one time range, and includes the call's start time. Then check the agent's timezone.
+  </Accordion>
+  <Accordion title="An overnight range does not match">
+    Split the range across two days. Configure the first range through the end of the starting day and the second from the beginning of the next day.
+  </Accordion>
+  <Accordion title="Time ranges overlap">
+    Remove overlapping time ranges from the same day.
+  </Accordion>
+</AccordionGroup>
