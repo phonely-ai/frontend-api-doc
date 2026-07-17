@@ -1,0 +1,94 @@
+---
+title: "Flow Settings"
+description: "Configure the shared context, Guidelines, knowledge sources, and switch message for one flow."
+sources:
+  - "features/workflows/modules/editor/components/flow-settings-modal.tsx"
+  - "features/workflows/modules/editor/components/controls/flow-settings-button.tsx"
+  - "features/workflows/modules/editor/context/workflow-access-context.tsx"
+  - "features/workflows/model/factories/create-initial-agent-workflow.ts"
+  - "phonely-backend/app/agent/assistant/workflows.py"
+  - "phonely-backend/app/outbound/call_trigger.py"
+last-verified: "2026-07-15"
+---
+
+Flow Settings control the context and resources shared across one flow. Use them to define the flow's purpose, decide whether it follows the agent's Guidelines, and choose which knowledge sources it can use.
+
+In the Flow Editor, select the flow you want to configure, then select **Flow Settings** (the gear icon) in the top bar.
+
+Changes are saved to the current draft when the dialog closes. They do not affect the live version until you publish the flow.
+
+<Frame>
+  <img
+    src="/assets/flow-settings-inbound.png"
+    alt="Inbound Flow Settings dialog with appointment context, Include Guidelines enabled, all documents and websites selected, and a switch message"
+  />
+</Frame>
+
+## Available settings
+
+| Setting | Purpose |
+| :-- | :-- |
+| **Flow&nbsp;Specific&nbsp;Information** | Context for an inbound flow or call instructions for an outbound flow |
+| **Include Guidelines** | Whether the flow uses the agent's Guidelines |
+| **Documents** | Uploaded documents the flow can reference |
+| **Websites** | Added websites the flow can reference |
+| **Switch Message** | Message played when an active call enters an inbound flow |
+
+### Flow Specific Information
+
+Use this field for context that applies throughout the current flow:
+
+- For an **inbound flow**, describe what the flow handles, its limits, and when to route the caller elsewhere.
+- For an **outbound flow**, describe the purpose of the call, who the agent is calling, and the desired outcome. Phonely uses this as the call instructions.
+
+Keep agent-wide behavior in Guidelines. Put instructions for a single step in the block that performs it.
+
+For example, an inbound billing flow could include:
+
+> This flow handles billing and subscription questions. Use the billing policy sources selected for this flow. Route refund exceptions to the billing escalation flow.
+
+Avoid copying reference material into this field. Select the relevant documents and websites in Flow Settings instead so the content remains easier to maintain.
+
+### Include Guidelines
+
+Keep **Include Guidelines** enabled to apply the agent's shared behavior, tone, and response rules to this flow. It is enabled by default.
+
+Turn it off only when the flow should operate without those shared instructions. This affects only the current flow; it does not change the agent's Guidelines or other flows. Add any replacement context to **Flow Specific Information** or the relevant blocks.
+
+### Documents and Websites
+
+Documents and Websites determine which existing Knowledge Base sources the flow can reference. Add or update the source in the Knowledge Base, then select it here.
+
+Choose the appropriate scope for each source type:
+
+- Select **All Documents** or **All Websites** to include existing sources and sources added later.
+- Select individual sources when the flow should use only a specific set. New sources are not added automatically.
+- Clear every selection when the flow should not use that source type.
+
+For a specialized flow, select only relevant sources to reduce unrelated context and make conflicting information easier to identify.
+
+If the list is empty, add a source to the agent's Knowledge Base first, then return to Flow Settings.
+
+### Switch Message
+
+**Switch Message** is a short transition spoken when an active call enters an inbound flow through **Transfer Flow** or a matching **Global Flow** trigger condition. It is not used when the First Flow begins the call; the **Greeting** is used instead.
+
+Keep the message brief and tell the caller what is happening. For example:
+
+> One moment while I pull up our scheduling information.
+
+Switch Message is not available for outbound flows because an outbound flow starts the call instead of receiving a transfer from an active call.
+
+After publishing, use Web Call and enter the flow through **Transfer Flow** or its **Global Flow** trigger condition to hear the message.
+
+## Choose the right level
+
+Place settings and instructions at the narrowest level where they should apply:
+
+| Level | Use it for |
+| :-- | :-- |
+| **Agent** | Behavior shared across all flows, such as tone and response style |
+| **Flow** | Context and knowledge sources shared throughout one flow |
+| **Block** | The instructions or action for one step in the call |
+
+This avoids duplicated instructions and keeps future changes in one place.

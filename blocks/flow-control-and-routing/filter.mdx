@@ -1,0 +1,102 @@
+---
+title: "Filter"
+description: "Route a flow by evaluating ordered cases against available data."
+sources:
+  - "features/workflows/model/nodes/filter-v2.ts"
+  - "features/workflows/model/schema/conditions.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/model/connection.ts"
+  - "features/workflows/modules/editor/custom-nodes/filter/v2/**"
+  - "features/workflows/modules/editor/components/condition/condition.tsx"
+  - "features/calls/model/runtime-trace/workflow-blocks.ts"
+  - "features/calls/modules/call-details/tabs/blocks/call-blocks-tab-block-timeline-item.tsx"
+  - "phonely-backend/app/agent/live_actions/filter/advanced_filter.py"
+  - "phonely-backend/app/agent/live_actions/filter/filter.py"
+last-verified: "2026-07-16"
+---
+
+Use **Filter** to route the flow using data available when the block runs, such as caller information, collected answers, or results from earlier API Request, Code, and integration blocks.
+
+Filter can run pre-call, live call, or post-call. Use [Talk exit conditions](/blocks/flow-blocks/talk#exit-conditions) for conversational outcomes and [Time Filter](/blocks/flow-control-and-routing/time-filter) for recurring weekly availability.
+
+## How Filter routes
+
+A Filter contains one or more ordered **Cases** and an **Else** fallback. It evaluates the cases from top to bottom and follows the first case whose conditions match. If no case matches, it follows Else.
+
+Case order matters. Put narrow or high-priority cases before broader cases that could match the same data.
+
+## Configure Filter
+
+Filter starts with **Case 1**. Select **Add Case** to create another route. Every case requires at least one condition.
+
+### Define a condition
+
+Each condition uses **Field** and **Operator**. Operators that compare values also show **Type** and a comparison value:
+
+| Field | Purpose |
+| :-- | :-- |
+| **Field** | Value or AI condition to evaluate |
+| **Operator** | Rule used to evaluate the field |
+| **Type and comparison value** | How to interpret the comparison value and what to compare with the field |
+
+Select the field from **Available Variables** when the condition depends on dynamic data. Typing a variable name as plain text does not insert its value. Only variables available before Filter on the current route can be selected. See [Variables](/flow-editor/variables) for how the editor determines availability.
+
+Choose a type that matches the data:
+
+| Type | Use it for |
+| :-- | :-- |
+| **String** | Text, categories, identifiers, and statuses |
+| **Number** | Amounts, counts, scores, and numeric comparisons |
+| **Boolean** | `true` or `false` values |
+
+The available operators depend on the selected type:
+
+- **exists** and **doesn't exist:** Check whether **Field** has a value or is empty.
+- **is equal to** and **is not equal to:** Compare **Field** with a specific value.
+- **Number comparisons:** Compare a numeric **Field** with a specific value using greater than, greater than or equal to, less than, or less than or equal to.
+- **is an array containing:** Check whether an array contains a specific item.
+- **matches condition (AI)** and **does not match condition (AI):** Evaluate a natural-language condition against the conversation context.
+
+**exists**, **doesn't exist**, and the AI operators do not use a comparison value. For an AI operator, enter the condition to evaluate in **Field**. Use AI matching only after the relevant conversation has occurred, and prefer another operator whenever structured data can express the rule.
+
+### Combine conditions
+
+Select **Add Condition** to add another rule to a case. When a case has multiple conditions, choose how they work together:
+
+- **AND** requires every condition in the case to match.
+- **OR** requires at least one condition in the case to match.
+
+AND or OR applies only within that case. Filter still evaluates the cases in order and stops at the first match.
+
+### Connect the routes
+
+Each case and Else appears as a separate route on the canvas. Connect each **Case** route to the path that should run when it matches, and connect **Else** to a safe fallback for data that is missing, unexpected, or not covered by a case.
+
+Deleting a case also removes its route connection. Review the canvas after changing the case list.
+
+## Example: Route by risk and customer tier
+
+Suppose a pre-call API request returns `risk_score` and `customer_tier`. Configure the cases in this order:
+
+| Route | Match | Destination |
+| :-- | :-- | :-- |
+| **Case 1** | `risk_score` is greater than or equal to `80` | Verification path |
+| **Case 2** | `customer_tier` is equal to `enterprise` | Priority support |
+| **Else** | No case matched | Standard support |
+
+If an enterprise caller also has a risk score of 90, Case 1 wins because it appears first.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Filter follows the wrong case">
+    Open **Call Details**, select **Blocks**, and expand Filter to review the selected route and each condition's result. Check whether an earlier case also matched, then confirm the case's AND or OR setting, value type, operator, and comparison value. Move more specific cases above broader ones.
+  </Accordion>
+  <Accordion title="Filter always follows Else">
+    Confirm that the expected variables are available before Filter on the current route and were inserted from **Available Variables**. Then check for missing values or a type mismatch.
+  </Accordion>
+  <Accordion title="AI matching is inconsistent">
+    Run Filter only after the relevant conversation exists, and write one clear condition that can be judged from that context. Use a deterministic operator instead when structured data can express the rule.
+  </Accordion>
+</AccordionGroup>

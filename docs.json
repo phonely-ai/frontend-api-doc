@@ -77,85 +77,82 @@
             "group": "BUILD YOUR AGENT",
             "icon": "hammer",
             "pages": [
+              "agent-design/overview",
+              "agent-design/guidelines",
+              "agent-design/voice/overview",
+              "agent-knowledge-base/overview",
               {
-                "group": "Agent Workspace",
+                "group": "Flow Editor",
                 "pages": [
-                  "key-concepts/create-duplicate-agents",
                   "key-concepts/flows",
-                  "key-concepts/variables",
-                  "key-concepts/routing",
-                  "agent-design/set-agent-guidelines",
-                  "agent-design/call-settings",
-                  "agent-design/flow-settings",
-                  "agent-design/compliance-settings",
-                  "agent-design/add-manage-phone-numbers",
-                  "agent-design/workflow-collaboration"
-                ]
-              },
-              {
-                "group": "Voice",
-                "pages": [
-                  "agent-design/voice/voice-selection",
-                  "agent-design/voice/add-a-voice",
-                  "agent-design/voice/clone-voice",
-                  "agent-design/voice/voice-and-personality",
-                  "agent-design/voice/advanced-settings"
-                ]
-              },
-              {
-                "group": "Knowledge Base",
-                "pages": [
-                  "agent-knowledge-base/upload-files",
-                  "agent-knowledge-base/upload-documents",
-                  "agent-knowledge-base/add-websites",
-                  "agent-knowledge-base/import-from-external",
-                  "agent-knowledge-base/managing-data-sources"
-                ]
-              },
-              {
-                "group": "Flow Blocks",
-                "pages": [
                   "blocks/flow-blocks/start-flow",
-                  "blocks/flow-blocks/talk",
-                  "blocks/flow-blocks/collect",
-                  "blocks/flow-blocks/ask-exactly",
-                  "blocks/flow-blocks/filter",
-                  "blocks/flow-blocks/time-filter",
-                  "blocks/flow-blocks/end-call"
+                  "flow-editor/connections-and-routing",
+                  "flow-editor/variables",
+                  "flow-editor/flow-settings",
+                  "key-concepts/flow-canvas-controls",
+                  "workflow-checklist",
+                  "flow-editor/test-and-publish",
+                  "flow-editor/versions",
+                  "flow-editor/collaboration"
                 ]
               },
               {
-                "group": "Pre-Call Actions",
+                "group": "Block Reference",
                 "pages": [
-                  "precall/precall-filter",
-                  "precall/precall-code",
-                  "precall/precall-webhook",
-                  "precall/precall-api-request",
-                  "precall/precall-end-call"
+                  "blocks/overview",
+                  "blocks/common-settings",
+                  {
+                    "group": "Conversation",
+                    "pages": [
+                      "blocks/flow-blocks/talk",
+                      "blocks/conversation-blocks/collect"
+                    ]
+                  },
+                  {
+                    "group": "Flow Control and Routing",
+                    "pages": [
+                      "blocks/flow-control-and-routing/filter",
+                      "blocks/flow-control-and-routing/time-filter",
+                      "blocks/flow-control-and-routing/transfer-flow",
+                      "blocks/flow-control-and-routing/end-call",
+                      "blocks/flow-control-and-routing/delay"
+                    ]
+                  },
+                  {
+                    "group": "Calls and Messaging",
+                    "pages": [
+                      "blocks/communication-blocks/transfer-call",
+                      "blocks/communication-blocks/send-sms",
+                      "blocks/communication-blocks/send-email",
+                      "blocks/communication-blocks/email-sms-notification",
+                      "blocks/communication-blocks/redial",
+                      "blocks/communication-blocks/campaign"
+                    ]
+                  },
+                  {
+                    "group": "Data and Automation",
+                    "pages": [
+                      "blocks/api-request",
+                      "blocks/data-and-automation-blocks/code",
+                      "blocks/data-and-automation-blocks/webhook",
+                      "blocks/data-and-automation-blocks/send-call-data",
+                      "blocks/data-and-automation-blocks/vision"
+                    ]
+                  }
                 ]
               },
               {
-                "group": "Live Call Actions",
+                "group": "Integrations",
                 "pages": [
-                  "blocks/live-call-actions/api-request",
-                  "blocks/live-call-actions/transfer-flow-new",
-                  "blocks/live-call-actions/new-transfer-call",
-                  "blocks/live-call-actions/payments",
-                  "blocks/live-call-actions/send-sms",
-                  "blocks/live-call-actions/send-email",
-                  "blocks/live-call-actions/codeflow"
-                ]
-              },
-              {
-                "group": "Post-Call Actions",
-                "pages": [
-                  "blocks/post-call-actions/post-call-overview",
-                  "blocks/post-call-actions/post-call-send-email",
-                  "blocks/post-call-actions/connect-to-make",
-                  "blocks/post-call-actions/redial",
-                  "blocks/post-call-actions/campaign",
-                  "blocks/post-call-actions/connect-to-google-drive",
-                  "blocks/post-call-actions/google-sheet-add-row"
+                  "integrations/overview",
+                  "integrations/google-calendar",
+                  "integrations/gmail",
+                  "integrations/google-sheets",
+                  "integrations/google-drive",
+                  "integrations/microsoft-outlook",
+                  "integrations/slack",
+                  "integrations/make",
+                  "integrations/zapier"
                 ]
               }
             ]
@@ -178,8 +175,7 @@
             "pages": [
               "call-history-ai-analytics/call-history-ai-analytics",
               "agent-review",
-              "call-events",
-              "testing/test-from-a-block"
+              "call-events"
             ]
           },
           {
@@ -287,7 +283,7 @@
           "ai/route-map",
           "ai/build-agent",
           "ai/manage-knowledge-base",
-          "ai/edit-workflows",
+        "ai/edit-flows",
           "ai/run-ab-tests-and-evaluations",
           "ai/review-calls-and-analytics",
           "ai/configure-outbound-campaigns",
@@ -368,28 +364,36 @@
       "destination": "/outboundcalling/createaoutboundcallingcampaign"
     },
     {
-      "source": "/blocks/api-request",
-      "destination": "/blocks/live-call-actions/api-request"
+      "source": "/blocks/live-call-actions/api-request",
+      "destination": "/blocks/api-request"
     },
     {
-      "source": "/blocks/ask-exactly",
-      "destination": "/blocks/flow-blocks/ask-exactly"
+      "source": "/precall/precall-api-request",
+      "destination": "/blocks/api-request"
     },
     {
       "source": "/blocks/collect",
-      "destination": "/blocks/flow-blocks/collect"
+      "destination": "/blocks/conversation-blocks/collect"
     },
     {
       "source": "/blocks/filter",
-      "destination": "/blocks/flow-blocks/filter"
+      "destination": "/blocks/flow-control-and-routing/filter"
     },
     {
       "source": "/blocks/time-filter",
-      "destination": "/blocks/flow-blocks/time-filter"
+      "destination": "/blocks/flow-control-and-routing/time-filter"
     },
     {
       "source": "/blocks/end-call",
-      "destination": "/blocks/flow-blocks/end-call"
+      "destination": "/blocks/flow-control-and-routing/end-call"
+    },
+    {
+      "source": "/precall/precall-filter",
+      "destination": "/blocks/flow-control-and-routing/filter"
+    },
+    {
+      "source": "/precall/precall-end-call",
+      "destination": "/blocks/flow-control-and-routing/end-call"
     },
     {
       "source": "/blocks/start-flow",
@@ -401,43 +405,111 @@
     },
     {
       "source": "/blocks/send-email",
-      "destination": "/blocks/live-call-actions/send-email"
+      "destination": "/blocks/communication-blocks/send-email"
+    },
+    {
+      "source": "/blocks/live-call-actions/send-email",
+      "destination": "/blocks/communication-blocks/send-email"
     },
     {
       "source": "/blocks/send-sms",
-      "destination": "/blocks/live-call-actions/send-sms"
+      "destination": "/blocks/communication-blocks/send-sms"
+    },
+    {
+      "source": "/blocks/live-call-actions/send-sms",
+      "destination": "/blocks/communication-blocks/send-sms"
     },
     {
       "source": "/blocks/codeflow",
-      "destination": "/blocks/live-call-actions/codeflow"
+      "destination": "/blocks/data-and-automation-blocks/code"
     },
     {
       "source": "/blocks/codeworkflows",
-      "destination": "/blocks/live-call-actions/codeflow"
+      "destination": "/blocks/data-and-automation-blocks/code"
     },
     {
       "source": "/blocks/live-call-actions/codeworkflows",
-      "destination": "/blocks/live-call-actions/codeflow"
+      "destination": "/blocks/data-and-automation-blocks/code"
+    },
+    {
+      "source": "/blocks/live-call-actions/codeflow",
+      "destination": "/blocks/data-and-automation-blocks/code"
+    },
+    {
+      "source": "/precall/precall-code",
+      "destination": "/blocks/data-and-automation-blocks/code"
     },
     {
       "source": "/blocks/post-call-overview",
-      "destination": "/blocks/post-call-actions/post-call-overview"
+      "destination": "/blocks/overview"
     },
     {
       "source": "/blocks/post-call-send-email",
-      "destination": "/blocks/post-call-actions/post-call-send-email"
+      "destination": "/blocks/communication-blocks/send-email"
+    },
+    {
+      "source": "/blocks/post-call-actions/post-call-send-email",
+      "destination": "/blocks/communication-blocks/send-email"
+    },
+    {
+      "source": "/blocks/sms-and-email-notifications",
+      "destination": "/blocks/communication-blocks/email-sms-notification"
+    },
+    {
+      "source": "/blocks/post-call-actions/sms-and-email-notifications",
+      "destination": "/blocks/communication-blocks/email-sms-notification"
+    },
+    {
+      "source": "/blocks/post-call-actions/redial",
+      "destination": "/blocks/communication-blocks/redial"
+    },
+    {
+      "source": "/blocks/redial",
+      "destination": "/blocks/communication-blocks/redial"
+    },
+    {
+      "source": "/blocks/post-call-actions/campaign",
+      "destination": "/blocks/communication-blocks/campaign"
+    },
+    {
+      "source": "/blocks/campaign",
+      "destination": "/blocks/communication-blocks/campaign"
     },
     {
       "source": "/blocks/google-sheet-live",
-      "destination": "/blocks/live-call-integrations/google-sheet-live"
+      "destination": "/integrations/google-sheets"
     },
     {
       "source": "/blocks/zapier-live",
-      "destination": "/blocks/live-call-integrations/zapier-live"
+      "destination": "/integrations/zapier"
     },
     {
       "source": "/blocks/live-call-integrations/google-sheet-add-row",
-      "destination": "/blocks/post-call-actions/google-sheet-add-row"
+      "destination": "/integrations/google-sheets"
+    },
+    {
+      "source": "/blocks/live-call-integrations/google-calendar",
+      "destination": "/integrations/google-calendar"
+    },
+    {
+      "source": "/blocks/live-call-integrations/google-gmail",
+      "destination": "/integrations/gmail"
+    },
+    {
+      "source": "/blocks/live-call-integrations/google-sheet-live",
+      "destination": "/integrations/google-sheets"
+    },
+    {
+      "source": "/blocks/live-call-integrations/microsoft-outlook",
+      "destination": "/integrations/microsoft-outlook"
+    },
+    {
+      "source": "/blocks/live-call-integrations/slack",
+      "destination": "/integrations/slack"
+    },
+    {
+      "source": "/blocks/live-call-integrations/zapier-live",
+      "destination": "/integrations/zapier"
     },
     {
       "source": "/agent-design/voice/interruption-settings",
@@ -449,31 +521,35 @@
     },
     {
       "source": "/blocks/code",
-      "destination": "/blocks/live-call-actions/codeflow"
+      "destination": "/blocks/data-and-automation-blocks/code"
     },
     {
       "source": "/blocks/transfer-call",
-      "destination": "/blocks/live-call-actions/new-transfer-call"
+      "destination": "/blocks/communication-blocks/transfer-call"
     },
     {
       "source": "/blocks/live-call-actions/old-transfer-call",
-      "destination": "/blocks/live-call-actions/new-transfer-call"
+      "destination": "/blocks/communication-blocks/transfer-call"
     },
     {
       "source": "/blocks/warm-transfer",
-      "destination": "/blocks/live-call-actions/new-transfer-call"
+      "destination": "/blocks/communication-blocks/transfer-call"
     },
     {
       "source": "/blocks/live-call-actions/warm-transfer",
-      "destination": "/blocks/live-call-actions/new-transfer-call"
+      "destination": "/blocks/communication-blocks/transfer-call"
+    },
+    {
+      "source": "/blocks/live-call-actions/new-transfer-call",
+      "destination": "/blocks/communication-blocks/transfer-call"
     },
     {
       "source": "/blocks/transfer-flows",
-      "destination": "/blocks/live-call-actions/transfer-flow-new"
+      "destination": "/blocks/flow-control-and-routing/transfer-flow"
     },
     {
       "source": "/blocks/live-call-actions/transfer-flows",
-      "destination": "/blocks/live-call-actions/transfer-flow-new"
+      "destination": "/blocks/flow-control-and-routing/transfer-flow"
     }
   ]
 }

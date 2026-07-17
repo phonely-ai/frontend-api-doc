@@ -1,0 +1,71 @@
+---
+title: "Redial"
+description: "Schedule another campaign call after a delay."
+sources:
+  - "features/workflows/model/nodes/redial.ts"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/redial/**"
+  - "phonely-backend/app/agent/live_actions/redialler.py"
+  - "phonely-backend/tests/unit/agent/live_actions/test_redialler.py"
+last-verified: "2026-07-16"
+---
+
+Use **Redial** after an outbound campaign call to schedule another attempt in the same campaign or a different one. Redial requires campaign call data and does not schedule calls that originated outside a campaign.
+
+## Configure the attempts
+
+Add one or more attempts in the order Phonely should use them. For the same campaign and phone number, Phonely selects the next attempt based on how many calls the campaign has already made. When no configured attempt remains, the block stops scheduling calls.
+
+For each attempt, choose an action and delay:
+
+| Action | What it schedules |
+| :-- | :-- |
+| **Retry After** | Another call in the current campaign with its original values |
+| **Move to Campaign** | A call in a selected campaign with the configured values |
+
+**Retry After** keeps the sequence in the current campaign. After **Move to Campaign**, the destination campaign's flow controls any later follow-up.
+
+Set **Delay Duration** in minutes, hours, or days. Enter `0` to schedule the attempt immediately. You can also select an available variable that resolves to a non-negative whole number.
+
+## Move to another campaign
+
+Select the destination campaign, then enter a fixed value or select an available variable for each displayed **Campaign Field**.
+
+Make sure the destination flow's phone-number field receives a valid number. Configure any other values that its outbound call needs.
+
+## Override the voicemail message
+
+By default, a redial attempt uses the voicemail message configured in the outbound flow's **Make Call** block.
+
+Enable **Override Voicemail Message** on an attempt when it needs a different message. The override can include variables available at the Redial block.
+
+## Verify Redial
+
+Redial does not have a block-level test. Use a phone number you control, then complete a campaign call that reaches the live-call block connected to Redial.
+
+Configure a short delay and confirm:
+
+1. A new call appears in the campaign with the **Redial Scheduled** status.
+2. The campaign places the call after the configured delay.
+3. **Retry After** preserves the original values, or **Move to Campaign** sends the intended fields to the selected campaign.
+4. If configured, the voicemail override plays when the call reaches voicemail.
+
+Testing Redial can schedule and place real outbound calls.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="No Redial Scheduled call appears">
+    Confirm that the completed call originated from a campaign and reached the live-call block connected to Redial. Check that the block contains at least one unused attempt and that the selected campaign for **Move to Campaign** still exists.
+  </Accordion>
+  <Accordion title="The scheduled call is not placed">
+    Confirm that the campaign for the attempt is **Active** or **Paused** and that its outbound flow is turned on. For **Move to Campaign**, check that the configured fields provide the phone number and other values required by the destination flow.
+  </Accordion>
+  <Accordion title="The wrong attempt or campaign values are used">
+    Phonely selects an attempt according to how many calls that campaign has already made to the phone number. Review the campaign's call history and the order of the attempts. For **Move to Campaign**, also check the fixed or variable values entered for the destination campaign.
+  </Accordion>
+  <Accordion title="The voicemail message is not overridden">
+    Confirm that **Override Voicemail Message** is enabled for the attempt and that its message and variables resolve correctly. The override plays only when the call reaches voicemail. When the setting is off, the attempt uses the voicemail message from **Make Call**.
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,80 @@
+---
+title: "Transfer Flow"
+description: "Continue an active call in another inbound flow for the same agent."
+sources:
+  - "features/workflows/model/nodes/transfer-workflow.ts"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/hooks/use-agent-inbound-workflows.ts"
+  - "features/workflows/modules/editor/custom-nodes/transfer-workflow/**"
+  - "phonely-backend/app/agent/live_actions/transfer_flow/flow_router.py"
+  - "phonely-backend/app/agent/live_actions/transfer_flow/transfer_workflow.py"
+  - "phonely-backend/app/custom_llm/state_manager.py"
+last-verified: "2026-07-16"
+---
+
+Use **Transfer Flow** to continue an active call in another inbound flow for the same agent. The call stays connected, and the target flow begins at its **Start Flow** trigger.
+
+Use [Transfer Call](/blocks/communication-blocks/transfer-call) instead when the call should leave Phonely for a phone destination. Use a [Global Flow](/blocks/flow-blocks/start-flow#configure-a-global-flow) when an intent should be reachable throughout the conversation rather than from a specific Transfer Flow block.
+
+## How Transfer Flow routes
+
+Transfer Flow requires at least one destination:
+
+- With **one destination**, the call enters that flow directly.
+- With **multiple destinations**, Phonely uses each target flow's **Transition Condition** to choose a destination and may ask clarifying questions.
+
+The source flow does not continue after Transfer Flow. The call continues from the selected target flow instead.
+
+A Transition Condition belongs to the target flow. Editing it updates every place that uses the same flow for intent-based routing.
+
+## Configure destinations
+
+Under **Available Sub-Flows**, select the inbound flow the call should enter.
+
+Select **Add Flow Destination** to add another target. When the block has multiple destinations, enter a distinct **Transition Condition** for each one. Describe the caller need that should route to the flow, not what the flow does after the transfer.
+
+For example:
+
+| Target flow | Transition condition |
+| :-- | :-- |
+| **Sales** | The caller wants pricing, a quote, or to purchase a service |
+| **Support** | The caller needs help with an existing product or service |
+| **Billing** | The caller has a question about an invoice, charge, or payment |
+
+Avoid conditions that overlap without explaining the difference. Select **View flow** to open the target flow on the canvas.
+
+## Prepare the target flow
+
+The target flow controls the conversation after the transfer. Review its **Start Flow** connection, flow settings, and downstream routes before using it as a destination. Turn on the target flow so it is available during normal calls.
+
+Set a [**Switch Message**](/flow-editor/flow-settings#switch-message) when the agent should acknowledge the transition as the call enters the target flow.
+
+<Warning>
+  Transfer Flow keeps the call active, but flow-specific variables do not carry from the source flow to the target flow. Design the target flow to collect or retrieve the data it needs.
+</Warning>
+
+For caller feedback during the transfer and outcome reporting, see [Common Block Settings](/blocks/common-settings).
+
+## Test the routing
+
+Publish changes to the source and target flows, then test every destination from the source flow. For an inbound source, **Web Chat** is the quickest way to try clear and ambiguous requests. For an outbound source, use **Place Phone Call**.
+
+Confirm that Phonely enters the intended flow or asks an appropriate clarifying question. Use **Web Call** or **Place Phone Call** when you need to hear the transition and **Switch Message**. After the test, open **Call Details**, select **Blocks**, and expand Transfer Flow to confirm the target flow.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The call enters the wrong flow">
+    Compare the destinations' **Transition Conditions**. Make each condition specific and mutually distinguishable, then retest clear and ambiguous requests.
+  </Accordion>
+  <Accordion title="The call does not enter the target flow">
+    Confirm that the target flow is turned on and still selected in Transfer Flow. Publish changes to both flows, then test again from the source flow.
+  </Accordion>
+  <Accordion title="A flow is missing from the destination list">
+    Transfer Flow lists inbound flows for the same agent. Confirm that the flow belongs to the agent and was created as an inbound flow.
+  </Accordion>
+  <Accordion title="Data is unavailable after the transfer">
+    Variables created in the source flow are not available in the target flow. Collect the value again or retrieve it within the target flow.
+  </Accordion>
+</AccordionGroup>

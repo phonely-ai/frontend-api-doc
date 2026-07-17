@@ -1,0 +1,100 @@
+---
+title: "Guidelines"
+description: "Define the shared goals, response style, and boundaries that guide your agent across flows."
+sources:
+  - "features/agents/modules/guidelines/**"
+  - "features/agents/model/guidelines.ts"
+  - "features/agents/model/runtime-guideline-sections.ts"
+  - "features/workflows/modules/editor/components/flow-settings-modal.tsx"
+  - "features/workflows/model/factories/create-initial-agent-workflow.ts"
+  - "app/agent/assistant/agent_data.py"
+  - "app/custom_llm/prompts/**"
+last-verified: "2026-07-17"
+---
+
+Guidelines define the goals, communication style, and boundaries that should remain consistent across an agent's conversations. They are available to every flow that has **Include Guidelines** turned on.
+
+Use Guidelines for shared behavior. Put instructions that apply only to one flow or one part of a call in that flow or block instead.
+
+## Choose where information belongs
+
+| Put it in | Use it for |
+| :-- | :-- |
+| **Guidelines** | Agent-wide goals, tone, boundaries, objections, and business rules |
+| [**Knowledge Base**](/agent-knowledge-base/overview) | Detailed reference material the agent may need when answering questions |
+| [**Flow Settings**](/flow-editor/flow-settings) | Context and instructions that apply to one flow |
+| **Block configuration** | The objective, wording, or behavior for one step in a flow |
+
+Avoid copying the same instruction into several places. Conflicting instructions make the agent's behavior less predictable and make future updates harder to maintain.
+
+## Choose guideline sections
+
+Add only the sections your agent needs:
+
+| Section | Use it for |
+| :-- | :-- |
+| **Objective** | The primary result the agent should work toward |
+| **Response Style** | Tone, personality, concision, and speaking style |
+| **Never Do** | Strict actions, claims, or promises the agent must avoid |
+| **General Info** | Short, stable business facts the agent may reference at any time |
+| **Rebuttals** | How to respond to common objections or pushback |
+| **Out of Scope** | What to do when a request cannot be answered or handled |
+| **Custom** | Additional agent-wide guidance that does not fit another section |
+
+Prefer the most specific section. For example, place a prohibited promise in **Never Do**, not in a broad Custom section. Keep detailed policies, service information, and frequently changing facts in the Knowledge Base rather than repeating them in **General Info**.
+
+### Configure Response Style
+
+The **Response Style** section combines written guidance with two agent settings:
+
+- **Personality** sets the general conversational style, such as Direct, Formal, Persuasive, or Friendly.
+- **Humanize speech** allows the agent to use vocal fillers such as “hmm” and “umm.”
+
+Use the written section for details the preset does not express, such as how concise answers should be or how the agent should respond to an upset caller.
+
+## Write effective guidelines
+
+- State what the agent should do in direct, specific language.
+- Define a clear fallback when the agent cannot complete a request.
+- Use **Never Do** for genuine hard boundaries, not general preferences.
+- Keep shared guidance independent of a particular flow path or block.
+- Remove instructions that duplicate or contradict another section.
+
+> **Example:** If the caller asks for a service you cannot confirm, explain that a team member can follow up and offer to collect their contact details. Do not invent availability or pricing.
+
+## Add and edit sections
+
+Open **Agent Design**, then select **Guidelines**.
+
+1. Select **Add Section** and choose a section type.
+2. Select the section in the sidebar and enter its guidance.
+3. Add a **Custom** section only when no predefined section fits; give it a specific name.
+
+Changes save automatically after you stop editing. Wait for the status to show **Saved** before leaving the editor. You can delete any configured section; only Custom sections can be renamed.
+
+To get help with a section, select it and choose **Ask AI**. Ask AI can inspect or improve the selected section, so review the result alongside the other Guidelines.
+
+## Use Guidelines in a flow
+
+New flows include the agent's Guidelines by default. To review the setting for a flow, open [Flow Settings](/flow-editor/flow-settings) and find **Include Guidelines**.
+
+Turn the setting off only when that flow should operate without the shared guidance. If a flow needs additional instructions, keep Guidelines enabled and add the flow-specific context in Flow Settings or the relevant blocks.
+
+## Test the behavior
+
+Before testing, confirm that **Include Guidelines** is turned on for the flow. Then:
+
+1. Use **Web Chat** to check the agent's goal, boundaries, objection handling, and out-of-scope response across the main conversation and important alternate paths.
+2. Use **Web Call** to hear its tone, pacing, and Response Style.
+3. Resolve any conflict between Guidelines, Flow Settings, and block instructions before relying on the updated behavior.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The agent does not follow a guideline">
+    Confirm that **Include Guidelines** is turned on for the flow. Then check for conflicting or more specific instructions in Flow Settings and the active block. Rewrite broad guidance as a direct rule in the most appropriate section.
+  </Accordion>
+  <Accordion title="The agent's responses are inconsistent">
+    Review all configured sections for duplicated or conflicting instructions. Keep one source for each rule, make the desired behavior specific, and test more than one conversation path.
+  </Accordion>
+</AccordionGroup>

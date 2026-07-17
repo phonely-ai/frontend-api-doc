@@ -1,0 +1,41 @@
+---
+title: "AI Edit Flows"
+description: "Deterministic procedure for editing, validating, publishing, and testing a Phonely flow."
+sources:
+  - "features/workflows/ai/**"
+  - "features/workflows/modules/editor/**"
+  - "features/workflows/model/**"
+---
+
+Use this runbook for exact flow-editing procedures. Use the visible [Call Flows](/key-concepts/flows), [Variables](/flow-editor/variables), and [Test and Publish](/flow-editor/test-and-publish) pages when the user needs an explanation.
+
+## Open the flow editor
+
+1. Navigate to `/agent/{agentId}?tab=workflows`.
+2. Confirm the active flow is the one you intend to edit.
+
+## Edit the flow
+
+1. Identify the trigger, execution stage, and route that need to change.
+2. Add or update the required blocks in execution order.
+3. Connect every required source handle to a compatible target handle, including required failure or alternate routes.
+4. Configure the block's required fields. In a field that supports variables, select only values shown in **Available Variables**.
+5. If a supported block derives output variables from a test result, run a successful block-level test with safe sample data before using those outputs downstream.
+6. Wait for auto-save to finish.
+7. Open the **Flow Checklist** and resolve every block error.
+8. Review the affected routes and variables, then publish the draft.
+9. Verify the published flow from its normal entry point with Web Chat, Web Call, or **Place Phone Call**, as appropriate.
+
+## Editing rules
+
+- Use **block** for a reusable capability or an item placed on the canvas. Use **node** only when quoting technical UI output that uses that term.
+- Match the block to its supported **Pre-call**, **Live call**, or **Post-call** stage.
+- Do not leave a required source handle disconnected.
+- Confirm that every referenced variable is available on each route that reaches the destination block.
+- **Transfer Flow** keeps the call active, but flow-specific variables from the source flow are unavailable in the target flow.
+- **Test from here** checks part of the current draft. It does not replace publishing and testing the complete flow.
+- Web Chat, Web Call, Place Phone Call, and inbound phone calls use the latest published version. If the flow has never been published, they fall back to its current draft.
+
+<Warning>
+  Tests can send messages, place requests, or update external systems. Use test recipients, safe endpoints, and non-production records when a tested block or route has side effects.
+</Warning>

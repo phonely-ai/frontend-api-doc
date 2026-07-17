@@ -1,0 +1,103 @@
+---
+title: "Webhook"
+description: "Receive external data before an inbound call and use it in the flow."
+sources:
+  - "features/workflows/model/nodes/webhook.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/webhook/**"
+  - "app/api/precall-cache/route.ts"
+  - "phonely-backend/app/agent/live_actions/http_request/webhook_cache.py"
+  - "phonely-db-svc/app/api/api/agent.py"
+  - "phonely-db-svc/app/schemas/api/agent.py"
+  - "phonely-db-svc/app/services/agent_service.py"
+last-verified: "2026-07-16"
+---
+
+Use **Webhook** to preload external data for an inbound call. For example, a CRM or routing service can send the caller's account status, preferred language, or support tier so the flow can personalize the greeting or choose a route without collecting the same information.
+
+Webhook runs only in pre-call on inbound flows. Use [API Request](/blocks/api-request) when the flow should request data from an external service as it runs.
+
+## How Webhook works
+
+Your external system sends an authenticated `POST` request to the generated webhook URL. Phonely stores the payload for the specified agent and caller phone number.
+
+When an incoming call matches that agent and phone number, the Webhook block loads the payload before the flow trigger runs. Fields discovered during a successful block test become variables for the trigger and later blocks.
+
+Send the request before the call reaches Phonely whenever possible. If the request and call may arrive at nearly the same time, configure a short fallback wait.
+
+## Send data to the webhook
+
+Open the block's **Configure** step to copy its webhook URL, API key, or sample cURL command. Send a `POST` request with a JSON body and the API key in the `X-Authorization` header.
+
+The request body requires:
+
+| Field | Purpose |
+| :-- | :-- |
+| `agentId` | Identifies the agent that should receive the payload |
+| `phoneNumber` | Matches the payload to the incoming call |
+
+Add each value you want to use in the flow as another top-level field:
+
+```json
+{
+  "agentId": "your_agent_id",
+  "phoneNumber": "+12125551234",
+  "customer_name": "Jordan Lee",
+  "support_tier": "priority",
+  "account_verified": true
+}
+```
+
+Use the caller's actual phone number, including its country code. Additional field values must be text, numbers, booleans, or `null`; nested objects and arrays are not accepted.
+
+<Warning>
+  Keep the API key private. Do not include it in documentation examples, screenshots, shared logs, or Ask AI prompts.
+</Warning>
+
+## Test and create variables
+
+The block test discovers the payload fields and creates variables for later blocks to use.
+
+1. Open the **Test** step and select **Test**.
+2. Within one minute, send a `POST` request to the webhook using representative field names and safe sample values.
+3. Confirm that the fields appear under **Fields from the webhook**.
+
+A successful test creates variables under the block's name. Later blocks can select them from **Available Variables**.
+
+If the payload fields change, run the test again and review any downstream fields that reference the Webhook variables.
+
+## Configure the fallback wait
+
+Under **Advanced Settings**, **Time Wait Before Fallback** controls how long the block checks for data after the call begins:
+
+- At `0` seconds, the block checks once and continues immediately if no matching payload is available.
+- From `1` to `5` seconds, the block continues checking for the payload until the configured time expires.
+
+Keep this value as short as possible because the caller waits before the flow trigger begins. If no matching payload arrives in time, the flow continues without values from that request.
+
+## Verify the live behavior
+
+Use a phone number you control:
+
+1. Send the payload with the agent's ID and the phone number you will call from.
+2. Place an inbound call to the agent from that number.
+3. Confirm that the flow follows the expected route and that later blocks receive the Webhook values.
+
+Test both a matching payload and a call with no matching payload, especially when the flow uses Webhook data for routing.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The test does not detect any fields">
+    Select **Test** before sending the request and send it within one minute. Confirm that the request uses `POST`, includes the copied API key in `X-Authorization`, and contains both `agentId` and `phoneNumber`.
+  </Accordion>
+  <Accordion title="A payload field is not available as a variable">
+    Include the field in a successful block test. Use a top-level field with a text, number, boolean, or `null` value; nested objects and arrays are not accepted. If the field set changed, test again and update any affected references.
+  </Accordion>
+  <Accordion title="The call does not receive the webhook data">
+    Confirm that `agentId` identifies the agent receiving the call and that `phoneNumber` matches the number used to place it. Send the payload before the call, or increase **Time Wait Before Fallback** slightly when the two events can occur at nearly the same time.
+  </Accordion>
+  <Accordion title="The call takes too long to begin">
+    Reduce **Time Wait Before Fallback** or send the payload earlier. Use a nonzero wait only when the external system cannot reliably send the data before the call starts.
+  </Accordion>
+</AccordionGroup>

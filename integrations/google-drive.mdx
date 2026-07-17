@@ -1,0 +1,80 @@
+---
+title: "Google Drive"
+description: "Upload a call recording to Google Drive after a call."
+sources:
+  - "features/workflows/model/nodes/google-drive.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/modules/editor/custom-nodes/google-drive/google-drive-action-form.tsx"
+  - "features/workflows/modules/editor/custom-nodes/google-drive/google-drive-action.tsx"
+  - "features/workflows/modules/editor/custom-nodes/google-drive/actions/upload-call-recording.tsx"
+  - "features/workflows/modules/editor/custom-nodes/google-drive/actions/google-drive-test.tsx"
+  - "features/workflows/modules/editor/custom-nodes/google-drive/components/google-drive-test-preview.tsx"
+  - "features/workflows/modules/editor/testing/google-drive-test-input.ts"
+  - "features/workflows/modules/editor/testing/run-block-test.ts"
+  - "app/models/flow_blocks/google_drive_block_model.py"
+  - "app/agent/live_actions/file_upload/file_upload.py"
+  - "app/agent/live_actions/file_upload/google_drive.py"
+last-verified: "2026-07-17"
+---
+
+Google Drive is a post-call integration. It uploads the recording after a call reaches the connected live-call block and ends.
+
+## Connect Google Drive
+
+Open the block's **Setup** step:
+
+1. Select **Upload Call Recording**.
+2. Select **Connect to Google Drive** and authorize the account.
+3. Continue to **Configure**.
+
+The connection belongs to the agent and can be reused across its flows. Other agents need their own connection.
+
+## Configure the upload
+
+| Setting | Purpose |
+| :-- | :-- |
+| **Folder** | The destination folder; leave it unselected to use the root folder |
+| **File Name** | The name of the uploaded recording |
+
+**File Name** is required and can use values from [Available Variables](/flow-editor/variables). Use a unique value such as `call.id`, and include the `.mp3` extension.
+
+## Route the result
+
+Google Drive provides **Success** and **Error** routes:
+
+- **Success** runs after the recording is uploaded.
+- **Error** runs when Phonely cannot complete the upload.
+
+The block retries temporary upload failures before using the Error route. Connect Error to a recovery action that records the failure or notifies your team.
+
+## Test Google Drive
+
+The block test uploads a sample call recording to the selected Google Drive folder:
+
+1. Open **Test** and enter safe sample values for any variables in the file name.
+2. Review the folder, resolved file name, and sample file in **Google Drive Preview**.
+3. Select **Test**.
+4. Confirm that the sample recording appears in the intended folder with the expected name.
+
+Then complete a controlled call that reaches the live-call block connected to Google Drive. After the call ends, confirm that its recording appears in the selected folder and that the expected result route runs.
+
+<Warning>
+  Testing Google Drive uploads a real sample recording. Use a folder and file name that are safe for testing, then remove the file when it is no longer needed.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A folder is missing from the list">
+    Confirm that the intended Google account is connected and can access the folder. Reconnect the account if its permissions changed. Select no folder to upload to the root folder instead.
+  </Accordion>
+
+  <Accordion title="The recording is not uploaded">
+    Confirm that the call reached the live-call block connected to Google Drive and then ended. Check that the selected account can add files to the destination folder, review the Error route, and reconnect the account if its access changed.
+  </Accordion>
+
+  <Accordion title="The recording has the wrong name or location">
+    Review the resolved folder and file name in **Google Drive Preview**. Confirm that each file-name variable is available to the Google Drive block. If no folder is selected, the recording is uploaded to the root folder.
+  </Accordion>
+</AccordionGroup>

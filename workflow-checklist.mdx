@@ -1,62 +1,43 @@
 ---
 searchable: true
-title: "Workflow Checklist"
+title: "Flow Checklist"
+description: "Find and resolve flow errors before publishing."
+sources:
+  - "features/workflows/modules/editor/hooks/use-checklist.ts"
+  - "features/workflows/modules/editor/components/controls/flow-checklist-popover.tsx"
+  - "features/workflows/modules/editor/components/controls/save-button-group.tsx"
+last-verified: "2026-07-15"
 ---
 
-The **Flow checklist** helps you catch issues that would prevent a workflow from publishing, then takes you straight to the exact node that needs attention. Instead of a generic “something is wrong” warning, the checklist now shows specific, node-level errors (for example, a required field missing in an API Request block), so you can fix problems quickly without hunting through the canvas.
+The **Flow Checklist** reports whether the current draft has block errors and whether the flow has a published version. Select the clipboard icon beside **Publish** to open it. A badge appears when either check needs attention.
 
-1. Open your workflow in the **Flow Builder**.
-2. In the top bar (near **Publish**), click the **checklist icon** (the one showing a badge/count when issues exist).
-3. The workflow checklist panel opens and shows:
-   - Your Published version status. 
-   - A summary like “X node(s) with errors”. 
-   - A list of the nodes that need fixes, each with a clear error message. 
+<img
+  src="/assets/flow-checklist-errors.png"
+  alt="Flow Checklist open beside Publish, showing a published version, two blocks with errors, their validation messages, and the Go to action"
+  style={{ width: "100%", maxWidth: "520px", margin: "0", borderRadius: "0.75rem" }}
+/>
 
-<Frame>
-  ![Workflowchecklist](/assets/workflowchecklist.png)
-</Frame>
+## What the checklist checks
 
-## What’s  in the checklist
+| Check | What it means |
+| :-- | :-- |
+| **Published version** | Whether the flow has been published at least once. Without one, Phonely falls back to the current draft. This is a warning, not a publishing blocker. |
+| **Block errors** | Whether trigger or action blocks have missing connections, invalid variables, or incomplete required settings. Block errors prevent publishing. |
 
-More specific node errors. Each checklist item now points to a specific node and explains _exactly_ what’s wrong.
+When every check passes, the panel shows **All issues are resolved**.
 
-<Frame>
-  ![Checklisterrors](/assets/checklisterrors.png)
-</Frame>
+## Fix block errors
 
-This is much more actionable than a generic publish error because you know which block is failing and what field is missing.
+1. Open the **Flow Checklist**.
+2. Review the messages shown under each affected block.
+3. Hover over a block entry and select **Go to**. Phonely centers the block on the canvas and opens its configuration panel.
+4. Correct each connection, variable, or setting named in the messages.
+5. Reopen the checklist and confirm that the block no longer appears.
 
-## Go to the exact node
+## What passing the checklist means
 
-When you’re working on larger workflows, the best upgrade is that you can now navigate directly to the broken node.
+The checklist evaluates the current draft and updates as you edit it. Publishing remains blocked while the draft has block errors.
 
-1. In the **Flow checklist**, find the node listed under the errors section.
-2. Click **Go to** on that item.
-3. Phonely automatically:
-   - Scrolls/pans the canvas to that node
-   - Visually highlights the node with a selection highlight, so it’s obvious which one you need to edit
+Passing the checklist confirms that required configuration is present; it does not prove that every conversation path behaves as intended. Test important routes, fallbacks, transfers, and post-call actions before relying on the flow for live calls.
 
-<Frame>
-  ![Gotonodeerrors](/assets/gotonodeerrors.png)
-</Frame>
-
-This saves time when a workflow has many blocks or when the error is in a post-call branch far from where you’re currently working.
-
-## Fixing the error
-
-Once the node is highlighted:
-
-1. Click the highlighted node to open its configuration panel.
-2. Fix the fields mentioned in the checklist message.
-   - Example: for **“Server URL cannot be empty”**, go to the API Request configuration and provide the missing URL/server value.
-
-<Frame>
-  ![Fixedworkflowchecklisterrors](/assets/fixedworkflowchecklisterrors.png)
-</Frame>
-
-3. Re-check the node card, publish warnings should clear once required fields are valid.
-4. Open the **Flow checklist** again to confirm the error count is reduced or gone.
-
-<Frame>
-  ![Fixedworkflowchecklisterrors](/assets/fixedworkflowchecklisterrors.png)
-</Frame>
+See [Test and Publish](/flow-editor/test-and-publish) for the complete edit, validate, publish, and test process.

@@ -1,0 +1,138 @@
+---
+title: "Code"
+description: "Process data with Python and use the output in later blocks."
+sources:
+  - "features/workflows/model/nodes/code.ts"
+  - "features/workflows/model/nodes/code-validation.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/code/**"
+  - "features/workflows/modules/editor/testing/code-test-input.ts"
+  - "features/workflows/modules/editor/testing/run-block-test.ts"
+  - "features/workflows/model/variables/flatten-sample-data.ts"
+  - "phonely-backend/app/services/code_block/python_block_service.py"
+  - "phonely-backend/app/services/code_block/code_block_service.py"
+  - "phonely-backend/app/agent/live_actions/code_block.py"
+  - "phonely-backend/app/config/settings.py"
+last-verified: "2026-07-16"
+---
+
+Use **Code** to transform, compare, or calculate data with Python. The block receives values from the flow and returns output that later blocks can use.
+
+Use [Filter](/blocks/flow-control-and-routing/filter) for straightforward routing conditions. Use Code when the flow needs a calculation, data transformation, or business rule that is clearer to express in Python.
+
+## Choose where it runs
+
+Place the block where its inputs are available and where its output will be used.
+
+| Stage | Use it when |
+| :-- | :-- |
+| **Pre-call** | The output is needed before the call starts |
+| **Live call** | The output affects the active conversation or its routing |
+| **Post-call** | Process data after a call that reached the connected live-call block |
+
+Inputs can use only variables available before Code runs. If the code needs information collected during the conversation, place it after the block that collects it.
+
+If the output is needed only after the call, use post-call so the caller does not wait for the processing.
+
+## Configure inputs
+
+Under **Input Variables**, create a key for each value the function needs. Set its value using fixed text, a variable available at the block, or both.
+
+| Field | Purpose |
+| :-- | :-- |
+| **Variable name** | The key used to access the value in `input_dict` |
+| **Set variables** | The value passed to that key |
+
+Use short, unique names such as `subtotal`, `customer_tier`, or `appointment_date`. Lowercase names with underscores are easiest to read in the code.
+
+When an input contains only a selected variable, it retains that variable's type, including text, number, boolean, array, or object. An empty resolved value is passed to the function as `None`. Handle missing or empty values in the code instead of assuming every input is present.
+
+## Write the Python function
+
+The editor provides the required function structure. Keep the function name and parameter unchanged, and return a dictionary:
+
+```python
+def function(input_dict: dict) -> dict:
+    output_dict = {}
+    return output_dict
+```
+
+Read each configured input by its key and return the values that later blocks need. For example:
+
+```python
+def function(input_dict: dict) -> dict:
+    subtotal = float(input_dict.get("subtotal") or 0)
+    tax_rate = float(input_dict.get("tax_rate") or 0)
+
+    total = round(subtotal * (1 + tax_rate), 2)
+
+    return {
+        "total": total
+    }
+```
+
+The keys in the returned dictionary define the block's outputs. A successful block test makes them available to later blocks. Keep output names stable once downstream blocks use them.
+
+### Use supported libraries
+
+Code runs in a restricted environment. You can import `math`, `datetime`, `json`, `random`, and `time`. Other libraries and dynamic imports with `__import__` are not supported.
+
+Use [API Request](/blocks/api-request) or an integration block to communicate with an external service. Use Code to process the data those blocks return.
+
+## Validate the code
+
+Select **Validate** after configuring the inputs and writing the function. Validation checks the Python syntax, the required `function(input_dict)` signature, and whether its imports are supported.
+
+Validation does not run the function or confirm its results. Continue to the Test step to verify the logic with sample inputs.
+
+Editing the Python code clears its previous validation. Validate again before testing or publishing the flow.
+
+## Test and create output variables
+
+Run the block test before using its output in another block.
+
+1. Enter representative sample values for each input.
+2. Select **Test** and inspect `output`, `stdout`, and `stderr`.
+3. Test any missing, empty, boundary, or unexpected values the flow may provide.
+
+A successful test creates variables from the returned dictionary under the block's name. For the example above, later blocks can select the entire dictionary as `output` or select `total` directly from **Available Variables**.
+
+Nested dictionaries and arrays create additional output paths. If the returned structure changes, test the block again and review downstream fields that use its variables.
+
+<Note>
+  `print()` output appears in `stdout` for debugging. It does not create a flow variable. Return a value from the function to use it in later blocks.
+</Note>
+
+## Configure shared settings
+
+Pre-call and live-call Code blocks support interim messages, Error Handling, and Call Outcome Tagging. See [Common Block Settings](/blocks/common-settings) for how these options affect the caller, connections, and reporting.
+
+Post-call Code blocks do not provide these settings.
+
+## Verify the flow behavior
+
+After the block test succeeds:
+
+1. Test each route that can reach the block using representative inputs.
+2. If **Error Handling** is enabled, trigger a controlled error and confirm the **Error** route runs.
+3. Confirm that downstream blocks receive the intended output values.
+4. Complete an end-to-end flow test before using the flow for live calls.
+
+During a Web Chat test, expand Code in the action trace. After a phone call, open **Call Details**, select **Blocks**, and expand Code. Review its inputs, output, stdout, stderr, and execution time.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Validation fails">
+    Read the validation message for the affected line or rule. Confirm that the code is valid Python, defines `function` with exactly one parameter named `input_dict`, and uses only permitted imports.
+  </Accordion>
+  <Accordion title="The code validates but fails when it runs">
+    Validation checks the code structure, not every input or execution path. Review `stderr` and `stdout`, reproduce the failure with representative test values, and handle the affected type, missing value, or operation in the function.
+  </Accordion>
+  <Accordion title="An input is missing or has the wrong type">
+    Confirm that the input name matches the key read from `input_dict` and that **Set variables** contains the intended fixed value or an available variable. Test with the same data type the flow will provide, and handle missing or empty values in the function.
+  </Accordion>
+  <Accordion title="An output variable is missing">
+    Return a dictionary containing that key, then run a successful test. If the output structure changed, test again and replace downstream references that no longer exist.
+  </Accordion>
+</AccordionGroup>

@@ -24,15 +24,15 @@ All routes below were verified against the Next.js App Router under `app/(main)/
 | `/agent/{agentId}?tab=voice` | Voice picker and voice configuration | `app/(main)/(routes)/agent/(routes)/[agentId]/components/store/use-agent-tab-value-store.tsx` |
 | `/agent/{agentId}?tab=guidelines` | Agent guidelines | `app/(main)/(routes)/agent/(routes)/[agentId]/components/store/use-agent-tab-value-store.tsx` |
 | `/agent/{agentId}?tab=knowledge-base` | Documents, websites, recordings, and knowledge source management | `app/(main)/(routes)/agent/(routes)/[agentId]/components/store/use-agent-tab-value-store.tsx` |
-| `/agent/{agentId}?tab=workflows` | Workflow editor and automation logic | `app/(main)/(routes)/agent/(routes)/[agentId]/components/store/use-agent-tab-value-store.tsx` |
+| `/agent/{agentId}?tab=workflows` | Flow editor and automation logic | `app/(main)/(routes)/agent/(routes)/[agentId]/components/store/use-agent-tab-value-store.tsx` |
 | `/agent/{agentId}?tab=settings` | Agent settings | `app/(main)/(routes)/agent/(routes)/[agentId]/components/store/use-agent-tab-value-store.tsx` |
 | `/performance/{agentId}` | Analytics, charts, data tables, and KPI analysis | `app/(main)/(routes)/performance/(routes)/[agentId]/page.tsx` |
 | `/call-paths/{agentId}` | Call path visualization and branch/path debugging | `app/(main)/(routes)/call-paths/(routes)/[agentId]/page.tsx` |
 | `/call-history/{agentId}` | Call list, recordings, transcripts, highlights, and call review | `app/(main)/(routes)/call-history/(routes)/[agentId]/page.tsx` |
-| `/event/{agentId}` | Event-level execution log and integration/workflow debugging | `app/(main)/(routes)/event/(routes)/[agentId]/page.tsx` |
+| `/event/{agentId}` | Event-level execution log and integration or flow debugging | `app/(main)/(routes)/event/(routes)/[agentId]/page.tsx` |
 | `/agent-review/{orgId}` | Flagged issue triage, statuses, severities, and team review notes | `app/(main)/(routes)/agent-review/(routes)/[orgId]/page.tsx` |
 | `/campaign/{agentId}` | Outbound campaign list and outbound call-flow management | `app/(main)/(routes)/campaign/(routes)/[agentId]/page.tsx` |
-| `/campaign/{agentId}/{campaignId}` | Specific outbound campaign overview, call list, and campaign workflow view | `app/(main)/(routes)/campaign/(routes)/[agentId]/(routes)/[campaignId]/page.tsx` |
+| `/campaign/{agentId}/{campaignId}` | Specific outbound campaign overview, call list, and campaign flow view | `app/(main)/(routes)/campaign/(routes)/[agentId]/(routes)/[campaignId]/page.tsx` |
 | `/testing/ab-test/{agentId}` | Current A/B testing surface for an agent | `app/(main)/(routes)/testing/ab-test/(routes)/[agentId]/page.tsx` |
 | `/settings` | Workspace settings shell | `app/(main)/(routes)/settings/page.tsx` |
 
@@ -76,7 +76,7 @@ Use these exact `tab` query values on `/agent/{agentId}`.
 | `voice` | Voice picker and voice configuration |
 | `guidelines` | Agent guidelines |
 | `knowledge-base` | Documents, websites, and recordings |
-| `workflows` | Workflow editor |
+| `workflows` | Flow editor |
 | `settings` | Agent settings |
 
 ## Settings Tabs
@@ -109,7 +109,7 @@ Use these exact `tab` query values on `/campaign/{agentId}`.
 | --- | --- |
 | `call-flows` | Outbound call-flow list and default campaign index view |
 | `campaigns` | Outbound campaign list |
-| `workflow-canvas` | Outbound workflow canvas |
+| `workflow-canvas` | Outbound flow canvas |
 | `onboard` | Outbound campaign onboarding flow |
 
 Use these exact `tab` query values on `/campaign/{agentId}/{campaignId}`.
@@ -117,7 +117,7 @@ Use these exact `tab` query values on `/campaign/{agentId}/{campaignId}`.
 | Tab value | Purpose |
 | --- | --- |
 | `overview` | Campaign overview and calls list |
-| `workflow-canvas` | Campaign workflow canvas |
+| `workflow-canvas` | Campaign flow canvas |
 
 ## Legacy Evaluation Tabs
 
@@ -141,7 +141,7 @@ Use these exact side-panel tab values and labels.
 
 - IF the task edits agent design, voice, guidelines, or settings, THEN use `/agent/{agentId}` with the matching agent tab.
 - IF the task edits knowledge sources, THEN use `/agent/{agentId}?tab=knowledge-base`.
-- IF the task edits workflow logic, THEN use `/agent/{agentId}?tab=workflows`.
+- IF the task edits flow logic, THEN use `/agent/{agentId}?tab=workflows`.
 - IF the task reviews a call transcript, recording, or highlight, THEN use `/call-history/{agentId}`.
 - IF the task analyzes call volume, KPIs, data tables, or performance reports, THEN use `/performance/{agentId}`.
 - IF the task investigates call branches or path drop-offs, THEN use `/call-paths/{agentId}`.

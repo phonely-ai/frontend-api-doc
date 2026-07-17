@@ -1,0 +1,72 @@
+---
+title: "Overview"
+description: "Find the Phonely block that matches your task and see where it can run in a flow."
+sources:
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/hooks/use-actions.ts"
+  - "features/workflows/modules/editor/components/action-market/action-palette.tsx"
+  - "features/workflows/model/execution-stage.ts"
+last-verified: "2026-07-16"
+---
+
+Blocks are reusable capabilities that handle individual steps in a flow, such as speaking, collecting information, making a decision, sending a request, or processing data. Use this page to compare blocks and see where each can run.
+
+Some blocks also share settings for caller feedback, failure routes, and reporting. See [Common Block Settings](/blocks/common-settings) to configure those options.
+
+<Info>
+  The **Available in** column shows where a block can run. **All stages** means pre-call, live call, and post-call. The block picker filters by the flow direction and stage where you open it.
+</Info>
+
+Blocks that connect to external services have one canonical guide under [Integrations](/integrations/overview). Each guide covers both connection setup and using the integration in a flow.
+
+Greeting, Start Flow, and Make Call are [flow triggers](/blocks/flow-blocks/start-flow), not reusable blocks. Phonely adds the appropriate trigger when you create a flow.
+
+## Conversation
+
+| Block | Use it to | Available in |
+| :-- | :-- | :-- |
+| [Talk](/blocks/flow-blocks/talk) | Handle a multi-turn conversation, collect information, and branch by outcome | Live call |
+| [Collect](/blocks/conversation-blocks/collect) | Collect specific information from the caller in a structured format | Live call |
+
+## Flow control and routing
+
+| Block | Use it to | Available in |
+| :-- | :-- | :-- |
+| [Filter](/blocks/flow-control-and-routing/filter) | Route the flow using available data | All stages |
+| [Time Filter](/blocks/flow-control-and-routing/time-filter) | Route the flow based on a weekly schedule | Live call |
+| [Transfer Flow](/blocks/flow-control-and-routing/transfer-flow) | Continue the call in another flow for the same agent | Live call |
+| [End Call](/blocks/flow-control-and-routing/end-call) | End the call with a final message | Pre-call, live call |
+| [Delay](/blocks/flow-control-and-routing/delay) | Wait before running connected post-call blocks | Post-call |
+
+Use [Talk exit conditions](/blocks/flow-blocks/talk#exit-conditions) for conversational outcomes and Filter for data-based routing. Transfer Flow stays within the agent, while [Transfer Call](/blocks/communication-blocks/transfer-call) sends the call to a phone destination.
+
+## Calls and messaging
+
+| Block | Use it to | Available in |
+| :-- | :-- | :-- |
+| [Transfer Call](/blocks/communication-blocks/transfer-call) | Transfer a call to one or more phone numbers | Live call |
+| [Send SMS](/blocks/communication-blocks/send-sms) | Send a text message to a phone number | All stages |
+| [Send Email](/blocks/communication-blocks/send-email) | Send an email to one or more recipients | Live call, post-call |
+| [Email & SMS Notification](/blocks/communication-blocks/email-sms-notification) | Send a call summary by email, SMS, or both | Post-call |
+| [Redial](/blocks/communication-blocks/redial) | Schedule one or more follow-up call attempts | Post-call |
+| [Campaign](/blocks/communication-blocks/campaign) | Queue an outbound call in a selected campaign | Post-call |
+
+Use Send SMS or Send Email when you control the message content. Use Email & SMS Notification to deliver the conversation summary automatically after the call.
+
+## Data and automation
+
+| Block | Use it to | Available in |
+| :-- | :-- | :-- |
+| [API Request](/blocks/api-request) | Send an API request and use the response | All stages |
+| [Code](/blocks/data-and-automation-blocks/code) | Process data with Python and use the output | All stages |
+| [Webhook](/blocks/data-and-automation-blocks/webhook) | Receive data from an external service | Pre-call, inbound only |
+| [Send Call Data](/blocks/data-and-automation-blocks/send-call-data) | Send call data to an endpoint | Post-call |
+| [Vision](/blocks/data-and-automation-blocks/vision) | Start a legacy webpage automation task | Live call |
+
+## Integrations
+
+Provider-connected blocks and branded webhook automations are documented under [Integrations](/integrations/overview). Use that section to compare their actions and configure accounts, webhooks, inputs, variables, and tests.
+
+<Warning>
+  The picker shows where a block can run, but it does not confirm that the block is fully configured. Complete its required settings and resolve any errors in the [Flow Checklist](/workflow-checklist) before publishing.
+</Warning>

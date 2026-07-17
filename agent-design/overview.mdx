@@ -1,0 +1,62 @@
+---
+title: "Agent Setup"
+description: "Understand the parts of a Phonely agent and where to configure each one."
+sources:
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-design/agent-design.tsx"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/agent-settings-client.tsx"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/agent-settings-hero-cards.tsx"
+  - "features/agents/modules/guidelines/**"
+  - "features/agents/modules/voice-picker/**"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/knowledge-base/**"
+  - "features/workflows/model/factories/create-initial-agent-workflow.ts"
+  - "features/workflows/modules/editor/components/flow-settings-modal.tsx"
+last-verified: "2026-07-17"
+---
+
+Agent Setup brings together the shared parts of one agent: how it sounds, how it should behave, what it knows, and the settings that apply across its calls. The agent's flows then determine what happens before, during, and after each call.
+
+<Tip>
+  If you completed onboarding, start with the agent and starter flow Phonely created for you. You do not need to create another agent to begin configuring it.
+</Tip>
+
+## Understand the parts of an agent
+
+| Area | Use it to |
+| :-- | :-- |
+| [**Voice**](/agent-design/voice/overview) | Choose how the agent sounds |
+| [**Guidelines**](/agent-design/guidelines) | Define shared objectives, response style, and boundaries |
+| [**Knowledge Base**](/agent-knowledge-base/overview) | Provide documents, websites, and calls the agent can use as knowledge |
+| [**Flows**](/key-concepts/flows) | Control the conversation, routing, data collection, and actions |
+| **Settings** | Manage the agent's identity, phone numbers, call behavior, compliance, and other agent-wide controls |
+
+Voice, Guidelines, Knowledge Base sources, and Settings are configured for the agent. Flows belong to that agent and control individual call paths.
+
+## How flows use shared configuration
+
+An agent can have multiple flows, but they use the same agent-level configuration. Each flow can decide whether to include the agent's Guidelines and which uploaded documents or websites it can reference.
+
+Use [Flow Settings](/flow-editor/flow-settings) to control those choices for one flow. Put instructions that apply only to one part of a call in that flow or block instead of adding them to the agent's shared Guidelines.
+
+## Open Agent Settings
+
+In **Agent Design**, select **Settings**. From there, you can update the agent name and primary number, duplicate or delete the agent, and open these settings areas:
+
+| Area | Use it for |
+| :-- | :-- |
+| **Call Settings** | Call-wide timing and behavior |
+| **Phone Numbers** | The agent's phone numbers and blocked numbers |
+| **Compliance** | Recording and compliance controls |
+| **Call Tagging** | Reporting labels and call outcomes |
+| **Advanced** | Specialized behavior that normally does not need to change during initial setup |
+
+Start with the defaults unless a business requirement calls for something different. Before handling real calls, confirm the phone number, timezone, recording, and compliance settings required for your use case.
+
+## Recommended setup order
+
+1. Review the agent created during onboarding.
+2. Choose a Voice and define the agent's Guidelines.
+3. Add only the knowledge sources the agent needs.
+4. Review the starter flow and adjust its conversation and actions.
+5. Review Agent Settings, then publish and test the flow before using it for live calls.
+
+For the complete first-call process, follow [Quick Start](/get-started/quick-start).

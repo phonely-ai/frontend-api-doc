@@ -1,321 +1,172 @@
 ---
 title: "Call Flows"
-description: "Build complex conversations, connect with your tools and more with flows"
+description: "Understand how flows, blocks, connections, stages, drafts, and published versions work in Phonely."
 sources:
   - "features/workflows/modules/editor/**"
-  - "features/workflows/model/**"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/model/execution-stage.ts"
+  - "features/workflows/model/workflow.ts"
+last-verified: "2026-07-15"
 ---
 
-Flows are the visual blueprints that define exactly how your AI phone agent behaves, from the greeting, to data collection, to decisions, actions, and the final call outcome. They describe what the agent says, what it asks, what it stores, what APIs it calls, and how the conversation moves forward.
+A flow defines what your agent does before, during, and after a call. On the canvas, you connect blocks to create the conversation path, collect information, make decisions, call other systems, and handle the result of the call.
 
-<Frame>
-  <img src="/assets/call-flow.gif" alt="Flow builder in action" />
-</Frame>
+## How a flow is structured
 
-Flows are made of several core elements:
+Every flow starts with a trigger and can contain three execution stages.
 
-### 1. Blocks
-
-Blocks are the individual steps in your workflow. Each block performs one clear function, such as:
-
-- Speaking to the caller (Talk)
-- Collecting information (Collect).
-- Applying logic or conditions (Filter, Time Filter)
-- Calling an external system (API Request, Google Sheets, Code)
-- Transferring or ending a call (Transfer Flow, End Call)
-- Sending messages (Email, SMS)
-- Running post-call actions.
-
-Blocks are intentionally focused complex behavior is created by connecting blocks together, not by overloading a single block.
-
-### 2. Connections & Exit  Conditions
-
-Connections determine how the conversation moves forward.
-
-An edge can represent:
-
-- A simple continuation (always go next)
-- A conditional path (only proceed if a condition is met)
-- An exit outcome (success, failure, escalation, etc)
-
-#### Exit condition tooltips
-
-When you hover over a connection handle or edge, Phonely now displays a tooltip explaining which condition is applied, why the edge exists or what will cause the call to take that path.
-
-<Frame>
-  <img
-    src="/assets/edge-tool-tip-message.png"
-    alt="Edge Tool Tip Message"
-    style={{ width:"79%" }}
-  />
-</Frame>
-
-This makes large or complex flows easier to understand and debug at a glance.
-
-### 3. Variables
-
-Variables store information during the call, such as:
-
-- Caller-provided inputs.
-- API responses.
-- System-generated data (timestamp, outcomes, etc.)
-
-<Frame>
-  <img
-    src="/assets/list-of-available-variables.png"
-    alt="List Of Available Variables"
-    title="List Of Available Variables"
-    style={{ width:"65%" }}
-  />
-</Frame>
-
-They act as the agent’s short-term working memory for the duration of the call.
-
-## Canvas Controls
-
-Phonely includes several canvas tools to help you navigate and organize large workflows.
-
-You'll find tools for:
-
-- Add new blocks
-- Using sticky notes
-- Organizing blocks
-- Replacing invalid variables
-- Undo/Redo actions
-- Viewing your change history
-
-See the dedicated [toolbar quick actions guide](/key-concepts/flow-canvas-controls) for more details.
-
-## Create a Flow
-
-<Steps>
-  <Step title="Go to the agent design page.">
-  </Step>
-  <Step title="Click the + to create a new workflow or select an existing workflow and click the Edit button.">
-  </Step>
-  <Step title="Click the “+” button between existing blocks or at the end of a chain to insert a new block.">
-  </Step>
-  <Step title="New blocks are auto-positioned to keep the layout readable.">
-    The canvas is where you visually design and manage your workflow.
-
-    <Frame>
-      <img
-        src="/assets/how-to-add-a-new-block.png"
-        alt="How To Add A New Block"
-        title="How To Add A New Block"
-        style={{ width:"65%" }}
-      />
-    </Frame>
-  </Step>
-  <Step title="Click any block in your flow to open its configuration panel. ">
-    Each block contains different settings, and the options you see will depend on the type of block you’re setting up.
-
-    <Frame>
-      <img
-        src="/assets/example-configuring-a-collect-block.png"
-        alt="Example Configuring A Collect Block"
-        title="Example Configuring A Collect Block"
-        style={{ width:"87%" }}
-      />
-    </Frame>
-  </Step>
-  <Step title="Connect blocks">
-    You can change connections between blocks by hovering over an edge clicking the **X** button, and then place your cursor over the output node of one block and drag the edge to connect to the input node of another block.
-  </Step>
-  <Step title="Save your changes.">
-    Every save creates a new version you can review or revert.
-  </Step>
-  <Step title="Publish when ready.">
-    Publishing makes the version live for real callers.
-  </Step>
-</Steps>
-
-### Copy & Paste Across Tabs
-
-You can now select one or multiple blocks. Copy them and then paste them into another open Phonely tab. This allows you to reuse logic across flows and build variations without starting from scratch.
-
-<Frame>
-  <img
-    src="/assets/selecting-blocks-copy-paste.png"
-    alt="Selecting Blocks Copy Paste"
-    title="Selecting Blocks Copy Paste"
-    style={{ width:"94%" }}
-  />
-</Frame>
-
-### Save, Version, and Publish
-
-Every save creates a new **version**. Versions can be reviewed or reverted.
-
-When publishing, review the version details and confirm the version you want to make live for callers.
-
-### Call variables
-
-<AccordionGroup>
-  <Accordion title="What are call variables?">
-    Variables are dynamic containers that persist for the duration of the call - like the agent's working memory.
-  </Accordion>
-
-  <Accordion title="How to set variables">
-    Use Collect blocks for caller input, API Request blocks for external data, or add custom variables via the Variable modal.
-  </Accordion>
-
-  <Accordion title="How to access variables">
-    Reference by name with @variable\_name or select from the Variable modal. Use them in prompts, conditions, and API payloads.
-  </Accordion>
-</AccordionGroup>
-
-### Variable types
-
-Variables in Phonely can store different types of data. Choose the appropriate type when collecting information from callers or storing data from API responses.
-
-| Type | Data Type | Description |
+| Stage | When it runs | Common uses |
 | :-- | :-- | :-- |
-| **text** | `string` | General text |
-| **number** | `number` | Numeric values |
-| **date** | `ISO date` | Dates in ISO format |
-| **time** | `HH:mm` | Times in 24-hour format |
-| **name** | `string` | Caller names |
-| **email** | `string` | Email addresses |
-| **phone** | `string` | Phone numbers |
-| **url** | `string` | Web addresses |
-| **address** | `object` | Street, city, region, postal code, country |
-| **currency** | `number` | Monetary values |
-| **percentage** | `number` | Percent values |
-| **duration** | `string` | Time spans |
-| **custom** | `any` | User-defined schema |
+| **Pre-call** | Before the agent greets the caller or places an outbound call | Look up caller data, apply a filter, prepare variables, or stop the flow before the conversation begins |
+| **Live call** | While the caller and agent are speaking | Talk, collect information, route the conversation, send messages, call an API, or transfer the call |
+| **Post-call** | After the call ends | Notify a team, update another system, store call data, or start a follow-up action |
 
-### Call outcome tagging
-
-<Info>
-  Outcome tags enable analytics, reporting, and automations after the call ends.
-</Info>
-
-Call outcomes are configured at the **block level**. Each block in your workflow can have an outcome tag assigned to it. When a call ends on that block, the call is tagged with that block's outcome.
-
-If the block where the call ends does not have an outcome tag set, Phonely falls back to the **last block the call visited** that had an outcome defined.
-
-This means you only need to tag the blocks that represent meaningful endpoints or milestones in your flow, you don't need to tag every block.
-
-<Steps>
-  <Step title="Open any block in your workflow">
-  </Step>
-  <Step title="Find the Call Outcome Tagging field in the block settings">
-  </Step>
-  <Step title="Select an existing outcome or type a custom one">
-  </Step>
-</Steps>
-
-<img
-  src="/assets/outcome-tagging-end-block.png"
-  alt="Outcome Tagging End Block"
-  title="Outcome Tagging End Block"
-  style={{ width:"89%" }}
-/>
-
-<Tip>
-  Some examples of tags that you can use include: **appointment scheduled**, **lead qualified,** **customer satisfied, escalation needed, no show followup**, etc.
-</Tip>
+The block picker only shows blocks that are supported for the selected stage and the flow's direction. Some blocks can run in more than one stage; their configuration and available variables can differ by stage.
 
 <Frame>
-  <img src="/assets/run-test-from-here.gif" alt="Test from here feature" />
+  <img
+    src="/assets/call-flows-editor-overview.png"
+    alt="Flow Editor showing a Greeting trigger, connected blocks during the call, an End Call block, and a post-call notification"
+  />
 </Frame>
 
-## Testing & best practices
+### Triggers
 
-<Tabs>
-  <Tab title="Simulation">
-    <Steps>
-      <Step title="Upload a recording">
-        Validate recognition and branch logic with real audio.
-      </Step>
-      <Step title="Simulate variables">
-        Seed test values for `@name`, `@phone`, etc.
-      </Step>
-      <Step title="Path testing">
-        Walk each branch and confirm expected prompts.
-      </Step>
-      <Step title="Error testing">
-        Force empty/malformed inputs to validate fallbacks.
-      </Step>
-    </Steps>
-  </Tab>
-  <Tab title="Live">
-    <Steps>
-      <Step title="Use test numbers">
-        Route calls to non-production DIDs.
-      </Step>
-      <Step title="Monitor in real time">
-        Watch transcripts and events in the dashboard.
-      </Step>
-      <Step title="Measure performance">
-        Track response times, success rates, transfers.
-      </Step>
-      <Step title="A/B versions">
-        Compare alternative prompts/flows.
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
+The trigger is the entry point of a flow:
 
-## Design guidelines
+- **Greeting** starts the agent's **First Flow**, the default entry point for inbound calls.
+- **Start Flow** is the entry point for another inbound flow. The agent enters that flow when its **Global Flow** trigger condition matches or another flow routes to it with **Transfer Flow**.
+- **Make Call** starts an outbound flow.
 
-<AccordionGroup>
-  <Accordion title="Conversation design">
-    Keep prompts natural and concise, offer clear next steps, plan for interruptions, and confirm critical data before proceeding. 
-  </Accordion>
+<Note>
+  Transfer Flow keeps the call active, but flow-specific variables do not carry from the source flow to the target flow. Design the target flow to collect or retrieve the data it needs.
+</Note>
 
-  <Accordion title="Technical hygiene">
-    Test all branches, add fallback edges, watch performance metrics, and keep external dependencies resilient.
-  </Accordion>
+Pre-call blocks connect before the trigger. The path during the call continues from the trigger, and post-call blocks attach to a block's post-call output.
 
-  <Accordion title="Variable management">
-    Use descriptive names, validate inputs, handle missing data gracefully, and scrub sensitive data when not needed.
-  </Accordion>
-</AccordionGroup>
+### Blocks and connections
 
-## Troubleshooting guide
+Each block handles one step, such as speaking, collecting information, making a decision, exchanging data with an external system, or transforming data.
 
-<AccordionGroup>
-  <Accordion title="Flow not responding">
-    Verify block connections, confirm required variables are set, test blocks individually, and check API auth/endpoints.
-  </Accordion>
+Connections determine how the flow moves between blocks:
 
-  <Accordion title="Poor call quality">
-    Review Talk block voice settings, try alternate voices, adjust rate and pauses, and check variable interpolation.
-  </Accordion>
+- **Pre-call:** Run preparation blocks before the flow trigger.
+- **Continuation:** Move to the next block during the call.
+- **Named route:** Follow an exit condition, branch, or action result.
+- **Post-call:** A post-call block runs after the call if the call reached the live call block it is connected to.
 
-  <Accordion title="Transfer failures">
-    Confirm destination numbers/agents, test fallbacks, and verify timing and availability windows.
-  </Accordion>
+## Create and manage flows
 
-  <Accordion title="Variable issues">
-    Check spelling/case, ensure values are set before use, validate data types, and test prompts using variables.
-  </Accordion>
+Your agent's flows appear in the left sidebar of the editor. Select **+** beside the flow list, then choose how to create the flow:
 
-  <Accordion title="API integration problems">
-    Test endpoints in isolation, verify credentials and headers, confirm request/response schemas, and watch rate limits/timeouts.
-  </Accordion>
-</AccordionGroup>
+- **Start from Scratch** creates a new flow for you to build in the editor.
+- **Create with AI** creates a new flow, opens it in the editor, and opens Ask AI so you can describe what you want to build.
+- **Use Template** creates a flow from a pre-built template that you can customize.
 
-## Conclusion
+Use a flow's menu to turn it on or off, rename, duplicate, or delete it. The **First Flow** cannot be turned off or deleted while it is the agent's active entry point for inbound calls.
 
-You now have the essentials to design reliable, natural AI phone experiences:
+### Flow availability and published versions
 
-<Steps>
-  <Step title="Start simple">
-    Build with Start Call, Talk, and End Call
-  </Step>
-  <Step title="Add interaction">
-    Use Collect and Question blocks.
-  </Step>
-  <Step title="Integrate systems">
-    Add API Request and conditional edges.
-  </Step>
-  <Step title="Optimize">
-    Use Filter and Time Filter to route intelligently.
-  </Step>
-  <Step title="Test thoroughly">
-    Apply simulation and live testing practices above.
-  </Step>
-</Steps>
+Turning a flow on or off controls whether the agent can use it during normal calls:
+
+- When a flow is **on**, the agent can enter it through a connected route or a matching Global Flow trigger condition.
+- When a flow is **off**, it is excluded from normal calls and cannot be entered by a matching Global Flow trigger condition.
+
+Turning a flow off does not delete its draft or version history.
+
+Publishing a version is separate from turning a flow on or off:
+
+- **Publish** in the editor's top bar creates a version from the current draft, makes that version live, and turns the flow on.
+- Turning a flow on or off from its menu changes only whether the flow is available. It does not create a version.
+
+<Warning>
+  A flow can be on while it has unpublished draft changes. If the top-bar **Publish** button is enabled, the current draft differs from the live version.
+</Warning>
+
+## Add and configure blocks
+
+Choose how to add a block based on whether you already know where it belongs:
+
+1. Hover over an available connection point and select **+** to add a compatible block and connect it in one step. The connection determines its stage and route.
+2. Select **Add block** in the canvas toolbar to place an unconnected block from the **Live Call** or **Post Call** category, then connect it where it belongs.
+
+Pre-call blocks are added from the connection above the flow trigger where pre-call actions are supported, not from the canvas toolbar.
+
+After you add a block, the block configuration panel opens. Available fields, outputs, variables, and test options depend on the block and its execution stage. Changes are auto-saved to the current draft.
+
+Use the [Block Reference](/blocks/overview) to choose a capability and review its supported stages, required settings, outputs, and routing behavior.
+
+## Work with variables
+
+Variables carry information into and through a flow, including call information, flow-defined values, and outputs from earlier blocks. A block can use a variable only if the value is available before that block runs on the path that reaches it.
+
+Type `@` in a supported field to open **Available Variables**. Select a value from the picker so Phonely adds it to the field.
+
+If a referenced value is removed or is no longer available on that path, Phonely marks the reference as invalid so you can replace it.
+
+See [Variables](/flow-editor/variables) for variable sources, scope, availability, and invalid-reference handling.
+
+## Draft, validate, and publish
+
+Edits are auto-saved to the current draft. Auto-save does not create a version or make the draft live.
+
+Before publishing, open the **Flow Checklist** to find blocks with missing or invalid settings. A missing published version is a warning; a block validation error must be resolved before you can publish.
+
+Select the main **Publish** button to create a version from the current draft and make it live. For version-related actions, open the adjacent menu:
+
+- **Save as Version** creates a numbered checkpoint without changing the live version.
+- **Version History** lets you inspect saved and published versions. Restoring a version replaces the current draft but does not change the live version until you publish it.
+
+See [Test and Publish](/flow-editor/test-and-publish) for the complete release process and which version each test uses. See [Flow Versions](/flow-editor/versions) before restoring a snapshot and [Resolve Remote Flow Updates](/flow-editor/collaboration) when newer remote changes need to be resolved.
+
+## Test changes safely
+
+The recommended release loop is:
+
+1. Edit the draft and wait for auto-save to finish.
+2. If the changed block provides its own test, run it with safe sample data.
+3. Resolve every block error in the **Flow Checklist**.
+4. Publish the reviewed draft.
+5. Test the published agent from its normal entry point with Web Call or Web Chat. Use Web Call when the change affects spoken behavior.
+
+Web Call and Web Chat use the latest published version. They fall back to the current draft only when the flow has never been published.
+
+Some blocks provide a test in their configuration panel. A block-level test checks that block in isolation with sample inputs and lets you inspect its result. It does not verify the block's connections or the complete conversation.
+
+For focused troubleshooting in a long or complex flow, **Test from here** starts the current draft at a selected block that runs during the call. It checks part of the draft without changing the published version, but it is not a required release step and does not replace a complete test of the published agent.
+
+<Warning>
+  Tests can run connected actions, including messages and external requests. Use test recipients, safe endpoints, and non-production records when a tested route has side effects.
+</Warning>
+
+See [Test and Publish](/flow-editor/test-and-publish) for Web Call, Web Chat, Test from here, and the recommended release loop.
+
+## Keep flows maintainable
+
+- Give each flow and block a name that describes its purpose.
+- Use each block for one clear step and give its exit conditions descriptive names.
+- Use sticky notes to explain non-obvious design decisions, not runtime instructions.
+- Use **Organize blocks** after structural changes to make paths easier to review.
+- Publish small, reviewed changes and save versions at meaningful checkpoints.
+- Test each route that can end a call, transfer it, handle a failure, or trigger a post-call action.
+
+<CardGroup cols={2}>
+  <Card title="Flow Canvas Controls" icon="layout-panel-top" href="/key-concepts/flow-canvas-controls">
+    Navigate, organize, annotate, and inspect a flow.
+  </Card>
+  <Card title="Connections and Routing" icon="route" href="/flow-editor/connections-and-routing">
+    Design branches, flow transfers, call transfers, and fallbacks.
+  </Card>
+  <Card title="Variables" icon="at-sign" href="/flow-editor/variables">
+    Capture data and use it safely across stages and blocks.
+  </Card>
+  <Card title="Flow Settings" icon="settings" href="/flow-editor/flow-settings">
+    Configure flow-level context, Guidelines, and knowledge sources.
+  </Card>
+  <Card title="Flow Checklist" icon="clipboard-check" href="/workflow-checklist">
+    Find validation errors before you publish.
+  </Card>
+  <Card title="Test and Publish" icon="rocket" href="/flow-editor/test-and-publish">
+    Check draft changes and release a reviewed version safely.
+  </Card>
+</CardGroup>

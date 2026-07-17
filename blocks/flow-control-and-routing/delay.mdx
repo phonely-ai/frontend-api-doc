@@ -1,0 +1,33 @@
+---
+title: "Delay"
+description: "Wait before running connected post-call blocks."
+sources:
+  - "features/workflows/model/nodes/delay.ts"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/model/connection.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/delay/**"
+  - "phonely-backend/app/agent/live_actions/delay_action.py"
+  - "phonely-backend/app/call/call_utils.py"
+  - "phonely-backend/app/call/routes.py"
+last-verified: "2026-07-16"
+---
+
+Use **Delay** to wait before running the connected post-call blocks. It schedules the rest of that path for later; it does not pause the live conversation.
+
+## Configure the delay
+
+1. Connect the post-call path to Delay.
+2. In **Time Delayed For**, enter a whole number or select an available variable that resolves to one.
+3. Choose **Minutes**, **Hours**, or **Days**. The duration must be at least one minute.
+4. Connect Delay to every post-call block that should run after the wait.
+
+<Info>
+  The wait starts when the post-call path reaches Delay. If Delay is the first post-call block, its duration is counted from the end of the call.
+</Info>
+
+## Build the delayed path
+
+The delayed path retains the call's available variables, so later blocks can use information collected during the call. For example, place Delay before [Send SMS](/blocks/communication-blocks/send-sms) to send a follow-up message the next day.
+
+Two Delay blocks cannot connect directly to each other. Set one Delay to the total wait required before its connected blocks run.

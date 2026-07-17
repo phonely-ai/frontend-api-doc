@@ -1,0 +1,55 @@
+---
+title: "Campaign"
+description: "Queue an outbound campaign call after a call."
+sources:
+  - "features/workflows/model/nodes/campaign.ts"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/campaign/**"
+  - "phonely-backend/app/agent/live_actions/add_to_campaign.py"
+  - "phonely-backend/app/outbound/campaign/routes.py"
+  - "phonely-backend/tests/unit/agent/live_actions/test_add_to_campaign.py"
+last-verified: "2026-07-16"
+---
+
+Use **Campaign** to queue an outbound call in a selected campaign after a call that reached the connected live-call block ends.
+
+Use [Redial](/blocks/communication-blocks/redial) instead when a campaign call should schedule another attempt.
+
+## Select a campaign
+
+Choose the campaign that should receive the new call. Phonely then displays its configured **Campaign Fields**.
+
+Enter a fixed value or select an available variable for each field the outbound call needs.
+
+<Warning>
+  Provide a valid value for the destination flow's phone-number field. The block sends only the values configured under **Campaign Fields**.
+</Warning>
+
+The selected campaign must be **Active** or **Paused**, and its outbound flow must be turned on. Campaign queues the call but does not change those settings.
+
+## Verify Campaign
+
+Campaign does not have a block-level test. Use a phone number you control, then complete a test call that reaches the live-call block connected to Campaign.
+
+Confirm:
+
+1. A new call appears in the selected campaign.
+2. Its phone number and other fields contain the expected values.
+3. The campaign places the outbound call.
+
+Testing this block can queue and place a real outbound call.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="No call appears in the campaign">
+    Confirm that the completed call reached the live-call block connected to Campaign and that the selected campaign still exists.
+  </Accordion>
+  <Accordion title="The campaign does not place the call">
+    Confirm that the campaign is **Active** or **Paused** and that its outbound flow is turned on. Check that **Campaign Fields** provide a valid phone number and any other input required by the outbound flow.
+  </Accordion>
+  <Accordion title="The campaign receives missing or incorrect values">
+    Review the values under **Campaign Fields** and confirm that their variables are available at the connected live-call block. If the campaign's fields changed, select the campaign again and reconfigure the displayed fields.
+  </Accordion>
+</AccordionGroup>

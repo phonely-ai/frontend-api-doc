@@ -15,13 +15,13 @@ sources:
 - The user is signed in to `app.phonely.ai`.
 - The user can access at least one agent or can create a new one.
 
-## Create or Open an Agent
+## Create or open an agent
 
 1. Open `/agent`.
 2. Select an existing agent or create a new agent.
 3. Confirm the active route is `/agent/{agentId}`.
 
-## Configure The Base Agent
+## Configure the base agent
 
 1. Open `/agent/{agentId}?tab=agent-design`.
 2. Set voice selection and personality settings.
@@ -29,7 +29,7 @@ sources:
 4. Add or update agent guidelines.
 5. Save changes before switching tabs.
 
-## Add Knowledge Sources
+## Add knowledge sources
 
 1. Open `/agent/{agentId}?tab=knowledge-base`.
 2. Choose one source type:
@@ -38,22 +38,25 @@ sources:
    - Add recordings
 3. Confirm the new source appears in the source list and is active.
 
-## Build Workflows
+## Build flows
 
 1. Open `/agent/{agentId}?tab=workflows`.
-2. Add or update workflow blocks.
+2. Add or update flow blocks.
 3. Confirm all required branches are connected.
 4. Confirm required variables and post-call actions are configured.
+5. Resolve every block error in the **Flow Checklist**.
+6. Publish the reviewed draft.
 
-## Validate The Agent
+## Validate the agent
 
-1. Open the side panel.
-2. Use `Build` for workflow edits.
-3. Use `Help` for product or docs questions.
-4. Use `Test` to run the current agent behavior.
+1. Select **Ask AI** to open the **Operator** side panel for product questions, flow analysis, or supported changes.
+2. Use **Web Chat** for a fast functional test of the published agent.
+3. Use **Web Call** when the change also needs audio, pacing, interruption, or voice review.
+4. For an outbound flow, use **Place Phone Call** to verify phone delivery and phone-derived data.
 
-## Exit Conditions
+## Exit conditions
 
 - The agent has a configured voice.
 - The agent has at least one knowledge source when the use case requires KB answers.
-- The workflow canvas contains the required path from entry to completion.
+- The flow contains the required path from entry to completion.
+- The reviewed draft has been published and tested from its normal entry point.

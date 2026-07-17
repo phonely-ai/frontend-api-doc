@@ -1,144 +1,92 @@
 ---
 searchable: true
-title: "Toolbar Quick Actions "
-description: "Learn how to navigate, organize, and manage your workflows using the canvas toolset"
+title: "Flow Canvas Controls"
+description: "Use the flow canvas to add and arrange blocks, resolve invalid variables, focus outcomes, and review edits."
+sources:
+  - "features/workflows/modules/editor/components/controls/flow-toolbar.tsx"
+  - "features/workflows/modules/editor/components/controls/add-node-popover.tsx"
+  - "features/workflows/modules/editor/components/controls/keyboard-shortcuts-popover.tsx"
+  - "features/workflows/modules/editor/components/controls/outcome-focus-popover.tsx"
+  - "features/workflows/modules/editor/components/controls/flow-history-button-group.tsx"
+  - "features/workflows/modules/editor/components/replace-invalid-variable-modal.tsx"
+  - "features/workflows/modules/editor/custom-nodes/note.tsx"
+  - "features/workflows/modules/editor/hooks/use-copy-paste.ts"
+  - "features/workflows/modules/editor/hooks/use-organize-blocks.ts"
+  - "features/workflows/modules/editor/hooks/use-shortcuts.ts"
+  - "features/workflows/modules/editor/hooks/use-undo-redo.ts"
+last-verified: "2026-07-15"
 ---
 
-The toolbar provides quick-access actions that help you build, organize, and edit workflows efficiently.
+The flow canvas includes a vertical toolbar for adding, arranging, and reviewing content. **Undo**, **Redo**, and **Change History** appear separately in the bottom-left of the editor.
 
-### ➕ Add Block
+Editing controls update the draft without publishing it. View-only controls, such as **Outcome Focus** and **Keyboard shortcuts**, do not change the flow.
 
-The **Add Block** button opens the block selector, allowing you to insert new blocks into your workflow. Opens the full block library, grouped by **Live Call** and **Post Call** actions.
-
-Click the ➕ icon, then select the block you want to add (for example: Talk, Collect, Filter, API Request).
-
-<Frame>
-  <img
-    src="/images/addanewblockstoyourworkflow.png"
-    alt="Addanewblockstoyourworkflow"
-    title="Addanewblockstoyourworkflow"
-    style={{ width:"54%" }}
-  />
-</Frame>
-
-### Sticky Note
-
-The Sticky Note button lets you add non-executable notes directly onto the canvas.
-
-- Click the Sticky Note icon to add a note to the canvas.
-- Type directly inside the note to add text.
-- Choose a color to visually categorize notes (for example: logic explanation, TODO, warning).
-
-Drag the note anywhere on the canvas.
-
-<Frame>
-  <img
-    src="/assets/stickynotes.png"
-    alt="Stickynotes"
-    title="Stickynotes"
-    style={{ width:"94%" }}
-  />
-</Frame>
-
-### Organize Blocks
-
-The Auto-arrange button automatically reorganizes all nodes on the canvas into a cleaner layout.
-
-- Repositions blocks to reduce overlaps and crossing connections.
-- Aligns nodes into a readable structure.
-- Preserves all connections and logic exactly as-is.
-
-<Frame>
-  <img
-    src="/assets/organizeblocksinaworkflow.png"
-    alt="Organizeblocksinaworkflow"
-    title="Organizeblocksinaworkflow"
-    style={{ width:"81%" }}
-  />
-</Frame>
-
-### Replace Invalid Variables
-
-The replace invalid variables button helps you quickly resolve variables that are no longer valid due to flow changes, deleted blocks, or renamed variables.
-
-When a variable becomes invalid, it is visually highlighted in red within block fields. Clicking the **Replace Invalid Variables** action opens a dialog that shows which variables are affected and where they are used. From there, you can select a valid replacement variable to update all affected nodes at once.
+## Canvas toolbar
 
 <img
-  src="/assets/how-to-replace-invalid-variable.gif"
-  alt="How To Replace Invalid Variable"
-  title="How To Replace Invalid Variable"
-  style={{ width:"94%" }}
+  src="/assets/flow-canvas-toolbar.png"
+  alt="Add block picker open beside the flow canvas toolbar"
+  style={{ width: "100%", maxWidth: "360px", margin: "0", borderRadius: "0.75rem" }}
 />
 
-You can also trigger this action by clicking directly on an invalid variable inside a block field.
+Controls that modify the draft are unavailable when the current view is read-only.
 
-### Keyboard Shortcuts
+### Add blocks
 
-The keyboard shortcuts button opens a reference panel showing all supported keyboard actions.
+Select **Add block** to add an unconnected block to the canvas. The picker separates **Live Call** and **Post Call** blocks and only shows blocks supported by the flow's inbound or outbound direction.
 
-- Editing shortcuts (undo, redo, copy, paste, delete).
-- Selection shortcuts (single select, multi-select, box select).
-- Navigation shortcuts (pan, zoom).
+To add a block already connected to a path, select an available connection handle on an existing block instead.
 
-<Frame>
-  <img
-    src="/assets/keyboardshortcutsworkflowcanvas-1.png"
-    alt="Keyboardshortcutsworkflowcanvas 1"
-    title="Keyboardshortcutsworkflowcanvas 1"
-    style={{ width:"59%" }}
-  />
-</Frame>
+<Note>
+  Add pre-call blocks from the pre-call connection above **Greeting** or **Make Call**. **Start Flow** does not support pre-call blocks.
+</Note>
 
-### Outcome Focus
+### Add sticky notes
 
-Outcome focus helps you visually trace where specific outcomes are being tagged inside a workflow. It lets you select one or more outcomes and instantly highlights the matching action blocks, while softly dimming all other blocks so you can focus on the relevant parts of the flow.
+Select **Add Sticky Note** to document design intent, assumptions, ownership, or follow-up work directly on the canvas. You can format the note's content, change its color, and resize it.
 
-How it works:
+Sticky notes do not connect to other blocks, run during a call, or provide instructions to the agent.
 
-Click the **Outcome focus** button from the toolbar.
+### Organize blocks
 
-Use the search outcomes… field to quickly find an outcome by name.
+Select **Organize blocks** to reposition the current flow without changing block settings or connections. The new layout is recorded as one undoable edit.
 
-Select one or more outcomes (checkboxes).
+Use it after adding or reconnecting several blocks. Review the result and select **Undo** if the previous layout was clearer.
 
-The canvas updates immediately:
+### Replace invalid variables
 
-- Matching outcome-tagging action blocks are highlighted
-- Non-matching blocks fade/grey out, making the relevant routing paths easier to follow
-- Click **Clear** (top-right of the panel) to remove the highlight and return the canvas to normal.
+For an isolated invalid reference, open the affected block, remove the reference, and select the intended variable again. Select **Replace Invalid Variables** when the same invalid reference appears in several fields or blocks and you want to update every affected use at once.
 
-When to use it:
+See [Resolve invalid variables](/flow-editor/variables#resolve-invalid-variables) for guidance on checking the cause and choosing a safe replacement.
 
-- Verifying that the correct blocks are tagging the intended outcomes.
-- Auditing a workflow with many outcome tags (e.g., sales vs support vs returns).
-- Debugging analytics by confirming where an outcome is set in the call flow.
+### Focus blocks by call outcome
 
-<Frame>
-  ![Selectspecifiedcalloutcomes](/assets/selectspecifiedcalloutcomes.png)
-</Frame>
+Select **Focus blocks by call outcome** to open **Outcome Focus**. Choose one or more call outcomes to highlight the blocks that use them and dim unrelated blocks. The number beside each outcome is the number of matching blocks in the current flow.
 
-## Change History, Undo, and Redo
+Outcome Focus only changes how the canvas is displayed. Clear the selection to return to the normal view.
 
-The workflow builder automatically tracks edits you make to your workflow, giving you confidence to experiment without worrying about losing work. Change History, along with Undo and Redo actions, helps you review recent edits and quickly recover from mistakes.
+### Keyboard shortcuts
 
-### Change History
+Select **Keyboard shortcuts** in the canvas toolbar to see the shortcuts for your device.
 
-The **Change History** panel shows a chronological list of recent updates made to the workflow, such as moving blocks, rearranging logic, or editing nodes.
+| Task | Windows | macOS |
+| :-- | :-- | :-- |
+| Undo | `Ctrl` + `Z` | `Command` + `Z` |
+| Redo | `Ctrl` + `Shift` + `Z` | `Command` + `Shift` + `Z` |
+| Copy selected blocks | `Ctrl` + `C` | `Command` + `C` |
+| Paste blocks | `Ctrl` + `V` | `Command` + `V` |
+| Delete selected blocks | `Delete` or `Backspace` | `Delete` or `Backspace` |
+| Select more than one block | `Ctrl` + click | `Command` + click |
+| Box select | `Shift` + drag | `Shift` + drag |
+| Zoom | Mouse wheel | Mouse wheel |
+| Pan | Drag the canvas | Drag the canvas |
 
-Each entry clearly describes what changed (for example, _“Moved node Wrap Up”_) and includes a timestamp indicating when the action occurred. This makes it easy to understand how the flow evolved over time, especially during active editing sessions or collaborative reviews.
+Copying a selection preserves connections between the selected blocks. Connections to blocks outside the selection are not copied. You can paste copied blocks into another open Phonely flow, but review their variables and connections because the destination flow may provide different context.
 
-Change history is especially useful when:
+When the cursor is in a text field, standard text-editing shortcuts take precedence over canvas shortcuts.
 
-- You want to confirm what was modified recently
-- You need to trace why a flow behaves differently than expected
-- You’re reviewing changes before testing or publishing
+## Undo, redo, and Change History
 
-![Change History Undo Redo 1](/assets/change-history-undo-redo-1.png)
+Use **Undo** and **Redo** in the bottom-left of the editor to move through recent draft changes in the current editing session. **Change History** lists the changes recorded during that session.
 
-### Undo and Redo
-
-The **Undo** and **Redo** buttons let you step backward or forward through recent actions on the canvas.
-
-Undo allows you to instantly reverse your last action, such as moving a block, deleting a node, or adjusting connections. Redo restores an action that was just undone, making it easy to experiment and compare layouts or logic changes.
-
-These controls work in real time and apply only to the current editing session, helping you quickly correct mistakes without disrupting the rest of your workflow.
+Change History is not a durable flow checkpoint and does not restore an edit by itself. Use [Flow Versions](/flow-editor/versions) to save, review, or restore named versions over time.

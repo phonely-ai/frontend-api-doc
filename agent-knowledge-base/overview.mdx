@@ -1,0 +1,87 @@
+---
+title: "Knowledge Base"
+description: "Give your agent trusted information to use during calls."
+sources:
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/knowledge-base/**"
+  - "features/agents/modules/knowledge-base/**"
+  - "features/workflows/modules/editor/components/flow-settings-modal.tsx"
+  - "features/calls/model/runtime-trace/workflow-blocks.ts"
+last-verified: "2026-07-17"
+---
+
+Use the Knowledge Base for facts and reference material your agent may need, such as services, pricing, policies, operating hours, and frequently asked questions.
+
+Keep behavior in [**Guidelines**](/agent-design/guidelines). Use the Knowledge Base for information the agent should look up rather than instructions it should always follow.
+
+## Choose a source
+
+Select **+** in the Knowledge Base to add a source:
+
+| Source | Use it for |
+| --- | --- |
+| **Blank Document** | Write and maintain information directly in Phonely |
+| **Upload File** | Add an existing PDF, DOCX, or TXT file |
+| **Add Website** | Add one public page or select pages from a site |
+| **Upload Recording** | Add an MP3, WAV, M4A, or WebM recording for playback |
+| **Import External** | Import selected documents from LivePro |
+
+Documents and websites provide the reference content that flows can use. Recordings are available for playback and show a transcript when one is available, but they are not selected as flow knowledge sources.
+
+## Add useful content
+
+Organize information around the questions callers ask. Use descriptive titles, clear headings, and direct answers. Keep related details together so the agent can retrieve enough context to answer accurately.
+
+For reliable results:
+
+- include the exact facts the agent should use;
+- remove duplicate or conflicting versions of the same information;
+- state exceptions beside the rule they modify; and
+- update time-sensitive details when they change.
+
+Avoid using the Knowledge Base for tone, conversation rules, or actions the agent must always take. Put those instructions in [**Guidelines**](/agent-design/guidelines), [**Flow Settings**](/flow-editor/flow-settings), or the relevant block.
+
+## Manage sources
+
+Use **All**, **Docs**, **Sites**, and **Calls** to filter the source list, or search by name. Select a source to review its details.
+
+Edits to written documents and website content save automatically in the detail panel. A website source does not refresh automatically when its public page changes. Uploaded files can be opened for review, but their contents are not edited in Phonely.
+
+Documents and websites can be **Active** or **Inactive**. An inactive source remains in the Knowledge Base but is not used for retrieval. Use **Select** to activate or deactivate multiple documents and websites, or to delete multiple sources, including recordings.
+
+<Warning>
+  Deleting a source removes it from the agent. Confirm that its content is no longer needed before deleting it.
+</Warning>
+
+## Make sources available to a flow
+
+Knowledge Base sources belong to the agent. In a flow's [**Flow Settings**](/flow-editor/flow-settings), choose whether that flow can use all or selected documents and websites.
+
+In a supported prompt field, insert **All Knowledge Base**, **All Documents**, **All Websites**, or a specific source from **Available Variables**. For example, a [**Talk**](/blocks/flow-blocks/talk) block can use selected reference material while answering caller questions.
+
+If you add or replace a source, review the flow's source selection before testing it again.
+
+## Verify the answers
+
+Test with questions that the source answers directly, questions that require details from different sections, and questions the source does not answer. Confirm that the agent uses the documented facts and does not invent missing information.
+
+Start with **Web Chat** for a quick content check, then use **Web Call** when you also need to review how the answer sounds. After a test, open **Call Details** and review **Referenced Knowledge Base** to see which content the agent used.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The agent does not use a source">
+    Confirm that the document or website is active and available in the flow's **Flow Settings**. Then check that the relevant block prompt includes the intended Knowledge Base source and publish the updated flow before testing it.
+  </Accordion>
+
+  <Accordion title="The agent gives an outdated or conflicting answer">
+    Search for another source that contains an older version of the same information. Update or deactivate conflicting content, then test the question again.
+  </Accordion>
+
+  <Accordion title="A website does not contain the expected information">
+    Open the website source and review the saved content. Add the correct page or update the saved content when the public page has changed.
+  </Accordion>
+
+  <Accordion title="An uploaded file cannot be edited">
+    Uploaded files are read-only in the Knowledge Base. Replace the file, or create a **Blank Document** when the content needs to be maintained directly in Phonely.
+  </Accordion>
+</AccordionGroup>
