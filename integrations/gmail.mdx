@@ -1,7 +1,96 @@
 ---
 title: "Gmail"
-description: "Connect Gmail and send email from a flow."
-searchable: false
+description: "Send email from a connected Gmail account during or after a call."
+sources:
+  - "features/workflows/model/nodes/gmail.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/gmail/gmail-action-form.tsx"
+  - "features/workflows/modules/editor/custom-nodes/gmail/components/setup.tsx"
+  - "features/workflows/modules/editor/custom-nodes/gmail/actions/send-email.tsx"
+  - "features/workflows/modules/editor/custom-nodes/gmail/actions/send-email-advanced.tsx"
+  - "features/workflows/modules/editor/custom-nodes/gmail/actions/send-email-test.tsx"
+  - "features/workflows/modules/editor/testing/integration-email-test-input.ts"
+  - "features/workflows/modules/editor/testing/run-block-test.ts"
+  - "app/agent/live_actions/email/email_v2.py"
+  - "app/services/email/email.py"
+last-verified: "2026-07-17"
 ---
 
-<Warning>This page is a draft scaffold and must be rebuilt before release.</Warning>
+Use [Send Email](/blocks/communication-blocks/send-email) for Phonely's built-in email action. Use [Email & SMS Notification](/blocks/communication-blocks/email-sms-notification) when you want Phonely's call summary sent automatically after a call.
+
+## Connect Gmail
+
+Open the block's **Setup** step:
+
+1. Select an existing Gmail account under **Connection**, or select **Add Connection** and authorize another account.
+2. Continue to **Configure**.
+
+The selected account sends the email. Its connection belongs to the agent and can be reused across flows. Other agents need their own connection.
+
+## Configure the email
+
+| Setting | Purpose |
+| :-- | :-- |
+| **To** | One or more primary recipients |
+| **Subject** | The email subject |
+| **Body** | The email message |
+
+All three fields are required. To, Subject, and Body can use values from [Available Variables](/flow-editor/variables). Each recipient must resolve to a valid email address when the block runs.
+
+### Advanced settings
+
+| Setting | Purpose |
+| :-- | :-- |
+| **Body Type** | Send the body as **Plain Text** or **HTML** |
+| **Cc** | Add recipients visible to everyone receiving the email |
+| **Bcc** | Add recipients hidden from the other recipients |
+| **From Name** | Change the sender name shown with the connected Gmail address |
+| **Reply To** | Send replies to a different email address |
+
+Cc, Bcc, From Name, and Reply To can also use variables available before the block runs. **From Name** does not change the Gmail address that sends the message. Choose HTML only when the Body contains HTML markup.
+
+## Choose when to send it
+
+| Stage | When it runs |
+| :-- | :-- |
+| **Live call** | When the active call reaches the block |
+| **Post-call** | After a call that reached the connected live-call block ends |
+
+Place Gmail after the blocks that provide any recipient addresses or content values it uses. Use post-call when the email is not needed during the conversation, so the caller does not wait for it to send.
+
+In **Live Call**, Gmail also supports interim messages and call outcome tagging. See [Common Block Settings](/blocks/common-settings).
+
+## Test Gmail
+
+The block test resolves the configured fields and shows the email in **Email Preview** before sending it from the selected Gmail account:
+
+1. Open **Test** and enter safe sample values for any variables.
+2. Review the recipients, Reply To, subject, Body Type, and body in **Email Preview**.
+3. Select **Test**.
+4. Confirm that the email arrives with the expected sender, content, and formatting.
+
+Then test the complete flow and confirm that its variables resolve correctly. Review Gmail in the action trace or **Call Details** to confirm its execution.
+
+<Warning>
+  Testing Gmail sends a real email from the selected account. Use recipients and content that are safe for testing.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The email is not sent or received">
+    Confirm that the intended account is selected under **Connection** and reconnect it if its access changed. Review **Email Preview** for valid recipients, then check the recipient's spam folder and the connected account's sent mail. Provider restrictions or sending limits can also prevent delivery.
+  </Accordion>
+
+  <Accordion title="The email uses the wrong sender or reply address">
+    Return to **Setup** and select the intended Gmail connection. **From Name** changes only the displayed sender name; it does not change the connected Gmail address. Clear or correct **Reply To** if replies should return to the sending account.
+  </Accordion>
+
+  <Accordion title="The email contains a missing or incorrect value">
+    Confirm that the variable is available before the Gmail block runs. Test the upstream path that creates it, then review its resolved value in **Email Preview** before testing again.
+  </Accordion>
+
+  <Accordion title="HTML appears as text or is formatted incorrectly">
+    Set **Body Type** to **HTML** and confirm that the Body contains valid HTML. Use **Plain Text** when the body should not be interpreted as markup.
+  </Accordion>
+</AccordionGroup>

@@ -1,7 +1,114 @@
 ---
 title: "Google Calendar"
-description: "Connect Google Calendar and use its available scheduling actions in a flow."
-searchable: false
+description: "Check availability and create appointments during a live call."
+sources:
+  - "features/workflows/model/nodes/google-calendar.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/google-calendar/v2/google-calendar-action-form.tsx"
+  - "features/workflows/modules/editor/custom-nodes/google-calendar/v2/actions/check-availability.tsx"
+  - "features/workflows/modules/editor/custom-nodes/google-calendar/v2/actions/create-appointment.tsx"
+  - "features/workflows/modules/editor/testing/google-calendar-test-input.ts"
+  - "features/workflows/modules/editor/testing/google-calendar-test-result.ts"
+  - "features/workflows/modules/editor/testing/run-block-test.ts"
+  - "app/agent/live_actions/google_calendar/google_calendar.py"
+last-verified: "2026-07-17"
 ---
 
-<Warning>This page is a draft scaffold and must be rebuilt before release.</Warning>
+| Action | Use it to | Result |
+| :-- | :-- | :-- |
+| **Check Availability** | Find open slots that fit your calendar and configured schedule | Provides **Available Appointment Slots** for later blocks |
+| <strong style={{ whiteSpace: "nowrap" }}>Create an Appointment</strong> | Add an event at a known start and end time | Creates the event and sends an invitation to the attendee |
+
+Use Check Availability before Create an Appointment when the caller needs to choose from open times. If another block already provides the start and end time, use Create an Appointment directly.
+
+## Connect Google Calendar
+
+Add Google Calendar in the **Live Call** stage, then open **Setup**:
+
+1. Select **Check Availability** or **Create an Appointment**.
+2. Select **Connect to Google Calendar** and authorize the account.
+3. Continue to **Configure**.
+
+The connection belongs to the agent and can be reused across its flows. Other agents need their own connection.
+
+## Check availability
+
+Check Availability reads events from the selected calendar, excludes conflicts, and returns open slots within the schedule you configure.
+
+| Setting | Purpose |
+| :-- | :-- |
+| **Calendar ID** | The calendar to check |
+| **Start Time** | When Phonely should begin looking for slots; use the clock button to start from the current time |
+| **Duration** | The length of each slot, such as `30m`, `1h`, or `1h 30m` |
+| **Available Times** | The days and time ranges when appointments may be offered |
+| **Search Period** | How many days ahead to search; the default is `7` |
+| **Available Time Slots** | The maximum number of slots to return; the default is `3` |
+
+**Search Period** and **Available Time Slots** are under **Advanced Settings**. Start Time, Duration, Search Period, and Available Time Slots can use values from [Available Variables](/flow-editor/variables).
+
+Enter a fixed Start Time in ISO format with a timezone offset. Available Times use the agent's timezone, so confirm it before testing the schedule.
+
+### Use the available slots
+
+Check Availability provides **Available Appointment Slots**, an array containing the start and end of each returned slot. Later blocks can select it from **Available Variables** to present options, make a decision, or create an appointment after the caller chooses a time.
+
+## Create an appointment
+
+Create an Appointment adds an event to the selected calendar and sends a Google Calendar invitation to the configured email address.
+
+| Setting | Purpose |
+| :-- | :-- |
+| **Calendar ID** | The calendar where the event should be created |
+| **Start Time** | When the event begins, in ISO format with a timezone offset |
+| **End Time** | When the event ends, in ISO format with a timezone offset |
+| **Email** | The attendee who receives the calendar invitation |
+| **Appointment Name** | The event title |
+| **Appointment Description** | Additional information included in the event |
+
+Appointment Name and Appointment Description are optional. All fields except Calendar ID can use variables available before the block runs. Include a timezone offset in both Start Time and End Time, and make sure End Time is later.
+
+## Route the result
+
+Google Calendar provides **Success** and **Error** routes:
+
+- **Success** runs when the selected calendar action completes. For Check Availability, this includes a successful check that finds no open slots.
+- **Error** runs when Phonely cannot complete the request to Google Calendar.
+
+Both actions support interim messages and call outcome tagging. These are covered in [Common Block Settings](/blocks/common-settings).
+
+## Test Google Calendar
+
+The block test uses the selected account and calendar:
+
+- **Check Availability** reads real events and shows the slots it finds. It does not change the calendar.
+- **Create an Appointment** creates a real event and sends a real invitation to the configured email address.
+
+For Check Availability, use representative dates, availability windows, and appointment durations. Confirm that busy events are excluded and that **Available Appointment Slots** contains the expected slots for later blocks.
+
+For Create an Appointment, use a calendar and attendee email that are safe for testing. Confirm the event details in Google Calendar and remove the test event when it is no longer needed.
+
+After the block test, test the complete flow, including what should happen if the calendar request fails.
+
+<Warning>
+  Testing **Create an Appointment** creates a real calendar event and may send an invitation. Use test details that will not affect customers or production schedules.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A calendar is missing from the list">
+    Confirm that the connected Google account can access the calendar, then use the refresh button beside **Calendar ID**. If the account or its permissions changed, return to **Setup** and reconnect it.
+  </Accordion>
+
+  <Accordion title="No available slots are found">
+    Confirm the Start Time, Duration, Search Period, and Available Times. Check that the agent's timezone matches the schedule and that existing or all-day events do not occupy the requested window. A check with no open slots follows **Success**, so handle the empty result in the next block.
+  </Accordion>
+
+  <Accordion title="Available slots appear at the wrong time">
+    Confirm the agent's timezone and the timezone offset in Start Time. Review the configured Available Times, then run the block test again with a known date and calendar event.
+  </Accordion>
+
+  <Accordion title="The appointment is not created or the invitation is missing">
+    Check whether the flow followed the **Error** route, then review the selected calendar, attendee email, start and end times, and timezone offsets. Reconnect the account if its permissions changed. After a successful test, verify the event and invitation in Google Calendar.
+  </Accordion>
+</AccordionGroup>

@@ -522,6 +522,30 @@
       "destination": "/integrations/google-sheets"
     },
     {
+      "source": "/blocks/live-call-integrations/google-calendar",
+      "destination": "/integrations/google-calendar"
+    },
+    {
+      "source": "/blocks/live-call-integrations/google-gmail",
+      "destination": "/integrations/gmail"
+    },
+    {
+      "source": "/blocks/live-call-integrations/google-sheet-live",
+      "destination": "/integrations/google-sheets"
+    },
+    {
+      "source": "/blocks/live-call-integrations/microsoft-outlook",
+      "destination": "/integrations/microsoft-outlook"
+    },
+    {
+      "source": "/blocks/live-call-integrations/slack",
+      "destination": "/integrations/slack"
+    },
+    {
+      "source": "/blocks/live-call-integrations/zapier-live",
+      "destination": "/integrations/zapier"
+    },
+    {
       "source": "/agent-design/voice/interruption-settings",
       "destination": "/agent-design/voice/advanced-settings"
     },

@@ -1,7 +1,112 @@
 ---
 title: "Google Sheets"
-description: "Connect Google Sheets and read or add spreadsheet data from a flow."
-searchable: false
+description: "Search spreadsheet data or add a row during or after a call."
+sources:
+  - "features/workflows/model/nodes/google-sheets.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/modules/editor/custom-nodes/google-sheets/google-sheets-action-form.tsx"
+  - "features/workflows/modules/editor/custom-nodes/google-sheets/google-sheets-action.tsx"
+  - "features/workflows/modules/editor/custom-nodes/google-sheets/components/spreadsheet-selector.tsx"
+  - "features/workflows/modules/editor/custom-nodes/google-sheets/actions/search-row.tsx"
+  - "features/workflows/modules/editor/custom-nodes/google-sheets/actions/add-row.tsx"
+  - "features/workflows/modules/editor/custom-nodes/google-sheets/actions/google-sheets-test.tsx"
+  - "features/workflows/modules/editor/testing/google-sheets-test-input.ts"
+  - "features/workflows/modules/editor/testing/google-sheets-test-result.ts"
+  - "features/workflows/modules/editor/testing/run-block-test.ts"
+  - "app/models/flow_blocks/google_sheets_block_model.py"
+  - "app/agent/live_actions/google_sheets.py"
+last-verified: "2026-07-17"
 ---
 
-<Warning>This page is a draft scaffold and must be rebuilt before release.</Warning>
+| Action | Use it to | Result |
+| :-- | :-- | :-- |
+| **Search a Row** | Find a row that matches configured conditions | Makes the first matching row available to later blocks |
+| **Add a Row** | Append values to selected spreadsheet columns | Adds one row to the selected tab |
+
+## Connect Google Sheets
+
+Open the block's **Setup** step:
+
+1. Select **Search a Row** or **Add a Row**.
+2. If the agent is not connected, select **Connect to Google Sheets** and authorize the account. Use **Reconnect** if its access has changed.
+3. Continue to **Configure**.
+
+The connection belongs to the agent and can be reused across its flows. Other agents need their own connection.
+
+## Select the spreadsheet and tab
+
+Choose the **Spreadsheet** and **Tab** the block should use, then select **Sync Column Names**. Phonely reads the first row as column names and uses them to configure search conditions or row values. For **Search a Row**, these names also define the block's output variables.
+
+Keep column names non-empty and unique. Sync again after adding, renaming, or removing columns, then review any fields and downstream variables that depend on them.
+
+## Search for a row
+
+**Search a Row** checks spreadsheet rows against the conditions you configure. For each condition, select a column, comparison, and value. The value can be fixed or selected from [Available Variables](/flow-editor/variables).
+
+Every condition must match the same row. If you add no conditions, the first data row is returned. When several rows match, the first matching row supplies the block's output variables.
+
+After syncing the column names, later blocks can select the returned fields from **Available Variables**. For example, a search by `order_number` can provide `order_status` and `shipping_date` to the next block.
+
+Enable **Include all data in agent context** when the conversation needs information from every matching row. This adds all matches to the agent's context; the block's output variables still use the first matching row.
+
+## Add a row
+
+**Add a Row** shows one field for each synced column. Map a fixed value or available variable to each column that should receive data. Leave a field empty only when the corresponding spreadsheet column may be empty.
+
+## Route the result
+
+Google Sheets provides **Success** and **Error** routes:
+
+- **Success** runs when **Search a Row** finds a match or **Add a Row** adds the row.
+- **Error** runs when no row matches or Phonely cannot complete the spreadsheet action.
+
+Connect **Error** to an appropriate recovery path, such as checking the value again, collecting details for follow-up, or explaining that the action is unavailable.
+
+## Choose when it runs
+
+| Stage | Use it when |
+| :-- | :-- |
+| **Live call** | The spreadsheet action must run during the active conversation |
+| **Post-call** | The spreadsheet action should run after a call that reached the connected live-call block |
+
+Place the block after the blocks that provide any values it uses. When the spreadsheet result is not needed during the conversation, prefer post-call so the caller does not wait for the request.
+
+In **Live Call**, use an interim message when the action may create noticeable silence. For this and call outcome tagging, see [Common Block Settings](/blocks/common-settings).
+
+## Test Google Sheets
+
+The block test uses the selected account, spreadsheet, and tab:
+
+- **Search a Row** reads real spreadsheet data and shows the first matching row. It does not change the spreadsheet.
+- **Add a Row** adds a real row to the selected tab.
+
+1. Open **Test** and enter safe sample values for any variables.
+2. Review the resolved action, spreadsheet, tab, and search conditions or row data in **Google Sheets Preview**.
+3. Select **Test** and inspect the result.
+4. For Search a Row, confirm that the expected row and output values are returned. For Add a Row, confirm the new row in Google Sheets.
+
+Then test the complete flow and both result routes. Review Google Sheets in the action trace or **Call Details** to confirm its execution and any stored variables.
+
+<Warning>
+  Testing Add a Row changes the selected spreadsheet. Use a test sheet or values that are safe to add, and remove the test row when it is no longer needed.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A spreadsheet or tab is missing">
+    Confirm that the intended Google account is connected and has access to the spreadsheet. Refresh the spreadsheet or tab list, or reconnect the account if its permissions changed.
+  </Accordion>
+
+  <Accordion title="Search a Row finds no match">
+    Confirm that the first row contains the expected column names and that every condition can match the same row. Review the resolved condition values in **Google Sheets Preview**, including capitalization, spacing, and numerical values, then test again.
+  </Accordion>
+
+  <Accordion title="A returned value is unavailable to later blocks">
+    Select **Sync Column Names** and confirm that the column appears in the block. Test Search a Row with a matching row, then review downstream fields that reference the Google Sheets variables.
+  </Accordion>
+
+  <Accordion title="A row is not added or contains incorrect values">
+    Confirm that the intended spreadsheet and tab are selected. Sync the column names, review each resolved field in **Google Sheets Preview**, and verify that the connected account can edit the spreadsheet.
+  </Accordion>
+</AccordionGroup>

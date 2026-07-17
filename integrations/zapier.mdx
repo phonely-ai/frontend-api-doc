@@ -1,7 +1,38 @@
 ---
 title: "Zapier"
-description: "Trigger a Zap with post-call data."
-searchable: false
+description: "Send post-call data to a Zapier webhook."
+sources:
+  - "features/workflows/model/nodes/zapier.ts"
+  - "features/workflows/model/nodes/send-call-data.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/ai/prompt/build-allowed-block-types.ts"
+  - "features/workflows/modules/editor/custom-nodes/zapier/zapier-action-form.tsx"
+  - "features/workflows/modules/editor/custom-nodes/send-call-data/actions/send-call-data.tsx"
+  - "features/workflows/modules/editor/custom-nodes/send-call-data/actions/send-call-data-test.tsx"
+  - "features/workflows/modules/editor/testing/webhook-test-input.ts"
+  - "app/agent/live_actions/http_request/zapier_make.py"
+last-verified: "2026-07-17"
 ---
 
-<Warning>This page is a draft scaffold and must be rebuilt before release.</Warning>
+<Warning>
+  For new flows, prefer [Send Call Data](/blocks/data-and-automation-blocks/send-call-data). Zapier uses the same webhook configuration and execution behavior; this block remains available for existing flows.
+</Warning>
+
+Use Zapier to send a completed call's data to a Zapier webhook. It runs only in post-call, after a call reaches the live-call block to which it is connected.
+
+## Configure Zapier
+
+1. Copy the webhook URL from Zapier.
+2. Enter it in **Webhook URL**.
+3. Keep **Send full call data to Zapier** enabled for the available call record, or turn it off to build a custom JSON body.
+
+Zapier does not create an agent-level provider connection. The webhook URL and payload configuration belong to this block.
+
+The block sends a JSON `POST` request and provides the same full-payload fields, custom-body modes, variable support, and endpoint requirements as Send Call Data. See [Send Call Data](/blocks/data-and-automation-blocks/send-call-data) for the canonical configuration and payload reference.
+
+## Test Zapier
+
+The block test sends a real request to the configured webhook. Use a Zap and data that are safe for testing, review **Resolved Input**, then confirm in Zapier that the request arrived with the expected payload.
+
+After the block test, complete a controlled call that reaches the connected live-call block and confirm that the Zap receives one request after the call ends. For shared verification steps and troubleshooting, see [Test the request](/blocks/data-and-automation-blocks/send-call-data#test-the-request) and [Troubleshooting](/blocks/data-and-automation-blocks/send-call-data#troubleshooting).

@@ -1,26 +1,67 @@
 ---
-title: "Integrations"
-description: "Connect Phonely to external services and use their actions in a flow."
-searchable: false
+title: "Overview"
+description: "Compare available integrations and see where they can run in a flow."
 sources:
   - "features/workflows/model/actions/integrations.ts"
   - "features/workflows/hooks/use-actions.ts"
   - "features/workflows/modules/editor/components/action-market/action-palette.tsx"
-last-verified: "2026-07-15"
+  - "features/workflows/modules/editor/workflow-editor-shell.tsx"
+  - "features/workflows/api/integration-service.ts"
+  - "features/workflows/model/nodes/google-calendar.ts"
+  - "features/workflows/model/nodes/gmail.ts"
+  - "features/workflows/model/nodes/google-sheets.ts"
+  - "features/workflows/model/nodes/google-drive.ts"
+  - "features/workflows/model/nodes/microsoft-outlook.ts"
+  - "features/workflows/model/nodes/slack.ts"
+  - "features/workflows/model/nodes/make.ts"
+  - "features/workflows/model/nodes/zapier.ts"
+last-verified: "2026-07-17"
 ---
 
-Integrations are provider-connected capabilities such as Google Calendar, Gmail, Slack, Make, and Zapier. Use this section when a task requires an external account or provider-specific setup.
+Integration blocks let a flow use an external service, such as checking a calendar, sending an email from a provider account, updating a spreadsheet, or triggering an automation.
 
-Each integration has one canonical guide covering:
+Use [Block Reference](/blocks/overview) for capabilities that do not depend on a specific provider, such as Talk, Filter, API Request, or Code.
 
-- Available actions and supported execution stages
-- Connecting or selecting an account
-- Configuring the integration block
-- Inputs, variables, and outputs
-- Testing and troubleshooting
+## Connected integrations
 
-Provider-neutral capabilities such as Talk, Filter, Transfer Call, API Request, and Code are documented under [Block Reference](/blocks/overview).
+| Integration | Use it to | Available in |
+| :-- | :-- | :-- |
+| [Google Calendar](/integrations/google-calendar) | Check availability or create an appointment | Live call |
+| [Gmail](/integrations/gmail) | Send an email from a connected Gmail account | Live call, post-call |
+| [Google Sheets](/integrations/google-sheets) | Search for or add a spreadsheet row | Live call, post-call |
+| [Google Drive](/integrations/google-drive) | Upload the current call recording | Post-call |
+| [Microsoft Outlook](/integrations/microsoft-outlook) | Send an email from a connected Outlook account | Live call, post-call |
+| [Slack](/integrations/slack) | Send a message to a Slack channel | Live call, post-call |
+
+Use Gmail or Microsoft Outlook when the email should come from a connected provider account. Use [Send Email](/blocks/communication-blocks/send-email) for Phonely's built-in email action.
+
+## Webhook automations
+
+| Integration | Use it to | Available in |
+| :-- | :-- | :-- |
+| [Make](/integrations/make) | Send call data to a Make webhook | Post-call |
+| [Zapier](/integrations/zapier) | Send call data to a Zapier webhook | Post-call |
+
+Make and Zapier use the same webhook configuration and execution behavior as [Send Call Data](/blocks/data-and-automation-blocks/send-call-data). They remain in Integrations to match the block picker, but do not create provider connections. For new flows, prefer Send Call Data.
+
+## Connect an account
+
+Google Calendar, Gmail, Google Sheets, Google Drive, Microsoft Outlook, and Slack use connected provider accounts. These connections belong to the agent, not an individual flow. Once connected, an account is available to integration blocks across that agent's flows. Other agents must connect their own accounts.
+
+In the block's **Setup** step, choose an action when more than one is available, then connect or select the account the block should use. The block's action and configuration remain specific to the flow.
+
+If a provider connection expires or its permissions change, reconnect it before testing the flow again.
+
+## Configure and test an integration
+
+1. Add the integration at the stage where it should run.
+2. Complete its connection or webhook setup.
+3. Enter the required values in **Configure**. Focus a supported field to select a value from **Available Variables**.
+4. Run the block test when available, then verify the result in the external service.
+5. Test the complete flow before using the integration in live calls.
+
+An integration can use only variables available before it runs. Tests for some integrations create output variables that later blocks can use. Each provider guide explains its inputs, outputs, and test behavior.
 
 <Warning>
-  The integration guides in this section are draft scaffolds and must be rebuilt before release.
+  Integration tests can send messages, create appointments or rows, upload files, or trigger automations. Use accounts and data that are safe for testing.
 </Warning>

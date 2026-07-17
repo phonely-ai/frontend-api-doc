@@ -1,7 +1,97 @@
 ---
 title: "Slack"
-description: "Connect Slack and send flow data to a workspace channel."
-searchable: false
+description: "Send a message to a connected Slack workspace during or after a call."
+sources:
+  - "features/workflows/model/nodes/slack.ts"
+  - "features/workflows/model/node-descriptors/index.ts"
+  - "features/workflows/model/actions/catalog.ts"
+  - "features/workflows/ai/prompt/build-allowed-block-types.ts"
+  - "features/workflows/modules/editor/custom-nodes/slack/slack-action-form.tsx"
+  - "features/workflows/modules/editor/custom-nodes/slack/actions/send-channel-message.tsx"
+  - "features/workflows/modules/editor/custom-nodes/slack/actions/send-channel-message-test.tsx"
+  - "features/workflows/modules/editor/custom-nodes/slack/components/channel-selector.tsx"
+  - "features/workflows/modules/editor/custom-nodes/slack/components/slack-message-preview.tsx"
+  - "features/workflows/modules/editor/testing/slack-test-input.ts"
+  - "features/workflows/modules/editor/testing/run-block-test.ts"
+  - "features/workflows/hooks/integrations/use-integration-connection.ts"
+  - "features/workflows/hooks/integrations/use-slack-channels.ts"
+  - "app/models/flow_blocks/slack_block_model.py"
+  - "app/agent/live_actions/messaging/slack.py"
+  - "app/agent/live_actions/messaging/messaging.py"
+last-verified: "2026-07-17"
 ---
 
-<Warning>This page is a draft scaffold and must be rebuilt before release.</Warning>
+Use Slack to send fixed text and values from the flow to a workspace channel.
+
+## Connect Slack
+
+Open the block's **Setup** step:
+
+1. Select **Send Channel Message**.
+2. Select **Connect to Slack** and authorize the workspace. Use **Reconnect** if the connection's access has changed.
+3. Continue to **Configure**.
+
+The connection belongs to the agent and can be reused by Slack blocks across its flows. Other agents need their own connection.
+
+## Configure the message
+
+| Setting | Purpose |
+| :-- | :-- |
+| **Channel** | The workspace channel that receives the message |
+| **Message** | The text to send |
+
+Both fields are required. **Channel** shows the non-archived public and private channels available to the Slack connection. Select the channel in the editor; it cannot use a variable or be chosen by Ask AI.
+
+**Message** can combine fixed text with values from [Available Variables](/flow-editor/variables). Place the Slack block after any blocks that provide the values it uses.
+
+For example:
+
+> New appointment request from `caller_name` for `appointment_time`.
+
+Select each value from **Available Variables** rather than typing its variable name as plain text.
+
+## Choose when to send it
+
+| Stage | When it runs |
+| :-- | :-- |
+| **Live call** | When the active call reaches the block |
+| **Post-call** | After a call that reached the connected live-call block ends |
+
+Use live call when the message is needed while the conversation is active. Use post-call when it can wait until the call ends, so the caller does not wait for Slack.
+
+In **Live Call**, Slack also supports interim messages and call outcome tagging. See [Common Block Settings](/blocks/common-settings).
+
+## Test Slack
+
+The block test resolves the configured message and shows it with the selected channel in **Slack Preview** before sending it:
+
+1. Open **Test** and enter safe sample values for any variables.
+2. Review the channel and resolved message in **Slack Preview**.
+3. Select **Test**.
+4. Confirm that the message appears in the intended Slack channel.
+
+Then test the complete flow and confirm that its variables resolve correctly. During a Web Chat test, expand Slack in the action trace. After a phone call, open **Call Details**, select **Blocks**, and expand Slack to confirm its execution.
+
+<Warning>
+  Testing Slack sends a real message to the selected channel. Use a channel and content that are safe for testing, then remove the message if it is no longer needed.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Slack is not connected">
+    Return to **Setup** and select **Connect to Slack**. If Slack was already connected, select **Reconnect** to refresh its access, then open **Configure** again.
+  </Accordion>
+
+  <Accordion title="A channel is missing from the list">
+    Confirm that the channel is not archived and is available to the Slack connection. Reconnect Slack if its channel access changed. Private channels appear only when the connection can access them.
+  </Accordion>
+
+  <Accordion title="The message is not posted or goes to the wrong channel">
+    Review the selected channel in **Slack Preview** and confirm that the Slack connection can post there. Return to **Configure** to select the intended channel, then test again.
+  </Accordion>
+
+  <Accordion title="The message contains a missing or incorrect value">
+    Confirm that the variable is available before the Slack block runs. Test the upstream path that creates it, then review its resolved value in **Slack Preview** before testing again.
+  </Accordion>
+</AccordionGroup>
