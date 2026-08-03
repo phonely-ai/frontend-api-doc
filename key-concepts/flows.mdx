@@ -6,7 +6,7 @@ sources:
   - "features/workflows/model/actions/catalog.ts"
   - "features/workflows/model/execution-stage.ts"
   - "features/workflows/model/workflow.ts"
-last-verified: "2026-07-15"
+last-verified: "2026-08-03"
 ---
 
 A flow defines what your agent does before, during, and after a call. On the canvas, you connect blocks to create the conversation path, collect information, make decisions, call other systems, and handle the result of the call.
@@ -110,9 +110,11 @@ See [Variables](/flow-editor/variables) for variable sources, scope, availabilit
 
 Edits are auto-saved to the current draft. Auto-save does not create a version or make the draft live.
 
-Before publishing, open the **Flow Checklist** to find blocks with missing or invalid settings. A missing published version is a warning; a block validation error must be resolved before you can publish.
+Before publishing, open the **Flow Checklist** to find reachable blocks with missing or invalid settings. A missing published version is a warning; a validation error on a block the flow can reach must be resolved before you can publish. Unconnected blocks parked on the canvas are excluded until they become part of the flow.
 
-Select the main **Publish** button to create a version from the current draft and make it live. For version-related actions, open the adjacent menu:
+Select the main **Publish** button to run a quick AI review. If the review finds concerns, inspect them in the Flow Checklist, ask Ask AI to help, or choose **Publish anyway** after deciding they are acceptable. This review is advisory; deterministic block errors still prevent publishing.
+
+Publishing creates a version from the current draft and makes it live. For version-related actions, open the adjacent menu:
 
 - **Save as Version** creates a numbered checkpoint without changing the live version.
 - **Version History** lets you inspect saved and published versions. Restoring a version replaces the current draft but does not change the live version until you publish it.
@@ -125,11 +127,12 @@ The recommended release loop is:
 
 1. Edit the draft and wait for auto-save to finish.
 2. If the changed block provides its own test, run it with safe sample data.
-3. Resolve every block error in the **Flow Checklist**.
-4. Publish the reviewed draft.
-5. Test the published agent from its normal entry point with Web Call or Web Chat. Use Web Call when the change affects spoken behavior.
+3. Test the draft from its normal entry point with Web Chat or Web Call. Use Web Call when the change affects spoken behavior.
+4. Resolve every reachable block error in the **Flow Checklist**.
+5. Publish the reviewed draft and address any relevant advisory review findings.
+6. Switch the test to **Live** and verify the version callers will use.
 
-Web Call and Web Chat use the latest published version. They fall back to the current draft only when the flow has never been published.
+Web Call and Web Chat started from the Flow Editor use the selected flow's current draft by default. The **Draft / Live** control in the Test Call panel switches between the current draft and published version and restarts the test. **Place Phone Call** for an outbound flow uses its published version, falling back to the draft only when the flow has never been published.
 
 Some blocks provide a test in their configuration panel. A block-level test checks that block in isolation with sample inputs and lets you inspect its result. It does not verify the block's connections or the complete conversation.
 

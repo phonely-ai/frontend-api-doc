@@ -5,12 +5,13 @@ sources:
   - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-design/agent-design.tsx"
   - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/agent-settings-client.tsx"
   - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/agent-settings-hero-cards.tsx"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/setting-tabs/call-tagging-tab.tsx"
   - "features/agents/modules/guidelines/**"
   - "features/agents/modules/voice-picker/**"
   - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/knowledge-base/**"
   - "features/workflows/model/factories/create-initial-agent-workflow.ts"
   - "features/workflows/modules/editor/components/flow-settings-modal.tsx"
-last-verified: "2026-07-17"
+last-verified: "2026-08-03"
 ---
 
 Agent Setup brings together the shared parts of one agent: how it sounds, how it should behave, what it knows, and the settings that apply across its calls. The agent's flows then determine what happens before, during, and after each call.
@@ -46,7 +47,7 @@ In **Agent Design**, select **Settings**. From there, you can update the agent n
 | **Call Settings** | Call-wide timing and behavior |
 | **Phone Numbers** | The agent's phone numbers and blocked numbers |
 | **Compliance** | Recording and compliance controls |
-| **Call Tagging** | Reporting labels and call outcomes |
+| **Call Tagging** | Call topics, sentiment definitions, and API-recorded outcomes |
 | **Advanced** | Specialized behavior that normally does not need to change during initial setup |
 
 Start with the defaults unless a business requirement calls for something different. Before handling real calls, confirm the phone number, timezone, recording, and compliance settings required for your use case.

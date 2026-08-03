@@ -6,10 +6,10 @@ sources:
   - "features/workflows/modules/editor/hooks/use-checklist.ts"
   - "features/workflows/modules/editor/components/controls/flow-checklist-popover.tsx"
   - "features/workflows/modules/editor/components/controls/save-button-group.tsx"
-last-verified: "2026-07-15"
+last-verified: "2026-08-03"
 ---
 
-The **Flow Checklist** reports whether the current draft has block errors and whether the flow has a published version. Select the clipboard icon beside **Publish** to open it. A badge appears when either check needs attention.
+The **Flow Checklist** reports reachable block errors, publish-review findings, and whether the flow has a published version. Select the clipboard icon beside **Publish** to open it. A badge appears when a check needs attention.
 
 <img
   src="/assets/flow-checklist-errors.png"
@@ -22,7 +22,8 @@ The **Flow Checklist** reports whether the current draft has block errors and wh
 | Check | What it means |
 | :-- | :-- |
 | **Published version** | Whether the flow has been published at least once. Without one, Phonely falls back to the current draft. This is a warning, not a publishing blocker. |
-| **Block errors** | Whether trigger or action blocks have missing connections, invalid variables, or incomplete required settings. Block errors prevent publishing. |
+| **Block errors** | Whether a trigger or action block reachable from the flow's entry point has missing connections, invalid variables, or incomplete required settings. These errors prevent publishing. |
+| **Publish review** | Advisory findings from the AI review that runs when you publish. Review or fix relevant findings, or choose **Publish anyway** when the draft is ready. |
 
 When every check passes, the panel shows **All issues are resolved**.
 
@@ -36,8 +37,8 @@ When every check passes, the panel shows **All issues are resolved**.
 
 ## What passing the checklist means
 
-The checklist evaluates the current draft and updates as you edit it. Publishing remains blocked while the draft has block errors.
+The checklist evaluates the current draft and updates as you edit it. Publishing remains blocked while a reachable block has errors. An unconnected block parked on the canvas is not part of the executable flow and does not block publishing until it becomes reachable.
 
-Passing the checklist confirms that required configuration is present; it does not prove that every conversation path behaves as intended. Test important routes, fallbacks, transfers, and post-call actions before relying on the flow for live calls.
+Resolving the blocking checks confirms that required configuration is present; it does not prove that every conversation path behaves as intended. Test important routes, fallbacks, transfers, and post-call actions before relying on the flow for live calls.
 
 See [Test and Publish](/flow-editor/test-and-publish) for the complete edit, validate, publish, and test process.

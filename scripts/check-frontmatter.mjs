@@ -137,8 +137,8 @@ for (const page of pages) {
   }
 
   if (typeof frontmatter['last-verified'] !== 'string') {
-    // Phase 2 adds this only after a real source review. Do not manufacture a
-    // verification date just to make legacy pages pass CI.
+    // Add this only after the page's factual and editorial review. Do not
+    // manufacture a review date just to make legacy pages pass CI.
     warnings.push(`${page}: missing last-verified`);
   } else {
     const verified = frontmatter['last-verified'].trim();
@@ -155,7 +155,7 @@ if (errors.length > 0) {
 }
 
 if (warnings.length > 0) {
-  console.warn(`Frontmatter lint found ${warnings.length} page(s) awaiting source verification.`);
+  console.warn(`Frontmatter lint found ${warnings.length} page(s) awaiting content review.`);
 }
 
 console.log(`Frontmatter lint passed for ${pages.length} indexed page(s).`);

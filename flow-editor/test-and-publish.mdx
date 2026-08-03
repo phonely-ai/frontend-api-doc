@@ -8,13 +8,15 @@ sources:
   - "features/workflows/modules/editor/components/test-from-node-modal.tsx"
   - "features/workflows/modules/editor/custom-nodes/custom-node-provider.tsx"
   - "features/workflows/modules/editor/hooks/use-unpublished-changes.ts"
+  - "features/workflows/modules/editor/hooks/use-checklist.ts"
+  - "features/workflows/modules/editor/hooks/use-workflow-save-actions.ts"
   - "features/workflows/modules/editor/testing/**"
   - "features/chat/test/**"
   - "app/(main)/(routes)/agent/(routes)/[agentId]/components/menu/test-agent-button.tsx"
-last-verified: "2026-07-15"
+last-verified: "2026-08-03"
 ---
 
-Use focused tests while editing, then publish and test the flow from its normal entry point. This separates quick checks of the current draft from verification of the version callers will use.
+Test the current draft while editing, then publish and switch the test to the live version. This separates fast feedback on unpublished changes from verification of the version callers will use.
 
 ## Understand drafts and versions
 
@@ -22,7 +24,7 @@ Use focused tests while editing, then publish and test the flow from its normal 
 | :-- | :-- |
 | **Current draft** | Your latest auto-saved edits; does not replace the published version |
 | **Saved version** | An optional checkpoint; does not replace the published version |
-| **Published version** | The version used by normal tests and live calls |
+| **Published version** | The version used by live calls and tests targeting **Live** |
 
 The auto-save message at the bottom of the editor confirms when the current draft was saved. Auto-save does not create or publish a version.
 
@@ -38,17 +40,17 @@ Turning a flow on or off is separate from publishing its current draft. Publishi
   <Step title="Edit the draft">
     Make a focused change and wait for auto-save to finish.
   </Step>
-  <Step title="Test focused changes when useful">
-    For faster feedback, test a supported block in isolation or use **Test from here** on part of a long inbound flow. These checks are optional and do not replace a complete test.
+  <Step title="Test the draft">
+    Start Web Chat or Web Call from the Flow Editor and exercise the affected paths. The test starts with **Draft** selected. Run a block-level test or **Test from here** when you need more focused feedback.
   </Step>
   <Step title="Review the flow">
-    Resolve every block error in the **Flow Checklist**, then review the affected routes, variables, and Flow Settings.
+    Resolve every reachable block error in the **Flow Checklist**, then review the affected routes, variables, and Flow Settings.
   </Step>
   <Step title="Publish">
-    Select **Publish** to create a version from the reviewed draft and make it the version used by normal tests and live calls.
+    Select **Publish**. Review any advisory AI findings and fix the ones that apply, or choose **Publish anyway** when the draft is ready. Publishing creates the version used by live calls.
   </Step>
-  <Step title="Verify the published flow">
-    Test from the normal entry point with Web Chat or Web Call for an inbound flow, or **Place Phone Call** for an outbound flow.
+  <Step title="Verify the live version">
+    Switch the Test Call panel to **Live** and repeat the important path. For an outbound flow, use **Place Phone Call**.
   </Step>
 </Steps>
 
@@ -93,22 +95,24 @@ A successful partial test does not confirm that blocks before the starting point
 
 ## Review and publish
 
-Open the [Flow Checklist](/workflow-checklist) and resolve every block error before publishing. Then review the affected routes, variable references, and [Flow Settings](/flow-editor/flow-settings).
+Open the [Flow Checklist](/workflow-checklist) and resolve every error on a block reachable from the flow's entry point. Unconnected blocks parked on the canvas are not part of the executable flow and do not block publishing. Then review the affected routes, variable references, and [Flow Settings](/flow-editor/flow-settings).
 
 Publishing can be unavailable when the flow has block errors, a block is not included in the current plan, your role cannot edit the flow, or a newer collaboration update must be resolved.
 
-Select the main **Publish** button to create a version from the current draft and make it live. The adjacent menu provides related version actions:
+Select the main **Publish** button to run a quick AI review. Its findings are advisory: inspect them in the Flow Checklist, ask Ask AI to help, or choose **Publish anyway** after deciding the draft is ready. If the review is unavailable, publishing continues without it. Deterministic block errors still prevent publishing.
+
+Publishing creates a version from the current draft and makes it live. The adjacent menu provides related version actions:
 
 - **Save as Version** creates a checkpoint without changing the published version.
 - **Version History** opens saved and published versions for review or restoration.
 
-The **Publish** button is disabled when the current draft matches the published version. After publishing, run the appropriate complete-flow test so you are checking the version callers will use.
+The **Publish** button is disabled when the current draft matches the published version. After publishing, switch the browser test to **Live** or run the appropriate phone test so you are checking the version callers will use.
 
 See [Flow Versions](/flow-editor/versions) for checkpoints and restoration, and [Resolve Remote Flow Updates](/flow-editor/collaboration) for resolving newer remote updates before publishing.
 
-## Verify the published flow
+## Test the complete flow
 
-Web Chat and Web Call begin at the agent's First Flow. Choose the test based on the behavior you need to verify.
+Web Chat and Web Call begin at the agent's First Flow unless a selected flow or block provides a draft override. Choose the test based on the behavior you need to verify.
 
 | Test | How it runs | Best for |
 | :-- | :-- | :-- |
@@ -123,12 +127,14 @@ Use Web Chat for a quick functional pass through the flow. Use Web Call when you
 
 For an inbound flow, select the chat icon on the right side of **Test agent** to start Web Chat. Select the main area of the same button to start Web Call. Both open in the **Test Call** tab of the side panel.
 
-The **Operator** tab is Ask AI. It can inspect and help change the agent, but it is separate from the tests in **Test Call**.
+When started from the Flow Editor, both tests begin with **Draft** selected and use the current draft of the selected flow. Use the **Draft / Live** control in the Test Call panel to switch targets; switching restarts the test. **Live** uses the published version real callers receive. If the flow has never been published, Phonely falls back to its draft.
+
+The **Ask AI** tab can inspect and help change the agent, but it is separate from the tests in **Test Call**.
 
 Browser-based tests do not always reproduce phone-network data or behavior, such as a real caller number or transfer timing. Use a phone call when the tested behavior depends on that information.
 
 ### Run a phone test
 
-**Outbound:** Open the outbound flow and select **Place Phone Call** in the top bar. Enter representative input values, including a destination number you control, then run the test.
+**Outbound:** Open the outbound flow and select **Place Phone Call** in the top bar. Enter representative input values, including a destination number you control, then run the test. This uses the latest published version, falling back to the draft only when the flow has never been published.
 
 **Inbound:** From a phone you control, call the number assigned to the agent. Start at the greeting and exercise the affected path.

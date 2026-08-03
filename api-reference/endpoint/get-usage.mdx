@@ -1,75 +1,24 @@
 ---
-title: "Get Usage"
-description: "Return usage metrics through the frontend API surface."
+title: "Get Usage (Retired)"
+description: "Understand the retired frontend usage endpoint and where to view current usage."
 sources:
   - "app/api/usage/route.ts"
-  - "services/usage-service.ts"
   - "features/settings/modules/usage-and-cost/**"
-  - "lib/api-auth.ts"
-  - "lib/api-client.ts"
-  - "lib/server-firebase-request-auth.ts"
 openapi: "GET /usage"
+last-verified: "2026-08-03"
 ---
 
-Retrieves usage statistics for agents within a specified date range.
+The frontend `GET /api/usage` endpoint is retired. Requests now return `410 Gone`.
+
+View current usage from **Settings > Usage & Cost** in the platform.
 
 ### Request
 
 **Method:** `GET`  
 **Endpoint:** `/api/usage`  
-**Headers:**
-- `X-Authorization`: Your API key (required)
-
-**Query Parameters:**
-- `uid` (string, required): Your user ID
-- `startDate` (string, required): Start date in YYYY-MM-DD format
-- `endDate` (string, required): End date in YYYY-MM-DD format
-- `agentId` (string, optional): Specific agent ID to get usage for (if not provided, returns usage for all accessible agents)
 
 ### Response
 
-**Success Response (200):**
-```json
-{
-  "summary": {
-    "totalCallCount": number,
-    "totalCallMinutes": number,
-    "agentCount": number,
-    "orgCount": number
-  },
-  "agents": [
-    {
-      "agentId": "string",
-      "agentName": "string",
-      "callCount": number,
-      "callMinutes": number,
-      "orgId": "string",
-      "orgName": "string"
-    }
-  ],
-  "dateRange": {
-    "startDate": "string",
-    "endDate": "string"
-  },
-  "requestedAgentId": "string"
-}
-```
+The endpoint returns `410 Gone`. Its response body identifies the endpoint as retired, but it is not a replacement usage-data contract. Do not build new integrations against it.
 
-**Error Responses:**
-- `400 Bad Request`: Missing required parameters, invalid date format, or invalid date range
-- `401 Unauthorized`: Invalid or missing API key
-- `404 Not Found`: User not found or agent not found/access denied
-- `500 Internal Server Error`: Server error
-
-### Example
-
-```bash
-curl -X GET "https://app.phonely.ai/api/usage?uid=user123&startDate=2024-01-01&endDate=2024-01-31" \
-  -H "X-Authorization: your-api-key"
-```
-
-### Notes
-
-- Date range cannot exceed reasonable limits
-- If no agents are found for the user, returns empty arrays with zero counts
-- The `requestedAgentId` field is only included when filtering for a specific agent
+**Status:** `410 Gone`

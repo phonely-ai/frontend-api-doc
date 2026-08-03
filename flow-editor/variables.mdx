@@ -21,8 +21,7 @@ sources:
   - "features/calls/modules/call-details/tabs/blocks/call-blocks-tab.tsx"
   - "features/calls/modules/call-details/tabs/blocks/call-blocks-tab-block-timeline-item.tsx"
   - "features/workflows/model/node-descriptors/index.ts"
-  - "features/workflows/ai/tools/set-variables.ts"
-last-verified: "2026-07-15"
+last-verified: "2026-08-03"
 ---
 
 Variables are named values that a flow can use. Some stay fixed, while others change with the caller, the route, or a block's result. They let the flow carry information forward and respond to the current call without entering the same data again.
@@ -205,7 +204,7 @@ When testing a flow, confirm that:
 
 In Web Call or Web Chat, hover over or focus the variable chip below an assistant response to see the values stored during that turn. This is useful for a quick check while testing.
 
-After a completed test or live call, open **Call Details**, select **Blocks**, and expand the relevant block or response. The **Stored Variables** section shows which values were captured at that point in the execution, making this the clearer view when you need to trace a variable to a block.
+After a completed test or live call, open **Call Details**, select **Blocks**, and expand the relevant block or response. The **Stored Variables** section shows the most recent value recorded for each variable at that point in the execution, making this the clearer view when you need to trace a variable to a block.
 
 Web Call and Web Chat do not always provide information that exists only on a real phone call. Complete a phone test when the flow depends on telephony data such as a caller number or transfer timing.
 

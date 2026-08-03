@@ -220,6 +220,8 @@
             "pages": [
               "api-reference/endpoint/get-agent",
               "api-reference/endpoint/get-agents",
+              "api-reference/endpoint/generate-agent",
+              "api-reference/endpoint/get-agent-generation",
               "api-reference/endpoint/duplicate-agent",
               "api-reference/endpoint/update-agent"
             ]

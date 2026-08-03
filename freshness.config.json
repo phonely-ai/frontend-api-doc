@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "repositories": [
+    {
+      "id": "phonely-frontend",
+      "sourcePrefix": "",
+      "rootEnv": "PHONELY_FRONTEND_ROOT",
+      "accountedThrough": {
+        "label": "v0.241.0",
+        "commit": "61d8b74c9b9ab0fa79f7dafb2c14bebb778d4ef4"
+      }
+    },
+    {
+      "id": "phonely-backend",
+      "sourcePrefix": "phonely-backend/",
+      "rootEnv": "PHONELY_BACKEND_ROOT",
+      "accountedThrough": null
+    },
+    {
+      "id": "voice-infra",
+      "sourcePrefix": "voice-infra/",
+      "rootEnv": "PHONELY_VOICE_INFRA_ROOT",
+      "accountedThrough": null
+    },
+    {
+      "id": "phonely-db-svc",
+      "sourcePrefix": "phonely-db-svc/",
+      "rootEnv": "PHONELY_DB_SVC_ROOT",
+      "accountedThrough": null
+    }
+  ],
+  "reviewWindows": [
+    {
+      "id": "phonely-frontend-v0.230.0-v0.241.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9245",
+      "reviewedOn": "2026-08-03",
+      "fromExclusive": {
+        "label": "v0.229.0",
+        "commit": "349a301a4b77f26f30a00572457c6dd046c8742f"
+      },
+      "throughInclusive": {
+        "label": "v0.241.0",
+        "commit": "61d8b74c9b9ab0fa79f7dafb2c14bebb778d4ef4"
+      },
+      "dispositions": [
+        {
+          "id": "draft-and-live-browser-tests",
+          "status": "docs-updated",
+          "pages": ["flow-editor/test-and-publish", "get-started/quick-start", "key-concepts/ask-ai", "key-concepts/flows"],
+          "note": "Documented draft-first editor tests, the Draft / Live selector, and published behavior for outbound phone tests."
+        },
+        {
+          "id": "reachable-flow-validation",
+          "status": "docs-updated",
+          "pages": ["flow-editor/test-and-publish", "key-concepts/flows", "workflow-checklist"],
+          "note": "Clarified that only errors on blocks reachable from the flow entry point block publishing."
+        },
+        {
+          "id": "advisory-ai-publish-review",
+          "status": "docs-updated",
+          "pages": ["flow-editor/test-and-publish", "key-concepts/flows", "workflow-checklist"],
+          "note": "Documented the advisory review, Flow Checklist findings, fail-open behavior, and Publish anyway path."
+        },
+        {
+          "id": "atomic-ask-ai-flow-proposals",
+          "status": "docs-updated",
+          "pages": ["key-concepts/ask-ai"],
+          "note": "Documented proposal review, per-change decisions, submission, and stale-proposal behavior."
+        },
+        {
+          "id": "ask-ai-panel-naming-and-reentry",
+          "status": "docs-updated",
+          "pages": ["flow-editor/test-and-publish", "get-started/home-overview", "get-started/quick-start", "key-concepts/ask-ai", "key-concepts/flows"],
+          "note": "Updated the former Operator terminology to Ask AI across the reviewed user journey and retained the current ways to open, resume, and use the side panel."
+        },
+        {
+          "id": "prompt-based-agent-generation-api",
+          "status": "docs-updated",
+          "pages": ["api-reference/endpoint/generate-agent", "api-reference/endpoint/get-agent-generation"],
+          "note": "Documented the authenticated asynchronous creation endpoint, idempotent retry contract, status polling, terminal responses, and organization permission boundary."
+        },
+        {
+          "id": "outbound-call-screening-context",
+          "status": "docs-updated",
+          "pages": ["blocks/flow-blocks/start-flow"],
+          "note": "Documented the optional caller identity and reason used when an automated call screener answers an outbound call."
+        },
+        {
+          "id": "code-generate-with-ai",
+          "status": "docs-updated",
+          "pages": ["blocks/data-and-automation-blocks/code"],
+          "note": "Documented the inline generator while retaining Python as the supported public runtime."
+        },
+        {
+          "id": "code-input-variable-modes",
+          "status": "docs-updated",
+          "pages": ["blocks/data-and-automation-blocks/code"],
+          "note": "Documented the interchangeable Manual key-value and Code JSON views for Code block inputs."
+        },
+        {
+          "id": "flow-toolbar-collapse-controls",
+          "status": "docs-updated",
+          "pages": ["key-concepts/flow-canvas-controls"],
+          "note": "Documented collapse and expand controls, current canvas interactions, and removed media captured against the previous toolbar."
+        },
+        {
+          "id": "transfer-call-editor-rework",
+          "status": "already-covered",
+          "pages": ["blocks/communication-blocks/transfer-call"],
+          "note": "The Transfer Call guide already describes the current cold and warm transfer configuration, destinations, failover, detection, and recovery routes."
+        },
+        {
+          "id": "historical-version-block-preview",
+          "status": "already-covered",
+          "pages": ["flow-editor/versions"],
+          "note": "The version guide already explains that previewing a version shows its saved canvas, block configuration, routes, variables, and settings without changing the draft."
+        },
+        {
+          "id": "latest-stored-variable-value",
+          "status": "docs-updated",
+          "pages": ["flow-editor/variables"],
+          "note": "Clarified that Call Details shows the most recent value recorded for each stored variable at that point in execution."
+        },
+        {
+          "id": "agent-settings-call-outcomes",
+          "status": "docs-updated",
+          "pages": ["agent-design/overview"],
+          "note": "Clarified that Call Tagging contains topics, sentiment definitions, and read-only outcomes recorded through the API rather than editable outcome management."
+        },
+        {
+          "id": "published-flow-content-protection",
+          "status": "already-covered",
+          "pages": ["flow-editor/test-and-publish", "flow-editor/versions"],
+          "note": "The guides already separate draft editing from the published version and direct users to publish flow changes through the Flow Editor."
+        },
+        {
+          "id": "ask-ai-conversation-test-failure-handling",
+          "status": "no-doc-change",
+          "pages": ["key-concepts/ask-ai"],
+          "note": "Failed or inconclusive internal conversation simulations no longer count as proof; this strengthens result integrity without changing the documented user workflow."
+        },
+        {
+          "id": "onboarding-domain-normalization",
+          "status": "no-doc-change",
+          "pages": ["get-started/quick-start"],
+          "note": "The website-entry control was simplified, but the quick-start guide does not depend on its protocol-entry mechanics."
+        },
+        {
+          "id": "talk-and-collect-configuration-polish",
+          "status": "already-covered",
+          "pages": ["blocks/conversation-blocks/collect", "blocks/flow-blocks/talk"],
+          "note": "The existing guides already describe the current Generate with AI and manual configuration paths."
+        },
+        {
+          "id": "webhook-authorization-scope",
+          "status": "no-doc-change",
+          "pages": ["blocks/data-and-automation-blocks/webhook"],
+          "note": "The implementation changed token scope; the user workflow and documented X-Authorization contract did not change."
+        },
+        {
+          "id": "do-not-call-system-variable",
+          "status": "no-doc-change",
+          "pages": ["flow-editor/variables"],
+          "note": "The conceptual variables guide intentionally does not enumerate every system-provided variable."
+        },
+        {
+          "id": "say-exactly-call-outcome-tagging",
+          "status": "not-public",
+          "pages": [],
+          "note": "Say Exactly remains unavailable for normal users, so no public block guide was added."
+        },
+        {
+          "id": "retired-frontend-usage-endpoint",
+          "status": "docs-updated",
+          "pages": ["api-reference/endpoint/get-usage"],
+          "note": "Replaced the obsolete success contract with the endpoint's current 410 Gone behavior and directed platform users to Usage & Cost."
+        },
+        {
+          "id": "campaign-and-outbound-refresh",
+          "status": "needs-doc-update",
+          "pages": [
+            "outboundcalling/addingphonenumber",
+            "outboundcalling/createaoutboundcallingcampaign",
+            "outboundcalling/uploadingcsv",
+            "outboundcalling/webhookconnection"
+          ],
+          "note": "The remaining outbound guides still need the authenticated campaign webhook, recipient-timezone scheduling, queue status, call-cadence validation, and per-lead dial-out number behavior introduced through v0.241.0."
+        },
+        {
+          "id": "analytics-and-call-review-refresh",
+          "status": "needs-doc-update",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics",
+            "data-tables",
+            "performance",
+            "post-call-outcomes"
+          ],
+          "note": "The remaining analytics and review guides need the current outcome controls, outbound API event fields, call-response reporting, and related reporting surfaces introduced in this window."
+        },
+        {
+          "id": "billing-and-usage-refresh",
+          "status": "needs-doc-update",
+          "pages": [
+            "billing-and-usage/manage-agents-and-usage",
+            "billing-and-usage/plans-and-billing-history",
+            "billing-and-usage/usage-notifications"
+          ],
+          "note": "The billing guides still need the current Usage & Cost surface and usage-event-ledger behavior introduced through v0.241.0."
+        }
+      ]
+    }
+  ]
+}

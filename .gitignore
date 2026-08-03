@@ -6,6 +6,7 @@ logo/*
 !logo/logo-small-purple.svg
 !logo/logo-small-white.svg
 node_modules/
+freshness-ledger.json
 
 # Editor and OS cruft
 .idea/

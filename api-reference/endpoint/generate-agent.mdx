@@ -1,0 +1,33 @@
+---
+title: "Generate an Agent"
+description: "Create an inbound agent and its first flow from a prompt."
+sources:
+  - "app/api/agent-generations/route.ts"
+  - "features/agent-generation/model/contracts.ts"
+  - "features/agent-generation/server/authentication.ts"
+  - "features/agent-generation/server/authorization.ts"
+  - "features/agent-generation/server/job-store.ts"
+last-verified: "2026-08-03"
+openapi: "POST /agent-generations"
+---
+
+Starts asynchronous generation of a new inbound agent and its first flow from a natural-language prompt.
+
+Send a unique `Idempotency-Key` with every logical request. Repeating the same request with the same key returns the existing generation instead of creating another agent. Reusing the key with different request data returns an idempotency conflict.
+
+The initial response includes a `generationId` and a `Location` header. Poll that location until the status is `completed` or `failed`.
+
+<Warning>
+  Store the idempotency key until generation reaches a terminal status. Retrying a failed generation with the same request and key safely reuses its reserved agent and flow instead of provisioning duplicates.
+</Warning>
+
+## Generation statuses
+
+| Status | Meaning |
+| --- | --- |
+| `queued` | The request was accepted and is waiting to start |
+| `generating` | Phonely is building the agent and first flow |
+| `completed` | The response includes the new `agentId` and `workflowId` |
+| `failed` | The response includes an error code and message |
+
+Only users with permission to edit agent design in the selected organization can generate an agent.
