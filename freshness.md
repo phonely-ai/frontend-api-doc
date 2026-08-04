@@ -35,11 +35,21 @@ node scripts/freshness-ledger.mjs
 
 Resolve every source mapping against local product repositories:
 
+```bash
+export PHONELY_FRONTEND_ROOT=/path/to/phonely
+export PHONELY_BACKEND_ROOT=/path/to/phonely-backend
+export PHONELY_VOICE_INFRA_ROOT=/path/to/voice-infra
+export PHONELY_DB_SVC_ROOT=/path/to/phonely-db-svc
+node scripts/freshness-ledger.mjs --resolve-sources
+```
+
+On Windows PowerShell:
+
 ```powershell
-$env:PHONELY_FRONTEND_ROOT = "E:\Project\phonely\phonely"
-$env:PHONELY_BACKEND_ROOT = "E:\Project\phonely\phonely-backend"
-$env:PHONELY_VOICE_INFRA_ROOT = "E:\Project\phonely\voice-infra"
-$env:PHONELY_DB_SVC_ROOT = "E:\Project\phonely\phonely-db-svc"
+$env:PHONELY_FRONTEND_ROOT = "C:\path\to\phonely"
+$env:PHONELY_BACKEND_ROOT = "C:\path\to\phonely-backend"
+$env:PHONELY_VOICE_INFRA_ROOT = "C:\path\to\voice-infra"
+$env:PHONELY_DB_SVC_ROOT = "C:\path\to\phonely-db-svc"
 node scripts/freshness-ledger.mjs --resolve-sources
 ```
 
@@ -56,7 +66,7 @@ For each release window:
 5. Verify behavior against the necessary repositories. Backend, voice, and data-service code may confirm the public contract, but internal mechanics must not be copied into user-facing prose unless users need them to use the product safely and correctly.
 6. Review the entire affected page for accuracy, terminology, order, duplication, links, examples, and visual shape, not only the changed sentence.
 7. Review neighboring pages when the change affects a shared concept or user journey. At the end of a product area, review the section as a whole.
-8. Record every disposition before advancing the repository cursor. Unclassified signals block advancement; classified `needs-doc-update` signals remain visible in the ledger and review task after the cursor advances.
+8. Record every disposition before advancing the repository cursor. Unclassified signals block advancement; classified `needs-doc-update` signals remain visible after the cursor advances. Record a later `docs-updated` disposition for the page when that work is complete; other dispositions do not clear the pending work.
 
 `accountedThrough` is a scan cursor, not a claim that every documentation page is current. It means every product change through that exact commit was inspected and given a disposition. The generated ledger reports pages named by `needs-doc-update` separately from pages awaiting their first content review.
 

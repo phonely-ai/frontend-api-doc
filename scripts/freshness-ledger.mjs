@@ -8,6 +8,8 @@ const CONFIG_PATH = join(ROOT, 'freshness.config.json');
 const LEDGER_PATH = join(ROOT, 'freshness-ledger.json');
 const WRITE = process.argv.includes('--write');
 const RESOLVE_SOURCES = process.argv.includes('--resolve-sources');
+const KNOWN_FLAGS = new Set(['--write', '--resolve-sources']);
+const UNKNOWN_FLAGS = process.argv.slice(2).filter((argument) => !KNOWN_FLAGS.has(argument));
 const SHA_PATTERN = /^[0-9a-f]{40}$/;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const ALLOWED_DISPOSITIONS = new Set([
@@ -35,6 +37,10 @@ function isIsoDate(value) {
     parsed.getUTCMonth() === month - 1 &&
     parsed.getUTCDate() === day
   );
+}
+
+function getReviewWindows(config) {
+  return Array.isArray(config.reviewWindows) ? config.reviewWindows : [];
 }
 
 function collectPages(value, out = []) {
@@ -120,7 +126,7 @@ function validateConfig(config) {
   }
   if (!prefixes.has('')) fail('One repository must own unprefixed sources');
 
-  const windows = Array.isArray(config.reviewWindows) ? config.reviewWindows : [];
+  const windows = getReviewWindows(config);
   const windowIds = new Set();
   for (const window of windows) {
     if (!window.id || windowIds.has(window.id)) fail(`Duplicate or missing review window id: ${window.id}`);
@@ -156,8 +162,13 @@ function validateConfig(config) {
   }
 
   for (const repository of config.repositories) {
-    if (!repository.accountedThrough) continue;
     const repositoryWindows = windows.filter((window) => window.repository === repository.id);
+    if (!repository.accountedThrough) {
+      if (repositoryWindows.length > 0) {
+        fail(`${repository.id}: review windows require accountedThrough`);
+      }
+      continue;
+    }
     if (repositoryWindows.length === 0) {
       fail(`${repository.id}: accountedThrough requires at least one review window`);
     }
@@ -195,13 +206,16 @@ function sourceOwner(source, repositories) {
 function buildLedger(config) {
   const docs = readJson(join(ROOT, 'docs.json'));
   const routes = [...new Set(collectPages(docs.navigation?.tabs ?? []))].sort();
-  const pendingRoutes = new Set(
-    config.reviewWindows.flatMap((window) =>
-      window.dispositions
-        .filter((disposition) => disposition.status === 'needs-doc-update')
-        .flatMap((disposition) => disposition.pages),
-    ),
-  );
+  const reviewWindows = getReviewWindows(config);
+  const pendingRoutes = new Set();
+  for (const window of reviewWindows) {
+    for (const disposition of window.dispositions) {
+      for (const route of disposition.pages) {
+        if (disposition.status === 'needs-doc-update') pendingRoutes.add(route);
+        if (disposition.status === 'docs-updated') pendingRoutes.delete(route);
+      }
+    }
+  }
   const pages = routes.map((route) => {
     const file = join(ROOT, `${route}.mdx`);
     if (!existsSync(file)) fail(`${route}: indexed page does not exist`);
@@ -229,7 +243,7 @@ function buildLedger(config) {
   });
 
   const knownRoutes = new Set(routes);
-  for (const window of config.reviewWindows) {
+  for (const window of reviewWindows) {
     for (const disposition of window.dispositions) {
       for (const route of disposition.pages) {
         if (!knownRoutes.has(route)) fail(`${window.id}/${disposition.id}: unknown page ${route}`);
@@ -240,7 +254,7 @@ function buildLedger(config) {
   return {
     schemaVersion: config.schemaVersion,
     repositories: config.repositories,
-    reviewWindows: config.reviewWindows,
+    reviewWindows,
     pages,
   };
 }
@@ -312,6 +326,7 @@ function resolveSources(ledger) {
 }
 
 try {
+  if (UNKNOWN_FLAGS.length > 0) fail(`Unsupported argument(s): ${UNKNOWN_FLAGS.join(', ')}`);
   const config = readJson(CONFIG_PATH);
   validateConfig(config);
   const ledger = buildLedger(config);
