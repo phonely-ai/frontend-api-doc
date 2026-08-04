@@ -14,7 +14,7 @@ sources:
   - "features/workflows/modules/editor/hooks/use-organize-blocks.ts"
   - "features/workflows/modules/editor/hooks/use-shortcuts.ts"
   - "features/workflows/modules/editor/hooks/use-undo-redo.ts"
-last-verified: "2026-07-15"
+last-verified: "2026-08-03"
 ---
 
 The flow canvas includes a vertical toolbar for adding, arranging, and reviewing content. **Undo**, **Redo**, and **Change History** appear separately in the bottom-left of the editor.
@@ -22,12 +22,6 @@ The flow canvas includes a vertical toolbar for adding, arranging, and reviewing
 Editing controls update the draft without publishing it. View-only controls, such as **Outcome Focus** and **Keyboard shortcuts**, do not change the flow.
 
 ## Canvas toolbar
-
-<img
-  src="/assets/flow-canvas-toolbar.png"
-  alt="Add block picker open beside the flow canvas toolbar"
-  style={{ width: "100%", maxWidth: "360px", margin: "0", borderRadius: "0.75rem" }}
-/>
 
 Controls that modify the draft are unavailable when the current view is read-only.
 
@@ -52,6 +46,12 @@ Sticky notes do not connect to other blocks, run during a call, or provide instr
 Select **Organize blocks** to reposition the current flow without changing block settings or connections. The new layout is recorded as one undoable edit.
 
 Use it after adding or reconnecting several blocks. Review the result and select **Undo** if the previous layout was clearer.
+
+### Collapse or expand blocks
+
+Select **Collapse all blocks** to hide the detailed exit-condition sections on blocks that support them. Select **Expand all blocks** to show those sections again.
+
+This changes only how the canvas is displayed. It does not remove exit conditions, connections, or other block settings.
 
 ### Replace invalid variables
 

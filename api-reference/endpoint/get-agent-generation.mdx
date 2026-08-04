@@ -1,0 +1,17 @@
+---
+title: "Get Agent Generation Status"
+description: "Check the status of a prompt-based agent generation."
+sources:
+  - "app/api/agent-generations/[generationId]/route.ts"
+  - "features/agent-generation/model/contracts.ts"
+  - "features/agent-generation/server/job-store.ts"
+  - "features/agent-generation/server/reconcile-generation.ts"
+last-verified: "2026-08-03"
+openapi: "GET /agent-generations/{generationId}"
+---
+
+Returns the current status of an agent generation owned by the authenticated user.
+
+Poll the URL supplied in the creation response's `Location` header. Stop polling when the status is `completed` or `failed`. A completed response includes the generated `agentId` and `workflowId`; a failed response includes an error code and message.
+
+Generation status responses are not cached.

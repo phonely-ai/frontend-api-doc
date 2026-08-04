@@ -13,7 +13,7 @@ sources:
   - "phonely-backend/app/services/code_block/code_block_service.py"
   - "phonely-backend/app/agent/live_actions/code_block.py"
   - "phonely-backend/app/config/settings.py"
-last-verified: "2026-07-16"
+last-verified: "2026-08-03"
 ---
 
 Use **Code** to transform, compare, or calculate data with Python. The block receives values from the flow and returns output that later blocks can use.
@@ -38,6 +38,8 @@ If the output is needed only after the call, use post-call so the caller does no
 
 Under **Input Variables**, create a key for each value the function needs. Set its value using fixed text, a variable available at the block, or both.
 
+Use **Manual** to configure inputs as key-value rows, or switch to **Code** to edit the same inputs as a JSON object. Phonely converts the current inputs when you switch views. Name every populated input before switching to Code, and fix invalid JSON before switching back to Manual.
+
 | Field | Purpose |
 | :-- | :-- |
 | **Variable name** | The key used to access the value in `input_dict` |
@@ -46,6 +48,12 @@ Under **Input Variables**, create a key for each value the function needs. Set i
 Use short, unique names such as `subtotal`, `customer_tier`, or `appointment_date`. Lowercase names with underscores are easiest to read in the code.
 
 When an input contains only a selected variable, it retains that variable's type, including text, number, boolean, array, or object. An empty resolved value is passed to the function as `None`. Handle missing or empty values in the code instead of assuming every input is present.
+
+## Generate code with AI
+
+In **Configure**, select **Generate with AI** and describe what the code should do. The assistant can write the Python function, map its inputs, and define its expected outputs. Continue the small chat to refine the result.
+
+Review the generated inputs, code, and outputs before continuing. You still need to validate the code and run a successful block test before its output variables can be used reliably by later blocks.
 
 ## Write the Python function
 

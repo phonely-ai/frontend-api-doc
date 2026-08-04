@@ -1719,107 +1719,30 @@
     },
     "/usage": {
       "get": {
-        "summary": "Get usage data",
-        "description": "Retrieves usage data for all agents accessible by a user within a date range. If agentId is provided, returns data for that specific agent only. Requires X-Authorization header with valid API key.",
-        "parameters": [
-          {
-            "name": "uid",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "User ID"
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "date",
-              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
-            },
-            "description": "Start date in YYYY-MM-DD format"
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "date",
-              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
-            },
-            "description": "End date in YYYY-MM-DD format"
-          },
-          {
-            "name": "agentId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional agent ID to filter data for specific agent"
-          }
-        ],
+        "summary": "Get usage data (retired)",
+        "description": "This frontend endpoint is retired and always returns 410 Gone. View current usage in the Phonely platform under Settings > Usage & Cost.",
         "responses": {
-          "200": {
-            "description": "Successful response",
+          "410": {
+            "description": "The endpoint has been retired",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsageResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request - Missing required parameters or invalid date format",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Missing or invalid API key",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "User or agent not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "type": "object",
+                  "required": ["error", "message"],
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Gone"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
           }
-        },
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ]
+        }
       }
     },
     "/get-invoices": {
@@ -1947,6 +1870,212 @@
           },
           "500": {
             "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent-generations": {
+      "post": {
+        "summary": "Generate an agent from a prompt",
+        "description": "Asynchronously create an inbound agent and its first flow from a natural-language prompt. Repeating the same request with the same idempotency key returns the existing generation.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "description": "A unique key for this logical generation request. Maximum 128 characters.",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAgentGenerationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The idempotent request already completed",
+            "headers": {
+              "Location": {
+                "description": "Relative URL for checking generation status",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentGenerationResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "The generation is queued or in progress",
+            "headers": {
+              "Location": {
+                "description": "Relative URL for checking generation status",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentGenerationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request or idempotency key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The user cannot create agents in the organization",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Organization not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The idempotency key was used for different request data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Agent generation could not be started",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent-generations/{generationId}": {
+      "get": {
+        "summary": "Get agent generation status",
+        "description": "Return the current status of a prompt-based agent generation owned by the authenticated user.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "generationId",
+            "in": "path",
+            "required": true,
+            "description": "Generation identifier returned by the create request",
+            "schema": {
+              "type": "string",
+              "pattern": "^gen_[a-f0-9]{40}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Current generation status",
+            "headers": {
+              "Cache-Control": {
+                "description": "Status responses are not cached",
+                "schema": {
+                  "type": "string",
+                  "example": "no-store"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentGenerationResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Generation not found or not owned by the authenticated user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Generation status could not be loaded",
             "content": {
               "application/json": {
                 "schema": {
@@ -2813,6 +2942,97 @@
           }
         }
       },
+      "CreateAgentGenerationRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["orgId", "agentName", "source"],
+        "properties": {
+          "orgId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "Organization in which to create the agent"
+          },
+          "agentName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "description": "Name for the generated agent"
+          },
+          "timezone": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "example": "America/New_York",
+            "description": "Valid IANA timezone. Defaults to UTC."
+          },
+          "source": {
+            "$ref": "#/components/schemas/PromptAgentGenerationSource"
+          }
+        }
+      },
+      "PromptAgentGenerationSource": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "prompt"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["prompt"]
+          },
+          "prompt": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20000,
+            "description": "Natural-language instructions for the agent and its first flow"
+          }
+        }
+      },
+      "AgentGenerationResponse": {
+        "type": "object",
+        "required": ["generationId", "status", "createdAt", "updatedAt"],
+        "properties": {
+          "generationId": {
+            "type": "string",
+            "pattern": "^gen_[a-f0-9]{40}$"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["queued", "generating", "completed", "failed"]
+          },
+          "agentId": {
+            "type": "string",
+            "description": "Generated agent identifier. Present when status is completed."
+          },
+          "workflowId": {
+            "type": "string",
+            "description": "Generated first-flow identifier. Present when status is completed."
+          },
+          "error": {
+            "$ref": "#/components/schemas/AgentGenerationFailure"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AgentGenerationFailure": {
+        "type": "object",
+        "required": ["code", "message"],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
       "Error": {
         "type": "object",
         "properties": {
@@ -2825,96 +3045,6 @@
             "description": "Detailed error message"
           }
         }
-      },
-      "UsageResponse": {
-        "type": "object",
-        "properties": {
-          "summary": {
-            "type": "object",
-            "properties": {
-              "totalCallCount": {
-                "type": "integer",
-                "description": "Total number of calls"
-              },
-              "totalCallMinutes": {
-                "type": "number",
-                "description": "Total call duration in minutes"
-              },
-              "agentCount": {
-                "type": "integer",
-                "description": "Number of agents"
-              },
-              "orgCount": {
-                "type": "integer",
-                "description": "Number of organizations"
-              }
-            },
-            "required": ["totalCallCount", "totalCallMinutes", "agentCount", "orgCount"],
-            "description": "Summary statistics for the usage data"
-          },
-          "agents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentUsage"
-            },
-            "description": "Usage data for each agent"
-          },
-          "dateRange": {
-            "type": "object",
-            "properties": {
-              "startDate": {
-                "type": "string",
-                "format": "date",
-                "description": "Start date of the query range"
-              },
-              "endDate": {
-                "type": "string",
-                "format": "date",
-                "description": "End date of the query range"
-              }
-            },
-            "required": ["startDate", "endDate"],
-            "description": "Date range for the usage data"
-          },
-          "requestedAgentId": {
-            "type": "string",
-            "description": "Agent ID that was specifically requested (only present when agentId parameter was provided)",
-            "nullable": true
-          }
-        },
-        "required": ["summary", "agents", "dateRange"]
-      },
-      "AgentUsage": {
-        "type": "object",
-        "properties": {
-          "agentId": {
-            "type": "string",
-            "description": "Agent ID"
-          },
-          "agentName": {
-            "type": "string",
-            "description": "Agent name"
-          },
-          "orgId": {
-            "type": "string",
-            "description": "Organization ID",
-            "nullable": true
-          },
-          "orgName": {
-            "type": "string",
-            "description": "Organization name",
-            "nullable": true
-          },
-          "callCount": {
-            "type": "integer",
-            "description": "Number of calls for this agent"
-          },
-          "callMinutes": {
-            "type": "number",
-            "description": "Total call duration in minutes for this agent"
-          }
-        },
-        "required": ["agentId", "agentName", "callCount", "callMinutes"]
       },
       "GetAllAgentsResponse": {
         "type": "object",
