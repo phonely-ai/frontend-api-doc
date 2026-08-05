@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.241.0",
-        "commit": "61d8b74c9b9ab0fa79f7dafb2c14bebb778d4ef4"
+        "label": "v0.242.0",
+        "commit": "15b5477fb21b63a158bd6867e139f2473246ba9b"
       }
     },
     {
@@ -207,6 +207,52 @@
             "billing-and-usage/usage-notifications"
           ],
           "note": "The billing guides still need the current Usage & Cost surface and usage-event-ledger behavior introduced through v0.241.0."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.242.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-08-05",
+      "fromExclusive": {
+        "label": "v0.241.0",
+        "commit": "61d8b74c9b9ab0fa79f7dafb2c14bebb778d4ef4"
+      },
+      "throughInclusive": {
+        "label": "v0.242.0",
+        "commit": "15b5477fb21b63a158bd6867e139f2473246ba9b"
+      },
+      "dispositions": [
+        {
+          "id": "workflow-template-experience",
+          "status": "docs-updated",
+          "pages": ["key-concepts/flows"],
+          "note": "Documented searching and filtering the template library, reviewing template details and the read-only flow preview, and creating an editable flow from a template."
+        },
+        {
+          "id": "workflow-change-review",
+          "status": "docs-updated",
+          "pages": ["flow-editor/collaboration", "key-concepts/ask-ai"],
+          "note": "Updated collaboration and Ask AI review guidance for the read-only canvas preview, highlighted block and connection changes, block-setting inspection, and proposal decisions."
+        },
+        {
+          "id": "pre-call-terminal-reachability",
+          "status": "already-covered",
+          "pages": ["blocks/flow-blocks/start-flow", "blocks/flow-control-and-routing/end-call", "key-concepts/flows"],
+          "note": "Existing guidance already covers pre-call routing, ending a call before the conversation begins, and validation of blocks reachable from the flow entry point."
+        },
+        {
+          "id": "retired-agent-creation-ui",
+          "status": "no-doc-change",
+          "pages": ["ai/build-agent", "get-started/quick-start"],
+          "note": "Removed a retired agent-creation implementation without changing the current product paths documented for onboarding and prompt-based agent creation."
+        },
+        {
+          "id": "internal-release-tooling",
+          "status": "not-public",
+          "pages": [],
+          "note": "Repository review automation and dependency metadata do not change the public Phonely product experience."
         }
       ]
     }

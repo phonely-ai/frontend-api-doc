@@ -5,12 +5,13 @@ sources:
   - "features/workflows/modules/editor/workflow-canvas.tsx"
   - "features/workflows/modules/editor/hooks/use-workflow-sync-coordinator.ts"
   - "features/workflows/modules/editor/hooks/use-collaboration.ts"
-  - "features/workflows/modules/editor/hooks/use-workflow-diff-review.ts"
+  - "features/workflows/modules/editor/hooks/use-remote-workflow-review.ts"
   - "features/workflows/modules/editor/components/controls/flow-sync-conflict-banner.tsx"
-  - "features/workflows/modules/editor/components/workflow-diff-review-modal.tsx"
+  - "features/workflows/modules/editor/components/remote-workflow-review-overlay.tsx"
+  - "features/workflows/modules/editor/components/workflow-comparison-node-frame.tsx"
   - "features/workflows/modules/editor/components/controls/save-button-group.tsx"
   - "features/workflows/modules/editor/components/version-restore-modal.tsx"
-last-verified: "2026-07-15"
+last-verified: "2026-08-05"
 ---
 
 When the same flow changes elsewhere while you have it open, Phonely protects both copies instead of silently overwriting one. Compare the drafts, then choose how to load the remote update.
@@ -39,17 +40,13 @@ Stop editing and resolve the update before continuing.
 
 ## Review the changes
 
-Select **Review Changes** in the banner. The **Review Flow Changes** dialog compares:
+Select **Review Changes** in the banner. The canvas switches to a read-only preview of the remote draft:
 
-- **Local Draft:** the flow currently shown on your canvas.
-- **Remote Updates:** the newer shared draft waiting to be loaded.
+- changed blocks and connections are highlighted;
+- select a changed block to inspect its updated settings; and
+- select **Fit changes** to bring the affected parts of the flow into view.
 
-| View | Best for |
-| :-- | :-- |
-| **Simple** | Readable changes to prompts, objectives, and block settings |
-| **Advanced** | Exact field-level JSON differences when Simple does not explain a change |
-
-The dialog is read-only and uses the technical terms **node** for a block and **edge** for a connection. Close it when you are ready to choose a resolution from the banner.
+The preview does not change either draft. Select **Back to Local** when you are ready to return to your draft and choose a resolution from the banner.
 
 ## Choose a resolution
 
