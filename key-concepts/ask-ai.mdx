@@ -16,8 +16,11 @@ sources:
   - "features/workflows/ai/prompt/workflows-prompt-fragment.ts"
   - "features/workflows/ai/tools/propose-workflow-changes.ts"
   - "features/workflows/assistant-capability/proposal-review/**"
+  - "features/workflows/modules/editor/components/workflow-proposal-preview-overlay.tsx"
+  - "features/workflows/modules/editor/components/workflow-proposal-node-review-frame.tsx"
+  - "features/workflows/modules/editor/context/workflow-field-review-context.tsx"
   - "app/api/assistant/**"
-last-verified: "2026-08-03"
+last-verified: "2026-08-05"
 ---
 
 Ask AI is Phonely's in-product assistant. It opens in the app side panel and works alongside the page you are using.
@@ -79,8 +82,8 @@ Attachments supplement the current page context; they do not change which agents
 Treat Ask AI as a collaborator rather than an automatic approval step:
 
 1. State the intended caller or business outcome.
-2. Review what Ask AI inspected and the changes it proposes.
-3. Accept or reject each proposed flow change, then select **Submit changes**. The draft does not change until you submit the proposal.
+2. Review the proposed flow on the canvas. Added, removed, and changed blocks are highlighted; select a block to inspect its proposed settings.
+3. Accept or reject each proposed change, then select **Submit changes**. The draft does not change until you submit the proposal.
 4. Check the affected configuration and test the important paths before relying on the result with callers.
 
 Accepted flow changes are applied together to the current draft. If the draft changes before you submit, the proposal can become outdated and must be prepared again. Draft auto-save does not publish the changes.
