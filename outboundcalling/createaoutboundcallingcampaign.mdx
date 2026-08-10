@@ -1,268 +1,62 @@
 ---
 title: "Outbound Campaigns"
-description: "Create and manage outbound calling campaigns."
+description: "Choose who to call, when calls can run, and which outbound flow handles them."
 sources:
   - "features/campaign/**"
   - "app/(main)/(routes)/campaign/**"
-  - "services/call-service.ts"
+last-verified: "2026-08-10"
 ---
 
-Outbound calling in Phonely allows you to proactively reach customers using AI-powered call flows. This is useful for use cases such as lead qualification, appointment follow-ups, reminders, and customer outreach, when done responsibly and compliantly
+Outbound campaigns schedule and place calls through an agent's outbound flow. The campaign supplies the contacts, phone numbers, calling hours, and source data; the selected flow controls what happens during and after each call.
 
-With concurrent calling, multiple leads can be contacted simultaneously, drastically improving speed to lead and ensuring every opportunity is reached in real time.
+<Warning>
+  You are responsible for consent, calling hours, identification, opt-outs, recordkeeping, and every law that applies to your campaign. Complete the in-product compliance acknowledgements only after reviewing the campaign and its audience.
+</Warning>
 
-<iframe src="https://www.youtube.com/embed/eM5TFVexJ3s" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
+## Choose a campaign type
 
-<Note>
-  Outbound AI calling is subject to regulations such as the **TCPA** and other local laws. Phonely is designed to support legitimate, opt-in use cases, not spam or mass cold calling.
+Select **Create Campaign**, then choose how contacts enter the campaign:
 
-  As a general rule:
+| Campaign type | Use it when | Contact source |
+| --- | --- | --- |
+| Continuous Calling | New contacts should enter an ongoing campaign automatically | Webhook or Google Sheets |
+| Batch Calling | You have a fixed list of contacts to call | CSV upload |
 
-  Do not use AI to spam or cold-call people without proper consent.
+After choosing the type, enter a campaign name and select the use case that best describes it.
 
-  Ensure you understand when and how AI-generated voices are allowed.
+## Complete campaign setup
 
-  Seek legal counsel if you are unsure about compliance requirements.
-</Note>
+The setup has six steps:
 
-Outbound calling in Phonely is made up of two connected parts:
+1. **Campaign Info:** Name the campaign and choose its use case.
+2. **Select Trigger Type:** Configure the webhook, Google Sheets connection, or CSV files that provide contacts.
+3. **Add Phone Numbers:** Choose the outbound numbers and how Phonely selects among them.
+4. **Set Call Cadence:** Choose the days, time ranges, and maximum calls per hour.
+5. **Configure Call Flows:** Select a published outbound flow and map any source fields it needs.
+6. **Compliance:** Review and accept the required compliance and Do Not Call acknowledgements.
 
-1. Outbound Call Flows – define what the AI says and does during the call
-2. Campaigns – define who to call, when to call, and how often
+The setup remains a draft until every required step is complete.
 
-You build the flow first, then attach it to a campaign.
+## Configure calling hours
 
-To create a campaign:
+Enable the days when calls may run and add one or more time ranges to each day. **Calls Per Hour** limits how many calls Phonely can place in an hour.
 
-1. Go to **Outbound Calls \> Campaigns**
-2. Click **Create Campaign**
-3. Enter the name of your campaign. Use a descriptive name that conveys purpose.
+Calling hours are evaluated in each contact's scheduling timezone. Phonely uses the agent timezone unless the campaign maps a timezone field or is configured to infer the timezone from the contact's phone number.
 
-### Campaign Use Cases
+The editor warns when a configured range falls outside 8:00 AM–9:00 PM. This warning does not replace your own compliance review.
 
-Next, choose a use case. This tells Phonely what kind of automation you’re building. Common use cases include:
+## Select a flow
 
-- **Lead Qualification** – calling potential customers and gathering initial details.
-- **Customer Retention** – re-engaging existing users or upselling new offers.
-- **Appointment Reminders** – automatically reminding clients of upcoming bookings.
-- **Feedback Collection** – conducting post-service surveys.
-- **Voicemail Redials** – following up with missed or unanswered leads.
+A campaign uses one published outbound flow. You can select an existing flow or create one during setup. Map the fields from the campaign source to the variables the flow needs before launching the campaign.
 
-Once defined, this context shapes your reporting and helps ensure that future analytics are categorized properly.
+See [Outbound Flows](/outboundcalling/creating-call-flows-for-outbound-campaigns) for the flow requirements.
 
-![Create Outbound Campaign](/assets/create-outbound-campaign.gif)
+## Launch and monitor the campaign
 
-### Add Outbound Numbers
+After setup, start the campaign from the campaign list. Campaigns appear as **In Progress**, **Paused**, or **Completed** as their status changes.
 
-A campaign needs outbound phone numbers that it can use to place calls. These numbers are provisioned through Twilio.
+- Pause a campaign to stop new calls temporarily.
+- Resume a paused campaign when it is ready to continue.
+- Open the campaign to review its queued and completed calls.
 
-When you connect Twilio to Phonely, all your available numbers become visible, allowing you to choose which ones will represent the campaign.
-
-### **Connect to Twilio**
-
-To place calls or receive calls in Phonely, you first need to connect your Twilio account and import at least one phone number.
-
-<Steps>
-  <Step title="Access Your Twilio Credentials">
-    Start by logging into your Twilio Console.
-
-    From the **Account Dashboard**, use the **Jump to search bar** at the top of the page and search for **General Settings**. This is the fastest way to locate account-level configuration without navigating through menus manually.
-
-    ![Access Twillio General Settings](/assets/access-twillio-general-settings.png)
-
-    Once you’re on the general settings page, look at the left-hand navigation and locate **Keys & Credentials**. From there, click **API Keys & Tokens**.
-
-    On this page, you’ll see your **Live credentials** section. You need two values: **Account SID**  and **Auth Token**.
-
-    Copy both values and keep them handy.
-
-    ![Twillio Live Credentials](/assets/twillio-live-credentials.png)
-  </Step>
-  <Step title="Import Numbers into Phonely">
-    Now switch over to Phonely. Navigate to the area where you manage phone numbers and click **Add Phone Numbers**.
-
-    Click Import numbers from Twilio.
-
-    Paste the credentials you copied from Twilio, then click **Connect & Fetch Numbers**.
-
-    ![Add Twillio Credentials To Phonely](/assets/add-twillio-credentials-to-phonely.png)
-
-    If the credentials are correct, Phonely will connect to your Twilio account and display any available phone numbers. Select the number(s) you want and add them to your campaign.
-  </Step>
-  <Step title="Purchase a Phone Number in Twilio">
-    If no phone numbers appear after connecting, it means your Twilio account does not yet have an active number.
-
-    To purchase, return to the Twilio Console and go back to the Account Dashboard. From the left-hand menu, open **Phone Numbers**.
-
-    Twilio will display a list of available numbers based on region. When choosing a number, review its capabilities carefully:
-
-    - Voice (required for calls)
-    - SMS/MMS (optional, but may require A2P 10DLC registration in the US)
-
-    Search for a number and then click **Buy**.
-
-    Once you’ve selected a number, review the routing and emergency calling requirements, accept the terms, and complete the purchase.
-
-    ![How To Buy A Phonenumber In Twillio](/assets/how-to-buy-a-phonenumber-in-twillio.png)
-
-    After the purchase is complete, return to **Phonely** and repeat the **Import from Twilio** step. The newly purchased number will now appear and can be selected for use.
-
-    ![Select Phone Numbers To Add To A Campaign In Phonely](/assets/select-phone-numbers-to-add-to-a-campaign-in-phonely.png)
-  </Step>
-</Steps>
-
-### Choose Routing Method
-
-Phonely offers three distinct ways to route calls across your outbound numbers:
-
-1. **Weight Routing** – The simplest and most common method. Phonely uses these weights to proportionally distribute calls.
-2. **State-Based Routing** – Designed for localized campaigns. Phonely detects the state of the recipient and automatically uses a number that matches that state. This improves answer rates, since recipients often respond more positively to local area codes. If no number matches the caller’s state, Phonely defaults to a random enabled number.
-3. **Country-Based Routing** – Used for international outreach. Calls are routed through numbers assigned to the recipient’s country, preserving a local presence and helping with compliance in regions where cross-border calls may be restricted. As with state-based routing, if no local number exists, Phonely falls back to a random enabled number.
-
-### Call Cadence
-
-Call cadence refers to when and how often your campaign will place calls. Phonely allows scheduling so your AI never calls outside of approved working hours.
-
-You’ll see a week-based grid interface where you can toggle each day on or off and define start and end times (for instance, Monday–Friday, 9 AM–6 PM).
-
-You can add multiple blocks per day if you want to include breaks. These schedules align with your customers’ local time zones, ensuring compliance with “do not disturb” hours.
-
-**Calls per Hour**
-
-You’ll also find a rate control slider that sets the maximum calls per hour. This feature prevents overwhelming your telephony provider or overloading concurrent call capacity.
-
-### Select Trigger
-
-This step determines how Phonely knows who to call and when to trigger those calls.\
-It’s here that you’ll decide between a continuous, always-on campaign and a finite, one-time batch.
-
-![Outbound Campaign Triggers](/assets/outbound-campaign-triggers.gif)
-
-**Campaign Type: Continuous vs Batch**
-
-At the top of this section, you’ll be asked to choose a Campaign Type.
-
-- **Continuous Calling** – This mode automatically calls new leads as they appear in your connected source (like Google Sheets or an incoming webhook). Whenever a new record is added, Phonely detects it and starts a call within your defined schedule.
-- **Batch Calling** – In this mode, you manually upload a fixed list of leads via CSV. Phonely then calls through that entire list until it’s completed. It’s perfect for short campaigns, such as a limited-time promotion or follow-up drive.
-
-### Trigger Sources
-
-After you pick the campaign type, Phonely asks you to specify the data source that provides leads. You’ll see three available options.
-
-#### 1. Google Sheets
-
-This is the most popular option for Continuous Calling.
-
-You’ll authenticate your Google account (or reconnect if needed), then select:
-
-- The spreadsheet where your leads are stored.
-- The specific tab to monitor.
-
-Every new row added to that tab becomes a new outbound call. Phonely reads the column headers and lets you map them to variables like name, phone number, or address.
-
-#### 2. Webhook
-
-The Webhook trigger is designed for real-time system integrations. Phonely generates a secure URL endpoint that can receive POST requests containing lead data.
-
-For example:
-
-```
-{
-  "phone_number": "+15551234567",
-  "name": "Jane Smith"
-}
-```
-
-Each POST instantly adds a new lead to your campaign queue.
-
-You can customize the schema and click **Update Fields** after any changes to ensure Phonely correctly interprets your payload.
-
-This option is excellent for developers or CRM systems that want to trigger calls based on specific events -  like when a new signup or missed call is logged.
-
-#### 3. CSV Upload
-
-For batch campaigns, you’ll upload a CSV file containing one or more leads. Each row represents a contact record, and at minimum you must include a column labeled.
-
-Once uploaded, Phonely processes the list sequentially according to your call cadence.\
-If you want to reuse the same campaign later with new leads, simply upload another CSV or create a new campaign.
-
-## Configure Call Flows
-
-Now that Phonely knows who to call, this step defines what happens during the call. Your AI agent’s behavior is determined by a Call Flow - a visual, block-based sequence that specifies messages, questions, responses, and follow-up actions.
-
-### Selecting or Editing a Flow
-
-You can choose an existing flow or create a new one. Each flow contains “prompt blocks” and “logic branches” that the AI uses to guide conversations.
-
-### Mapping Variables
-
-Phonely detects variables in your flow that require data - such as `{name}`, `{email}`, and asks you to map these to fields from your trigger source.
-
-For example:
-
-<img
-  src="/assets/select-campaign-call-flow.png"
-  alt="Select Campaign Call Flow"
-  title="Select Campaign Call Flow"
-  style={{ width:"66%" }}
-/>
-
-Correct mapping ensures that each call feels personalized. When your AI says, “_Hi Jane, this is your delivery confirmation_,” it’s pulling that name from your sheet or webhook payload.
-
-<Danger>
-  Please note that **not all variables need to be mapped**, only those you want your agent to reference or use during the call
-</Danger>
-
-After mapping, click **Save** to lock in your configuration.
-
-## Campaign Compliance
-
-Outbound calling regulations vary by country, so Phonely includes a mandatory compliance review step before publishing.
-
-You’ll see two confirmation checkboxes:
-
-1. **General Compliance** – You confirm that your campaign abides by relevant telemarketing laws, including:
-   - Consent from call recipients.
-   - Adherence to permitted calling hours.
-   - Accurate identification of your business.
-   - Maintenance of opt-out and record logs.
-2. **Do-Not-Call (DNC) Policy** – You acknowledge responsibility for ensuring that no prohibited numbers are called. Phonely screens against common DNC registries, but compliance ultimately rests with the campaign owner.
-
-<img
-  src="/assets/campaign-compliance-acknowledgement.png"
-  alt="Campaign Compliance Acknowledgement"
-  title="Campaign Compliance Acknowledgement"
-  style={{ width:"74%" }}
-/>
-
-Once both are acknowledged, you can safely publish your campaign.
-
-## Launching and Monitoring the Campaign
-
-Once published, the campaign is listed on the outbound calls dashboard with real-time visibility into call activity and results. Use the ▶️ Start control on the campaign row to launch the campaign.
-
-## Managing Campaign Status
-
-Once running, your campaign displays an **In Progress** status badge.\
-Click it to reveal control options:
-
-- **Pause Campaign** – temporarily stop all outbound calls while retaining data and progress.
-- **End Campaign** – permanently stop the campaign. Once ended, it cannot be resumed.
-
-![Edit Pause Delete Campaigns](/assets/edit-pause-delete-campaigns.png)
-
-## Edit a Campaign
-
-If you need to make adjustments after launch, click **Edit Campaign** at the top-right of the dashboard.
-
-You can modify:
-
-- Campaign name and type.
-- Phone numbers used for this campaign and routing method.
-- Call cadence and call per hour.
-- Trigger type (e.g., reconnect a Google Sheet or update webhook URL).
-- Call flow connections.
-
-  ![Edit An Outbound Campaign](/assets/edit-an-outbound-campaign.png)
-
----
+Before using production contacts, test the selected flow and campaign mappings with contact data and phone numbers you control.

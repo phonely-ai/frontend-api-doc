@@ -1,37 +1,53 @@
 ---
 title: "Introduction"
-description: "Get your API key and start using Phonely's frontend API."
+description: "Authenticate requests and work with supported Phonely API resources."
 sources:
+  - "app/api/agent-generations/**"
+  - "app/api/get-agent/**"
+  - "app/api/calls/**"
+  - "app/api/agent-documents/**"
+  - "app/api/agent-websites/**"
+  - "app/api/import-number/**"
+  - "app/api/list-voices/**"
+  - "app/api/agent-block-list/**"
+  - "app/api/get-orgs/**"
+  - "app/layout.tsx"
   - "lib/api-auth.ts"
   - "lib/api-client.ts"
-  - "lib/server-firebase-request-auth.ts"
   - "features/settings/modules/account/account-access-form.tsx"
+  - "features/settings/model/settings-tabs.ts"
+last-verified: "2026-08-10"
 ---
 
-{/* TODO: Add a screenshot showing where to find the API key in the Phonely settings page (the /settings?tab=profile view with the API Key field highlighted). Mintlify's API reference pages include a screenshot of their API playground — a similar "here's where to find it" visual reduces friction for developers. */}
+Use the Phonely API to generate and manage agents, inspect calls, manage agent knowledge sources, work with phone numbers, and retrieve organization data. The base URL is `https://app.phonely.ai/api`.
 
-These API docs cover the frontend endpoints that are authenticated with your Phonely API key.
-
-## Get Your API Key
+## Get your API key
 
 1. Sign in to the Phonely app.
-2. Open `/settings?tab=profile`.
-3. Find the `API Key` field.
-4. Reveal and copy the key.
+2. Open **Settings**, then select **Account**.
+3. Under **Access**, reveal and copy the **API Key**.
 
-## Authenticate Requests
+## Authenticate requests
 
-Send the API key in the `X-Authorization` header.
+Send the key in the `X-Authorization` header unless an endpoint states that authentication is not required.
 
 ```bash
-curl https://api.phonely.ai/agents \
+curl https://app.phonely.ai/api/agent-generations/GENERATION_ID \
   -H "X-Authorization: YOUR_API_KEY"
 ```
 
-## Keep The Scope In Mind
+## Generate an agent
 
-- These docs cover the API-key-authenticated frontend API surface.
-- Internal-only routes and services that use a different authentication model are out of scope here.
+1. [Start an agent generation](/api-reference/endpoint/generate-agent) with a prompt and an idempotency key.
+2. [Check the generation status](/api-reference/endpoint/get-agent-generation) until it completes or fails.
+
+The navigation groups the remaining endpoints by resource. Each endpoint guide documents its request, response, access checks, and important limitations.
+
+To add browser-based voice calls to your own application, use the [Web SDK](/api-reference/web-sdk).
+
+## Supported API surface
+
+The endpoints listed in this API Reference are the supported customer API contract. Routes used internally by the Phonely application, including billing and Ask AI operations, are not public integration endpoints even when they use an `/api` URL.
 
 <Warning>
   Keep your API key confidential. Do not share it publicly or commit it to source control.

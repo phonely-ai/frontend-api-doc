@@ -1,47 +1,24 @@
 ---
-title: "Delete Agents"
-description: "Learn how to delete agents"
+title: "Manage and Delete Agents"
+description: "Review organization agents, export their usage, or permanently delete selected agents."
 sources:
-  - "features/settings/modules/agents/**"
-  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/delete-agent-modal.tsx"
+  - "features/settings/modules/agents/agents-table/**"
+  - "services/agents/**"
+last-verified: "2026-08-10"
 ---
 
-The **Agents** page provides a centralized overview of all AI agents under your organization.\
-From here, you can monitor call activity, download usage data, and delete agents.
+Open **Settings > Agents** to review the agents in the current organization. The table includes identifying and operational details such as the agent name, phone number, agent ID, monthly call minutes, and last update time. Some columns depend on your access level and table settings.
 
-<Steps>
-  <Step title="Click your profile icon (bottom-left corner of the dashboard).">
-  </Step>
-  <Step title="From the dropdown menu, select Settings.">
-  </Step>
-  <Step title="Switch to the agents page.">
-    <Frame>
-      ![Delete agents settings](/assets/delete-agents-settings.png)
-    </Frame>
-  </Step>
-  <Step title="You’ll see a table listing all agents in your organization, along with key details such as:">
-    - **Name**: The agent's display name.
-    - **Phone Number:** The number assigned to the agent (if any).
-    - **Agent ID:** A unique identifier.
-    - **Deployment:** Indicates whether the agent  is live in Production or Enterprise.
-    - **Call Minutes (Monthly):** Total minutes the agent has used this month.
-    - **Updated At:** Shows when the agent was las modified or deployed.
-  </Step>
-  <Step title="Delete an agent">
-    Deleting an agent permanently removes its configurations, workflows, and logs associated with that agent. You can also delete one or multiple agents at once. 
+## Export agent usage
 
-    On the **Agents** page, locate the agent(s) you want to remove. Click the checkbox next to each agent’s name to select them.
+Use **Export Usage** to download usage data for the agents in the table. For interactive charts and filters, use [Usage and Cost](/billing-and-usage/manage-agents-and-usage).
 
-    Once selected, a toolbar will appear at the top of the list showing how many agents are selected. Click **Delete agents**.
+## Delete agents
 
-    <Frame>
-      ![Delete agents settings](/assets/delete-agents-settings.png)
-    </Frame>
+1. Select the checkbox beside each agent you want to remove.
+2. Select **Delete agents** in the selection toolbar.
+3. Review the selected agents and confirm **Delete agents**.
 
-    Confirm the deletion in the prompt that appears.
-
-    <Tip>
-      Deleted agents cannot be recovered. If you need to reuse a configuration later, consider duplicating the agent before deleting it.
-    </Tip>
-  </Step>
-</Steps>
+<Warning>
+  Deleting an agent is permanent. Confirm that you no longer need its configuration or associated resources before continuing.
+</Warning>

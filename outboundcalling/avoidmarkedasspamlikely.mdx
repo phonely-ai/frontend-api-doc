@@ -1,31 +1,32 @@
 ---
-title: "Reduce Spam Labeling Risk"
-description: "Practical checklist for lowering spam-labeling risk on outbound campaigns."
+title: "Outbound Compliance"
+description: "Prepare an outbound campaign responsibly and reduce avoidable delivery problems."
 sources:
-  - "features/campaign/**"
-  - "services/phone-numbers/**"
-  - "features/settings/modules/messaging/**"
+  - "features/campaign/modules/campaign-onboarding/steps/compliance-step.tsx"
+  - "features/campaign/modules/edit-campaign-sheet/call-cadence-tab/**"
+  - "features/campaign/modules/edit-campaign-sheet/phone-number-tab/**"
+last-verified: "2026-08-10"
 ---
 
-Spam labeling is influenced by carrier behavior, list quality, cadence, and consent. Use this checklist before you scale an outbound campaign.
+Carrier labeling and call delivery depend on factors outside Phonely, so no configuration can guarantee that a call will be answered or avoid a spam label. Use the campaign controls to remove preventable problems before launch.
 
-## Before You Launch
+## Before launching
 
-1. Use the correct outbound number for the campaign and region.
-2. Confirm your contact source is consent-based and current.
-3. Set reasonable call cadence and retry rules.
-4. Launch with a smaller sample before using the full audience.
-5. Review answer rates, outcomes, and complaints immediately after launch.
+1. Call only contacts you are permitted to contact.
+2. Remove contacts who have opted out or must not be called.
+3. Use an appropriate enabled number and routing method for the audience.
+4. Configure calling hours in the contact's scheduling timezone.
+5. Set a calls-per-hour limit appropriate for the campaign.
+6. Test the flow, source mappings, routing, and voicemail behavior with numbers you control.
 
-## Good Operating Habits
+Phonely warns when calling hours extend outside 8:00 AM–9:00 PM, but you remain responsible for the rules that apply to each contact and jurisdiction.
 
-- Match numbers to the audience when possible.
-- Keep call windows aligned to appropriate local hours.
-- Remove bad or blocked contacts quickly.
-- Monitor DNC compliance and suppression lists.
-- Pause the campaign if answer rates drop sharply or complaint volume rises.
+## Review campaign behavior
 
-## Rules
+Start with a controlled audience and monitor the campaign's queued and completed calls. Investigate unexpected delivery failures, answer patterns, outcomes, or opt-out requests before increasing volume.
 
-- ALWAYS respect consent and compliance requirements for the target campaign.
-- NEVER scale a campaign before validating the flow on a smaller sample.
+Pause the campaign while correcting its contact source, calling hours, phone-number configuration, or flow behavior.
+
+<Warning>
+  Phonely's compliance controls and Do Not Call handling do not replace your own legal review, consent records, suppression lists, or operational monitoring.
+</Warning>

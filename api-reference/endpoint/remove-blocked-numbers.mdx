@@ -1,0 +1,12 @@
+---
+title: "Remove Blocked Numbers"
+description: "Remove one or more phone numbers from an agent's block list."
+sources:
+  - "app/api/agent-block-list/route.ts"
+last-verified: "2026-08-10"
+openapi: "DELETE /agent-block-list"
+---
+
+Removes phone numbers from an agent's block list. The API key must belong to the supplied user, and that user must have access to the agent.
+
+The response separates numbers that were removed from numbers that were invalid or not present. Handle both arrays because a request can partially succeed.

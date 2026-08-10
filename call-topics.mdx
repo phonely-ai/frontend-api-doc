@@ -1,0 +1,34 @@
+---
+title: "Call Topics"
+description: "Define the topics used to classify completed calls."
+sources:
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/setting-tabs/call-tagging-tab.tsx"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/setting-tabs/call-topics-section.tsx"
+  - "features/calls/modules/call-details/tabs/highlights/call-highlights-tab.tsx"
+  - "features/performance/**"
+last-verified: "2026-08-10"
+---
+
+Call topics classify what a completed conversation was about. Use them to organize Call History and compare common reasons for calls in Performance.
+
+## Define topics
+
+Open the agent's **Settings**, select **Call Tagging**, and add each topic with a name and description.
+
+- Use the **name** as the stable reporting label.
+- Use the **description** to explain when the topic applies.
+- Keep topics distinct enough that the same conversation is not routinely ambiguous.
+
+For example, prefer separate topics such as `New appointment`, `Reschedule appointment`, and `Cancel appointment` when those categories lead to different operational decisions.
+
+Phonely analyzes completed calls against the agent's configured topics. A call can contain more than one topic.
+
+## Review and use topics
+
+Topics appear in [Call History](/call-history-ai-analytics/call-history-ai-analytics), [Call Details](/call-history-ai-analytics/call-history-ai-analytics#review-call-details), [Performance](/performance) filters and charts, and [Data Tables](/data-tables). In a completed call's **Highlights**, you can add or remove topics when the classification needs correction.
+
+When you rename or remove a configured topic, earlier calls can still contain the previous value. Review saved Performance and Data Table views that refer to it.
+
+<Tip>
+  Topics describe what the call was about. Use [Call Outcome Tagging](/blocks/common-settings#call-outcome-tagging) for a result recorded by the flow, and [Post-Call Outcomes](/post-call-outcomes) for a result added later through the API.
+</Tip>

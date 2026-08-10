@@ -1,84 +1,34 @@
 ---
 title: "Settings Overview"
-description: "Overview of the Settings workspace, including profile, billing, notifications, agents, and numbers."
+description: "Find the account, workspace, billing, usage, and communication settings available in Phonely."
 sources:
-  - "features/settings/**"
+  - "features/settings/model/settings-tabs.ts"
+  - "features/settings/ui/**"
   - "app/(main)/(routes)/settings/page.tsx"
+last-verified: "2026-08-10"
 ---
 
-Settings is where you manage your personal account details and workspace-level configuration. Open `/settings` and use the tabs at the top of the page to switch between areas.
+Open **Settings** from your profile menu to manage your account and the current organization.
 
-## Main Tabs
+## Settings pages
 
-| Tab | Route | Use it for |
-| --- | --- | --- |
-| Profile | `/settings?tab=profile` | Your name, avatar, phone number, password, and API key |
-| Plan & Billing | `/settings?tab=plan-and-billing` | Plan details, invoices, checkout flows, and billing history |
-| Notifications | `/settings?tab=notifications` | Usage alerts, recipients, and notification logs |
-| Agents | `/settings?tab=agents` | Workspace agent list, usage data, and agent cleanup |
-| Numbers | `/settings?tab=numbers` | Workspace phone numbers and DNC numbers |
+| Page | Use it for |
+| --- | --- |
+| **Account** | Profile, preferences, account identifiers, API access, and organization information |
+| **Team** | Members, invitations, and roles |
+| **Plan & Billing** | Subscription, included usage, payment information, and invoices |
+| **Usage & Cost** | Usage and estimated cost trends by date, agent, and usage type |
+| **Notifications** | Email alerts for monthly usage thresholds |
+| **Agents** | Organization-wide agent inventory, usage export, and agent deletion |
+| **Numbers** | Phone numbers and the organization do-not-call list |
+| **Messaging** | Messaging configuration for the organization |
 
-## Profile
+The pages and controls you can use depend on your role, plan, and organization configuration. Users with viewer access see only **Account**.
 
-Open `/settings?tab=profile` to manage your personal settings.
+## Personal and organization settings
 
-This tab includes:
+Changes under **Account** apply to your user unless the field is in the organization section. Team membership, billing, notifications, agents, numbers, and messaging are organization-level settings.
 
-- Your display name, avatar, and phone number
-- Password reset controls
-- Your API key, which you can reveal and copy for API requests
-
-## Plan & Billing
-
-Open `/settings?tab=plan-and-billing` to review workspace billing.
-
-Use this tab to:
-
-- Review the current plan
-- Start or complete checkout flows
-- Review invoices and billing history
-
-## Notifications
-
-Open `/settings?tab=notifications` to manage usage alerts for the workspace.
-
-From this tab you can:
-
-- Create a new notification with `Add Notification`
-- Edit or delete an existing notification
-- Open execution logs to see when an alert fired
-
-## Agents
-
-Open `/settings?tab=agents` to manage the workspace agent list.
-
-This table is used for:
-
-- Reviewing all agents in the organization
-- Checking monthly call minutes and deployment state
-- Downloading usage data
-- Deleting agents when they are no longer needed
-
-## Numbers
-
-Open `/settings?tab=numbers` to manage workspace phone numbers.
-
-This tab has two built-in views:
-
-- `Available Numbers` for active workspace numbers
-- `DNC Numbers` for the do-not-call list
-
-## Admin-Only Tabs
-
-Admins may also see:
-
-- `/settings?tab=admin`
-- `/settings?tab=admin-orgs`
-- `/settings?tab=admin-custom-actions`
-- `/settings?tab=admin-flow-templates`
-- `/settings?tab=admin-selector-options`
-- `/settings?tab=admin-changelog`
-
-## Viewer Access
-
-If the current user inherits viewer UX, only the `Profile` tab is available.
+<Tip>
+  Check the organization switcher before changing organization-level settings when you belong to more than one organization.
+</Tip>

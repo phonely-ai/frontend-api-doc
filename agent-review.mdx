@@ -1,76 +1,35 @@
 ---
 title: "Agent Review"
-description: "Track flagged issues, prioritize review work, and update issue status across your organization."
+description: "Triage issues reported while reviewing calls."
 sources:
   - "app/(main)/(routes)/agent-review/**"
   - "services/onboarding/**"
+last-verified: "2026-08-10"
 ---
 
-Agent Review is the workspace for triaging and resolving issues that were flagged during call review. It is designed for teams that need to move from "something went wrong" to an organized queue of work.
+Agent Review organizes issues that your team reports from calls. It provides a shared queue for moving an observed problem from review to resolution.
 
-Open `/agent-review` to jump to the first available organization, or open `/agent-review/{orgId}` directly when you already know which organization you want to review.
+Use [Call History](/call-history-ai-analytics/call-history-ai-analytics) to investigate a call. Use Agent Review when the investigation needs to become tracked work.
 
-## What Agent Review Is For
+## Work through the queue
 
-Use Agent Review to:
+Issues are grouped by agent. Filter the queue by organization, date range, severity, or tags, then use the status tabs:
 
-- see open review issues grouped by agent
-- prioritize issues by status, severity, and tags
-- open the full issue detail sheet for transcript and call context
-- update issue status as work moves from triage to resolution
-
-## Main Areas Of The Page
-
-### Status Tabs
-
-The top of the page includes these tabs:
-
-- `Open`
-- `In Progress`
-- `Resolved`
-- `Cancelled`
-- `All`
-
-### Filters
-
-Use the page filters to narrow the queue by:
-
-- organization
-- date range
-- severity
-- tags
-
-### Issue Groups
-
-Issues are grouped by agent so you can quickly see which agents have the most review work and how many issues are still open.
-
-### Issue Detail Sheet
-
-Selecting an issue opens a detail sheet where you can review the issue context and update it without leaving the page.
-
-## Review Workflow
-
-1. Open `/agent-review` or `/agent-review/{orgId}`.
-2. Choose the correct organization.
-3. Select the status tab you want to work through.
-4. Apply date, severity, or tag filters if needed.
-5. Open an issue from the list.
-6. Review the transcript, recording, call links, tags, severity, and current status.
-7. Update the issue to `In Progress`, `Resolved`, `Cancelled`, or `Open` as appropriate.
-
-## Bulk Actions
-
-If you select multiple issues, Phonely shows a bulk action toolbar. Use it to:
-
-- reopen issues
-- mark issues as `In Progress`
-- mark issues as `Resolved`
-- mark issues as `Cancelled`
-
-## Agent Review vs Other Review Pages
-
-| Page | Use it for |
+| Status | Meaning |
 | --- | --- |
-| `Call History` | transcripts, recordings, summaries, and single-call analysis |
-| `Call Events` | event-by-event debugging for workflows and integrations |
-| `Agent Review` | issue tracking, triage, prioritization, and team follow-up |
+| **Open** | Reported and waiting for work |
+| **In Progress** | Actively being investigated or fixed |
+| **Resolved** | Addressed and complete |
+| **Cancelled** | Closed without further work |
+| **All** | Every issue in the current scope |
+
+Open an issue to review its description, call context, transcript, tags, and other available details. Update the status as the work progresses.
+
+## Keep reviews actionable
+
+- Describe the observed behavior rather than only the expected fix.
+- Include enough call context for another person to reproduce or understand the issue.
+- Use severity for impact and tags for categorization.
+- Mark an issue resolved only after the relevant behavior has been checked.
+
+Agent Review does not change an agent or flow. Make product changes in [Agent Design](/agent-design/overview), test them, then return to the issue to record its final status.

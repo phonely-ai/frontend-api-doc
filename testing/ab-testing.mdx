@@ -1,347 +1,70 @@
 ---
 title: "A/B Testing"
-description: "Learn how to run performance tests on your voice agents"
+description: "Compare a control agent with a variant using live call traffic."
 sources:
   - "features/testing/modules/ab-test/**"
   - "app/(main)/(routes)/testing/ab-test/**"
   - "services/ab-test-case-service.ts"
+last-verified: "2026-08-10"
 ---
 
-Phonely's A/B Testing tool helps you experiment, measure, and improve your voice AI's performance with real world data. It allows you to compare different versions of your AI agent such as Voice, workflow, conversation settings to determine which one performs best in live calls.
+A/B Testing compares your current agent, the **Control**, with a duplicated **Variant** using live calls. Phonely routes the configured share of calls to the variant and evaluates both agents against the same success criterion.
 
-This guide explains how A/B testing works, how to create and run a test, and how to interpret results.
+Use [Unit Testing](/testing/simulation-testing) for repeatable generated scenarios before exposing changes to live traffic.
 
-<iframe src="https://www.youtube.com/embed/m_Eyh2RGGyg" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
+## Create a test
 
-## What is A/B Testing in Phonely?
+Open **Testing > A/B Testing** and create a test in **Planned**. The setup has four parts:
 
-A/B Testing lets you run controlled experiments between two versions of your AI agent:
+| Step | What you configure |
+| --- | --- |
+| Test details | Name, description, and the category of change |
+| End criteria | Stop after a number of calls or a number of days |
+| Traffic split | The percentage of calls sent to the variant; the remainder stays with the control |
+| Success criteria | The call outcome, ended reason, or call-duration direction that counts as success |
 
-- The Base Agent (Control) - your existing setup.
-- The Test Agent (Variant) - a duplicate with specific changes.
+The category—**Voice**, **Workflow**, **Agent Settings**, **Knowledge Base**, or **Other**—labels what you intend to compare. It does not restrict which variant settings you can edit.
 
-Incoming calls are automatically split between the two versions. Phonely then measures how each one performs based on the success criteria you define, such as call duration, outcomes, or end reasons.
+Creating a test duplicates the control agent. Select **Edit variant agent** and make the change you want to measure. Keep unrelated settings aligned so the result remains interpretable.
 
-This gives you clear, data-driven insights into what changes actually improve performance instead of relying on guesswork.
+## Start and manage the test
 
-## Access A/B Testing
+Review the variant before selecting **Begin Test**. While a test is in progress, eligible calls are assigned to the Control or Variant according to the traffic split.
 
-1. Go to your Phonely menu and click to open Testing .
-2. Choose A/B Testing from the top navigation bar.
+The test appears in one of three sections:
 
-You'll see three sections:
+- **Planned** has been configured but is not routing calls.
+- **In Progress** is currently routing live calls.
+- **Completed** has reached its end criterion or was terminated.
 
-- **Planned** – Tests you've set up but haven't started yet.
-- **In Progress** – Tests currently running on live calls.
-- **Completed** – Finished tests where you can review performance results.
+You can adjust the traffic split while a test is in progress. Terminating a test stops new calls from being assigned to it; it does not undo calls already completed.
 
-## Creating a New A/B Test
+<Warning>
+  A/B Testing affects live traffic. Test the variant independently and begin with a traffic share appropriate for the risk of the change.
+</Warning>
 
-Click create a new test in the Planned section to begin. A step-by-step setup window will appear.
+## Review the result
 
-**Name and Describe Your Test**
+Open a test to compare completed calls, successful calls, and success rates for the Control and Variant. You can also open the calls assigned to either arm and inspect them in Call History.
 
-Give your test a descriptive name that identifies what you’re testing.\
-_Example:_ “Friendly Voice vs Formal Voice – Support Line.”
+Phonely calculates success from the criterion selected during setup:
 
-Add a description to explain the goal of your test.                                                        \
-_Example:_ “Evaluate whether a friendly voice style improves appointment confirmations.”
+- **Call Outcome** counts calls with one of the selected outcomes.
+- **Call Ended Reason** counts calls with one of the selected ended reasons.
+- **Call Duration** compares whether shorter or longer calls better match the goal.
 
-![Creating An Ab Test Gi](/assets/creating-an-ab-test.gif)
+The result may also show the difference between success rates, the probability that the variant wins, a p-value, and a confidence interval. Treat these as evidence from the calls collected so far, not a guarantee about future calls. A small sample or an interval that crosses zero means the result remains uncertain.
 
-## Choose What You'd Like to Test
+If you decide to keep the variant, apply it deliberately and complete an end-to-end test of the resulting control agent. Do not assume every variant difference should be promoted simply because one metric improved.
 
-Phonely supports multiple types of tests depending on your experiment goal. You can select one of the following:
-
-| Type | What It Tests | Common Use Case |
-| :-- | :-- | :-- |
-| **Voice** | Compares different AI voices or tones | Test if a friendly voice leads to higher customer engagement |
-| **Workflow** | Tests different conversation flows or logic | Compare two calls scripts or routing paths |
-| **Agent Settings** | Evaluates settings like interruption, delay, or background noise | Find the balance between quick responses and natural flow |
-| **Knowledge Base** | Tests different documentation sources | See which knowledge sources improve the accuracy of the answers |
-| **Other** | For any other tests outside these categories |  |
-
-Once selected, click **Next**.
-
-## Define End Criteria and Call Distribution
-
-Here, you’ll specify how long the test should run and what share of calls should be routed to your test version.
-
-### End Criteria
-
-Choose when the test should stop automatically:
-
-- **By Number of Calls:** Ends after a set number of test calls. Example: Stop after 1,000 calls routed to the test version.
-- **By Number of Days:** Runs for a fixed duration (e.g., 10 days).
-- **AI-Determined:** Will allow Phonely to automatically decide when enough data is collected.
-
-### Call Route Percentage
-
-Use the slider to define how much traffic is sent to the test version.
-
-- **Example:** Route 30% of calls to the test, and keep 70% on the base agent.
-- **Recommendation:** Start small (20–30%) to ensure stability before scaling up.
-
-After configuring both, click **Next**.
-
-![Configure Test End Criteria Gi](/assets/configure-test-end-criteria.gif)
-
-## Set Success Criteria
-
-This step defines what "success" means for your test. You can base success on how calls end, what outcomes are tagged, or how long they last.
-
-### Call Ended Reason-Based Testing
-
-Evaluates success based on how the call ended. Use this if you care about the technical or behavioural outcome of the call.
-
-<Expandable title="Examples of End Call Reasons">
-  - Call Transferred
-  - Voicemail
-  - Max Duration
-  - Silence Timeout
-  - Customer Ended
-  - Agent Ended
-</Expandable>
-
-Example Use case: “We want more calls to end in transfers to the sales team."
-
-### Call Outcome-Based Testing
-
-Evaluates based on your defined business outcomes, which you can configure inside your flow.
-
-<Expandable title="Example Outcomes">
-  - Appointment Booked.
-  - Lead Qualified.
-  - Legal Inquiry Logged.
-  - Support Issue Resolved.
-</Expandable>
-
-_Use case:_ "We want to see if the new workflow increases lead qualification rate."
-
-### Duration-Based Testing
-
-Optimizes for call length.
-
-- **Shorter Calls:** Indicate more efficiency or faster resolution (ideal for support or routing).
-- **Longer Calls:** Indicates better engagement or deeper discussions (ideal for sales).
-
-Use case: “Does the new prompt shorten average support calls by 15%?”
-
-### LLM-Based Evaluation
-
-A future option will allow Phonely’s AI to analyze transcripts and automatically evaluate call quality based on context. Once you've chosen and configured your success criteria, click **Next**.
-
-![Test Success Criteria Gi](/assets/test-success-criteria.gif)
-
-## Editing the Test Agent
-
-After setup, Phonely automatically duplicates your base agent into a Test Agent.\
-You’ll see a banner:
-
-> "You are editing a test agent. This agent will be used to test the new changes."
-
-Keep all other elements identical to ensure that results reflect only the changes you made. Once done, click **Continue** to save your test agent.
-
-## Running the A/B Test
-
-After your setup is complete, you'll return to the A/B Testing dashboard.
-
-1. Under the **Planned** section, find your new test.
-2. Click **Begin Test** to start routing calls.
-
-Your test will then appear under in progress, showing live metrics such as:
-
-- Success rate for each agent.
-- Total answered calls.
-- Traffic allocation.
-
-Calls will automatically be divided between your Base Agent and Test Agent.
-
-![Execute An Ab Test Gi](/assets/execute-an-ab-test.gif)
-
-## Monitoring and Analyzing Results
-
-{/* TODO: Add a screenshot of the A/B test results dashboard showing the comparison view — success rates, call counts, and the "winner" indicator. This is the payoff of the entire A/B testing feature and users need to see what the results look like before they invest time setting up a test. Also consider adding a short GIF of clicking "View Results" and seeing the comparison charts animate in. */}
-
-You can monitor ongoing results anytime during the test.
-
-- Track success rate trends to see which variant performs better.
-- Check if call allocation percentages remain balanced.
-- Review call outcomes and end reasons to ensure tagging consistency.
-
-Once your call limit or duration target is reached, the test moves to the **Completed** section.
-
-Click **View Results** to analyze:
-
-- Performance metrics (success rate, duration, end reason distribution).
-- Comparative insights between Base and Test agents.
-- Which version achieved better alignment with your success criteria.
-
-The variant with the higher success percentage is your winning configuration, which you can apply to your main agent for future calls.
-
-## How Phonely Calculates A/B Test Results
-
-Phonely compares the Base Agent and Test Agent using the success criteria selected when the test was created. A call counts as a success when it matches that criterion, such as the desired call outcome, end reason, or duration target.
-
-In the results view:
-
-- **Control** or **A** means the Control Agent.
-- **Variant** or **B** means the Variant Agent.
-- **Calls** means completed calls for that arm.
-- **Successes** means completed calls that met the success criteria.
-- **Success rate** is `successes / calls`, displayed as a rounded percentage.
-
-### Success Rates
-
-Phonely calculates each arm's success rate as:
-
-```text
-control success rate = control successes / control completed calls
-variant success rate = variant successes / variant completed calls
-```
-
-For display, the percentage is rounded to the nearest whole number. For example, 42 successes out of 100 calls is shown as 42%.
-
-If either arm has no completed calls, Phonely does not calculate a winner, delta, z-test result, or confidence interval yet.
-
-### Delta and Winner
-
-The delta is the difference between the two displayed success rates:
-
-```text
-delta = variant success rate - control success rate
-```
-
-If the variant rate is higher than the control rate, the variant is ahead. If the control rate is higher, the control is ahead. If the rates are equal, the test is tied.
-
-### Two-Proportion Z-Test
-
-Phonely uses a two-proportion z-test to estimate whether the difference between the Base Agent and Test Agent is likely to be real or just noise from a limited sample of calls.
-
-The calculation uses the raw call counts and success counts:
-
-```text
-nA = completed control calls
-xA = successful control calls
-nB = completed variant calls
-xB = successful variant calls
-
-pA = xA / nA
-pB = xB / nB
-pooled rate = (xA + xB) / (nA + nB)
-pooled standard error = sqrt(pooled rate * (1 - pooled rate) * (1 / nA + 1 / nB))
-z-score = (pB - pA) / pooled standard error
-```
-
-The z-score is positive when the variant is doing better than the control and negative when the variant is doing worse.
-
-### Chance Variant Wins
-
-The "chance variant wins" number is calculated from the z-score using the standard normal cumulative distribution function:
-
-```text
-chance variant wins = normalCdf(z-score)
-```
-
-So if Phonely shows **11% chance variant wins**, it means the z-score is below zero and the observed data currently favors the Base Agent. In simple terms: based on the completed calls so far, the Test Agent only has about an 11% statistical chance of being better than the Base Agent on the selected success criterion.
-
-This is not a guarantee about future calls. It is a statistical estimate from the calls collected so far.
-
-### P-Value
-
-Phonely's displayed p-value is a one-sided p-value for the question "is the variant better than the control?":
-
-```text
-p-value = 1 - normalCdf(z-score)
-```
-
-When the variant is ahead, this p-value becomes smaller. When the variant is behind, this p-value becomes larger.
-
-For example, if the chance variant wins is 11%, the p-value is 89%. That means the current evidence does not support saying the variant is better.
-
-Do not describe the p-value as the probability that the test result is true. Treat it as a measure of how strong the current evidence is for the variant outperforming the control.
-
-### Confidence Interval
-
-Phonely also estimates a 95% confidence interval for the difference between the variant and control success rates.
-
-This interval uses the unpooled standard error:
-
-```text
-unpooled standard error = sqrt((pA * (1 - pA)) / nA + (pB * (1 - pB)) / nB)
-difference = pB - pA
-confidence interval low = difference - 1.96 * unpooled standard error
-confidence interval high = difference + 1.96 * unpooled standard error
-```
-
-The formula produces proportions. Multiply the low and high values by 100 to explain the interval in percentage points. If the whole interval is above 0, the variant is likely performing better. If the whole interval is below 0, the control is likely performing better. If the interval crosses 0, the result is not clearly separated yet.
-
-### How to Explain a Result Like "11% Chance Variant Wins"
-
-When explaining a result to a user, use the test's actual call counts and success counts, then walk through the result in this order:
-
-1. State which arm is control and which arm is variant.
-2. Show completed calls and successes for each arm.
-3. Calculate each success rate as `successes / completed calls`.
-4. Compare the rates and state the delta in percentage points.
-5. Explain the z-score: positive favors the variant, negative favors the control.
-6. Explain the chance variant wins as `normalCdf(z-score)`.
-7. Explain the p-value as `1 - normalCdf(z-score)`.
-8. Explain the 95% confidence interval for `variant rate - control rate`.
-9. End with a plain-language interpretation, not a guarantee.
-
-For example:
-
-> For "Greeting Message", the variant currently has an 11% chance of beating the control. That means the observed success rates favor the control right now. The variant may still recover as more calls come in, but based on the current sample, there is not enough evidence to call the variant better.
-
-Avoid saying that a low chance variant wins means the test is permanently failed. A/B test results can change as more calls are completed, especially when the sample size is small.
-
-## Editing an A/B Test
-
-Phonely allows you to update your A/B test at any point before or during the experiment. This is useful when you want to refine the test name, description, routing percentage, or modify the Test Agent itself.
-
-You can edit your test from the **Planned** or **In Progress** section.
-
-1. Open your **A/B Testing** dashboard.
-2. Find the test you want to modify.
-3. Click the **⋮ menu** in the top-right corner of the test card.
-4. Choose one of the following options:
-
-![Editing A Base Agent](/assets/editing-a-base-agent.png)
-
-Use this option to update:
-
-- Test name
-- Description
-- What you're testing (Voice, Workflow, Agent Settings, etc.)
-- End criteria (number of calls or days)
-- Call route percentage
-- Success criteria
-
-This opens the same guided setup window you used when creating the test, allowing you to adjust any configuration step-by-step.
-
-### Edit B Test Agent
-
-Selecting this option opens the **Test Agent**, which is the duplicate created during setup. You’ll see a banner reminding you:
-
-> **"You are editing a test agent. This agent will be used to test the new changes."**
-
-Only modify the specific variables you want to test. All other settings should remain identical to your Base Agent to ensure fair and reliable results.
-
-When finished, click **Continue** to save your changes.
-
-### Delete Test
-
-If you want to remove a planned or completed test entirely, choose **Delete Test**.\\\\n(Tests already running cannot be deleted until they finish.
-
-### When to Edit a Test
-
-You might want to make edits when:
-
-- The description or test name needs clarification.
-- You want to adjust call routing (e.g., from 30% to 45%).
-- You need to modify the workflow, voice, or KB version in the Test Agent.
-- You decide to extend the test duration from 1 day to 7 days.
-- You want to change the success criteria.
-
-Any changes you make will immediately update the test configuration.
+<AccordionGroup>
+  <Accordion title="The test has few or uneven calls">
+    Confirm that the agent is receiving eligible live calls and review the configured traffic split. Random assignment can be uneven in a small sample; allow enough calls before interpreting the result.
+  </Accordion>
+  <Accordion title="Calls are not counted as successful">
+    Review the selected success criterion and the affected calls. Confirm that their outcome, ended reason, or duration matches the values configured for the test.
+  </Accordion>
+  <Accordion title="The result does not identify a clear winner">
+    Review the completed-call count and confidence interval. Continue the test when appropriate, or conclude that the measured change did not produce a reliable difference within the collected sample.
+  </Accordion>
+</AccordionGroup>

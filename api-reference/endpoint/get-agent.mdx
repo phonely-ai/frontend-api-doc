@@ -1,70 +1,12 @@
 ---
 title: "Get Agent"
-description: "Return one API-key-authenticated frontend agent record by agent ID."
+description: "Return basic information about one accessible agent."
 sources:
   - "app/api/get-agent/route.ts"
-  - "services/agent-service.ts"
-  - "lib/api-auth.ts"
-  - "lib/api-client.ts"
-  - "lib/server-firebase-request-auth.ts"
+last-verified: "2026-08-10"
 openapi: "POST /get-agent"
 ---
 
-## Get Agents
+Returns the agent's ID, name, and owner ID, plus its country and business phone number when available. The API key must belong to the supplied user, and that user must have access to the agent.
 
-Retrieves detailed information about a specific agent.
-
-### Request
-
-**Method:** `POST`\
-**Endpoint:** `/api/get-agent`\
-**Headers:**
-
-- `X-Authorization`: Your API key (required)
-- `Content-Type`: `application/json`
-
-**Request Body:**
-
-```json
-{
-  "uid": "string",
-  "agentId": "string"
-}
-```
-
-**Parameters:**
-
-- `uid` (string, required): Your user ID
-- `agentId` (string, required): The ID of the agent to retrieve
-
-### Response
-
-**Success Response (200):**
-
-```json
-{
-  "uid": "string",
-  "agentId": "string", 
-  "name": "string",
-  "country": "string",
-  "businessPhoneNumber": "string"
-}
-```
-
-**Error Responses:**
-
-- `400 Bad Request`: Invalid request body
-- `401 Unauthorized`: Invalid or missing API key, or insufficient permissions
-- `500 Internal Server Error`: Server error
-
-### Example
-
-```bash
-curl -X POST https://app.phonely.ai/api/get-agent \
-  -H "X-Authorization: your-api-key" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "uid": "user123",
-    "agentId": "agent456"
-  }'
-```
+This endpoint returns a compact agent record rather than the complete flow configuration.

@@ -1,73 +1,12 @@
 ---
 title: "Get Call"
-description: "Fetch one call record and related details through the frontend API."
+description: "Return one call belonging to an accessible agent."
 sources:
   - "app/api/get-call/route.ts"
-  - "app/api/calls/[agentId]/[callId]/route.ts"
-  - "services/call-service.ts"
-  - "lib/api-auth.ts"
-  - "lib/api-client.ts"
-  - "lib/server-firebase-request-auth.ts"
+last-verified: "2026-08-10"
 openapi: "POST /get-call"
 ---
 
-Retrieves detailed information about a specific call made to an agent.
+Returns call details and analysis for the supplied call and agent IDs. The API key must belong to the supplied user, and that user must have access to the agent.
 
-### Request
-
-**Method:** `POST`  
-**Endpoint:** `/api/get-call`  
-**Headers:**
-- `X-Authorization`: Your API key (required)
-- `Content-Type`: `application/json`
-
-**Request Body:**
-```json
-{
-  "uid": "string",
-  "agentId": "string",
-  "callId": "string"
-}
-```
-
-**Parameters:**
-- `uid` (string, required): Your user ID
-- `agentId` (string, required): The ID of the agent that received the call
-- `callId` (string, required): The ID of the call to retrieve
-
-### Response
-
-**Success Response (200):**
-```json
-{
-  "callId": "string",
-  "agentName": "string",
-  "businessPhoneNumber": "string",
-  "callerPhoneNumber": "string",
-  "startTime": "string",
-  "endTime": "string",
-  "duration": number,
-  "status": "string",
-  "transcript": "string",
-  "recordingUrl": "string"
-}
-```
-
-**Error Responses:**
-- `400 Bad Request`: Invalid request body
-- `401 Unauthorized`: Invalid or missing API key, or insufficient permissions
-- `404 Not Found`: Call not found or invalid call ID
-- `500 Internal Server Error`: Server error
-
-### Example
-
-```bash
-curl -X POST https://app.phonely.ai/api/get-call \
-  -H "X-Authorization: your-api-key" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "uid": "user123",
-    "agentId": "agent456",
-    "callId": "call789"
-  }'
-```
+Phonely returns `404` when the call does not exist or does not belong to the specified agent.

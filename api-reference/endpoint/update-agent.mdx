@@ -1,80 +1,12 @@
 ---
 title: "Update Agent"
-description: "Update an agent through the API-key-authenticated frontend API surface."
+description: "Update supported setup fields for an accessible agent."
 sources:
   - "app/api/update-agent/route.ts"
-  - "services/agent-service.ts"
-  - "lib/api-auth.ts"
-  - "lib/api-client.ts"
-  - "lib/server-firebase-request-auth.ts"
+last-verified: "2026-08-10"
 openapi: "POST /update-agent"
 ---
 
-Updates various settings and configurations for an existing agent.
+Updates supported agent setup fields. The API key must belong to the supplied user, and that user must have access to the agent.
 
-### Request
-
-**Method:** `POST`\
-**Endpoint:** `/api/update-agent`\
-**Headers:**
-
-- `X-Authorization`: Your API key (required)
-- `Content-Type`: `application/json`
-
-**Request Body:**
-
-```json
-{
-  "uid": "string",
-  "agentId": "string",
-  "voiceId": "string",
-  "agentName": "string",
-  "greetingMessage": "string",
-  "humanizeConversation": boolean,
-  "conversationStyle": "string",
-  "orgId": "string"
-}
-```
-
-**Parameters:**
-
-- `uid` (string, required): Your user ID
-- `agentId` (string, required): The ID of the agent to update
-- `voiceId` (string, optional): ID of the voice to use for the agent
-- `agentName` (string, optional): New name for the agent (max 50 characters)
-- `greetingMessage` (string, optional): New greeting message (max 500 characters)
-- `humanizeConversation` (boolean, optional): Whether to humanize the conversation
-- `conversationStyle` (string, optional): Style of conversation. Must be one of: "Casual", "Humorous", "Direct", "Formal", "Persuasive", "Friendly"
-- `orgId` (string, optional): Organization ID to move the agent to
-
-### Response
-
-**Success Response (200):**
-
-```json
-{
-  "success": true
-}
-```
-
-**Error Responses:**
-
-- `400 Bad Request`: Invalid request body, invalid voice ID, agent name too long, greeting message too long, invalid conversation style, or agent already in organization
-- `401 Unauthorized`: Invalid or missing API key, or insufficient permissions
-- `500 Internal Server Error`: Server error
-
-### Example
-
-```bash
-curl -X POST https://app.phonely.ai/api/update-agent \
-  -H "X-Authorization: your-api-key" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "uid": "user123",
-    "agentId": "agent456",
-    "agentName": "Updated Agent Name",
-    "greetingMessage": "Hello! How can I help you today?",
-    "conversationStyle": "Friendly",
-    "humanizeConversation": true
-  }'
-```
+When updating `orgId`, the destination organization must be accessible to the user. Voice IDs and conversation styles are validated before the update is applied.

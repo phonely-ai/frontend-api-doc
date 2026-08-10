@@ -16,6 +16,14 @@ const BROAD_SOURCE_PATTERNS = new Set([
   'lib/**',
 ]);
 const BLOCK_SCALAR_PATTERN = /^[>|][+-]?(?:\s+#.*)?$/;
+const SENSITIVE_SOURCE_PATTERNS = [
+  /(?:^|\/)\.env(?:\.|$)/i,
+  /(?:^|\/)(?:secrets?|credentials?)(?:\/|\.|$)/i,
+  /(?:^|\/)hooks\/firebase-admin(?:\.|\/|$)/i,
+  /(?:^|\/)lib\/server-firebase-request-auth(?:\.|\/|$)/i,
+  /(?:^|\/)services\/billing(?:\/|\.|$)/i,
+  /(?:^|\/)app\/api\/(?:admin|stripe-)(?:\/|[^/]*$)/i,
+];
 
 function collectPages(value, out = []) {
   if (typeof value === 'string') {
@@ -133,6 +141,9 @@ for (const page of pages) {
       if (BROAD_SOURCE_PATTERNS.has(source.trim())) {
         errors.push(`${page}: source glob is too broad (${source})`);
       }
+      if (SENSITIVE_SOURCE_PATTERNS.some((pattern) => pattern.test(source.trim()))) {
+        errors.push(`${page}: source metadata exposes a sensitive implementation path (${source})`);
+      }
     }
   }
 
@@ -155,7 +166,7 @@ if (errors.length > 0) {
 }
 
 if (warnings.length > 0) {
-  console.warn(`Frontmatter lint found ${warnings.length} page(s) awaiting content review.`);
+  console.warn(`Frontmatter lint found ${warnings.length} tracked page(s) awaiting content review.`);
 }
 
-console.log(`Frontmatter lint passed for ${pages.length} indexed page(s).`);
+console.log(`Frontmatter lint passed for ${pages.length} tracked page(s).`);

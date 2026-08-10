@@ -1,64 +1,12 @@
 ---
 title: "Get Agents"
-description: "Return the list of agents accessible to the current API-key-authenticated frontend user."
+description: "List basic information for a user's agents."
 sources:
   - "app/api/get-agents/route.ts"
-  - "services/agents/list/**"
-  - "lib/api-auth.ts"
-  - "lib/api-client.ts"
-  - "lib/server-firebase-request-auth.ts"
+last-verified: "2026-08-10"
 openapi: "POST /get-agents"
 ---
 
-## Get Agents
+Returns compact records for the agents assigned directly to the supplied user. Each record includes the agent's ID, name, owner ID, country, and business phone number when available.
 
-Retrieves a list of all agents accessible to the authenticated user.
-
-### Request
-
-**Method:** `POST`  
-**Endpoint:** `/api/get-agents`  
-**Headers:**
-- `X-Authorization`: Your API key (required)
-- `Content-Type`: `application/json`
-
-**Request Body:**
-```json
-{
-  "uid": "string"
-}
-```
-
-**Parameters:**
-- `uid` (string, required): Your user ID
-
-### Response
-
-**Success Response (200):**
-```json
-[
-  {
-    "uid": "string",
-    "agentId": "string",
-    "name": "string",
-    "country": "string",
-    "businessPhoneNumber": "string"
-  }
-]
-```
-
-**Error Responses:**
-- `400 Bad Request`: Invalid request body
-- `401 Unauthorized`: Invalid or missing API key
-- `500 Internal Server Error`: Server error
-
-### Example
-
-```bash
-curl -X POST https://app.phonely.ai/api/get-agents \
-  -H "X-Authorization: your-api-key" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "uid": "user123"
-  }'
-```
+The `X-Authorization` API key must belong to the supplied user ID.

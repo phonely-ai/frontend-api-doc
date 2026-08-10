@@ -1,47 +1,41 @@
 ---
-title: "Add Phone Numbers"
-description: "Attach phone numbers to an outbound campaign and import numbers from Twilio when needed."
+title: "Campaign Phone Numbers"
+description: "Choose outbound phone numbers and configure how a campaign selects them."
 sources:
   - "features/campaign/modules/edit-campaign-sheet/phone-number-tab/**"
+  - "features/campaign/modules/edit-campaign-sheet/general-tab/components/dialout-number-field.tsx"
   - "features/campaign/api/phone-number-service.ts"
   - "services/phone-numbers/**"
+last-verified: "2026-08-10"
 ---
 
-Every outbound campaign needs at least one phone number before it can place calls. Phonely lets you choose numbers already attached to the agent, assign unused workspace numbers, or import new numbers from Twilio.
+Every outbound campaign needs at least one enabled phone number. In **Add Phone Numbers**, choose from numbers already assigned to the agent or unassigned numbers available to the workspace.
 
-## Where To Add Numbers
+If the required number is not listed, select **Import numbers from Twilio** and complete the connection flow.
 
-- Open `/campaign/{agentId}` and create or edit a campaign.
-- In the `Add Phone Numbers` step, click `Add Phone Numbers`.
-- Use `/settings?tab=numbers` when you want to review workspace numbers outside a campaign.
+## Choose a routing method
 
-## What The Selector Shows
+The routing method controls which enabled number places each call:
 
-The number picker separates numbers into:
+| Method | How Phonely selects a number |
+| --- | --- |
+| Weight Routing | Selects numbers according to their assigned weights; active weights must total 100% |
+| State-Based Routing | Uses an enabled number in the contact's state when one is available |
+| Country-Based Routing | Uses an enabled number in the contact's country when one is available |
 
-- `Agent Phone Numbers`: numbers already associated with the current agent
-- `Unassigned Phone Numbers`: workspace numbers that are available to assign
-- `Import numbers from Twilio`: a modal for bringing in more numbers
+State- and country-based routing fall back to a random number from the enabled pool when no regional match is available.
 
-You can search by phone number or region before making a selection.
+## Map the dial-out number when needed
 
-## Add Existing Numbers
+A campaign source can provide a specific dial-out number. Map **Dial-out Number** to the relevant source field only when each contact should determine which campaign number places the call.
 
-1. Open the `Add Phone Numbers` selector from the campaign.
-2. Search or browse the available lists.
-3. Select one or more numbers.
-4. Click `Add to Campaign`.
-5. Confirm the number now appears in the campaign phone number list.
+A non-empty mapped value overrides Weight, State, and Country routing. The value must match an enabled number in the campaign; otherwise, that contact fails instead of using another number. An empty or unmapped value uses the campaign's configured routing method.
 
-## Import Numbers From Twilio
+## Verify the numbers
 
-1. In the selector, click `Import numbers from Twilio`.
-2. Connect the Twilio account in the modal.
-3. Reopen the number selector after the import finishes.
-4. Select the new number and add it to the campaign.
+Before launching the campaign:
 
-## Before You Launch
-
-- Confirm the campaign has at least one phone number attached.
-- Use numbers that match the routing strategy you plan to use.
-- If the wrong number is attached, remove it before publishing the campaign.
+1. Confirm that every intended number is enabled.
+2. For Weight Routing, confirm that the weights total 100%.
+3. For regional routing, test a matching contact and a contact that requires the fallback pool.
+4. Place a controlled outbound call and verify the number shown to the recipient.

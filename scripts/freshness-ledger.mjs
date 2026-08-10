@@ -283,12 +283,6 @@ function resolveSources(ledger) {
     const root = process.env[repository.rootEnv];
     if (!root) fail(`${repository.rootEnv} is required with --resolve-sources`);
     const resolvedRoot = resolve(root);
-    const output = execFileSync('git', ['-C', resolvedRoot, 'ls-files'], { encoding: 'utf8' });
-    filesByRepository.set(
-      repository.id,
-      output.split(/\r?\n/).filter(Boolean).map((file) => file.replaceAll('\\', '/')),
-    );
-
     const windows = ledger.reviewWindows.filter((window) => window.repository === repository.id);
     const commits = new Set([
       ...(repository.accountedThrough ? [repository.accountedThrough.commit] : []),
@@ -301,6 +295,16 @@ function resolveSources(ledger) {
         fail(`${repository.id}: commit is not available locally: ${commit}`);
       }
     }
+
+    const fileListArgs = repository.accountedThrough
+      ? ['-C', resolvedRoot, 'ls-tree', '-r', '--name-only', repository.accountedThrough.commit]
+      : ['-C', resolvedRoot, 'ls-files'];
+    const output = execFileSync('git', fileListArgs, { encoding: 'utf8' });
+    filesByRepository.set(
+      repository.id,
+      output.split(/\r?\n/).filter(Boolean).map((file) => file.replaceAll('\\', '/')),
+    );
+
     for (const window of windows) {
       try {
         execFileSync(

@@ -1,55 +1,28 @@
 ---
-title: "Agent Usage Data"
-description: "Learn how to access agents usage data and how to delete agents"
+title: "Usage and Cost"
+description: "Review and export organization usage across agents, channels, and time ranges."
 sources:
-  - "features/settings/modules/agents/**"
   - "features/settings/modules/usage-and-cost/**"
-  - "services/agents/**"
+last-verified: "2026-08-10"
 ---
 
-The Agents page provides a centralized overview of all AI agents under your organization.\
-From here, you can monitor call activity, download usage data, and manage agents.
+Open **Settings > Usage & Cost** to analyze usage for the current organization.
 
-<Steps>
-  <Step title="Click your profile icon (bottom-left corner of the dashboard).">
-  </Step>
-  <Step title="   From the dropdown menu, select Settings.">
-    ![Accessing Agent Usage Data Gi](/assets/accessing-agent-usage-data.gif)
-  </Step>
-  <Step title="Switch to the agents tab.">
-  </Step>
-  <Step title="You’ll see a table listing all agents in your organization, along with key details such as:">
-    - **Name**: The agent's display name.
-    - **Phone Number:** The number assigned to the agent (if any).
-    - **Agent ID:** A unique identifier.
-    - **Deployment:** Indicates whether the agent  is live in Production or Enterprise.
-    - **Call Minutes (Monthly):** Total minutes the agent has used this month.
-    - **Updated At:** Shows when the agent was last modified or deployed.
-  </Step>
-  <Step title="Click the organization button at top to switch between different organizations.">
-  </Step>
-</Steps>
+## Review usage
 
-### Agent Usage Data
+Switch between **Usage** and **Cost** when cost estimates are available. Summary cards and the chart group activity into channels such as AI minutes, transfer minutes, SMS, and web chat.
 
-Each agent’s monthly activity is automatically logged and displayed in this table. You can also export this data reporting or analysis.
+Use the controls above the chart to:
 
-<Steps>
-  <Step title="Review each agent’s Call Minutes (Monthly) to see current usage.">
-  </Step>
-  <Step title="To download a detailed report:">
-    - Click the **Download usage data** button (top right of the table).
-    - The data file will include each agent's total usage time, deployment details, and activity timestamps.
+- include all agents or select specific agents;
+- filter the usage types shown;
+- group results by day, week, or month; and
+- choose the current billing cycle, a preset range, or a custom date range.
 
-    <img
-      src="/assets/agent-usage-page.png"
-      alt="Agent Usage Page"
-      style={{ width:"98%" }}
-    />
-  </Step>
-  <Step title="Open the downloaded file in your preferred spreadsheet tool (e.g., Excel or Google Sheets) to analyze or share with your team.">
-    <Tip>
-      Usage data helps you track which agents handle the most calls, making it easier to allocate minutes or identify agents that may need scaling adjustments.
-    </Tip>
-  </Step>
-</Steps>
+Rates, included quantities, and cost estimates appear only when the organization's billing data provides them. Treat displayed cost as an estimate unless your billing agreement states otherwise.
+
+## Export the current view
+
+Select **Export** to download the usage represented by the current date range, filters, grouping, and agent selection as CSV.
+
+Use **Plan & Billing** for subscription status and invoices. Use **Notifications** to email recipients when monthly usage reaches selected thresholds.

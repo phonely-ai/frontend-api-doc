@@ -1,211 +1,63 @@
 ---
-searchable: true
-title: "Simulation Testing"
-description: "Test your AI agents with fully synthetic, AI-generated phone conversations before real customers ever call"
+title: "Unit Testing"
+description: "Run repeatable AI-generated conversations and evaluate how your agent responds."
+sources:
+  - "features/testing/modules/evaluation/**"
+  - "app/(main)/(routes)/testing/evaluation/**"
+last-verified: "2026-08-10"
 ---
 
-Simulation Testing allows you to test your AI agents using fully synthetic, AI-generated phone conversations. Instead of relying solely on real inbound calls, you can run hundreds of controlled simulations to see how your agent behaves under different scenarios, before any customer ever interacts with it.
+Unit Testing runs AI-generated conversations against your agent before you rely on a change in live calls. Use it to exercise a defined scenario repeatedly, check expected behavior, and compare results across runs.
 
-This guide explains what simulation testing is, how to create and run simulation test cases, and how to review results to improve your agent’s performance.
+Unit tests complement—not replace—[Web Chat, Web Call, and phone testing](/flow-editor/test-and-publish). They are most useful for repeatable scenarios and regression checks.
 
-## What Is Simulation Testing?
+## Create a test case
 
-Simulation testing uses AI to generate realistic phone conversations between a virtual “customer” and your Phonely agent. These simulations behave like real calls, including intent changes, interruptions, topic variations, and unexpected questions.
+Open **Testing > Unit Testing**, select **Test Cases**, then add a test case.
 
-Simulation testing helps you:
+| Setting | What it controls |
+| --- | --- |
+| Case Name | Identifies the scenario in the test list and results |
+| Description | Describes the caller, situation, and behavior to exercise |
+| Test Instance | How many conversations to run for the scenario |
+| Variance | How much the generated conversations may differ from one another |
 
-- Validate workflows before going live.
-- Detect misconfigurations, routing errors, and dead-ends.
-- Test knowledge base accuracy.
-- Stress-test prompts and guardrails.
-- Preview how your agent handles different tones and behaviors.
-- Ensure your agent behaves consistently after updates.
+Write the description as a concrete caller scenario. Include the caller's goal and any important constraints, but do not prescribe the agent's response—the agent should follow its own configuration.
 
-Simulation tests do not use real customers and do not affect live call routing.
+<Note>
+  Each test run can incur usage charges. The current limits and price are shown in the test form before you run it.
+</Note>
 
-## Where to Access Simulation Testing
+## Choose data sources and evaluators
 
-To open the simulation workspace:
+Use **Data Sources** to define the conversations or criteria associated with a test case:
 
-<Steps>
-  <Step title="Go to your Phonely Dashboard.">
-  </Step>
-  <Step title="Click the Simulation Testing tab at the top (beside A/B Testing).">
-  </Step>
-  <Step title="You will see two sub-tabs:">
-    - **Test Cases** – Create and configure simulations.
-    - **Results** – Review past simulation outputs.
-  </Step>
-  <Step title="The main screen shows:">
-    - Test cases at the top.
-    - Data sources (optional call recordings) at the bottom.
+- **Call Recordings** are recordings you upload for testing.
+- **Phonely's Calls** are calls already handled by the agent.
+- **AI Evaluator** defines an AI-generated caller and the criteria used to judge the interaction.
 
-    ![Simulated Testing Pn](/assets/simulated-testing.png)
-  </Step>
-</Steps>
+Select only sources that represent the behavior you want the test case to cover. Keep evaluators focused on one scenario so a failed result is easier to understand.
 
-## Test Cases Overview
+## Run tests
 
-In the Test Cases area, you can manage every simulation you create. Each test case card includes two key actions: **Config** and **Run**.
+Run an individual test case from its card, or select **Run All Tests** to run every configured case for the agent. Phonely moves the new run to **Test Results** while it is processed.
 
-Clicking Config opens the editor, where you can update the case name, description, number of test instances, and the randomness (variance) of the generated conversations. You can fine-tune how the simulated caller behaves before running the test.
+Changing the agent does not retroactively change an earlier result. Run the relevant cases again after modifying prompts, flows, knowledge, voice behavior, or other settings that affect the scenario.
 
-The **Run** button immediately triggers the simulation using the settings you’ve configured.
+## Review results
 
-<img
-  src="/assets/test-main-page.png"
-  alt="Test Main Page"
-  style={{ width:"95%" }}
-/>
+Open **Test Results** and select a run to review its overall result and individual test instances. The result identifies the test case snapshot, AI evaluator, and status for each generated conversation.
 
-If you want to remove a test case entirely, click the ellipsis (⋮)  in the top-right corner of the card, this reveals a **Delete** option that lets you safely remove test cases you no longer need.
+Review failed and inconsistent instances individually. A useful follow-up is to compare their conversation paths and determine whether the issue comes from the scenario, the evaluator, or the agent configuration.
 
-This layout makes it easy to adjust, execute, and clean up simulation tests as you iterate on your agent’s behavior.
-
-## How to Create a Simulation Test Case
-
-Follow these steps to build your first simulation:
-
-<Steps>
-  <Step title="Go to Simulation Testing > Test Cases.">
-  </Step>
-  <Step title="Click the + card.">
-  </Step>
-  <Step title="A modal window titled Add Test Case will appear.">
-    <img
-      src="/assets/add-test-form.png"
-      alt="Add Test Form"
-      style={{ width:"94%" }}
-    />
-  </Step>
-  <Step title="Fill in the following details:">
-    **Case Name**
-
-    A short, descriptive label such as:
-
-    - “Support Call – Device Setup”
-    - “Customer Asking About Plans”
-    - “Lead Qualification Script”
-
-    **Description**
-
-    Explain the goal of the simulation.
-
-    Example:
-
-    > _“Simulates a conversation where a customer asks about pricing and plan options.”_
-  </Step>
-</Steps>
-
-## **Configure Test Parameters**
-
-Two sliders allow you to define the nature and quantity of simulations:
-
-### **Test Instance**
-
-Defines how many conversations to generate.
-
-- Range: 1–25 per run
-- Up to 1000 total runs (billed at \$0.10 per run)
-
-### **Variance**
-
-Controls the randomness of the simulated customer behavior.
-
-**1 = Low Variance:** Conversations stay similar across runs
-
-**10 = High Variance:** Conversations differ dramatically (ideal for stress testing)
-
-Higher variance helps reveal weaknesses in:
-
-- Prompts
-- Routing
-- Tone handling
-- Unexpected customer questions
-
-## Working With Data Sources
-
-Data sources determine _where the “customer side” of the simulated conversation comes from_.\
-You can attach any of the following:
-
-- Call Recordings
-- Phonely’s Calls (past real calls)
-- AI Evaluators
-
-Each of these appears as a tab at the top-right of the Data Sources panel. You can attach one data source or mix multiple types depending on how complex your test case is.
-
-### Call Recordings
-
-Call Recordings allow you to upload audio files that represent real customer speech.\
-This is useful when you want the AI to react to real-world phrasing, accents, pacing, or emotional tone.
-
-When you choose Call Recordings, Phonely displays an empty table until you upload something.
-
-To upload:
-
-1. Click **Upload Files**
-2. Enter a recording name (e.g., “Customer refund call”)
-3. Choose **Inbound** or **Outbound**
-4. Drag or browse to add audio files
-5. Press **Upload**
-
-Uploaded recordings appear in a list. Select the checkboxes to attach them to a test case. Phonely automatically transcribes and uses the audio during the simulation.
-
-### Phonely’s Calls
-
-This tab displays recordings from actual calls your agent has already handled inside Phonely.
-
-It is extremely helpful for:
-
-- regression testing
-- verifying bug fixes
-- comparing old vs new agent behavior
-
-You simply select any past call and link it to a test case. Phonely replays the transcript during the simulated test.
-
-### AI Evaluators
-
-AI Evaluators are the most flexible data source. Instead of using audio recordings, an evaluator acts as the customer during simulation.
-
-To create one:
-
-<Steps>
-  <Step title="Click Add Evaluator and give it a name.">
-  </Step>
-  <Step title="Choose a conversation style ">
-    Such as Casual, Angry, Frustrated, Happy, Distracted, Sad, or Demanding
-  </Step>
-  <Step title="Write detailed instructions, this defines how the evaluator behaves">
-    Example: _“Act like a customer trying to book a flight but constantly changing their mind.”_
-  </Step>
-  <Step title="Define the success criteria">
-    Example: “_Success means the agent confirms date, destination, and seat type.”_
-  </Step>
-  <Step title="Click Add">
-    Once created, the evaluator appears in the list and you can link it to any test case.
-  </Step>
-</Steps>
-
-Evaluators produce extremely realistic interactions because they generate natural, dynamic dialogue instead of repeating fixed audio.
-
-## Run the Simulation
-
-After saving the test case:
-
-<Steps>
-  <Step title="Find the test card">
-  </Step>
-  <Step title="Click Run">
-  </Step>
-  <Step title="Phonely will begin generating simulated calls">
-  </Step>
-  <Step title="Progress indicators will appear">
-    You can continue working while simulations run in the background.
-  </Step>
-</Steps>
-
-## Reviewing Simulation Results
-
-After simulations complete, open the **Results** tab. For each simulation run, you will see:
-
-Each test case, the respective number of runs, status of test case run, when its was created and whether it succeeded, failes or is in progress.
+<AccordionGroup>
+  <Accordion title="A test does not exercise the expected behavior">
+    Make the test case description more specific, confirm that the selected data sources and evaluator represent the intended scenario, then run it again. Also verify that the agent version you intended to test contains the relevant changes.
+  </Accordion>
+  <Accordion title="Results vary too much between runs">
+    Lower **Variance**, narrow the scenario, and separate unrelated goals into different test cases. Some variation is expected because the conversations are generated by AI.
+  </Accordion>
+  <Accordion title="A result remains in progress or fails to run">
+    Refresh **Test Results** and retry the case. If it fails again, reduce the number of instances and verify that the agent and selected data sources are still available.
+  </Accordion>
+</AccordionGroup>
