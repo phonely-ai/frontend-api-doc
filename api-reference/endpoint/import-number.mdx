@@ -1,81 +1,16 @@
 ---
-title: "Import Phone Number"
-description: "Import or attach a phone number to an agent through the frontend API."
+title: "Import Number"
+description: "Import a Twilio phone number for an accessible agent."
 sources:
   - "app/api/import-number/route.ts"
-  - "services/agent-service.ts"
-  - "lib/api-auth.ts"
-  - "lib/api-client.ts"
-  - "lib/server-firebase-request-auth.ts"
+last-verified: "2026-08-10"
 openapi: "POST /import-number"
 ---
 
-Imports a phone number from Twilio to use with an agent.
+Imports a Twilio number and assigns it to an agent. The API key must belong to the supplied user, and that user must have access to the agent.
 
-### Request
+The agent must be on a paid plan and must not already have a business phone number. Only `twilio` is accepted as the source in this production version.
 
-**Method:** `POST`  
-**Endpoint:** `/api/import-number`  
-**Headers:**
-- `X-Authorization`: Your API key (required)
-- `Content-Type`: `application/json`
-
-**Request Body:**
-```json
-{
-  "uid": "string",
-  "agentId": "string",
-  "source": "string",
-  "twilioAccountSid": "string",
-  "twilioAuthToken": "string",
-  "phoneNumber": "string",
-  "countryCode": "string"
-}
-```
-
-**Parameters:**
-- `uid` (string, required): Your user ID
-- `agentId` (string, required): The ID of the agent to assign the phone number to
-- `source` (string, required): Must be "twilio" (only Twilio is currently supported)
-- `twilioAccountSid` (string, required): Your Twilio Account SID
-- `twilioAuthToken` (string, required): Your Twilio Auth Token
-- `phoneNumber` (string, required): The phone number to import
-- `countryCode` (string, required): The country code for the phone number
-
-### Response
-
-**Success Response (200):**
-```json
-{
-  "message": "string"
-}
-```
-
-**Error Responses:**
-- `400 Bad Request`: Invalid request body, invalid source, or agent already has a phone number
-- `401 Unauthorized`: Invalid or missing API key, or insufficient permissions
-- `500 Internal Server Error`: Agent not found, user needs paid plan, or server error
-
-### Example
-
-```bash
-curl -X POST https://app.phonely.ai/api/import-number \
-  -H "X-Authorization: your-api-key" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "uid": "user123",
-    "agentId": "agent456",
-    "source": "twilio",
-    "twilioAccountSid": "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    "twilioAuthToken": "your-twilio-auth-token",
-    "phoneNumber": "+1234567890",
-    "countryCode": "US"
-  }'
-```
-
-### Notes
-
-- Only Twilio phone numbers are currently supported
-- The agent must be on a paid plan to import phone numbers
-- The agent cannot already have a business phone number assigned
-- This operation has a maximum duration of 60 seconds
+<Warning>
+  Treat the Twilio account SID and auth token as secrets. Do not place them in client-side code, screenshots, or logs.
+</Warning>

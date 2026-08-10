@@ -1,95 +1,14 @@
 ---
 title: "Set Post-Call Outcome"
-description: "Set custom call outcome fields for a call using the public frontend API."
+description: "Update custom outcome data for a call."
 sources:
   - "app/api/calls/[agentId]/[callId]/route.ts"
-  - "services/agents/use-agent-post-call-outcomes.ts"
-  - "lib/api-auth.ts"
-  - "lib/api-client.ts"
-  - "lib/server-firebase-request-auth.ts"
+last-verified: "2026-08-10"
 openapi: "PATCH /calls/{agentId}/{callIdOrPhone}"
 ---
 
-## Overview
+Updates any supplied custom outcome, numeric value, or metadata for a call belonging to the agent.
 
-This API allows you to set post call outcome fields for calls by either:
+Identify the call with either its call ID or a customer phone number. For a phone number, `preference=last` updates the most recent matching call by default; use `preference=first` for the earliest match. Formatting characters are removed before the phone number is validated and matched.
 
-1. **Call ID:** `PATCH /api/calls/{agent_id}/{call_id}`
-2. **Phone Number:** `PATCH /api/calls/{agent_id}/{e164_number}?preference=first|last`
-
-## Authentication
-
-- **API Key**: `X-Authorization` header (for batch jobs)
-
-## Example 1: Update by Call ID
-
-### Using API Key
-
-```bash
-curl -X PATCH "https://app.phonely.ai/api/calls/agent123/call456" \
-  -H "X-Authorization: your-api-key-here" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "custom_call_outcome": "Sold",
-    "custom_call_outcome_value": 299,
-    "custom_call_metadata": {
-      "campaign": "spring_2026",
-      "rep_id": "12345",
-      "notes": "Customer was very interested"
-    }
-  }'
-```
-
-## Example 2: Update by Phone Number (Last Touch - Default)
-
-```bash
-curl -X PATCH "https://app.phonely.ai/api/calls/agent123/+14155551234" \
-  -H "X-Authorization: your-api-key-here" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "custom_call_outcome": "No Sale",
-    "custom_call_outcome_value": 0,
-    "custom_call_metadata": {
-      "reason": "Price too high",
-      "follow_up": true
-    }
-  }'
-```
-
-## Example 3: Update by Phone Number (First Touch)
-
-```bash
-curl -X PATCH "https://app.phonely.ai/api/calls/agent123/+14155551234?preference=first" \
-  -H "X-Authorization: your-api-key-here" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "custom_call_outcome": "Sold",
-    "custom_call_outcome_value": 499,
-    "custom_call_metadata": {
-      "attribution": "first_touch",
-      "campaign": "spring_2026"
-    }
-  }'
-```
-
-## Example 4: Partial Update (Only Outcome)
-
-```bash
-curl -X PATCH "https://app.phonely.ai/api/calls/agent123/call456" \
-  -H "X-Authorization: your-api-key-here" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "custom_call_outcome": "Follow Up Required"
-  }'
-```
-
-## Notes
-
-1. **Phone Number Format**: Phone numbers must be in E.164 format (e.g., `+14155551234`). The `+` sign can be included directly in the URL path.
-2. **Preference Parameter**:
-   - `first`: Updates the earliest call with the given phone number
-   - `last`: Updates the most recent call (default)
-3. **Partial Updates**: You can provide any combination of the three fields:
-   - `custom_call_outcome` (string)
-   - `custom_call_outcome_value` (number)
-   - `custom_call_metadata` (object)
+Fields omitted from the request are left unchanged.

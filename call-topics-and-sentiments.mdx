@@ -1,133 +1,34 @@
 ---
 title: "Call Topics"
-description: "Guide to topic and sentiment analysis fields used across the Phonely analytics surfaces."
+description: "Define the topics used to classify completed calls."
 sources:
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/setting-tabs/call-tagging-tab.tsx"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/setting-tabs/call-topics-section.tsx"
+  - "features/calls/modules/call-details/tabs/highlights/call-highlights-tab.tsx"
   - "features/performance/**"
-  - "features/calls/**"
-  - "services/dashboard-service.ts"
+last-verified: "2026-08-10"
 ---
 
-Call topics let Phonely automatically categorize calls by analyzing the full call transcript and selecting the most relevant topic from a predefined list. This provides an additional layer of classification beyond call outcomes and helps teams better understand why calls happened, not just how they ended.
+Call topics classify what a completed conversation was about. Use them to organize Call History and compare common reasons for calls in Performance.
 
-Unlike call outcomes, which are tied to specific blocks in a workflow, Call Topics are transcript-based and evaluated at the end of the call. This makes them flexible and suitable for both high-level categorization and very granular analysis.
+## Define topics
 
-## **How Call Topics Work**
+Open the agent's **Settings**, select **Call Tagging**, and add each topic with a name and description.
 
-You define a list of possible topics that represent common reasons or situations during calls. These can be broad, such as caller transferred or caller asked to speak to a representative, or highly specific, such as caller hung up after agent asked for age.
+- Use the **name** as the stable reporting label.
+- Use the **description** to explain when the topic applies.
+- Keep topics distinct enough that the same conversation is not routinely ambiguous.
 
-When a call finishes, Phonely reviews the entire transcript and selects the single topic that best matches what actually occurred during the conversation.
+For example, prefer separate topics such as `New appointment`, `Reschedule appointment`, and `Cancel appointment` when those categories lead to different operational decisions.
 
-## Add a Call Topics
+Phonely analyzes completed calls against the agent's configured topics. A call can contain more than one topic.
 
-Call topics define the types of conversations your agent handles. These help Phonely identify caller intent and organize analytics around meaningful categories.
+## Review and use topics
 
-1. Go to agent design \> settings from the left sidebar.
-3. Go to the call tagging tab
-4. Locate the call topics section
-5. Click **add topic**. Enter the topic name and the topic description. The description is where you define what happens for the call to be
-7. Click **add**
+Topics appear in Call History, Call Details, Performance filters and charts, and Data Tables. In a completed call's **Highlights**, you can add or remove topics when the classification needs correction.
 
-![Call Tagging Settings](/assets/call-tagging-settings.png)
+When you rename or remove a configured topic, earlier calls can still contain the previous value. Review saved Performance and Data Table views that refer to it.
 
-During each conversation, Phonely analyzes the caller’s intent and applies relevant topics automatically. Once the call ends, these topics become part of the call record and appear in:
-
-- [Call history](/call-history-ai-analytics/call-history-ai-analytics)
-- [Performance](/performance)
-
-## Viewing Call Topics in Call History
-
-The call history and analytics dashboard provides a centralized view of all calls.
-
-Each call entry includes the duration, call outcome, sentiment, call topic, and timestamp.
-
-To review or edit detected topics:
-
-1. From the sidebar menu find the call section.
-2. Click call history
-3. Click on any call
-
-This opens the highlights page below.
-
-![Call Tags Call Stats](/assets/call-tags-call-stats.png)
-
-In the highlights tab, under the call stats section you will find 3 sections including sentiments, call ended reasons, duration and call topics.
-
-Under the **call topics** section you can:
-
-- View automatically detected topics
-- Select relevant topics
-- Unselect irrelevant topics
-
-## Call Topics in the Performance Page
-
-Call topics become most valuable when used inside the **performance page**, where they allow you to isolate, compare, and analyze specific types of conversations. Instead of looking at all calls as a single dataset, call topics let you break down performance based on why customers are calling.
-
-This enables you to answer important operational questions such as:
-
-- How many callers are booking appointments?
-- How many callers are requesting callbacks?
-- How often callers request a human representative?
-- Which types of calls convert successfully?
-
-The performance page provides two primary ways to use call topics:
-
-- **Filtering** - isolate specific conversations
-- **Grouping** - compare different types of conversations side-by-side
-
-### Filtering Calls by Topic
-
-Filtering allows you to narrow the performance dashboard to show only calls that match specific topics. All data shown will reflect only calls that match the selected topic.
-
-1. Go to the analytics section and click performance
-2. Click the filter button
-3. Locate the call topic section
-4. Select one or more topics (for example: _appointment booked_)
-5. Click apply
-
-<img
-  src="/assets/filter-analytics-by-call-topics.png"
-  alt="Filter Analytics By Call Topics"
-  title="Filter Analytics By Call Topics"
-  style={{ width:"48%" }}
-/>
-
-### Call Topics in Groups
-
-Groups allow you to compare multiple topics at the same time. This is one of the most powerful analysis tools in the performance page.
-
-When you create groups using call topics, the performance page splits your data into separate segments.This allows direct visual comparison between different types of calls.
-
-1. Go to the analytics section and click performance
-2. Click group
-3. Click add group
-4. In the grouping dropdown, select call topic
-5. Choose the topics you want to include
-6. Click apply
-
-<img
-  src="/assets/calltopicgroupsinperfomancepage.png"
-  alt="Calltopicgroupsinperfomancepage"
-  title="Calltopicgroupsinperfomancepage"
-  style={{ width:"59%" }}
-/>
-
-## Call Topics in Call History
-
-Call history allows you to filter calls based on call topics. This helps you quickly find conversations related to a specific caller intent, such as appointment bookings, support requests, or general inquiries.
-
-To filter calls by topic:
-
-1. Go to call history
-2. Click the filter button
-3. Locate the call topic section
-4. Select one or more topics
-5. Click apply
-
-<img
-  src="/assets/call-topics-filters-call-history-phonely.jpg"
-  alt="Call Topics Filters Call History Phonely"
-  title="Call Topics Filters Call History Phonely"
-  style={{ width:"55%" }}
-/>
-
-The call history table updates to show only calls associated with the selected topics.
+<Tip>
+  Topics describe what the call was about. Use [Call Outcome Tagging](/blocks/common-settings#call-outcome-tagging) for a result recorded by the flow, and [Post-Call Outcomes](/post-call-outcomes) for a result added later through the API.
+</Tip>

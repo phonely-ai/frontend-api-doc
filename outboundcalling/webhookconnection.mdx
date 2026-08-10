@@ -1,48 +1,46 @@
 ---
-title: "Start Campaigns From Webhooks"
-description: "Configure a continuous outbound campaign that receives contacts from an external webhook."
+title: "Webhook Triggers"
+description: "Send contacts from an external system to a continuous outbound campaign."
 sources:
   - "features/campaign/modules/edit-campaign-sheet/general-tab/components/triggers/webhook-trigger.tsx"
-  - "features/campaign/modules/campaign-onboarding/**"
+  - "features/campaign/api/queue-call-service.ts"
+  - "features/campaign/api/campaign-service.ts"
+last-verified: "2026-08-10"
 ---
 
-Use this setup when an external system should push contacts into Phonely in real time instead of uploading a CSV file.
+Use a webhook when an external system should add contacts to a **Continuous Calling** campaign. Each accepted request adds a call to the campaign queue; the campaign cadence determines when that call can run.
 
-## When To Use This Trigger
+## Configure the webhook
 
-- Choose this option for continuous campaigns.
-- Use it when leads arrive from a CRM, signup form, or backend service.
-- Do not use it for one-time list uploads. Use CSV for that.
+1. Create or edit a Continuous Calling campaign.
+2. In **Select Trigger Type**, choose **Webhook**.
+3. Copy the generated webhook URL and authorization details.
+4. Define the JSON request body, then select **Update Fields**.
+5. Map the detected fields to the contact phone number, optional timezone or dial-out number, and any variables used by the outbound flow.
 
-## Set Up The Webhook Trigger
-
-1. Open `/campaign/{agentId}`.
-2. Create or edit a campaign.
-3. In the trigger step, choose a `Continuous` campaign and select `Webhook`.
-4. Select the outbound call flow that should run for the campaign.
-5. Copy the generated `Webhook URL`.
-6. Send a sample `POST` request with JSON data.
-7. Click `Update Fields` so Phonely can detect the payload fields.
-8. Map the detected fields to the outbound variables used in the workflow.
-
-## Example Payload
+The default body includes `phone_number`, `timezone`, and `dialout_number`. You can add fields required by your flow.
 
 ```json
 {
-  "phone_number": "+15551234567",
-  "first_name": "Jane",
-  "appointment_id": "apt_123"
+  "phone_number": "+12125551234",
+  "timezone": "America/New_York",
+  "dialout_number": "+12125559876",
+  "customer_name": "Jordan Lee"
 }
 ```
 
-## Important Notes
+Send JSON with the authorization required by the generated webhook. Keep the credential private and do not place it in client-side code, screenshots, or documentation examples.
 
-- The receiver must send JSON with `POST`.
-- Phonely updates the available field list only after a successful webhook test.
-- If the payload shape changes later, run `Update Fields` again and review the variable mapping.
-- Test the webhook before turning on production traffic.
+## Keep the schema aligned
 
-## Rules
+Select **Update Fields** whenever you add, rename, or remove a top-level field. Then review the campaign mappings and any downstream flow fields that use those values.
 
-- ALWAYS confirm the payload includes the fields your workflow expects.
-- NEVER launch the campaign before testing a sample webhook request.
+## Verify the trigger
+
+Use a phone number you control and send a representative request. Confirm that:
+
+1. the call appears in the campaign queue;
+2. the phone number, timezone, and optional dial-out number resolve correctly; and
+3. the selected flow receives the expected mapped values.
+
+Testing the webhook can queue and place a real outbound call when the campaign is running.

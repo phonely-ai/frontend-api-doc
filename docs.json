@@ -158,24 +158,32 @@
             ]
           },
           {
-            "group": "OPTIMIZE YOUR AGENT",
+            "group": "TEST YOUR AGENT",
+            "icon": "flask-conical",
+            "pages": [
+              "testing/simulation-testing",
+              "testing/ab-testing"
+            ]
+          },
+          {
+            "group": "REVIEW CALLS",
+            "icon": "search",
+            "pages": [
+              "call-history-ai-analytics/call-history-ai-analytics",
+              "agent-review",
+              "call-events"
+            ]
+          },
+          {
+            "group": "ANALYZE PERFORMANCE",
             "icon": "chart-line",
             "pages": [
               "performance",
               "data-tables",
               "call-path",
               "post-call-outcomes",
-              "call-sentiments",
-              "call-topics-and-sentiments"
-            ]
-          },
-          {
-            "group": "REVIEW YOUR AGENT",
-            "icon": "search",
-            "pages": [
-              "call-history-ai-analytics/call-history-ai-analytics",
-              "agent-review",
-              "call-events"
+              "call-topics-and-sentiments",
+              "call-sentiments"
             ]
           },
           {
@@ -191,17 +199,12 @@
             ]
           },
           {
-            "group": "TESTING",
-            "icon": "flask-conical",
-            "pages": [
-              "testing/ab-testing"
-            ]
-          },
-          {
             "group": "SETTINGS & BILLING",
             "icon": "settings",
             "pages": [
               "manage-account-and-organization-settings/manage-account-and-organization-settings",
+              "billing-and-usage/account",
+              "billing-and-usage/teams",
               "manage-account-and-organization-settings/delete-agents",
               "billing-and-usage/plans-and-billing-history",
               "billing-and-usage/manage-agents-and-usage",
@@ -215,21 +218,21 @@
         "icon": "code",
         "pages": [
           "api-reference/introduction",
+          "api-reference/web-sdk",
+          {
+            "group": "Agent Generation",
+            "pages": [
+              "api-reference/endpoint/generate-agent",
+              "api-reference/endpoint/get-agent-generation"
+            ]
+          },
           {
             "group": "Agent Management",
             "pages": [
               "api-reference/endpoint/get-agent",
               "api-reference/endpoint/get-agents",
-              "api-reference/endpoint/generate-agent",
-              "api-reference/endpoint/get-agent-generation",
               "api-reference/endpoint/duplicate-agent",
               "api-reference/endpoint/update-agent"
-            ]
-          },
-          {
-            "group": "Web SDK",
-            "pages": [
-              "api-reference/web-sdk"
             ]
           },
           {
@@ -245,7 +248,11 @@
             "group": "Knowledge Base",
             "pages": [
               "api-reference/endpoint/agent-documents",
-              "api-reference/endpoint/agent-websites"
+              "api-reference/endpoint/post-agent-documents",
+              "api-reference/endpoint/delete-agent-documents",
+              "api-reference/endpoint/agent-websites",
+              "api-reference/endpoint/post-agent-websites",
+              "api-reference/endpoint/delete-agent-websites"
             ]
           },
           {
@@ -253,43 +260,17 @@
             "pages": [
               "api-reference/endpoint/list-voices",
               "api-reference/endpoint/import-number",
-              "api-reference/endpoint/block-list"
+              "api-reference/endpoint/block-list",
+              "api-reference/endpoint/add-blocked-numbers",
+              "api-reference/endpoint/remove-blocked-numbers"
             ]
           },
           {
-            "group": "Organization & Billing",
+            "group": "Organizations",
             "pages": [
-              "api-reference/endpoint/get-orgs",
-              "api-reference/endpoint/get-invoices",
-              "api-reference/endpoint/get-usage"
+              "api-reference/endpoint/get-orgs"
             ]
           }
-        ]
-      },
-      {
-        "tab": "Webhook Reference",
-        "icon": "webhook",
-        "hidden": true,
-        "searchable": true,
-        "pages": [
-          "webhook-reference/intro",
-          "webhook-reference/endpoint/postcall-webhook"
-        ]
-      },
-      {
-        "tab": "AI Runbooks",
-        "icon": "bot",
-        "hidden": true,
-        "searchable": true,
-        "pages": [
-          "ai/route-map",
-          "ai/build-agent",
-          "ai/manage-knowledge-base",
-        "ai/edit-flows",
-          "ai/run-ab-tests-and-evaluations",
-          "ai/review-calls-and-analytics",
-          "ai/configure-outbound-campaigns",
-          "ai/frontend-api-boundaries"
         ]
       }
     ]

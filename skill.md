@@ -2,12 +2,11 @@
 
 This file is the operating contract for AI agents that update the Phonely docs. It is behavior, not product knowledge.
 
-The placement policy is: prompts are for behavior, docs are for knowledge, and tools are for live state. Do not put product facts here. When a product fact is needed, read the relevant docs page, hidden runbook, frontend code, API code, or live tool result.
+The placement policy is: prompts are for behavior, indexed docs are for stable product knowledge, and tools are for live state. Do not put product facts here. When a product fact is needed, read the relevant indexed page, product source, API schema, or live tool result.
 
 ## Required References
 
 - Use `writing-guidelines.md` for page structure, tone, visual placement, and formatting rules. Do not copy those rules here.
-- Use `ai/route-map.mdx` as the single source of truth for frontend routes, query tabs, side-panel labels, and task-to-route selection. Do not copy route or tab tables here.
 - Use the page's own `sources` frontmatter as the first search boundary for code verification. Expand only when the changelog or code references require it.
 
 ## Audience And Voice
@@ -63,7 +62,7 @@ Rules:
 - For sources outside the frontend repository, use a repository-prefixed path such as `phonely-backend/app/agent/routes.py` so the verification boundary remains unambiguous.
 - `last-verified` must be the date the agent verified the touched page against those sources.
 - Do not add broad globs such as `app/**` or `features/**` unless the page truly depends on that whole area.
-- If only a hidden AI runbook is touched, it still needs source coverage for every concrete claim it makes.
+- Do not add an MDX product page until it has completed the same factual and editorial review required for visible navigation.
 - If a page is legacy, duplicate, or intentionally excluded from indexing, keep that status explicit with the repo's existing `noindex` or `.mintignore` pattern.
 
 ## Media Contract
@@ -93,7 +92,7 @@ TODO format:
 - A page must fully answer the customer question in text without relying on screenshots, GIFs, videos, or assistant-only context.
 - Put prerequisites before steps.
 - Follow `writing-guidelines.md` for section order and formatting mechanics.
-- If a table repeats another canonical page or runbook, replace it with a link to the canonical source.
+- If a table repeats another canonical page, replace it with a link to that page.
 - Keep API examples and endpoint details on API reference pages unless the product page needs a short, cited pointer.
 
 ## Scope Discipline
@@ -104,8 +103,8 @@ TODO format:
 - Edit only pages supported by that discovery or by a reviewer request; record adjacent gaps separately instead of allowing the ticket to expand without limit.
 - Propose new pages when a concept has no home; do not silently create new user-facing pages.
 - Preserve one canonical page per concept. Merge, redirect, or point rather than duplicating.
-- Keep hidden `ai/` pages for deterministic AI-only runbooks. Keep visible pages customer-readable.
-- Do not move product facts into `.mintlify/Assistant.md`, system prompts, or this file. Those surfaces may point to docs or runbooks, but must not duplicate facts.
+- Keep incomplete or unstable drafts outside the documentation repository until they pass a complete source-backed review.
+- Do not move product facts into `.mintlify/Assistant.md`, system prompts, or this file. Those surfaces may require documentation retrieval, but must not duplicate facts.
 
 ## Change Depth
 
@@ -120,7 +119,7 @@ Before finalizing a docs PR, verify:
 
 - Every touched page has refreshed `sources` and `last-verified` frontmatter when applicable.
 - Every concrete claim is cited, source-covered, or removed.
-- Every route or tab decision points to `ai/route-map.mdx` instead of a copied table.
+- Every route, tab, and UI-label claim is verified against current product source.
 - Every media reference exists, or a TODO with a capture spec replaces it.
 - The page remains useful as text-only documentation.
 - The change does not add a new canonical concept page without explicit reviewer agreement.

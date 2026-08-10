@@ -20,6 +20,10 @@ last-verified: "YYYY-MM-DD"
 
 Use `skill.md` for the full source and claim-traceability contract. Refresh `last-verified` only after checking the page against its listed sources.
 
+Treat source paths as publishable metadata. Use the narrowest customer-safe source boundary and never list secret files, credential stores, billing-provider services, admin routes, or private authentication implementations in public page frontmatter.
+
+For the API Reference, `openapi.json` is the supported public API contract. Every operation in that schema must have one visible reference page. A route's existence in the application does not make it a public API; do not document app-internal, billing, admin, cron, or Ask AI routes unless they are deliberately added to the supported schema.
+
 ### Ordering Within a Page
 
 1. **Value statement** (1-2 sentences): what this feature does for the customer and why they'd use it.
@@ -98,8 +102,7 @@ conversations go well, and where they don't.
 - Show request and response shapes.
 - List common error responses.
 
-## Hidden AI Pages
+## Publication Boundary
 
-- Place deterministic agent runbooks under `/ai/`.
-- Use literal, step-by-step language.
-- Keep them public-safe.
+- Visible navigation is the authoritative, searchable documentation corpus.
+- Add a product page to the documentation repository only after its complete content is source-backed and its `last-verified` date is current.

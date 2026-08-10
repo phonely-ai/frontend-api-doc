@@ -1,315 +1,45 @@
 ---
-title: "Post Call Outcomes"
-description: "Guide to post-call business outcomes and how they are interpreted inside Phonely analytics."
+title: "Post-Call Outcomes"
+description: "Record business results that become known after a call."
 sources:
   - "services/agents/use-agent-post-call-outcomes.ts"
-  - "features/performance/**"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/setting-tabs/post-call-outcomes-section.tsx"
   - "app/api/calls/[agentId]/[callId]/route.ts"
+  - "features/performance/**"
+last-verified: "2026-08-10"
 ---
 
-Post-Call Outcomes allow you to update what ultimately happened after a call ended. This makes it possible to track real business results, such as sales, booked appointments, or completed follow-ups, even if those events occur outside of Phonely.
+Post-call outcomes record a business result that is added or confirmed after a call, such as a completed sale, attended appointment, or later follow-up result.
 
-This is one of the most powerful tools for measuring and optimizing your AI agent’s real-world performance.
+They are different from the call outcomes configured on flow blocks:
 
-<iframe src="https://www.youtube.com/embed/FyfJmDvX8wc" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
+| Value | When it is recorded |
+| --- | --- |
+| **Call outcome** | When a call reaches a block with Call Outcome Tagging |
+| **Post-call outcome** | When an external system updates the completed call through the API |
 
-### Why Post-Call Outcomes Matter
+Use a post-call outcome when the final result is not reliably known while the call is running.
 
-When building a voice AI agent, the goal is not just to complete conversations, but to achieve meaningful outcomes.
+## Record an outcome
 
-For example, your agent might:
+Update the completed call with the [Set Post-Call Outcome endpoint](/api-reference/endpoint/set-post-call-outcome). The request can include:
 
-- Book an appointment
-- Qualify a lead
-- Transfer a caller to a human
-- Collect information for a follow-up
-- Support a customer inquiry
+| Field | Purpose |
+| --- | --- |
+| `custom_call_outcome` | A label for the result |
+| `custom_call_outcome_value` | A numeric value associated with the result |
+| `custom_call_metadata` | Additional structured metadata for the call |
 
-However, the final result often happens after the call ends.
+Use stable labels such as `Sale completed` or `Appointment attended`. Avoid creating multiple labels that mean the same thing, because each distinct label becomes a separate reporting value.
 
-<Expandable title="Examples">
-  - A lead converts into a paying customer later
-  - An appointment is successfully completed
-  - A transferred call results in a sale
-  - A follow-up email leads to conversion
-</Expandable>
+## Review recorded outcomes
 
-Post-Call Outcomes allow you to send this information back into Phonely so you can track and analyze real business impact, not just conversation activity.
+In the agent's **Settings**, open **Call Tagging**. **Post-Call Outcomes** lists labels already recorded through the API, including when each label was first and last recorded and its total call count.
 
-## What You Can Track with Post-Call Outcomes
+This list is read-only. It is updated automatically as completed calls receive outcomes.
 
-Each call can be updated with outcome data that helps you measure conversions, revenue, and performance across your business.
+Post-call outcomes and their numeric values can also be used in Performance filters and Data Table metrics.
 
-| Outcome Field | Description | Examples |
-| :-- | :-- | :-- |
-| **Custom Call Outcome** | A label that describes the final result of the call. This defines what ultimately happened after the conversation. | Sold,<br />No Sale,<br />Appointment Completed,<br />Appointment No-Show,<br />Qualified Lead,<br />Follow-Up Required,<br />Escalated Successfully |
-| **Outcome Value** | The monetary value associated with the call outcome. This represents the revenue or business value generated from the call. | custom\_call\_outcome\_value: 299 |
-| **Custom Metadata** | Additional structured data attached to the call outcome. This can include campaign information, sales rep identifiers, product details, or any business-specific attributes. | campaign name, rep ID, notes |
-
-```javascript
-curl -X PATCH "https://app.phonely.ai/api/calls/agent123/call456" \
-  -H "X-Authorization: your-api-key-here" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "custom_call_outcome": "Sold",
-    "custom_call_outcome_value": 299,
-    "custom_call_metadata": {
-      "campaign": "spring_2026",
-      "rep_id": "12345",
-      "notes": "Customer was very interested"
-    }
-  }'
-```
-
-This allows you to measure:
-
-- Revenue generated per call
-- Conversion rates
-- Campaign performance
-- Agent effectiveness
-- Lead quality etc.
-
-## How Calls Are Identified
-
-Phonely lets you update the post-call outcome fields for a call using either of the following identifiers:
-
-**Call ID:**  Use this endpoint when you want to update the outcome for a specific call.
-
-```javascript
-PATCH /api/calls/{agent_id}/{call_id}
-```
-
-**Phone Number:** Use this endpoint to update the outcome based on the caller’s phone number. The `preference` parameter determines whether the update applies to the first or last call associated with that number.                   
-
-```javascript
-PATCH /api/calls/{agent_id}/{e164_phone_number}?preference=first|last
-```
-
-### Option 1: Update by Call ID
-
-Updates one exact call using its unique call ID.
-
-```javascript
-curl -X PATCH "https://app.phonely.ai/api/calls/agent123/call456" \
-  -H "X-Authorization: your-api-key-here" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "custom_call_outcome": "Sold",
-    "custom_call_outcome_value": 299,
-    "custom_call_metadata": {
-      "campaign": "spring_2026",
-      "rep_id": "12345",
-      "notes": "Customer was very interested"
-    }
-  }'
-```
-
-### Option 2: Update by Phone Number (Last Touch  - default)
-
-Updates a call using the caller’s phone number (E.164 format), and automatically picks the most recent call from that number.
-
-<Note>
-  Phone numbers must be in E.164 format.
-
-  **Correct:** \+14155551234
-
-  **Incorrect**: 4155551234
-</Note>
-
-This is common for workflows like:
-
-- “Customer bought later”
-- “Appointment completed”
-- “Lead converted after follow-up”
-
-**Why it matters:** If the same person called twice, the outcome attaches to the most recent interaction, which usually matches conversion reality.
-
-**Example**
-
-```javascript
-curl -X PATCH "https://app.phonely.ai/api/calls/agent123/+14155551234" \
-  -H "X-Authorization: your-api-key-here" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "custom_call_outcome": "No Sale",
-    "custom_call_outcome_value": 0,
-    "custom_call_metadata": {
-      "reason": "Price too high",
-      "follow_up": true
-    }
-  }'
-```
-
-### Option 3: Update by Phone Number (First Touch)
-
-Updates a call using the caller’s **phone number**, but selects the **earliest (first) call** from that number.
-
-Common cases:
-
-- Tracking conversions back to the first inbound call
-- Measuring campaign performance where the first interaction matters
-
-Updates the earliest call for that phone number. You must explicitly set:`?preference=first`
-
-**Example**
-
-```javascript
-curl -X PATCH "https://app.phonely.ai/api/calls/agent123/+14155551234?preference=first" \
-  -H "X-Authorization: your-api-key-here" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "custom_call_outcome": "Sold",
-    "custom_call_outcome_value": 499,
-    "custom_call_metadata": {
-      "attribution": "first_touch",
-      "campaign": "spring_2026"
-    }
-  }'
-```
-
-### Option 4: Partial Update (Only Outcome)
-
-Updates **only one field** without sending a full payload.
-
-This is useful when:
-
-- You only know the final outcome label
-- You only want to update outcomes
-
-**Attribution behavior**
-
-Depends on how you identify the call:
-
-- If you update by **call\_id** → no attribution
-- If you update by **phone number** → attribution rules apply (first/last touch)
-
-**Example**
-
-```javascript
-curl -X PATCH "https://app.phonely.ai/api/calls/agent123/call456" \
-  -H "X-Authorization: your-api-key-here" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "custom_call_outcome": "Follow Up Required"
-  }'
-```
-
-## Full Lifecycle Example
-
-Example scenario: AI agent books an appointment.
-
-<Steps>
-  <Step title="Step 1">
-    Call happens: Agent collects information and books appointment.
-  </Step>
-  <Step title="Step 2">
-    Customer attends appointment later
-  </Step>
-  <Step title="Step 3">
-    Your CRM detects appointment completion
-  </Step>
-  <Step title="Step 4">
-    Your system sends outcome update
-  </Step>
-  <Step title="Step 5">
-    Phonely updates analytics automatically. You can now see:
-
-    - Appointment conversion rate
-    - Revenue generated
-    - Performance trends
-  </Step>
-</Steps>
-
-## Viewing Post-Call Outcomes in Analytics
-
-Once post-call outcomes are set using the API, webhook, or integration, they automatically appear in the performance page, where you can track, compare, and analyze results over time.
-
-To open the performance page:
-
-<Steps>
-  <Step title="Go to Analytics in the left sidebar">
-  </Step>
-  <Step title="Click Performance">
-  </Step>
-  <Step title="Select the appropriate date range and agent">
-  </Step>
-</Steps>
-
-The charts and metrics will update automatically to include any post-call outcomes that were assigned.
-
-Every time a call outcome is updated (for example, `"Sold"` or `"Appointment Completed"`), that outcome becomes a trackable category in your analytics.
-
-You can view:
-
-- When outcomes occurred (by day or week)
-- How frequently each outcome occurs
-- How outcomes compare to total calls
-- How outcomes trend over time
-
-This helps you understand not just call volume, but actual business impact.
-
-## Groups
-
-Grouping allows you to compare specific outcomes against total calls or other outcomes. This is one of the most powerful ways to measure conversion rates.
-
-To configure grouping:
-
-<Steps>
-  <Step title="Click Group at the top of the Performance chart">
-  </Step>
-  <Step title="Click Add Group">
-  </Step>
-  <Step title="Select Group Type > Call Outcome">
-  </Step>
-  <Step title="Select the outcome you want to track (for example, Appointment Booked)">
-  </Step>
-  <Step title="Rename the group to something meaningful (for example, Appointments Booked)">
-  </Step>
-  <Step title="Add another group for comparison (for example, All Calls or other outcomes)">
-  </Step>
-  <Step title="Click Apply">
-  </Step>
-</Steps>
-
-The chart will now show each group separately. This allows you to clearly see:
-
-- How many calls resulted in appointments
-- How that compares to total calls
-- The percentage conversion rate over time
-
-<Frame>
-  ![Post Call Outcome Tagging Phonely](/images/post-call-outcome-tagging-phonely.png)
-</Frame>
-
-This helps you measure how effectively your AI agent is achieving your business goals.
-
-## Absolute and Percentage Views
-
-You can change how the data is displayed using the chart controls.
-
-- **Absolute mode** shows raw counts (for example, 25 appointments)
-- **Percentage mode** shows conversion rates (for example, 25%)
-
-## View the Actual Calls Behind an Outcome
-
-You can click any outcome, group, or chart segment to see the specific calls that produced that result. For example: Clicking the appointment booked group will open a list showing:
-
-<Expandable title="Examples" defaultOpen="true">
-  - All calls marked with that outcome
-  - Call timestamps
-  - Caller phone numbers
-  - Call summaries
-  - Call recordings
-  - Full transcripts
-</Expandable>
-
-![View Actual Outcome Calls](/assets/view-actual-outcome-calls.png)
-
-From there, you can:
-
-- Listen to successful calls
-- Identify patterns in high-performing conversations
-- See exactly what the AI did correctly
-- Identify areas for improvement
-
-This allows you to move beyond analytics and understand real caller behavior. To learn more about the [performance page please refer to this guide](/performance).
+<Info>
+  Updating a post-call outcome changes reporting data for that call. It does not change the flow that handled the conversation.
+</Info>

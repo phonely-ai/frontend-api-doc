@@ -1,47 +1,12 @@
 ---
 title: "List Voices"
-description: "Return available voices for the frontend agent-building experience."
+description: "Return the public voices available for agents."
 sources:
   - "app/api/list-voices/route.ts"
-  - "services/voice-service.ts"
-  - "lib/api-auth.ts"
-  - "lib/api-client.ts"
-  - "lib/server-firebase-request-auth.ts"
+last-verified: "2026-08-10"
 openapi: "GET /list-voices"
 ---
 
-## List Voices
+Returns public voice records with their IDs and display metadata, including language, accent, tags, gender, and multilingual support when available.
 
-Retrieves a list of all available public voices that can be used for agents.
-
-### Request
-
-**Method:** `GET`  
-**Endpoint:** `/api/list-voices`  
-**Headers:** None required
-
-### Response
-
-**Success Response (200):**
-```json
-[
-  {
-    "name": "string",
-    "id": "string",
-    "gender": "string",
-    "language": "string",
-    "tags": ["string"],
-    "accent": "string",
-    "isMultiLingualSupport": boolean
-  }
-]
-```
-
-**Error Responses:**
-- `500 Internal Server Error`: Server error
-
-### Example
-
-```bash
-curl -X GET https://app.phonely.ai/api/list-voices
-```
+This endpoint does not require authentication.

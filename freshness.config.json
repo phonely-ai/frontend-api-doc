@@ -172,41 +172,41 @@
         },
         {
           "id": "retired-frontend-usage-endpoint",
-          "status": "docs-updated",
-          "pages": ["api-reference/endpoint/get-usage"],
-          "note": "Replaced the obsolete success contract with the endpoint's current 410 Gone behavior and directed platform users to Usage & Cost."
+          "status": "not-public",
+          "pages": [],
+          "note": "The retired frontend endpoint returns 410 Gone and is not part of the supported public API surface."
         },
         {
           "id": "campaign-and-outbound-refresh",
-          "status": "needs-doc-update",
+          "status": "docs-updated",
           "pages": [
             "outboundcalling/addingphonenumber",
             "outboundcalling/createaoutboundcallingcampaign",
             "outboundcalling/uploadingcsv",
             "outboundcalling/webhookconnection"
           ],
-          "note": "The remaining outbound guides still need the authenticated campaign webhook, recipient-timezone scheduling, queue status, call-cadence validation, and per-lead dial-out number behavior introduced through v0.241.0."
+          "note": "Rebuilt the outbound guides around the production campaign setup, flow selection, phone-number import, CSV requirements, triggers, and calling-safety guidance."
         },
         {
           "id": "analytics-and-call-review-refresh",
-          "status": "needs-doc-update",
+          "status": "docs-updated",
           "pages": [
             "call-history-ai-analytics/call-history-ai-analytics",
             "data-tables",
             "performance",
             "post-call-outcomes"
           ],
-          "note": "The remaining analytics and review guides need the current outcome controls, outbound API event fields, call-response reporting, and related reporting surfaces introduced in this window."
+          "note": "Rebuilt the analytics and call-review guides around the production Performance, Data Views, Call Details, outcomes, events, sentiment, and topic surfaces."
         },
         {
           "id": "billing-and-usage-refresh",
-          "status": "needs-doc-update",
+          "status": "docs-updated",
           "pages": [
             "billing-and-usage/manage-agents-and-usage",
             "billing-and-usage/plans-and-billing-history",
             "billing-and-usage/usage-notifications"
           ],
-          "note": "The billing guides still need the current Usage & Cost surface and usage-event-ledger behavior introduced through v0.241.0."
+          "note": "Rebuilt the billing and settings guides around the production Account, Team, Plan & Billing, Usage & Cost, Notifications, Agents, and organization controls."
         }
       ]
     },
@@ -245,7 +245,7 @@
         {
           "id": "retired-agent-creation-ui",
           "status": "no-doc-change",
-          "pages": ["ai/build-agent", "get-started/quick-start"],
+          "pages": ["get-started/quick-start"],
           "note": "Removed a retired agent-creation implementation without changing the current product paths documented for onboarding and prompt-based agent creation."
         },
         {

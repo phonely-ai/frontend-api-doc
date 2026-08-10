@@ -1,86 +1,27 @@
 ---
 title: "Plans and Billing"
-description: "Learn how to manage your plan and access billing history"
+description: "Review your subscription, included minutes, payment information, and invoices."
 sources:
+  - "features/settings/modules/billing/plan-and-billing-tab.tsx"
   - "features/settings/modules/billing/**"
-  - "features/settings/modules/usage-and-cost/**"
-  - "services/billing/**"
+last-verified: "2026-08-10"
 ---
 
-The plan & billing page allows you to view your current subscription, track your usage, manage plan upgrades or downgrades, and review billing history. This page ensures you have full visibility into your organization’s call time, overage costs, and invoices.
+Open **Settings > Plan & Billing** to review the subscription and billing records for the current organization.
 
-<Steps>
-  <Step title="Click your profile icon (bottom-left corner of the dashboard).">
-  </Step>
-  <Step title="From the dropdown menu, select Settings.">
-    <Frame>
-      ![Planandbillingsettings](/assets/planandbillingsettings.png)
-    </Frame>
-  </Step>
-  <Step title="You’ll be directed to the account settings page, where you’ll find sections for managing your plans, usage, billing, and overages.">
-  </Step>
-</Steps>
+## Current plan
 
-### Managing Your Plans
+The current-plan section shows your plan and subscription status, the minutes used in the current billing cycle, the remaining included minutes, and the renewal date when available.
 
-From the sidebar click the plan and billing. 
+Users with billing access can select:
 
-- **Plan Type:** Indicates your current subscription tier (e.g., Free, Starter, Professional, Business, or Enterprise).
-- **Status:** Shows whether your plan is _active_, _incomplete_, or _expired_.
-- **Usage Summary Bar:** Displays the total minutes used out of your included monthly allowance.
-- **Renewal Date:** The date when your plan will automatically renew.
-- **Manage Plan:** Click this button to view or modify your subscription.
+- **Update Payment Info** to open the billing portal for the current subscription.
+- **Manage Plan** to review the plans available to the organization.
 
-### Total Usage Summary
+The actions shown depend on your role and the organization's billing state.
 
-This section provides a breakdown of how your organization is using its minutes and estimated call time savings.
+## Billing history
 
-It includes:
+Billing history lists recent invoices with their date, status, amount, and hosted invoice. You can open an individual invoice or export the available invoice usage reports as CSV.
 
-- **Total Usage:** Total number of minutes used during the current billing period.
-- **Total Overage:** The number of minutes used beyond your plan’s included quota.
-- **Estimated Monthly Usage:** A projection of your monthly call activity based on current patterns.
-- **Cost Savings Insight:** Displays how much agent time (and equivalent cost) your AI agents have saved.
-
-![Total Usage Summary](/assets/total-usage-summary.png)
-
-<Tip>
-  Monitoring this section helps you predict when you may need to upgrade your plan to avoid overage charges.
-</Tip>
-
-### **Billing History**
-
-The billing history section shows a record of your invoices and payments.
-
-You’ll see:
-
-- **Invoice Date:** The date the invoice was issued.
-- **Status:** Indicates whether an invoice is paid or pending.
-- **Amount:** The total billed amount for that period.
-- **Invoice:** Opens a detailed invoice document in a new window.
-- **Usage Report:** Provides a breakdown of how minutes were consumed across agents and call types.
-
-### **Upgrade or Downgrade Your Plan**
-
-To modify your plan:
-
-<Steps>
-  <Step title="Click Manage Plan on the Plan & Billing page.">
-  </Step>
-  <Step title="You’ll see available subscription plans.">
-    ![Manage Plans Phonely Pn](/assets/manage-plans-phonely.png)
-  </Step>
-  <Step title="Choose between Monthly or Yearly (33% off) billing options.">
-  </Step>
-  <Step title="Click Upgrade or Downgrade to switch plans.">
-  </Step>
-  <Step title="The change takes effect immediately, and billing adjusts on your next cycle.">
-  </Step>
-</Steps>
-
-<img
-  src="/assets/manage-plans-phonely.png"
-  alt="Managing Plans In Phonely"
-  title="Managing Plans In Phonely"
-  style={{ width:"95%" }}
-/>
+Use [Usage and Cost](/billing-and-usage/manage-agents-and-usage) for current usage trends and a detailed breakdown by agent or usage type.

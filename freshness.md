@@ -7,6 +7,8 @@ Freshness has two separate guarantees:
 - **Source integrity:** every declared source mapping resolves to a tracked file in an allowed product repository.
 - **Content review:** a page's product facts and presentation were reviewed together on its `last-verified` date.
 
+Visible navigation is the documentation trust boundary. Every MDX product page must complete source-backed content review before it is added to the repository and visible navigation. Published pages are eligible for documentation search and Ask AI retrieval; uncertain drafts should remain outside the documentation repository until they are ready.
+
 Resolving a source mapping does not prove that the page is current. A page is content-reviewed only when its full factual and editorial review is complete.
 
 ## Sources of truth
@@ -18,6 +20,8 @@ Resolving a source mapping does not prove that the page is current. A page is co
 An unprefixed source belongs to `phonely-frontend`. Sources in another product repository must use the repository prefix declared in `freshness.config.json`, such as `phonely-backend/`.
 
 Source mappings are evidence pointers, not content to publish. Keep them limited to repository-relative code paths that are safe to expose. Never put credentials, environment values, private endpoints, customer data, call logs, or other sensitive implementation details in page metadata or review-window notes.
+
+Every repository declared in `freshness.config.json` must also be provisioned as a read-only Git cache for the scheduled scanner. Add that automation support before merging documentation that introduces a new repository. The configured `rootEnv` identifies an override path; GitHub's default branch remains authoritative, and the cache working tree is never the source of truth.
 
 ## Commands
 
@@ -74,7 +78,7 @@ Set `last-verified` only after both the factual and editorial review of the whol
 
 ## Ask AI boundary
 
-Documentation owns stable product facts, terminology, supported behavior, limitations, and user guidance. Ask AI prompts own its role, tone, safety rules, retrieval policy, and tool-selection behavior. Tools and application code own live state, call diagnostics, mutations, and internal operations.
+Indexed documentation owns stable product facts, terminology, supported behavior, limitations, and user guidance. Ask AI prompts own its role, tone, safety rules, retrieval policy, and tool-selection behavior. Tools and application code own live state, call diagnostics, mutations, executable schemas, and internal operations.
 
 Moving product facts into documentation reduces duplicated prompt knowledge, but do not move operational instructions or sensitive implementation details there. Ask AI should retrieve the smallest relevant documentation context and use tools for current agent, flow, or call state.
 

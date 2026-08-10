@@ -1,61 +1,12 @@
 ---
 title: "Duplicate Agent"
-description: "Duplicate an existing agent through the frontend API surface."
+description: "Create a copy of an agent you can access."
 sources:
   - "app/api/duplicate-agent/route.ts"
-  - "services/agent-service.ts"
-  - "lib/api-auth.ts"
-  - "lib/api-client.ts"
-  - "lib/server-firebase-request-auth.ts"
+last-verified: "2026-08-10"
 openapi: "POST /duplicate-agent"
 ---
 
-Creates a copy of an existing agent with all its settings and configurations.
+Creates a new agent from an existing agent's configuration. The API key must belong to the supplied user, and that user must have access to the source agent.
 
-### Request
-
-**Method:** `POST`  
-**Endpoint:** `/api/duplicate-agent`  
-**Headers:**
-- `X-Authorization`: Your API key (required)
-- `Content-Type`: `application/json`
-
-**Request Body:**
-```json
-{
-  "uid": "string",
-  "agentId": "string"
-}
-```
-
-**Parameters:**
-- `uid` (string, required): Your user ID
-- `agentId` (string, required): The ID of the agent to duplicate
-
-### Response
-
-**Success Response (200):**
-```json
-{
-  "uid": "string",
-  "agentId": "string",
-  "name": "string"
-}
-```
-
-**Error Responses:**
-- `400 Bad Request`: Invalid request body
-- `401 Unauthorized`: Invalid or missing API key, or insufficient permissions
-- `500 Internal Server Error`: Server error
-
-### Example
-
-```bash
-curl -X POST https://app.phonely.ai/api/duplicate-agent \
-  -H "X-Authorization: your-api-key" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "uid": "user123",
-    "agentId": "agent456"
-  }'
-```
+The response identifies the new agent by its `agentId` and includes its name and owning user ID.

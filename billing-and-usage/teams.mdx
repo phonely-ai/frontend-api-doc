@@ -1,88 +1,36 @@
 ---
-searchable: true
 title: "Team Management and Roles"
-description: "Invite teammates, assign roles, and manage who can access your Phonely workspace"
+description: "Invite teammates and assign the access they need in your Phonely organization."
+sources:
+  - "features/settings/modules/team/**"
+  - "features/settings/modules/orgs/org-members-card.tsx"
+last-verified: "2026-08-10"
 ---
 
-The **Team** page is where you invite teammates, assign their access level, and manage who can work inside your Phonely workspace. Use this page when you need to add a new team member, control what they can access, or review the role of existing members.
+Open **Settings > Team** to review members, invite teammates, and manage their roles. Team invitations require a plan that supports additional members.
 
-To open this page, go to **Settings** and select **Team** from the left sidebar.
+## Invite a teammate
+
+Enter the teammate's email address, choose a role, and select **Invite**. You can also create an invite link to share outside Phonely.
+
+The roles available when inviting a teammate are **Admin**, **Member**, and **Viewer**.
+
+## Choose a role
+
+| Role | Access |
+| --- | --- |
+| **Owner** | Full control, including billing and organization ownership |
+| **Admin** | Full access to the organization |
+| **Member** | Access to the organization but cannot manage members |
+| **Viewer** | Read-only access to agents and call history |
+| **Call history only** | Call history only; Ask AI, exports, and other pages are hidden |
+
+Use the least-permissive role that still lets the teammate do their work.
+
+## Manage members
+
+Organization owners and admins can change member roles or remove members. The organization owner is identified separately and cannot be managed like a regular member.
 
 <Note>
-  Inviting members requires a paid plan — on the free plan the invite controls prompt you to upgrade. Managing members (changing roles, removing members) requires an organization **Owner** or **Admin** role.
+  Role changes affect what the user can see and change across the organization, not only on the Team page.
 </Note>
-
-From the team page, you can:
-
-- Invite new members by email
-- Choose a role before sending the invite
-- Share an invite link
-- Review current team members
-- See the role assigned to each member
-- Manage access levels across your workspace
-
-This makes the Team page the main place for controlling collaboration and permissions.
-
-## Invite a team member by email
-
-The main area of the page is the **Members** section.
-
-This section includes:
-
-- An email input field for inviting a new member
-- A role dropdown
-- An Invite button
-- An Invite Link button
-- A list of current team members and their assigned roles
-
-Use this section to add new people and review who already has access to the workspace. To invite someone directly by email:
-
-<Steps>
-  <Step title="Open Settings > Team.">
-  </Step>
-  <Step title="In the Members section, click the input field labeled Invite a new member to your team by email.">
-  </Step>
-  <Step title="Enter the teammate’s email address.">
-  </Step>
-  <Step title="Open the role dropdown and select the appropriate role.">
-  </Step>
-  <Step title="Click Invite.">
-  </Step>
-</Steps>
-
-Once invited, the team member receives access to your workspace based on the role you selected. Make sure the email is entered correctly before sending the invitation.
-
-## Share an invite link
-
-Instead of inviting someone by email directly, you can also use Invite Link. Use this when you want to copy and share an invitation link manually.
-
-To do this:
-
-<Steps>
-  <Step title="Open Settings > Team.">
-  </Step>
-  <Step title="In the Members section, click Invite Link.">
-  </Step>
-  <Step title="Copy or share the generated invitation link as needed.">
-  </Step>
-</Steps>
-
-This is useful when you want to send access through chat, documentation, or another communication channel instead of entering each email manually on the page.
-
-## Team roles
-
-Before inviting a member, choose the role you want to assign from the role dropdown.
-
-Phonely supports different access levels so you can give each person the right level of control for their responsibilities. The current workspace owner is shown separately as **Owner** in the member list.
-
-**Member**
-
-Members have access to the workspace and can work with agents, flows, call history, and other organization resources, but they cannot manage members.Use this role for teammates who need to build, review, test, or manage work inside the organization without handling user access.
-
-**Viewer**
-
-Viewers have read-only access to agents and call history. Use this role for users who only need to review information, monitor activity, or inspect call history without making changes.
-
-**Admin**
-
-Admins have full access to everything in the organization. Use this role for users who need to manage workspace settings, resources, and member access.

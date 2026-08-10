@@ -1,75 +1,12 @@
 ---
 title: "Report Call Error"
-description: "Report a call issue through the frontend API-key-authenticated error reporting endpoint."
+description: "Submit feedback about a call to the Phonely team."
 sources:
   - "app/api/report-call-error/route.ts"
-  - "app/api/submit-call-error/route.ts"
-  - "lib/api-auth.ts"
-  - "lib/api-client.ts"
-  - "lib/server-firebase-request-auth.ts"
+last-verified: "2026-08-10"
 openapi: "POST /report-call-error"
 ---
 
-Reports an error or issue with a specific call to help improve the service.
+Submits the call ID, a contact email, and a description of the problem for review. The API key must belong to the supplied user, the user must have access to the agent, and the call must belong to that agent.
 
-### Request
-
-**Method:** `POST`  
-**Endpoint:** `/api/report-call-error`  
-**Headers:**
-- `X-Authorization`: Your API key (required)
-- `Content-Type`: `application/json`
-
-**Request Body:**
-```json
-{
-  "uid": "string",
-  "agentId": "string",
-  "callId": "string",
-  "email": "string",
-  "reason": "string"
-}
-```
-
-**Parameters:**
-- `uid` (string, required): Your user ID
-- `agentId` (string, required): The ID of the agent that received the call
-- `callId` (string, required): The ID of the call with the error
-- `email` (string, required): Your email address for follow-up
-- `reason` (string, required): Description of the error or issue
-
-### Response
-
-**Success Response (200):**
-```json
-{
-  "success": true
-}
-```
-
-**Error Responses:**
-- `400 Bad Request`: Invalid request body
-- `401 Unauthorized`: Invalid or missing API key, or insufficient permissions
-- `404 Not Found`: Call not found or invalid call ID
-- `500 Internal Server Error`: Server error or problem submitting the error report
-
-### Example
-
-```bash
-curl -X POST https://app.phonely.ai/api/report-call-error \
-  -H "X-Authorization: your-api-key" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "uid": "user123",
-    "agentId": "agent456",
-    "callId": "call789",
-    "email": "user@example.com",
-    "reason": "Agent did not respond properly to customer questions"
-  }'
-```
-
-### Notes
-
-- This endpoint helps improve the service by collecting feedback on call issues
-- The error report will be sent to the Phonely team for review
-- A link to the call history will be included in the error report
+Use a specific `reason` that explains the observed behavior and the expected behavior.
