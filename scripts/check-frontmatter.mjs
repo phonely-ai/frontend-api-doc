@@ -21,7 +21,7 @@ const SENSITIVE_SOURCE_PATTERNS = [
   /(?:^|\/)(?:secrets?|credentials?)(?:\/|\.|$)/i,
   /(?:^|\/)hooks\/firebase-admin(?:\.|\/|$)/i,
   /(?:^|\/)lib\/server-firebase-request-auth(?:\.|\/|$)/i,
-  /(?:^|\/)services\/billing(?:\/|$)/i,
+  /(?:^|\/)services\/billing(?:\/|\.|$)/i,
   /(?:^|\/)app\/api\/(?:admin|stripe-)(?:\/|[^/]*$)/i,
 ];
 

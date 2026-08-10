@@ -21,7 +21,7 @@ An unprefixed source belongs to `phonely-frontend`. Sources in another product r
 
 Source mappings are evidence pointers, not content to publish. Keep them limited to repository-relative code paths that are safe to expose. Never put credentials, environment values, private endpoints, customer data, call logs, or other sensitive implementation details in page metadata or review-window notes.
 
-Every repository declared in `freshness.config.json` must also be provisioned as a read-only Git cache for the scheduled scanner. Add that automation support before merging documentation that introduces a new repository. The configured `rootEnv` identifies an override path; GitHub's default branch remains authoritative, and the cache working tree is never the source of truth.
+Every repository declared in `freshness.config.json` must also be provisioned as a read-only Git cache for the scheduled scanner. Add that automation support before merging documentation that introduces a new repository. The configured `rootEnv` identifies an override path; GitHub repository history remains authoritative, and the cache working tree is never the source of truth. When `accountedThrough` is set, source mappings resolve against that exact commit so the documentation can describe the deployed product snapshot instead of a newer default branch.
 
 ## Commands
 

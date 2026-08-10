@@ -11,4 +11,6 @@ Returns a paginated list of calls for an agent. Authentication must grant access
 
 Repeat array query parameters such as `status`, `sentiment`, `call_type`, `outcome`, `ended_reason`, and `mode` to include multiple values. Dates use ISO 8601 date-time values, and durations are measured in seconds.
 
+Use `campaign_id` or `ab_test_id` to restrict results to a campaign or A/B test.
+
 The response's `total` is the number of matching calls before `limit` and `offset` are applied.

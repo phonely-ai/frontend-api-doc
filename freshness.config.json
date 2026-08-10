@@ -191,7 +191,12 @@
           "id": "analytics-and-call-review-refresh",
           "status": "docs-updated",
           "pages": [
+            "agent-review",
             "call-history-ai-analytics/call-history-ai-analytics",
+            "call-events",
+            "call-path",
+            "call-sentiments",
+            "call-topics",
             "data-tables",
             "performance",
             "post-call-outcomes"
@@ -202,8 +207,10 @@
           "id": "billing-and-usage-refresh",
           "status": "docs-updated",
           "pages": [
+            "billing-and-usage/account",
             "billing-and-usage/manage-agents-and-usage",
             "billing-and-usage/plans-and-billing-history",
+            "billing-and-usage/teams",
             "billing-and-usage/usage-notifications"
           ],
           "note": "Rebuilt the billing and settings guides around the production Account, Team, Plan & Billing, Usage & Cost, Notifications, Agents, and organization controls."

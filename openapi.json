@@ -146,7 +146,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GetOrgsRequest"
+                "$ref": "#/components/schemas/GetAgentsRequest"
               }
             }
           }
@@ -159,7 +159,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/OrgInfo"
+                    "$ref": "#/components/schemas/AgentInfo"
                   }
                 }
               }
@@ -226,7 +226,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AgentInfo"
+                    "$ref": "#/components/schemas/OrgInfo"
                   }
                 }
               }
@@ -290,10 +290,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CallSummaryResponse"
-                  }
+                  "$ref": "#/components/schemas/CallSummaryResponse"
                 }
               }
             }
@@ -310,6 +307,16 @@
           },
           "401": {
             "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Call or agent not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -389,6 +396,15 @@
             "description": "Filter by campaign ID"
           },
           {
+            "name": "ab_test_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by A/B test ID"
+          },
+          {
             "name": "status",
             "in": "query",
             "required": false,
@@ -396,7 +412,17 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["COMPLETED", "FAILED", "ENDED", "IN_PROGRESS"]
+                "enum": [
+                  "QUEUED",
+                  "IN_PROGRESS",
+                  "ENDED",
+                  "COMPLETED",
+                  "FAILED",
+                  "DNC",
+                  "REDIAL_SCHEDULED",
+                  "QUEUEING",
+                  "IN_WARM_TRANSFER"
+                ]
               }
             },
             "description": "Filter by call status (can specify multiple values)"
@@ -409,7 +435,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["Positive", "Negative", "Neutral"]
+                "enum": ["Positive", "Negative", "Neutral", "Unsure"]
               }
             },
             "description": "Filter by sentiment (can specify multiple values)"
@@ -422,7 +448,14 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["inboundPhoneCall", "outboundPhoneCall", "webCall", "dailyCall"]
+                "enum": [
+                  "inboundPhoneCall",
+                  "outboundPhoneCall",
+                  "dailyCall",
+                  "webCall",
+                  "messagingSession",
+                  "callAndMessaging"
+                ]
               }
             },
             "description": "Filter by call type (can specify multiple values)"
@@ -681,6 +714,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": ["success"],
                   "properties": {
                     "success": {
                       "type": "boolean",
@@ -945,6 +979,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": ["success"],
                   "properties": {
                     "success": {
                       "type": "boolean",
@@ -1151,6 +1186,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": ["documents"],
                   "properties": {
                     "documents": {
                       "type": "array",
@@ -1240,6 +1276,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": ["message", "documentIds"],
                   "properties": {
                     "message": {
                       "type": "string"
@@ -1331,6 +1368,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string"
@@ -1419,6 +1457,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": ["websites"],
                   "properties": {
                     "websites": {
                       "type": "array",
@@ -1532,6 +1571,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string"
@@ -1617,6 +1657,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string"
@@ -1703,7 +1744,7 @@
         },
         "responses": {
           "200": {
-            "description": "The idempotent request already completed",
+            "description": "The idempotent request has reached a terminal status",
             "headers": {
               "Location": {
                 "description": "Relative URL for checking generation status",
@@ -1880,6 +1921,8 @@
     "schemas": {
       "UpdateCallOutcomeRequest": {
         "type": "object",
+        "additionalProperties": false,
+        "minProperties": 1,
         "properties": {
           "custom_call_outcome": {
             "type": "string",
@@ -1897,6 +1940,7 @@
       },
       "UpdateCallOutcomeResponse": {
         "type": "object",
+        "required": ["success", "call_id", "agent_id", "updated_fields"],
         "properties": {
           "success": {
             "type": "boolean"
@@ -1937,6 +1981,7 @@
       },
       "AgentResponse": {
         "type": "object",
+        "required": ["uid", "agentId", "name"],
         "properties": {
           "uid": {
             "type": "string",
@@ -1978,6 +2023,7 @@
       },
       "DuplicateAgentResponse": {
         "type": "object",
+        "required": ["uid", "agentId", "name"],
         "properties": {
           "uid": {
             "type": "string",
@@ -1994,16 +2040,6 @@
         }
       },
       "GetAgentsRequest": {
-        "type": "object",
-        "required": ["uid"],
-        "properties": {
-          "uid": {
-            "type": "string",
-            "description": "User ID"
-          }
-        }
-      },
-      "GetOrgsRequest": {
         "type": "object",
         "required": ["uid"],
         "properties": {
@@ -2033,6 +2069,7 @@
       },
       "AgentInfo": {
         "type": "object",
+        "required": ["uid", "agentId", "name", "country", "businessPhoneNumber"],
         "properties": {
           "uid": {
             "type": "string",
@@ -2060,6 +2097,7 @@
       },
       "OrgInfo": {
         "type": "object",
+        "required": ["orgId", "name"],
         "properties": {
           "orgId": {
             "type": "string",
@@ -2073,21 +2111,114 @@
       },
       "CallSummaryResponse": {
         "type": "object",
+        "required": ["agentName", "transcriptText", "dashboardUrl"],
         "properties": {
           "agentName": {
             "type": "string",
             "description": "Name of the agent handling the call"
+          },
+          "callId": {
+            "type": "string",
+            "description": "Unique identifier for the call"
+          },
+          "agentId": {
+            "type": "string",
+            "description": "ID of the agent that handled the call"
+          },
+          "businessPhoneNumber": {
+            "type": "string",
+            "nullable": true,
+            "description": "Business phone number used for the call"
+          },
+          "customerPhoneNumber": {
+            "type": "string",
+            "nullable": true,
+            "description": "Customer phone number"
+          },
+          "transcript": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TranscriptEntry"
+            },
+            "nullable": true,
+            "description": "Structured call messages"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TranscriptEntry"
+            },
+            "nullable": true,
+            "description": "Structured call messages; currently the same data as transcript"
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true,
+            "description": "Brief summary of the call"
+          },
+          "longSummary": {
+            "type": "string",
+            "nullable": true,
+            "description": "Detailed summary of the call"
+          },
+          "ai_success": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Whether the AI completed the call successfully"
+          },
+          "sentiment": {
+            "type": "string",
+            "nullable": true,
+            "description": "Overall sentiment of the call"
+          },
+          "topic": {
+            "nullable": true,
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            ],
+            "description": "Topic or topic labels assigned to the call"
+          },
+          "purpose": {
+            "type": "string",
+            "nullable": true,
+            "description": "Main purpose of the call"
+          },
+          "keyPoints": {
+            "type": "array",
+            "items": { "type": "string" },
+            "nullable": true,
+            "description": "Key points identified during the call"
+          },
+          "mentionedDate": {
+            "type": "string",
+            "nullable": true,
+            "description": "Date mentioned during the call"
+          },
+          "mentionedTime": {
+            "type": "string",
+            "nullable": true,
+            "description": "Time mentioned during the call"
           },
           "mentionedEmail": {
             "type": "string",
             "nullable": true,
             "description": "Email address mentioned during the call"
           },
+          "callerName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Caller name extracted from the call"
+          },
           "unansweredQuestions": {
             "type": "array",
             "items": {
               "type": "string"
             },
+            "nullable": true,
             "description": "List of questions that were not answered during the call"
           },
           "actionItems": {
@@ -2095,120 +2226,69 @@
             "items": {
               "type": "string"
             },
+            "nullable": true,
             "description": "List of action items identified during the call"
           },
           "followUpReason": {
             "type": "string",
+            "nullable": true,
             "description": "Reason for any required follow-up"
           },
           "followUp": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Whether follow-up is required"
+          },
+          "callDirection": {
             "type": "string",
-            "description": "Indicator if follow-up is required"
+            "nullable": true,
+            "description": "Call type or direction"
           },
           "recordingUrl": {
             "type": "string",
+            "nullable": true,
             "description": "URL to access the call recording"
-          },
-          "dashboardUrl": {
-            "type": "string",
-            "description": "URL to access the call dashboard"
-          },
-          "purpose": {
-            "type": "string",
-            "description": "Main purpose or topic of the call"
-          },
-          "sentiment": {
-            "type": "string",
-            "description": "Overall sentiment of the call"
           },
           "transcriptText": {
             "type": "string",
-            "description": "Full text transcript of the call"
-          },
-
-          "transcript": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TranscriptEntry"
-            },
-            "description": "Structured transcript of the call"
-          },
-          "mentionedDate": {
-            "type": "string",
-            "nullable": true,
-            "description": "Any specific date mentioned during the call"
-          },
-          "businessPhoneNumber": {
-            "type": "string",
-            "description": "Phone number of the agent"
-          },
-          "keyPoints": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Key points or highlights from the call"
-          },
-          "topic": {
-            "type": "string",
-            "description": "Main topic or category of the call"
-          },
-          "longSummary": {
-            "type": "string",
-            "nullable": true,
-            "description": "Detailed summary of the call"
-          },
-          "callId": {
-            "type": "string",
-            "description": "Unique identifier for the call"
-          },
-          "ai_success": {
-            "type": "string",
-            "description": "Indicator of AI's success in handling the call"
-          },
-          "customerPhoneNumber": {
-            "type": "string",
-            "description": "Phone number of the customer"
+            "description": "Text transcript containing user and assistant messages"
           },
           "callStarted": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Date string when the call started"
+            "$ref": "#/components/schemas/FirestoreTimestamp"
+          },
+          "startedAt": {
+            "$ref": "#/components/schemas/FirestoreTimestamp"
           },
           "callEnded": {
+            "$ref": "#/components/schemas/FirestoreTimestamp"
+          },
+          "callStartedDateString": {
             "type": "string",
-            "format": "date-time",
-            "description": "Date string when the call ended"
+            "description": "Call start formatted in the agent's timezone"
+          },
+          "callEndedDateString": {
+            "type": "string",
+            "description": "Call end formatted in the agent's timezone"
           },
           "duration": {
             "type": "number",
             "description": "Duration of the call in seconds"
           },
-          "callerName": {
-            "type": "string",
-            "description": "Name of the caller"
-          },
-          "callDirection": {
-            "type": "string",
-            "description": "Direction of the call (inbound/outbound)"
-          },
-          "mentionedTime": {
-            "type": "string",
-            "nullable": true,
-            "description": "Any specific time mentioned during the call"
-          },
-          "summary": {
-            "type": "string",
-            "description": "Brief summary of the call"
-          },
           "endedReason": {
             "type": "string",
+            "nullable": true,
             "description": "Reason for the call ending"
+          },
+          "dashboardUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to open the call in Phonely"
           }
         }
       },
       "ListCallsResponse": {
         "type": "object",
+        "required": ["items", "total", "limit", "offset"],
         "properties": {
           "items": {
             "type": "array",
@@ -2233,6 +2313,7 @@
       },
       "CallItem": {
         "type": "object",
+        "required": ["id", "agentId", "c_topic"],
         "properties": {
           "id": {
             "type": "string",
@@ -2244,59 +2325,90 @@
           },
           "business_phone_number": {
             "type": "string",
+            "nullable": true,
             "description": "The business phone number used for the call"
           },
           "customer_phone_number": {
             "type": "string",
+            "nullable": true,
             "description": "The customer's phone number"
           },
           "started_at": {
             "type": "string",
             "format": "date-time",
+            "nullable": true,
             "description": "ISO 8601 datetime when the call started"
           },
           "ended_at": {
             "type": "string",
             "format": "date-time",
+            "nullable": true,
             "description": "ISO 8601 datetime when the call ended"
           },
           "duration": {
             "type": "number",
+            "nullable": true,
             "description": "Call duration in seconds"
           },
           "status": {
             "type": "string",
-            "enum": ["COMPLETED", "FAILED", "ENDED", "IN_PROGRESS"],
+            "enum": [
+              "QUEUED",
+              "IN_PROGRESS",
+              "ENDED",
+              "COMPLETED",
+              "FAILED",
+              "DNC",
+              "REDIAL_SCHEDULED",
+              "QUEUEING",
+              "IN_WARM_TRANSFER"
+            ],
+            "nullable": true,
             "description": "Call status"
           },
           "recording_url": {
             "type": "string",
+            "nullable": true,
             "description": "URL to access the call recording"
           },
           "ended_reason": {
             "type": "string",
+            "nullable": true,
             "description": "Reason why the call ended"
           },
           "type": {
             "type": "string",
-            "enum": ["inboundPhoneCall", "outboundPhoneCall", "webCall", "dailyCall"],
+            "enum": [
+              "inboundPhoneCall",
+              "outboundPhoneCall",
+              "dailyCall",
+              "webCall",
+              "messagingSession",
+              "callAndMessaging"
+            ],
+            "nullable": true,
             "description": "Type of call"
           },
           "mode": {
             "type": "string",
+            "enum": ["call", "messaging"],
+            "nullable": true,
             "description": "Call mode"
           },
           "read": {
             "type": "boolean",
+            "nullable": true,
             "description": "Whether the call has been read"
           },
           "c_sentiment": {
             "type": "string",
-            "enum": ["Positive", "Negative", "Neutral"],
+            "enum": ["Positive", "Negative", "Neutral", "Unsure"],
+            "nullable": true,
             "description": "Customer sentiment analysis result"
           },
           "c_outcome": {
             "type": "string",
+            "nullable": true,
             "description": "Call outcome classification"
           },
           "c_topic": {
@@ -2305,14 +2417,17 @@
           },
           "ab_test_type": {
             "type": "string",
+            "nullable": true,
             "description": "A/B test variant"
           },
           "ab_test_id": {
             "type": "string",
+            "nullable": true,
             "description": "ID of the A/B test"
           },
           "ab_test_success": {
             "type": "boolean",
+            "nullable": true,
             "description": "Whether the A/B test was successful"
           },
           "draft_agent_version": {
@@ -2330,6 +2445,7 @@
             "items": {
               "$ref": "#/components/schemas/WorkflowAction"
             },
+            "nullable": true,
             "description": "Array of workflow actions executed during the call"
           },
           "campaign_id": {
@@ -2356,21 +2472,70 @@
           }
         }
       },
+      "FirestoreTimestamp": {
+        "type": "object",
+        "required": ["_seconds", "_nanoseconds"],
+        "properties": {
+          "_seconds": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "_nanoseconds": {
+            "type": "integer"
+          }
+        },
+        "description": "Serialized Firestore timestamp"
+      },
       "TranscriptEntry": {
         "type": "object",
+        "required": ["content", "role"],
         "properties": {
           "content": {
-            "type": "string",
+            "oneOf": [
+              { "type": "string" },
+              { "type": "object", "additionalProperties": true }
+            ],
             "description": "Content of the transcript entry"
           },
           "role": {
             "type": "string",
-            "description": "Role of the speaker (e.g., assistant, user)"
+            "enum": [
+              "user",
+              "assistant",
+              "interruption",
+              "action",
+              "workflow_triggered",
+              "kb_retrieval",
+              "state_transition",
+              "control",
+              "stored_variables",
+              "tts_failover",
+              "endpointing_result",
+              "response_type"
+            ],
+            "description": "Message role"
+          },
+          "timestamp": {
+            "type": "number"
+          },
+          "isPositive": {
+            "type": "boolean"
+          },
+          "requestId": {
+            "type": "string"
+          },
+          "response_issue_tags": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "user_instructions": {
+            "type": "string"
           }
         }
       },
       "BlockListResponse": {
         "type": "object",
+        "required": ["blockList"],
         "properties": {
           "blockList": {
             "type": "array",
@@ -2395,6 +2560,7 @@
           },
           "numbers": {
             "type": "array",
+            "minItems": 1,
             "items": {
               "type": "string"
             },
@@ -2404,6 +2570,7 @@
       },
       "BlockListUpdateResponse": {
         "type": "object",
+        "required": ["message", "added", "failed"],
         "properties": {
           "message": {
             "type": "string",
@@ -2427,6 +2594,7 @@
       },
       "BlockListDeleteResponse": {
         "type": "object",
+        "required": ["message", "removed", "failed"],
         "properties": {
           "message": {
             "type": "string",
@@ -2450,6 +2618,7 @@
       },
       "BlockListFailure": {
         "type": "object",
+        "required": ["number", "reason"],
         "properties": {
           "number": {
             "type": "string",
@@ -2463,6 +2632,7 @@
       },
       "ImportNumberRequest": {
         "type": "object",
+        "additionalProperties": false,
         "required": ["uid", "agentId", "source", "twilioAccountSid", "twilioAuthToken", "phoneNumber", "countryCode"],
         "properties": {
           "uid": {
@@ -2475,6 +2645,7 @@
           },
           "source": {
             "type": "string",
+            "enum": ["twilio"],
             "description": "Phone number source (currently only supports 'twilio')"
           },
           "twilioAccountSid": {
@@ -2487,16 +2658,20 @@
           },
           "phoneNumber": {
             "type": "string",
+            "pattern": "^\\+[1-9]\\d{1,14}$",
             "description": "Phone number to import, includes country code. i.e +10123456789"
           },
           "countryCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 2,
             "description": "Country code of the phone number, ISO 3166-1 alpha-2 format"
           }
         }
       },
       "ImportNumberResponse": {
         "type": "object",
+        "required": ["message"],
         "properties": {
           "message": {
             "type": "string",
@@ -2513,7 +2688,7 @@
           },
           "id": {
             "type": "string",
-            "description": "unique voice id, use for set agent's voice"
+            "description": "Unique voice ID to use when updating an agent"
           },
           "gender": {
             "type": "string",
@@ -2521,7 +2696,7 @@
           },
           "language": {
             "type": "string",
-            "description": "Support language of the voice"
+            "description": "Language supported by the voice"
           },
           "tags": {
             "type": "array",
@@ -2562,19 +2737,22 @@
           },
           "agentName": {
             "type": "string",
+            "maxLength": 50,
             "description": "Name of the agent, limited to 50 characters"
           },
           "greetingMessage": {
             "type": "string",
+            "maxLength": 500,
             "description": "Greeting message to be used when the agent is called, limited to 500 characters"
           },
           "humanizeConversation": {
             "type": "boolean",
-            "description": "Add a vocal ticks such as hmm, umm etc. to your conversation."
+            "description": "Set to true to add natural vocal fillers to the conversation"
           },
           "conversationStyle": {
             "type": "string",
-            "description": "'Casual' | 'Humorous' | 'Direct' | 'Formal' | 'Persuasive' | 'Friendly'"
+            "enum": ["Casual", "Humorous", "Direct", "Formal", "Persuasive", "Friendly"],
+            "description": "Conversation style"
           }
         }
       },
@@ -2607,6 +2785,7 @@
       },
       "Document": {
         "type": "object",
+        "required": ["id", "agentId", "name", "active", "lastUpdatedBy", "lastUpdatedAt"],
         "properties": {
           "id": {
             "type": "string",
@@ -2628,19 +2807,30 @@
             "type": "string",
             "description": "URL to access the document"
           },
+          "content": {
+            "type": "string",
+            "description": "Extracted document content when stored with the record"
+          },
+          "contentMD": {
+            "type": "string",
+            "description": "Document content in Markdown when stored with the record"
+          },
           "lastUpdatedBy": {
             "type": "string",
             "description": "Who last updated the document"
           },
           "lastUpdatedAt": {
-            "type": "string",
-            "format": "date-time",
+            "oneOf": [
+              { "type": "string", "format": "date-time" },
+              { "$ref": "#/components/schemas/FirestoreTimestamp" }
+            ],
             "description": "When the document was last updated"
           }
         }
       },
       "Website": {
         "type": "object",
+        "required": ["id", "agentId", "name", "url", "active", "content", "contentMD", "lastUpdatedBy", "lastUpdatedAt"],
         "properties": {
           "id": {
             "type": "string",
@@ -2676,8 +2866,10 @@
             "description": "Who last updated the website"
           },
           "lastUpdatedAt": {
-            "type": "string",
-            "format": "date-time",
+            "oneOf": [
+              { "type": "string", "format": "date-time" },
+              { "$ref": "#/components/schemas/FirestoreTimestamp" }
+            ],
             "description": "When the website was last updated"
           }
         }
@@ -2783,56 +2975,6 @@
           "message": {
             "type": "string",
             "description": "Detailed error message"
-          }
-        }
-      },
-      "GetAllAgentsResponse": {
-        "type": "object",
-        "properties": {
-          "orgAgents": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "Organization name"
-                },
-                "orgId": {
-                  "type": "string",
-                  "description": "Organization ID"
-                },
-                "agents": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "description": "Agent ID"
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "Agent name"
-                      },
-                      "businessPhoneNumber": {
-                        "type": "string",
-                        "description": "Business phone number",
-                        "nullable": true
-                      },
-                      "orgId": {
-                        "type": "string",
-                        "description": "Organization ID"
-                      },
-                      "cluster": {
-                        "type": "string",
-                        "description": "Cluster identifier"
-                      }
-                    }
-                  }
-                }
-              }
-            }
           }
         }
       }

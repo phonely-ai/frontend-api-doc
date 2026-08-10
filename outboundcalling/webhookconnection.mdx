@@ -5,10 +5,13 @@ sources:
   - "features/campaign/modules/edit-campaign-sheet/general-tab/components/triggers/webhook-trigger.tsx"
   - "features/campaign/api/queue-call-service.ts"
   - "features/campaign/api/campaign-service.ts"
+  - "phonely-backend/app/outbound/campaign/routes.py"
 last-verified: "2026-08-10"
 ---
 
 Use a webhook when an external system should add contacts to a **Continuous Calling** campaign. Each accepted request adds a call to the campaign queue; the campaign cadence determines when that call can run.
+
+Phonely does not deduplicate accepted webhook requests. If the sending system retries a request, it can queue another call. Prevent duplicate requests before sending them when one contact should produce only one call.
 
 ## Configure the webhook
 

@@ -182,7 +182,7 @@
               "data-tables",
               "call-path",
               "post-call-outcomes",
-              "call-topics-and-sentiments",
+              "call-topics",
               "call-sentiments"
             ]
           },
@@ -322,6 +322,10 @@
     "/css/variables-table-alignment.css"
   ],
   "redirects": [
+    {
+      "source": "/call-topics-and-sentiments",
+      "destination": "/call-topics"
+    },
     {
       "source": "/get-started/home",
       "destination": "/get-started/home-overview"

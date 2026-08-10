@@ -45,3 +45,6 @@ jobs:
 
       - name: Indexing contract
         run: node scripts/check-indexing-contract.mjs
+
+      - name: OpenAPI contract
+        run: node scripts/check-openapi-contract.mjs

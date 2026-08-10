@@ -3,6 +3,7 @@ title: "Campaign Phone Numbers"
 description: "Choose outbound phone numbers and configure how a campaign selects them."
 sources:
   - "features/campaign/modules/edit-campaign-sheet/phone-number-tab/**"
+  - "features/campaign/modules/edit-campaign-sheet/general-tab/components/dialout-number-field.tsx"
   - "features/campaign/api/phone-number-service.ts"
   - "services/phone-numbers/**"
 last-verified: "2026-08-10"
@@ -26,9 +27,9 @@ State- and country-based routing fall back to a random number from the enabled p
 
 ## Map the dial-out number when needed
 
-A campaign source can provide a specific dial-out number. Map **Dial-out Number** to the relevant source field only when each contact should determine which number places the call.
+A campaign source can provide a specific dial-out number. Map **Dial-out Number** to the relevant source field only when each contact should determine which campaign number places the call.
 
-Otherwise, leave the campaign's configured routing method responsible for selecting the number.
+A non-empty mapped value overrides Weight, State, and Country routing. The value must match an enabled number in the campaign; otherwise, that contact fails instead of using another number. An empty or unmapped value uses the campaign's configured routing method.
 
 ## Verify the numbers
 
