@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.242.0",
-        "commit": "15b5477fb21b63a158bd6867e139f2473246ba9b"
+        "label": "v0.244.0",
+        "commit": "45a00e051483f100e29572e144d325e99c1fc00b"
       }
     },
     {
@@ -47,121 +47,175 @@
         {
           "id": "draft-and-live-browser-tests",
           "status": "docs-updated",
-          "pages": ["flow-editor/test-and-publish", "get-started/quick-start", "key-concepts/ask-ai", "key-concepts/flows"],
+          "pages": [
+            "flow-editor/test-and-publish",
+            "get-started/quick-start",
+            "key-concepts/ask-ai",
+            "key-concepts/flows"
+          ],
           "note": "Documented draft-first editor tests, the Draft / Live selector, and published behavior for outbound phone tests."
         },
         {
           "id": "reachable-flow-validation",
           "status": "docs-updated",
-          "pages": ["flow-editor/test-and-publish", "key-concepts/flows", "workflow-checklist"],
+          "pages": [
+            "flow-editor/test-and-publish",
+            "key-concepts/flows",
+            "workflow-checklist"
+          ],
           "note": "Clarified that only errors on blocks reachable from the flow entry point block publishing."
         },
         {
           "id": "advisory-ai-publish-review",
           "status": "docs-updated",
-          "pages": ["flow-editor/test-and-publish", "key-concepts/flows", "workflow-checklist"],
+          "pages": [
+            "flow-editor/test-and-publish",
+            "key-concepts/flows",
+            "workflow-checklist"
+          ],
           "note": "Documented the advisory review, Flow Checklist findings, fail-open behavior, and Publish anyway path."
         },
         {
           "id": "atomic-ask-ai-flow-proposals",
           "status": "docs-updated",
-          "pages": ["key-concepts/ask-ai"],
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
           "note": "Documented proposal review, per-change decisions, submission, and stale-proposal behavior."
         },
         {
           "id": "ask-ai-panel-naming-and-reentry",
           "status": "docs-updated",
-          "pages": ["flow-editor/test-and-publish", "get-started/home-overview", "get-started/quick-start", "key-concepts/ask-ai", "key-concepts/flows"],
+          "pages": [
+            "flow-editor/test-and-publish",
+            "get-started/home-overview",
+            "get-started/quick-start",
+            "key-concepts/ask-ai",
+            "key-concepts/flows"
+          ],
           "note": "Updated the former Operator terminology to Ask AI across the reviewed user journey and retained the current ways to open, resume, and use the side panel."
         },
         {
           "id": "prompt-based-agent-generation-api",
           "status": "docs-updated",
-          "pages": ["api-reference/endpoint/generate-agent", "api-reference/endpoint/get-agent-generation"],
+          "pages": [
+            "api-reference/endpoint/generate-agent",
+            "api-reference/endpoint/get-agent-generation"
+          ],
           "note": "Documented the authenticated asynchronous creation endpoint, idempotent retry contract, status polling, terminal responses, and organization permission boundary."
         },
         {
           "id": "outbound-call-screening-context",
           "status": "docs-updated",
-          "pages": ["blocks/flow-blocks/start-flow"],
+          "pages": [
+            "blocks/flow-blocks/start-flow"
+          ],
           "note": "Documented the optional caller identity and reason used when an automated call screener answers an outbound call."
         },
         {
           "id": "code-generate-with-ai",
           "status": "docs-updated",
-          "pages": ["blocks/data-and-automation-blocks/code"],
+          "pages": [
+            "blocks/data-and-automation-blocks/code"
+          ],
           "note": "Documented the inline generator while retaining Python as the supported public runtime."
         },
         {
           "id": "code-input-variable-modes",
           "status": "docs-updated",
-          "pages": ["blocks/data-and-automation-blocks/code"],
+          "pages": [
+            "blocks/data-and-automation-blocks/code"
+          ],
           "note": "Documented the interchangeable Manual key-value and Code JSON views for Code block inputs."
         },
         {
           "id": "flow-toolbar-collapse-controls",
           "status": "docs-updated",
-          "pages": ["key-concepts/flow-canvas-controls"],
+          "pages": [
+            "key-concepts/flow-canvas-controls"
+          ],
           "note": "Documented collapse and expand controls, current canvas interactions, and removed media captured against the previous toolbar."
         },
         {
           "id": "transfer-call-editor-rework",
           "status": "already-covered",
-          "pages": ["blocks/communication-blocks/transfer-call"],
+          "pages": [
+            "blocks/communication-blocks/transfer-call"
+          ],
           "note": "The Transfer Call guide already describes the current cold and warm transfer configuration, destinations, failover, detection, and recovery routes."
         },
         {
           "id": "historical-version-block-preview",
           "status": "already-covered",
-          "pages": ["flow-editor/versions"],
+          "pages": [
+            "flow-editor/versions"
+          ],
           "note": "The version guide already explains that previewing a version shows its saved canvas, block configuration, routes, variables, and settings without changing the draft."
         },
         {
           "id": "latest-stored-variable-value",
           "status": "docs-updated",
-          "pages": ["flow-editor/variables"],
+          "pages": [
+            "flow-editor/variables"
+          ],
           "note": "Clarified that Call Details shows the most recent value recorded for each stored variable at that point in execution."
         },
         {
           "id": "agent-settings-call-outcomes",
           "status": "docs-updated",
-          "pages": ["agent-design/overview"],
+          "pages": [
+            "agent-design/overview"
+          ],
           "note": "Clarified that Call Tagging contains topics, sentiment definitions, and read-only outcomes recorded through the API rather than editable outcome management."
         },
         {
           "id": "published-flow-content-protection",
           "status": "already-covered",
-          "pages": ["flow-editor/test-and-publish", "flow-editor/versions"],
+          "pages": [
+            "flow-editor/test-and-publish",
+            "flow-editor/versions"
+          ],
           "note": "The guides already separate draft editing from the published version and direct users to publish flow changes through the Flow Editor."
         },
         {
           "id": "ask-ai-conversation-test-failure-handling",
           "status": "no-doc-change",
-          "pages": ["key-concepts/ask-ai"],
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
           "note": "Failed or inconclusive internal conversation simulations no longer count as proof; this strengthens result integrity without changing the documented user workflow."
         },
         {
           "id": "onboarding-domain-normalization",
           "status": "no-doc-change",
-          "pages": ["get-started/quick-start"],
+          "pages": [
+            "get-started/quick-start"
+          ],
           "note": "The website-entry control was simplified, but the quick-start guide does not depend on its protocol-entry mechanics."
         },
         {
           "id": "talk-and-collect-configuration-polish",
           "status": "already-covered",
-          "pages": ["blocks/conversation-blocks/collect", "blocks/flow-blocks/talk"],
+          "pages": [
+            "blocks/conversation-blocks/collect",
+            "blocks/flow-blocks/talk"
+          ],
           "note": "The existing guides already describe the current Generate with AI and manual configuration paths."
         },
         {
           "id": "webhook-authorization-scope",
           "status": "no-doc-change",
-          "pages": ["blocks/data-and-automation-blocks/webhook"],
+          "pages": [
+            "blocks/data-and-automation-blocks/webhook"
+          ],
           "note": "The implementation changed token scope; the user workflow and documented X-Authorization contract did not change."
         },
         {
           "id": "do-not-call-system-variable",
           "status": "no-doc-change",
-          "pages": ["flow-editor/variables"],
+          "pages": [
+            "flow-editor/variables"
+          ],
           "note": "The conceptual variables guide intentionally does not enumerate every system-provided variable."
         },
         {
@@ -234,25 +288,36 @@
         {
           "id": "workflow-template-experience",
           "status": "docs-updated",
-          "pages": ["key-concepts/flows"],
+          "pages": [
+            "key-concepts/flows"
+          ],
           "note": "Documented searching and filtering the template library, reviewing template details and the read-only flow preview, and creating an editable flow from a template."
         },
         {
           "id": "workflow-change-review",
           "status": "docs-updated",
-          "pages": ["flow-editor/collaboration", "key-concepts/ask-ai"],
+          "pages": [
+            "flow-editor/collaboration",
+            "key-concepts/ask-ai"
+          ],
           "note": "Updated collaboration and Ask AI review guidance for the read-only canvas preview, highlighted block and connection changes, block-setting inspection, and proposal decisions."
         },
         {
           "id": "pre-call-terminal-reachability",
           "status": "already-covered",
-          "pages": ["blocks/flow-blocks/start-flow", "blocks/flow-control-and-routing/end-call", "key-concepts/flows"],
+          "pages": [
+            "blocks/flow-blocks/start-flow",
+            "blocks/flow-control-and-routing/end-call",
+            "key-concepts/flows"
+          ],
           "note": "Existing guidance already covers pre-call routing, ending a call before the conversation begins, and validation of blocks reachable from the flow entry point."
         },
         {
           "id": "retired-agent-creation-ui",
           "status": "no-doc-change",
-          "pages": ["get-started/quick-start"],
+          "pages": [
+            "get-started/quick-start"
+          ],
           "note": "Removed a retired agent-creation implementation without changing the current product paths documented for onboarding and prompt-based agent creation."
         },
         {
@@ -260,6 +325,139 @@
           "status": "not-public",
           "pages": [],
           "note": "Repository review automation and dependency metadata do not change the public Phonely product experience."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.243.0-v0.244.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-08-10",
+      "fromExclusive": {
+        "label": "v0.242.0",
+        "commit": "15b5477fb21b63a158bd6867e139f2473246ba9b"
+      },
+      "throughInclusive": {
+        "label": "v0.244.0",
+        "commit": "45a00e051483f100e29572e144d325e99c1fc00b"
+      },
+      "dispositions": [
+        {
+          "id": "call-screening-details-rename",
+          "status": "docs-updated",
+          "pages": [
+            "blocks/flow-blocks/start-flow"
+          ],
+          "note": "Renamed the Make Call \"Call Context\" option to \"Provide Call Screening Details\" and updated its description to match the new label and explanation shown when an automated call screener answers."
+        },
+        {
+          "id": "campaign-webhook-trigger-relabel",
+          "status": "docs-updated",
+          "pages": [
+            "outboundcalling/webhookconnection"
+          ],
+          "note": "Updated the campaign webhook trigger guide for the renamed \"Set Fields\" button (formerly \"Update Fields\")."
+        },
+        {
+          "id": "do-not-dial-days",
+          "status": "docs-updated",
+          "pages": [
+            "outboundcalling/createaoutboundcallingcampaign",
+            "outboundcalling/avoidmarkedasspamlikely"
+          ],
+          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused — do-not-dial day\" indicator on campaign list and detail views."
+        },
+        {
+          "id": "call-review-webhook-cache-miss-and-event-separators",
+          "status": "already-covered",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics"
+          ],
+          "note": "The webhook \"Cache miss\" badge and _event transcript separators are call-review display refinements; Call History already describes block execution details and transcript event separators for non-conversational events."
+        },
+        {
+          "id": "agent-review-org-routing",
+          "status": "already-covered",
+          "pages": [
+            "agent-review"
+          ],
+          "note": "Corrected organization routing and added a retryable error state for Agent Review; the documented queue triage workflow is unchanged."
+        },
+        {
+          "id": "ask-ai-issue-reporting",
+          "status": "no-doc-change",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "Added a \"Report an issue or idea\" control from the assistant panel and individual responses that carries diagnostic context into platform reports. This is a support/feedback path, not a documented product workflow."
+        },
+        {
+          "id": "ask-ai-token-usage-capture",
+          "status": "not-public",
+          "pages": [],
+          "note": "Non-blocking server-side Ask AI token usage capture for future billing calculations; no customer-facing surface."
+        },
+        {
+          "id": "ask-ai-layout-and-agent-switch-context",
+          "status": "no-doc-change",
+          "pages": [
+            "key-concepts/ask-ai",
+            "get-started/navigation-and-shortcuts"
+          ],
+          "note": "Prevented wide Ask AI messages from overflowing the panel and kept conversations active across agent switches while clearing stale context. Behavior polish that does not change the documented Ask AI or navigation workflow."
+        },
+        {
+          "id": "admin-billing-ops-tab",
+          "status": "not-public",
+          "pages": [],
+          "note": "Replaced the admin Organizations tab with an admin-only Billing Ops review table (role === ADMIN, renders null otherwise). No customer-facing settings surface changed."
+        },
+        {
+          "id": "hybrid-billing-authority",
+          "status": "already-covered",
+          "pages": [
+            "billing-and-usage/plans-and-billing-history",
+            "billing-and-usage/manage-agents-and-usage"
+          ],
+          "note": "Introduced the Stripe-Metronome hybrid billing model and machine-readable billing authority so enterprise Metronome accounts open the normal Plan & Billing experience. The Plans and Billing and Usage and Cost pages already describe subscription, payment, invoices, and usage generically and note that available actions depend on billing state."
+        },
+        {
+          "id": "onboarding-self-serve-enrollment",
+          "status": "no-doc-change",
+          "pages": [
+            "get-started/quick-start"
+          ],
+          "note": "New organizations enroll in self-serve billing at creation; the onboarding steps documented for quick start are unchanged."
+        },
+        {
+          "id": "sales-demo-links",
+          "status": "no-doc-change",
+          "pages": [
+            "billing-and-usage/plans-and-billing-history"
+          ],
+          "note": "Centralized the in-app \"book a demo\" sales link; no documented customer workflow depends on the destination URL."
+        },
+        {
+          "id": "dashboard-chart-cleanup",
+          "status": "no-doc-change",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics"
+          ],
+          "note": "Removed unused dashboard chart variants and their data hooks; the dashboard route and documented analytics surfaces are unaffected."
+        },
+        {
+          "id": "api-client-retry",
+          "status": "no-doc-change",
+          "pages": [
+            "api-reference/introduction"
+          ],
+          "note": "Added client-side retry with backoff for transient API failures; the public API contract and documented endpoints are unchanged."
+        },
+        {
+          "id": "internal-tooling-and-changelog",
+          "status": "not-public",
+          "pages": [],
+          "note": "CI workflow, Vercel config, and changelog updates do not change the public product experience or customer documentation."
         }
       ]
     }
