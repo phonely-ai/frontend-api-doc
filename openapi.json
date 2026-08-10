@@ -2172,9 +2172,8 @@
             "description": "Overall sentiment of the call"
           },
           "topic": {
-            "nullable": true,
             "oneOf": [
-              { "type": "string" },
+              { "type": "string", "nullable": true },
               {
                 "type": "array",
                 "items": { "type": "string" }

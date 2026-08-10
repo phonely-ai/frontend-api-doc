@@ -11,6 +11,7 @@ import { readFileSync } from 'node:fs';
 
 const openapi = JSON.parse(readFileSync('openapi.json', 'utf8'));
 const failures = [];
+const referencedSchemas = new Set();
 const HTTP_METHODS = new Set(['get', 'post', 'put', 'patch', 'delete', 'options', 'head']);
 
 function fail(message) {
@@ -55,19 +56,18 @@ function expectArrayOf(schema, expectedRef, label) {
 
 function walkRefs(value, location = 'openapi.json') {
   if (!value || typeof value !== 'object') return;
-  if (typeof value.$ref === 'string' && value.$ref.startsWith('#/') && !resolveRef(value.$ref)) {
-    fail(`${location} contains an unresolved reference: ${value.$ref}`);
+  if (typeof value.$ref === 'string' && value.$ref.startsWith('#/')) {
+    if (!resolveRef(value.$ref)) fail(`${location} contains an unresolved reference: ${value.$ref}`);
+    if (value.$ref.startsWith('#/components/schemas/')) referencedSchemas.add(value.$ref);
   }
   for (const [key, child] of Object.entries(value)) walkRefs(child, `${location}.${key}`);
 }
 
 walkRefs(openapi);
 
-const serializedContract = JSON.stringify(openapi);
 for (const schemaName of Object.keys(openapi.components?.schemas ?? {})) {
   const reference = `#/components/schemas/${schemaName}`;
-  const references = serializedContract.split(reference).length - 1;
-  if (references === 0) fail(`components.schemas.${schemaName} is unused`);
+  if (!referencedSchemas.has(reference)) fail(`components.schemas.${schemaName} is unused`);
 }
 
 for (const [path, pathItem] of Object.entries(openapi.paths ?? {})) {
