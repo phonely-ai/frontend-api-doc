@@ -14,7 +14,7 @@ sources:
   - "features/workflows/modules/editor/utils/content.ts"
   - "phonely-backend/app/agent/assistant/workflows.py"
   - "phonely-backend/app/call/routes.py"
-last-verified: "2026-08-03"
+last-verified: "2026-08-10"
 ---
 
 Every flow begins with one fixed trigger. Phonely adds the trigger when you create the flow; it cannot be added from the block picker, deleted, or moved on the canvas.
@@ -95,7 +95,7 @@ Every outbound flow begins with **Make Call**. Select the trigger to configure:
 
 - **Phone Number:** The destination to call. Insert a variable when the number is supplied at runtime.
 - **Voice Mail Message:** The message Phonely leaves when voicemail is detected.
-- **Call Context:** Optional caller identity and reason for calling. When an automated call screener answers, Phonely uses this context to respond. **Caller Name** and **Reason for Calling** can use variables available before the call begins.
+- **Provide Call Screening Details:** Optional caller identity and reason for calling. When an automated call screener answers, Phonely provides this information so the recipient knows who is calling and why. **Caller Name** and **Reason for Calling** can use variables available before the call begins.
 - **Voicemail Call Outcome Tagging:** Outcome tags recorded for calls that reach voicemail. This setting is under **Advanced Settings**.
 
 Make Call provides two outputs:

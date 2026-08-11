@@ -31,7 +31,7 @@ The setup has six steps:
 1. **Campaign Info:** Name the campaign and choose its use case.
 2. **Select Trigger Type:** Configure the webhook, Google Sheets connection, or CSV files that provide contacts.
 3. **Add Phone Numbers:** Choose the outbound numbers and how Phonely selects among them.
-4. **Set Call Cadence:** Choose the days, time ranges, and maximum calls per hour.
+4. **Set Call Cadence:** Choose the days, time ranges, maximum calls per hour, and any do-not-dial days.
 5. **Configure Call Flows:** Select a published outbound flow and map any source fields it needs.
 6. **Compliance:** Review and accept the required compliance and Do Not Call acknowledgements.
 
@@ -44,6 +44,17 @@ Enable the days when calls may run and add one or more time ranges to each day. 
 Calling hours are evaluated in each contact's scheduling timezone. Phonely uses the agent timezone unless the campaign maps a timezone field or is configured to infer the timezone from the contact's phone number.
 
 The editor warns when a configured range falls outside 8:00 AM–9:00 PM. This warning does not replace your own compliance review.
+
+## Set do-not-dial days
+
+Use **Do Not Dial Days** in **Set Call Cadence** to keep a campaign from placing calls on specific dates, such as holidays. Add dates in either of two ways:
+
+- Select the **US federal holidays** preset to add its upcoming dates at once.
+- Select individual dates on the year calendar.
+
+Date edits are part of the campaign form. They are saved when you select **Save** and discarded if you close the setup without saving. On a do-not-dial day, the campaign shows a **Paused — do-not-dial day** indicator in the campaign list and detail views and resumes automatically on the next allowed day.
+
+Do-not-dial days do not replace the calling-hours, consent, and suppression rules that apply to each contact and jurisdiction.
 
 ## Select a flow
 

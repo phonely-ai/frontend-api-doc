@@ -18,7 +18,7 @@ Phonely does not deduplicate accepted webhook requests. If the sending system re
 1. Create or edit a Continuous Calling campaign.
 2. In **Select Trigger Type**, choose **Webhook**.
 3. Copy the generated webhook URL and authorization details.
-4. Define the JSON request body, then select **Update Fields**.
+4. Define the JSON request body, then select **Set Fields**.
 5. Map the detected fields to the contact phone number, optional timezone or dial-out number, and any variables used by the outbound flow.
 
 The default body includes `phone_number`, `timezone`, and `dialout_number`. You can add fields required by your flow.
@@ -36,7 +36,7 @@ Send JSON with the authorization required by the generated webhook. Keep the cre
 
 ## Keep the schema aligned
 
-Select **Update Fields** whenever you add, rename, or remove a top-level field. Then review the campaign mappings and any downstream flow fields that use those values.
+Select **Set Fields** whenever you add, rename, or remove a top-level field. Then review the campaign mappings and any downstream flow fields that use those values.
 
 ## Verify the trigger
 
