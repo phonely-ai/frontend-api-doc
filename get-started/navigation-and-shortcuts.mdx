@@ -1,6 +1,6 @@
 ---
 title: "Navigation and Search"
-description: "Find pages and agents quickly, then keep your regular destinations in the sidebar."
+description: "Find pages, agents, and support actions, then keep regular destinations in the sidebar."
 sources:
   - "config/sidebar-navigation.ts"
   - "components/command-k-modal.tsx"
@@ -8,7 +8,9 @@ sources:
   - "components/ui/app-sidebar/app-sidebar.tsx"
   - "components/customize-navbar-modal.tsx"
   - "features/app-shell/search/**"
-last-verified: "2026-07-13"
+  - "features/platform-reports/lib/platform-report-shortcut.ts"
+  - "features/platform-reports/lib/search-intent.ts"
+last-verified: "2026-08-17"
 ---
 
 Use the sidebar for destinations you open regularly. Use global search when you need another page or want to switch agents without navigating back through the app.
@@ -33,9 +35,11 @@ Press `Command + K` on macOS or `Ctrl + K` on Windows to open global search. Dep
   ![Global search showing Ask AI, page, and agent results](/assets/navigation-global-search.png)
 </Frame>
 
-Page results are grouped by tasks such as building, optimizing, and reviewing your agent. Search also includes destinations hidden from your sidebar.
+Page results are grouped by tasks such as building, optimizing, and reviewing your agent. Search also includes destinations hidden from your sidebar and support actions such as **Report issue**.
 
 The first result can send the text to Ask AI instead. Choose a page or agent result when you know where you want to go; choose **Ask AI about...** when you want Phonely to interpret a question or task. See [Ask AI](/key-concepts/ask-ai) for how context and changes are handled.
+
+When you need to report a problem or share an idea, search for the issue and select **Report issue**. Phonely can use the search text to start the report. See [Report Issues and Ideas](/get-started/report-issues-and-ideas) for what to include.
 
 <Tip>
   Use the arrow keys to move through results, `Enter` to open the selected result, and `Escape` to close search.
@@ -91,4 +95,4 @@ The saved destination opens as an external link. Only add URLs you trust.
 | --- | --- | --- |
 | Open global search | `Command + K` | `Ctrl + K` |
 | Open Ask AI | `Command + /` | `Ctrl + /` |
-| Collapse or expand the sidebar | `Command + B` | `Ctrl + B` |
+| Report an issue or idea | `Command + B` | `Ctrl + B` |

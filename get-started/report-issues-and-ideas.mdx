@@ -1,0 +1,74 @@
+---
+title: "Report Issues and Ideas"
+description: "Send product feedback with the context Phonely needs to investigate it."
+sources:
+  - "features/platform-reports/**"
+  - "components/application-error-fallback.tsx"
+  - "components/command-k-modal.tsx"
+  - "components/ui/app-sidebar/app-sidebar.tsx"
+  - "components/ui/app-sidebar/app-sidebar-profile-menu.tsx"
+  - "features/app-shell/search/use-global-search.ts"
+  - "features/app-shell/ui/ask-ai-search.tsx"
+  - "features/chat/assistant/ui/assistant-panel-menu.tsx"
+  - "features/chat/assistant/ui/chat/thread/assistant-message-actions.tsx"
+  - "features/workflows/modules/editor/components/sidebar.tsx"
+last-verified: "2026-08-17"
+---
+
+Use **Report issue** to tell Phonely about a product problem, confusing behavior, performance concern, billing issue, or idea. Reports include useful context from the part of the app where you open them.
+
+## Open a report
+
+You can open **Report an issue or idea** in several ways:
+
+- Select **Report issue** from the app sidebar or profile menu.
+- Open [global search](/get-started/navigation-and-shortcuts), search for the problem or reporting action, and select **Report issue**.
+- Press `Command + B` on macOS or `Ctrl + B` on Windows.
+- Select **Report issue** from an application error screen when the option is available.
+- Report an Ask AI conversation or response from the assistant panel.
+
+## Describe the issue or idea
+
+Choose the type that best matches your report:
+
+| Type | Use it for |
+| --- | --- |
+| **Bug** | Product behavior that is broken or incorrect |
+| **Platform idea** | A product improvement or new capability |
+| **Confusing behavior** | An experience that works but is unclear |
+| **Performance** | Slow, delayed, or unresponsive behavior |
+| **Billing** | A billing-related question or problem |
+| **Other** | Feedback that does not fit another type |
+
+Select **Low**, **Medium**, or **High** based on the impact on your work, then describe what happened or what you would like to improve. The description is required.
+
+For a problem, open **Add details for investigation** when steps to reproduce, the expected behavior, or the actual result would help explain it. For an idea, describe the improvement and why it would be useful.
+
+## Attach supporting media
+
+You can browse for files, drag them into the report, or paste a screenshot. A report can include up to three attachments:
+
+- PNG, JPEG, WebP, or GIF images up to 25 MB each
+- MP4, MOV, or WebM videos up to 100 MB each
+
+Wait for each upload to finish before sending the report. Remove any attachment that fails to upload.
+
+<Warning>
+  Remove credentials and customer information that is not needed to investigate the report before attaching or entering it.
+</Warning>
+
+## Understand the included context
+
+Phonely includes the current page and basic device context with the report. Reports opened from a supported feature can also include diagnostic context for that feature, helping the team investigate without requiring you to copy technical identifiers manually.
+
+This context supplements your description. Include the visible symptom, the outcome you expected, and any timing or scope that would help reproduce the problem.
+
+## Report an Ask AI issue
+
+Open **More Ask AI options** and select **Report Ask AI issue** to report the current conversation. To report one response, point to the response and select the bug icon beneath it. Phonely includes the relevant conversation diagnostics with either report.
+
+If the support team asks for identifiers separately, open **More Ask AI options** and select **Copy diagnostic details**. See [Ask AI](/key-concepts/ask-ai) for more about assistant conversations and context.
+
+## After you send the report
+
+A successful submission shows a report number. The Phonely team reviews the submitted details and may follow up when more information is needed.

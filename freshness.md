@@ -72,6 +72,10 @@ For each release window:
 7. Review neighboring pages when the change affects a shared concept or user journey. At the end of a product area, review the section as a whole.
 8. Record every disposition before advancing the repository cursor. Unclassified signals block advancement; classified `needs-doc-update` signals remain visible after the cursor advances. Record a later `docs-updated` disposition for the page when that work is complete; other dispositions do not clear the pending work.
 
+Classify the user-visible contract rather than the commit title, code location, or implementation size. A change is documentation-worthy when it adds, changes, or removes a stable user task or entry point; a visible input, output, default, state, limit, availability rule, or term; or guidance users need for safe use, recovery, support, or troubleshooting. Internal refactors, tests, diagnostics, storage, analytics, triage, and cosmetic changes do not require documentation unless they alter that public contract. For a mixed change, document the public consequence without exposing its internal implementation.
+
+Use dispositions consistently: `docs-updated` means the affected pages were changed and fully reviewed; `already-covered` means the existing pages already describe the reviewed behavior accurately; `no-doc-change` means the reviewed signal has no customer-facing documentation consequence; `needs-doc-update` records a known page gap that remains open; and `not-public` is reserved for internal-only changes with no public page mapping.
+
 `accountedThrough` is a scan cursor, not a claim that every documentation page is current. It means every product change through that exact commit was inspected and given a disposition. The generated ledger reports pages named by `needs-doc-update` separately from pages awaiting their first content review.
 
 Set `last-verified` only after both the factual and editorial review of the whole page are complete. A correct local patch is not enough if it makes the page or surrounding section inconsistent.
