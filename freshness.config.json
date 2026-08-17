@@ -385,11 +385,13 @@
         },
         {
           "id": "ask-ai-issue-reporting",
-          "status": "no-doc-change",
+          "status": "docs-updated",
           "pages": [
+            "get-started/report-issues-and-ideas",
+            "get-started/navigation-and-shortcuts",
             "key-concepts/ask-ai"
           ],
-          "note": "Added a \"Report an issue or idea\" control from the assistant panel and individual responses that carries diagnostic context into platform reports. This is a support/feedback path, not a documented product workflow."
+          "note": "Documented the platform-wide issue and idea reporting workflow, corrected the global shortcut and search guidance, and added Ask AI conversation and response reporting with diagnostic context."
         },
         {
           "id": "ask-ai-token-usage-capture",
