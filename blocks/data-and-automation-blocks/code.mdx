@@ -8,12 +8,13 @@ sources:
   - "features/workflows/modules/editor/custom-nodes/code/**"
   - "features/workflows/modules/editor/testing/code-test-input.ts"
   - "features/workflows/modules/editor/testing/run-block-test.ts"
-  - "features/workflows/model/variables/flatten-sample-data.ts"
+  - "features/workflows/modules/editor/testing/components/output-selector.tsx"
+  - "features/workflows/modules/editor/testing/apply-output-selection.ts"
   - "phonely-backend/app/services/code_block/python_block_service.py"
   - "phonely-backend/app/services/code_block/code_block_service.py"
   - "phonely-backend/app/agent/live_actions/code_block.py"
   - "phonely-backend/app/config/settings.py"
-last-verified: "2026-08-03"
+last-verified: "2026-08-18"
 ---
 
 Use **Code** to transform, compare, or calculate data with Python. The block receives values from the flow and returns output that later blocks can use.
@@ -103,9 +104,13 @@ Run the block test before using its output in another block.
 2. Select **Test** and inspect `output`, `stdout`, and `stderr`.
 3. Test any missing, empty, boundary, or unexpected values the flow may provide.
 
-A successful test creates variables from the returned dictionary under the block's name. For the example above, later blocks can select the entire dictionary as `output` or select `total` directly from **Available Variables**.
+After a successful test, choose which parts of the returned dictionary later blocks can use. The result panel shows the output as an expandable tree beside the complete raw JSON, with each value's type.
 
-Nested dictionaries and arrays create additional output paths. If the returned structure changes, test the block again and review downstream fields that use its variables.
+For the example above, you can select the entire dictionary as `output` or select `total` on its own. Selecting a parent includes the values nested inside it, and you can search by path or value when the output is large.
+
+The first successful test on a new block selects the complete output for you. After that, only what you select becomes a variable under the block's name, available to later blocks from **Available Variables**.
+
+If the returned structure changes, test the block again and review your selection along with any downstream fields that use its variables. Reselecting outputs keeps existing references working, and a failed retest leaves your last successful selection in place.
 
 <Note>
   `print()` output appears in `stdout` for debugging. It does not create a flow variable. Return a value from the function to use it in later blocks.

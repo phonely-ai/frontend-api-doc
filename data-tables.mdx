@@ -1,21 +1,28 @@
 ---
 title: "Data Tables"
-description: "Create saved tables that group calls and calculate the metrics you need."
+description: "Build tables that group calls and calculate the metrics you need."
 sources:
   - "features/performance/modules/data-tables/**"
-  - "features/performance/ui/performance-header.tsx"
-  - "app/api/generate-with-ai/performance-data-table-suggestions/route.ts"
-  - "app/api/generate-with-ai/performance-data-table-view/route.ts"
-last-verified: "2026-08-10"
+  - "features/performance/modules/analytics/board/add-widget-menu.tsx"
+  - "features/performance/modules/analytics/board/board-widget-cell.tsx"
+  - "features/performance/hooks/use-migrate-data-tables.ts"
+  - "features/performance/hooks/use-data-table-deep-link.ts"
+last-verified: "2026-08-18"
 ---
 
-Data Tables lets you build saved, agent-specific tables from call data. Use it when a standard Performance chart does not answer the question you need.
+A data table groups calls into rows and calculates the metrics you need. Use one when a chart does not answer the question you have.
 
-Open [**Performance**](/performance), select **Data Tables**, and choose or create a view.
+Data tables are cards on the [Performance](/performance) board. Open **Performance**, choose an agent and view, then select **Add widget** and **Build a query**.
 
-## Build a view
+<Note>
+  Data Tables used to be its own tab. Your existing tables were moved onto the board, and a one-time note on the page tells you which view received them. Saved links that pointed at the old tab still open the right table.
+</Note>
 
-Each view defines:
+## Build a table
+
+In Explore, build the question, choose **Table** as its chart type, then save it to the board.
+
+Each table defines:
 
 | Part | Purpose |
 | --- | --- |
@@ -23,13 +30,13 @@ Each view defines:
 | **Metrics** | Calculates counts, totals, averages, percentages, or other supported formulas |
 | **Filters** | Limits which calls contribute to the table |
 
-You can create a view manually or describe the result you want and use AI to generate a starting configuration. Review generated groupings, formulas, and filters before saving the view.
+Review the groupings, formulas, and filters before saving. Keep one table per stable reporting question instead of combining unrelated metrics in one card.
 
-Views can be renamed, duplicated, reordered, and deleted. Use one view for each stable reporting question instead of combining unrelated metrics in one table.
+A table shares the board's date range and filters. Resize, reorder, or remove it like any other card. Select **Edit in Explore** (the pencil) to change its question or presentation.
 
 ## Use metrics and formulas
 
-The metric editor lists the variables supported by the selected agent and table. These can include general call fields, topics, outcomes, custom call outcomes, and flow blocks.
+The metric editor lists the variables supported by the selected agent and table. These can include general call fields, topics, outcomes, custom call outcomes, and flow blocks. A metric you expect to reuse can be saved and referenced from other cards.
 
 Select variables from the editor rather than typing their internal form. This keeps formulas aligned with the available data.
 
@@ -43,13 +50,13 @@ Select a metric cell to open the calls that contributed to it. Use this drilldow
 
 If a table looks unexpected:
 
-1. Confirm the date and duration filters.
+1. Confirm the board's date range and the table's own filters.
 2. Inspect a cell's underlying calls.
 3. Check the grouping and formula variables.
 4. Review whether topic, outcome, or block names changed for the agent.
 
-## Keep the view current
+## Keep the table current
 
-Refresh the table to load current results. If the agent's topics, outcomes, or flow structure changes, review views that refer to those values.
+Refresh the board to load current results. If the agent's topics, outcomes, or flow structure changes, review tables that refer to those values.
 
-Use **Export CSV** when you need the current table outside Phonely. The export reflects the active view and its current scope.
+Export a table from its **More options** menu when you need the data outside Phonely. The export reflects the card and the board's current scope.

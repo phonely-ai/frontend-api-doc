@@ -6,7 +6,7 @@ sources:
   - "features/campaign/api/queue-call-service.ts"
   - "features/campaign/api/campaign-service.ts"
   - "phonely-backend/app/outbound/campaign/routes.py"
-last-verified: "2026-08-10"
+last-verified: "2026-08-18"
 ---
 
 Use a webhook when an external system should add contacts to a **Continuous Calling** campaign. Each accepted request adds a call to the campaign queue; the campaign cadence determines when that call can run.
@@ -19,18 +19,21 @@ Phonely does not deduplicate accepted webhook requests. If the sending system re
 2. In **Select Trigger Type**, choose **Webhook**.
 3. Copy the generated webhook URL and authorization details.
 4. Define the JSON request body, then select **Set Fields**.
-5. Map the detected fields to the contact phone number, optional timezone or dial-out number, and any variables used by the outbound flow.
+5. Map the detected fields to the contact phone number, optional timezone, dial-out number, or calling window, and any variables used by the outbound flow.
 
-The default body includes `phone_number`, `timezone`, and `dialout_number`. You can add fields required by your flow.
+The default body includes `phone_number`, `timezone`, `dialout_number`, and `calling_window`. You can add fields required by your flow.
 
 ```json
 {
   "phone_number": "+12125551234",
   "timezone": "America/New_York",
   "dialout_number": "+12125559876",
+  "calling_window": "09:00-12:00;13:00-17:00",
   "customer_name": "Jordan Lee"
 }
 ```
+
+A `calling_window` narrows the campaign's calling hours for that contact only. See [calling windows](/outboundcalling/createaoutboundcallingcampaign#give-a-contact-its-own-calling-window).
 
 Send JSON with the authorization required by the generated webhook. Keep the credential private and do not place it in client-side code, screenshots, or documentation examples.
 
@@ -43,7 +46,7 @@ Select **Set Fields** whenever you add, rename, or remove a top-level field. The
 Use a phone number you control and send a representative request. Confirm that:
 
 1. the call appears in the campaign queue;
-2. the phone number, timezone, and optional dial-out number resolve correctly; and
+2. the phone number, timezone, and optional dial-out number or calling window resolve correctly; and
 3. the selected flow receives the expected mapped values.
 
 Testing the webhook can queue and place a real outbound call when the campaign is running.

@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.244.0",
-        "commit": "45a00e051483f100e29572e144d325e99c1fc00b"
+        "label": "v0.249.0",
+        "commit": "c58a8bd84387dfe68d35533eef302b6deb26add0"
       }
     },
     {
@@ -460,6 +460,299 @@
           "status": "not-public",
           "pages": [],
           "note": "CI workflow, Vercel config, and changelog updates do not change the public product experience or customer documentation."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.244.0-v0.249.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-08-18",
+      "fromExclusive": {
+        "label": "v0.244.0",
+        "commit": "45a00e051483f100e29572e144d325e99c1fc00b"
+      },
+      "throughInclusive": {
+        "label": "v0.249.0",
+        "commit": "c58a8bd84387dfe68d35533eef302b6deb26add0"
+      },
+      "dispositions": [
+        {
+          "id": "performance-widget-board",
+          "status": "docs-updated",
+          "pages": [
+            "performance",
+            "data-tables"
+          ],
+          "note": "Rewrote Performance as one widget board with resizable, reorderable, retypable cards; documented that the Data Tables and Proactive Monitoring tabs are gone, existing tables convert to cards once, and Proactive Monitoring opens in its side panel."
+        },
+        {
+          "id": "performance-explore-query-builder",
+          "status": "docs-updated",
+          "pages": [
+            "performance",
+            "data-tables"
+          ],
+          "note": "Documented Add widget presets, the Explore query builder that replaces the board while open, saved metrics and filters, and the unsaved-changes prompt when leaving Explore."
+        },
+        {
+          "id": "performance-board-polish",
+          "status": "docs-updated",
+          "pages": [
+            "performance"
+          ],
+          "note": "Documented the Not saved retry warning, filter chips replacing the quick-filter popovers, per-card export and remove actions, hover tooltips showing count or share, and the per-card data freshness label."
+        },
+        {
+          "id": "performance-chart-type-switcher",
+          "status": "docs-updated",
+          "pages": [
+            "performance"
+          ],
+          "note": "Documented the Time series, Bar chart, Big number, Top list, Table, Pie, and Sankey card types, that only compatible types are offered, and that switching type never changes the computed number."
+        },
+        {
+          "id": "data-table-legacy-deep-links",
+          "status": "docs-updated",
+          "pages": [
+            "data-tables"
+          ],
+          "note": "Documented that links to the retired Data Tables tab still resolve to the right table on the board."
+        },
+        {
+          "id": "ab-test-outbound-direction",
+          "status": "docs-updated",
+          "pages": [
+            "testing/ab-testing"
+          ],
+          "note": "Documented the Inbound calls / Outbound calls choice for workflow tests, that other categories and pre-existing workflow tests split both directions, and that success-criteria options are direction-scoped with no Voicemail ended reason for inbound tests."
+        },
+        {
+          "id": "ab-test-voicemail-inclusion",
+          "status": "docs-updated",
+          "pages": [
+            "testing/ab-testing"
+          ],
+          "note": "Documented the Include voicemail calls in results option, its default-off behavior, and that it excludes outbound voicemail calls from the result until enabled."
+        },
+        {
+          "id": "ab-test-outbound-variant-flow",
+          "status": "docs-updated",
+          "pages": [
+            "testing/ab-testing"
+          ],
+          "note": "Documented that outbound workflow tests open the variant call flow on the campaign call-flow canvas through Edit variant flow with the Campaigns view hidden and a variant chip, while other tests keep Edit variant agent."
+        },
+        {
+          "id": "unified-agent-language-picker",
+          "status": "docs-updated",
+          "pages": [
+            "agent-design/voice/overview"
+          ],
+          "note": "Replaced the removed Multi-Lingual toggle with the Languages control as the single setting for what an agent hears and replies in, including new agents starting at English."
+        },
+        {
+          "id": "transcriber-language-bounds",
+          "status": "docs-updated",
+          "pages": [
+            "agent-design/voice/overview"
+          ],
+          "note": "Documented that available languages are bounded by both the transcriber and the selected voice, that switching engines keeps only accepted languages, and that narrowing to one language is explained inline; removed the stale claim that transcriber languages are limited to Gladia and Soniox."
+        },
+        {
+          "id": "transcriber-selector-relocated",
+          "status": "docs-updated",
+          "pages": [
+            "agent-design/voice/overview"
+          ],
+          "note": "Moved the Transcriber selector location to Agent Settings > Advanced > Interruptions Control, left Transcription Keywords under Voice Settings Advanced, and noted that changing engines applies its interruption defaults."
+        },
+        {
+          "id": "per-recipient-calling-window",
+          "status": "docs-updated",
+          "pages": [
+            "outboundcalling/createaoutboundcallingcampaign",
+            "outboundcalling/uploadingcsv",
+            "outboundcalling/webhookconnection"
+          ],
+          "note": "Documented the Recipient calling window field mapping, its 09:00-17:00 daily range format with semicolon-separated ranges evaluated in the recipient timezone, that windows only narrow campaign hours, and the calling_window webhook body field."
+        },
+        {
+          "id": "queued-call-hold-reasons",
+          "status": "docs-updated",
+          "pages": [
+            "outboundcalling/createaoutboundcallingcampaign"
+          ],
+          "note": "Documented the Queued, Queued · After hours, and Queued · On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
+        },
+        {
+          "id": "block-test-output-selection",
+          "status": "docs-updated",
+          "pages": [
+            "blocks/api-request",
+            "blocks/data-and-automation-blocks/code"
+          ],
+          "note": "Replaced automatic response flattening with the explicit output selector: expandable tree beside full raw JSON, parent selection including nested values, path and value search, complete response selected on a new block first success, and preserved references on reselection or failed retest."
+        },
+        {
+          "id": "campaign-recipient-terminology",
+          "status": "already-covered",
+          "pages": [
+            "outboundcalling/createaoutboundcallingcampaign",
+            "outboundcalling/uploadingcsv",
+            "outboundcalling/webhookconnection"
+          ],
+          "note": "Campaign pages already use contact and recipient wording rather than the retired sales-specific lead terminology, so the rename needed no further edit."
+        },
+        {
+          "id": "auto-organize-prompt-removed",
+          "status": "already-covered",
+          "pages": [
+            "key-concepts/flow-canvas-controls",
+            "key-concepts/flows"
+          ],
+          "note": "The canvas guides already document Organize blocks as a manual, undoable action and never described the removed one-time Keep/Revert prompt."
+        },
+        {
+          "id": "variable-chip-tooltips",
+          "status": "no-doc-change",
+          "pages": [
+            "flow-editor/variables",
+            "key-concepts/flows"
+          ],
+          "note": "Replacing delayed native chip titles with styled tooltips showing name, type, and source changes presentation only; stored workflow data and the documented variable behavior are unchanged."
+        },
+        {
+          "id": "workflow-canvas-loading-polish",
+          "status": "no-doc-change",
+          "pages": [
+            "key-concepts/flows",
+            "key-concepts/plan-your-agent"
+          ],
+          "note": "One stable loading surface until the graph hydrates, plus canvas layout and overlap-resolution work, are rendering behavior with no user-facing instruction to change."
+        },
+        {
+          "id": "agent-settings-toast-sizing",
+          "status": "no-doc-change",
+          "pages": [
+            "agent-design/overview"
+          ],
+          "note": "Content-sized Saving and Saved toasts in Agent Settings are visual polish; the documented save behavior is unchanged."
+        },
+        {
+          "id": "performance-nav-new-marker",
+          "status": "no-doc-change",
+          "pages": [
+            "get-started/navigation-and-shortcuts",
+            "get-started/report-issues-and-ideas"
+          ],
+          "note": "The self-retiring New marker on the Performance sidebar item is a temporary transition cue that expires per account, so it is not durable documentation."
+        },
+        {
+          "id": "view-block-outbound-flow-fix",
+          "status": "already-covered",
+          "pages": [
+            "outboundcalling/creating-call-flows-for-outbound-campaigns"
+          ],
+          "note": "View Block on an outbound call now opens the outbound flow rather than the inbound one, restoring the behavior the outbound flow guide already describes."
+        },
+        {
+          "id": "ask-ai-pinned-chart-scope",
+          "status": "no-doc-change",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "The Ask AI capability prompt now states that pinned charts always inherit the active view date range; the Ask AI page does not document Performance chart creation, so no public claim changed."
+        },
+        {
+          "id": "firebase-token-mint-refactor",
+          "status": "not-public",
+          "pages": [],
+          "note": "Server-owned Firebase custom-token exchange, its per-environment Identity Toolkit key requirement, and the assistant route auth refactor are deployment and internal implementation concerns."
+        },
+        {
+          "id": "billing-ops-admin-tools",
+          "status": "not-public",
+          "pages": [],
+          "note": "Billing Ops Hide 0 min filtering, sandbox Metronome and Stripe links, and enterprise contract customer creation are internal admin tooling, not customer documentation."
+        },
+        {
+          "id": "build-and-ci-toolchain",
+          "status": "not-public",
+          "pages": [],
+          "note": "Node 22 and npm 10 standardization, the TypeScript 7 typecheck gate, Momentic alignment, dependency pruning, CI workflow changes, and the retired notification cron job are internal engineering concerns."
+        },
+        {
+          "id": "agent-service-hook-cleanup",
+          "status": "no-doc-change",
+          "pages": [
+            "manage-account-and-organization-settings/delete-agents"
+          ],
+          "note": "Removing unused agent document and FAQ query hooks and an agents-table column tweak are internal refactors with no change to the documented agent management behavior."
+        },
+        {
+          "id": "legacy-dashboard-route-removed",
+          "status": "no-doc-change",
+          "pages": [
+            "get-started/home-overview",
+            "get-started/navigation-and-shortcuts"
+          ],
+          "note": "The retired /dashboard route and its sidebar entry were deleted in favour of Home and the Performance board. No documentation page described that route, and the docs.json Dashboard anchors point at the app root rather than the removed page, so nothing required an edit or redirect."
+        },
+        {
+          "id": "performance-onboarding-tour-media",
+          "status": "no-doc-change",
+          "pages": [
+            "performance"
+          ],
+          "note": "The four new public/performance step videos belong to the in-product one-time consolidation tour, not to the documentation site, so no docs asset or media TODO follows from them."
+        },
+        {
+          "id": "call-history-filter-consolidation",
+          "status": "no-doc-change",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics",
+            "call-events"
+          ],
+          "note": "Call History keyword search and column view options moved into shared filter and toolbar components used by both call tables. Phone and keyword search, faceted filters, and column visibility all remain available, so the documented behavior is unchanged."
+        },
+        {
+          "id": "call-blocks-view-block-url",
+          "status": "already-covered",
+          "pages": [
+            "call-events",
+            "blocks/overview"
+          ],
+          "note": "A dedicated view-block URL builder now resolves the Blocks tab link for a call, which restores the documented behavior of opening the block that ran rather than changing it."
+        },
+        {
+          "id": "usage-and-savings-relocated",
+          "status": "already-covered",
+          "pages": [
+            "billing-and-usage/manage-agents-and-usage",
+            "billing-and-usage/plans-and-billing-history"
+          ],
+          "note": "Usage and savings reporting now lives with the billing surfaces the docs already point customers to, after the legacy dashboard that also showed it was removed. The documented place to review usage and cost is unchanged."
+        },
+        {
+          "id": "proactive-monitoring-report-items",
+          "status": "no-doc-change",
+          "pages": [
+            "performance"
+          ],
+          "note": "The Proactive Monitoring report list was rebuilt as individual report items in the existing side panel. Report behavior is unchanged, and the Performance page now points users to the panel rather than the retired tab."
+        },
+        {
+          "id": "shared-ui-and-chart-library-upgrade",
+          "status": "not-public",
+          "pages": [],
+          "note": "Recharts v3 accessibility naming, shared select, checkbox, tooltip, scroll-area and sidebar primitives, the thinking-orb and plum accent helpers, phone-number formatting, and user-facing API error plumbing are internal component work behind unchanged surfaces."
+        },
+        {
+          "id": "internal-program-planning-docs",
+          "status": "not-public",
+          "pages": [],
+          "note": "The in-repo performance-consolidation program plans, formula-language notes, alerts postponement plan, and Momentic testing guide are internal engineering documents and must not be mirrored to the customer docs site."
         }
       ]
     }

@@ -1,50 +1,78 @@
 ---
 title: "Performance"
-description: "Measure call volume, outcomes, topics, and end reasons across an agent's calls."
+description: "Build a board of cards that measure call volume, outcomes, topics, and end reasons across an agent's calls."
 sources:
   - "features/performance/ui/**"
   - "features/performance/modules/analytics/**"
-  - "features/performance/model/system-charts.ts"
+  - "features/performance/model/analytics-widget.ts"
   - "app/(main)/(routes)/performance/**"
-last-verified: "2026-08-10"
+last-verified: "2026-08-18"
 ---
 
-Performance turns an agent's call history into charts that help you understand traffic, results, and recurring patterns.
+Performance turns an agent's call history into a board of cards that help you understand traffic, results, and recurring patterns.
 
-Open **Performance**, choose an agent, then use the tabs at the top of the page:
+Open **Performance** and choose an agent. The page is a single board: every chart, table, and big number on it is a card you can arrange, retype, and drill into.
 
-| Tab | Use it for |
-| --- | --- |
-| **Performance** | Charts for call volume, outcomes, topics, and end reasons |
-| **Data Tables** | Custom grouped metrics and calculations |
-| **Proactive Monitoring** | Reports created for the selected agent |
-
-This page covers the **Performance** tab. See [Data Tables](/data-tables) for custom tables.
+<Note>
+  Data Tables and Proactive Monitoring are no longer separate tabs. Existing data tables are converted to cards the first time you open the page, and a one-time note tells you which view received them. Proactive Monitoring opens in a side panel from the account menu or a report link.
+</Note>
 
 ## Filter the calls
 
-The date range and filters apply to the charts in the active view. Available filters can include outcomes, topics, end reasons, call status, call type, sentiment, phone numbers, call duration, day of week, and time of day.
+The date range and filters in the header apply to every card in the active view. Available filters can include outcomes, topics, end reasons, call status, call type, sentiment, phone numbers, call duration, day of week, and time of day.
 
-Use quick filters for common fields, or open the full filter panel for the complete set. Filter choices are limited to values available for the selected agent and date range.
+Filters you set appear as chips in the header. Remove a chip to clear that filter. Filter choices are limited to values available for the selected agent and date range.
 
-## Read the charts
+## Read the cards
 
-The default Performance view includes:
+**Add widget** offers preset cards for common questions:
 
-| Chart | What it shows |
+| Card | What it shows |
 | --- | --- |
-| **Performance** | Call volume over time |
-| **Call Outcomes** | Calls grouped by the outcome recorded by the flow |
-| **Call Topics** | Calls grouped by detected topic |
-| **End Call Reasons** | Calls grouped by how they ended |
+| **Calls over time** | Call volume across the selected range |
+| **Total calls** | A single number for the range |
+| **Average call length** | Mean call duration |
+| **Calls by outcome** | Calls grouped by the outcome recorded by the flow |
+| **Outcome detail** | Outcomes with supporting metrics in a table |
 
-Select a chart segment or point to open the matching calls. This lets you move from an aggregate pattern to the conversations behind it.
+Select a segment, point, or row to open the matching calls. This lets you move from an aggregate pattern to the conversations behind it.
 
-Some charts provide controls for their metric, time granularity, scale, category grouping, or goal. These settings belong to that chart and do not change the underlying call data.
+Each card shows when its data was last updated. Hover a number to see the count or share behind it.
+
+### Change how a card looks
+
+Open a card's **More options** menu to switch between compatible chart types, such as **Time series**, **Bar chart**, **Big number**, **Top list**, **Table**, **Pie**, or **Sankey**. Only the types that suit the card's question are offered — a pie cannot show a time grouping, for example.
+
+Switching the type changes the presentation only. It never changes the number a card computes.
+
+### Arrange the board
+
+- Drag a card to reorder it.
+- Drag a card's edge or corner to resize it.
+- Select **Edit in Explore** (the pencil) to change the question behind a card.
+- Use **More options** to export the card's data or remove it from the view.
+
+Layout changes belong to the active view. If a board cannot be saved, the header shows a **Not saved** warning; select it to retry.
+
+## Build your own card
+
+Select **Add widget** to add a preset card, or **Build a query** to open **Explore**.
+
+Explore replaces the board while you work in it. Build a question by choosing what to count, how to group it, and which calls to include:
+
+| Part | Purpose |
+| --- | --- |
+| **Entity and measure** | What each number counts, such as calls or a saved metric |
+| **Group by** | What each series, slice, or row represents |
+| **Filters** | Which calls contribute to the result |
+
+Save the result to add it to the board. Use the browser's Back button or the back arrow to leave Explore; if you have unsaved work, Phonely asks before discarding it.
+
+You can save a metric or filter to reuse it across cards, and manage those saved definitions from Explore.
 
 ## Work with views
 
-A view keeps a set of Performance filters and chart settings for an agent. You can create, rename, duplicate, reorder, and delete views.
+A view keeps a board's cards, filters, and settings for an agent. Use the view selector to switch between them and its menu to create, rename, duplicate, reorder, or delete a view.
 
 Use separate views for questions that need different scopes, such as weekly operations, negative-sentiment calls, or a specific outcome. Give each view a name that describes the question it answers.
 
@@ -53,7 +81,7 @@ Use separate views for questions that need different scopes, such as weekly oper
 - Use **outcomes** to measure results recorded by flows or updated after a call.
 - Use **topics** to understand what callers discussed.
 - Use **end reasons** to understand how calls stopped.
-- Open the underlying calls before treating a chart change as a product or flow issue.
+- Open the underlying calls before treating a change on a card as a product or flow issue.
 
 <Tip>
   Keep the date range and filters consistent when comparing results. A change in scope can look like a change in agent performance.

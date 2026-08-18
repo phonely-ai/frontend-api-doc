@@ -9,10 +9,11 @@ sources:
   - "features/workflows/modules/editor/custom-nodes/http-request/**"
   - "features/workflows/modules/editor/testing/api-request-test-input.ts"
   - "features/workflows/modules/editor/testing/run-block-test.ts"
-  - "features/workflows/model/variables/flatten-sample-data.ts"
+  - "features/workflows/modules/editor/testing/components/output-selector.tsx"
+  - "features/workflows/modules/editor/testing/apply-output-selection.ts"
   - "phonely-backend/app/agent/live_actions/http_request/api_request.py"
   - "phonely-backend/app/utils/url_validator.py"
-last-verified: "2026-07-16"
+last-verified: "2026-08-18"
 ---
 
 Use **API Request** to read from or send data to an external service. The block can look up account information, create or update a record, or trigger another operation through an HTTP endpoint.
@@ -81,7 +82,9 @@ Run **Send test request** before using the response in another block. The test s
 3. Select **Show request** to inspect the resolved URL, headers, parameters, and body.
 4. Send the request and inspect the response.
 
-A successful test with a `2xx` JSON response creates variables under the block's name. For example:
+After a successful test, choose which parts of the response later blocks can use. The result panel shows the response as an expandable tree beside the complete raw JSON, with each value's type.
+
+For example:
 
 ```json
 {
@@ -92,9 +95,11 @@ A successful test with a `2xx` JSON response creates variables under the block's
 }
 ```
 
-This creates `response` for the complete object, plus `customer`, `customer.id`, and `customer.active`. If the response is a top-level array, its items are available under `output`.
+You can select `response` for the complete object, or individual values such as `customer.id` and `customer.active`. Selecting a parent object includes the values nested inside it. Search by path or value when a response is large.
 
-Later blocks can select these values from **Available Variables**. If the response structure changes, test the request again and review downstream fields that reference its variables.
+The first successful test on a new block selects the complete response for you. After that, your selection is what the block keeps: only what you select becomes a variable under the block's name, available to later blocks from **Available Variables**.
+
+If the response structure changes, test the request again and review your selection along with any downstream fields that reference its variables. Reselecting outputs keeps existing references working, and a failed retest leaves your last successful selection in place.
 
 Use a JSON response when later blocks need individual response fields. At runtime, a non-JSON response is stored as text in `response`.
 
