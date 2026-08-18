@@ -3,16 +3,16 @@ title: "Data Tables"
 description: "Build tables that group calls and calculate the metrics you need."
 sources:
   - "features/performance/modules/data-tables/**"
-  - "features/performance/ui/performance-header.tsx"
+  - "features/performance/modules/analytics/board/add-widget-menu.tsx"
+  - "features/performance/modules/analytics/board/board-widget-cell.tsx"
+  - "features/performance/hooks/use-migrate-data-tables.ts"
   - "features/performance/hooks/use-data-table-deep-link.ts"
-  - "app/api/generate-with-ai/performance-data-table-suggestions/route.ts"
-  - "app/api/generate-with-ai/performance-data-table-view/route.ts"
 last-verified: "2026-08-18"
 ---
 
 A data table groups calls into rows and calculates the metrics you need. Use one when a chart does not answer the question you have.
 
-Data tables are cards on the [Performance](/performance) board. Open **Performance**, choose an agent and view, then select **Add widget**.
+Data tables are cards on the [Performance](/performance) board. Open **Performance**, choose an agent and view, then select **Add widget** and **Build a query**.
 
 <Note>
   Data Tables used to be its own tab. Your existing tables were moved onto the board, and a one-time note on the page tells you which view received them. Saved links that pointed at the old tab still open the right table.
@@ -20,7 +20,7 @@ Data tables are cards on the [Performance](/performance) board. Open **Performan
 
 ## Build a table
 
-Add a table from **Add widget**, either by describing the result you want and letting AI generate a starting configuration, or by building the question yourself in **Build query**.
+In Explore, build the question, choose **Table** as its chart type, then save it to the board.
 
 Each table defines:
 
@@ -30,9 +30,9 @@ Each table defines:
 | **Metrics** | Calculates counts, totals, averages, percentages, or other supported formulas |
 | **Filters** | Limits which calls contribute to the table |
 
-Review generated groupings, formulas, and filters before saving. Keep one table per stable reporting question instead of combining unrelated metrics in one card.
+Review the groupings, formulas, and filters before saving. Keep one table per stable reporting question instead of combining unrelated metrics in one card.
 
-A table shares the board's date range and filters. Resize, reorder, retype, or remove it like any other card, and use its **More options** menu to open it in Explore.
+A table shares the board's date range and filters. Resize, reorder, or remove it like any other card. Select **Edit in Explore** (the pencil) to change its question or presentation.
 
 ## Use metrics and formulas
 

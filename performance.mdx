@@ -13,10 +13,8 @@ Performance turns an agent's call history into a board of cards that help you un
 
 Open **Performance** and choose an agent. The page is a single board: every chart, table, and big number on it is a card you can arrange, retype, and drill into.
 
-{/* TODO: Add a screenshot of the Performance board showing the header row, the view tabs, and a mix of chart, table, and big-number cards. */}
-
 <Note>
-  Data Tables and Proactive Monitoring are no longer separate tabs. Tables are cards on this board, and Proactive Monitoring is a card you can add to it. Existing charts and tables are converted to cards the first time you open the page, and a one-time note tells you which view received your old tables.
+  Data Tables and Proactive Monitoring are no longer separate tabs. Existing data tables are converted to cards the first time you open the page, and a one-time note tells you which view received them. Proactive Monitoring opens in a side panel from the account menu or a report link.
 </Note>
 
 ## Filter the calls
@@ -27,7 +25,7 @@ Filters you set appear as chips in the header. Remove a chip to clear that filte
 
 ## Read the cards
 
-A new view starts with cards for the questions most teams ask first:
+**Add widget** offers preset cards for common questions:
 
 | Card | What it shows |
 | --- | --- |
@@ -36,8 +34,6 @@ A new view starts with cards for the questions most teams ask first:
 | **Average call length** | Mean call duration |
 | **Calls by outcome** | Calls grouped by the outcome recorded by the flow |
 | **Outcome detail** | Outcomes with supporting metrics in a table |
-| **Call paths** | How conversations moved through the flow |
-| **Proactive monitoring** | Reports created for the selected agent |
 
 Select a segment, point, or row to open the matching calls. This lets you move from an aggregate pattern to the conversations behind it.
 
@@ -45,7 +41,7 @@ Each card shows when its data was last updated. Hover a number to see the count 
 
 ### Change how a card looks
 
-Use the chart-type control on a card to switch between **Time series**, **Big number**, **Top list**, **Table**, **Pie**, and **Sankey**. Only the types that suit the card's question are offered — a pie cannot show a time grouping, for example.
+Open a card's **More options** menu to switch between compatible chart types, such as **Time series**, **Bar chart**, **Big number**, **Top list**, **Table**, **Pie**, or **Sankey**. Only the types that suit the card's question are offered — a pie cannot show a time grouping, for example.
 
 Switching the type changes the presentation only. It never changes the number a card computes.
 
@@ -53,13 +49,14 @@ Switching the type changes the presentation only. It never changes the number a 
 
 - Drag a card to reorder it.
 - Drag a card's edge or corner to resize it.
-- Use a card's **More options** menu to export its data, open it in Explore, or remove it from the view.
+- Select **Edit in Explore** (the pencil) to change the question behind a card.
+- Use **More options** to export the card's data or remove it from the view.
 
 Layout changes belong to the active view. If a board cannot be saved, the header shows a **Not saved** warning; select it to retry.
 
 ## Build your own card
 
-Select **Add widget** to add a card from the presets, or **Build query** to open **Explore**.
+Select **Add widget** to add a preset card, or **Build a query** to open **Explore**.
 
 Explore replaces the board while you work in it. Build a question by choosing what to count, how to group it, and which calls to include:
 
@@ -75,7 +72,7 @@ You can save a metric or filter to reuse it across cards, and manage those saved
 
 ## Work with views
 
-A view keeps a board's cards, filters, and settings for an agent. Use the view tabs to switch between them, and create, rename, duplicate, reorder, or delete a view from its menu.
+A view keeps a board's cards, filters, and settings for an agent. Use the view selector to switch between them and its menu to create, rename, duplicate, reorder, or delete a view.
 
 Use separate views for questions that need different scopes, such as weekly operations, negative-sentiment calls, or a specific outcome. Give each view a name that describes the question it answers.
 

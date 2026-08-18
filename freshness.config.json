@@ -484,7 +484,7 @@
             "performance",
             "data-tables"
           ],
-          "note": "Rewrote Performance as one widget board with resizable, reorderable, retypable cards and documented that the Data Tables and Proactive Monitoring tabs are gone, tables are cards, and existing charts and tables convert once on first open."
+          "note": "Rewrote Performance as one widget board with resizable, reorderable, retypable cards; documented that the Data Tables and Proactive Monitoring tabs are gone, existing tables convert to cards once, and Proactive Monitoring opens in its side panel."
         },
         {
           "id": "performance-explore-query-builder",
@@ -509,7 +509,7 @@
           "pages": [
             "performance"
           ],
-          "note": "Documented the Time series, Big number, Top list, Table, Pie, and Sankey card types, that only compatible types are offered, and that switching type never changes the computed number."
+          "note": "Documented the Time series, Bar chart, Big number, Top list, Table, Pie, and Sankey card types, that only compatible types are offered, and that switching type never changes the computed number."
         },
         {
           "id": "data-table-legacy-deep-links",
@@ -736,11 +736,11 @@
         },
         {
           "id": "proactive-monitoring-report-items",
-          "status": "already-covered",
+          "status": "no-doc-change",
           "pages": [
             "performance"
           ],
-          "note": "The Proactive Monitoring report list was rebuilt as individual report items feeding the board feed card, which the Performance page now documents as a card; the reports themselves are unchanged."
+          "note": "The Proactive Monitoring report list was rebuilt as individual report items in the existing side panel. Report behavior is unchanged, and the Performance page now points users to the panel rather than the retired tab."
         },
         {
           "id": "shared-ui-and-chart-library-upgrade",
