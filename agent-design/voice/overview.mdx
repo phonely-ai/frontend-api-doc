@@ -4,11 +4,12 @@ description: "Choose, configure, and test how your agent sounds during calls."
 sources:
   - "features/agents/modules/voice-picker/**"
   - "features/test-voice/**"
+  - "config/transcribers.ts"
   - "services/agents/voices/**"
   - "services/voice-service.ts"
   - "services/agent-service.ts"
   - "phonely-backend/app/agent/assistant/assistant.py"
-last-verified: "2026-07-17"
+last-verified: "2026-08-18"
 ---
 
 Voice controls the speech callers hear during phone conversations. The selected voice and its settings belong to the agent and apply across its inbound and outbound flows.
@@ -30,6 +31,9 @@ Open **Agent Design**, then select **Voice**.
   />
 </Frame>
 
+{/* TODO: Replace with an updated screenshot of the Voice Settings panel. The captured version still shows the removed Multi-Lingual toggle; the panel is now Speed, Languages, Background Noise, Pronunciations, and Advanced. */}
+{/* TODO: Remove old asset /assets/voice-library-and-settings.png once the replacement is added. */}
+
 The selected voice appears first in the library. Use the heart control to save favorites, and use **Mine** to view voices owned by you or your organization.
 
 Choose a voice that remains clear at phone-call audio quality and fits the conversations the agent handles. Accent, pacing, and pronunciation are usually more important than how expressive a voice sounds in a short sample.
@@ -41,11 +45,24 @@ Use **Voice Settings** to adjust the selected voice. Changes save automatically.
 | Setting | What it controls |
 | :-- | :-- |
 | **Speed** | How quickly the agent speaks; range varies by provider |
-| **Multi-Lingual** | Whether a supported voice can respond in multiple languages |
+| **Languages** | Which languages the agent understands and replies in |
 | **Background Noise** | Optional office ambience and its volume |
 | **Pronunciations** | How Cartesia voices pronounce specific names or terms |
 
-Changing to a voice without multi-lingual support turns **Multi-Lingual** off. Re-enable it after selecting a voice that supports it.
+### Choose the agent's languages
+
+**Languages** is the single control for what your agent hears and says. New agents start with English.
+
+What you can choose depends on two things:
+
+- **The transcriber.** Each speech recognition engine supports its own set of languages. Switching engines keeps only the languages the new one accepts.
+- **The selected voice.** A voice that speaks one language limits the agent to that language. Choose a Spanish-only voice on an English agent and the agent handles Spanish, not both.
+
+When only one language is available, the control becomes a single choice and explains why. If a multi-language selection has to narrow, an inline message and a toast name the voice and the one language the agent will use.
+
+<Tip>
+  Select only the languages your callers actually use. Extra languages give the agent more ways to mishear a caller without improving the conversations you expect.
+</Tip>
 
 ### Add pronunciations
 
@@ -55,13 +72,9 @@ Enter the written word and its pronunciation, then play the entry before saving 
 
 ### Configure transcription
 
-Expand **Advanced** only when the default speech recognition needs adjustment:
+Expand **Advanced** in Voice Settings to add **Transcription Keywords**, which help the transcriber recognize uncommon names, product terms, or identifiers.
 
-- **Transcriber** selects the service that converts caller speech into text.
-- **Transcriber Languages** prepares supported transcribers to recognize selected languages. This setting is available for Gladia and Soniox.
-- **Transcription Keywords** help the transcriber recognize uncommon names, product terms, or identifiers.
-
-Keep the default unless testing shows that another transcriber better fits the language or audio conditions of your calls.
+The **Transcriber** itself is selected in **Agent Settings > Advanced > Interruptions Control**. Keep the default unless testing shows that another engine better fits the language or audio conditions of your calls. Changing the engine keeps your language selections compatible with it and applies that engine's interruption defaults.
 
 ## Test the voice
 
@@ -90,8 +103,8 @@ Select **Add or Clone a Voice** when the built-in library does not contain the v
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="Multi-Lingual is unavailable or turns off">
-    The selected voice does not support multi-lingual responses. Select a voice marked as multi-lingual, then enable the setting again in Voice Settings.
+  <Accordion title="A language I need is unavailable">
+    Either the selected voice speaks a single language, or the transcriber does not support that language. Select a multi-lingual voice, or change the transcriber in **Agent Settings > Advanced > Interruptions Control**, then set **Languages** again.
   </Accordion>
   <Accordion title="A word is pronounced incorrectly">
     If the selected voice supports **Pronunciations**, add the word and test a clearer pronunciation. If the setting is unavailable, select a Cartesia voice or another voice that already pronounces the term correctly.

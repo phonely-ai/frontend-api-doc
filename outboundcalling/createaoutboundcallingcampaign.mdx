@@ -4,7 +4,7 @@ description: "Choose who to call, when calls can run, and which outbound flow ha
 sources:
   - "features/campaign/**"
   - "app/(main)/(routes)/campaign/**"
-last-verified: "2026-08-10"
+last-verified: "2026-08-18"
 ---
 
 Outbound campaigns schedule and place calls through an agent's outbound flow. The campaign supplies the contacts, phone numbers, calling hours, and source data; the selected flow controls what happens during and after each call.
@@ -45,6 +45,14 @@ Calling hours are evaluated in each contact's scheduling timezone. Phonely uses 
 
 The editor warns when a configured range falls outside 8:00 AM–9:00 PM. This warning does not replace your own compliance review.
 
+### Give a contact its own calling window
+
+When your contact data already says when each person may be called, map **Recipient calling window field** in the campaign's general settings to that source field.
+
+Write each window as a daily time range such as `09:00-17:00`, and separate multiple ranges with a semicolon: `09:00-12:00;13:00-17:00`. Each window is evaluated in that contact's own timezone.
+
+A contact's window can only narrow the campaign's calling hours, never extend them. If a contact's window never overlaps the campaign's hours, that call is held rather than dialed.
+
 ## Set do-not-dial days
 
 Use **Do Not Dial Days** in **Set Call Cadence** to keep a campaign from placing calls on specific dates, such as holidays. Add dates in either of two ways:
@@ -69,5 +77,15 @@ After setup, start the campaign from the campaign list. Campaigns appear as **In
 - Pause a campaign to stop new calls temporarily.
 - Resume a paused campaign when it is ready to continue.
 - Open the campaign to review its queued and completed calls.
+
+A queued call shows why it has not been dialed yet:
+
+| Status | What it means |
+| --- | --- |
+| **Queued** | Waiting its turn; nothing is holding it |
+| **Queued · After hours** | Waiting for the campaign's calling hours in the contact's timezone |
+| **Queued · On hold** | Held by a problem you need to fix |
+
+Hover a held call to see the reason. A call goes on hold when the contact's calling window no longer overlaps the campaign's hours, when that window could not be read, or when the campaign's calling hours are misconfigured. Widen the campaign's hours or correct the contact data to release it.
 
 Before using production contacts, test the selected flow and campaign mappings with contact data and phone numbers you control.

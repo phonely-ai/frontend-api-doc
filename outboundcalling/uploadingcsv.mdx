@@ -5,7 +5,8 @@ sources:
   - "features/campaign/modules/edit-campaign-sheet/general-tab/components/upload-files.tsx"
   - "features/campaign/modules/edit-campaign-sheet/general-tab/components/data-source-fields.tsx"
   - "features/campaign/modules/edit-campaign-sheet/general-tab/components/source-field-mapping-select.tsx"
-last-verified: "2026-08-10"
+  - "features/campaign/utils/source-field-mappings.ts"
+last-verified: "2026-08-18"
 ---
 
 Batch campaigns receive contacts from CSV files. Each row represents one queued call, and the column names become fields that the campaign can map to phone numbers, timezones, and flow variables.
@@ -19,12 +20,14 @@ Batch campaigns receive contacts from CSV files. Each row represents one queued 
 
 Use consistent values within each column. For example, keep phone numbers in one format and use valid timezone values if the campaign maps a timezone field.
 
+To control when individual contacts may be called, add a column of daily time ranges such as `09:00-17:00`, using a semicolon between multiple ranges. See [calling windows](/outboundcalling/createaoutboundcallingcampaign#give-a-contact-its-own-calling-window) for how they interact with the campaign's hours.
+
 ## Upload and map the fields
 
 1. Create or edit a **Batch Calling** campaign.
 2. Upload one or more CSV files in **Select Trigger Type**.
 3. Review the detected columns.
-4. Map the contact phone number and any optional timezone or dial-out-number fields.
+4. Map the contact phone number and any optional timezone, dial-out-number, or calling-window fields.
 5. In **Configure Call Flows**, map the source fields used by the selected flow.
 
 If the file or its headers change, review every mapping before starting the campaign.

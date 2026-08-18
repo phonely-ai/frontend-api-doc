@@ -5,10 +5,11 @@ sources:
   - "features/testing/modules/ab-test/**"
   - "app/(main)/(routes)/testing/ab-test/**"
   - "services/ab-test-case-service.ts"
-last-verified: "2026-08-10"
+  - "features/testing/modules/ab-test/utils/open-test-variant-agent.ts"
+last-verified: "2026-08-18"
 ---
 
-A/B Testing compares your current agent, the **Control**, with a duplicated **Variant** using live calls. Phonely routes the configured share of calls to the variant and evaluates both agents against the same success criterion.
+A/B Testing compares your current agent, the **Control**, with a duplicated **Variant** using live calls. Phonely routes the configured share of calls to the variant and evaluates both agents against the same success criterion. Tests can run on the calls your agent answers, on the calls it places, or on both.
 
 Use [Unit Testing](/testing/simulation-testing) for repeatable generated scenarios before exposing changes to live traffic.
 
@@ -18,14 +19,36 @@ Open **Testing > A/B Testing** and create a test in **Planned**. The setup has f
 
 | Step | What you configure |
 | --- | --- |
-| Test details | Name, description, and the category of change |
+| Test details | Name, description, the category of change, and which calls the test runs on |
 | End criteria | Stop after a number of calls or a number of days |
 | Traffic split | The percentage of calls sent to the variant; the remainder stays with the control |
 | Success criteria | The call outcome, ended reason, or call-duration direction that counts as success |
 
 The category—**Voice**, **Workflow**, **Agent Settings**, **Knowledge Base**, or **Other**—labels what you intend to compare. It does not restrict which variant settings you can edit.
 
-Creating a test duplicates the control agent. Select **Edit variant agent** and make the change you want to measure. Keep unrelated settings aligned so the result remains interpretable.
+### Choose which calls the test runs on
+
+A **Workflow** test asks which calls it should run on. Choose one:
+
+| Choice | What it splits |
+| --- | --- |
+| **Inbound calls** | The calls your agent answers |
+| **Outbound calls** | The calls placed by campaigns and the API |
+
+Every other category splits calls in both directions, as do workflow tests created before this choice existed.
+
+When a test includes outbound calls, use **Include voicemail calls in results** to decide whether outbound calls that reach voicemail count toward the result. It is off by default, so those calls are excluded until you enable it.
+
+Success-criteria options follow that choice for workflow tests: outcome tags come from the selected direction's calls only, and an inbound test does not offer the **Voicemail** ended reason.
+
+### Edit the variant
+
+Creating a test duplicates the control agent. Make the change you want to measure, then keep unrelated settings aligned so the result remains interpretable.
+
+- Most tests open the variant in the agent editor through **Edit variant agent**.
+- An outbound workflow test opens the variant's call flow instead. **Edit variant flow** takes you to the campaign page's call-flow canvas, where the Campaigns view is hidden and a chip marks the surface as the variant.
+
+Select **Back to tests** in the notice that stays on screen while you edit to return to Testing.
 
 ## Start and manage the test
 
