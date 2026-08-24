@@ -15,7 +15,7 @@ sources:
   - "features/workflows/modules/editor/custom-nodes/filter/v2/**"
   - "phonely-backend/app/agent/assistant/workflows.py"
   - "phonely-backend/app/agent/assistant/agent_data.py"
-last-verified: "2026-07-15"
+last-verified: "2026-08-24"
 ---
 
 Connections control which block can run next. A connection leaves the current block through a **source handle** and enters the next block through a **target handle**. The selected source handle determines which result follows the route.
@@ -59,7 +59,7 @@ Where a post-call route begins determines which calls trigger it:
 - **Transfer:** Use **Transfer Flow** to move the active conversation to another flow in the same agent, or **Transfer Call** to hand the call to a phone destination.
 
 <Warning>
-  Transfer Flow keeps the call active, but flow-specific variables from the source flow are not available in the target flow. Collect or retrieve required data in the target flow.
+  Transfer Flow keeps the call active, but flow-specific variables from the source flow are not available automatically in the target flow. Import a [Flow Input](/flow-editor/variables#use-flow-inputs) in the target flow to reuse a value the source flow collected, or collect or retrieve required data in the target flow.
 </Warning>
 
 ## Routing and variable availability
@@ -69,6 +69,8 @@ Routing determines which block variables are available downstream. During pre-ca
 When routes rejoin, a variable created on only one branch may be empty for calls that took another branch. Keep the block that uses it on the same branch, create the value on every incoming branch, or handle an empty value.
 
 Post-call blocks use **Post Call Variables** instead of **Call Variables**. They can also reference block variables, but a value may be empty when the call did not pass through the block that created it.
+
+Across a Transfer Flow, an inbound target flow can import a [Flow Input](/flow-editor/variables#use-flow-inputs) to reuse a value the source flow collected earlier in the same call.
 
 Use the variable picker in the destination block to see what can be referenced, then confirm that its incoming routes supply every required value. See [Variables](/flow-editor/variables) for the complete availability model.
 

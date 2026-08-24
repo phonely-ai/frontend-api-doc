@@ -6,10 +6,14 @@ sources:
   - "features/performance/modules/analytics/**"
   - "features/performance/model/analytics-widget.ts"
   - "app/(main)/(routes)/performance/**"
-last-verified: "2026-08-18"
+last-verified: "2026-08-24"
 ---
 
 Performance turns an agent's call history into a board of cards that help you understand traffic, results, and recurring patterns.
+
+<Note>
+  Performance reports on the agent's real phone traffic. Web calls are excluded from every card, drilldown, and filter, and **Call type** does not offer that value.
+</Note>
 
 Open **Performance** and choose an agent. The page is a single board: every chart, table, and big number on it is a card you can arrange, retype, and drill into.
 
@@ -19,7 +23,7 @@ Open **Performance** and choose an agent. The page is a single board: every char
 
 ## Filter the calls
 
-The date range and filters in the header apply to every card in the active view. Available filters can include outcomes, topics, end reasons, call status, call type, sentiment, phone numbers, call duration, day of week, and time of day.
+The date range and filters in the header apply to every card in the active view. Available filters can include outcomes, topics, end reasons, call status, call type, sentiment, phone numbers, call duration, day of week, and time of day. For outbound campaigns you can also filter and group by the campaign's outbound variables, and for inbound agents by each Webhook block's status and payload fields, alongside API block fields.
 
 Filters you set appear as chips in the header. Remove a chip to clear that filter. Filter choices are limited to values available for the selected agent and date range.
 
@@ -34,6 +38,11 @@ Filters you set appear as chips in the header. Remove a chip to clear that filte
 | **Average call length** | Mean call duration |
 | **Calls by outcome** | Calls grouped by the outcome recorded by the flow |
 | **Outcome detail** | Outcomes with supporting metrics in a table |
+| **Unique customers** | The number of distinct customers, deduplicated by phone number |
+
+<Note>
+  A unique count deduplicates by customer phone number and does not add up, so totals, shares, pie charts, and stacking are withheld for it. On a time axis, every bucket shows the whole range's unique count, and the card notes this.
+</Note>
 
 Select a segment, point, or row to open the matching calls. This lets you move from an aggregate pattern to the conversations behind it.
 

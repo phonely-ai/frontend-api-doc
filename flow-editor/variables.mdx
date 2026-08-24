@@ -8,6 +8,9 @@ sources:
   - "features/workflows/modules/editor/components/custom-variable-modal.tsx"
   - "features/workflows/modules/editor/components/trigger-variable-modal.tsx"
   - "features/workflows/modules/editor/components/auto-gather-variable-modal.tsx"
+  - "features/workflows/modules/editor/components/flow-input-modal.tsx"
+  - "features/workflows/model/variables/flow-input.ts"
+  - "features/workflows/modules/editor/hooks/use-flow-inputs.ts"
   - "features/workflows/modules/editor/components/replace-invalid-variable-modal.tsx"
   - "features/workflows/modules/editor/utils/variable-references.ts"
   - "features/workflows/modules/editor/testing/run-block-test.ts"
@@ -21,7 +24,7 @@ sources:
   - "features/calls/modules/call-details/tabs/blocks/call-blocks-tab.tsx"
   - "features/calls/modules/call-details/tabs/blocks/call-blocks-tab-block-timeline-item.tsx"
   - "features/workflows/model/node-descriptors/index.ts"
-last-verified: "2026-08-03"
+last-verified: "2026-08-24"
 ---
 
 Variables are named values that a flow can use. Some stay fixed, while others change with the caller, the route, or a block's result. They let the flow carry information forward and respond to the current call without entering the same data again.
@@ -58,6 +61,7 @@ The **Available Variables** panel groups variables by their source:
 - **Post Call Variables** contain finalized information such as the transcript, summary, outcome, recording link, and call duration.
 - **Outbound Variables** contain values supplied when an outbound call starts.
 - **Auto-Gather Variables** provide a shorter way for supported actions to collect information from the caller.
+- **Flow Inputs** contain values collected earlier in the same call that you import from another flow for reuse after a transfer.
 
 <Note>
   Some fields also show knowledge-base content when you type `@`. Knowledge-base content gives the agent information to reference; it does not store a value that moves through the flow.
@@ -139,6 +143,16 @@ The **Add Custom Variable** dialog also supports these specialized inputs:
 
 In an outbound flow, select **+** beside **Outbound Variables** to add values that will be supplied when a call starts. Create them before using them in later blocks, and give them clear names that are easy to map from the call source.
 
+## Use Flow Inputs
+
+A **Flow Input** reuses a value collected earlier in the same call after the conversation transfers into another flow. A transfer keeps the call active but does not automatically carry a source flow's variables into the target flow, so a Flow Input lets the target flow reference a value the earlier flow already collected.
+
+Flow Inputs are available in inbound flows. Select **+** beside **Flow Inputs** and choose the source variable to import, searching by flow, block, or variable. The imported value is available to later blocks in the target flow.
+
+<Note>
+  A Flow Input reflects the value collected earlier in the same call. If the call did not pass through the block that collects it, the value is empty. Design the target flow to handle a missing value, or collect it again when it is required.
+</Note>
+
 ## When variables are available
 
 The **Available Variables** panel already filters the list for the selected block. These rules explain why a variable may not appear or may have no value:
@@ -147,7 +161,7 @@ The **Available Variables** panel already filters the list for the selected bloc
 - If a call takes a different route and skips the block that creates a value, a later shared block may receive no value.
 - Outbound Variables appear only in outbound flows.
 - Post-call blocks use **Post Call Variables** for finalized call information.
-- Transfer Flow keeps the call active, but variables created in the source flow are not available in the target flow.
+- Transfer Flow keeps the call active, but variables created in the source flow are not automatically available in the target flow. Import a **Flow Input** in the target flow to reuse a value the source flow collected.
 
 If a later block needs a value on every route, collect or create it on every route before that block, or make the block handle a missing value.
 

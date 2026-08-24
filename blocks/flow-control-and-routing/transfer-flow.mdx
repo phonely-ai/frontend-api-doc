@@ -10,7 +10,7 @@ sources:
   - "phonely-backend/app/agent/live_actions/transfer_flow/flow_router.py"
   - "phonely-backend/app/agent/live_actions/transfer_flow/transfer_workflow.py"
   - "phonely-backend/app/custom_llm/state_manager.py"
-last-verified: "2026-07-16"
+last-verified: "2026-08-24"
 ---
 
 Use **Transfer Flow** to continue an active call in another inbound flow for the same agent. The call stays connected, and the target flow begins at its **Start Flow** trigger.
@@ -51,7 +51,7 @@ The target flow controls the conversation after the transfer. Review its **Start
 Set a [**Switch Message**](/flow-editor/flow-settings#switch-message) when the agent should acknowledge the transition as the call enters the target flow.
 
 <Warning>
-  Transfer Flow keeps the call active, but flow-specific variables do not carry from the source flow to the target flow. Design the target flow to collect or retrieve the data it needs.
+  Transfer Flow keeps the call active, but flow-specific variables do not carry automatically from the source flow to the target flow. Import a [Flow Input](/flow-editor/variables#use-flow-inputs) in the target flow to reuse a value the source flow collected, or design the target flow to collect or retrieve the data it needs.
 </Warning>
 
 For caller feedback during the transfer and outcome reporting, see [Common Block Settings](/blocks/common-settings).
@@ -75,6 +75,6 @@ Confirm that Phonely enters the intended flow or asks an appropriate clarifying 
     Transfer Flow lists inbound flows for the same agent. Confirm that the flow belongs to the agent and was created as an inbound flow.
   </Accordion>
   <Accordion title="Data is unavailable after the transfer">
-    Variables created in the source flow are not available in the target flow. Collect the value again or retrieve it within the target flow.
+    Variables created in the source flow are not carried automatically into the target flow. Import a [Flow Input](/flow-editor/variables#use-flow-inputs) for the value in the target flow, or collect or retrieve it again within the target flow.
   </Accordion>
 </AccordionGroup>

@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.249.0",
-        "commit": "c58a8bd84387dfe68d35533eef302b6deb26add0"
+        "label": "v0.253.0",
+        "commit": "fcf64e00f3fbb586657a41f6d340b9016bfd5832"
       }
     },
     {
@@ -365,7 +365,7 @@
             "outboundcalling/createaoutboundcallingcampaign",
             "outboundcalling/avoidmarkedasspamlikely"
           ],
-          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused — do-not-dial day\" indicator on campaign list and detail views."
+          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused \u2014 do-not-dial day\" indicator on campaign list and detail views."
         },
         {
           "id": "call-review-webhook-cache-miss-and-event-separators",
@@ -583,7 +583,7 @@
           "pages": [
             "outboundcalling/createaoutboundcallingcampaign"
           ],
-          "note": "Documented the Queued, Queued · After hours, and Queued · On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
+          "note": "Documented the Queued, Queued \u00b7 After hours, and Queued \u00b7 On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
         },
         {
           "id": "block-test-output-selection",
@@ -753,6 +753,191 @@
           "status": "not-public",
           "pages": [],
           "note": "The in-repo performance-consolidation program plans, formula-language notes, alerts postponement plan, and Momentic testing guide are internal engineering documents and must not be mirrored to the customer docs site."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.249.0-v0.253.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-08-24",
+      "fromExclusive": {
+        "label": "v0.249.0",
+        "commit": "c58a8bd84387dfe68d35533eef302b6deb26add0"
+      },
+      "throughInclusive": {
+        "label": "v0.253.0",
+        "commit": "fcf64e00f3fbb586657a41f6d340b9016bfd5832"
+      },
+      "dispositions": [
+        {
+          "id": "unanswered-dial-dispositions",
+          "status": "docs-updated",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics"
+          ],
+          "note": "PHO-10077 surfaces unanswered outbound dials as No Answer, Busy, and Failed to Connect end reasons in the call and campaign call tables and their filters (lib/call-ended-reason-utils.ts, call-list/table/options.tsx, campaign-detail/campaign-calls-table). Documented the specific end reasons and filtering in Call History; the campaign call table is not documented at that level."
+        },
+        {
+          "id": "cross-flow-inputs",
+          "status": "docs-updated",
+          "pages": [
+            "flow-editor/variables",
+            "flow-editor/connections-and-routing",
+            "blocks/flow-control-and-routing/transfer-flow",
+            "blocks/flow-blocks/start-flow"
+          ],
+          "note": "PHO-10040 adds Flow Inputs: an inbound target flow can import a value collected earlier in the same call from another flow, reused after a transfer (model/variables/flow-input.ts, flow-input-modal.tsx, use-flow-inputs.ts, variable-panel.tsx). Documented the new Flow Inputs group/section and corrected the repeated claim that transfer variables never carry to note they can be reused via a Flow Input."
+        },
+        {
+          "id": "no-engagement-and-screening-outcomes",
+          "status": "docs-updated",
+          "pages": [
+            "blocks/flow-blocks/start-flow"
+          ],
+          "note": "PHO-10041 adds a customizable no-engagement outcome (default Greeting Hangup) to inbound Greeting and outbound Make Call, and a call-screening AI hangup outcome (default Call Screening AI Hangup) shown when call screening is enabled (receive-call.ts, initiate-call.ts and their trigger/action forms). Documented both settings under the Greeting and Make Call trigger configuration."
+        },
+        {
+          "id": "ab-test-traffic-split-range",
+          "status": "docs-updated",
+          "pages": [
+            "testing/ab-testing"
+          ],
+          "note": "PHO-10123 sets the A/B traffic-split slider to a 1-100% range in 1% steps and inherits the source agent's cluster on the variant (ab-test-form.tsx min=1/step=1, agent-service.ts createBTestAgent cluster). Documented the 1% minimum; the cluster inheritance is an internal serving detail, not user-facing."
+        },
+        {
+          "id": "campaign-use-case-editable-priority",
+          "status": "docs-updated",
+          "pages": [
+            "outboundcalling/createaoutboundcallingcampaign"
+          ],
+          "note": "PHO-10036 makes the campaign use case editable after creation via the shared UseCaseField in the edit sheet General tab, and the picker now explains dialing priority (fresh-lead urgency, reminder timing, callback treatment, standard pacing) since the dial queue derives priority from it (use-case-field.tsx, edit-campaign-sheet). Documented that the use case sets dialing priority and can be changed later."
+        },
+        {
+          "id": "performance-unique-customers-and-web-exclusion",
+          "status": "docs-updated",
+          "pages": [
+            "performance",
+            "data-tables",
+            "call-sentiments"
+          ],
+          "note": "PHO-9916 excludes web calls from every Performance card, drilldown, and filter and removes them from the Call type filter; adds a Unique count aggregation and Unique customers preset that deduplicate by customer phone number and withhold totals/shares/pies/stacking; renames unique-caller to unique customers throughout. Documented the web-call exclusion, the Unique customers card/aggregation, and its non-additive behavior on Performance and Data Tables. PHO-10071 shows sentiment as Positive/Negative/Neutral/Unknown everywhere; documented Unknown on Call Sentiment."
+        },
+        {
+          "id": "performance-outbound-webhook-fields",
+          "status": "docs-updated",
+          "pages": [
+            "performance",
+            "data-tables"
+          ],
+          "note": "PHO-10034 adds a campaign's outbound variables and each inbound Webhook block's status and payload fields to Performance filters, group-bys, and Data Table metrics (analytics-catalog.ts). Documented these new filter/metric sources on Performance and Data Tables."
+        },
+        {
+          "id": "reporting-case-insensitive-merge",
+          "status": "docs-updated",
+          "pages": [
+            "call-topics"
+          ],
+          "note": "PHO-10071 lists two spellings of one outcome, topic, custom outcome, or sentiment as a single entity because the query already matches case-insensitively. Documented case-insensitive merging of topic spellings; the same behavior for outcomes/sentiment is inherent to the shared reporting engine."
+        },
+        {
+          "id": "analyze-with-ai-default-scope",
+          "status": "docs-updated",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics"
+          ],
+          "note": "PHO-9916/PHO-10142/PHO-10051 let Analyze with AI default to every matched call with no selection, narrow to the selection when present, disclose when a sample is handed over, and distinguish loaded, remaining, and unavailable calls (selection-action-bar.tsx, call-analysis-handoff, performance/data-tables assistant contexts). Documented the default scope and sampling disclosure in the Analyze with AI section."
+        },
+        {
+          "id": "flow-version-compare-and-copy",
+          "status": "docs-updated",
+          "pages": [
+            "flow-editor/versions"
+          ],
+          "note": "PHO-9750 adds a read-only version comparison mode with searchable From/To selectors (including the current draft) that highlights field-level differences, and PHO-10120 lets you copy blocks from a previewed historical version into the current draft (version-comparison-status.tsx, use-workflow-version-comparison.ts, version-history-side-panel Compare menu, version-preview-overlay copy). Documented both in Flow Versions."
+        },
+        {
+          "id": "collaboration-overlay-source-rename",
+          "status": "docs-updated",
+          "pages": [
+            "flow-editor/collaboration"
+          ],
+          "note": "Repaired a stale source mapping: remote-workflow-review-overlay.tsx was renamed to workflow-comparison-overlay.tsx in v0.250.0 (git R071). Updated the page's sources front matter to the current path; page content was already accurate."
+        },
+        {
+          "id": "ask-ai-workflow-proposal-review",
+          "status": "already-covered",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "PHO-9116/PHO-9705/PHO-9268 refine Ask AI workflow proposals (single reviewable proposal, per-change accept/reject/restore, highlighted added/removed/rewritten fields, documentation grounding, stop handling). The Ask AI page's Review changes and Ask AI and documentation sections already describe reviewing highlighted proposed changes, accepting/rejecting per change, submitting, and documentation grounding accurately; no user-facing fact changed."
+        },
+        {
+          "id": "api-code-output-selection",
+          "status": "already-covered",
+          "pages": [
+            "blocks/api-request",
+            "blocks/data-and-automation-blocks/code"
+          ],
+          "note": "PHO-10066/PHO-9992/PHO-9962 refine API Request and Code output selection (distinguish the complete result from a field literally named response/output, retain full raw JSON, parent selections include nested values, preserve references on reselection, root selected by default). The API Request and Code pages already document selecting the complete response/output or individual fields, the raw JSON tree, default full-response selection, and reselecting after a shape change; the response/output field-name edge case is not a documented fact. Complete-result variable stays response (API Request) and output (Code)."
+        },
+        {
+          "id": "code-generate-import-allowlist",
+          "status": "already-covered",
+          "pages": [
+            "blocks/data-and-automation-blocks/code"
+          ],
+          "note": "PHO-10106 shares the Python import allowlist between Code Generate with AI and workflow Ask AI so generated code avoids unsupported modules (app/api/generate-with-ai/code/route.ts, code-runtime-policy.ts). The Code page already lists the supported imports (math, datetime, json, random, time) and states other libraries and __import__ are unsupported; no user-facing fact changed."
+        },
+        {
+          "id": "opening-fixed-message-admin-only",
+          "status": "not-public",
+          "pages": [],
+          "note": "PHO-10134 adds an Opening Fixed Message to the Prompt/Talk block gated behind isAdmin (prompt-action-form.tsx useAccessContext, node-descriptors ai directOmit). It is admin-only and never shown to product users, so it is not user-facing or Ask AI-relevant."
+        },
+        {
+          "id": "twilio-auth-token-mask",
+          "status": "not-public",
+          "pages": [],
+          "note": "PHO-8907 adds a show/hide toggle for the Twilio auth token in the import-number and link-twilio-account forms (import-twilio-number-form.tsx, link-twilio-account-modal.tsx). It is UI polish on an undocumented connection flow; no documented fact changed and the auth-token secret handling is already noted on the import-number API page."
+        },
+        {
+          "id": "usage-cost-display-polish",
+          "status": "not-public",
+          "pages": [],
+          "note": "PHO-10195 hides Extra usage notices when the extra charge is zero, describes enterprise commitments by billing period, and keeps stacked-bar corner rounding after switching Usage to Cost (usage-and-cost module). Presentation polish that does not change the Usage and Cost page's documented behavior."
+        },
+        {
+          "id": "org-owner-field-hidden",
+          "status": "not-public",
+          "pages": [],
+          "note": "The organization owner selector in org-form.tsx was commented out, leaving a read-only owner email input, plus removal of the unused update-external-api-keys modal. Internal/admin settings scaffolding with no documented user-facing surface (Usage and Cost page covers billing settings)."
+        },
+        {
+          "id": "onboarding-flow-removed",
+          "status": "not-public",
+          "pages": [],
+          "note": "v0.253.0 deletes the legacy onboarding flow (features/onboard/**, onboard-checklist.tsx, upload-recordings.tsx). These onboarding surfaces are not documented in the product docs, so no page describes the removed flow."
+        },
+        {
+          "id": "ask-ai-internal-and-infra",
+          "status": "not-public",
+          "pages": [],
+          "note": "The bulk of the window is Ask AI/assistant internals: Langfuse prompt management, evals, observability, token-usage capture, prompt contracts, server-side Firebase auth for autonomous builders, tool-activity labels, and dependency/security upgrades (features/assistant/**, features/chat/assistant/**, app/api/assistant/**, lib/langfuse, lib/tools, scripts/assistant, docs/assistant, package.json). Backend/observability plumbing with no user-facing or Ask AI-behavioral fact for the docs."
+        },
+        {
+          "id": "call-paths-canvas-and-billing-cron",
+          "status": "not-public",
+          "pages": [],
+          "note": "In-window Call Paths change is a canvas end-node rendering fix (call-paths-canvas.tsx) and the billing reconcile cron timeout increase (PHO-10131) plus internal enterprise/self-serve reconcile logic (reconcile-self-serve-billing/route.ts). No user-facing documented fact changed; the Call Paths Analyze-with-AI enablement (PHO-8161) predates this window."
+        },
+        {
+          "id": "web-sdk-version-unchanged",
+          "status": "no-doc-change",
+          "pages": [
+            "api-reference/web-sdk"
+          ],
+          "note": "The @phonely-ai/web 0.0.8 upgrade (PHO-8708) landed before this cursor; package.json in-window only removes internal assistant npm scripts and does not bump the web SDK version. The Web SDK page states version 0.0.8, which remains correct, so no change is required."
         }
       ]
     }
