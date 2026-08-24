@@ -11,7 +11,7 @@ sources:
   - "features/workflows/modules/editor/components/version-delete-modal.tsx"
   - "features/workflows/modules/editor/components/workflow-changelog-modal.tsx"
   - "features/workflows/modules/editor/hooks/use-version-preview.ts"
-last-verified: "2026-07-15"
+last-verified: "2026-08-24"
 ---
 
 A version is a read-only snapshot of a flow. Use versions to preserve meaningful checkpoints, compare earlier configurations, and restore a known design without changing the published version.
@@ -43,6 +43,12 @@ Open the menu beside **Publish** and select **Version History**. The side panel 
 Version History puts the editor into read-only review mode. Select a version to preview its saved canvas, then select a block to inspect its saved configuration. Previewing never changes the current draft.
 
 Select **Current Draft** to view the draft while keeping Version History open, or close the panel to resume editing.
+
+While previewing a version, you can select one or more of its blocks and copy them, then paste the copied blocks into the current draft. The preview stays read-only, so the version itself is never changed.
+
+### Compare two versions
+
+Open a version's menu and select **Compare** to enter comparison mode. Use the **From** and **To** selectors to choose the two versions to compare; each selector is searchable, and the current draft is available alongside the numbered versions. Comparison mode is read-only and highlights the field-level differences between the two selected snapshots without changing the current draft.
 
 <Tip>
   Compare routes, block settings, variables, and Flow Settings—not only block names or canvas layout. A configuration change can alter behavior without moving a block.

@@ -6,7 +6,7 @@ sources:
   - "app/(main)/(routes)/testing/ab-test/**"
   - "services/ab-test-case-service.ts"
   - "features/testing/modules/ab-test/utils/open-test-variant-agent.ts"
-last-verified: "2026-08-18"
+last-verified: "2026-08-24"
 ---
 
 A/B Testing compares your current agent, the **Control**, with a duplicated **Variant** using live calls. Phonely routes the configured share of calls to the variant and evaluates both agents against the same success criterion. Tests can run on the calls your agent answers, on the calls it places, or on both.
@@ -21,7 +21,7 @@ Open **Testing > A/B Testing** and create a test in **Planned**. The setup has f
 | --- | --- |
 | Test details | Name, description, the category of change, and which calls the test runs on |
 | End criteria | Stop after a number of calls or a number of days |
-| Traffic split | The percentage of calls sent to the variant; the remainder stays with the control |
+| Traffic split | The percentage of calls sent to the variant, from 1% to 100% in 1% steps; the remainder stays with the control |
 | Success criteria | The call outcome, ended reason, or call-duration direction that counts as success |
 
 The category—**Voice**, **Workflow**, **Agent Settings**, **Knowledge Base**, or **Other**—labels what you intend to compare. It does not restrict which variant settings you can edit.

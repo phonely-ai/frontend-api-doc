@@ -4,7 +4,7 @@ description: "Choose who to call, when calls can run, and which outbound flow ha
 sources:
   - "features/campaign/**"
   - "app/(main)/(routes)/campaign/**"
-last-verified: "2026-08-18"
+last-verified: "2026-08-24"
 ---
 
 Outbound campaigns schedule and place calls through an agent's outbound flow. The campaign supplies the contacts, phone numbers, calling hours, and source data; the selected flow controls what happens during and after each call.
@@ -23,6 +23,8 @@ Select **Create Campaign**, then choose how contacts enter the campaign:
 | Batch Calling | You have a fixed list of contacts to call | CSV upload |
 
 After choosing the type, enter a campaign name and select the use case that best describes it.
+
+The use case is more than a label: it sets how the outbound dial queue prioritizes the campaign's calls, such as fresh-lead urgency, reminder timing, callback treatment, or standard pacing. The picker explains what each choice means for dialing. You can change the use case later from the campaign's **General** settings, and the new selection is saved with the campaign.
 
 ## Complete campaign setup
 

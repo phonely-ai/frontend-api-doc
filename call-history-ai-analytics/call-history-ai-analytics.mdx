@@ -6,7 +6,7 @@ sources:
   - "features/calls/modules/call-details/**"
   - "features/calls/modules/transcript/**"
   - "app/(main)/(routes)/call-history/**"
-last-verified: "2026-08-10"
+last-verified: "2026-08-24"
 ---
 
 Call History is the record of an agent's phone and web conversations. Use it to find a call, understand what happened, and inspect how the flow ran.
@@ -20,6 +20,8 @@ Search by phone number or words from the call, or filter the list by fields such
 - status and end reason;
 - outcome, topic, and sentiment; and
 - prompt version.
+
+Unanswered outbound dials show their specific telephony result instead of a generic failure: **No Answer**, **Busy**, and **Failed to Connect** appear as end reasons in the list and in a call's details, and you can filter for them alongside **Voicemail**.
 
 The list groups calls by date and shows current calls as they progress. Select a call to open **Call Details**.
 
@@ -44,7 +46,9 @@ If call review is enabled for your role, mark the call as a success or error aft
 
 ## Analyze a call with Ask AI
 
-Use **Analyze with AI** when you want Ask AI to inspect the selected call. It can combine the transcript with block execution and underlying call details, including events that are not practical to review manually in the standard interface.
+Use **Analyze with AI** when you want Ask AI to inspect calls. With no selection, it defaults to every call the current list matches and narrows to your selection once you make one. It can combine the transcript with block execution and underlying call details, including events that are not practical to review manually in the standard interface.
+
+For a large set, Analyze with AI tells you when it hands the assistant a sample rather than every call, and it distinguishes loaded, remaining, and unavailable calls so a partial view is never mistaken for the whole.
 
 Ask a specific question, such as:
 
