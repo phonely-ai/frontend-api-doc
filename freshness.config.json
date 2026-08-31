@@ -962,7 +962,7 @@
             "performance",
             "data-tables"
           ],
-          "note": "PHO-9916/PHO-10070/PHO-10166/PHO-10254 rename the \"Group by\" control to \"Breakdown by\" across the Explore rail and the Data Table selector, add a Blocks filter category (Reached / Never reached, grouped by flow, searchable by name/flow/action id) to both the query rail and the board filter panel, and extend breakdown/filter drilldowns. Renamed the label to Breakdown by on Performance and Data Tables and documented the new flow-block filter on Performance. The remaining explore/widget/drilldown work is internal presentation of already-documented cards."
+          "note": "PHO-9916/PHO-10070/PHO-10166/PHO-10254 rename the \"Group by\" control to \"Breakdown by\" across the Explore rail and Data Table selector, calculate unique customers independently within each time bucket or breakdown group, add API response keys as breakdowns, and add a Blocks filter category (Reached / Never reached, grouped by flow, searchable by name/flow/action id) to the query rail and board filter panel. Updated Performance and Data Tables with the renamed control and per-group unique-count behavior, and documented the flow-block filter on Performance."
         },
         {
           "id": "analyze-with-ai-and-call-history",

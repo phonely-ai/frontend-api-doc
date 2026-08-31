@@ -6,7 +6,7 @@ sources:
   - "features/performance/modules/analytics/**"
   - "features/performance/model/analytics-widget.ts"
   - "app/(main)/(routes)/performance/**"
-last-verified: "2026-08-24"
+last-verified: "2026-08-31"
 ---
 
 Performance turns an agent's call history into a board of cards that help you understand traffic, results, and recurring patterns.
@@ -43,7 +43,7 @@ Filters you set appear as chips in the header. Remove a chip to clear that filte
 | **Unique customers** | The number of distinct customers, deduplicated by phone number |
 
 <Note>
-  A unique count deduplicates by customer phone number and does not add up, so totals, shares, pie charts, and stacking are withheld for it. On a time axis, every bucket shows the whole range's unique count, and the card notes this.
+  A unique count deduplicates by customer phone number within each time bucket or breakdown group. A customer who appears in more than one group is counted once in each, so grouped unique counts do not add up to an overall customer total. Pie charts and stacking are unavailable for unique counts.
 </Note>
 
 Select a segment, point, or row to open the matching calls. This lets you move from an aggregate pattern to the conversations behind it.

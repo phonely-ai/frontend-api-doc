@@ -7,7 +7,7 @@ sources:
   - "features/performance/modules/analytics/board/board-widget-cell.tsx"
   - "features/performance/hooks/use-migrate-data-tables.ts"
   - "features/performance/hooks/use-data-table-deep-link.ts"
-last-verified: "2026-08-24"
+last-verified: "2026-08-31"
 ---
 
 A data table groups calls into rows and calculates the metrics you need. Use one when a chart does not answer the question you have.
@@ -38,7 +38,7 @@ A table shares the board's date range and filters. Resize, reorder, or remove it
 
 The metric editor lists the variables supported by the selected agent and table. These can include general call fields, topics, outcomes, custom call outcomes, and flow blocks, as well as a campaign's outbound variables and each inbound Webhook block's status and payload fields. A metric you expect to reuse can be saved and referenced from other cards.
 
-A **Unique count** aggregation deduplicates by customer phone number. Because unique counts do not add up, totals, shares, and stacking are withheld for it, and on a time grouping each period shows the whole range's unique count.
+A **Unique count** aggregation deduplicates by customer phone number within each row. When a table breaks calls down by time or another field, each row calculates its own unique customers. A customer can therefore be counted once in more than one row, so the row values do not add up to an overall unique-customer total.
 
 Select variables from the editor rather than typing their internal form. This keeps formulas aligned with the available data.
 
