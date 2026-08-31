@@ -21,7 +21,7 @@ sources:
   - "features/workflows/modules/editor/context/workflow-field-review-context.tsx"
   - "app/api/assistant/**"
   - "features/platform-reports/ui/platform-report-dialog.tsx"
-last-verified: "2026-08-17"
+last-verified: "2026-08-31"
 ---
 
 Ask AI is Phonely's in-product assistant. It opens in the app side panel and works alongside the page you are using.
@@ -71,6 +71,12 @@ The conversation can continue as you navigate, while the page context updates to
 Opening Ask AI from the top bar continues the active conversation. Use **New chat** when you want a clean context for an unrelated task.
 
 Use **Chat history** to restore a recent Ask AI session. Removing a chat hides it from that history. Recent chats can also appear in the open top-bar input.
+
+## Reference a flow block
+
+When a flow is open, you can point Ask AI at an exact block instead of describing it. Type `@` in the Ask AI input and pick a block from the list, or keep typing to match one by name. The reference stays in place while you write, edit, or continue the conversation, and asks Ask AI to re-read that block before it acts.
+
+Block references only work while their flow is open. If you reference a block and then leave its flow, open the flow again or remove the reference before sending.
 
 ## Add supporting material
 

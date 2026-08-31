@@ -6,7 +6,7 @@ sources:
   - "features/calls/modules/call-details/**"
   - "features/calls/modules/transcript/**"
   - "app/(main)/(routes)/call-history/**"
-last-verified: "2026-08-24"
+last-verified: "2026-08-31"
 ---
 
 Call History is the record of an agent's phone and web conversations. Use it to find a call, understand what happened, and inspect how the flow ran.
@@ -48,7 +48,7 @@ If call review is enabled for your role, mark the call as a success or error aft
 
 Use **Analyze with AI** when you want Ask AI to inspect calls. With no selection, it defaults to every call the current list matches and narrows to your selection once you make one. It can combine the transcript with block execution and underlying call details, including events that are not practical to review manually in the standard interface.
 
-For a large set, Analyze with AI tells you when it hands the assistant a sample rather than every call, and it distinguishes loaded, remaining, and unavailable calls so a partial view is never mistaken for the whole.
+A deliberate selection is analyzed exactly, up to 500 calls; above that, Analyze with AI asks you to narrow the selection. Without a selection, it uses a recent sample instead of the whole list. Analyze with AI tells you when it hands the assistant a sample rather than every call, and it distinguishes loaded, remaining, and unavailable calls so a partial view is never mistaken for the whole.
 
 Ask a specific question, such as:
 
