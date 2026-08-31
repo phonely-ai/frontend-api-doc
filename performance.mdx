@@ -23,7 +23,9 @@ Open **Performance** and choose an agent. The page is a single board: every char
 
 ## Filter the calls
 
-The date range and filters in the header apply to every card in the active view. Available filters can include outcomes, topics, end reasons, call status, call type, sentiment, phone numbers, call duration, day of week, and time of day. For outbound campaigns you can also filter and group by the campaign's outbound variables, and for inbound agents by each Webhook block's status and payload fields, alongside API block fields.
+The date range and filters in the header apply to every card in the active view. Available filters can include outcomes, topics, end reasons, call status, call type, sentiment, phone numbers, call duration, day of week, and time of day. For outbound campaigns you can also filter and break down by the campaign's outbound variables, and for inbound agents by each Webhook block's status and payload fields, alongside API block fields.
+
+You can also filter by a flow block: keep the calls that **Reached** a block, or those that **Never reached** it. Blocks are listed grouped by flow, and a search box matches a block by its name, flow, or action id. **Never reached** also keeps calls that ran no flow at all.
 
 Filters you set appear as chips in the header. Remove a chip to clear that filter. Filter choices are limited to values available for the selected agent and date range.
 
@@ -67,12 +69,12 @@ Layout changes belong to the active view. If a board cannot be saved, the header
 
 Select **Add widget** to add a preset card, or **Build a query** to open **Explore**.
 
-Explore replaces the board while you work in it. Build a question by choosing what to count, how to group it, and which calls to include:
+Explore replaces the board while you work in it. Build a question by choosing what to count, how to break it down, and which calls to include:
 
 | Part | Purpose |
 | --- | --- |
 | **Entity and measure** | What each number counts, such as calls or a saved metric |
-| **Group by** | What each series, slice, or row represents |
+| **Breakdown by** | What each series, slice, or row represents |
 | **Filters** | Which calls contribute to the result |
 
 Save the result to add it to the board. Use the browser's Back button or the back arrow to leave Explore; if you have unsaved work, Phonely asks before discarding it.

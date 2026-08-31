@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.253.0",
-        "commit": "fcf64e00f3fbb586657a41f6d340b9016bfd5832"
+        "label": "v0.261.0",
+        "commit": "3f2c98d0da3025ce9ba67b949c11d964cff9ec6e"
       }
     },
     {
@@ -938,6 +938,141 @@
             "api-reference/web-sdk"
           ],
           "note": "The @phonely-ai/web 0.0.8 upgrade (PHO-8708) landed before this cursor; package.json in-window only removes internal assistant npm scripts and does not bump the web SDK version. The Web SDK page states version 0.0.8, which remains correct, so no change is required."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.253.0-v0.261.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-08-31",
+      "fromExclusive": {
+        "label": "v0.253.0",
+        "commit": "fcf64e00f3fbb586657a41f6d340b9016bfd5832"
+      },
+      "throughInclusive": {
+        "label": "v0.261.0",
+        "commit": "3f2c98d0da3025ce9ba67b949c11d964cff9ec6e"
+      },
+      "dispositions": [
+        {
+          "id": "performance-breakdown-blocks-and-unique",
+          "status": "docs-updated",
+          "pages": [
+            "performance",
+            "data-tables"
+          ],
+          "note": "PHO-9916/PHO-10070/PHO-10166/PHO-10254 rename the \"Group by\" control to \"Breakdown by\" across the Explore rail and the Data Table selector, add a Blocks filter category (Reached / Never reached, grouped by flow, searchable by name/flow/action id) to both the query rail and the board filter panel, and extend breakdown/filter drilldowns. Renamed the label to Breakdown by on Performance and Data Tables and documented the new flow-block filter on Performance. The remaining explore/widget/drilldown work is internal presentation of already-documented cards."
+        },
+        {
+          "id": "analyze-with-ai-and-call-history",
+          "status": "docs-updated",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics"
+          ],
+          "note": "PHO-10256/PHO-10045/PHO-10051 make Analyze with AI cover deliberate selections exactly up to 500 calls and ask for a narrower selection above that, while a no-selection action uses a fast recent 200-call subset (limits.ts MAX_EXPLICIT/IMPLICIT_CALL_ANALYSIS_HANDOFF, selection-action-bar). Documented the exact-500 selection limit and recent-sample fallback in the Analyze with AI section. Call Details modal and phone-number search changes are internal refactors of already-documented surfaces."
+        },
+        {
+          "id": "ask-ai-inline-block-references",
+          "status": "docs-updated",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "PHO-9958 lets Ask AI insert exact workflow blocks inline through the block menu or a keyboard-accessible @ autocomplete, available only while the referenced flow is active, with references persisted through composing, editing, and replay. Documented the new @-mention block reference and its open-flow requirement on the Ask AI page."
+        },
+        {
+          "id": "ask-ai-assistant-internals",
+          "status": "not-public",
+          "pages": [],
+          "note": "The bulk of the window is Ask AI/assistant internals: Claude Opus 5 migration and provider-native web search (PHO-10259), context compaction and thread pruning (PHO-9762), tool-result compaction and handoff hardening (PHO-10256/PHO-10277), error classification and cancellation (PHO-10143/PHO-10173/PHO-10285), Langfuse prompt management, evals, telemetry, and prompt contracts (PHO-9268/PHO-9113). These are model, provider, and observability internals with no user-facing or Ask AI-behavioral fact for the docs beyond the wording already covered on the Ask AI page."
+        },
+        {
+          "id": "billing-history-invoice-visibility",
+          "status": "docs-updated",
+          "pages": [
+            "billing-and-usage/plans-and-billing-history"
+          ],
+          "note": "PHO-10296 hides draft and voided invoices from customers in billing history (get-invoices/route.ts filters status draft and void), and PHO-10278 enriches Stripe invoice history. Documented that draft and voided invoices are not shown in Billing history."
+        },
+        {
+          "id": "billing-ops-admin-tooling",
+          "status": "not-public",
+          "pages": [],
+          "note": "Billing Ops admin panel enhancements, Metronome/Stripe reconcile and links, enterprise plan and contract handling, billing reconcile cron timeout, usage/cost display polish, and the Twilio auth-token mask (PHO-10130/PHO-10278/PHO-10307/PHO-10195/PHO-8907 and related). These are admin-only tooling and internal billing plumbing behind unchanged customer surfaces already documented on the Plans and Billing and Usage and Cost pages."
+        },
+        {
+          "id": "workflow-editor-and-authoring",
+          "status": "already-covered",
+          "pages": [
+            "key-concepts/flows",
+            "flow-editor/variables",
+            "blocks/flow-blocks/talk",
+            "blocks/flow-blocks/start-flow",
+            "flow-editor/test-and-publish"
+          ],
+          "note": "Workflow editor and AI-authoring work in the window (template experience, block test output selection, variable handling, historical version copy, opening fixed message, conversation-test lifecycle, canvas polish, transcriber relocation, cross-flow inputs and no-engagement outcomes) was already documented in the prior v0.249.0-v0.253.0 review or is admin-only/internal (Opening Fixed Message is admin-gated). No new user-facing workflow fact changed in this window; the existing flow, variable, block, and test guides remain accurate."
+        },
+        {
+          "id": "ab-testing-refinements",
+          "status": "already-covered",
+          "pages": [
+            "testing/ab-testing"
+          ],
+          "note": "PHO-10240 uses the tested destination in the test-call modal and earlier A/B work (direction picker, voicemail opt-in, 1% traffic-split range) was documented in prior windows. The A/B Testing page already describes the 1%-100% traffic split, direction choice, and variant flow editing accurately; no new user-facing A/B fact changed."
+        },
+        {
+          "id": "agents-table-cleanup",
+          "status": "no-doc-change",
+          "pages": [
+            "manage-account-and-organization-settings/delete-agents"
+          ],
+          "note": "PHO-9871 agent-switch routing fixes and agents-table column/toolbar refactors do not change the documented manage-and-delete-agents workflow."
+        },
+        {
+          "id": "home-and-date-range",
+          "status": "no-doc-change",
+          "pages": [
+            "get-started/home-overview"
+          ],
+          "note": "PHO-10198 fixes the Home date-range selector and refactors inclusive date-range handling; the Home overview page's documented behavior is unchanged."
+        },
+        {
+          "id": "navigation-search-and-shell",
+          "status": "no-doc-change",
+          "pages": [
+            "get-started/navigation-and-shortcuts",
+            "get-started/report-issues-and-ideas"
+          ],
+          "note": "Global search, Command-K, faceted-filter, and app-shell layout refactors plus the site-wide Google Tag Manager container swap (PHO-10253) and knowledge-base/agent-workspace client refactors are internal; navigation, search, and issue-reporting behavior documented on these pages is unchanged."
+        },
+        {
+          "id": "call-paths-canvas-fix",
+          "status": "already-covered",
+          "pages": [
+            "call-path"
+          ],
+          "note": "PHO-10362 scopes call-paths entries by node membership so A/B challenger calls contribute to block reached/ended counts, and other changes are canvas metric/content refactors. This restores the counting behavior the Call Paths page already describes; no user-facing fact changed."
+        },
+        {
+          "id": "agent-design-ask-ai-button",
+          "status": "no-doc-change",
+          "pages": [
+            "agent-design/guidelines",
+            "agent-design/overview"
+          ],
+          "note": "The guidelines panel was refactored to use the shared assistant client for its Ask AI button; the documented Guidelines and Agent Setup behavior is unchanged."
+        },
+        {
+          "id": "onboarding-removed",
+          "status": "not-public",
+          "pages": [],
+          "note": "The legacy onboarding multi-choice component was removed; these onboarding surfaces are not documented in the product docs."
+        },
+        {
+          "id": "infra-and-dependencies",
+          "status": "not-public",
+          "pages": [],
+          "note": "Gardening/dead-code removal, added tests, CI and Claude PR tooling, dependency and security upgrades (firebase-admin pin, uuid overrides, Momentic), changelog edits, version-bump releases, and mainline mergebacks are internal engineering concerns with no customer-facing effect."
         }
       ]
     }
