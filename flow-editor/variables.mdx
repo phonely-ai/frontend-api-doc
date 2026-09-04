@@ -24,6 +24,8 @@ sources:
   - "features/calls/modules/call-details/tabs/blocks/call-blocks-tab.tsx"
   - "features/calls/modules/call-details/tabs/blocks/call-blocks-tab-block-timeline-item.tsx"
   - "features/workflows/model/node-descriptors/index.ts"
+  - "phonely-backend/app/agent/assistant/agent_data.py"
+  - "phonely-backend/app/custom_llm/prompts/prompts_v1.py"
 last-verified: "2026-08-24"
 ---
 
@@ -188,6 +190,27 @@ Use these options when the built-in formats are not enough:
 Choose the type that best describes the expected answer. When the format matters, test valid, invalid, and corrected answers.
 
 These collection types describe the meaning and expected format of an answer. They are separate from the data types used for block results.
+
+### Timezone sets the expected country format
+
+**Zipcode** and **Phone** do not use one fixed format. Phonely derives the agent's country from the timezone in **Settings**, then tells the agent which national format to expect and to check the answer against.
+
+An agent set to a US timezone asks for and validates a 5-digit ZIP code. An agent set to `Australia/Sydney` asks for a 4-digit postcode instead. This applies even when the caller is in a different country than the agent.
+
+| Country from timezone | Zipcode | Phone |
+| :-- | :-- | :-- |
+| United States (also the fallback) | 5-digit ZIP code, such as `90210` | 10 digits, such as `4123456789` |
+| Australia | 4-digit postcode, such as `3000` | 10 digits starting with `0`, such as `0412345678` |
+| Canada | 6-character postal code alternating letter and digit, such as `K1A 0B4` | 10 digits, such as `4123456789` |
+| United Kingdom | Postcode with area, district, and a 3-character ending, such as `SW1A 1AA` | 11 digits starting with `0`, such as `07123456789` |
+
+Any timezone outside these countries falls back to the US formats.
+
+<Warning>
+  If an agent asks for the wrong kind of postcode or rejects a valid one, check the agent's timezone first. A timezone set to the wrong country is the most common cause, and it looks like the agent inventing a format. Open **Settings** and confirm the timezone matches the country your callers are in.
+</Warning>
+
+When you need a format that these country defaults do not produce, use **Regex** or **Custom** to define the expected pattern yourself.
 
 ### Data types for variable values
 
