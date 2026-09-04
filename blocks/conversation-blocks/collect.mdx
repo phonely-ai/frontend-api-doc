@@ -12,6 +12,8 @@ sources:
   - "app/api/generate-with-ai/collect/route.ts"
   - "phonely-backend/app/agent/live_actions/conversation/multi_ask.py"
   - "phonely-backend/app/custom_llm/prompts/prompts_v4_0.py"
+  - "phonely-backend/app/custom_llm/prompts/prompts_v1.py"
+  - "phonely-backend/app/agent/assistant/agent_data.py"
 last-verified: "2026-07-16"
 ---
 
@@ -45,6 +47,10 @@ Add one question for each value the block should collect. Collect requires at le
 **Confirm** is available after **Required** is enabled, and **Spell Back** is available after **Confirm** is enabled.
 
 Choose the type that matches the expected answer. See [Variables](/flow-editor/variables) for available types, formats, and downstream availability.
+
+<Note>
+  **Zipcode** and **Phone** expect the format of the agent's country, which Phonely derives from the timezone in **Settings**. A US timezone collects a 5-digit ZIP code, while an Australian timezone collects a 4-digit postcode. See [Timezone sets the expected country format](/flow-editor/variables#timezone-sets-the-expected-country-format).
+</Note>
 
 ### Completion and routing
 
@@ -91,6 +97,9 @@ For an unexpected result, open **Call Details**, select **Blocks**, and expand C
   </Accordion>
   <Accordion title="The agent does not use the exact question wording">
     Collect asks questions conversationally and may rephrase them. Write the **Question** as a clear request for one value rather than relying on exact wording.
+  </Accordion>
+  <Accordion title="The agent asks for the wrong postcode format">
+    Check the agent's timezone in **Settings**. Phonely uses it to decide which country's format to ask for and validate against, so a timezone set to the wrong country makes the agent request a postcode your callers do not have. For a format the country defaults do not cover, set the question's **Type** to **Regex** or **Custom**.
   </Accordion>
   <Accordion title="A collected value is empty later">
     Open **Call Details** and confirm that Collect stored the value. If later blocks always need it, enable **Required**. Otherwise, make sure those blocks can run without it.
