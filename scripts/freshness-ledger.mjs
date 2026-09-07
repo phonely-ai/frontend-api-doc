@@ -346,7 +346,7 @@ try {
   const reviewed = ledger.pages.filter((page) => page.status === 'content-reviewed').length;
   const pending = ledger.pages.filter((page) => page.status === 'needs-doc-update').length;
   console.log(
-    `Freshness ledger is valid: ${reviewed}/${ledger.pages.length} page(s) content-reviewed; ${pending} need documentation updates.`,
+    `Freshness ledger is valid: ${reviewed}/${ledger.pages.length} page(s) have recorded review dates and no pending disposition; ${pending} have known documentation work. Dates do not prove current source coverage.`,
   );
 } catch (error) {
   console.error(error instanceof Error ? error.message : error);

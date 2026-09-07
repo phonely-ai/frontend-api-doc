@@ -15,6 +15,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -39,6 +40,16 @@ jobs:
 
       - name: Freshness contract
         run: node scripts/freshness-ledger.mjs
+
+      - name: Review date regression tests
+        run: node --test scripts/check-review-dates.test.mjs
+
+      - name: Changed page review dates
+        if: github.event_name == 'pull_request'
+        env:
+          REVIEW_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          REVIEW_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: node scripts/check-review-dates.mjs "$REVIEW_BASE_SHA"
 
       - name: Orphan media
         run: node scripts/find-orphan-media.mjs --fail-on-orphans
