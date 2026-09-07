@@ -1096,25 +1096,23 @@
           "pages": [
             "agent-design/voice/overview"
           ],
-          "note": "PHO-10340: the voice picker now lets admins change a voice's TTS model (including Cartesia sonic-3.6, stored as its dated snapshot but shown as sonic-3.6) and add the same provider voice at more than one model, and lets admins or a voice's owner rename it and set an optional name when adding a voice. Documented the optional Name field and owner rename on the Voice page; the admin-only model switch and unlisted model id stay out of customer prose. sonic-3.5 remains the default. Agent Setup already points to the Voice page and needs no change."
+          "note": "PHO-10340: documented optional naming, rename steps for personal and organization-owned voices, read-only restrictions, provider-derived fallback names, and adding the same provider voice ID on a different model as a separate library entry. Adding listed models is available to ordinary users; changing an existing voice model and entering an unlisted model ID are admin-only and remain outside customer instructions. Cartesia sonic-3.6 is offered in the built-in model list, while sonic-3.5 remains the default; no model catalog is duplicated in the guide. Agent Setup already links to Voice. Existing media is unchanged; these short tasks are fully explained in text."
         },
         {
           "id": "multi-select-search-select-all",
-          "status": "no-doc-change",
+          "status": "docs-updated",
           "pages": [
             "testing/ab-testing"
           ],
-          "note": "PHO-10406: searching inside a multi-select (including the A/B \"Successful outcomes\" picker) narrows Select All to the matching rows and keeps out-of-search selections. This refines an existing picker's interaction; the A/B Testing guide describes choosing success criteria without documenting Select All mechanics, so no customer-facing prose changes."
+          "note": "PHO-10406: documented search-scoped Select all N results for A/B successful outcomes and ended reasons. Selecting preserves choices outside the search; toggling again clears only matching choices. The guide tells users to clear the search and review the full selection before starting. Text is sufficient; no new media is needed."
         },
         {
           "id": "ask-ai-block-reference-placeholder",
-          "status": "already-covered",
+          "status": "docs-updated",
           "pages": [
-            "key-concepts/ask-ai",
-            "get-started/navigation-and-shortcuts",
-            "get-started/report-issues-and-ideas"
+            "key-concepts/ask-ai"
           ],
-          "note": "PHO-10399: the Ask AI composer placeholder now advertises the \"@\" workflow-block reference shortcut only while the current workflow can supply block references. The @ block-reference capability is already documented on the Ask AI page; the placeholder hint is a cosmetic affordance with no change to the documented behavior."
+          "note": "PHO-10399 adds a contextual placeholder hint for the existing @ block-reference capability. Expanded the canonical Ask AI section to explicitly cover both top-bar and side-panel inputs, keyboard selection and dismissal, and the existing More options > Ask AI about this block entry point missed in the previous review window. The block-menu action composes a reference without sending; users add their request and send. Existing flow-availability guidance remains accurate. Navigation and reporting pages already link to Ask AI and need no duplicated instructions. Text is sufficient; no new media is needed."
         },
         {
           "id": "variable-error-copy-and-tooltips",
@@ -1129,16 +1127,11 @@
         },
         {
           "id": "block-navigation-consolidation",
-          "status": "no-doc-change",
+          "status": "docs-updated",
           "pages": [
-            "flow-editor/versions",
-            "flow-editor/collaboration",
-            "key-concepts/flows",
-            "get-started/quick-start",
-            "get-started/introduction",
-            "key-concepts/plan-your-agent"
+            "flow-editor/variables"
           ],
-          "note": "PHO-10050 internal refactor: block focus/navigation was consolidated behind a single canonical path (focusWorkflowBlock / useNavigateToWorkflowBlock) used by the canvas, field-error links, version preview, and the assistant focus action, and variables can resolve to a navigable source block. No change to documented editor behavior; version preview, collaboration, and flow guidance remain accurate."
+          "note": "PHO-10050 combines an internal navigation refactor with a new public action: activating a valid upstream variable chip opens and focuses its source block. Documented pointer and Enter/Space activation in Variables, excluded variable kinds, invalid-variable replacement, and the proposal-preview restriction. The other canvas, error-link, assistant-focus, and version-preview callers preserve existing tasks; their guides need no change. Retained the existing Available Variables image for insertion guidance; source navigation is fully explained in text and needs no additional media."
         },
         {
           "id": "call-deployment-metadata-strip",
