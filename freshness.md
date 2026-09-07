@@ -70,7 +70,7 @@ For each release window:
 5. Verify behavior against the necessary repositories. Backend, voice, and data-service code may confirm the public contract, but internal mechanics must not be copied into user-facing prose unless users need them to use the product safely and correctly.
 6. Review the entire affected page for accuracy, terminology, order, duplication, links, examples, and visual shape, not only the changed sentence.
 7. Review neighboring pages when the change affects a shared concept or user journey. At the end of a product area, review the section as a whole.
-8. Record every disposition before advancing the repository cursor. Unclassified signals block advancement; classified `needs-doc-update` signals remain visible after the cursor advances. Record an explicit resolution of the pending behavior ID when that work is complete; an unrelated update to the same page does not clear pending work.
+8. Record every disposition before advancing the repository cursor. Unclassified signals block advancement; classified `needs-doc-update` signals remain visible after the cursor advances. Record a later `docs-updated` disposition for the page when that work is complete; other dispositions do not clear the pending work.
 
 Classify the user-visible contract rather than the commit title, code location, or implementation size. A change is documentation-worthy when it adds, changes, or removes a stable user task or entry point; a visible input, output, default, state, limit, availability rule, or term; or guidance users need for safe use, recovery, support, or troubleshooting. Internal refactors, tests, diagnostics, storage, analytics, triage, and cosmetic changes do not require documentation unless they alter that public contract. For a mixed change, document the public consequence without exposing its internal implementation.
 
@@ -91,21 +91,3 @@ Moving product facts into documentation reduces duplicated prompt knowledge, but
 Automation may compare commits after a repository's `accountedThrough` SHA, combine the exact diff with changelog evidence, match changed files to page sources, and open or update one review task with concise evidence. Source matches and unmatched changes are candidates, not proof that prose is wrong. Content changes require human review; skipped signals require a recorded disposition. Existing `needs-doc-update` items stay in the task until their pages are reviewed even though later scans begin from the newer cursor.
 
 Repository access must be read-only and scoped to approved repositories and paths. Evidence stored in tasks or the ledger should be limited to commits, file paths, and safe summaries. The pipeline must not read secret stores or customer data, generate speculative documentation prose, modify product repositories, or open recurring content PRs without review.
-
-## Precise pending work and periodic review
-
-Each `needs-doc-update` item is identified by `<window.id>/<disposition.id>`. A later `docs-updated` disposition closes only IDs listed in its `resolves` array, and must cover every page of each resolved item. Unknown, duplicate, or already-resolved IDs fail validation.
-
-A repair without new product commits appends a top-level `resolutions` record: `{id, issue, reviewedOn, pages, note, resolves: [pendingId]}`. Existing resolution records are immutable. The pipeline review must contain the same appended records and audit the affected pages. Product cursors and historical review windows remain unchanged during this repair. `node scripts/freshness-pending.mjs` prints the remaining behavior items.
-
-The scanner selects up to three pages whose whole-page review is at least 90 days old. An optional `reviewPolicy` config can specify `maxAgeDays`, `batchSize` (1¨C20), and `priorityPages`. This adds review candidates; it does not create a schedule. Review and renew those pages even without new source commits. A review date is only recorded after completing source and editorial checks.
-
-## Affected-page and question checks
-
-`node scripts/docs-impact.mjs <base-sha>` includes directly changed pages, consumers of changed shared content/media, API wrappers affected by OpenAPI changes, and pages affected by navigation changes. OpenAPI and navigation expansion is deliberately conservative. It follows literal paths and extensionless imports; dynamic imports and undocumented aliases require the writer's explicit impact review. Removed published pages require manual handling rather than being silently excluded.
-
-`node scripts/check-docs-questions.mjs` validates the seed question set and expected headings only. It does not evaluate retrieval or product truth. Use `--request` to export the questions with a digest of their current source pages. Run the questions through the actual approved retrieval/assistant surface, preserving retrieved page/heading pairs and answers. A separate reviewer grades each required fact and prohibited misconception with reasons. Pass the result file to the same script to report retrieval and answer correctness separately. Changes to questions or source pages invalidate old evaluation results.
-
-Result format: `{digest, runId, reviewerSession, cases: [{id, answer, retrievedSections: [{page, heading}], usedLiveTool, facts: [{index, pass, reason}], misconceptions: [{index, pass, reason}]}]}`. Indices follow the case arrays; `pass` for a misconception means the incorrect claim was avoided. Live-state cases require actual authorized tool use, not a promise to look it up. Reviewer identity and tool-use fields are attestations; the operator must preserve the real execution evidence. Store artifacts in restricted pipeline state, not public docs.
-
-Before first rollout, establish source-reviewed expected answers and a baseline using the deployed retrieval system. Compare missing facts, wrong conditions, citation quality and appropriate live-tool use. Keep these runtime results distinct from green build and corpus-contract checks.
