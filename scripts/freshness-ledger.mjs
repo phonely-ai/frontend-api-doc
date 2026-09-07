@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { pendingItems } from './freshness-pending.mjs';
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve, sep } from 'node:path';
@@ -207,15 +208,7 @@ function buildLedger(config) {
   const docs = readJson(join(ROOT, 'docs.json'));
   const routes = [...new Set(collectPages(docs.navigation?.tabs ?? []))].sort();
   const reviewWindows = getReviewWindows(config);
-  const pendingRoutes = new Set();
-  for (const window of reviewWindows) {
-    for (const disposition of window.dispositions) {
-      for (const route of disposition.pages) {
-        if (disposition.status === 'needs-doc-update') pendingRoutes.add(route);
-        if (disposition.status === 'docs-updated') pendingRoutes.delete(route);
-      }
-    }
-  }
+  const pendingRoutes = new Set(pendingItems(config).flatMap(item => item.pages));
   const pages = routes.map((route) => {
     const file = join(ROOT, `${route}.mdx`);
     if (!existsSync(file)) fail(`${route}: indexed page does not exist`);

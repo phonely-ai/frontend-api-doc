@@ -106,3 +106,15 @@ conversations go well, and where they don't.
 
 - Visible navigation is the authoritative, searchable documentation corpus.
 - Add a product page to the documentation repository only after its complete content is source-backed and its `last-verified` date is current.
+
+## Review for task completion and retrieval
+
+Choose the page's purpose before editing: how-to, tutorial, reference, or explanation. A how-to must let the intended reader identify prerequisites, follow the task, recognize success, and recover from likely failure. Reference pages need precise conditions and examples; conceptual pages need clear distinctions and links to tasks. Do not add irrelevant sections merely to fill a template.
+
+Lead each section with its useful answer. Keep limitations, role/version conditions and exceptions beside the claim they qualify. Use stable customer-facing terminology and descriptive headings. A retrieved section should identify what object or action it describes without relying on ambiguous pronouns or a distant paragraph. Essential instructions must remain available in text when media is omitted. Check examples for realistic inputs, expected outputs and safe testing context.
+
+Before adding prose, decide whether to update the canonical explanation, replace obsolete instructions, or create a new task page. Link related journeys instead of duplicating facts across many pages. Inspect neighboring setup, testing, reference and troubleshooting pages for contradictions. Preserve useful existing organization rather than accumulating release-by-release appendices.
+
+Every pipeline page audit records its page type, concrete editorial findings, and at least one representative user question with the expected answer and an exact supporting section excerpt. This checks whether the authored page can answer the question; it is separate from testing the deployed retrieval system.
+
+The seed evaluation set is `evals/docs-questions.json`. Keep evaluation records outside the indexed documentation. When an omission escapes review, add a representative question and misconception to this set, verify it against source, and retain that regression. Do not rewrite expected answers solely to match a failing model output.

@@ -14,3 +14,5 @@ test('missing and regressed dates fail', () => {
 });
 
 test('Git output newline normalization does not turn metadata-only edits into content changes', () => validateReviewDate(page('2026-08-01'), page('2026-08-01') + '\n', '2026-09-07'));
+
+test('indirect page changes require renewed review even when its prose is unchanged',()=>assert.throws(()=>validateReviewDate(page('2026-08-01'),page('2026-08-01'),'2026-09-07',true)));
