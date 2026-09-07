@@ -9,7 +9,7 @@ sources:
   - "services/voice-service.ts"
   - "services/agent-service.ts"
   - "phonely-backend/app/agent/assistant/assistant.py"
-last-verified: "2026-08-18"
+last-verified: "2026-09-07"
 ---
 
 Voice controls the speech callers hear during phone conversations. The selected voice and its settings belong to the agent and apply across its inbound and outbound flows.
@@ -24,7 +24,7 @@ Open **Agent Design**, then select **Voice**.
 2. Search by voice name or filter the library by language, gender, accent, or other available traits.
 3. Select the voice you want the agent to use.
 
-The selected voice appears first in the library. Use the heart control to save favorites, and use **Mine** to view voices owned by you or your organization.
+The selected voice appears first in the library. Use the heart control to save favorites, and use **Mine** to view voices owned by you or your organization. Rename a voice you own from its row in the library when you want a clearer label for it.
 
 Choose a voice that remains clear at phone-call audio quality and fits the conversations the agent handles. Accent, pacing, and pronunciation are usually more important than how expressive a voice sounds in a short sample.
 
@@ -83,7 +83,7 @@ Select **Add or Clone a Voice** when the built-in library does not contain the v
 
 <AccordionGroup>
   <Accordion title="Add a provider voice">
-    Choose **Add a voice**, then select the provider and model. Enter the voice ID from the provider and select its language. Adding the voice also selects it for the current agent, so test it before using the agent for live calls.
+    Choose **Add a voice**, then select the provider and model. Enter the voice ID from the provider and select its language. Add an optional **Name** to label the voice in your library, or leave it blank to keep the provider's own name. Adding the voice also selects it for the current agent, so test it before using the agent for live calls.
   </Accordion>
   <Accordion title="Clone a voice">
     Choose **Clone a voice**, then upload or record a clear 1–2 minute sample. Enter a unique name, gender, and language, and confirm that you have permission to clone and use the recording. Compare the generated samples before saving one. The saved voice becomes the current agent's selected voice.

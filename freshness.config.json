@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.261.0",
-        "commit": "3f2c98d0da3025ce9ba67b949c11d964cff9ec6e"
+        "label": "v0.263.0",
+        "commit": "9049f3664c7cc486f24272cf5552f2bb6d63d70b"
       }
     },
     {
@@ -365,7 +365,7 @@
             "outboundcalling/createaoutboundcallingcampaign",
             "outboundcalling/avoidmarkedasspamlikely"
           ],
-          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused \u2014 do-not-dial day\" indicator on campaign list and detail views."
+          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused — do-not-dial day\" indicator on campaign list and detail views."
         },
         {
           "id": "call-review-webhook-cache-miss-and-event-separators",
@@ -583,7 +583,7 @@
           "pages": [
             "outboundcalling/createaoutboundcallingcampaign"
           ],
-          "note": "Documented the Queued, Queued \u00b7 After hours, and Queued \u00b7 On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
+          "note": "Documented the Queued, Queued · After hours, and Queued · On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
         },
         {
           "id": "block-test-output-selection",
@@ -1073,6 +1073,96 @@
           "status": "not-public",
           "pages": [],
           "note": "Gardening/dead-code removal, added tests, CI and Claude PR tooling, dependency and security upgrades (firebase-admin pin, uuid overrides, Momentic), changelog edits, version-bump releases, and mainline mergebacks are internal engineering concerns with no customer-facing effect."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.262.0-v0.263.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-09-07",
+      "fromExclusive": {
+        "label": "v0.261.0",
+        "commit": "3f2c98d0da3025ce9ba67b949c11d964cff9ec6e"
+      },
+      "throughInclusive": {
+        "label": "v0.263.0",
+        "commit": "9049f3664c7cc486f24272cf5552f2bb6d63d70b"
+      },
+      "dispositions": [
+        {
+          "id": "voice-model-and-name-editing",
+          "status": "docs-updated",
+          "pages": [
+            "agent-design/voice/overview"
+          ],
+          "note": "PHO-10340: the voice picker now lets admins change a voice's TTS model (including Cartesia sonic-3.6, stored as its dated snapshot but shown as sonic-3.6) and add the same provider voice at more than one model, and lets admins or a voice's owner rename it and set an optional name when adding a voice. Documented the optional Name field and owner rename on the Voice page; the admin-only model switch and unlisted model id stay out of customer prose. sonic-3.5 remains the default. Agent Setup already points to the Voice page and needs no change."
+        },
+        {
+          "id": "multi-select-search-select-all",
+          "status": "no-doc-change",
+          "pages": [
+            "testing/ab-testing"
+          ],
+          "note": "PHO-10406: searching inside a multi-select (including the A/B \"Successful outcomes\" picker) narrows Select All to the matching rows and keeps out-of-search selections. This refines an existing picker's interaction; the A/B Testing guide describes choosing success criteria without documenting Select All mechanics, so no customer-facing prose changes."
+        },
+        {
+          "id": "ask-ai-block-reference-placeholder",
+          "status": "already-covered",
+          "pages": [
+            "key-concepts/ask-ai",
+            "get-started/navigation-and-shortcuts",
+            "get-started/report-issues-and-ideas"
+          ],
+          "note": "PHO-10399: the Ask AI composer placeholder now advertises the \"@\" workflow-block reference shortcut only while the current workflow can supply block references. The @ block-reference capability is already documented on the Ask AI page; the placeholder hint is a cosmetic affordance with no change to the documented behavior."
+        },
+        {
+          "id": "variable-error-copy-and-tooltips",
+          "status": "already-covered",
+          "pages": [
+            "flow-editor/variables",
+            "workflow-checklist",
+            "flow-editor/connections-and-routing",
+            "blocks/flow-blocks/talk"
+          ],
+          "note": "PHO-10050: invalid-variable errors now read as prose that names the source block instead of exposing an internal id (for example, \"X is no longer provided by Y\"), variable errors are kept per identity, and the editor field tooltip/link styling was refreshed. The Variables page already documents resolving invalid variables and Replace Invalid Variables, and the Flow Checklist already documents block errors and the Go to action; the reviewed wording remains accurate against those pages."
+        },
+        {
+          "id": "block-navigation-consolidation",
+          "status": "no-doc-change",
+          "pages": [
+            "flow-editor/versions",
+            "flow-editor/collaboration",
+            "key-concepts/flows",
+            "get-started/quick-start",
+            "get-started/introduction",
+            "key-concepts/plan-your-agent"
+          ],
+          "note": "PHO-10050 internal refactor: block focus/navigation was consolidated behind a single canonical path (focusWorkflowBlock / useNavigateToWorkflowBlock) used by the canvas, field-error links, version preview, and the assistant focus action, and variables can resolve to a navigable source block. No change to documented editor behavior; version preview, collaboration, and flow guidance remain accurate."
+        },
+        {
+          "id": "call-deployment-metadata-strip",
+          "status": "no-doc-change",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics"
+          ],
+          "note": "PHO-10332: the call-details deployment strip now also lists the transcriber and its languages, TTS provider, and deployment region, and relabels the voice build as \"Voice infra\". This is diagnostic deployment metadata surfaced for support, not a documented user task; the Call History page does not describe the strip and needs no change."
+        },
+        {
+          "id": "transcript-per-turn-block-badges",
+          "status": "no-doc-change",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics",
+            "call-sentiments",
+            "call-topics"
+          ],
+          "note": "PHO-10170: the transcript now shows every block an assistant turn passed through, not only the last one, and reads endpointing from each transition. This is a fidelity fix to the existing transcript display; the Call History page already tells users blocks map to transcript segments and needs no change. call-highlights-tab is shared with sentiment/topic candidates but those surfaces are unaffected."
+        },
+        {
+          "id": "dead-code-and-housekeeping",
+          "status": "not-public",
+          "pages": [],
+          "note": "v0.263 housekeeping with no public contract: removed unused code (agent-building overlay, quillforms voice-block, onboarding morphing-input, orgs agents-list-card, mcp-api-utils, an org usage-breakdown hook, and the retired performance flow-version-group component, which had no importers and does not remove the Call Paths flow-version filter), internal best-practice skill notes, and changelog entries. The api-reference/web-sdk candidate maps to changelog.MD only; the changelog changes are release notes for the features dispositioned above and do not change the Web SDK."
         }
       ]
     }
