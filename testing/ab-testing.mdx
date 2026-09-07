@@ -6,7 +6,8 @@ sources:
   - "app/(main)/(routes)/testing/ab-test/**"
   - "services/ab-test-case-service.ts"
   - "features/testing/modules/ab-test/utils/open-test-variant-agent.ts"
-last-verified: "2026-08-24"
+  - "components/ui/multi-select-with-icon.tsx"
+last-verified: "2026-09-07"
 ---
 
 A/B Testing compares your current agent, the **Control**, with a duplicated **Variant** using live calls. Phonely routes the configured share of calls to the variant and evaluates both agents against the same success criterion. Tests can run on the calls your agent answers, on the calls it places, or on both.
@@ -40,6 +41,8 @@ Every other category splits calls in both directions, as do workflow tests creat
 When a test includes outbound calls, use **Include voicemail calls in results** to decide whether outbound calls that reach voicemail count toward the result. It is off by default, so those calls are excluded until you enable it.
 
 Success-criteria options follow that choice for workflow tests: outcome tags come from the selected direction's calls only, and an inbound test does not offer the **Voicemail** ended reason.
+
+When choosing successful outcomes or ended reasons, search to narrow the options. **Select all N results** selects the matching options and keeps any selections outside the search. If all matches are already selected, selecting it again clears only those matches. Clear the search and review the full selection before starting the test.
 
 ### Edit the variant
 

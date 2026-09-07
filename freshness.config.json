@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.261.0",
-        "commit": "3f2c98d0da3025ce9ba67b949c11d964cff9ec6e"
+        "label": "v0.263.0",
+        "commit": "9049f3664c7cc486f24272cf5552f2bb6d63d70b"
       }
     },
     {
@@ -365,7 +365,7 @@
             "outboundcalling/createaoutboundcallingcampaign",
             "outboundcalling/avoidmarkedasspamlikely"
           ],
-          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused \u2014 do-not-dial day\" indicator on campaign list and detail views."
+          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused — do-not-dial day\" indicator on campaign list and detail views."
         },
         {
           "id": "call-review-webhook-cache-miss-and-event-separators",
@@ -583,7 +583,7 @@
           "pages": [
             "outboundcalling/createaoutboundcallingcampaign"
           ],
-          "note": "Documented the Queued, Queued \u00b7 After hours, and Queued \u00b7 On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
+          "note": "Documented the Queued, Queued · After hours, and Queued · On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
         },
         {
           "id": "block-test-output-selection",
@@ -1073,6 +1073,89 @@
           "status": "not-public",
           "pages": [],
           "note": "Gardening/dead-code removal, added tests, CI and Claude PR tooling, dependency and security upgrades (firebase-admin pin, uuid overrides, Momentic), changelog edits, version-bump releases, and mainline mergebacks are internal engineering concerns with no customer-facing effect."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.262.0-v0.263.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-09-07",
+      "fromExclusive": {
+        "label": "v0.261.0",
+        "commit": "3f2c98d0da3025ce9ba67b949c11d964cff9ec6e"
+      },
+      "throughInclusive": {
+        "label": "v0.263.0",
+        "commit": "9049f3664c7cc486f24272cf5552f2bb6d63d70b"
+      },
+      "dispositions": [
+        {
+          "id": "voice-model-and-name-editing",
+          "status": "docs-updated",
+          "pages": [
+            "agent-design/voice/overview"
+          ],
+          "note": "PHO-10340: documented optional naming, rename steps for personal and organization-owned voices, read-only restrictions, provider-derived fallback names, and adding the same provider voice ID on a different model as a separate library entry. Adding listed models is available to ordinary users; changing an existing voice model and entering an unlisted model ID are admin-only and remain outside customer instructions. Cartesia sonic-3.6 is offered in the built-in model list, while sonic-3.5 remains the default; no model catalog is duplicated in the guide. Agent Setup already links to Voice. Existing media is unchanged; these short tasks are fully explained in text."
+        },
+        {
+          "id": "multi-select-search-select-all",
+          "status": "docs-updated",
+          "pages": [
+            "testing/ab-testing"
+          ],
+          "note": "PHO-10406: documented search-scoped Select all N results for A/B successful outcomes and ended reasons. Selecting preserves choices outside the search; toggling again clears only matching choices. The guide tells users to clear the search and review the full selection before starting. Text is sufficient; no new media is needed."
+        },
+        {
+          "id": "ask-ai-block-reference-placeholder",
+          "status": "docs-updated",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "PHO-10399 adds a contextual placeholder hint for the existing @ block-reference capability. Expanded the canonical Ask AI section to explicitly cover both top-bar and side-panel inputs, keyboard selection and dismissal, and the existing More options > Ask AI about this block entry point missed in the previous review window. The block-menu action composes a reference without sending; users add their request and send. Existing flow-availability guidance remains accurate. Navigation and reporting pages already link to Ask AI and need no duplicated instructions. Text is sufficient; no new media is needed."
+        },
+        {
+          "id": "variable-error-copy-and-tooltips",
+          "status": "already-covered",
+          "pages": [
+            "flow-editor/variables",
+            "workflow-checklist",
+            "flow-editor/connections-and-routing",
+            "blocks/flow-blocks/talk"
+          ],
+          "note": "PHO-10050: invalid-variable errors now read as prose that names the source block instead of exposing an internal id (for example, \"X is no longer provided by Y\"), variable errors are kept per identity, and the editor field tooltip/link styling was refreshed. The Variables page already documents resolving invalid variables and Replace Invalid Variables, and the Flow Checklist already documents block errors and the Go to action; the reviewed wording remains accurate against those pages."
+        },
+        {
+          "id": "block-navigation-consolidation",
+          "status": "docs-updated",
+          "pages": [
+            "flow-editor/variables"
+          ],
+          "note": "PHO-10050 combines an internal navigation refactor with a new public action: activating a valid upstream variable chip opens and focuses its source block. Documented pointer and Enter/Space activation in Variables, excluded variable kinds, invalid-variable replacement, and the proposal-preview restriction. The other canvas, error-link, assistant-focus, and version-preview callers preserve existing tasks; their guides need no change. Retained the existing Available Variables image for insertion guidance; source navigation is fully explained in text and needs no additional media."
+        },
+        {
+          "id": "call-deployment-metadata-strip",
+          "status": "no-doc-change",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics"
+          ],
+          "note": "PHO-10332: the call-details deployment strip now also lists the transcriber and its languages, TTS provider, and deployment region, and relabels the voice build as \"Voice infra\". This is diagnostic deployment metadata surfaced for support, not a documented user task; the Call History page does not describe the strip and needs no change."
+        },
+        {
+          "id": "transcript-per-turn-block-badges",
+          "status": "no-doc-change",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics",
+            "call-sentiments",
+            "call-topics"
+          ],
+          "note": "PHO-10170: the transcript now shows every block an assistant turn passed through, not only the last one, and reads endpointing from each transition. This is a fidelity fix to the existing transcript display; the Call History page already tells users blocks map to transcript segments and needs no change. call-highlights-tab is shared with sentiment/topic candidates but those surfaces are unaffected."
+        },
+        {
+          "id": "dead-code-and-housekeeping",
+          "status": "not-public",
+          "pages": [],
+          "note": "v0.263 housekeeping with no public contract: removed unused code (agent-building overlay, quillforms voice-block, onboarding morphing-input, orgs agents-list-card, mcp-api-utils, an org usage-breakdown hook, and the retired performance flow-version-group component, which had no importers and does not remove the Call Paths flow-version filter), internal best-practice skill notes, and changelog entries. The api-reference/web-sdk candidate maps to changelog.MD only; the changelog changes are release notes for the features dispositioned above and do not change the Web SDK."
         }
       ]
     }

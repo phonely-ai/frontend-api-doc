@@ -5,6 +5,11 @@ sources:
   - "features/workflows/model/schema/variables.ts"
   - "features/workflows/model/variables/**"
   - "features/workflows/modules/editor/components/panels/variable-panel.tsx"
+  - "features/workflows/modules/editor/components/tagify/tagify-input.tsx"
+  - "features/workflows/modules/editor/navigation/resolve-variable-source-block.ts"
+  - "features/workflows/modules/editor/navigation/use-navigate-to-workflow-block.ts"
+  - "features/workflows/modules/editor/navigation/focus-workflow-block.ts"
+  - "features/workflows/modules/editor/hooks/use-get-incoming-variable-groups.ts"
   - "features/workflows/modules/editor/components/custom-variable-modal.tsx"
   - "features/workflows/modules/editor/components/trigger-variable-modal.tsx"
   - "features/workflows/modules/editor/components/auto-gather-variable-modal.tsx"
@@ -26,7 +31,7 @@ sources:
   - "features/workflows/model/node-descriptors/index.ts"
   - "phonely-backend/app/agent/assistant/agent_data.py"
   - "phonely-backend/app/custom_llm/prompts/prompts_v1.py"
-last-verified: "2026-08-24"
+last-verified: "2026-09-07"
 ---
 
 Variables are named values that a flow can use. Some stay fixed, while others change with the caller, the route, or a block's result. They let the flow carry information forward and respond to the current call without entering the same data again.
@@ -80,6 +85,12 @@ Blocks are the main source of values that change while a flow runs. Their variab
 In each case, the variables appear under the block's name and can be selected in blocks that run later.
 
 Tests can also fill variables whose names are already known. A Google Sheets Search a Row test adds the matched row values to its column variables. A Google Calendar availability test fills **Available Appointment Slots**.
+
+### Open a variable's source block
+
+To inspect where a value comes from, click its variable chip in an editor text field. For a valid variable produced by an upstream block on the current canvas, Phonely moves to that block and opens its settings. You can also focus the chip with the keyboard and press `Enter` or `Space`.
+
+This shortcut is for block-produced variables. Custom Variables, Auto-Gather Variables, knowledge-base references, and Flow Inputs do not navigate to a source block. An invalid variable opens the replacement dialog instead. Source-block navigation is unavailable in a proposal preview.
 
 ### Collect information from the caller
 

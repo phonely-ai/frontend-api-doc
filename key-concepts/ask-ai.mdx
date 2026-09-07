@@ -6,6 +6,9 @@ sources:
   - "features/app-shell/config/shell-route-rules.ts"
   - "features/chat/side-panel/ui/app-side-panel.tsx"
   - "features/chat/assistant/ui/**"
+  - "features/chat/assistant/references/**"
+  - "features/workflows/assistant-capability/references/**"
+  - "features/workflows/modules/editor/custom-nodes/custom-node-provider.tsx"
   - "features/chat/assistant/attachments/**"
   - "features/chat/assistant/lib/route-capabilities.ts"
   - "features/chat/assistant/hooks/use-context-sync.ts"
@@ -21,7 +24,7 @@ sources:
   - "features/workflows/modules/editor/context/workflow-field-review-context.tsx"
   - "app/api/assistant/**"
   - "features/platform-reports/ui/platform-report-dialog.tsx"
-last-verified: "2026-08-31"
+last-verified: "2026-09-07"
 ---
 
 Ask AI is Phonely's in-product assistant. It opens in the app side panel and works alongside the page you are using.
@@ -74,7 +77,11 @@ Use **Chat history** to restore a recent Ask AI session. Removing a chat hides i
 
 ## Reference a flow block
 
-When a flow is open, you can point Ask AI at an exact block instead of describing it. Type `@` in the Ask AI input and pick a block from the list, or keep typing to match one by name. The reference stays in place while you write, edit, or continue the conversation, and asks Ask AI to re-read that block before it acts.
+When a flow is open, you can point Ask AI at an exact block instead of describing it. Type `@` in either the top-bar Ask AI input or the Ask AI side-panel composer, then pick a block from the list or keep typing to match one by name. Use the arrow keys and `Enter` to choose a result with the keyboard; `Escape` dismisses the list.
+
+You can also open an editable block's **More options** menu and select **Ask AI about this block** when that action is available. Ask AI opens with the block reference in the composer. Add your question or instruction, then send it.
+
+The reference stays in place while you write, edit, or continue the conversation, and asks Ask AI to re-read that block before it acts.
 
 Block references only work while their flow is open. If you reference a block and then leave its flow, open the flow again or remove the reference before sending.
 
