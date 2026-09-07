@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { pendingItems } from './freshness-pending.mjs';
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve, sep } from 'node:path';
@@ -207,15 +208,7 @@ function buildLedger(config) {
   const docs = readJson(join(ROOT, 'docs.json'));
   const routes = [...new Set(collectPages(docs.navigation?.tabs ?? []))].sort();
   const reviewWindows = getReviewWindows(config);
-  const pendingRoutes = new Set();
-  for (const window of reviewWindows) {
-    for (const disposition of window.dispositions) {
-      for (const route of disposition.pages) {
-        if (disposition.status === 'needs-doc-update') pendingRoutes.add(route);
-        if (disposition.status === 'docs-updated') pendingRoutes.delete(route);
-      }
-    }
-  }
+  const pendingRoutes = new Set(pendingItems(config).flatMap(item => item.pages));
   const pages = routes.map((route) => {
     const file = join(ROOT, `${route}.mdx`);
     if (!existsSync(file)) fail(`${route}: indexed page does not exist`);
@@ -346,7 +339,7 @@ try {
   const reviewed = ledger.pages.filter((page) => page.status === 'content-reviewed').length;
   const pending = ledger.pages.filter((page) => page.status === 'needs-doc-update').length;
   console.log(
-    `Freshness ledger is valid: ${reviewed}/${ledger.pages.length} page(s) content-reviewed; ${pending} need documentation updates.`,
+    `Freshness ledger is valid: ${reviewed}/${ledger.pages.length} page(s) have recorded review dates and no pending disposition; ${pending} have known documentation work. Dates do not prove current source coverage.`,
   );
 } catch (error) {
   console.error(error instanceof Error ? error.message : error);

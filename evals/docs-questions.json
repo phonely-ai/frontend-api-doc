@@ -1,0 +1,395 @@
+{
+  "schemaVersion": 1,
+  "status": "seed cases grounded in current docs; source correctness and live retrieval require separate review",
+  "cases": [
+    {
+      "id": "insert-variable",
+      "question": "How do I insert a variable into a block?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/variables",
+          "heading": "Use a variable"
+        }
+      ],
+      "requiredFacts": [
+        "Focus a supported field and select an available variable.",
+        "Typing its name as plain text does not substitute its value."
+      ],
+      "forbiddenClaims": [
+        "Any plain variable name is automatically substituted."
+      ]
+    },
+    {
+      "id": "variable-source",
+      "question": "How do I open the block that produced a variable?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/variables",
+          "heading": "Open a variable's source block"
+        }
+      ],
+      "requiredFacts": [
+        "Activate a valid upstream block variable chip.",
+        "Keyboard activation supports Enter or Space."
+      ],
+      "forbiddenClaims": [
+        "Every kind of variable navigates to a block."
+      ]
+    },
+    {
+      "id": "variable-exclusions",
+      "question": "Why does clicking my custom variable not open a block?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/variables",
+          "heading": "Open a variable's source block"
+        }
+      ],
+      "requiredFacts": [
+        "Custom variables are excluded from source-block navigation."
+      ],
+      "forbiddenClaims": [
+        "Every variable chip must have a source block."
+      ]
+    },
+    {
+      "id": "variable-preview",
+      "question": "Can I navigate to a source block from a proposal preview?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/variables",
+          "heading": "Open a variable's source block"
+        }
+      ],
+      "requiredFacts": [
+        "Source-block navigation is unavailable in a proposal preview."
+      ],
+      "forbiddenClaims": [
+        "Proposal previews support source-block navigation."
+      ]
+    },
+    {
+      "id": "invalid-variable",
+      "question": "What happens when I activate an invalid variable?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/variables",
+          "heading": "Open a variable's source block"
+        }
+      ],
+      "requiredFacts": [
+        "An invalid variable opens replacement handling."
+      ],
+      "forbiddenClaims": [
+        "An invalid variable always navigates successfully."
+      ]
+    },
+    {
+      "id": "variable-kinds",
+      "question": "What kinds of information can variables carry?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/variables",
+          "heading": "Where variables come from"
+        }
+      ],
+      "requiredFacts": [
+        "Distinguish block, call and custom variables.",
+        "Knowledge-base references are not values passed through the flow."
+      ],
+      "forbiddenClaims": [
+        "Knowledge-base references and flow variables are identical."
+      ]
+    },
+    {
+      "id": "draft-test",
+      "question": "Does testing from the Flow Editor use my draft?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/test-and-publish",
+          "heading": "Web Chat and Web Call"
+        }
+      ],
+      "requiredFacts": [
+        "Editor browser tests start with Draft selected.",
+        "The Draft / Live control changes the test target."
+      ],
+      "forbiddenClaims": [
+        "All tests always use the published version."
+      ]
+    },
+    {
+      "id": "never-published",
+      "question": "What does Live testing use if the flow was never published?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/test-and-publish",
+          "heading": "Web Chat and Web Call"
+        }
+      ],
+      "requiredFacts": [
+        "A never-published flow falls back to its draft."
+      ],
+      "forbiddenClaims": [
+        "Live testing always requires an existing published version."
+      ]
+    },
+    {
+      "id": "phone-test",
+      "question": "Which version does an outbound phone test use?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/test-and-publish",
+          "heading": "Run a phone test"
+        }
+      ],
+      "requiredFacts": [
+        "It uses the latest published version.",
+        "It falls back to draft only if never published."
+      ],
+      "forbiddenClaims": [
+        "Outbound phone tests always test the current draft."
+      ]
+    },
+    {
+      "id": "save-version",
+      "question": "Does Save as Version make my changes live?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/test-and-publish",
+          "heading": "Review and publish"
+        }
+      ],
+      "requiredFacts": [
+        "Save as Version creates a checkpoint without changing the published version."
+      ],
+      "forbiddenClaims": [
+        "Saving a version automatically publishes it."
+      ]
+    },
+    {
+      "id": "unreachable-errors",
+      "question": "Do errors in unconnected blocks prevent publishing?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/test-and-publish",
+          "heading": "Review and publish"
+        }
+      ],
+      "requiredFacts": [
+        "Errors in blocks reachable from the entry point block publication.",
+        "Unconnected blocks parked on the canvas do not block publication."
+      ],
+      "forbiddenClaims": [
+        "Every block error on the canvas blocks publication."
+      ]
+    },
+    {
+      "id": "advisory-review",
+      "question": "Can I publish despite AI review findings?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/test-and-publish",
+          "heading": "Review and publish"
+        }
+      ],
+      "requiredFacts": [
+        "AI findings are advisory.",
+        "Deterministic block errors still prevent publishing."
+      ],
+      "forbiddenClaims": [
+        "Publish anyway bypasses deterministic errors."
+      ]
+    },
+    {
+      "id": "publish-unavailable",
+      "question": "Why could Publish be unavailable?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/test-and-publish",
+          "heading": "Review and publish"
+        }
+      ],
+      "requiredFacts": [
+        "Possible reasons include block errors, plan restrictions, role permissions or newer collaboration updates.",
+        "A draft identical to the published version disables Publish."
+      ],
+      "forbiddenClaims": [
+        "The docs establish the actual cause for this specific agent without inspecting it."
+      ]
+    },
+    {
+      "id": "test-from-here",
+      "question": "Does Test from here prove the entire flow works?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/test-and-publish",
+          "heading": "Test from a selected block"
+        }
+      ],
+      "requiredFacts": [
+        "It does not verify earlier blocks or alternate routes.",
+        "It does not establish that the draft was published."
+      ],
+      "forbiddenClaims": [
+        "A successful partial test validates the whole flow."
+      ]
+    },
+    {
+      "id": "phone-data",
+      "question": "Can browser tests validate all phone-network behavior?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "flow-editor/test-and-publish",
+          "heading": "Web Chat and Web Call"
+        }
+      ],
+      "requiredFacts": [
+        "Phone-dependent data and behavior require a phone test."
+      ],
+      "forbiddenClaims": [
+        "Browser tests fully reproduce phone-network behavior."
+      ]
+    },
+    {
+      "id": "historical-path",
+      "question": "Should I use the current draft to interpret old Call Paths?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "call-path",
+          "heading": "Follow routes across flows"
+        }
+      ],
+      "requiredFacts": [
+        "Calls are analyzed against the published versions they used."
+      ],
+      "forbiddenClaims": [
+        "Historical paths reflect the current draft."
+      ]
+    },
+    {
+      "id": "inspect-path",
+      "question": "How should I investigate an unexpected call path?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "call-path",
+          "heading": "Investigate a path"
+        }
+      ],
+      "requiredFacts": [
+        "Choose a date range and flow version.",
+        "Inspect the relevant route and individual calls."
+      ],
+      "forbiddenClaims": [
+        "Call Paths alone proves why every caller behaved a certain way."
+      ]
+    },
+    {
+      "id": "old-config",
+      "question": "What if a historical block configuration is unavailable?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "call-path",
+          "heading": "Read the canvas"
+        }
+      ],
+      "requiredFacts": [
+        "Use historical metrics and call drilldown.",
+        "Do not substitute current editor configuration as evidence of an old version."
+      ],
+      "forbiddenClaims": [
+        "Current editor configuration proves the configuration used by historical calls."
+      ]
+    },
+    {
+      "id": "live-published",
+      "question": "Is my agent currently using the latest draft?",
+      "mode": "live-state",
+      "sections": [
+        {
+          "page": "flow-editor/test-and-publish",
+          "heading": "Understand drafts and versions"
+        }
+      ],
+      "requiredFacts": [
+        "Inspect current agent and published-version state with an authorized read-only tool.",
+        "Static documentation alone cannot answer this live-state question."
+      ],
+      "forbiddenClaims": [
+        "Assert this agent is current using documentation alone."
+      ]
+    },
+    {
+      "id": "live-call-failure",
+      "question": "Why did my particular call fail?",
+      "mode": "live-state",
+      "sections": [
+        {
+          "page": "call-path",
+          "heading": "Investigate a path"
+        }
+      ],
+      "requiredFacts": [
+        "Inspect the specific call using authorized read-only tools.",
+        "Documentation supplies investigation guidance, not the actual diagnosis."
+      ],
+      "forbiddenClaims": [
+        "Invent a diagnosis without call evidence."
+      ]
+    },
+    {
+      "id": "block-reference-menu",
+      "question": "How do I reference a specific flow block in Ask AI?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "key-concepts/ask-ai",
+          "heading": "Reference a flow block"
+        }
+      ],
+      "requiredFacts": [
+        "Open the flow and type @ in the top-bar input or side-panel composer.",
+        "Choose a block from the results; keyboard selection is supported."
+      ],
+      "forbiddenClaims": [
+        "Block references are only available through a block context menu."
+      ]
+    },
+    {
+      "id": "block-reference-context",
+      "question": "Why did my block reference stop working after I left the flow?",
+      "mode": "docs",
+      "sections": [
+        {
+          "page": "key-concepts/ask-ai",
+          "heading": "Reference a flow block"
+        }
+      ],
+      "requiredFacts": [
+        "The referenced flow must remain open.",
+        "Open the flow again or remove the reference before sending."
+      ],
+      "forbiddenClaims": [
+        "A block reference works regardless of the currently open flow."
+      ]
+    }
+  ]
+}
