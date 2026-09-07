@@ -12,3 +12,5 @@ test('missing and regressed dates fail', () => {
   assert.throws(() => validateReviewDate('', 'New page', '2026-09-07'));
   assert.throws(() => validateReviewDate(page('2026-08-01'), page('2026-07-01', 'New claim'), '2026-09-07'));
 });
+
+test('Git output newline normalization does not turn metadata-only edits into content changes', () => validateReviewDate(page('2026-08-01'), page('2026-08-01') + '\n', '2026-09-07'));

@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const date = text => /^last-verified:\s*["']?(\d{4}-\d{2}-\d{2})/m.exec(text)?.[1];
-const body = text => text.replace(/^---\r?\n[\s\S]*?\r?\n---\s*/, '').replace(/\r\n/g, '\n');
+const body = text => text.replace(/^---\r?\n[\s\S]*?\r?\n---\s*/, '').replace(/\r\n/g, '\n').trimEnd();
 export function validateReviewDate(before, after, reviewDay) {
   if (body(before) === body(after)) return;
   const next = date(after);
