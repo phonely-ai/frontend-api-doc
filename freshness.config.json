@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.265.0",
-        "commit": "0bcd826e482dca5c90aa4b6b5a30af1748cf9049"
+        "label": "v0.268.0",
+        "commit": "d1bc54873c0598a58bf4a22d8d95917d1f7c154e"
       }
     },
     {
@@ -1302,6 +1302,132 @@
           "status": "not-public",
           "pages": [],
           "note": "Housekeeping with no public contract: PHO-10307 firebase-admin pin and uuid overrides, dependency and lockfile upgrades, gardening dead-code removal, removed in-repo performance-consolidation program plans and sidebar docs, CI and Claude PR tooling, auth and request-context refactors, instrumentation, changelog and version-bump releases, and mainline mergebacks."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.268.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-09-28",
+      "fromExclusive": {
+        "label": "v0.265.0",
+        "commit": "0bcd826e482dca5c90aa4b6b5a30af1748cf9049"
+      },
+      "throughInclusive": {
+        "label": "v0.268.0",
+        "commit": "d1bc54873c0598a58bf4a22d8d95917d1f7c154e"
+      },
+      "dispositions": [
+        {
+          "id": "opportunity-analysis",
+          "status": "docs-updated",
+          "pages": [
+            "agent-design/overview",
+            "call-history-ai-analytics/call-history-ai-analytics",
+            "performance",
+            "data-tables"
+          ],
+          "note": "PHO-10443 adds Opportunity Analysis: an opt-in analytics-derived field for early-ended calls, with a configurable sample rate and optional AI-created categories (features/agents/model/opportunity-analysis-analytics-field.ts, analytics-derived-fields.ts). In Analytics settings, users can add, rename, describe, and delete opportunity categories; the list ranks them by matching calls from the last 30 days and links to those calls (opportunity-analysis-section.tsx). Call Details shows the block where the call ended, why the caller left, the category, 30-day count and share, matching-call drilldown, and any suggested fix that can be handed to Ask AI (call-details/tabs/highlights/opportunity-analysis-section.tsx). Explore adds analytics-derived fields and a Dropped off block-filter operator (formula-variables.ts, explore-count-entities.tsx, explore-predicate-list.tsx, filter-block-menu.tsx). Documented the settings controls and call panel, corrected the sampled-out state, and added the related Performance and Data Tables vocabulary."
+        },
+        {
+          "id": "campaign-queue-management",
+          "status": "docs-updated",
+          "pages": [
+            "outboundcalling/createaoutboundcallingcampaign"
+          ],
+          "note": "PHO-9129/PHO-9130/PHO-9132 add live queue management: Clear queue is available for running and paused campaigns, confirms the operation, cancels queued calls, and reports the count; Remove from queue cancels queued attempts for a contact number while in-progress calls finish; Edit changes a queued call's mapped variables, caller-ID override, recipient timezone, and voicemail override while it is Queued, Queueing, or scheduled for redial (flush-queue-button.tsx, remove-queue-numbers.ts, campaign-call-actions.tsx, edit-queued-call-dialog.tsx). Documented all three actions with the exact Clear queue label and availability."
+        },
+        {
+          "id": "campaign-overview-badge",
+          "status": "docs-updated",
+          "pages": [
+            "outboundcalling/createaoutboundcallingcampaign"
+          ],
+          "note": "PHO-10541 keeps the campaign overview badge and the campaign-list queue-status badge in sync with queued calls (queue-status-badge.tsx, campaign-detail/overview/overview-data-grid.tsx). Documented that the campaign overview badge stays in sync as calls are added, dialed, or cancelled, within the new queue-management section."
+        },
+        {
+          "id": "outbound-default-tab",
+          "status": "no-doc-change",
+          "pages": [
+            "outboundcalling/createaoutboundcallingcampaign"
+          ],
+          "note": "The Outbound Calls view now opens the Campaigns tab by default instead of Call Flows (campaign-list-client.tsx defaultValue 'campaigns'; shell-route-rules.ts governs the command palette). No documented workflow states which tab opens first, so no user-facing fact changed."
+        },
+        {
+          "id": "callhistory-ab-test-switching",
+          "status": "docs-updated",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics"
+          ],
+          "note": "PHO-10164 shows the selected A/B test name in a Call History capsule and lets you switch between tests and between All calls / Control calls / Variant calls from its menu (call-history-ab-test-chip.tsx, ab-test-call-badge.tsx, call-history-provider.tsx, call-history-client.tsx). Documented the A/B capsule and its All/Control/Variant and switch-test menu. The rest of the touched call-list surface (search, filters, pagination, row actions, mobile, call-details modal/transcript refactors) is internal refactoring of the already-documented Call History surfaces."
+        },
+        {
+          "id": "phonely-left-call-transcript",
+          "status": "docs-updated",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics"
+          ],
+          "note": "PHO-10204 relabels the departure step to 'Phonely Left Call' instead of 'User Left Call' when the agent hangs up after completing a warm transfer (call-departure.ts hasCompletedCallTransfer, call-blocks-tab-block-timeline-item.tsx, transcript-container.tsx). Documented the Phonely Left Call transcript label for that case."
+        },
+        {
+          "id": "signup-gate",
+          "status": "not-public",
+          "pages": [],
+          "note": "PHO-10616 adds an optional frontend sign-up gate controlled by the server-only SIGNUP_ACCESS_CODE env var, with invite-token access and a sign-up-closed redirect (auth/server/signup-gate.ts, auth/model/*, sign-up/page.tsx, sign-in-form.tsx, config/urls.ts). Sign-up and invite acceptance are not documented product pages, and the gate is a server-configured deployment control, so no customer documentation applies."
+        },
+        {
+          "id": "org-search",
+          "status": "no-doc-change",
+          "pages": [
+            "manage-account-and-organization-settings/manage-account-and-organization-settings"
+          ],
+          "note": "PHO-10065 tightens the settings organization-switcher search so fuzzy matching no longer returns unrelated organizations (org-switcher.tsx useFuzzySearch). This is search-quality polish on the organization switcher, which the account and organization settings page does not document at the switcher level; no documented behavior changed."
+        },
+        {
+          "id": "llm-version-and-prompt-filter",
+          "status": "not-public",
+          "pages": [],
+          "note": "PHO-10667 renames the Agent Settings > Advanced 'Prompt Version' section to 'LLM Version' and updates the admin selector options (advanced-tab.tsx, admin-selector-options-tab.tsx). That Advanced section and the Call History 'Prompt Version (Admin Only)' filter are admin-only and not part of the documented customer surface, so no public page applies; the undocumented Call History filter label remains 'Prompt Version'."
+        },
+        {
+          "id": "ask-ai-queue-multi-conversation",
+          "status": "docs-updated",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "PHO-10589/PHO-10619 let Ask AI queue additional requests while work is active and run separate conversations independently. The Queued Ask AI requests list supports Remove from queue and Retry (assistant-request-queue.ts/.tsx, send-message.ts), focused tasks can stack, and Chat history shows per-session working or needs-attention state (use-assistant-tab-store.ts, use-open-assistant.ts, assistant-session-menu.tsx). Documented independent conversations and the released queue controls."
+        },
+        {
+          "id": "ask-ai-conversation-testing",
+          "status": "docs-updated",
+          "pages": [
+            "key-concepts/ask-ai",
+            "flow-editor/test-and-publish"
+          ],
+          "note": "PHO-10642 lets Ask AI run a text-only simulated conversation against one path in an inbound draft, starting from Talk, Collect, or Ask Exactly. Results expose the transcript, visited path, captured variables, exact checks, behavioral evaluation, and every simulated external action assumption (features/workflows/ai/tools/run-conversation-test.ts, conversation-test/**, conversation-test-result-card.tsx). Documented how to request a test, what evidence it returns, and its scope: one caller case and path, draft only, with outbound, phone/audio, published behavior, live integrations, and untested branches outside the result."
+        },
+        {
+          "id": "assistant-and-workflow-ai-internals",
+          "status": "not-public",
+          "pages": [],
+          "note": "Ask AI and workflow-AI internals: outcome-based turn classification and Langfuse observability/evals (PHO-10547, turn-classification.ts, evidence-report*, langfuse-*), self-healing workflow proposals against the draft and change-set recovery (PHO-10624, proposal-recovery.ts, workflow-change-set-review.ts), tool activity/UI metadata, tool-result compaction, prompt fragments and server tools, admin-only Deep Dive, and agent-from-recordings seeds. These are model, provider, observability, and admin internals behind unchanged surfaces; the public v0.268 conversation-test behavior is dispositioned separately."
+        },
+        {
+          "id": "workflow-authoring-polish",
+          "status": "no-doc-change",
+          "pages": [
+            "key-concepts/flows",
+            "flow-editor/versions",
+            "flow-editor/collaboration"
+          ],
+          "note": "Workflow editor authoring polish and refactors through v0.268: canvas, sidebar, top-bar, auto-save status, workflow comparison overlay, field-review context, version-preview and diff utilities, custom-node cards, trigger switching, reachable-node validation, and custom-action/code-validation services. These change internal structure or presentation of already-documented flow-editing, block-configuration, version, and testing workflows without changing another public instruction; conversation-test results are dispositioned separately."
+        },
+        {
+          "id": "infra-and-releases",
+          "status": "not-public",
+          "pages": [],
+          "note": "Release, CI, and infrastructure through v0.268: v0.266.0-v0.268.0 version bumps and changelog edits, dev/main merges and mergebacks, gardening/dead-code removal, package and dependency changes, GitHub Actions and Playwright/Vitest config, shared UI primitives and hooks, PostHog/instrumentation, agent shell/settings-client scaffolding, and the PHO-10344 workflow-compression dependency doc. None of these change the public product experience or customer documentation."
         }
       ]
     }

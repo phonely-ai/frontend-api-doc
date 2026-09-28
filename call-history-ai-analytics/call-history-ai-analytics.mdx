@@ -5,8 +5,12 @@ sources:
   - "features/calls/modules/call-list/**"
   - "features/calls/modules/call-details/**"
   - "features/calls/modules/transcript/**"
+  - "features/calls/model/runtime-trace/call-departure.ts"
+  - "features/calls/modules/call-details/tabs/highlights/opportunity-analysis-section.tsx"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/setting-tabs/opportunity-analysis-section.tsx"
+  - "features/agents/model/opportunity-analysis-analytics-field.ts"
   - "app/(main)/(routes)/call-history/**"
-last-verified: "2026-08-31"
+last-verified: "2026-09-28"
 ---
 
 Call History is the record of an agent's phone and web conversations. Use it to find a call, understand what happened, and inspect how the flow ran.
@@ -19,7 +23,9 @@ Search by phone number or words from the call, or filter the list by fields such
 - call type and mode;
 - status and end reason;
 - outcome, topic, and sentiment; and
-- prompt version.
+- prompt version (admin only).
+
+When you open Call History from a running A/B test, a capsule at the top of the list shows the selected test's name. Use its menu to switch between **All calls**, **Control calls**, and **Variant calls**, or to switch to another A/B test.
 
 Unanswered outbound dials show their specific telephony result instead of a generic failure: **No Answer**, **Busy**, and **Failed to Connect** appear as end reasons in the list and in a call's details, and you can filter for them alongside **Voicemail**.
 
@@ -34,9 +40,17 @@ Call Details keeps the transcript beside two review tabs:
 | **Highlights** | Summary, sentiment, caller and end details, topics, outcome, actions, and time spent in blocks |
 | **Blocks** | The ordered blocks and actions recorded while the call ran, including stored variables and available execution details |
 
-For a completed call, use the audio player to hear the conversation while following the transcript. Transcript event separators identify non-conversational events where available.
+For a completed call, use the audio player to hear the conversation while following the transcript. Transcript event separators identify non-conversational events where available. When the agent hangs up after completing a warm transfer, the transcript labels that step **Phonely Left Call** rather than **User Left Call**.
 
 Select a block or duration segment to move to the corresponding part of the transcript. This is useful when one Talk block contains several caller and agent turns.
+
+## Understand why callers left early
+
+When **Opportunity Analysis** is turned on for the agent, a completed call that ended before reaching a terminal block can show an **Opportunity Analysis** panel in **Highlights**. The panel reports where the caller dropped off, why they left, and the opportunity that might have kept them on the call, such as a callback instead of a long hold or a price to quote.
+
+Each analyzed opportunity shows the block where the call ended, the number and share of analyzed early-ended calls from the last 30 days with the same opportunity, and any suggested fix. Select **View all calls** to inspect the matching calls, or **Implement with AI** when available to hand the suggested change to Ask AI. An early-ended call included in the feature's records but outside its review sample shows **Not analyzed** instead of an opportunity. Calls without an Opportunity Analysis record do not show the panel.
+
+Turn Opportunity Analysis on from the agent's **Settings > Analytics** tab. Choose whether AI can name new opportunity categories and select the percentage of early-ended calls to review. You can add, rename, describe, or delete categories yourself. The category list is ranked by matching calls from the last 30 days; select a call count to inspect those calls. See [Agent Setup](/agent-design/overview#open-agent-settings) for the Analytics tab.
 
 ## Correct call classifications
 

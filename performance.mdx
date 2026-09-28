@@ -8,8 +8,12 @@ sources:
   - "features/performance/store/use-performance-store.ts"
   - "features/performance/assistant-capability/components/**"
   - "features/performance/assistant-capability/authoring-prompt-fragment.ts"
+  - "features/performance/modules/analytics/explore/explore-count-entities.tsx"
+  - "features/performance/modules/analytics/explore/explore-predicate-list.tsx"
+  - "features/performance/ui/filter-block-menu.tsx"
+  - "features/performance/modules/formula/utils/formula-variables.ts"
   - "app/(main)/(routes)/performance/**"
-last-verified: "2026-09-14"
+last-verified: "2026-09-28"
 ---
 
 Performance turns an agent's call history into a board of cards that help you understand traffic, results, and recurring patterns.
@@ -28,7 +32,9 @@ Open **Performance** and choose an agent. The page is a single board: every char
 
 The date range and filters in the header apply across the active view. The board's filter controls include call status, call type, and the Phonely phone number. Filters you set appear as chips in the header; remove a chip to clear that filter.
 
-For a question about particular outcomes, topics, end reasons, sentiments, or flow blocks, open the card in **Explore** and use **Only count calls where…** to set its own conditions. Save a filter when you want to reuse the same definition across cards. For example, define which calls count as a booked appointment, then use that definition on each relevant card.
+For a question about particular outcomes, topics, end reasons, sentiments, analytics fields, or flow blocks, open the card in **Explore** and use **Only count calls where…** to set its own conditions. Save a filter when you want to reuse the same definition across cards. For example, define which calls count as a booked appointment, then use that definition on each relevant card.
+
+A flow-block filter offers three operators: **Reached**, **Never reached**, and **Dropped off**. Use **Dropped off** to count only the calls that ended on a block, which pairs with [Opportunity Analysis](/call-history-ai-analytics/call-history-ai-analytics#understand-why-callers-left-early) when you are investigating where callers leave early.
 
 Older board-wide outcome, topic, end-reason, sentiment, caller-number, duration, and flow-block filters are no longer retained. Review older views before comparing their totals with earlier reports, and recreate supported conditions on the relevant cards.
 
