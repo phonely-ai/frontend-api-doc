@@ -4,7 +4,7 @@ description: "Choose who to call, when calls can run, and which outbound flow ha
 sources:
   - "features/campaign/**"
   - "app/(main)/(routes)/campaign/**"
-last-verified: "2026-09-14"
+last-verified: "2026-09-28"
 ---
 
 Outbound campaigns schedule and place calls through an agent's outbound flow. The campaign supplies the contacts, phone numbers, calling hours, and source data; the selected flow controls what happens during and after each call.
@@ -93,5 +93,15 @@ A queued call shows why it has not been dialed yet:
 | **Queued · On hold** | Held by a problem you need to fix |
 
 Hover a held call to see the reason. A call goes on hold when the contact's calling window no longer overlaps the campaign's hours, when that window could not be read, or when the campaign's calling hours are misconfigured. Widen the campaign's hours or correct the contact data to release it.
+
+## Manage queued calls
+
+Open a campaign to review the calls waiting in its queue. From the calls table you can adjust the queue while a campaign runs:
+
+- **Edit** a queued call to change its variables and settings before it is dialed. Editing is available while a call is still **Queued**, **Queueing**, or scheduled for redial.
+- **Remove from queue** cancels the queued calls for a contact's number. Calls already in progress finish; queued attempts are cancelled.
+- **Flush queue** cancels every queued call for the campaign at once. Phonely asks you to confirm before clearing the queue and reports how many calls were cancelled.
+
+The campaign overview badge stays in sync with the queue as calls are added, dialed, or cancelled.
 
 Before using production contacts, test the selected flow and campaign mappings with contact data and phone numbers you control.

@@ -6,6 +6,9 @@ sources:
   - "features/app-shell/config/shell-route-rules.ts"
   - "features/chat/side-panel/ui/app-side-panel.tsx"
   - "features/chat/assistant/ui/**"
+  - "features/chat/assistant/lib/assistant-request-queue.ts"
+  - "features/chat/assistant/ui/chat/assistant-request-queue.tsx"
+  - "features/chat/assistant/hooks/use-open-assistant.ts"
   - "features/chat/assistant/references/**"
   - "features/workflows/assistant-capability/references/**"
   - "features/workflows/modules/editor/custom-nodes/custom-node-provider.tsx"
@@ -24,7 +27,7 @@ sources:
   - "features/workflows/modules/editor/context/workflow-field-review-context.tsx"
   - "app/api/assistant/**"
   - "features/platform-reports/ui/platform-report-dialog.tsx"
-last-verified: "2026-09-14"
+last-verified: "2026-09-28"
 ---
 
 Ask AI is Phonely's in-product assistant. It opens in the app side panel and works alongside the page you are using.
@@ -74,6 +77,18 @@ The conversation can continue as you navigate, while the page context updates to
 Opening Ask AI from the top bar continues the active conversation. Use **New chat** when you want a clean context for an unrelated task.
 
 Use **Chat history** to restore a recent Ask AI session. Removing a chat hides it from that history. Recent chats can also appear in the open top-bar input.
+
+Separate conversations run independently. In **Chat history**, each session shows whether Ask AI is still working on it or needs your attention, so you can start a new task without waiting for another to finish.
+
+## Queue more than one request
+
+You can send another request while Ask AI is still responding. Additional requests wait in a **Queued Ask AI requests** list and run in turn. From that list you can:
+
+- **Steer** the current response to stop it and run a queued request next.
+- **Exit & run** a queued request that belongs to a different focused task.
+- **Remove from queue** a request you no longer want.
+
+If a queued request cannot start, the list shows the error and a **Retry** action.
 
 ## Reference a flow block
 

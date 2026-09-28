@@ -4,6 +4,7 @@ description: "Configure caller feedback, failure routes, and call outcome report
 sources:
   - "features/workflows/modules/editor/components/common/advanced-settings.tsx"
   - "features/workflows/modules/editor/components/form-items/interim-message.tsx"
+  - "features/workflows/model/interim-message-playback.ts"
   - "features/workflows/modules/editor/components/form-items/error-handling.tsx"
   - "features/workflows/modules/editor/components/form-items/outcome.tsx"
   - "features/workflows/modules/editor/custom-nodes/http-request/**"
@@ -16,7 +17,7 @@ sources:
   - "phonely-backend/app/agent/live_actions/tool_actions.py"
   - "phonely-backend/app/custom_llm/state_manager.py"
   - "phonely-backend/app/agent/post_call/extract_call_insights.py"
-last-verified: "2026-07-16"
+last-verified: "2026-09-28"
 ---
 
 Select a block and expand **Advanced Settings** to see any shared options it supports. These supplement the block's main configuration by controlling what the caller hears while it runs, how action failures are routed, or which outcome is recorded for reporting.
@@ -45,6 +46,8 @@ Keep the message short and neutral. It should acknowledge the wait without claim
 > One moment while I check that for you.
 
 Enable **Post Interim Message Delay** to pause briefly after the message before the flow continues. Set a delay of up to 60 seconds.
+
+An interim message plays only on a block that starts an action sequence. If a block always runs after another action, the editor warns that its message won't play. If the message plays only on some paths into the block, the editor notes that instead. The [Flow Checklist](/workflow-checklist) also lists blocks whose interim message won't play.
 
 ## Error handling
 
