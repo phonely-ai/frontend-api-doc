@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.269.0",
-        "commit": "538c71aa4c60fae57ff161af54158db26b35fcc6"
+        "label": "v0.268.0",
+        "commit": "d1bc54873c0598a58bf4a22d8d95917d1f7c154e"
       }
     },
     {
@@ -1306,7 +1306,7 @@
       ]
     },
     {
-      "id": "phonely-frontend-v0.269.0",
+      "id": "phonely-frontend-v0.268.0",
       "repository": "phonely-frontend",
       "issue": "PHO-9239",
       "reviewedOn": "2026-09-28",
@@ -1315,8 +1315,8 @@
         "commit": "0bcd826e482dca5c90aa4b6b5a30af1748cf9049"
       },
       "throughInclusive": {
-        "label": "v0.269.0",
-        "commit": "538c71aa4c60fae57ff161af54158db26b35fcc6"
+        "label": "v0.268.0",
+        "commit": "d1bc54873c0598a58bf4a22d8d95917d1f7c154e"
       },
       "dispositions": [
         {
@@ -1328,7 +1328,7 @@
             "performance",
             "data-tables"
           ],
-          "note": "PHO-10443 adds Opportunity Analysis: a system-default analytics-derived field (features/agents/model/opportunity-analysis-analytics-field.ts, analytics-derived-fields.ts) that runs on early-ended calls (runCondition terminal_not_reached), lets extraction mint opportunity categories, and is opt-in with a sample-rate control (steps 10/25/50/75/100%). It surfaces as an Opportunity Analysis section on the Analytics settings tab (opportunity-analysis-section.tsx, call-tagging-tab.tsx), an Opportunity Analysis panel in Call Details Highlights showing where the caller dropped off, why they left, last-30-day counts, and a suggested fix (call-details/tabs/highlights/opportunity-analysis-section.tsx), and new Explore/Performance vocabulary: the @opportunity_at and @field formula families, a Dropped off block-filter operator alongside Reached/Never reached, and analytics-derived fields as filters/metrics/breakdowns (formula-variables.ts, explore-count-entities.tsx, explore-predicate-list.tsx, filter-block-menu.tsx, analytics-fields-section.tsx). Documented the settings toggle and Call History panel, added the analytics-field metric/filter sources to Performance and Data Tables, and documented the Dropped off operator. The @opportunity_at/@field grammar and Opportunity Analysis renaming from Drop-off are internal formula/label mechanics not enumerated in customer docs."
+          "note": "PHO-10443 adds Opportunity Analysis: an opt-in analytics-derived field for early-ended calls, with a configurable sample rate and optional AI-created categories (features/agents/model/opportunity-analysis-analytics-field.ts, analytics-derived-fields.ts). In Analytics settings, users can add, rename, describe, and delete opportunity categories; the list ranks them by matching calls from the last 30 days and links to those calls (opportunity-analysis-section.tsx). Call Details shows the block where the call ended, why the caller left, the category, 30-day count and share, matching-call drilldown, and any suggested fix that can be handed to Ask AI (call-details/tabs/highlights/opportunity-analysis-section.tsx). Explore adds analytics-derived fields and a Dropped off block-filter operator (formula-variables.ts, explore-count-entities.tsx, explore-predicate-list.tsx, filter-block-menu.tsx). Documented the settings controls and call panel, corrected the sampled-out state, and added the related Performance and Data Tables vocabulary."
         },
         {
           "id": "campaign-queue-management",
@@ -1336,7 +1336,7 @@
           "pages": [
             "outboundcalling/createaoutboundcallingcampaign"
           ],
-          "note": "PHO-9129/PHO-9130/PHO-9132 add live queue management to a running campaign: Flush queue cancels every queued call after a confirm dialog and reports the count (flush-queue/flush-queue-button.tsx, flush-queue-summary.ts, campaign-service.ts), Remove from queue cancels queued attempts for a contact number while in-progress calls finish (remove-queue-numbers.ts, campaign-call-actions.tsx), and Edit lets you change a queued call's mapped variables, caller-ID override, recipient timezone, and voicemail override while it is Queued/Queueing/redial-scheduled (edit-queued-call-dialog.tsx). Documented the Edit, Remove from queue, and Flush queue actions in the Outbound Campaigns page's queue section."
+          "note": "PHO-9129/PHO-9130/PHO-9132 add live queue management: Clear queue is available for running and paused campaigns, confirms the operation, cancels queued calls, and reports the count; Remove from queue cancels queued attempts for a contact number while in-progress calls finish; Edit changes a queued call's mapped variables, caller-ID override, recipient timezone, and voicemail override while it is Queued, Queueing, or scheduled for redial (flush-queue-button.tsx, remove-queue-numbers.ts, campaign-call-actions.tsx, edit-queued-call-dialog.tsx). Documented all three actions with the exact Clear queue label and availability."
         },
         {
           "id": "campaign-overview-badge",
@@ -1371,15 +1371,6 @@
           "note": "PHO-10204 relabels the departure step to 'Phonely Left Call' instead of 'User Left Call' when the agent hangs up after completing a warm transfer (call-departure.ts hasCompletedCallTransfer, call-blocks-tab-block-timeline-item.tsx, transcript-container.tsx). Documented the Phonely Left Call transcript label for that case."
         },
         {
-          "id": "interim-message-playback",
-          "status": "docs-updated",
-          "pages": [
-            "blocks/common-settings",
-            "workflow-checklist"
-          ],
-          "note": "PHO-10268 adds interim-message playback analysis: node descriptors gain a liveCallExecution classification (node-descriptors/index.ts), and the editor warns that an enabled interim message won't play when its block never starts an action sequence, or notes path-dependent playback (interim-message-playback.ts, form-items/interim-message.tsx). The Flow Checklist adds an 'N interim message(s) won't play' warning row with Go to (use-checklist.ts, flow-checklist-popover.tsx). Documented the interim-message playback warning on Common Block Settings and the new checklist warning row."
-        },
-        {
           "id": "signup-gate",
           "status": "not-public",
           "pages": [],
@@ -1405,13 +1396,22 @@
           "pages": [
             "key-concepts/ask-ai"
           ],
-          "note": "PHO-10589/PHO-10619/PHO-10774 let Ask AI queue additional requests while a response is running and run separate conversations independently: a Queued Ask AI requests list with Steer, Exit & run, Discard & run, Remove, and Retry actions (assistant-request-queue.ts/.tsx, send-message.ts), focused tasks that can stack in the queue and be exited (use-assistant-tab-store.ts, use-open-assistant.ts sessionTarget new/current-or-new), and a chat-history session menu showing per-session working / needs-attention state (assistant-session-menu.tsx). Documented independent conversations and the request queue on the Ask AI page. Attachment, block-reference, and workflow proposal-review plumbing touched here is already covered by existing Ask AI sections."
+          "note": "PHO-10589/PHO-10619 let Ask AI queue additional requests while work is active and run separate conversations independently. The Queued Ask AI requests list supports Remove from queue and Retry (assistant-request-queue.ts/.tsx, send-message.ts), focused tasks can stack, and Chat history shows per-session working or needs-attention state (use-assistant-tab-store.ts, use-open-assistant.ts, assistant-session-menu.tsx). Documented independent conversations and the released queue controls."
+        },
+        {
+          "id": "ask-ai-conversation-testing",
+          "status": "docs-updated",
+          "pages": [
+            "key-concepts/ask-ai",
+            "flow-editor/test-and-publish"
+          ],
+          "note": "PHO-10642 lets Ask AI run a text-only simulated conversation against one path in an inbound draft, starting from Talk, Collect, or Ask Exactly. Results expose the transcript, visited path, captured variables, exact checks, behavioral evaluation, and every simulated external action assumption (features/workflows/ai/tools/run-conversation-test.ts, conversation-test/**, conversation-test-result-card.tsx). Documented how to request a test, what evidence it returns, and its scope: one caller case and path, draft only, with outbound, phone/audio, published behavior, live integrations, and untested branches outside the result."
         },
         {
           "id": "assistant-and-workflow-ai-internals",
           "status": "not-public",
           "pages": [],
-          "note": "Ask AI / assistant and workflow-AI internals: outcome-based turn classification and Langfuse observability/evals (PHO-10547, turn-classification.ts, evidence-report*, langfuse-*), self-healing workflow proposals against the draft and change-set recovery (PHO-10624, proposal-recovery.ts, workflow-change-set-review.ts), tool activity/UI metadata, tool-result compaction, prompt fragments and server tools (workflows/ai/**, assistant/**, chat/assistant tool-call/tool-group), admin-only Deep Dive, conversation-test/evaluation engine, and agent-from-recordings seeds. These are model, provider, observability, and admin internals behind unchanged surfaces with no user-facing or Ask AI-behavioral fact for the docs."
+          "note": "Ask AI and workflow-AI internals: outcome-based turn classification and Langfuse observability/evals (PHO-10547, turn-classification.ts, evidence-report*, langfuse-*), self-healing workflow proposals against the draft and change-set recovery (PHO-10624, proposal-recovery.ts, workflow-change-set-review.ts), tool activity/UI metadata, tool-result compaction, prompt fragments and server tools, admin-only Deep Dive, and agent-from-recordings seeds. These are model, provider, observability, and admin internals behind unchanged surfaces; the public v0.268 conversation-test behavior is dispositioned separately."
         },
         {
           "id": "workflow-authoring-polish",
@@ -1421,13 +1421,13 @@
             "flow-editor/versions",
             "flow-editor/collaboration"
           ],
-          "note": "Workflow editor authoring polish and refactors: inline Block name editing that saves through the shared auto-save path (PHO-10774, form-items/name.tsx), canvas/sidebar/top-bar/auto-save-status refactors, workflow comparison overlay and field-review context, version-preview and diff utilities, custom-node cards and trigger switcher, reachable-node validation, custom-action and code-validation services, and conversation-test result cards. These change internal structure or presentation of already-documented flow-editing, block-configuration, version, and testing workflows without changing a user-facing instruction; the corresponding flow, block, version, and testing guides remain accurate."
+          "note": "Workflow editor authoring polish and refactors through v0.268: canvas, sidebar, top-bar, auto-save status, workflow comparison overlay, field-review context, version-preview and diff utilities, custom-node cards, trigger switching, reachable-node validation, and custom-action/code-validation services. These change internal structure or presentation of already-documented flow-editing, block-configuration, version, and testing workflows without changing another public instruction; conversation-test results are dispositioned separately."
         },
         {
           "id": "infra-and-releases",
           "status": "not-public",
           "pages": [],
-          "note": "Release, CI, and infrastructure: v0.266.0-v0.269.0 version bumps and changelog edits, dev/main merges and mergebacks, gardening/dead-code removal, package/package-lock and dependency changes, GitHub Actions and Playwright/Vitest config, shared UI primitives and hooks, PostHog/instrumentation, agent shell/settings-client scaffolding, internal .agents skills docs, and the PHO-10344 workflow-compression dependency doc. None of these change the public product experience or customer documentation."
+          "note": "Release, CI, and infrastructure through v0.268: v0.266.0-v0.268.0 version bumps and changelog edits, dev/main merges and mergebacks, gardening/dead-code removal, package and dependency changes, GitHub Actions and Playwright/Vitest config, shared UI primitives and hooks, PostHog/instrumentation, agent shell/settings-client scaffolding, and the PHO-10344 workflow-compression dependency doc. None of these change the public product experience or customer documentation."
         }
       ]
     }

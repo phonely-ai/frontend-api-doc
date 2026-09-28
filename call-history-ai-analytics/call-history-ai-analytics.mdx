@@ -46,11 +46,11 @@ Select a block or duration segment to move to the corresponding part of the tran
 
 ## Understand why callers left early
 
-When **Opportunity Analysis** is turned on for the agent, a completed call that ended before reaching a terminal block can show an **Opportunity Analysis** panel in **Highlights**. The panel reports where the caller dropped off, why they left, and the opportunity that would have kept them on the call, such as a callback instead of a long hold or a price to quote.
+When **Opportunity Analysis** is turned on for the agent, a completed call that ended before reaching a terminal block can show an **Opportunity Analysis** panel in **Highlights**. The panel reports where the caller dropped off, why they left, and the opportunity that might have kept them on the call, such as a callback instead of a long hold or a price to quote.
 
-Each opportunity shows the block the call ended on, the count of calls from the last 30 days classified with the same opportunity, and a suggested fix you can hand to Ask AI. A call that was not analyzed—because Opportunity Analysis is off or the call fell outside its review sample—shows that state instead of an opportunity.
+Each analyzed opportunity shows the block where the call ended, the number and share of analyzed early-ended calls from the last 30 days with the same opportunity, and any suggested fix. Select **View all calls** to inspect the matching calls, or **Implement with AI** when available to hand the suggested change to Ask AI. An early-ended call included in the feature's records but outside its review sample shows **Not analyzed** instead of an opportunity. Calls without an Opportunity Analysis record do not show the panel.
 
-Turn Opportunity Analysis on from the agent's **Settings > Analytics** tab, where you can also choose how much of the early-ended call traffic to review. See [Agent Setup](/agent-design/overview#open-agent-settings) for the Analytics tab.
+Turn Opportunity Analysis on from the agent's **Settings > Analytics** tab. Choose whether AI can name new opportunity categories and select the percentage of early-ended calls to review. You can add, rename, describe, or delete categories yourself. The category list is ranked by matching calls from the last 30 days; select a call count to inspect those calls. See [Agent Setup](/agent-design/overview#open-agent-settings) for the Analytics tab.
 
 ## Correct call classifications
 

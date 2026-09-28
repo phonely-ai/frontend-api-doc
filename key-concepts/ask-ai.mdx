@@ -21,6 +21,9 @@ sources:
   - "features/calls/assistant-capability/services/get-call-details.ts"
   - "features/workflows/ai/prompt/workflows-prompt-fragment.ts"
   - "features/workflows/ai/tools/propose-workflow-changes.ts"
+  - "features/workflows/ai/tools/run-conversation-test.ts"
+  - "features/workflows/ai/conversation-test/**"
+  - "features/workflows/ui/conversation-test-result-card.tsx"
   - "features/workflows/assistant-capability/proposal-review/**"
   - "features/workflows/modules/editor/components/workflow-proposal-preview-overlay.tsx"
   - "features/workflows/modules/editor/components/workflow-proposal-node-review-frame.tsx"
@@ -84,8 +87,6 @@ Separate conversations run independently. In **Chat history**, each session show
 
 You can send another request while Ask AI is still responding. Additional requests wait in a **Queued Ask AI requests** list and run in turn. From that list you can:
 
-- **Steer** the current response to stop it and run a queued request next.
-- **Exit & run** a queued request that belongs to a different focused task.
 - **Remove from queue** a request you no longer want.
 
 If a queued request cannot start, the list shows the error and a **Retry** action.
@@ -124,6 +125,14 @@ Treat Ask AI as a collaborator rather than an automatic approval step:
 Accepted flow changes are applied together to the current draft. If the draft changes before you submit, the proposal can become outdated and must be prepared again. Draft auto-save does not publish the changes.
 
 On **Performance**, Ask AI can propose changes to cards, views, and saved metrics or filters. Those proposals have their own review and apply actions; see [Edit Performance with Ask AI](/performance#edit-performance-with-ask-ai).
+
+## Test a draft conversation with Ask AI
+
+Ask AI to test an inbound draft when you want evidence that one caller scenario follows the intended path. Describe the caller, the behavior you expect, and any exact result that matters. Ask AI runs a text-only conversation starting from a **Talk**, **Collect**, or **Ask Exactly** block and returns a transcript, the blocks visited, captured variables, and the result of its checks.
+
+Each run covers one caller case and one path. Actions outside the deterministic test boundary, including Code blocks and connected integrations, are represented by visible assumptions instead of being executed. Check those assumptions in the result before relying on the outcome.
+
+Use conversation tests to check an inbound draft's conversational and routing behavior. They do not test a published version, outbound flow, phone or audio behavior, a live integration, or every branch. Run separate cases for other important paths, and use [Test Call](/flow-editor/test-and-publish) for voice, chat, and published-version checks.
 
 ## Ask AI and Test Call
 

@@ -5,11 +5,10 @@ sources:
   - "features/workflows/modules/editor/hooks/use-checklist.ts"
   - "features/workflows/modules/editor/components/controls/flow-checklist-popover.tsx"
   - "features/workflows/modules/editor/components/controls/save-button-group.tsx"
-  - "features/workflows/model/interim-message-playback.ts"
-last-verified: "2026-09-28"
+last-verified: "2026-08-03"
 ---
 
-The **Flow Checklist** reports reachable block errors, interim messages that won't play, publish-review findings, and whether the flow has a published version. Select the clipboard icon beside **Publish** to open it. A badge appears when a check needs attention.
+The **Flow Checklist** reports reachable block errors, publish-review findings, and whether the flow has a published version. Select the clipboard icon beside **Publish** to open it. A badge appears when a check needs attention.
 
 <img
   src="/assets/flow-checklist-errors.png"
@@ -23,7 +22,6 @@ The **Flow Checklist** reports reachable block errors, interim messages that won
 | :-- | :-- |
 | **Published version** | Whether the flow has been published at least once. Without one, Phonely falls back to the current draft. This is a warning, not a publishing blocker. |
 | **Block errors** | Whether a trigger or action block reachable from the flow's entry point has missing connections, invalid variables, or incomplete required settings. These errors prevent publishing. |
-| **Interim messages** | Whether any block has an interim message that won't play because the block never starts an action sequence. This is a warning, not a publishing blocker. Select a listed block and use **Go to** to review it. |
 | **Publish review** | Advisory findings from the AI review that runs when you publish. Review or fix relevant findings, or choose **Publish anyway** when the draft is ready. |
 
 When every check passes, the panel shows **All issues are resolved**.
