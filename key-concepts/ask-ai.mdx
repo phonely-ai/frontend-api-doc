@@ -6,8 +6,9 @@ sources:
   - "features/app-shell/config/shell-route-rules.ts"
   - "features/chat/side-panel/ui/app-side-panel.tsx"
   - "features/chat/assistant/ui/**"
-  - "features/chat/assistant/lib/assistant-request-queue.ts"
-  - "features/chat/assistant/ui/chat/assistant-request-queue.tsx"
+  - "features/chat/assistant/lib/send-message.ts"
+  - "features/chat/assistant/lib/dispatch-pending-submission.ts"
+  - "features/chat/assistant/lib/types.ts"
   - "features/chat/assistant/hooks/use-open-assistant.ts"
   - "features/chat/assistant/references/**"
   - "features/workflows/assistant-capability/references/**"
@@ -24,13 +25,14 @@ sources:
   - "features/workflows/ai/tools/run-conversation-test.ts"
   - "features/workflows/ai/conversation-test/**"
   - "features/workflows/ui/conversation-test-result-card.tsx"
+  - "features/workflows/assistant-capability/workflow-change-mode/**"
   - "features/workflows/assistant-capability/proposal-review/**"
   - "features/workflows/modules/editor/components/workflow-proposal-preview-overlay.tsx"
   - "features/workflows/modules/editor/components/workflow-proposal-node-review-frame.tsx"
   - "features/workflows/modules/editor/context/workflow-field-review-context.tsx"
   - "app/api/assistant/**"
   - "features/platform-reports/ui/platform-report-dialog.tsx"
-last-verified: "2026-09-28"
+last-verified: "2026-10-05"
 ---
 
 Ask AI is Phonely's in-product assistant. It opens in the app side panel and works alongside the page you are using.
@@ -83,13 +85,13 @@ Use **Chat history** to restore a recent Ask AI session. Removing a chat hides i
 
 Separate conversations run independently. In **Chat history**, each session shows whether Ask AI is still working on it or needs your attention, so you can start a new task without waiting for another to finish.
 
-## Queue more than one request
+## Send a follow-up while Ask AI is responding
 
-You can send another request while Ask AI is still responding. Additional requests wait in a **Queued Ask AI requests** list and run in turn. From that list you can:
+You do not have to wait for Ask AI to finish before you add to the conversation. Send another message while a response is still running and Ask AI steers the active response toward your new message instead of holding it in a queue. The current turn stops, and Ask AI continues with the latest context you provided.
 
-- **Remove from queue** a request you no longer want.
+Use the **Stop** control on the send button if you only want to halt the current response without sending a new message.
 
-If a queued request cannot start, the list shows the error and a **Retry** action.
+You can keep working in the conversation while a flow proposal is open for review; a follow-up request does not force you to resolve the proposal first.
 
 ## Reference a flow block
 
@@ -113,6 +115,15 @@ Open **More Ask AI options** and select **Report Ask AI issue** to report the cu
 
 If you are asked to share identifiers separately, select **Copy diagnostic details** from **More Ask AI options**. See [Report Issues and Ideas](/get-started/report-issues-and-ideas) for attachment limits, included context, and guidance on writing a useful report.
 
+## Choose how flow changes are applied
+
+When Ask AI can edit the selected flow, a mode selector next to the composer lets you choose how its changes reach the draft:
+
+- **Review** keeps every change as a proposal you check and apply yourself.
+- **Auto apply** writes approved flow and focused-block changes directly to the draft, while Ask AI still plans, validates, and tests the change before applying it.
+
+The selector appears only for a writable flow on the agent or campaign surface, and only when you have permission to edit that agent's flows. It is not available while viewing a historical version. When Auto apply writes a change, the conversation shows a receipt of what was applied and the affected blocks are briefly highlighted on the canvas so you can check or clear them.
+
 ## Review changes before relying on them
 
 Treat Ask AI as a collaborator rather than an automatic approval step:
@@ -122,7 +133,7 @@ Treat Ask AI as a collaborator rather than an automatic approval step:
 3. For a focused proposal started from a block's **Generate with AI** strip, inspect the highlighted fields and select **Apply changes**. If you reject an individual change, the proposal returns to per-change review: accept or reject the changes, then select **Submit changes**. Other flow proposals use this per-change review directly. The draft does not change until you apply or submit the proposal.
 4. Check the affected configuration and test the important paths before relying on the result with callers.
 
-Accepted flow changes are applied together to the current draft. If the draft changes before you submit, the proposal can become outdated and must be prepared again. Draft auto-save does not publish the changes.
+In **Review** mode, accepted flow changes are applied together to the current draft. If the draft changes before you submit, the proposal can become outdated and must be prepared again. In **Auto apply** mode, Ask AI writes the approved changes to the draft for you. In either mode, draft auto-save does not publish the changes.
 
 On **Performance**, Ask AI can propose changes to cards, views, and saved metrics or filters. Those proposals have their own review and apply actions; see [Edit Performance with Ask AI](/performance#edit-performance-with-ask-ai).
 

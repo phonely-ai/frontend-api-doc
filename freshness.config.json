@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.268.0",
-        "commit": "d1bc54873c0598a58bf4a22d8d95917d1f7c154e"
+        "label": "v0.270.1",
+        "commit": "7622f3eb40f7876fc780d542f4fca15d1b275d63"
       }
     },
     {
@@ -1428,6 +1428,118 @@
           "status": "not-public",
           "pages": [],
           "note": "Release, CI, and infrastructure through v0.268: v0.266.0-v0.268.0 version bumps and changelog edits, dev/main merges and mergebacks, gardening/dead-code removal, package and dependency changes, GitHub Actions and Playwright/Vitest config, shared UI primitives and hooks, PostHog/instrumentation, agent shell/settings-client scaffolding, and the PHO-10344 workflow-compression dependency doc. None of these change the public product experience or customer documentation."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.270.1",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-10-05",
+      "fromExclusive": {
+        "label": "v0.268.0",
+        "commit": "d1bc54873c0598a58bf4a22d8d95917d1f7c154e"
+      },
+      "throughInclusive": {
+        "label": "v0.270.1",
+        "commit": "7622f3eb40f7876fc780d542f4fca15d1b275d63"
+      },
+      "dispositions": [
+        {
+          "id": "ask-ai-steering-replaces-queue",
+          "status": "docs-updated",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "PHO-10799 replaced the Ask AI request queue with steering: a message sent during an active response now steers the current turn instead of waiting in a Queued Ask AI requests list, and conversations stay usable while a proposal is open. Rewrote the former \"Queue more than one request\" section as \"Send a follow-up while Ask AI is responding\" and removed the deleted queue sources from the page frontmatter."
+        },
+        {
+          "id": "ask-ai-workflow-change-modes",
+          "status": "docs-updated",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "PHO-10724 added Review and Auto apply modes to Ask AI workflow editing. The mode selector appears next to the composer for a writable flow on the agent or campaign surface when the user can edit that agent's flows; Auto apply writes approved flow and focused-block changes to the draft with a chat receipt and transient canvas highlights, while retaining planning, validation, and testing. Documented the selector and both modes on the Ask AI page."
+        },
+        {
+          "id": "ask-ai-workspace-notes",
+          "status": "no-doc-change",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "PHO-10621 added per-agent Ask AI workspace notes (list, search, read, write, edit, move, archive) reached only through model tools, plus a standing /BRIEF.md loaded into every turn. There is no customer-facing UI surface for notes and note writes never publish to the voice knowledge base; the capability is exercised by the model through tools, so the Ask AI page needs no change. Recorded against the Ask AI page as the closest owning surface. Requires phonely-db-svc v0.188.0 with migration 50a7aa761f8e before deployment."
+        },
+        {
+          "id": "conversation-test-and-evidence-internals",
+          "status": "no-doc-change",
+          "pages": [
+            "key-concepts/ask-ai",
+            "flow-editor/test-and-publish"
+          ],
+          "note": "PHO-10966 / PHO-10727 reworked conversation-test requirement evaluation, reruns, variable/caller mocking, and the Langfuse evidence contract (v3). The customer-facing conversation-test behavior documented on the Ask AI and Test and Publish pages (one caller case, one path, visible assumptions, transcript and checks) is unchanged; the changes are internal evaluation and observability mechanics with no new public contract."
+        },
+        {
+          "id": "agent-from-recordings-removed",
+          "status": "no-doc-change",
+          "pages": [
+            "get-started/introduction",
+            "get-started/quick-start"
+          ],
+          "note": "PHO-10886 removed the agent-from-recordings build flow: the From Recordings option in the add-agent modal, the import dialog, the agent-from-recordings-* Ask AI profiles, and the /api/assistant/runs and /api/assistant/sessions/{id}/state routes. The public docs never documented From Recordings agent creation (the \"Call Recordings\" references in testing and the \"Private Recordings\" account setting are unrelated), so no user-facing page described the removed capability."
+        },
+        {
+          "id": "call-history-analytics-field-filter",
+          "status": "already-covered",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics"
+          ],
+          "note": "PHO-10472 made the call-history filter mirror the agent's Analytics Fields (legacy Call Topics alongside custom fields) and fixed the chart drill-down to narrow by the clicked Analytics Field. The Call History page already documents filtering by fields including outcome, topic, and sentiment and opening calls from a chart slice; the change refines the grouping of existing filter controls without altering the documented customer contract."
+        },
+        {
+          "id": "performance-board-and-widgets",
+          "status": "already-covered",
+          "pages": [
+            "performance",
+            "call-sentiments",
+            "call-topics",
+            "data-tables"
+          ],
+          "note": "PHO-10809 and related work added usage analytics, throttled board/chart re-layout to stop a max-update-depth crash, unified the board menu and Filters into one settings popover, and refined drag/drop, drilldown, and the calls drawer on Performance. The Performance, Call Sentiment, Call Topics, and Data Tables pages already describe building boards, widgets, filters, saved views, and opening calls from a widget; these are stability and interaction refinements to existing documented surfaces, and product analytics are internal."
+        },
+        {
+          "id": "campaign-counts-and-clear-queue",
+          "status": "already-covered",
+          "pages": [
+            "outboundcalling/createaoutboundcallingcampaign"
+          ],
+          "note": "PHO-10717 made Campaign Overview cards and Calls remaining read one counts endpoint (showing a dash on failure and Not started before a campaign runs) and extended Clear queue to also cancel stale records and scheduled redials with a retry on failure. The outbound campaign page already documents reviewing queued/completed calls and that Clear queue cancels queued calls and reports how many were cancelled; the change refines counts and cancellation reporting within that documented behavior and depends on unshipped db-svc/backend support."
+        },
+        {
+          "id": "flow-editor-and-blocks-refinements",
+          "status": "already-covered",
+          "pages": [
+            "flow-editor/connections-and-routing",
+            "flow-editor/collaboration",
+            "flow-editor/test-and-publish",
+            "blocks/overview"
+          ],
+          "note": "PHO-10472 (bottom exit ports), PHO-10774 (inline block-name editing), PHO-10709/10268 (review diffs and interim-message guidance) and related workflow-editor changes refine layout, connections, naming, and review of existing flow-editor surfaces. The Connections and Routing, Collaboration, Test and Publish, and Blocks pages already describe source/target handles, exit conditions, remote-update review, and block configuration; the visible contract (how customers connect blocks, name them, and review changes) is unchanged."
+        },
+        {
+          "id": "api-and-settings-surfaces",
+          "status": "already-covered",
+          "pages": [
+            "api-reference/introduction",
+            "api-reference/web-sdk",
+            "billing-and-usage/plans-and-billing-history"
+          ],
+          "note": "Changes to app API routes (assistant streaming, calls, cron billing/notifications, generate-with-ai, admin/enterprise, stripe), settings modules, and shared lib/config are internal, admin, cron, or billing surfaces that are not part of the supported public OpenAPI contract. The supported blocked-numbers and calls public endpoints already have reference pages and their request/response contracts are unchanged; the @phonely-ai/web SDK version on the Web SDK page is unchanged (0.0.8); no public reference or billing page requires an update."
+        },
+        {
+          "id": "non-public-tooling-tests-deps-and-ui-primitives",
+          "status": "not-public",
+          "pages": [],
+          "note": "Repository tooling (.agents/.claude/.cursor skills, .github workflows, Factory/editor config), dependency and build updates (package.json, package-lock.json, Next.js 15.5.26, Prettier/editorconfig), internal docs/, shared UI primitives under components/ui, and test files carry no customer-facing documentation contract. PHO-10607 doc pruning, PHO-10847/10912/10998 verify-ask-ai regression tooling, and PHO-10967 cron deprecation are internal-only."
         }
       ]
     }
