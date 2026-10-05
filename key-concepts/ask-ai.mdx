@@ -6,8 +6,9 @@ sources:
   - "features/app-shell/config/shell-route-rules.ts"
   - "features/chat/side-panel/ui/app-side-panel.tsx"
   - "features/chat/assistant/ui/**"
-  - "features/chat/assistant/lib/assistant-request-queue.ts"
-  - "features/chat/assistant/ui/chat/assistant-request-queue.tsx"
+  - "features/chat/assistant/lib/send-message.ts"
+  - "features/chat/assistant/lib/dispatch-pending-submission.ts"
+  - "features/chat/assistant/lib/types.ts"
   - "features/chat/assistant/hooks/use-open-assistant.ts"
   - "features/chat/assistant/references/**"
   - "features/workflows/assistant-capability/references/**"
@@ -24,13 +25,18 @@ sources:
   - "features/workflows/ai/tools/run-conversation-test.ts"
   - "features/workflows/ai/conversation-test/**"
   - "features/workflows/ui/conversation-test-result-card.tsx"
+  - "features/workflows/assistant-capability/workflow-change-mode/**"
   - "features/workflows/assistant-capability/proposal-review/**"
   - "features/workflows/modules/editor/components/workflow-proposal-preview-overlay.tsx"
   - "features/workflows/modules/editor/components/workflow-proposal-node-review-frame.tsx"
   - "features/workflows/modules/editor/context/workflow-field-review-context.tsx"
   - "app/api/assistant/**"
   - "features/platform-reports/ui/platform-report-dialog.tsx"
-last-verified: "2026-09-28"
+  - "features/assistant/capabilities/modules/workspace/server.ts"
+  - "features/workflows/ai/runtime/server-tools.ts"
+  - "features/workflows/ai/tools/apply-workflow-changes.ts"
+  - "features/chat/assistant/store/use-assistant-tab-store.ts"
+last-verified: "2026-10-05"
 ---
 
 Ask AI is Phonely's in-product assistant. It opens in the app side panel and works alongside the page you are using.
@@ -77,19 +83,21 @@ The conversation can continue as you navigate, while the page context updates to
 
 ## Continue or start a chat
 
-Opening Ask AI from the top bar continues the active conversation. Use **New chat** when you want a clean context for an unrelated task.
+Opening Ask AI without a new request continues the active conversation. Use **New chat** when you want a clean context for an unrelated task.
+
+Most page or block requests continue an empty conversation or one whose latest request was about the same agent. If the conversation was about another agent, Phonely starts a new one. Call Details investigations, Performance board setup, and A/B test result explanations start a new conversation. Typing directly in the open panel continues the conversation on screen, so check the current agent and page before referring to "this" or "these."
 
 Use **Chat history** to restore a recent Ask AI session. Removing a chat hides it from that history. Recent chats can also appear in the open top-bar input.
 
 Separate conversations run independently. In **Chat history**, each session shows whether Ask AI is still working on it or needs your attention, so you can start a new task without waiting for another to finish.
 
-## Queue more than one request
+## Send a follow-up while Ask AI is responding
 
-You can send another request while Ask AI is still responding. Additional requests wait in a **Queued Ask AI requests** list and run in turn. From that list you can:
+You do not have to wait for Ask AI to finish before you add to the conversation. Send another message while a response is still running and Ask AI steers the active response toward your new message instead of holding it in a queue. The current turn stops, and Ask AI continues with the latest context you provided.
 
-- **Remove from queue** a request you no longer want.
+Use the **Stop** control on the send button if you only want to halt the current response without sending a new message.
 
-If a queued request cannot start, the list shows the error and a **Retry** action.
+You can keep working in the conversation while a flow proposal is open for review; a follow-up request does not force you to resolve the proposal first.
 
 ## Reference a flow block
 
@@ -113,24 +121,51 @@ Open **More Ask AI options** and select **Report Ask AI issue** to report the cu
 
 If you are asked to share identifiers separately, select **Copy diagnostic details** from **More Ask AI options**. See [Report Issues and Ideas](/get-started/report-issues-and-ideas) for attachment limits, included context, and guidance on writing a useful report.
 
+## Choose how flow changes are applied
+
+When Ask AI can edit the selected flow, a mode selector next to the composer lets you choose how its changes reach the draft:
+
+- **Review** is the default. Ask AI prepares a proposal for you to check and apply.
+- **Auto apply** writes changes authorized by your request or approved plan directly to the draft.
+
+Auto apply retains planning, scope, and validation safeguards. Ask AI verifies the applied draft; test the affected paths before using it with callers. A focused block request stays limited to that block.
+
+The selector appears only for a writable flow on the agent or campaign surface, and only when you have permission to edit that agent's flows. It is not available while viewing a historical version. When Auto apply writes a change, the conversation shows a receipt of what was applied and the affected blocks are briefly highlighted on the canvas so you can check or clear them.
+
 ## Review changes before relying on them
 
-Treat Ask AI as a collaborator rather than an automatic approval step:
+In **Review** mode, check the proposal before applying it:
 
 1. State the intended caller or business outcome.
 2. Review the proposed flow on the canvas. Added, removed, and changed blocks are highlighted; select a block to inspect its proposed settings.
 3. For a focused proposal started from a block's **Generate with AI** strip, inspect the highlighted fields and select **Apply changes**. If you reject an individual change, the proposal returns to per-change review: accept or reject the changes, then select **Submit changes**. Other flow proposals use this per-change review directly. The draft does not change until you apply or submit the proposal.
 4. Check the affected configuration and test the important paths before relying on the result with callers.
 
-Accepted flow changes are applied together to the current draft. If the draft changes before you submit, the proposal can become outdated and must be prepared again. Draft auto-save does not publish the changes.
+In **Review** mode, accepted flow changes are applied together to the current draft. If the draft changes before you submit, the proposal can become outdated and must be prepared again. In **Auto apply** mode, Ask AI writes the approved changes to the draft for you. In either mode, draft auto-save does not publish the changes.
 
 On **Performance**, Ask AI can propose changes to cards, views, and saved metrics or filters. Those proposals have their own review and apply actions; see [Edit Performance with Ask AI](/performance#edit-performance-with-ask-ai).
+
+## Keep notes for an agent
+
+With an agent open, ask Ask AI to save useful business context, decisions, or follow-up work as notes. Those notes persist across Ask AI conversations for that agent. For example, ask "Save our appointment rules for this agent" or "Find the decisions we made about callbacks."
+
+Ask AI can list, search, read, edit, move, archive, and restore notes. Writing or changing them requires edit access to the agent. Saves do not require a separate confirmation step; check Ask AI's reported result when you ask it to save something.
+
+The agent's standing brief, `/BRIEF.md`, holds concise context used in its Ask AI turns when available. It is limited to 16 KiB. Other notes are read when needed rather than loaded into every turn. Archiving a note hides it from normal listing and search until restored.
+
+These are Ask AI notes. Saving them does not publish information to the voice agent's knowledge base or change its guidelines. Use the relevant configuration tools when callers need the information.
 
 ## Test a draft conversation with Ask AI
 
 Ask AI to test an inbound draft when you want evidence that one caller scenario follows the intended path. Describe the caller, the behavior you expect, and any exact result that matters. Ask AI runs a text-only conversation starting from a **Talk**, **Collect**, or **Ask Exactly** block and returns a transcript, the blocks visited, captured variables, and the result of its checks.
 
-Each run covers one caller case and one path. Actions outside the deterministic test boundary, including Code blocks and connected integrations, are represented by visible assumptions instead of being executed. Check those assumptions in the result before relying on the outcome.
+Each run covers one caller case and one path, with up to six requirements checked individually. Results distinguish requirements you stated from ones Ask AI inferred. An inferred mismatch is an observation to discuss, not a reason by itself to change the flow.
+
+When time allows, a mismatch or a successful repair-verification result is rerun once. Check whether the result reproduced, varied between runs, or could not be confirmed before treating one test as proof.
+
+Include the caller's number or a local call start time in the agent's timezone when the scenario depends on them. Supply representative values for data the path needs before it can collect them. Simulated values must match their declared types; call-derived values should be supplied through the test's call context rather than replaced with arbitrary variable mocks.
+
+Actions outside the deterministic test boundary, including Code blocks and connected integrations, are represented by visible assumptions instead of being executed. Check those assumptions in the result before relying on the outcome. If the test setup is incomplete or invalid, correct it before concluding that the flow is defective.
 
 Use conversation tests to check an inbound draft's conversational and routing behavior. They do not test a published version, outbound flow, phone or audio behavior, a live integration, or every branch. Run separate cases for other important paths, and use [Test Call](/flow-editor/test-and-publish) for voice, chat, and published-version checks.
 

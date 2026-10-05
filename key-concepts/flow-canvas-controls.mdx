@@ -13,7 +13,9 @@ sources:
   - "features/workflows/modules/editor/hooks/use-organize-blocks.ts"
   - "features/workflows/modules/editor/hooks/use-shortcuts.ts"
   - "features/workflows/modules/editor/hooks/use-undo-redo.ts"
-last-verified: "2026-08-03"
+  - "features/workflows/modules/editor/components/form-items/name.tsx"
+  - "features/workflows/modules/editor/components/controls/organize-exit-ports-hint.tsx"
+last-verified: "2026-10-05"
 ---
 
 The flow canvas includes a vertical toolbar for adding, arranging, and reviewing content. **Undo**, **Redo**, and **Change History** appear separately in the bottom-left of the editor.
@@ -34,6 +36,10 @@ To add a block already connected to a path, select an available connection handl
   Add pre-call blocks from the pre-call connection above **Greeting** or **Make Call**. **Start Flow** does not support pre-call blocks.
 </Note>
 
+### Rename a block
+
+Select an editable block to open its configuration, then edit the block name directly in the panel header. The new name auto-saves with the draft. Give blocks names that make their purpose clear when you review the flow.
+
 ### Add sticky notes
 
 Select **Add Sticky Note** to document design intent, assumptions, ownership, or follow-up work directly on the canvas. You can format the note's content, change its color, and resize it.
@@ -45,6 +51,8 @@ Sticky notes do not connect to other blocks, run during a call, or provide instr
 Select **Organize blocks** to reposition the current flow without changing block settings or connections. The new layout is recorded as one undoable edit.
 
 Use it after adding or reconnecting several blocks. Review the result and select **Undo** if the previous layout was clearer.
+
+An older flow with branches laid out for side exits can offer **Organize** to arrange them beneath the new bottom exit ports. After organizing, choose **Keep** or **Undo**. Undo restores the previous block positions while preserving content edits made in the meantime.
 
 ### Collapse or expand blocks
 

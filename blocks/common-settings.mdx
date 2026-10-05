@@ -16,7 +16,8 @@ sources:
   - "phonely-backend/app/agent/live_actions/tool_actions.py"
   - "phonely-backend/app/custom_llm/state_manager.py"
   - "phonely-backend/app/agent/post_call/extract_call_insights.py"
-last-verified: "2026-07-16"
+  - "features/workflows/model/interim-message-playback.ts"
+last-verified: "2026-10-05"
 ---
 
 Select a block and expand **Advanced Settings** to see any shared options it supports. These supplement the block's main configuration by controlling what the caller hears while it runs, how action failures are routed, or which outcome is recorded for reporting.
@@ -45,6 +46,10 @@ Keep the message short and neutral. It should acknowledge the wait without claim
 > One moment while I check that for you.
 
 Enable **Post Interim Message Delay** to pause briefly after the message before the flow continues. Set a delay of up to 60 seconds.
+
+During a live call, an interim message plays only when its block starts an action sequence. When one automatic action follows another, the later action's interim message is skipped. Put a message needed for the sequence on its first action. If a block has different incoming paths, its message can play on some paths and be skipped on others.
+
+The block settings explain these cases. The [Flow Checklist](/workflow-checklist) also warns about messages that will never play on reachable paths. These warnings do not block publishing; review them so callers hear the feedback you intend.
 
 ## Error handling
 
@@ -75,7 +80,7 @@ Use [**Focus blocks by call outcome**](/key-concepts/flow-canvas-controls#focus-
 
 <AccordionGroup>
   <Accordion title="The caller does not hear the interim message">
-    Open **Advanced Settings** and confirm that **Interim Message** is enabled. For **Fixed**, enter the message to play. For **Promptable**, provide instructions for the message to generate. Then confirm that the call reaches the block.
+    Open **Advanced Settings** and confirm that **Interim Message** is enabled. For **Fixed**, enter the message to play. For **Promptable**, provide instructions for the message to generate. Then confirm that the call reaches the block and that the block starts the action sequence. Review any playback guidance shown in the settings or Flow Checklist.
   </Accordion>
   <Accordion title="Success and Error handles are missing">
     Open **Advanced Settings** and enable **Error Handling**. The block updates automatically to show **Success** and **Error** source handles. Connect each handle to the appropriate next block.

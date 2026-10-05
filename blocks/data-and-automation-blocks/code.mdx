@@ -16,7 +16,8 @@ sources:
   - "phonely-backend/app/services/code_block/code_block_service.py"
   - "phonely-backend/app/agent/live_actions/code_block.py"
   - "phonely-backend/app/config/settings.py"
-last-verified: "2026-09-14"
+  - "features/workflows/ai/runtime/server-tools.ts"
+last-verified: "2026-10-05"
 ---
 
 Use **Code** to transform, compare, or calculate data with Python. The block receives values from the flow and returns output that later blocks can use.
@@ -54,7 +55,7 @@ When an input contains only a selected variable, it retains that variable's type
 
 ## Generate code with AI
 
-Expand the **Generate with AI** strip at the top of the panel, describe what the code should do, and start a focused Ask AI task that proposes changes to this block alone. Ask AI can write the Python function, map its inputs, and define its expected outputs. Review the proposal on the canvas and apply it, then refine the block by asking again. Generation is offered only on an editable draft, not in version previews, comparisons, or to viewers.
+Expand the **Generate with AI** strip at the top of the panel, describe what the code should do, and start a focused Ask AI task for this block alone. Ask AI can write the Python function, map its inputs, and define its expected outputs. In **Review** mode, inspect and apply the proposal; **Auto apply** writes the requested edit directly to the draft. See [Choose how flow changes are applied](/key-concepts/ask-ai#choose-how-flow-changes-are-applied), and check the generated result before publishing. Generation is offered only on an editable draft, not in version previews, comparisons, or to viewers.
 
 Review the generated inputs, code, and outputs before continuing. You still need to validate the code and run a successful block test before its output variables can be used reliably by later blocks.
 
