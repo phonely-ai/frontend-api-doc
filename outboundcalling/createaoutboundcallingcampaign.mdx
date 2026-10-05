@@ -4,7 +4,7 @@ description: "Choose who to call, when calls can run, and which outbound flow ha
 sources:
   - "features/campaign/**"
   - "app/(main)/(routes)/campaign/**"
-last-verified: "2026-09-28"
+last-verified: "2026-10-05"
 ---
 
 Outbound campaigns schedule and place calls through an agent's outbound flow. The campaign supplies the contacts, phone numbers, calling hours, and source data; the selected flow controls what happens during and after each call.
@@ -84,6 +84,8 @@ After setup, start the campaign from the campaign list. Campaigns appear as **In
 - Resume a paused campaign when it is ready to continue.
 - Open the campaign to review its queued and completed calls.
 
+The campaign's **Overview** cards and **Calls remaining** show its current counts. **Queued** reflects calls waiting in the dial queue; the other cards count call records. If counts cannot be loaded, they show a dash rather than zero. A campaign that has never run shows **Not started**. Use **Back to Campaigns** from the detail page to return to the same agent's campaign list.
+
 A queued call shows why it has not been dialed yet:
 
 | Status | What it means |
@@ -100,7 +102,9 @@ Open a campaign to review the calls waiting in its queue. From the calls table y
 
 - **Edit** a queued call to change its variables and settings before it is dialed. Editing is available while a call is still **Queued**, **Queueing**, or scheduled for redial.
 - **Remove from queue** cancels the queued calls for a contact's number. Calls already in progress finish; queued attempts are cancelled.
-- **Clear queue** cancels every queued call for the campaign at once. Phonely asks you to confirm before clearing the queue and reports how many calls were cancelled.
+- **Clear queue** asks for confirmation before cancelling the campaign's queued calls, including records still marked Queued that are no longer waiting to dial. Review the preview counts; when scheduled redials are included, those are cancelled too. Calls already dialing finish.
+
+The result reports cancelled calls and any scheduled redials. A call record can take a moment to update. Failed cancellations are reported separately: a scheduled redial that could not be cancelled may still dial. Retry **Clear queue** when the result reports a failure, and contact support if it keeps failing.
 
 The campaign overview badge stays in sync with the queue as calls are added, dialed, or cancelled.
 

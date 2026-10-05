@@ -10,7 +10,10 @@ sources:
   - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/setting-tabs/opportunity-analysis-section.tsx"
   - "features/agents/model/opportunity-analysis-analytics-field.ts"
   - "app/(main)/(routes)/call-history/**"
-last-verified: "2026-09-28"
+  - "features/calls/model/analytics-field-filters.ts"
+  - "features/calls/assistant-capability/lib/call-analysis-handoff.ts"
+  - "features/calls/assistant-capability/services/get-call-details.ts"
+last-verified: "2026-10-05"
 ---
 
 Call History is the record of an agent's phone and web conversations. Use it to find a call, understand what happened, and inspect how the flow ran.
@@ -24,6 +27,8 @@ Search by phone number or words from the call, or filter the list by fields such
 - status and end reason;
 - outcome, topic, and sentiment; and
 - prompt version (admin only).
+
+The filter popup groups configured category choices under **Analytics Fields**. Existing **Call Topics** appears alongside custom fields. Select the field's options to find matching calls; fields or options that have been disabled can still be used to find their historical calls. Numeric fields and Opportunity Analysis do not appear in this popup; Opportunity Analysis has its own review panel below.
 
 When you open Call History from a running A/B test, a capsule at the top of the list shows the selected test's name. Use its menu to switch between **All calls**, **Control calls**, and **Variant calls**, or to switch to another A/B test.
 
@@ -60,7 +65,7 @@ If call review is enabled for your role, mark the call as a success or error aft
 
 ## Analyze a call with Ask AI
 
-Use **Analyze with AI** when you want Ask AI to inspect calls. With no selection, it defaults to every call the current list matches and narrows to your selection once you make one. It can combine the transcript with block execution and underlying call details, including events that are not practical to review manually in the standard interface.
+Use **Analyze with AI** when you want Ask AI to inspect selected calls or a recent sample of the current list. It can combine the transcript with block execution and underlying call details, including events that are not practical to review manually in the standard interface.
 
 A deliberate selection is analyzed exactly, up to 500 calls; above that, Analyze with AI asks you to narrow the selection. Without a selection, it uses a recent sample instead of the whole list. Analyze with AI tells you when it hands the assistant a sample rather than every call, and it distinguishes loaded, remaining, and unavailable calls so a partial view is never mistaken for the whole.
 

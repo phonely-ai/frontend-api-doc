@@ -13,7 +13,9 @@ sources:
   - "features/workflows/modules/editor/hooks/use-start-focused-block-generation.ts"
   - "phonely-backend/app/agent/live_actions/conversation/custom_prompt.py"
   - "phonely-backend/app/custom_llm/prompts/prompts_v4_0.py"
-last-verified: "2026-09-14"
+  - "features/workflows/ai/runtime/server-tools.ts"
+  - "features/workflows/modules/editor/custom-nodes/custom-node-card.tsx"
+last-verified: "2026-10-05"
 ---
 
 Choose **Talk** when the agent needs to adapt over several turns, such as answering questions, understanding an issue, or qualifying a caller. It stays active until an exit condition is met and can collect values along the way.
@@ -22,11 +24,11 @@ Choose [Collect](/blocks/conversation-blocks/collect) for the more focused task 
 
 ## Start the block
 
-Configure the block directly, or expand the **Generate with AI** strip at the top of the panel, describe what you want, and start a focused Ask AI task that proposes changes to this block alone. For example:
+Configure the block directly, or expand the **Generate with AI** strip at the top of the panel, describe what you want, and start a focused Ask AI task for this block alone. For example:
 
 > Answer the caller's questions using the knowledge base. If an answer is unavailable, offer to collect their contact details for follow-up.
 
-Review the proposal on the canvas and apply it, then refine the block by asking again. The instruction is not saved onto the block, so the box starts empty each time and the request lives in the Ask AI conversation. Generation is offered only on an editable draft, not in version previews, comparisons, or to viewers.
+In **Review** mode, inspect the proposal on the canvas and apply it. In **Auto apply** mode, the requested edit is written directly to the draft. Check the result and test the affected path before publishing; see [Choose how flow changes are applied](/key-concepts/ask-ai#choose-how-flow-changes-are-applied). The instruction is not saved onto the block, so the box starts empty each time and the request lives in the Ask AI conversation. Generation is offered only on an editable draft, not in version previews, comparisons, or to viewers.
 
 ## Configure the conversation
 
@@ -38,7 +40,7 @@ Type `@` and select an available variable or knowledge base source when the prom
 
 ### Exit Conditions
 
-Each **Exit Condition** describes a conversational result that ends the Talk block and creates a source handle. Connect that handle to the block that should run next.
+Each **Exit Condition** describes a conversational result that ends the Talk block and creates a source handle. Match the condition to its numbered port along the bottom of the block and connect that port to the block that should run next.
 
 Write conditions as completed, observable outcomes. For example:
 

@@ -13,7 +13,7 @@ sources:
   - "features/performance/ui/filter-block-menu.tsx"
   - "features/performance/modules/formula/utils/formula-variables.ts"
   - "app/(main)/(routes)/performance/**"
-last-verified: "2026-09-28"
+last-verified: "2026-10-05"
 ---
 
 Performance turns an agent's call history into a board of cards that help you understand traffic, results, and recurring patterns.
@@ -30,7 +30,9 @@ Open **Performance** and choose an agent. The page is a single board: every char
 
 ## Filter the calls
 
-The date range and filters in the header apply across the active view. The board's filter controls include call status, call type, and the Phonely phone number. Filters you set appear as chips in the header; remove a chip to clear that filter.
+The date range in the header applies across the active view. Open **Settings** (the gear), then **Call scope** to filter the board by call status, call type, or the Phonely phone number. Use **Date & time** in the same panel to refine the days and hours included; the panel identifies the timezone used for those refinements.
+
+The gear indicates when scope refinements are active. Clear the relevant selections in Settings when you want the full view's scope again. These board-wide controls apply to every card in the view.
 
 For a question about particular outcomes, topics, end reasons, sentiments, analytics fields, or flow blocks, open the card in **Explore** and use **Only count calls where…** to set its own conditions. Save a filter when you want to reuse the same definition across cards. For example, define which calls count as a booked appointment, then use that definition on each relevant card.
 
@@ -57,7 +59,7 @@ You can also pick a preset directly. On an empty view, you can ask Phonely to su
   A unique count deduplicates by customer phone number within each time bucket or breakdown group. A customer who appears in more than one group is counted once in each, so grouped unique counts do not add up to an overall customer total. Pie charts and stacking are unavailable for unique counts.
 </Note>
 
-Select a segment, point, or row to open the matching calls. This lets you move from an aggregate pattern to the conversations behind it.
+Select a segment, point, row, or big-number card to open the matching calls. This lets you move from an aggregate pattern to the conversations behind it.
 
 Each card shows when its data was last updated. Hover a number to see the count or share behind it.
 
@@ -94,7 +96,7 @@ Explore replaces the board while you work in it. Build a question by choosing wh
 
 Save the result to add it to the board. Use the browser's Back button or the back arrow to leave Explore; if you have unsaved work, Phonely asks before discarding it.
 
-You can save a metric or filter to reuse it across cards, and manage those saved definitions from Explore. Deleting a saved definition asks for confirmation and identifies the metric or filter to be removed.
+You can save a metric or filter to reuse it across cards. Manage those saved definitions from Explore or from **Settings > Saved metrics & filters** on the board. Deleting a saved definition asks for confirmation and identifies the metric or filter to be removed.
 
 ## Edit Performance with Ask AI
 
@@ -108,7 +110,7 @@ Changing a saved metric or filter can affect cards that use it. Ask AI cannot de
 
 ## Work with views
 
-A view keeps a board's cards, filters, and settings for an agent. Use the view selector to switch between them and its menu to create, rename, duplicate, reorder, or delete a view.
+A view keeps a board's cards, filters, and settings for an agent. Use the view selector to switch between views and manage them. To change the active view's name or description, open **Settings > View settings**.
 
 Use separate views for questions that need different scopes, such as weekly operations, negative-sentiment calls, or a specific outcome. Give each view a name that describes the question it answers.
 

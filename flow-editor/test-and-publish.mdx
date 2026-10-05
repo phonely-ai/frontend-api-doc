@@ -16,7 +16,9 @@ sources:
   - "features/workflows/ai/conversation-test/**"
   - "features/workflows/ui/conversation-test-result-card.tsx"
   - "app/(main)/(routes)/agent/(routes)/[agentId]/components/menu/test-agent-button.tsx"
-last-verified: "2026-09-28"
+  - "features/workflows/modules/editor/hooks/use-live-test-block-follow.ts"
+  - "features/workflows/modules/editor/hooks/use-follow-live-test-workflow.ts"
+last-verified: "2026-10-05"
 ---
 
 Test the current draft while editing, then publish and switch the test to the live version. This separates fast feedback on unpublished changes from verification of the version callers will use.
@@ -132,9 +134,11 @@ For an inbound flow, select the chat icon on the right side of **Test agent** to
 
 When started from the Flow Editor, both tests begin with **Draft** selected and use the current draft of the selected flow. Use the **Draft / Live** control in the Test Call panel to switch targets; switching restarts the test. **Live** uses the published version real callers receive. If the flow has never been published, Phonely falls back to its draft.
 
+During Web Chat or Web Call, the editor highlights the block currently executing and follows block transitions on the visible draft canvas. If the test hands off to another flow available in the editor, the editor follows that flow too. Following pauses while you pan or zoom manually, and the highlight clears when the test ends.
+
 The **Ask AI** tab can inspect and help change the agent, but it is separate from the tests in **Test Call**.
 
-Ask AI can also run a text-only conversation test against one path in an inbound draft. This is useful for checking a specific expected route, terminal block, or captured variable with a reviewable transcript. External actions are simulated and shown as assumptions, so use Test Call or a controlled live test when phone, audio, publishing, or an integration itself is part of what you need to verify. See [Test a draft conversation with Ask AI](/key-concepts/ask-ai#test-a-draft-conversation-with-ask-ai).
+Ask AI can also run a text-only conversation test against one path in an inbound draft. This is useful for checking a specific expected route, terminal block, or captured variable with a reviewable transcript. Review the individual requirements and whether findings reproduced; an inferred requirement or inconclusive result is not proof that the flow needs repair. External actions are simulated and shown as assumptions, so use Test Call or a controlled live test when phone, audio, publishing, or an integration itself is part of what you need to verify. See [Test a draft conversation with Ask AI](/key-concepts/ask-ai#test-a-draft-conversation-with-ask-ai).
 
 Browser-based tests do not always reproduce phone-network data or behavior, such as a real caller number or transfer timing. Use a phone call when the tested behavior depends on that information.
 

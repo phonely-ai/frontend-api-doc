@@ -15,7 +15,8 @@ sources:
   - "phonely-backend/app/custom_llm/prompts/prompts_v4_0.py"
   - "phonely-backend/app/custom_llm/prompts/prompts_v1.py"
   - "phonely-backend/app/agent/assistant/agent_data.py"
-last-verified: "2026-09-14"
+  - "features/workflows/ai/runtime/server-tools.ts"
+last-verified: "2026-10-05"
 ---
 
 Choose **Collect** when the agent needs a defined set of information, such as a caller's name, contact details, or appointment preferences. It asks for the information one item at a time and stores the answers as variables for later blocks.
@@ -24,11 +25,11 @@ Each **Question** guides what the agent should ask, but it is not a fixed script
 
 ## Start the block
 
-Configure the questions directly, or expand the **Generate with AI** strip at the top of the panel, describe what you want, and start a focused Ask AI task that proposes changes to this block alone. For example:
+Configure the questions directly, or expand the **Generate with AI** strip at the top of the panel, describe what you want, and start a focused Ask AI task for this block alone. For example:
 
 > Gather the caller's name, email address, phone number, and reason for calling.
 
-Review the proposal on the canvas and apply it, then refine the block by asking again. The instruction is not saved onto the block, so the box starts empty each time and the request lives in the Ask AI conversation. Generation is offered only on an editable draft, not in version previews, comparisons, or to viewers.
+In **Review** mode, inspect the proposal on the canvas and apply it. In **Auto apply** mode, the requested edit is written directly to the draft. Check the result and test the affected path before publishing; see [Choose how flow changes are applied](/key-concepts/ask-ai#choose-how-flow-changes-are-applied). The instruction is not saved onto the block, so the box starts empty each time and the request lives in the Ask AI conversation. Generation is offered only on an editable draft, not in version previews, comparisons, or to viewers.
 
 ## Configure the questions
 

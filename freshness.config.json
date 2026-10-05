@@ -365,7 +365,7 @@
             "outboundcalling/createaoutboundcallingcampaign",
             "outboundcalling/avoidmarkedasspamlikely"
           ],
-          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused — do-not-dial day\" indicator on campaign list and detail views."
+          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused \u2014 do-not-dial day\" indicator on campaign list and detail views."
         },
         {
           "id": "call-review-webhook-cache-miss-and-event-separators",
@@ -583,7 +583,7 @@
           "pages": [
             "outboundcalling/createaoutboundcallingcampaign"
           ],
-          "note": "Documented the Queued, Queued · After hours, and Queued · On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
+          "note": "Documented the Queued, Queued \u00b7 After hours, and Queued \u00b7 On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
         },
         {
           "id": "block-test-output-selection",
@@ -1451,32 +1451,35 @@
           "pages": [
             "key-concepts/ask-ai"
           ],
-          "note": "PHO-10799 replaced the Ask AI request queue with steering: a message sent during an active response now steers the current turn instead of waiting in a Queued Ask AI requests list, and conversations stay usable while a proposal is open. Rewrote the former \"Queue more than one request\" section as \"Send a follow-up while Ask AI is responding\" and removed the deleted queue sources from the page frontmatter."
+          "note": "Ask AI > Send a follow-up while Ask AI is responding replaces the removed queue with steering and explains Stop and continued conversation during proposal review. Continue or start a chat distinguishes same-agent reuse, different-agent entry, explicit new-chat handoffs and typing into the current panel; Reference a flow block retains the @ and current-flow requirements. Checked dispatch, send, entry-point callers and the Call Details explicit-new-session handoff."
         },
         {
           "id": "ask-ai-workflow-change-modes",
           "status": "docs-updated",
           "pages": [
-            "key-concepts/ask-ai"
+            "key-concepts/ask-ai",
+            "blocks/flow-blocks/talk",
+            "blocks/conversation-blocks/collect",
+            "blocks/data-and-automation-blocks/code"
           ],
-          "note": "PHO-10724 added Review and Auto apply modes to Ask AI workflow editing. The mode selector appears next to the composer for a writable flow on the agent or campaign surface when the user can edit that agent's flows; Auto apply writes approved flow and focused-block changes to the draft with a chat receipt and transient canvas highlights, while retaining planning, validation, and testing. Documented the selector and both modes on the Ask AI page."
+          "note": "Ask AI > Choose how flow changes are applied and Review changes before relying on them explain Review as the default, authorized Auto apply draft writes, availability on writable agent/campaign flows, scope, receipts, validation and verification after applying. Talk, Collect and Code focused-generation guidance now describes both modes instead of always promising a proposal. Draft auto-save does not publish; affected paths still require testing. Checked selector guards, request-time mode, tools and workflow prompt."
         },
         {
           "id": "ask-ai-workspace-notes",
-          "status": "no-doc-change",
+          "status": "docs-updated",
           "pages": [
             "key-concepts/ask-ai"
           ],
-          "note": "PHO-10621 added per-agent Ask AI workspace notes (list, search, read, write, edit, move, archive) reached only through model tools, plus a standing /BRIEF.md loaded into every turn. There is no customer-facing UI surface for notes and note writes never publish to the voice knowledge base; the capability is exercised by the model through tools, so the Ask AI page needs no change. Recorded against the Ask AI page as the closest owning surface. Requires phonely-db-svc v0.188.0 with migration 50a7aa761f8e before deployment."
+          "note": "Ask AI > Keep notes for an agent documents the customer-accessible capability reached by asking Ask AI: persistent per-agent notes, search/read/edit/move/archive/restore, edit permission for mutations, saves without separate confirmation, save-result checking and the 16 KiB standing brief. Notes are distinct from voice knowledge-base publication and guidelines. Checked capability activation and permission/tool guards; a missing separate UI is not an exclusion reason. Frontend production is proven; this review does not independently certify the required db-svc deployment."
         },
         {
           "id": "conversation-test-and-evidence-internals",
-          "status": "no-doc-change",
+          "status": "docs-updated",
           "pages": [
             "key-concepts/ask-ai",
             "flow-editor/test-and-publish"
           ],
-          "note": "PHO-10966 / PHO-10727 reworked conversation-test requirement evaluation, reruns, variable/caller mocking, and the Langfuse evidence contract (v3). The customer-facing conversation-test behavior documented on the Ask AI and Test and Publish pages (one caller case, one path, visible assumptions, transcript and checks) is unchanged; the changes are internal evaluation and observability mechanics with no new public contract."
+          "note": "Ask AI > Test a draft conversation with Ask AI now explains up to six individual requirements, stated versus inferred observations, a confirmation rerun when time allows, caller number/local time, correctly typed simulated data, visible external-action assumptions and setup-error recovery. Test and Publish > Test focused draft changes points to this canonical guidance and distinguishes inference/inconclusive results from repair evidence. Langfuse observation IDs and hashes remain internal; the caller setup and visible results are public behavior."
         },
         {
           "id": "agent-from-recordings-removed",
@@ -1485,61 +1488,60 @@
             "get-started/introduction",
             "get-started/quick-start"
           ],
-          "note": "PHO-10886 removed the agent-from-recordings build flow: the From Recordings option in the add-agent modal, the import dialog, the agent-from-recordings-* Ask AI profiles, and the /api/assistant/runs and /api/assistant/sessions/{id}/state routes. The public docs never documented From Recordings agent creation (the \"Call Recordings\" references in testing and the \"Private Recordings\" account setting are unrelated), so no user-facing page described the removed capability."
+          "note": "Checked Introduction > What you can do and Quick Start > Understand the starting point and the creation/test/publish steps: neither promises From Recordings creation. Searched the public MDX corpus for From Recordings and from recordings and found no instructions for the removed option. Recording playback and private-recording settings describe different features. Removed app-internal assistant run/session routes are not in the supported OpenAPI surface; prompt-based agent generation remains unchanged."
         },
         {
           "id": "call-history-analytics-field-filter",
-          "status": "already-covered",
+          "status": "docs-updated",
           "pages": [
             "call-history-ai-analytics/call-history-ai-analytics"
           ],
-          "note": "PHO-10472 made the call-history filter mirror the agent's Analytics Fields (legacy Call Topics alongside custom fields) and fixed the chart drill-down to narrow by the clicked Analytics Field. The Call History page already documents filtering by fields including outcome, topic, and sentiment and opening calls from a chart slice; the change refines the grouping of existing filter controls without altering the documented customer contract."
+          "note": "Call History > Find a call explains the Analytics Fields filter group, legacy topics beside custom categories, historical disabled choices, and the exclusion of numeric fields and the separate Opportunity Analysis panel. Analyze a call with Ask AI now consistently describes exact selections versus recent sampling, retaining the 500-call limit and partial-coverage guidance. Checked filter construction and caller/detail handoff boundaries; these capabilities were not established by a generic topics/filter mention."
         },
         {
           "id": "performance-board-and-widgets",
-          "status": "already-covered",
+          "status": "docs-updated",
           "pages": [
-            "performance",
-            "call-sentiments",
-            "call-topics",
-            "data-tables"
+            "performance"
           ],
-          "note": "PHO-10809 and related work added usage analytics, throttled board/chart re-layout to stop a max-update-depth crash, unified the board menu and Filters into one settings popover, and refined drag/drop, drilldown, and the calls drawer on Performance. The Performance, Call Sentiment, Call Topics, and Data Tables pages already describe building boards, widgets, filters, saved views, and opening calls from a widget; these are stability and interaction refinements to existing documented surfaces, and product analytics are internal."
+          "note": "Performance > Filter the calls now directs users to Settings > Call scope and Date & time instead of removed header filter chips; saved-definition and active-view guidance uses the same settings panel. Call inspection includes big-number cards and Analytics Field chart drill-down. Adjacent Call Sentiment > Review and correct sentiment, Call Topics > Review and use topics, and Data Tables > Inspect the calls behind a value retain their existing classification/table tasks; they do not duplicate removed board controls. Layout/crash fixes and product-analytics events require no additional task instructions."
         },
         {
           "id": "campaign-counts-and-clear-queue",
-          "status": "already-covered",
+          "status": "docs-updated",
           "pages": [
             "outboundcalling/createaoutboundcallingcampaign"
           ],
-          "note": "PHO-10717 made Campaign Overview cards and Calls remaining read one counts endpoint (showing a dash on failure and Not started before a campaign runs) and extended Clear queue to also cancel stale records and scheduled redials with a retry on failure. The outbound campaign page already documents reviewing queued/completed calls and that Clear queue cancels queued calls and reports how many were cancelled; the change refines counts and cancellation reporting within that documented behavior and depends on unshipped db-svc/backend support."
+          "note": "Outbound campaign review now explains Overview/Calls remaining counts, a dash when counts fail, Not started, and Back to Campaigns for the same agent. Clear queue covers stale queued records and scheduled redials when included, calls already dialing, record-update lag versus failed cancellations, retry and support; a failed redial cancellation can still dial. Checked counts consumers, status badge, confirmation and outcome formatter. Removed the unsupported assertion that backend prerequisites are unshipped; frontend UI support does not independently prove backend rollout."
         },
         {
           "id": "flow-editor-and-blocks-refinements",
-          "status": "already-covered",
+          "status": "docs-updated",
           "pages": [
             "flow-editor/connections-and-routing",
-            "flow-editor/collaboration",
+            "key-concepts/flow-canvas-controls",
             "flow-editor/test-and-publish",
-            "blocks/overview"
+            "blocks/common-settings",
+            "workflow-checklist",
+            "blocks/flow-blocks/talk"
           ],
-          "note": "PHO-10472 (bottom exit ports), PHO-10774 (inline block-name editing), PHO-10709/10268 (review diffs and interim-message guidance) and related workflow-editor changes refine layout, connections, naming, and review of existing flow-editor surfaces. The Connections and Routing, Collaboration, Test and Publish, and Blocks pages already describe source/target handles, exit conditions, remote-update review, and block configuration; the visible contract (how customers connect blocks, name them, and review changes) is unchanged."
+          "note": "Connections and Routing and Talk describe numbered bottom exit ports and condition rows, including collapsed-list behavior. Flow Canvas Controls covers inline auto-saved names and the older-layout Organize/Keep/Undo prompt, preserving later content edits on Undo. Test and Publish describes draft-canvas live-test highlighting/following, available-flow handoffs and manual-pan/zoom pause. Common Block Settings and Flow Checklist explain action-sequence interim playback and nonblocking warnings. Collaboration's remote-update review remains valid; semantic diff and validation fixes do not change its task steps."
         },
         {
           "id": "api-and-settings-surfaces",
-          "status": "already-covered",
+          "status": "no-doc-change",
           "pages": [
             "api-reference/introduction",
             "api-reference/web-sdk",
             "billing-and-usage/plans-and-billing-history"
           ],
-          "note": "Changes to app API routes (assistant streaming, calls, cron billing/notifications, generate-with-ai, admin/enterprise, stripe), settings modules, and shared lib/config are internal, admin, cron, or billing surfaces that are not part of the supported public OpenAPI contract. The supported blocked-numbers and calls public endpoints already have reference pages and their request/response contracts are unchanged; the @phonely-ai/web SDK version on the Web SDK page is unchanged (0.0.8); no public reference or billing page requires an update."
+          "note": "API Introduction > Supported API surface and the reference OpenAPI contract do not expose the changed app-internal assistant, cron, admin/billing or widget routes. Web SDK > Install the SDK still uses @phonely-ai/web 0.0.8; its authentication/runtime-variable examples are unchanged. Plans and Billing History > Current plan/Billing history do not document the changed admin implementation; billing-form/transcriber changes are comments and the removed phonetic dictionary table had no callers before removal. No new public request/response shape or customer task was found in this group."
         },
         {
           "id": "non-public-tooling-tests-deps-and-ui-primitives",
           "status": "not-public",
           "pages": [],
-          "note": "Repository tooling (.agents/.claude/.cursor skills, .github workflows, Factory/editor config), dependency and build updates (package.json, package-lock.json, Next.js 15.5.26, Prettier/editorconfig), internal docs/, shared UI primitives under components/ui, and test files carry no customer-facing documentation contract. PHO-10607 doc pruning, PHO-10847/10912/10998 verify-ask-ai regression tooling, and PHO-10967 cron deprecation are internal-only."
+          "note": "Source-group review found developer skills, CI/evaluation tooling, archived implementation docs, dependency/format changes and supporting UI/observability primitives. Customer-facing effects of shared UI and assistant tools are accounted for in the task dispositions above; path location alone was not used to exclude them. Deep Dive telemetry remains an admin-only audience follow-up, and the removed enterprise-usage cron is operational. No additional supported public API or customer instructions are established by this group."
         }
       ]
     }

@@ -15,7 +15,8 @@ sources:
   - "features/workflows/modules/editor/custom-nodes/filter/v2/**"
   - "phonely-backend/app/agent/assistant/workflows.py"
   - "phonely-backend/app/agent/assistant/agent_data.py"
-last-verified: "2026-08-24"
+  - "features/workflows/modules/editor/custom-nodes/custom-node-card.tsx"
+last-verified: "2026-10-05"
 ---
 
 Connections control which block can run next. A connection leaves the current block through a **source handle** and enters the next block through a **target handle**. The selected source handle determines which result follows the route.
@@ -25,6 +26,8 @@ Connections control which block can run next. A connection leaves the current bl
 1. Hover over a source handle to see what it represents.
 2. Drag from the source handle toward the block you want to run next.
 3. Drop the connection on a compatible target handle.
+
+Named exit conditions connect from numbered ports along the bottom of the block. Match the port number to the exit-condition row, or hover over the port to read its condition. Expand the block's exit-condition list when you need to see the full text. The ports remain available when the list is collapsed.
 
 While you drag, the editor dims and disables incompatible handles, leaving valid target handles active.
 
