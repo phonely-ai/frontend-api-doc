@@ -6,24 +6,20 @@ This directory contains the Mintlify docs for the Phonely frontend product and t
 
 Prerequisites:
 
-- Node.js 18 or newer
+- Node.js (latest), Bun, or pnpm. The Mintlify CLI runs on demand; nothing to install.
 
-Install the Mintlify CLI:
-
-```bash
-npm i -g mint
-```
-
-Start the local preview from this directory:
+Start the local preview from this directory with whichever runner you have:
 
 ```bash
-mint dev
+npx mint@latest dev
+bunx mint@latest dev
+pnpx mint@latest dev
 ```
 
 Optional custom port:
 
 ```bash
-mint dev --port 3333
+npx mint@latest dev --port 3333
 ```
 
 ## Important Files
