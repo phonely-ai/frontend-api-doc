@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "mint": "^4.2.953"
+    "mint": "^4.2.984"
   },
   "overrides": {
     "@modelcontextprotocol/sdk": "^1.31.0",
