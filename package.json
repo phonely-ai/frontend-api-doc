@@ -1,5 +1,15 @@
 {
   "dependencies": {
-    "mint": "^4.2.441"
+    "mint": "^4.2.952"
+  },
+  "overrides": {
+    "@modelcontextprotocol/sdk": "^1.31.0",
+    "adm-zip": "^0.6.1",
+    "axios": "^1.20.0",
+    "postcss-selector-parser": "^7.1.6",
+    "js-yaml@4": "^4.3.2",
+    "katex": "^0.18.9",
+    "qs": "^6.16.0",
+    "sharp": "^0.35.5"
   }
 }
