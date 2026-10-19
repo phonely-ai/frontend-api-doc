@@ -36,7 +36,7 @@ Work through the setup wizard, reviewing each step before continuing:
 
 1. **Name:** Name the campaign and choose its use case.
 2. **Call initiation:** Choose how people are added — webhook, Google Sheets, or Zapier for a continuous campaign, or a CSV upload for a batch campaign.
-3. **Source setup:** Set up the chosen source. The webhook step listens for a live test request so you can confirm the fields it sends. See [Webhook Triggers](/outboundcalling/webhookconnection) and [Upload Contacts by CSV](/outboundcalling/uploadingcsv).
+3. **Source setup:** Set up the chosen source. The webhook step listens for a live test request so you can confirm the fields it sends. See [Webhook Triggers](/outbound-calling/webhook-triggers) and [Upload Contacts by CSV](/outbound-calling/upload-csv).
 4. **Phone numbers:** Add the Twilio numbers the campaign can call from. If your Twilio account is not connected yet, an inline connect step links it without leaving setup.
 5. **Number routing:** Choose how each call picks a number. This step appears only when two or more numbers are switched on.
 6. **Calling hours:** Choose the days, time ranges, timezone, maximum calls per hour, and any do-not-dial days.
@@ -82,7 +82,7 @@ Do-not-dial days do not replace the calling-hours, consent, and suppression rule
 
 A campaign uses one published outbound flow. In the **Call flow** step you can select an existing flow or create a new one and land in the flow editor with Ask AI open. Map the fields from the campaign source to the variables the flow needs in the **Variables** step before launching the campaign.
 
-See [Outbound Flows](/outboundcalling/creating-call-flows-for-outbound-campaigns) for the flow requirements.
+See [Outbound Flows](/outbound-calling/call-flows) for the flow requirements.
 
 ## Launch and monitor the campaign
 

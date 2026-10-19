@@ -86,6 +86,13 @@ conversations go well, and where they don't.
 - If current media is unavailable, leave a capture-spec TODO as defined in `skill.md`; do not invent an asset path.
 - Store new assets in `/assets/` with descriptive kebab-case names.
 
+## Page Names and URLs
+
+- Use short, descriptive, lowercase names with hyphens between words for MDX files and directories.
+- Avoid run-together words and repeating the directory name in the filename. Use `overview.mdx` for a section overview.
+- When moving a page, update navigation and internal links, add a direct `docs.json` redirect from its old URL, and update older redirects to point to the new destination.
+- Preserve historical review-window paths in `freshness.config.json`; the freshness ledger resolves them through those redirects.
+
 ## Sections and Formatting
 
 - Keep sections short and scannable.
