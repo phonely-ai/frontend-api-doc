@@ -33,6 +33,9 @@ jobs:
       - name: Frontmatter contract
         run: node scripts/check-frontmatter.mjs
 
+      - name: Freshness history routes
+        run: node --test scripts/freshness-ledger.test.mjs
+
       - name: Freshness contract
         run: node scripts/freshness-ledger.mjs
 

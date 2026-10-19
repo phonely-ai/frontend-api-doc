@@ -207,10 +207,29 @@ function buildLedger(config) {
   const docs = readJson(join(ROOT, 'docs.json'));
   const routes = [...new Set(collectPages(docs.navigation?.tabs ?? []))].sort();
   const reviewWindows = getReviewWindows(config);
+  const knownRoutes = new Set(routes);
+  const redirects = new Map((docs.redirects ?? []).map(({ source, destination }) => [source, destination]));
+  // Keep review history immutable when a page moves. Only exact local
+  // redirects ending at an indexed page can identify a historical route.
+  function resolveRoute(route) {
+    let current = route;
+    const seen = new Set();
+    while (!knownRoutes.has(current)) {
+      if (seen.has(current)) fail(`${route}: redirect cycle in historical page reference`);
+      seen.add(current);
+      const destination = redirects.get(`/${current}`);
+      if (typeof destination !== 'string' || !destination.startsWith('/') || destination.startsWith('//')) {
+        fail(`Unknown historical page: ${route}`);
+      }
+      current = destination.slice(1);
+    }
+    return current;
+  }
   const pendingRoutes = new Set();
   for (const window of reviewWindows) {
     for (const disposition of window.dispositions) {
-      for (const route of disposition.pages) {
+      for (const historicalRoute of disposition.pages) {
+        const route = resolveRoute(historicalRoute);
         if (disposition.status === 'needs-doc-update') pendingRoutes.add(route);
         if (disposition.status === 'docs-updated') pendingRoutes.delete(route);
       }
@@ -241,15 +260,6 @@ function buildLedger(config) {
       sources,
     };
   });
-
-  const knownRoutes = new Set(routes);
-  for (const window of reviewWindows) {
-    for (const disposition of window.dispositions) {
-      for (const route of disposition.pages) {
-        if (!knownRoutes.has(route)) fail(`${window.id}/${disposition.id}: unknown page ${route}`);
-      }
-    }
-  }
 
   return {
     schemaVersion: config.schemaVersion,

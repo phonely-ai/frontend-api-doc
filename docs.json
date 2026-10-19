@@ -170,7 +170,7 @@
             "group": "REVIEW CALLS",
             "icon": "search",
             "pages": [
-              "call-history-ai-analytics/call-history-ai-analytics",
+              "call-history/overview",
               "agent-review",
               "call-events"
             ]
@@ -191,22 +191,22 @@
             "group": "OUTBOUND CALLS",
             "icon": "phone-outgoing",
             "pages": [
-              "outboundcalling/createaoutboundcallingcampaign",
-              "outboundcalling/creating-call-flows-for-outbound-campaigns",
-              "outboundcalling/addingphonenumber",
-              "outboundcalling/uploadingcsv",
-              "outboundcalling/webhookconnection",
-              "outboundcalling/avoidmarkedasspamlikely"
+              "outbound-calling/campaigns",
+              "outbound-calling/call-flows",
+              "outbound-calling/phone-numbers",
+              "outbound-calling/upload-csv",
+              "outbound-calling/webhook-triggers",
+              "outbound-calling/compliance"
             ]
           },
           {
             "group": "SETTINGS & BILLING",
             "icon": "settings",
             "pages": [
-              "manage-account-and-organization-settings/manage-account-and-organization-settings",
+              "settings/overview",
               "billing-and-usage/account",
               "billing-and-usage/teams",
-              "manage-account-and-organization-settings/delete-agents",
+              "settings/delete-agents",
               "billing-and-usage/plans-and-billing-history",
               "billing-and-usage/manage-agents-and-usage",
               "billing-and-usage/usage-notifications"
@@ -345,11 +345,11 @@
     },
     {
       "source": "/manage-account-and-organization-settings/organization-settings",
-      "destination": "/manage-account-and-organization-settings/manage-account-and-organization-settings"
+      "destination": "/settings/overview"
     },
     {
       "source": "/blocks/covertfile",
-      "destination": "/outboundcalling/createaoutboundcallingcampaign"
+      "destination": "/outbound-calling/campaigns"
     },
     {
       "source": "/blocks/live-call-actions/api-request",
@@ -538,6 +538,54 @@
     {
       "source": "/blocks/live-call-actions/transfer-flows",
       "destination": "/blocks/flow-control-and-routing/transfer-flow"
+    },
+    {
+      "source": "/outboundcalling/createaoutboundcallingcampaign",
+      "destination": "/outbound-calling/campaigns"
+    },
+    {
+      "source": "/outboundcalling/creating-call-flows-for-outbound-campaigns",
+      "destination": "/outbound-calling/call-flows"
+    },
+    {
+      "source": "/outboundcalling/addingphonenumber",
+      "destination": "/outbound-calling/phone-numbers"
+    },
+    {
+      "source": "/outboundcalling/uploadingcsv",
+      "destination": "/outbound-calling/upload-csv"
+    },
+    {
+      "source": "/outboundcalling/webhookconnection",
+      "destination": "/outbound-calling/webhook-triggers"
+    },
+    {
+      "source": "/outboundcalling/avoidmarkedasspamlikely",
+      "destination": "/outbound-calling/compliance"
+    },
+    {
+      "source": "/call-history-ai-analytics/call-history-ai-analytics",
+      "destination": "/call-history/overview"
+    },
+    {
+      "source": "/manage-account-and-organization-settings/manage-account-and-organization-settings",
+      "destination": "/settings/overview"
+    },
+    {
+      "source": "/manage-account-and-organization-settings/delete-agents",
+      "destination": "/settings/delete-agents"
+    },
+    {
+      "source": "/outboundcalling",
+      "destination": "/outbound-calling/campaigns"
+    },
+    {
+      "source": "/call-history-ai-analytics",
+      "destination": "/call-history/overview"
+    },
+    {
+      "source": "/manage-account-and-organization-settings",
+      "destination": "/settings/overview"
     }
   ]
 }
