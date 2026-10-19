@@ -16,7 +16,7 @@ sources:
   - "phonely-backend/app/custom_llm/prompts/prompts_v1.py"
   - "phonely-backend/app/agent/assistant/agent_data.py"
   - "features/workflows/ai/runtime/server-tools.ts"
-last-verified: "2026-10-05"
+last-verified: "2026-10-19"
 ---
 
 Choose **Collect** when the agent needs a defined set of information, such as a caller's name, contact details, or appointment preferences. It asks for the information one item at a time and stores the answers as variables for later blocks.
@@ -30,6 +30,8 @@ Configure the questions directly, or expand the **Generate with AI** strip at th
 > Gather the caller's name, email address, phone number, and reason for calling.
 
 In **Review** mode, inspect the proposal on the canvas and apply it. In **Auto apply** mode, the requested edit is written directly to the draft. Check the result and test the affected path before publishing; see [Choose how flow changes are applied](/key-concepts/ask-ai#choose-how-flow-changes-are-applied). The instruction is not saved onto the block, so the box starts empty each time and the request lives in the Ask AI conversation. Generation is offered only on an editable draft, not in version previews, comparisons, or to viewers.
+
+Type `@` in the instruction to add a workflow variable. The selected variable appears as a chip and passes to Ask AI as a variable reference rather than plain text.
 
 ## Configure the questions
 

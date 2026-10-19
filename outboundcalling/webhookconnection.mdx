@@ -2,26 +2,37 @@
 title: "Webhook Triggers"
 description: "Send contacts from an external system to a continuous outbound campaign."
 sources:
-  - "features/campaign/modules/edit-campaign-sheet/general-tab/components/triggers/webhook-trigger.tsx"
+  - "features/campaign/modules/campaign-onboarding/components/webhook-setup.tsx"
+  - "features/campaign/modules/campaign-onboarding/components/webhook-live-test.tsx"
+  - "features/campaign/modules/campaign-onboarding/components/webhook-fields.ts"
+  - "features/campaign/modules/campaign-onboarding/components/webhook-fields-editor.tsx"
   - "features/campaign/api/queue-call-service.ts"
   - "features/campaign/api/campaign-service.ts"
   - "phonely-backend/app/outbound/campaign/routes.py"
-last-verified: "2026-08-18"
+  - "features/campaign/modules/campaign-onboarding/steps/call-cadence-step.tsx"
+  - "features/campaign/modules/campaign-onboarding/steps/routing-step.tsx"
+  - "features/campaign/modules/campaign-onboarding/steps/variables-step.tsx"
+  - "features/campaign/modules/campaign-settings/campaign-settings.tsx"
+last-verified: "2026-10-19"
 ---
 
-Use a webhook when an external system should add contacts to a **Continuous Calling** campaign. Each accepted request adds a call to the campaign queue; the campaign cadence determines when that call can run.
+Use a webhook when an external system should add contacts to a **Continuous Calling** campaign. Requests to an active campaign add calls to its queue; the campaign's calling schedule determines when they can run. Draft-only field capture is described below.
 
 Phonely does not deduplicate accepted webhook requests. If the sending system retries a request, it can queue another call. Prevent duplicate requests before sending them when one contact should produce only one call.
 
 ## Configure the webhook
 
-1. Create or edit a Continuous Calling campaign.
-2. In **Select Trigger Type**, choose **Webhook**.
-3. Copy the generated webhook URL and authorization details.
-4. Define the JSON request body, then select **Set Fields**.
-5. Map the detected fields to the contact phone number, optional timezone, dial-out number, or calling window, and any variables used by the outbound flow.
+During campaign setup:
 
-The default body includes `phone_number`, `timezone`, `dialout_number`, and `calling_window`. You can add fields required by your flow.
+1. Create a **Continuous Calling** campaign and choose **Webhook** in **Call initiation**.
+2. In **Source setup**, copy the webhook URL and API key. Send a JSON POST with the key in the `X-Authorization` header.
+3. To capture fields from a request, open **Live test**, select **Start listening**, and send a representative test request. This draft-only test captures field names without queuing a call. You can also declare fields by hand on the **Manual** tab.
+4. In **Calling hours**, configure any per-person timezone or calling-window field. If using **Internal routing**, choose the dial-out-number field in **Number routing**.
+5. In **Variables**, map the remaining source data to the variables used by the outbound flow.
+
+For a campaign that has finished setup, edit webhook fields manually in **Settings > Call initiation** and select **Save changes**. Live test is unavailable after setup; requests to an active campaign are contacts to call.
+
+Include `phone_number` for the number to call. The following example also includes optional scheduling and dial-out fields. Declare the fields you send and enable the corresponding controls in Calling hours or Number routing; adding an optional field to the request alone does not turn that behavior on.
 
 ```json
 {
@@ -35,11 +46,11 @@ The default body includes `phone_number`, `timezone`, `dialout_number`, and `cal
 
 A `calling_window` narrows the campaign's calling hours for that contact only. See [calling windows](/outboundcalling/createaoutboundcallingcampaign#give-a-contact-its-own-calling-window).
 
-Send JSON with the authorization required by the generated webhook. Keep the credential private and do not place it in client-side code, screenshots, or documentation examples.
+Keep the API key private. Do not place it in client-side code, screenshots, or documentation examples.
 
 ## Keep the schema aligned
 
-Select **Set Fields** whenever you add, rename, or remove a top-level field. Then review the campaign mappings and any downstream flow fields that use those values.
+Update the declared fields whenever you add, rename, or remove a top-level field. During draft setup, capture another request with **Live test** or edit the list on **Manual**. After setup, use **Settings > Call initiation** and save the changes. Then review the routing, scheduling, and flow-variable mappings that use those fields.
 
 ## Verify the trigger
 

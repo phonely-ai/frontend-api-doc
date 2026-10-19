@@ -18,7 +18,7 @@ sources:
   - "app/(main)/(routes)/agent/(routes)/[agentId]/components/menu/test-agent-button.tsx"
   - "features/workflows/modules/editor/hooks/use-live-test-block-follow.ts"
   - "features/workflows/modules/editor/hooks/use-follow-live-test-workflow.ts"
-last-verified: "2026-10-05"
+last-verified: "2026-10-19"
 ---
 
 Test the current draft while editing, then publish and switch the test to the live version. This separates fast feedback on unpublished changes from verification of the version callers will use.
@@ -76,7 +76,7 @@ Use focused tests for faster feedback while editing. They do not confirm that th
 
 ### Test a block in isolation
 
-Some blocks include a **Test** section in their configuration panel. Enter safe sample values for the variables used by the block, run the test, and inspect the resolved input and result.
+Some blocks include a **Test** section in their configuration panel. Enter safe sample values for the variables used by the block, run the test, and inspect the resolved input and result. Configured custom variable values are prefilled, and an edited value is kept for later tests. Retained API Request and Code outputs are labeled with the time they were tested.
 
 Some blocks determine their output variables from the test result. For these blocks, run a successful test before using returned values in downstream blocks, and test again whenever the output structure changes.
 

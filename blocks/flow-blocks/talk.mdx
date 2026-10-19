@@ -11,11 +11,15 @@ sources:
   - "features/calls/modules/call-details/tabs/blocks/call-blocks-tab-block-timeline-item.tsx"
   - "features/workflows/modules/editor/components/common/generate-with-ai-inline.tsx"
   - "features/workflows/modules/editor/hooks/use-start-focused-block-generation.ts"
+  - "features/workflows/modules/editor/custom-nodes/prompt/components/exit-condition-requirements.tsx"
+  - "features/workflows/modules/editor/custom-nodes/prompt/components/exit-requirement-levels.tsx"
+  - "features/workflows/modules/editor/custom-nodes/prompt/components/require-on-all-exits-menu.tsx"
+  - "features/workflows/model/nodes/prompt-exit-conditions.ts"
   - "phonely-backend/app/agent/live_actions/conversation/custom_prompt.py"
   - "phonely-backend/app/custom_llm/prompts/prompts_v4_0.py"
   - "features/workflows/ai/runtime/server-tools.ts"
   - "features/workflows/modules/editor/custom-nodes/custom-node-card.tsx"
-last-verified: "2026-10-05"
+last-verified: "2026-10-19"
 ---
 
 Choose **Talk** when the agent needs to adapt over several turns, such as answering questions, understanding an issue, or qualifying a caller. It stays active until an exit condition is met and can collect values along the way.
@@ -29,6 +33,8 @@ Configure the block directly, or expand the **Generate with AI** strip at the to
 > Answer the caller's questions using the knowledge base. If an answer is unavailable, offer to collect their contact details for follow-up.
 
 In **Review** mode, inspect the proposal on the canvas and apply it. In **Auto apply** mode, the requested edit is written directly to the draft. Check the result and test the affected path before publishing; see [Choose how flow changes are applied](/key-concepts/ask-ai#choose-how-flow-changes-are-applied). The instruction is not saved onto the block, so the box starts empty each time and the request lives in the Ask AI conversation. Generation is offered only on an editable draft, not in version previews, comparisons, or to viewers.
+
+Type `@` in the instruction to add a workflow variable. The selected variable appears as a chip and passes to Ask AI as a variable reference rather than plain text.
 
 ## Configure the conversation
 
@@ -50,11 +56,13 @@ Write conditions as completed, observable outcomes. For example:
 
 A Talk block requires at least one exit condition and supports up to ten. Conditions must be non-empty and unique.
 
+Each exit lists the variables it must capture before the call can leave through it, shown as chips on the condition and on the exit rows on the canvas. See [Require variables per exit](#require-variables-per-exit).
+
 <Warning>
   Exit conditions decide when Talk ends and can override instructions in the Prompt. If the block advances too early or takes the wrong route, make the relevant condition more specific before adding more prompt instructions.
 </Warning>
 
-When several conditions lead to the same block, combine them into one outcome-focused condition for clearer routing.
+When several conditions lead to the same block, combine them into one outcome-focused condition for clearer routing. Exits leading to the same block are suggested for combining only when their variable requirements also match.
 
 ### Variables
 
@@ -65,13 +73,24 @@ Add a variable when the Talk block should extract information from the conversat
 | **Name** | Name shown in **Available Variables**; must be unique within the block |
 | **Type** | Expected format of the value |
 | **Description** | Information the agent should collect |
-| **Required** | Collect the value before leaving the block |
-| **Confirm** | Ask the caller to confirm a required value |
-| **Spell Back** | Spell a confirmed value character by character |
 
-**Confirm** is available after **Required** is enabled, and **Spell Back** is available after **Confirm** is enabled.
+Each variable's card can require it on every exit at once. Requiring whether a value must be captured, confirmed, or spelled back is set per exit condition, not on the variable itself. See [Require variables per exit](#require-variables-per-exit).
 
 Collected values appear in **Available Variables** for later blocks on that route. See [Variables](/flow-editor/variables) for types, availability, and troubleshooting.
+
+### Require variables per exit
+
+A Talk variable is required per exit condition, so one route can demand a value while another does not. For example, an exit such as “the caller refuses to give their name” does not have to wait for the name, while the normal completion exit does.
+
+On each exit condition, add the variables it needs as chips and choose how far to take each one:
+
+| Level | What the agent does |
+| :-- | :-- |
+| **Collect** | Capture the value, with no read-back |
+| **Confirm** | Repeat the value and ask the caller to confirm it |
+| **Spell back** | Spell the value out and confirm it with the caller |
+
+To apply the same requirement everywhere, open the variable's card and require it on all exits at once; its chips still live on each exit, so you can adjust an individual exit afterward. Existing blocks keep their earlier behavior: each previously **Required** variable becomes a requirement on every exit.
 
 ## Example: Answer business questions
 
@@ -106,6 +125,6 @@ For an unexpected result, open **Call Details**, select **Blocks**, and expand T
     Give the Talk block one conversational objective with clear completion points. Move structured collection, actions, or later decisions into connected blocks.
   </Accordion>
   <Accordion title="A Talk variable is empty later">
-    Open **Call Details** and confirm that the call passed through Talk and stored the value. If later blocks always need it, enable **Required**. Otherwise, make sure those blocks can run without it.
+    Open **Call Details** and confirm that the call passed through Talk and stored the value. If later blocks always need it, require the variable on the exits that reach them. Otherwise, make sure those blocks can run without it.
   </Accordion>
 </AccordionGroup>

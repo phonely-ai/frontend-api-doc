@@ -2,11 +2,15 @@
 title: "Upload Contacts by CSV"
 description: "Add a fixed contact list to a batch campaign and map its columns."
 sources:
+  - "features/campaign/modules/campaign-onboarding/steps/source-setup-step.tsx"
+  - "features/campaign/modules/campaign-onboarding/steps/variables-step.tsx"
   - "features/campaign/modules/edit-campaign-sheet/general-tab/components/upload-files.tsx"
-  - "features/campaign/modules/edit-campaign-sheet/general-tab/components/data-source-fields.tsx"
   - "features/campaign/modules/edit-campaign-sheet/general-tab/components/source-field-mapping-select.tsx"
   - "features/campaign/utils/source-field-mappings.ts"
-last-verified: "2026-08-18"
+  - "features/campaign/modules/campaign-onboarding/steps/call-cadence-step.tsx"
+  - "features/campaign/modules/campaign-onboarding/steps/routing-step.tsx"
+  - "features/campaign/modules/campaign-settings/campaign-settings.tsx"
+last-verified: "2026-10-19"
 ---
 
 Batch campaigns receive contacts from CSV files. Each row represents one queued call, and the column names become fields that the campaign can map to phone numbers, timezones, and flow variables.
@@ -15,7 +19,6 @@ Batch campaigns receive contacts from CSV files. Each row represents one queued 
 
 - Include a header row with non-empty, distinct column names.
 - Include a phone-number column with country codes where required.
-- Keep each file at or below 10 MB.
 - Remove contacts that should not be called before uploading the file.
 
 Use consistent values within each column. For example, keep phone numbers in one format and use valid timezone values if the campaign maps a timezone field.
@@ -24,13 +27,12 @@ To control when individual contacts may be called, add a column of daily time ra
 
 ## Upload and map the fields
 
-1. Create or edit a **Batch Calling** campaign.
-2. Upload one or more CSV files in **Select Trigger Type**.
-3. Review the detected columns.
-4. Map the contact phone number and any optional timezone, dial-out-number, or calling-window fields.
-5. In **Configure Call Flows**, map the source fields used by the selected flow.
+1. Create a batch campaign and upload one or more CSV files in **Source setup**. For an existing campaign, open **Settings > Call initiation**.
+2. Review the detected columns and any warning about a missing phone-number column.
+3. In **Calling hours**, configure any per-person timezone or calling-window field. If using **Internal routing**, choose the dial-out-number field in **Number routing**.
+4. In **Variables**, map the source fields used by the selected flow. For an existing campaign, these controls are under **Settings > Outbound call flow**, with scheduling under **Calling hours** and routing under **Numbers**.
 
-If the file or its headers change, review every mapping before starting the campaign.
+If the file or its headers change, review every mapping before starting the campaign. Apply edits to an existing campaign with **Save changes**.
 
 ## Verify the import
 

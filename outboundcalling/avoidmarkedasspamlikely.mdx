@@ -3,9 +3,10 @@ title: "Outbound Compliance"
 description: "Prepare an outbound campaign responsibly and reduce avoidable delivery problems."
 sources:
   - "features/campaign/modules/campaign-onboarding/steps/compliance-step.tsx"
-  - "features/campaign/modules/edit-campaign-sheet/call-cadence-tab/**"
-  - "features/campaign/modules/edit-campaign-sheet/phone-number-tab/**"
-last-verified: "2026-08-10"
+  - "features/campaign/modules/campaign-onboarding/steps/call-cadence-step.tsx"
+  - "features/campaign/modules/campaign-onboarding/steps/phone-numbers-step.tsx"
+  - "features/campaign/modules/campaign-onboarding/steps/routing-step.tsx"
+last-verified: "2026-10-19"
 ---
 
 Carrier labeling and call delivery depend on factors outside Phonely, so no configuration can guarantee that a call will be answered or avoid a spam label. Use the campaign controls to remove preventable problems before launch.
@@ -14,7 +15,7 @@ Carrier labeling and call delivery depend on factors outside Phonely, so no conf
 
 1. Call only contacts you are permitted to contact.
 2. Remove contacts who have opted out or must not be called.
-3. Use an appropriate enabled number and routing method for the audience.
+3. Switch on appropriate numbers and choose a routing method that fits the audience.
 4. Configure calling hours in the contact's scheduling timezone.
 5. Set a calls-per-hour limit appropriate for the campaign, and add any do-not-dial days such as holidays.
 6. Test the flow, source mappings, routing, and voicemail behavior with numbers you control.

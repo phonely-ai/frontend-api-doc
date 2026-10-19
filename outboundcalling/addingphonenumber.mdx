@@ -2,40 +2,43 @@
 title: "Campaign Phone Numbers"
 description: "Choose outbound phone numbers and configure how a campaign selects them."
 sources:
-  - "features/campaign/modules/edit-campaign-sheet/phone-number-tab/**"
-  - "features/campaign/modules/edit-campaign-sheet/general-tab/components/dialout-number-field.tsx"
+  - "features/campaign/modules/campaign-onboarding/steps/phone-numbers-step.tsx"
+  - "features/campaign/modules/campaign-onboarding/steps/routing-step.tsx"
+  - "features/campaign/modules/campaign-onboarding/components/twilio-connect.tsx"
+  - "features/campaign/modules/campaign-onboarding/components/twilio-numbers-dialog.tsx"
+  - "features/campaign/hooks/use-add-campaign-numbers.ts"
   - "features/campaign/api/phone-number-service.ts"
   - "services/phone-numbers/**"
-last-verified: "2026-08-10"
+last-verified: "2026-10-19"
 ---
 
-Every outbound campaign needs at least one enabled phone number. In **Add Phone Numbers**, choose from numbers already assigned to the agent or unassigned numbers available to the workspace.
+Every outbound campaign calls from numbers in your own Twilio account. In the **Phone numbers** step, add numbers from Twilio and switch on the ones the campaign can call from. Only switched-on numbers dial.
 
-If the required number is not listed, select **Import numbers from Twilio** and complete the connection flow.
+Select **Add numbers from Twilio** to open the picker, which groups available numbers by region. If your Twilio account is not connected yet, an inline connect step links it with your Account SID and Auth Token before you add numbers.
 
 ## Choose a routing method
 
-The routing method controls which enabled number places each call:
+The **Number routing** step appears only when two or more numbers are switched on. It controls which number places each call:
 
 | Method | How Phonely selects a number |
 | --- | --- |
-| Weight Routing | Selects numbers according to their assigned weights; active weights must total 100% |
-| State-Based Routing | Uses an enabled number in the contact's state when one is available |
-| Country-Based Routing | Uses an enabled number in the contact's country when one is available |
+| Percent-based routing | Splits calls across your numbers by the percentage you give each one. Switching a number on or off re-splits the share evenly. |
+| Location based routing | Calls each person from a number in their state or country, when a matching number is available. |
+| Internal routing | Your data names the number to call each person from. |
 
-State- and country-based routing fall back to a random number from the enabled pool when no regional match is available.
+Location based routing lets you match on **state** or **country**, and falls back to another enabled number when no regional match is available.
 
-## Map the dial-out number when needed
+## Internal routing: name the number per contact
 
-A campaign source can provide a specific dial-out number. Map **Dial-out Number** to the relevant source field only when each contact should determine which campaign number places the call.
+Choose **Internal routing** when a campaign source field already carries the number to dial from for each person. Point the step at the source field that holds that number.
 
-A non-empty mapped value overrides Weight, State, and Country routing. The value must match an enabled number in the campaign; otherwise, that contact fails instead of using another number. An empty or unmapped value uses the campaign's configured routing method.
+The named value must match a switched-on number in the campaign; otherwise that contact fails instead of using another number. A contact without a usable value uses the campaign's other enabled numbers.
 
 ## Verify the numbers
 
 Before launching the campaign:
 
-1. Confirm that every intended number is enabled.
-2. For Weight Routing, confirm that the weights total 100%.
-3. For regional routing, test a matching contact and a contact that requires the fallback pool.
+1. Confirm that every intended number is switched on.
+2. For percent-based routing, review the share given to each number.
+3. For location based routing, test a matching contact and a contact that requires the fallback pool.
 4. Place a controlled outbound call and verify the number shown to the recipient.
