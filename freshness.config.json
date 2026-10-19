@@ -1565,7 +1565,7 @@
           "pages": [
             "key-concepts/ask-ai"
           ],
-          "note": "PHO-10844 makes Ask AI read one agent by default (the page's agent, or the sidebar agent on pages without one) instead of every accessible agent, with explicit naming/comparison to read others; PHO-11067/11158/11115/11195/10839/11179/11269 are internal brief handling, step reporting, regression tooling and copy that the Ask AI page already covers generically. Added the one-default-agent behavior to Ask AI's navigation-context section. The large remainder is assistant orchestrator, capability, runtime, change-set and regression internals with no further public fact. Verified chat.tsx default-agent selection and route-capabilities."
+          "note": "Ask AI > Understand page context documents one default agent (the page agent, otherwise the accessible sidebar selection), with explicit requests needed to read others. Keep notes for an agent now distinguishes automatically maintained business notes and remember/forget updates after the reply from saved workspace files. Notes can be read for the default agent on Home/Settings; mutations require the agent's own page and edit permission. File tools remain supported, with confirmation for changes to an existing file the user did not name. Checked workspace capability activation, mutation guards, brief-update scheduling and file-tool policy. The release's unrelated observability, regression tooling and wording changes add no further public task."
         },
         {
           "id": "org-roles-and-access",
@@ -1591,7 +1591,7 @@
           "pages": [
             "agent-design/voice/overview"
           ],
-          "note": "PHO-11157 shares private voice clones with the agent's organization, lets admins make a clone public, and shows provider cloning error detail. Added these facts to the Clone a voice accordion on Voice. Verified clone-voice-form.tsx."
+          "note": "Voice > Add or clone a voice explains organization-shared private clones and provider error detail. Public visibility is explicitly limited to Phonely platform administrators, matching the current-user global role guard; an organization Admin role alone does not grant this control. Verified clone-voice-form and the user-role source without changing the existing voice selection/settings journey."
         },
         {
           "id": "outbound-campaign-wizard",
@@ -1604,7 +1604,7 @@
             "outboundcalling/webhookconnection",
             "outboundcalling/avoidmarkedasspamlikely"
           ],
-          "note": "PHO-9438 rebuilt outbound campaign setup as a step-by-step wizard (Name, Call initiation, Source setup with a listening webhook test, Phone numbers with an inline Twilio connect, conditional Number routing, Calling hours, Call flow, Variables with Ignore this variable, Compliance, Review and start) with each answer kept in the URL; settings moved to a Settings tab with section nav and one save bar; the campaign page shows the queue as a Call History style list and status reads Active. The six outbound pages were rewritten and their stale source maps (edit-campaign-sheet phone-number-tab/general-tab components removed by the rework) repointed to the campaign-onboarding steps/components. Percent-based/Location based/Internal routing replace Weight/State/Country naming. Verified step order and labels in campaign-onboarding.tsx, routing-step, phone-numbers-step, source-setup-step, webhook-setup, twilio-connect, variables-step, campaign-settings, and campaign-status-text."
+          "note": "Reconciled all six outbound pages with the released wizard and campaign Settings. Setup ends with Start campaign, which saves and starts calling; a refused start leaves the campaign saved for recovery. Exit setup's Discard deletes the draft, so the docs no longer promise that leaving always preserves progress. Corrected Call initiation/Calling hours settings labels, per-person scheduling and Internal-routing field locations, draft-only webhook field capture versus active-campaign requests, X-Authorization, and flow-variable mapping. Monitoring uses Queued/In progress/Completed/Failed filter tiles; Queued includes scheduled redials and the removed Calls remaining UI is no longer described. Repaired source maps and set all six outbound verification dates to October 19 after the page/journey review. Removed an unverified numeric CSV upload limit rather than inventing another cap. Source evidence includes onboarding, settings, queue tiles, source setup and webhook handling."
         },
         {
           "id": "block-test-redesign",
@@ -1629,7 +1629,7 @@
             "performance",
             "data-tables"
           ],
-          "note": "PHO-10082 and PHO-10472 add a billing measure family (Billed minutes, Billed transfer minutes, Cost in USD), a Numbers filter (is over/at least/under/at most, decimals), a Call list chart type (default for a bare count with no breakdown), the add-widget chat/templates/goals split, and the Explore metric redesign (population row above function row, By number of calls / By value per call, Add Metric > Numbers, folded Percentile row, Total \u2026 caption). Updated Performance (filters, chart types, add-widget, Explore, measures) and Data Tables (billing measures in the metric list). Verified analytics-widget.ts, explore-model.ts, explore-query-rail.tsx and formula-variables.ts. The remaining Performance files are internal board/widget/assistant plumbing and date-range work (PHO-11479) carried for the same release."
+          "note": "Performance documents billing measures, Numbers bounds, Call list, guided card creation and Explore controls; Data Tables retains its canonical metric guidance. Performance > Compare with another period now covers the released board-wide control, Previous period, choosing an earlier non-overlapping same-length window on the calendar, Apply and Stop comparing. This PHO-11479 task is public behavior, not an internal date-range change. Verified the compare control, header integration, period-window calculations and existing card/query guards; unrelated rendering and analytics changes require no additional instructions."
         },
         {
           "id": "ab-test-order",

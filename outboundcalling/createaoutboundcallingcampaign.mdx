@@ -32,7 +32,7 @@ The use case is more than a label: it sets how the outbound dial queue prioritiz
 
 ## Complete campaign setup
 
-Setup is a step-by-step wizard. Each step keeps its answer in the page URL, so you can leave and return without losing progress:
+Work through the setup wizard, reviewing each step before continuing:
 
 1. **Name:** Name the campaign and choose its use case.
 2. **Call initiation:** Choose how people are added — webhook, Google Sheets, or Zapier for a continuous campaign, or a CSV upload for a batch campaign.
@@ -45,11 +45,11 @@ Setup is a step-by-step wizard. Each step keeps its answer in the page URL, so y
 9. **Compliance:** Review and accept the required compliance and Do Not Call acknowledgements.
 10. **Review and start:** Check the summary and start the campaign.
 
-The setup remains a draft until every required step is complete.
+The campaign remains a draft until you complete setup and select **Start campaign**. If you choose **Exit setup**, confirming **Discard** deletes the draft campaign.
 
 ## Change settings after setup
 
-A created campaign has a **Settings** tab on the campaign page. A section nav on the left switches between **Campaign**, **People**, **Numbers**, **Calling hours**, **Outbound call flow**, and an **End or delete** panel, and a single save bar applies your changes.
+A created campaign has a **Settings** tab on the campaign page. A section nav on the left switches between **Campaign**, **Call initiation**, **Numbers**, **Calling hours**, **Outbound call flow**, and an **End or delete** panel, and a single save bar applies your changes.
 
 ## Configure calling hours
 
@@ -61,7 +61,7 @@ The editor warns when a configured range falls outside 8:00 AM–9:00 PM. This w
 
 ### Give a contact its own calling window
 
-When your contact data already says when each person may be called, map **Recipient calling window field** in the campaign's general settings to that source field.
+In the **Calling hours** step, open **Days and hours**, turn on per-person calling hours, and choose the source field containing each contact's window. For an existing campaign, open **Settings > Calling hours** to change that mapping.
 
 Write each window as a daily time range such as `09:00-17:00`, and separate multiple ranges with a semicolon: `09:00-12:00;13:00-17:00`. Each window is evaluated in that contact's own timezone.
 
@@ -69,12 +69,12 @@ A contact's window can only narrow the campaign's calling hours, never extend th
 
 ## Set do-not-dial days
 
-Use **Do Not Dial Days** in the **Calling hours** step to keep a campaign from placing calls on specific dates, such as holidays. Add dates in either of two ways:
+Open **Days off** in the **Calling hours** step to keep a campaign from placing calls on specific dates, such as holidays. Add dates in either of two ways:
 
 - Select the **US federal holidays** preset to add its upcoming dates at once.
 - Select individual dates on the year calendar.
 
-Date edits are part of the campaign form. They are saved when you select **Save** and discarded if you close the setup without saving. On a do-not-dial day, the campaign shows a **Paused — do-not-dial day** indicator in the campaign list and detail views and resumes automatically on the next allowed day.
+Review the dates before selecting **Start campaign** during setup. For an existing campaign, apply date edits with **Save changes** in Settings. An active campaign waits on its days off and resumes when its calling schedule allows.
 
 Do-not-dial days do not replace the calling-hours, consent, and suppression rules that apply to each contact and jurisdiction.
 
@@ -86,7 +86,7 @@ See [Outbound Flows](/outboundcalling/creating-call-flows-for-outbound-campaigns
 
 ## Launch and monitor the campaign
 
-After setup, start the campaign from the campaign list. A running campaign reads **Active**; campaigns also appear as **Paused** or **Completed** as their status changes, and a campaign that has not finished setup reads **Not set up**.
+On **Review and start**, select **Start campaign** to save and start the campaign. If the campaign is saved but cannot start, correct the reported problem and use the start action on its detail page. A running campaign reads **Active**; campaigns also appear as **Paused** or **Completed**, and a draft reads **Not set up**.
 
 The campaign page shows the queue as a Call History style list: four tiles that double as filters, rows grouped by queue state and day, selection with **Analyze with AI** and export, the number each call was dialed from, and next-try times on waiting calls.
 
@@ -94,7 +94,9 @@ The campaign page shows the queue as a Call History style list: four tiles that 
 - Resume a paused campaign when it is ready to continue.
 - Open the campaign to review its queued and completed calls.
 
-The campaign's **Overview** cards and **Calls remaining** show its current counts. **Queued** reflects calls waiting in the dial queue; the other cards count call records. If counts cannot be loaded, they show a dash rather than zero. A campaign that has never run shows **Not started**. Use **Back to Campaigns** from the detail page to return to the same agent's campaign list.
+The four tiles are **Queued**, **In progress**, **Completed**, and **Failed**. **Queued** includes calls waiting to dial and scheduled redials; **In progress** includes calls being dialed and active calls. Select a tile to filter the list, then select it again to show all calls.
+
+If counts are unavailable, the tiles show a dash rather than zero. Use the back arrow beside the campaign name to return to that agent's campaign list.
 
 A queued call shows why it has not been dialed yet:
 

@@ -15,6 +15,8 @@ sources:
   - "features/performance/modules/analytics/explore/explore-model.ts"
   - "features/performance/modules/analytics/explore/explore-query-rail.tsx"
   - "app/(main)/(routes)/performance/**"
+  - "features/performance/ui/performance-compare-toggle.tsx"
+  - "features/performance/utils/period-comparison.ts"
 last-verified: "2026-10-19"
 ---
 
@@ -43,6 +45,14 @@ A flow-block filter offers three operators: **Reached**, **Never reached**, and 
 A **Numbers** filter bounds any numeric field with **is over**, **is at least**, **is under**, or **is at most**, and the bound can take decimals. Use it to count, for example, calls longer than 30 seconds or calls costing over $1.50.
 
 Older board-wide outcome, topic, end-reason, sentiment, caller-number, duration, and flow-block filters are no longer retained. Review older views before comparing their totals with earlier reports, and recreate supported conditions on the relevant cards.
+
+### Compare with another period
+
+Use the clock-arrow control beside the date range, labeled **Compare to another period**, to compare the board with an earlier window.
+
+1. Choose **Previous period** for the window immediately before the current range.
+2. To compare with a different period, choose its first day on the calendar and select **Apply**. Phonely keeps the comparison the same length as the current range; for example, compare seven days with an earlier seven days. The comparison must end before the current range begins.
+3. Check the period shown on the comparison control before interpreting the results. Open the control and select **Stop comparing** to turn comparison off.
 
 ## Read the cards
 
