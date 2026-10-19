@@ -7,7 +7,7 @@ sources:
   - "services/ab-test-case-service.ts"
   - "features/testing/modules/ab-test/utils/open-test-variant-agent.ts"
   - "components/ui/multi-select-with-icon.tsx"
-last-verified: "2026-09-07"
+last-verified: "2026-10-19"
 ---
 
 A/B Testing compares your current agent, the **Control**, with a duplicated **Variant** using live calls. Phonely routes the configured share of calls to the variant and evaluates both agents against the same success criterion. Tests can run on the calls your agent answers, on the calls it places, or on both.
@@ -62,6 +62,8 @@ The test appears in one of three sections:
 - **Planned** has been configured but is not routing calls.
 - **In Progress** is currently routing live calls.
 - **Completed** has reached its end criterion or was terminated.
+
+Completed tests open newest first in the table view; use the column headers to change the sort order.
 
 You can adjust the traffic split while a test is in progress. Terminating a test stops new calls from being assigned to it; it does not undo calls already completed.
 

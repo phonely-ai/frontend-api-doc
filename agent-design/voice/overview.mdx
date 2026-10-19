@@ -11,7 +11,7 @@ sources:
   - "phonely-backend/app/agent/assistant/assistant.py"
   - "phonely-db-svc/app/services/voice_service.py"
   - "phonely-db-svc/app/api/public/voices.py"
-last-verified: "2026-09-07"
+last-verified: "2026-10-19"
 ---
 
 Voice controls the speech callers hear during phone conversations. The selected voice and its settings belong to the agent and apply across its inbound and outbound flows.
@@ -91,6 +91,8 @@ Select **Add or Clone a Voice** when the built-in library does not contain the v
   </Accordion>
   <Accordion title="Clone a voice">
     Choose **Clone a voice**, then upload or record a clear 1–2 minute sample. Enter a unique name, gender, and language, and confirm that you have permission to clone and use the recording. Compare the generated samples before saving one. The saved voice becomes the current agent's selected voice.
+
+    A cloned voice is private to your organization and available to everyone in it. An admin can instead make a clone public, which adds it to the voice catalog every account sees. If cloning fails, the form shows the provider's error detail so you can correct the sample or settings and try again.
   </Accordion>
 </AccordionGroup>
 

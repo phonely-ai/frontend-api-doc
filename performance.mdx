@@ -12,8 +12,10 @@ sources:
   - "features/performance/modules/analytics/explore/explore-predicate-list.tsx"
   - "features/performance/ui/filter-block-menu.tsx"
   - "features/performance/modules/formula/utils/formula-variables.ts"
+  - "features/performance/modules/analytics/explore/explore-model.ts"
+  - "features/performance/modules/analytics/explore/explore-query-rail.tsx"
   - "app/(main)/(routes)/performance/**"
-last-verified: "2026-10-05"
+last-verified: "2026-10-19"
 ---
 
 Performance turns an agent's call history into a board of cards that help you understand traffic, results, and recurring patterns.
@@ -38,11 +40,13 @@ For a question about particular outcomes, topics, end reasons, sentiments, analy
 
 A flow-block filter offers three operators: **Reached**, **Never reached**, and **Dropped off**. Use **Dropped off** to count only the calls that ended on a block, which pairs with [Opportunity Analysis](/call-history-ai-analytics/call-history-ai-analytics#understand-why-callers-left-early) when you are investigating where callers leave early.
 
+A **Numbers** filter bounds any numeric field with **is over**, **is at least**, **is under**, or **is at most**, and the bound can take decimals. Use it to count, for example, calls longer than 30 seconds or calls costing over $1.50.
+
 Older board-wide outcome, topic, end-reason, sentiment, caller-number, duration, and flow-block filters are no longer retained. Review older views before comparing their totals with earlier reports, and recreate supported conditions on the relevant cards.
 
 ## Read the cards
 
-**Add widget** opens a dialog with guided creation and preset cards. Before your first guided request, describe your business goal and north star metric—the main measure of success you want to track—then select **Save and continue**. Describe the card you want and review the proposal before adding it. Use **Change business goal and north star metric** in the dialog to revise those answers later.
+**Add widget** opens a dialog that splits into chat, templates, and goals views. Before your first guided request, describe your business goal and north star metric—the main measure of success you want to track—then select **Save and continue**. Describe the card you want and review the proposal before adding it. Use **Change business goal and north star metric** in the dialog to revise those answers later.
 
 You can also pick a preset directly. On an empty view, you can ask Phonely to suggest a starting board built from the agent's own flow and outcomes. Preset cards cover common questions:
 
@@ -65,7 +69,7 @@ Each card shows when its data was last updated. Hover a number to see the count 
 
 ### Change how a card looks
 
-Open a card's **More options** menu to switch between **Time series**, **Bar chart**, **Big number**, **Metric bars**, **Top list**, **Table**, and **Pie**, where compatible. Unavailable types are greyed out with instructions for unlocking them. **Metric bars** requires no breakdown and at least two displayed metrics that share a unit.
+Open a card's **More options** menu to switch between **Time series**, **Bar chart**, **Big number**, **Metric bars**, **Top list**, **Table**, **Call list**, and **Pie**, where compatible. Unavailable types are greyed out with instructions for unlocking them. **Metric bars** requires no breakdown and at least two displayed metrics that share a unit. **Call list** lists the individual calls a query matches; it needs a metric and no breakdown, and is the default for a bare count with no breakdown.
 
 An existing **Sankey** card keeps its own chart type. You cannot convert an ordinary card to Sankey from this menu.
 
@@ -93,6 +97,10 @@ Explore replaces the board while you work in it. Build a question by choosing wh
 | **Entity and measure** | What each number counts, such as calls or a saved metric |
 | **Breakdown by** | What each series, slice, or row represents |
 | **Filters** | Which calls contribute to the result |
+
+A metric card reads as a query and then arithmetic: the population row (which calls) sits above the function row. The aggregation menu is split into **By number of calls** and **By value per call**, **Add Metric** offers **Numbers** to add a “calls over …” measure in one pick, the percentile options fold into one **Percentile** row, and a summed metric is captioned **Total …**. The breakdown-by field picker opens on the field it already holds and pins each family heading while its fields scroll.
+
+Measures include a billing family alongside call metrics: **Billed minutes**, **Billed transfer minutes**, and **Cost** (rendered as USD).
 
 Save the result to add it to the board. Use the browser's Back button or the back arrow to leave Explore; if you have unsaved work, Phonely asks before discarding it.
 

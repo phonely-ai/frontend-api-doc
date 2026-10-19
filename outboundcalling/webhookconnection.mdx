@@ -2,11 +2,14 @@
 title: "Webhook Triggers"
 description: "Send contacts from an external system to a continuous outbound campaign."
 sources:
-  - "features/campaign/modules/edit-campaign-sheet/general-tab/components/triggers/webhook-trigger.tsx"
+  - "features/campaign/modules/campaign-onboarding/components/webhook-setup.tsx"
+  - "features/campaign/modules/campaign-onboarding/components/webhook-live-test.tsx"
+  - "features/campaign/modules/campaign-onboarding/components/webhook-fields.ts"
+  - "features/campaign/modules/campaign-onboarding/components/webhook-fields-editor.tsx"
   - "features/campaign/api/queue-call-service.ts"
   - "features/campaign/api/campaign-service.ts"
   - "phonely-backend/app/outbound/campaign/routes.py"
-last-verified: "2026-08-18"
+last-verified: "2026-08-19"
 ---
 
 Use a webhook when an external system should add contacts to a **Continuous Calling** campaign. Each accepted request adds a call to the campaign queue; the campaign cadence determines when that call can run.
@@ -16,10 +19,10 @@ Phonely does not deduplicate accepted webhook requests. If the sending system re
 ## Configure the webhook
 
 1. Create or edit a Continuous Calling campaign.
-2. In **Select Trigger Type**, choose **Webhook**.
-3. Copy the generated webhook URL and authorization details.
-4. Define the JSON request body, then select **Set Fields**.
-5. Map the detected fields to the contact phone number, optional timezone, dial-out number, or calling window, and any variables used by the outbound flow.
+2. In **Call initiation**, choose **Webhook**.
+3. In the **Source setup** step, copy the generated webhook URL and authorization details.
+4. Declare the fields the campaign should accept. Use the **Live test** tab to arm the webhook and send a real test request; the step lists the fields it received so you can confirm them. Use the **Manual** tab to edit the field list by hand.
+5. In the **Variables** step, map the fields to the contact phone number, optional timezone, dial-out number, or calling window, and any variables used by the outbound flow.
 
 The default body includes `phone_number`, `timezone`, `dialout_number`, and `calling_window`. You can add fields required by your flow.
 
@@ -39,7 +42,7 @@ Send JSON with the authorization required by the generated webhook. Keep the cre
 
 ## Keep the schema aligned
 
-Select **Set Fields** whenever you add, rename, or remove a top-level field. Then review the campaign mappings and any downstream flow fields that use those values.
+Update the declared fields whenever you add, rename, or remove a top-level field, either by sending another test request on the **Live test** tab or by editing the list on the **Manual** tab. Then review the campaign mappings and any downstream flow fields that use those values.
 
 ## Verify the trigger
 

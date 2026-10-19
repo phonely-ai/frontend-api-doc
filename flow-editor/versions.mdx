@@ -11,7 +11,7 @@ sources:
   - "features/workflows/modules/editor/components/version-delete-modal.tsx"
   - "features/workflows/modules/editor/components/workflow-changelog-modal.tsx"
   - "features/workflows/modules/editor/hooks/use-version-preview.ts"
-last-verified: "2026-08-24"
+last-verified: "2026-10-19"
 ---
 
 A version is a read-only snapshot of a flow. Use versions to preserve meaningful checkpoints, compare earlier configurations, and restore a known design without changing the published version.
@@ -38,7 +38,7 @@ Avoid creating a version for every minor edit. Auto-save already saves the curre
 
 ## Preview an earlier version
 
-Open the menu beside **Publish** and select **Version History**. The side panel lists **Current Draft** and every numbered version. Each version shows its name, notes, author, and time; a **Published** badge marks the current published version. **Current Draft** is the latest auto-saved flow and is not numbered.
+Open the menu beside **Publish** and select **Version History**. The panel opens by comparing the published version with the current draft, and lists **Current Draft** and every numbered version. Each version shows its name, notes, author, and time; a **Published** badge marks the current published version. **Current Draft** is the latest auto-saved flow and is not numbered.
 
 Version History puts the editor into read-only review mode. Select a version to preview its saved canvas, then select a block to inspect its saved configuration. Previewing never changes the current draft.
 
@@ -48,7 +48,9 @@ While previewing a version, you can select one or more of its blocks and copy th
 
 ### Compare two versions
 
-Open a version's menu and select **Compare** to enter comparison mode. Use the **From** and **To** selectors to choose the two versions to compare; each selector is searchable, and the current draft is available alongside the numbered versions. Comparison mode is read-only and highlights the field-level differences between the two selected snapshots without changing the current draft.
+Version History opens by comparing the published version with the current draft. A single **Compare** action at the top of the panel starts every comparison. From a version's own entry you can compare it with the published version or with the current draft.
+
+In comparison mode, use the **From** and **To** selectors to choose the two versions to compare; each selector is searchable, and the current draft is available alongside the numbered versions. Comparison mode is read-only and highlights the field-level differences between the two selected snapshots without changing the current draft. **Restore**, **Rename**, and **Delete** stay available while you compare.
 
 <Tip>
   Compare routes, block settings, variables, and Flow Settings—not only block names or canvas layout. A configuration change can alter behavior without moving a block.

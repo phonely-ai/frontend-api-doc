@@ -36,7 +36,7 @@ sources:
   - "features/workflows/ai/runtime/server-tools.ts"
   - "features/workflows/ai/tools/apply-workflow-changes.ts"
   - "features/chat/assistant/store/use-assistant-tab-store.ts"
-last-verified: "2026-10-05"
+last-verified: "2026-10-19"
 ---
 
 Ask AI is Phonely's in-product assistant. It opens in the app side panel and works alongside the page you are using.
@@ -78,6 +78,8 @@ Start with a request such as "Can you look into this call in detail?" Then add t
 ## Understand page context
 
 Ask AI follows your navigation context. Depending on the current surface, that context can include the current agent, active flow, selected guideline section, or selected calls. This is why requests such as "explain this flow" or "review these calls" can work without repeating every identifier.
+
+Ask AI reads one agent by default: the agent in the page's URL, or on pages without one, such as Home and Settings, the agent selected in the sidebar. It does not read every agent you can access; name another agent, or ask to compare agents, when you need one beyond the default. If the sidebar agent is one you can no longer access, the chat simply has no default agent rather than failing.
 
 The conversation can continue as you navigate, while the page context updates to the new surface. Check the current page and selection before using an implicit reference such as "this" or "these."
 

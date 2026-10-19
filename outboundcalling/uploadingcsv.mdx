@@ -2,11 +2,12 @@
 title: "Upload Contacts by CSV"
 description: "Add a fixed contact list to a batch campaign and map its columns."
 sources:
+  - "features/campaign/modules/campaign-onboarding/steps/source-setup-step.tsx"
+  - "features/campaign/modules/campaign-onboarding/steps/variables-step.tsx"
   - "features/campaign/modules/edit-campaign-sheet/general-tab/components/upload-files.tsx"
-  - "features/campaign/modules/edit-campaign-sheet/general-tab/components/data-source-fields.tsx"
   - "features/campaign/modules/edit-campaign-sheet/general-tab/components/source-field-mapping-select.tsx"
   - "features/campaign/utils/source-field-mappings.ts"
-last-verified: "2026-08-18"
+last-verified: "2026-08-19"
 ---
 
 Batch campaigns receive contacts from CSV files. Each row represents one queued call, and the column names become fields that the campaign can map to phone numbers, timezones, and flow variables.
@@ -25,10 +26,10 @@ To control when individual contacts may be called, add a column of daily time ra
 ## Upload and map the fields
 
 1. Create or edit a **Batch Calling** campaign.
-2. Upload one or more CSV files in **Select Trigger Type**.
+2. Upload one or more CSV files in the **Source setup** step.
 3. Review the detected columns.
 4. Map the contact phone number and any optional timezone, dial-out-number, or calling-window fields.
-5. In **Configure Call Flows**, map the source fields used by the selected flow.
+5. In the **Variables** step, map the source fields used by the selected flow.
 
 If the file or its headers change, review every mapping before starting the campaign.
 

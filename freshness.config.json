@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.270.1",
-        "commit": "7622f3eb40f7876fc780d542f4fca15d1b275d63"
+        "label": "v0.273.0",
+        "commit": "3ba98b4fb8dba13705040f6381949a5db74068b4"
       }
     },
     {
@@ -1542,6 +1542,172 @@
           "status": "not-public",
           "pages": [],
           "note": "Source-group review found developer skills, CI/evaluation tooling, archived implementation docs, dependency/format changes and supporting UI/observability primitives. Customer-facing effects of shared UI and assistant tools are accounted for in the task dispositions above; path location alone was not used to exclude them. Deep Dive telemetry remains an admin-only audience follow-up, and the removed enterprise-usage cron is operational. No additional supported public API or customer instructions are established by this group."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.273.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-10-19",
+      "fromExclusive": {
+        "label": "v0.270.1",
+        "commit": "7622f3eb40f7876fc780d542f4fca15d1b275d63"
+      },
+      "throughInclusive": {
+        "label": "v0.273.0",
+        "commit": "3ba98b4fb8dba13705040f6381949a5db74068b4"
+      },
+      "dispositions": [
+        {
+          "id": "ask-ai-assistant-internal",
+          "status": "docs-updated",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "PHO-10844 makes Ask AI read one agent by default (the page's agent, or the sidebar agent on pages without one) instead of every accessible agent, with explicit naming/comparison to read others; PHO-11067/11158/11115/11195/10839/11179/11269 are internal brief handling, step reporting, regression tooling and copy that the Ask AI page already covers generically. Added the one-default-agent behavior to Ask AI's navigation-context section. The large remainder is assistant orchestrator, capability, runtime, change-set and regression internals with no further public fact. Verified chat.tsx default-agent selection and route-capabilities."
+        },
+        {
+          "id": "org-roles-and-access",
+          "status": "docs-updated",
+          "pages": [
+            "billing-and-usage/teams",
+            "billing-and-usage/account"
+          ],
+          "note": "PHO-11314 reads organization settings and members through db-svc and adds an org-level Call history only role to member management and invitations; PHO-11031 requires an access code for sign-up (email-only page, Google routed to email sign-up) and blocks free-plan public invites/member adds. Added Call history only to the Teams invite roles and clarified that only owners/admins edit org settings on Account (others read-only, viewers hidden). Verified org-members-card.tsx, org-info-card.tsx, org-role-mapping, sign-up route/form and invite routes. Sign-up/invite gating is server enforcement of behavior the docs already describe generically, so no separate public page change was needed."
+        },
+        {
+          "id": "publish-review-and-checklist",
+          "status": "already-covered",
+          "pages": [
+            "flow-editor/test-and-publish",
+            "workflow-checklist"
+          ],
+          "note": "PHO-11274 broadens publish review to larger workflows, focuses on call-affecting issues and clearer fixes while still allowing Publish anyway. Test and Publish and the Flow Checklist already describe the advisory review and Publish anyway, so no wording change was required. Checklist/initiate-call/receive-call files are internal review and trigger-form plumbing. Verified publish-review-service and flow-checklist-popover."
+        },
+        {
+          "id": "voice-clone-sharing",
+          "status": "docs-updated",
+          "pages": [
+            "agent-design/voice/overview"
+          ],
+          "note": "PHO-11157 shares private voice clones with the agent's organization, lets admins make a clone public, and shows provider cloning error detail. Added these facts to the Clone a voice accordion on Voice. Verified clone-voice-form.tsx."
+        },
+        {
+          "id": "outbound-campaign-wizard",
+          "status": "docs-updated",
+          "pages": [
+            "outboundcalling/createaoutboundcallingcampaign",
+            "outboundcalling/addingphonenumber",
+            "outboundcalling/creating-call-flows-for-outbound-campaigns",
+            "outboundcalling/uploadingcsv",
+            "outboundcalling/webhookconnection",
+            "outboundcalling/avoidmarkedasspamlikely"
+          ],
+          "note": "PHO-9438 rebuilt outbound campaign setup as a step-by-step wizard (Name, Call initiation, Source setup with a listening webhook test, Phone numbers with an inline Twilio connect, conditional Number routing, Calling hours, Call flow, Variables with Ignore this variable, Compliance, Review and start) with each answer kept in the URL; settings moved to a Settings tab with section nav and one save bar; the campaign page shows the queue as a Call History style list and status reads Active. The six outbound pages were rewritten and their stale source maps (edit-campaign-sheet phone-number-tab/general-tab components removed by the rework) repointed to the campaign-onboarding steps/components. Percent-based/Location based/Internal routing replace Weight/State/Country naming. Verified step order and labels in campaign-onboarding.tsx, routing-step, phone-numbers-step, source-setup-step, webhook-setup, twilio-connect, variables-step, campaign-settings, and campaign-status-text."
+        },
+        {
+          "id": "block-test-redesign",
+          "status": "docs-updated",
+          "pages": [
+            "flow-editor/test-and-publish"
+          ],
+          "note": "PHO-10949 and PHO-10731 refresh workflow block tests with compact editable input rows, consistent controls/previews/test buttons, errors shown once beside fields, visible simple resolved inputs, prefilled configured custom variable values (edits kept), and retained API/Code outputs labeled with their test time; PHO-11055 moves Code validation to an explicit Validate click. Added prefill/retained-output note to Test and Publish; the Code page already documented click-to-validate. Remaining files are the block-test panel components and per-block form refactors (imports repointed to shared workflow-inspector-controls) with no further user-facing fact."
+        },
+        {
+          "id": "usage-cost-forecast",
+          "status": "docs-updated",
+          "pages": [
+            "billing-and-usage/manage-agents-and-usage"
+          ],
+          "note": "PHO-11393 adds a current-billing-cycle forecast inside each Usage & Cost card's info popover, projected from this cycle's daily average and shown as an estimate only inside the popover. Added a forecast note to Manage Agents & Usage. Home/onboard files here are internal scope-selection changes (PHO-11479) with no separate user-facing doc fact. Verified usage-kpi-cards.tsx."
+        },
+        {
+          "id": "performance-explore-billing",
+          "status": "docs-updated",
+          "pages": [
+            "performance",
+            "data-tables"
+          ],
+          "note": "PHO-10082 and PHO-10472 add a billing measure family (Billed minutes, Billed transfer minutes, Cost in USD), a Numbers filter (is over/at least/under/at most, decimals), a Call list chart type (default for a bare count with no breakdown), the add-widget chat/templates/goals split, and the Explore metric redesign (population row above function row, By number of calls / By value per call, Add Metric > Numbers, folded Percentile row, Total \u2026 caption). Updated Performance (filters, chart types, add-widget, Explore, measures) and Data Tables (billing measures in the metric list). Verified analytics-widget.ts, explore-model.ts, explore-query-rail.tsx and formula-variables.ts. The remaining Performance files are internal board/widget/assistant plumbing and date-range work (PHO-11479) carried for the same release."
+        },
+        {
+          "id": "ab-test-order",
+          "status": "docs-updated",
+          "pages": [
+            "testing/ab-testing"
+          ],
+          "note": "PHO-11280 opens A/B tests newest first in table view, with column headers still controlling sort order. Added a note to the Completed section of A/B Testing. Verified ab-test-cases-container and use-ab-test-calls."
+        },
+        {
+          "id": "talk-per-exit-requirements",
+          "status": "docs-updated",
+          "pages": [
+            "blocks/flow-blocks/talk"
+          ],
+          "note": "PHO-11005 moved Talk Required/Confirm/Spell back from per-variable to per-exit-condition (levels Collect, Confirm, Spell back), with a require-on-all-exits control on the variable card and existing blocks migrated so each old Required variable becomes a requirement on every exit. Talk page Variables and Exit Conditions sections rewritten and a Require variables per exit section added; combine-exit guidance now notes matching requirements. Verified exit-condition-requirements.tsx, exit-requirement-levels.tsx, require-on-all-exits-menu.tsx, prompt-exit-conditions.ts, variables.tsx and the migrated default template."
+        },
+        {
+          "id": "generate-ai-variable-picker",
+          "status": "docs-updated",
+          "pages": [
+            "blocks/flow-blocks/talk",
+            "blocks/conversation-blocks/collect",
+            "blocks/data-and-automation-blocks/code"
+          ],
+          "note": "PHO-11147 lets Generate with AI instructions for Talk, Collect and Code include workflow variables via the @ picker, inserted as chips/variable references and no longer clipped. Added a one-line note to each block's Generate section. Verified generate-with-ai-inline.tsx (TagifyInput with shouldPortalMentionDropdown) and the focused-generation hook."
+        },
+        {
+          "id": "version-history-compare",
+          "status": "docs-updated",
+          "pages": [
+            "flow-editor/versions"
+          ],
+          "note": "PHO-10990 opens Version History by comparing the published workflow with the current draft, with one Compare action at the top starting every comparison and Restore/Rename/Delete available while comparing; read-only panels allow selection/copy and keep changed-checkbox state. Updated the Versions compare section and intro. Verified version-history-side-panel.tsx."
+        },
+        {
+          "id": "build-and-tooling",
+          "status": "not-public",
+          "pages": [],
+          "note": "Non-product changes: CI workflow and dependabot config, lint/tsconfig/build config, Firestore indexes/rules, Momentic and e2e test scaffolding, docs/ developer notes, public assets, changelog, and dependency bumps (PHO-11442 vulnerable transitive deps). None affect user-facing product behavior or Ask AI facts."
+        },
+        {
+          "id": "platform-ui-internal",
+          "status": "no-doc-change",
+          "pages": [
+            "get-started/navigation-and-shortcuts",
+            "agent-design/overview",
+            "agent-design/guidelines"
+          ],
+          "note": "Internal shared UI and platform changes: sidebar/navbar tile component consolidation (the wide caret tiles from PHO-10472), command-K/global-search role gating, hooks, providers, shared libs, call-path and web-call internals, and the call-tagging-tab scroll fix. No user-facing navigation, shortcut, or page behavior changed for standard roles beyond facts dispositioned elsewhere. Reviewed app-sidebar, customize-navbar-modal, command-k-modal and shared libs."
+        },
+        {
+          "id": "api-auth-and-services-internal",
+          "status": "not-public",
+          "pages": [],
+          "note": "Internal API route and service refactors: get-call/import-number and other app/api routes move to a shared checkApiKeyAccess helper and db-svc-backed org/user/call services; these are implementation changes behind unchanged request/response contracts. The public API reference endpoints keep their documented behavior. Reviewed app/api routes and services/* admin and org/user/call services."
+        },
+        {
+          "id": "calls-list-refactor",
+          "status": "already-covered",
+          "pages": [
+            "call-history-ai-analytics/call-history-ai-analytics"
+          ],
+          "note": "PHO-10472 makes the Call History list reusable so the campaign page can render it with queue controls, and gates Ask AI/Analyze with AI/export for the Call history only role. The Call History page behavior is unchanged for normal roles and the role limits are documented on Teams; the campaign-scoped list is documented on the outbound pages. No Call History page fact changed. Verified call-history-client.tsx and call-details-modal.tsx role gating."
+        },
+        {
+          "id": "flow-editor-internal",
+          "status": "no-doc-change",
+          "pages": [
+            "flow-editor/connections-and-routing",
+            "flow-editor/collaboration",
+            "blocks/common-settings",
+            "blocks/data-and-automation-blocks/webhook",
+            "blocks/flow-blocks/start-flow",
+            "flow-editor/variables",
+            "workflow-checklist"
+          ],
+          "note": "Internal flow-editor changes: node-descriptor plumbing, canvas/edge rendering and CSS, server-side workflow mutation/rename/change-set/proposal services, projection and compile helpers, and model factories not tied to a user-facing fact beyond the Talk per-exit and version-compare work dispositioned separately. Reviewed custom-node-card, prompt/filter action forms, workflow-canvas and server workflow modules; no public product fact changed here."
         }
       ]
     }
