@@ -1758,7 +1758,7 @@
           "pages": [
             "performance"
           ],
-          "note": "Documented per-call stats as measures, filters and formula variables, the Transfer duration to Transfer hold time relabel, the one-figure-per-call summing guidance, the em-dash for a missing value, and the stat-note summary/hover; admin-only stats stay hidden from customers."
+          "note": "Documented per-call stats in measures, filters, and formulas; distinguished additive totals from non-additive per-call averages, maxima, and percentiles; clarified cumulative warm-transfer hold time, missing values, and withheld comparisons when either period has incomplete stat coverage."
         },
         {
           "id": "performance-widget-builder-and-compare",
@@ -1774,7 +1774,7 @@
           "pages": [
             "key-concepts/ask-ai"
           ],
-          "note": "Documented the docked question card that replaces the composer: context, stepped questions, suggested options, a Next or Submit action, single-choice auto-advance with typed notes, and Esc to answer in chat."
+          "note": "Documented the released question card: up to four stepped questions, optional typed answers and notes, final-choice submission, options requiring details, exact next/submit actions, revisiting earlier answers, and Esc to chat. The unused longer questionnaire's review screen is not presented as available."
         },
         {
           "id": "ask-ai-cross-flow",
@@ -1873,11 +1873,11 @@
         },
         {
           "id": "blocked-numbers-ui",
-          "status": "already-covered",
+          "status": "docs-updated",
           "pages": [
             "agent-design/overview"
           ],
-          "note": "Reviewed the reworked agent Phone Numbers settings tab and blocked-numbers save-through-db-svc behavior; Agent Setup already lists Phone Numbers settings as including blocked numbers and the block list is documented in the API reference."
+          "note": "Documented Agent Settings > Phone Numbers > Blocked Phone Numbers: full numbers with country codes, the Block action, row-level unblocking, individual saves and errors, replacing numbers, and repairing older entries without country codes."
         },
         {
           "id": "api-cors-preflight",
