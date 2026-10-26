@@ -13,7 +13,7 @@ sources:
   - "features/calls/modules/call-details/tabs/blocks/call-blocks-tab-block-timeline-item.tsx"
   - "phonely-backend/app/agent/live_actions/filter/advanced_filter.py"
   - "phonely-backend/app/agent/live_actions/filter/filter.py"
-last-verified: "2026-07-16"
+last-verified: "2026-10-23"
 ---
 
 Use **Filter** to route the flow using data available when the block runs, such as caller information, collected answers, or results from earlier API Request, Code, and integration blocks.
@@ -29,6 +29,8 @@ Case order matters. Put narrow or high-priority cases before broader cases that 
 ## Configure Filter
 
 Filter starts with **Case 1**. Select **Add Case** to create another route. Every case requires at least one condition.
+
+Each case can take an optional name. Enter one in the case's name field to label the route; its name then appears beside the case's route on the canvas. A case you leave unnamed keeps its numbered label, such as `Case 1`.
 
 ### Define a condition
 

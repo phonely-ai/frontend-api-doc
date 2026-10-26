@@ -38,7 +38,11 @@ sources:
   - "features/chat/assistant/store/use-assistant-tab-store.ts"
   - "features/assistant/capabilities/modules/workspace/brief-update.ts"
   - "features/assistant/capabilities/modules/workspace/workspace-tools.ts"
-last-verified: "2026-10-19"
+  - "features/assistant/capabilities/modules/questions/**"
+  - "features/chat/assistant/interactive/**"
+  - "features/workflows/assistant-capability/use-workflow-navigation-intent.ts"
+  - "features/workflows/assistant-capability/workflow-result-navigation.ts"
+last-verified: "2026-10-23"
 ---
 
 Ask AI is Phonely's in-product assistant. It opens in the app side panel and works alongside the page you are using.
@@ -103,6 +107,17 @@ Use the **Stop** control on the send button if you only want to halt the current
 
 You can keep working in the conversation while a flow proposal is open for review; a follow-up request does not force you to resolve the proposal first.
 
+## Answer a question from Ask AI
+
+When Ask AI needs a decision or a detail before it continues, it can present a question card in place of the message box. The card shows a sentence of context, one or more questions, each question's suggested options, and an answer field with a single **Next** or **Submit** action.
+
+- Pick a suggested option, or type your own answer in the field.
+- On a single-choice question, picking an option moves on right away and sends any text you typed as a note.
+- For a set of questions, work through them in order; a longer set ends on a review of the answers you send.
+- Press `Esc` to dismiss the card and reply in the chat instead. Ask AI reads your next message as the answer, and your draft is kept so you can reopen the card.
+
+The card replaces the composer only while the question is open; the conversation returns to normal once you answer or dismiss it.
+
 ## Reference a flow block
 
 When a flow is open, you can point Ask AI at an exact block instead of describing it. Type `@` in either the top-bar Ask AI input or the Ask AI side-panel composer, then pick a block from the list or keep typing to match one by name. Use the arrow keys and `Enter` to choose a result with the keyboard; `Escape` dismisses the list.
@@ -127,6 +142,8 @@ If you are asked to share identifiers separately, select **Copy diagnostic detai
 
 ## Choose how flow changes are applied
 
+Ask AI can read and edit a flow you name without opening it first, including other inbound and outbound flows on the agent. When it finishes a batch of changes, it opens the resulting flow so you can review it. Navigating yourself, or using **Stop**, cancels that automatic navigation.
+
 When Ask AI can edit the selected flow, a mode selector next to the composer lets you choose how its changes reach the draft:
 
 - **Review** is the default. Ask AI prepares a proposal for you to check and apply.
@@ -145,7 +162,7 @@ In **Review** mode, check the proposal before applying it:
 3. For a focused proposal started from a block's **Generate with AI** strip, inspect the highlighted fields and select **Apply changes**. If you reject an individual change, the proposal returns to per-change review: accept or reject the changes, then select **Submit changes**. Other flow proposals use this per-change review directly. The draft does not change until you apply or submit the proposal.
 4. Check the affected configuration and test the important paths before relying on the result with callers.
 
-In **Review** mode, accepted flow changes are applied together to the current draft. If the draft changes before you submit, the proposal can become outdated and must be prepared again. In **Auto apply** mode, Ask AI writes the approved changes to the draft for you. In either mode, draft auto-save does not publish the changes.
+In **Review** mode, accepted flow changes are applied together to the current draft, and a change set that spans more than one flow keeps each flow's changes separate for review. If the draft changes before you submit, the proposal can become outdated and must be prepared again. In **Auto apply** mode, Ask AI writes the approved changes to each affected flow's draft for you. In either mode, draft auto-save does not publish the changes.
 
 On **Performance**, Ask AI can propose changes to cards, views, and saved metrics or filters. Those proposals have their own review and apply actions; see [Edit Performance with Ask AI](/performance#edit-performance-with-ask-ai).
 

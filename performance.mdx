@@ -17,7 +17,10 @@ sources:
   - "app/(main)/(routes)/performance/**"
   - "features/performance/ui/performance-compare-toggle.tsx"
   - "features/performance/utils/period-comparison.ts"
-last-verified: "2026-10-19"
+  - "features/performance/utils/describe-metric-expr.ts"
+  - "features/performance/ui/field-note.tsx"
+  - "features/performance/ui/internal-metric-chip.tsx"
+last-verified: "2026-10-23"
 ---
 
 Performance turns an agent's call history into a board of cards that help you understand traffic, results, and recurring patterns.
@@ -111,6 +114,8 @@ Explore replaces the board while you work in it. Build a question by choosing wh
 A metric card reads as a query and then arithmetic: the population row (which calls) sits above the function row. The aggregation menu is split into **By number of calls** and **By value per call**, **Add Metric** offers **Numbers** to add a “calls over …” measure in one pick, the percentile options fold into one **Percentile** row, and a summed metric is captioned **Total …**. The breakdown-by field picker opens on the field it already holds and pins each family heading while its fields scroll.
 
 Measures include a billing family alongside call metrics: **Billed minutes**, **Billed transfer minutes**, and **Cost** (rendered as USD).
+
+Per-call stats are also available as measures, filters, and formula variables, grouped into families such as conversation turns, caller timing, transfers, and silence. The former **Transfer duration** measure is now **Transfer hold time**, the caller's wait while a warm transfer connects. A per-call stat is one figure per call, so average it or take percentiles across calls rather than summing it. When a stat has no value for a call, the card shows **—** instead of a number. A stat's picker row shows a short summary of its note, with the full note on hover; a measure's own picker offers **Numbers** and category stats.
 
 Save the result to add it to the board. Use the browser's Back button or the back arrow to leave Explore; if you have unsaved work, Phonely asks before discarding it.
 

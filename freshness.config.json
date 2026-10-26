@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.273.0",
-        "commit": "3ba98b4fb8dba13705040f6381949a5db74068b4"
+        "label": "v0.275.0",
+        "commit": "bc5c0ecd58ee275ece13f302fdda5980dc24ef05"
       }
     },
     {
@@ -365,7 +365,7 @@
             "outboundcalling/createaoutboundcallingcampaign",
             "outboundcalling/avoidmarkedasspamlikely"
           ],
-          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused \u2014 do-not-dial day\" indicator on campaign list and detail views."
+          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused — do-not-dial day\" indicator on campaign list and detail views."
         },
         {
           "id": "call-review-webhook-cache-miss-and-event-separators",
@@ -583,7 +583,7 @@
           "pages": [
             "outboundcalling/createaoutboundcallingcampaign"
           ],
-          "note": "Documented the Queued, Queued \u00b7 After hours, and Queued \u00b7 On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
+          "note": "Documented the Queued, Queued · After hours, and Queued · On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
         },
         {
           "id": "block-test-output-selection",
@@ -1708,6 +1708,210 @@
             "workflow-checklist"
           ],
           "note": "Internal flow-editor changes: node-descriptor plumbing, canvas/edge rendering and CSS, server-side workflow mutation/rename/change-set/proposal services, projection and compile helpers, and model factories not tied to a user-facing fact beyond the Talk per-exit and version-compare work dispositioned separately. Reviewed custom-node-card, prompt/filter action forms, workflow-canvas and server workflow modules; no public product fact changed here."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.273.0-v0.275.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-10-26",
+      "fromExclusive": {
+        "label": "v0.273.0",
+        "commit": "3ba98b4fb8dba13705040f6381949a5db74068b4"
+      },
+      "throughInclusive": {
+        "label": "v0.275.0",
+        "commit": "bc5c0ecd58ee275ece13f302fdda5980dc24ef05"
+      },
+      "dispositions": [
+        {
+          "id": "release-and-mergeback",
+          "status": "not-public",
+          "pages": [],
+          "note": "Release tags, dated changelog entries, and mergeback/merge commits carry no independent user-facing contract change beyond the features dispositioned separately."
+        },
+        {
+          "id": "dependency-and-ci-maintenance",
+          "status": "not-public",
+          "pages": [],
+          "note": "Dependency bumps (next, vite, follow-redirects, dompurify and grouped Dependabot/Oneleet updates) and CI/dependabot configuration patch security advisories and build tooling without changing any documented product behavior."
+        },
+        {
+          "id": "gardening-dead-code-and-tests",
+          "status": "not-public",
+          "pages": [],
+          "note": "Dead-code removal, duplicate-abstraction consolidation, added tests, and comment/doc-debt pruning are internal refactors with no customer-facing contract change."
+        },
+        {
+          "id": "filter-case-names",
+          "status": "docs-updated",
+          "pages": [
+            "blocks/flow-control-and-routing/filter",
+            "flow-editor/connections-and-routing"
+          ],
+          "note": "Documented optional Filter case names that appear beside each case route on the canvas, with unnamed cases keeping their numbered labels."
+        },
+        {
+          "id": "performance-per-call-stats",
+          "status": "docs-updated",
+          "pages": [
+            "performance"
+          ],
+          "note": "Documented per-call stats as measures, filters and formula variables, the Transfer duration to Transfer hold time relabel, the one-figure-per-call summing guidance, the em-dash for a missing value, and the stat-note summary/hover; admin-only stats stay hidden from customers."
+        },
+        {
+          "id": "performance-widget-builder-and-compare",
+          "status": "docs-updated",
+          "pages": [
+            "performance"
+          ],
+          "note": "Reviewed the Performance board widget builder, group drilldowns, billing measures, click-to-validate, period comparison, and the campaign-hours/single-day range fix; the board, Explore, and period-comparison guidance remain accurate."
+        },
+        {
+          "id": "ask-ai-structured-questions",
+          "status": "docs-updated",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "Documented the docked question card that replaces the composer: context, stepped questions, suggested options, a Next or Submit action, single-choice auto-advance with typed notes, and Esc to answer in chat."
+        },
+        {
+          "id": "ask-ai-cross-flow",
+          "status": "docs-updated",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "Documented that Ask AI can read and edit named inbound and outbound flows without opening them first, opens the result when a batch finishes, keeps each flow separate in review, and cancels automatic navigation on manual navigation or Stop."
+        },
+        {
+          "id": "campaign-lifecycle-fixes",
+          "status": "docs-updated",
+          "pages": [
+            "outbound-calling/campaigns"
+          ],
+          "note": "Documented refusing to start or resume a campaign with no switched-on number, deleting completed campaigns, the Retry state on a failed Settings load, and marking source changes as unsaved."
+        },
+        {
+          "id": "ask-ai-reviewed-no-change",
+          "status": "already-covered",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "Reviewed Ask AI steering of in-flight responses, auto-apply mode, default-agent scoping, persistent workspace notes, background note updates, conversation-test evidence terminology, tool-step reporting, entry points, responsive access, block read-only reporting, and reliability fixes; the Ask AI guide already describes these behaviors accurately."
+        },
+        {
+          "id": "call-history-analytics-filter",
+          "status": "already-covered",
+          "pages": [
+            "call-history/overview",
+            "call-topics"
+          ],
+          "note": "Reviewed Call History filtering by Analytics Fields and the 1,024-character analytics option description limit; the Call History and Call Topics guides already describe Analytics Fields filtering, and no documented limit changes."
+        },
+        {
+          "id": "block-and-version-reviewed",
+          "status": "already-covered",
+          "pages": [
+            "blocks/flow-blocks/talk",
+            "flow-editor/versions",
+            "blocks/common-settings",
+            "testing/simulation-testing"
+          ],
+          "note": "Reviewed moving Talk required-confirm variables onto exits, keeping version actions available while comparing, improved version review, and simpler block-test UI and prefill; the Talk, Versions, and testing guides already describe the current behavior."
+        },
+        {
+          "id": "notifications-reviewed",
+          "status": "already-covered",
+          "pages": [
+            "blocks/communication-blocks/email-sms-notification"
+          ],
+          "note": "Reviewed always showing Notification recipient and phone lists, validating Signpost bodies and collapsed lists, and the enlarged Slack alert message field; the notification guidance remains accurate."
+        },
+        {
+          "id": "campaign-queue-and-nav-reviewed",
+          "status": "already-covered",
+          "pages": [
+            "outbound-calling/campaigns"
+          ],
+          "note": "Reviewed clear-queue cancellation-failure reporting, stale-record counting, restored holiday selections, back-to-Campaigns navigation, the overview badge fix, and defaulting Outbound Calls to Campaigns; the Campaigns guide already describes these."
+        },
+        {
+          "id": "voice-clone-reviewed",
+          "status": "already-covered",
+          "pages": [
+            "agent-design/voice/overview"
+          ],
+          "note": "Reviewed private voice clones belonging to the agent organization with admin public-catalog clones; the Voice guide already documents organization-private clones and admin public catalog voices."
+        },
+        {
+          "id": "usage-forecast-and-home",
+          "status": "already-covered",
+          "pages": [
+            "billing-and-usage/manage-agents-and-usage",
+            "get-started/home-overview"
+          ],
+          "note": "Reviewed the Usage & Cost cycle-end forecast popover and platform-scope Home with restricted breakdowns and the home dashboard fix; the Usage and Cost and Home guides already describe the forecast and home overview."
+        },
+        {
+          "id": "halloween-seasonal",
+          "status": "not-public",
+          "pages": [],
+          "note": "Halloween mode is an opt-in October-only seasonal theme with a pumpkin hunt; it adds no durable product capability and is not documented."
+        },
+        {
+          "id": "legacy-billing-removal",
+          "status": "not-public",
+          "pages": [],
+          "note": "Removing Legacy billing pages, APIs, cron jobs, and deprecated user fields, plus self-serve billing cron hardening, concern deprecated internal surfaces with no current customer-facing documentation."
+        },
+        {
+          "id": "db-svc-reads-and-rename",
+          "status": "not-public",
+          "pages": [],
+          "note": "Reading agents, user profiles, organization owners, settings, and members through db-svc instead of Firestore, and saving agent renames through db-svc, are backend data-path changes; name trimming and the 50-character limit match the existing create behavior, so no documented customer contract changes."
+        },
+        {
+          "id": "blocked-numbers-ui",
+          "status": "already-covered",
+          "pages": [
+            "agent-design/overview"
+          ],
+          "note": "Reviewed the reworked agent Phone Numbers settings tab and blocked-numbers save-through-db-svc behavior; Agent Setup already lists Phone Numbers settings as including blocked numbers and the block list is documented in the API reference."
+        },
+        {
+          "id": "api-cors-preflight",
+          "status": "not-public",
+          "pages": [],
+          "note": "Omitting the Content-Type header on bodyless API requests (and its revert and reland) removes needless CORS preflights without changing any documented request or response contract."
+        },
+        {
+          "id": "assistant-monitoring-internal",
+          "status": "not-public",
+          "pages": [],
+          "note": "Recording structured final Ask AI request outcomes, deep-dive and Ask AI telemetry, usage events, and hiding platform report numbers from confirmation are internal observability and triage changes with no customer-facing documentation consequence."
+        },
+        {
+          "id": "ab-test-ordering",
+          "status": "already-covered",
+          "pages": [
+            "testing/ab-testing"
+          ],
+          "note": "Reviewed showing completed A/B tests newest first in table view; the A/B testing guide does not depend on list ordering and remains accurate."
+        },
+        {
+          "id": "vitest-and-knowledge-fix",
+          "status": "no-doc-change",
+          "pages": [
+            "agent-knowledge-base/overview"
+          ],
+          "note": "Upgrading unit tests to Vitest 5 for Node 26 and fixing a knowledge base editor-permission crash are an internal test-tooling change and a bug fix with no change to documented behavior."
+        },
+        {
+          "id": "sdk-gating",
+          "status": "not-public",
+          "pages": [],
+          "note": "Blocking client SDK sign-up while gated and stopping free-plan organization invites restrict internal provisioning without changing documented customer guidance."
         }
       ]
     }
