@@ -17,7 +17,13 @@ sources:
   - "app/(main)/(routes)/performance/**"
   - "features/performance/ui/performance-compare-toggle.tsx"
   - "features/performance/utils/period-comparison.ts"
-last-verified: "2026-10-19"
+  - "features/performance/utils/describe-metric-expr.ts"
+  - "features/performance/ui/field-note.tsx"
+  - "features/performance/ui/internal-metric-chip.tsx"
+  - "features/performance/model/analytics-catalog.ts"
+  - "features/performance/utils/stats-coverage.ts"
+  - "phonely-db-svc/app/analytics/catalog.py"
+last-verified: "2026-10-26"
 ---
 
 Performance turns an agent's call history into a board of cards that help you understand traffic, results, and recurring patterns.
@@ -115,6 +121,19 @@ Measures include a billing family alongside call metrics: **Billed minutes**, **
 Save the result to add it to the board. Use the browser's Back button or the back arrow to leave Explore; if you have unsaved work, Phonely asks before discarding it.
 
 You can save a metric or filter to reuse it across cards. Manage those saved definitions from Explore or from **Settings > Saved metrics & filters** on the board. Deleting a saved definition asks for confirmation and identifies the metric or filter to be removed.
+
+### Use per-call stats
+
+Per-call stats are available as measures, filters, and formula variables, grouped into families such as conversation turns, caller timing, transfers, and silence. A stat's picker row shows a short summary of its note, with the full note on hover. A measure's own picker offers **Numbers** and category stats.
+
+Choose an aggregation that matches the question:
+
+- Sum additive stats, such as counts or cumulative durations, when you want a total across calls.
+- Use averages or percentiles to compare per-call values. Per-call averages, maxima, and percentiles cannot be summed; averaging a per-call percentile describes the typical call's percentile, not the percentile across every individual event.
+
+**Transfer hold time**, formerly **Transfer duration**, is the caller's cumulative wait on hold across warm-transfer attempts, including failed attempts. It does not measure time talking to the transfer recipient and has no value for cold transfers.
+
+An unavailable stat value displays as **—**, rather than zero. A date range that starts before a stat's collection began has incomplete coverage. Phonely omits the period comparison when either range has incomplete coverage, rather than showing a misleading change.
 
 ## Edit Performance with Ask AI
 

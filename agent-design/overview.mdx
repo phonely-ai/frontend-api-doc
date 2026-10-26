@@ -13,7 +13,10 @@ sources:
   - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/knowledge-base/**"
   - "features/workflows/model/factories/create-initial-agent-workflow.ts"
   - "features/workflows/modules/editor/components/flow-settings-modal.tsx"
-last-verified: "2026-09-28"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/setting-tabs/phone-numbers-tab.tsx"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/blocked-phone-numbers-section.tsx"
+  - "services/agents/blocked-numbers.ts"
+last-verified: "2026-10-26"
 ---
 
 Agent Setup brings together the shared parts of one agent: how it sounds, how it should behave, what it knows, and the settings that apply across its calls. The agent's flows then determine what happens before, during, and after each call.
@@ -53,6 +56,18 @@ In **Agent Design**, select **Settings**. From there, you can update the agent n
 | **Advanced** | Specialized behavior that normally does not need to change during initial setup |
 
 Start with the defaults unless a business requirement calls for something different. Before handling real calls, confirm the phone number, timezone, recording, and compliance settings required for your use case.
+
+### Block or unblock a phone number
+
+To stop a number from contacting the agent, open **Agent Design > Settings > Phone Numbers** with edit access to the agent.
+
+1. Under **Blocked Phone Numbers**, enter the full phone number, including its country code.
+2. Select **Block**. The number appears in the list after the change saves.
+3. To allow a blocked number again, select the trash icon in its row to unblock it.
+
+Each block or unblock saves separately. To replace a number, unblock the old number and block the replacement. If a save fails, the field or row shows the error; correct the problem and retry.
+
+An older entry flagged as missing its country code does not match incoming calls. Replace it with the full number to make the block effective.
 
 ## Recommended setup order
 

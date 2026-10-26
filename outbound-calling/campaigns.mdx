@@ -4,7 +4,7 @@ description: "Choose who to call, when calls can run, and which outbound flow ha
 sources:
   - "features/campaign/**"
   - "app/(main)/(routes)/campaign/**"
-last-verified: "2026-10-19"
+last-verified: "2026-10-26"
 ---
 
 Outbound campaigns schedule and place calls through an agent's outbound flow. The campaign supplies the contacts, phone numbers, calling hours, and source data; the selected flow controls what happens during and after each call.
@@ -49,7 +49,9 @@ The campaign remains a draft until you complete setup and select **Start campaig
 
 ## Change settings after setup
 
-A created campaign has a **Settings** tab on the campaign page. A section nav on the left switches between **Campaign**, **Call initiation**, **Numbers**, **Calling hours**, **Outbound call flow**, and an **End or delete** panel, and a single save bar applies your changes.
+A created campaign has a **Settings** tab on the campaign page. A section nav on the left switches between **Campaign**, **Call initiation**, **Numbers**, **Calling hours**, **Outbound call flow**, and an **End or delete** panel, and a single save bar applies your changes. Changing the campaign type, source, spreadsheet, or tab marks the settings as unsaved so the save bar appears. If the campaign's settings fail to load, the page shows **Retry** instead of a blank form.
+
+You can delete a campaign from the campaign list or from **Settings > End or delete**, including a campaign that has already completed.
 
 ## Configure calling hours
 
@@ -86,7 +88,7 @@ See [Outbound Flows](/outbound-calling/call-flows) for the flow requirements.
 
 ## Launch and monitor the campaign
 
-On **Review and start**, select **Start campaign** to save and start the campaign. If the campaign is saved but cannot start, correct the reported problem and use the start action on its detail page. A running campaign reads **Active**; campaigns also appear as **Paused** or **Completed**, and a draft reads **Not set up**.
+On **Review and start**, select **Start campaign** to save and start the campaign. If the campaign is saved but cannot start, correct the reported problem and use the start action on its detail page. A campaign cannot start or resume while every phone number is switched off; switch on at least one number to call from first. A running campaign reads **Active**; campaigns also appear as **Paused** or **Completed**, and a draft reads **Not set up**.
 
 The campaign page shows the queue as a Call History style list: four tiles that double as filters, rows grouped by queue state and day, selection with **Analyze with AI** and export, the number each call was dialed from, and next-try times on waiting calls.
 

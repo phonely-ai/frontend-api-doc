@@ -16,7 +16,7 @@ sources:
   - "phonely-backend/app/agent/assistant/workflows.py"
   - "phonely-backend/app/agent/assistant/agent_data.py"
   - "features/workflows/modules/editor/custom-nodes/custom-node-card.tsx"
-last-verified: "2026-10-05"
+last-verified: "2026-10-26"
 ---
 
 Connections control which block can run next. A connection leaves the current block through a **source handle** and enters the next block through a **target handle**. The selected source handle determines which result follows the route.
@@ -36,6 +36,8 @@ While you drag, the editor dims and disables incompatible handles, leaving valid
 </Tip>
 
 A live call continuation or named source handle accepts one destination. Create separate named routes to branch. A post-call source handle can connect to multiple post-call blocks.
+
+A Filter case route shows the case's name when you give the case one, or its numbered label such as `Case 1` when you do not. Naming cases makes each route easier to recognize when you connect it.
 
 ## Follow the execution stages
 
