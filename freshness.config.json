@@ -1935,7 +1935,7 @@
           "pages": [
             "agent-design/voice/overview"
           ],
-          "note": "Favorite voices now belong to the agent's organization and save through db-svc, so every member sees and edits the same set; agents without an organization hide the favorite button, and the library lists the selected voice, then featured voices, then the most used. Updated the Voice guide so readers know favorites are organization-shared and distinguished the Favorites and Mine library filters."
+          "note": "Favorite voices now belong to the agent's organization and save through db-svc; changing favorites requires an editable agent, and agents without an organization hide the favorite button. The library lists the selected voice, then featured voices, then the most used. Updated the Voice guide to distinguish the organization-shared Favorites and ownership-based Mine filters, preserve voice ownership restrictions for renaming, and explain that read-only agents cannot change favorites or rename voices."
         },
         {
           "id": "agent-settings-layout-and-transcriber-location",

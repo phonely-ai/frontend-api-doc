@@ -5,6 +5,7 @@ sources:
   - "features/agents/modules/voice-picker/**"
   - "features/test-voice/**"
   - "config/transcribers.ts"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/setting-tabs/advanced-tab.tsx"
   - "services/agents/voices/**"
   - "services/voice-service.ts"
   - "services/agent-service.ts"
@@ -26,7 +27,9 @@ Open **Agent Design**, then select **Voice**.
 2. Search by voice name or filter the library by language, gender, accent, or other available traits.
 3. Select the voice you want the agent to use.
 
-The selected voice appears first in the library, followed by featured voices. Use the heart control to save a voice to **Favorites**; favorites are shared across your organization, so everyone on the agent's organization sees and can change the same set. Use the **Favorites** filter to show only favorited voices, and **Mine** to show voices owned by you or your organization. To give a voice a clearer label, select **Rename voice** in its row, enter a name, and select **Save**. Renaming is unavailable while the agent is read-only.
+The selected voice appears first in the library, followed by featured voices. Use the heart control to save a voice to **Favorites**. Favorites are shared across the agent's organization. Use the **Favorites** filter to show only favorited voices, and **Mine** to show voices owned by you or your organization.
+
+To give a voice owned by you or your organization a clearer label, select **Rename voice** in its row, enter a name, and select **Save**. Changing favorites and renaming voices are unavailable while the agent is read-only.
 
 Choose a voice that remains clear at phone-call audio quality and fits the conversations the agent handles. Accent, pacing, and pronunciation are usually more important than how expressive a voice sounds in a short sample.
 
