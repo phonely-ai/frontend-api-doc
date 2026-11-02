@@ -5,13 +5,14 @@ sources:
   - "features/agents/modules/voice-picker/**"
   - "features/test-voice/**"
   - "config/transcribers.ts"
+  - "app/(main)/(routes)/agent/(routes)/[agentId]/components/content/agent-settings/components/setting-tabs/advanced-tab.tsx"
   - "services/agents/voices/**"
   - "services/voice-service.ts"
   - "services/agent-service.ts"
   - "phonely-backend/app/agent/assistant/assistant.py"
   - "phonely-db-svc/app/services/voice_service.py"
   - "phonely-db-svc/app/api/public/voices.py"
-last-verified: "2026-10-19"
+last-verified: "2026-11-02"
 ---
 
 Voice controls the speech callers hear during phone conversations. The selected voice and its settings belong to the agent and apply across its inbound and outbound flows.
@@ -26,7 +27,9 @@ Open **Agent Design**, then select **Voice**.
 2. Search by voice name or filter the library by language, gender, accent, or other available traits.
 3. Select the voice you want the agent to use.
 
-The selected voice appears first in the library. Use the heart control to save favorites, and use **Mine** to view voices owned by you or your organization. To give one of these voices a clearer label, select **Rename voice** in its row, enter a name, and select **Save**. Renaming is unavailable while the agent is read-only.
+The selected voice appears first in the library, followed by featured voices. Use the heart control to save a voice to **Favorites**. Favorites are shared across the agent's organization. Use the **Favorites** filter to show only favorited voices, and **Mine** to show voices owned by you or your organization.
+
+To give a voice owned by you or your organization a clearer label, select **Rename voice** in its row, enter a name, and select **Save**. Changing favorites and renaming voices are unavailable while the agent is read-only.
 
 Choose a voice that remains clear at phone-call audio quality and fits the conversations the agent handles. Accent, pacing, and pronunciation are usually more important than how expressive a voice sounds in a short sample.
 
@@ -66,7 +69,7 @@ Enter the written word and its pronunciation, then play the entry before saving 
 
 Expand **Advanced** in Voice Settings to add **Transcription Keywords**, which help the transcriber recognize uncommon names, product terms, or identifiers.
 
-The **Transcriber** itself is selected in **Agent Settings > Advanced > Interruptions Control**. Keep the default unless testing shows that another engine better fits the language or audio conditions of your calls. Changing the engine keeps your language selections compatible with it and applies that engine's interruption defaults.
+The **Transcriber** itself is selected in **Agent Settings > Advanced > Speech & Turn-Taking**. Keep the default unless testing shows that another engine better fits the language or audio conditions of your calls. Changing the engine keeps your language selections compatible with it and applies that engine's recommended turn-taking defaults.
 
 ## Test the voice
 
@@ -100,7 +103,7 @@ Select **Add or Clone a Voice** when the built-in library does not contain the v
 
 <AccordionGroup>
   <Accordion title="A language I need is unavailable">
-    Either the selected voice speaks a single language, or the transcriber does not support that language. Select a multi-lingual voice, or change the transcriber in **Agent Settings > Advanced > Interruptions Control**, then set **Languages** again.
+    Either the selected voice speaks a single language, or the transcriber does not support that language. Select a multi-lingual voice, or change the transcriber in **Agent Settings > Advanced > Speech & Turn-Taking**, then set **Languages** again.
   </Accordion>
   <Accordion title="A word is pronounced incorrectly">
     If the selected voice supports **Pronunciations**, add the word and test a clearer pronunciation. If the setting is unavailable, select a Cartesia voice or another voice that already pronounces the term correctly.
