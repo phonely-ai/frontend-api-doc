@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.275.0",
-        "commit": "bc5c0ecd58ee275ece13f302fdda5980dc24ef05"
+        "label": "v0.277.0",
+        "commit": "0d9d844de3ae0a147748360dd17432fd3ac70b3f"
       }
     },
     {
@@ -365,7 +365,7 @@
             "outboundcalling/createaoutboundcallingcampaign",
             "outboundcalling/avoidmarkedasspamlikely"
           ],
-          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused — do-not-dial day\" indicator on campaign list and detail views."
+          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused \u2014 do-not-dial day\" indicator on campaign list and detail views."
         },
         {
           "id": "call-review-webhook-cache-miss-and-event-separators",
@@ -583,7 +583,7 @@
           "pages": [
             "outboundcalling/createaoutboundcallingcampaign"
           ],
-          "note": "Documented the Queued, Queued · After hours, and Queued · On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
+          "note": "Documented the Queued, Queued \u00b7 After hours, and Queued \u00b7 On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
         },
         {
           "id": "block-test-output-selection",
@@ -1912,6 +1912,114 @@
           "status": "not-public",
           "pages": [],
           "note": "Blocking client SDK sign-up while gated and stopping free-plan organization invites restrict internal provisioning without changing documented customer guidance."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.276.0-v0.277.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-11-02",
+      "fromExclusive": {
+        "label": "v0.275.0",
+        "commit": "bc5c0ecd58ee275ece13f302fdda5980dc24ef05"
+      },
+      "throughInclusive": {
+        "label": "v0.277.0",
+        "commit": "0d9d844de3ae0a147748360dd17432fd3ac70b3f"
+      },
+      "dispositions": [
+        {
+          "id": "org-shared-favorite-voices",
+          "status": "docs-updated",
+          "pages": [
+            "agent-design/voice/overview"
+          ],
+          "note": "Favorite voices now belong to the agent's organization and save through db-svc, so every member sees and edits the same set; agents without an organization hide the favorite button, and the library lists the selected voice, then featured voices, then the most used. Updated the Voice guide so readers know favorites are organization-shared and distinguished the Favorites and Mine library filters."
+        },
+        {
+          "id": "agent-settings-layout-and-transcriber-location",
+          "status": "docs-updated",
+          "pages": [
+            "agent-design/voice/overview"
+          ],
+          "note": "Agent Settings tabs were regrouped and the Advanced \"Interruptions Control\" card was renamed \"Speech & Turn-Taking\" with the Transcriber selector first; the fields, values, ranges, and saves are unchanged and the settings now persist through db-svc. Updated the Voice guide's Transcriber location (and the matching troubleshooting step) to Agent Settings > Advanced > Speech & Turn-Taking."
+        },
+        {
+          "id": "guidelines-and-ask-ai-save-through-db-svc",
+          "status": "no-doc-change",
+          "pages": [
+            "agent-design/guidelines",
+            "key-concepts/ask-ai"
+          ],
+          "note": "The Guidelines page and Ask AI's guideline tools now read and save through db-svc instead of writing Firestore from the browser, with autosave, refused-save retry, and section add/rename/delete handling. The documented user task (add, edit, delete, and rename sections; autosave to Saved; Ask AI edits shown as Ask AI's) and the Response Style personality and humanize controls are unchanged, so no user-facing fact changed."
+        },
+        {
+          "id": "flow-update-conflict-banner-copy",
+          "status": "docs-updated",
+          "pages": [
+            "flow-editor/collaboration"
+          ],
+          "note": "The flow-sync conflict banner was reworded: the status is now \"Flow updated\" (or \"Ask AI changes need review\"), it names the other editor and shows \"Saving paused,\" and the actions are \"Review changes,\" \"Use latest changes\"/\"Use {editor}'s changes,\" \"Save mine & use latest\"/\"Save mine & use {editor}'s,\" and \"Back to draft.\" Rewrote the collaboration page to the current labels, removed the stale banner screenshot, and kept the Draft Backup version behavior."
+        },
+        {
+          "id": "ask-ai-tool-activity-labels",
+          "status": "no-doc-change",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "Every Ask AI tool call now shows user-facing text, and long-running steps advance their running label over elapsed time (for example a conversation test moves to \"Playing the caller's side of the call\" then \"Checking the call against each requirement\"). This is a display refinement of existing activity indicators; the Ask AI guide does not enumerate per-tool labels, so no documented fact changed."
+        },
+        {
+          "id": "ask-ai-on-copied-ab-variant-agents",
+          "status": "no-doc-change",
+          "pages": [
+            "key-concepts/ask-ai",
+            "testing/ab-testing"
+          ],
+          "note": "Ask AI no longer rejects copied A/B Variant B agents solely because they are marked drafts; existing access checks and saved-version restrictions still apply and approved workflow changes stay on B. The docs do not state that Ask AI is unavailable on A/B variants, so this fix removes an unintended block without changing any documented behavior."
+        },
+        {
+          "id": "organization-api-key-management",
+          "status": "not-public",
+          "pages": [],
+          "note": "Adds staff-only organization API key management (create, list, revoke; Read only or Full access) in Settings. The API Keys tab stays hidden from customers, including organization owners and admins, until an explicit customer rollout, so there is no public product surface to document."
+        },
+        {
+          "id": "viewer-sidebar-billing-requests",
+          "status": "no-doc-change",
+          "pages": [
+            "billing-and-usage/plans-and-billing-history"
+          ],
+          "note": "Viewers no longer trigger billing-account or enterprise-contract requests from the sidebar, and billing queries wait for the current organization's permissions. This is an internal permission/bug fix with no change to any documented user task or billing surface."
+        },
+        {
+          "id": "removed-unused-internal-services",
+          "status": "no-doc-change",
+          "pages": [
+            "testing/ab-testing",
+            "testing/simulation-testing"
+          ],
+          "note": "Removed unused frontend code paths: the legacy Coval evaluation-creation endpoint and direct evaluator collection access, the unused FAQ service, and the historical system-prompt relocation helper. Existing A/B and call-unit testing, agent FAQ links, backend FAQ support, and call/prompt data are preserved, so there is no customer-visible consequence."
+        },
+        {
+          "id": "email-route-send-timeout-hardening",
+          "status": "no-doc-change",
+          "pages": [
+            "blocks/communication-blocks/send-email",
+            "blocks/communication-blocks/email-sms-notification"
+          ],
+          "note": "Agent and new-call email routes now bound each Resend send below the backend timeout, retry once with a stable key, and log failures so a stalled send can't cause a 504. This is reliability hardening of the notification/email delivery path; the Send Email and notification block user workflows and options are unchanged."
+        },
+        {
+          "id": "internal-tooling-gardening-and-release",
+          "status": "no-doc-change",
+          "pages": [
+            "blocks/data-and-automation-blocks/code",
+            "integrations/google-calendar",
+            "call-history/overview"
+          ],
+          "note": "Repository tooling (test:changed/verify:merge scripts, CI isolation, agent skill docs), code-comment gardening, removal of already-commented-out options (for example the commented-out Unsure sentiment, Warm Transfer call type, Run JavaScript, and Get an Event entries that were never active), release version bumps, changelog, and mergeback merges. None change the public product experience."
         }
       ]
     }

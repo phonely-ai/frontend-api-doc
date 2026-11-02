@@ -11,53 +11,49 @@ sources:
   - "features/workflows/modules/editor/components/workflow-comparison-node-frame.tsx"
   - "features/workflows/modules/editor/components/controls/save-button-group.tsx"
   - "features/workflows/modules/editor/components/version-restore-modal.tsx"
-last-verified: "2026-08-24"
+last-verified: "2026-11-02"
 ---
 
 When the same flow changes elsewhere while you have it open, Phonely protects both copies instead of silently overwriting one. Compare the drafts, then choose how to load the remote update.
 
 <Warning>
-  Phonely does not merge the two drafts automatically. **Save Local & Load Latest** backs up the local draft before loading the remote draft, but you must manually reapply any changes you still need.
+  Phonely does not merge the two drafts automatically. **Save mine & use latest** backs up your draft before loading the latest changes, but you must manually reapply any changes you still need.
 </Warning>
 
 ## When the banner appears
 
-The **New remote updates available** banner appears when a newer shared draft cannot be applied to your open canvas automatically. When available, the banner identifies the other editor.
+The **Flow updated** banner appears when the same flow changes elsewhere while you have local edits that cannot be applied to your open canvas automatically. When available, the banner names the other editor, such as **Flow updated by Alex**, and shows **Saving paused**.
 
-<img
-  src="/assets/flow-collaboration-remote-updates-banner.png"
-  alt="New remote updates available banner with Review Changes, Apply Latest, and Save Local and Load Latest actions"
-  style={{ width: "100%", margin: "0" }}
-/>
-
-This can happen when a teammate, another browser tab, or another editing session changes the same flow. While the update is unresolved:
+This can happen when a teammate, another browser tab, or another editing session changes the same flow. It can also appear as **Ask AI changes need review** when Ask AI changed the flow while you were editing it. While the update is unresolved:
 
 - auto-save is paused;
 - publishing and version restoration are blocked; and
-- the canvas continues to show your local draft.
+- the canvas continues to show your draft.
 
 Stop editing and resolve the update before continuing.
 
 ## Review the changes
 
-Select **Review Changes** in the banner. The canvas switches to a read-only preview of the remote draft:
+Select **Review changes** in the banner. The canvas switches to a read-only preview of the incoming draft:
 
 - changed blocks and connections are highlighted;
 - select a changed block to inspect its updated settings; and
 - select **Fit changes** to bring the affected parts of the flow into view.
 
-The preview does not change either draft. Select **Back to Local** when you are ready to return to your draft and choose a resolution from the banner.
+The preview does not change either draft. Select **Back to draft** when you are ready to return to your draft and choose a resolution from the banner.
 
 ## Choose a resolution
 
 | Action | What happens | Use when |
 | :-- | :-- | :-- |
-| **Apply Latest** | Loads the remote draft and discards local differences | You no longer need the local changes, or they already exist in the remote draft |
-| **Save Local & Load Latest** | Creates a **Draft Backup** version, then loads the remote draft | You may need to recover or reapply local changes |
+| **Use latest changes** | Loads the incoming draft and discards your local differences | You no longer need the local changes, or they already exist in the incoming draft |
+| **Save mine & use latest** | Creates a **Draft Backup** version, then loads the incoming draft | You may need to recover or reapply local changes |
 
-A **Draft Backup** is an unpublished version saved in **Version History**. It is not merged into the remote draft; preview it later and manually reapply any changes you need.
+When the banner names another editor, these actions read as **Use {editor}'s changes** and **Save mine & use {editor}'s**. When Ask AI is the source, they read as **Use AI changes** and **Save mine & use AI**. While the backup saves, the button shows **Saving backup…**.
 
-## After loading the remote draft
+A **Draft Backup** is an unpublished version saved in **Version History**. It is not merged into the incoming draft; preview it later and manually reapply any changes you need.
+
+## After loading the incoming draft
 
 If you created a **Draft Backup**, reapply any required local changes, then wait for auto-save to finish. Open the [Flow Checklist](/workflow-checklist) and resolve any block errors. Test the affected paths, and publish only after reviewing the updated draft.
 
@@ -69,12 +65,12 @@ If you created a **Draft Backup**, reapply any required local changes, then wait
 
 <AccordionGroup>
   <Accordion title="Publishing or restoring is blocked">
-    Return to the canvas and resolve the **New remote updates available** banner. **Review Changes** only compares the drafts; you must select **Apply Latest** or **Save Local & Load Latest** to resolve the update.
+    Return to the canvas and resolve the **Flow updated** banner. **Review changes** only compares the drafts; you must select **Use latest changes** or **Save mine & use latest** to resolve the update.
   </Accordion>
-  <Accordion title="I need local changes after loading the remote draft">
-    If you selected **Save Local & Load Latest**, open [Flow Versions](/flow-editor/versions), preview the **Draft Backup**, and manually reapply the changes you need.
+  <Accordion title="I need local changes after loading the incoming draft">
+    If you selected **Save mine & use latest**, open [Flow Versions](/flow-editor/versions), preview the **Draft Backup**, and manually reapply the changes you need.
 
-    If you selected **Apply Latest**, the discarded local differences were not saved as a version.
+    If you selected **Use latest changes**, the discarded local differences were not saved as a version.
   </Accordion>
 </AccordionGroup>
 
