@@ -1,0 +1,66 @@
+---
+title: "Updates and concurrency"
+description: "Change resources with PATCH, avoid overwriting someone else's change, and know when a change shows up."
+sources:
+  - "phonely-db-svc/openapi/v1.json"
+  - "phonely-db-svc/app/api/v1/_core/etag.py"
+  - "phonely-db-svc/app/api/v1/_core/errors.py"
+  - "phonely-db-svc/app/api/v1/calls.py"
+last-verified: "2026-11-06"
+---
+
+API v1 changes resources with `PATCH`. Send only what you want to change. When someone else might change the same resource at the same time, for example a teammate in the Phonely web app, use `If-Match` so your change never overwrites theirs by accident.
+
+## Send only what changes
+
+- Fields you leave out keep their current values.
+- `null` clears a field, or resets it to its default. Each endpoint's reference page says which.
+- A list replaces the stored list whole. To add one item, send the full list with the item added.
+- Sending a field that a request can't change, such as `id`, is a `400` with the issue `read_only_field`.
+
+A successful `PATCH` answers with the updated resource.
+
+## Avoid overwriting other changes
+
+An agent and its voice, guidelines, settings and call analysis each return an `ETag` header: the version of the resource you read. Send it back as `If-Match` when you change the resource:
+
+1. Read the resource and keep its `ETag`:
+
+   ```bash
+   curl -i https://api.us.phonely.ai/v1/agents/AGENT_ID/guidelines \
+     -H "Authorization: Bearer $PHONELY_API_KEY"
+   ```
+
+2. Send your change with `If-Match` set to that `ETag`:
+
+   ```bash
+   curl -X PATCH https://api.us.phonely.ai/v1/agents/AGENT_ID/guidelines \
+     -H "Authorization: Bearer $PHONELY_API_KEY" \
+     -H 'If-Match: "ETAG_FROM_STEP_1"' \
+     -H "Content-Type: application/json" \
+     -d '{ ... }'
+   ```
+
+3. If the resource hasn't changed since you read it, the change is made and the response has the new `ETag`.
+4. If it has changed, the API answers `412` with `precondition_failed` and changes nothing. Read the resource again, reapply your change to what you read, and send it with the new `ETag`.
+
+The `ETag` changes only when something you can see in the resource changes.
+
+### When `If-Match` is required
+
+`If-Match` is optional, with one exception: a change that replaces a list needs it. Without it, the API answers `428` with `precondition_required`. A list is replaced whole, so a change based on an old read would silently remove items someone else added since.
+
+## Updating call outcomes
+
+`PATCH /v1/calls/{id}` sets a call's post-call outcome: `custom_outcome`, `custom_outcome_value` and `custom_metadata`.
+
+- `custom_metadata` replaces the whole object stored before. To add a key, send the whole object with the key added.
+- Each request is saved, even when it sends the values the call already has. A new `custom_outcome` is also added to the agent's list of post-call outcomes. Send an update when the outcome changes, not on a schedule.
+- Calls don't return an `ETag`, so a call update can't use `If-Match`. If two systems set the same call's outcome, the last request wins.
+
+## When changes show up
+
+- A change is in the response to the request that made it, and in any read of the same resource after it.
+- Lists can take a few seconds to reflect a change. A renamed agent, for example, shows its new name in the agent list within seconds.
+- A change to an agent's voice, guidelines or settings applies from its next call. A change to its call analysis applies to calls that end after the change.
+- A new call can be read by its ID before it appears in the calls list.
