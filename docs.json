@@ -41,6 +41,11 @@
       "vscode"
     ]
   },
+  "api": {
+    "playground": {
+      "display": "simple"
+    }
+  },
   "navigation": {
     "global": {
       "anchors": [
@@ -217,59 +222,89 @@
       {
         "tab": "API Reference",
         "icon": "code",
-        "pages": [
-          "api-reference/introduction",
-          "api-reference/web-sdk",
+        "groups": [
           {
-            "group": "Agent Generation",
+            "group": "API v1",
             "pages": [
-              "api-reference/endpoint/generate-agent",
-              "api-reference/endpoint/get-agent-generation"
+              "api-reference/v1/overview",
+              "api-reference/v1/authentication",
+              "api-reference/v1/errors",
+              "api-reference/v1/pagination",
+              "api-reference/v1/updates-and-concurrency",
+              "api-reference/v1/versioning",
+              "api-reference/v1/migrate-from-legacy",
+              "api-reference/v1/changelog"
             ]
           },
           {
-            "group": "Agent Management",
+            "group": "API v1 endpoints",
+            "openapi": {
+              "source": "/api-reference/v1/openapi.json",
+              "directory": "api-reference/v1"
+            }
+          },
+          {
+            "group": "Legacy API",
             "pages": [
-              "api-reference/endpoint/get-agent",
-              "api-reference/endpoint/get-agents",
-              "api-reference/endpoint/duplicate-agent",
-              "api-reference/endpoint/update-agent"
+              "api-reference/introduction",
+              {
+                "group": "Agent Generation",
+                "pages": [
+                  "api-reference/endpoint/generate-agent",
+                  "api-reference/endpoint/get-agent-generation"
+                ]
+              },
+              {
+                "group": "Agent Management",
+                "pages": [
+                  "api-reference/endpoint/get-agent",
+                  "api-reference/endpoint/get-agents",
+                  "api-reference/endpoint/duplicate-agent",
+                  "api-reference/endpoint/update-agent"
+                ]
+              },
+              {
+                "group": "Call Management",
+                "pages": [
+                  "api-reference/endpoint/list-calls",
+                  "api-reference/endpoint/get-call",
+                  "api-reference/endpoint/report-call-error",
+                  "api-reference/endpoint/set-post-call-outcome"
+                ]
+              },
+              {
+                "group": "Knowledge Base",
+                "pages": [
+                  "api-reference/endpoint/agent-documents",
+                  "api-reference/endpoint/post-agent-documents",
+                  "api-reference/endpoint/delete-agent-documents",
+                  "api-reference/endpoint/agent-websites",
+                  "api-reference/endpoint/post-agent-websites",
+                  "api-reference/endpoint/delete-agent-websites"
+                ]
+              },
+              {
+                "group": "Voice & Phone",
+                "pages": [
+                  "api-reference/endpoint/list-voices",
+                  "api-reference/endpoint/import-number",
+                  "api-reference/endpoint/block-list",
+                  "api-reference/endpoint/add-blocked-numbers",
+                  "api-reference/endpoint/remove-blocked-numbers"
+                ]
+              },
+              {
+                "group": "Organizations",
+                "pages": [
+                  "api-reference/endpoint/get-orgs"
+                ]
+              }
             ]
           },
           {
-            "group": "Call Management",
+            "group": "Web SDK",
             "pages": [
-              "api-reference/endpoint/list-calls",
-              "api-reference/endpoint/get-call",
-              "api-reference/endpoint/report-call-error",
-              "api-reference/endpoint/set-post-call-outcome"
-            ]
-          },
-          {
-            "group": "Knowledge Base",
-            "pages": [
-              "api-reference/endpoint/agent-documents",
-              "api-reference/endpoint/post-agent-documents",
-              "api-reference/endpoint/delete-agent-documents",
-              "api-reference/endpoint/agent-websites",
-              "api-reference/endpoint/post-agent-websites",
-              "api-reference/endpoint/delete-agent-websites"
-            ]
-          },
-          {
-            "group": "Voice & Phone",
-            "pages": [
-              "api-reference/endpoint/list-voices",
-              "api-reference/endpoint/import-number",
-              "api-reference/endpoint/block-list",
-              "api-reference/endpoint/add-blocked-numbers",
-              "api-reference/endpoint/remove-blocked-numbers"
-            ]
-          },
-          {
-            "group": "Organizations",
-            "pages": [
-              "api-reference/endpoint/get-orgs"
+              "api-reference/web-sdk"
             ]
           }
         ]

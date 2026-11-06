@@ -1,0 +1,39 @@
+---
+title: "Versioning and stability"
+description: "How API v1 changes over time, what Beta means, and how to build an integration that keeps working."
+sources:
+  - "phonely-db-svc/openapi/v1.json"
+  - "phonely-db-svc/app/api/v1/_core/policy.py"
+  - "phonely-db-svc/app/api/v1/_core/openapi.py"
+  - "phonely-db-svc/.github/workflows/v1_openapi_breaking.yaml"
+last-verified: "2026-11-06"
+---
+
+API v1 keeps working for the integrations built on it. Most endpoints are stable: they only gain things. A few are marked **Beta** while their shape settles, and those can still change, with notice.
+
+## Stable endpoints
+
+A stable endpoint only changes in ways that don't break a correctly built integration:
+
+- New endpoints.
+- New optional request fields and query parameters.
+- New fields in responses.
+- New values for fixed-value fields, such as a new call `status` or `ended_reason`.
+- New error codes.
+
+A stable endpoint never removes or renames a field, changes a field's type or meaning, or makes an optional input required. Every change to the API is checked automatically for breaking changes before it's released.
+
+## Beta endpoints
+
+Endpoints marked **Beta** in the reference work and are supported, but their request and response shapes can still change in ways that break an integration.
+
+- Before a breaking change to a Beta endpoint, Phonely announces it in the [changelog](/api-reference/v1/changelog) at least 14 days ahead.
+- When a Beta endpoint's shape has settled, it becomes stable, and from then on it follows the stable rules.
+
+## Build an integration that keeps working
+
+- Ignore response fields you don't recognize.
+- Handle fixed values you don't recognize, for example by treating an unknown `status` as "other".
+- Handle error codes you don't recognize by their HTTP status.
+- Don't rely on the order of fields in a response, or on the wording of error `message`s.
+- If you use Beta endpoints, follow the [changelog](/api-reference/v1/changelog).

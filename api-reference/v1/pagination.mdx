@@ -1,0 +1,59 @@
+---
+title: "Pagination"
+description: "Page through API v1 lists with limit and cursor, and keep a list of calls in sync."
+sources:
+  - "phonely-db-svc/openapi/v1.json"
+  - "phonely-db-svc/app/schemas/v1/base.py"
+  - "phonely-db-svc/app/api/v1/_core/cursor.py"
+last-verified: "2026-11-06"
+---
+
+Every API v1 list returns one page at a time. Ask for the next page with the cursor the previous page returned, until there isn't one.
+
+## Read a list page by page
+
+1. Request the first page. `limit` sets how many items a page holds: 1 to 100, 50 when you leave it out.
+
+   ```bash
+   curl "https://api.us.phonely.ai/v1/calls?agent_id=AGENT_ID&limit=100" \
+     -H "Authorization: Bearer $PHONELY_API_KEY"
+   ```
+
+2. Read the items in `data`. The response also has `next_cursor`:
+
+   ```json
+   {
+     "data": [ ... ],
+     "next_cursor": "eyJ2IjoxLCJwIjp7InMi..."
+   }
+   ```
+
+3. If `next_cursor` isn't `null`, request the next page with the same filters and `cursor` set to it:
+
+   ```bash
+   curl "https://api.us.phonely.ai/v1/calls?agent_id=AGENT_ID&limit=100&cursor=eyJ2IjoxLCJwIjp7InMi..." \
+     -H "Authorization: Bearer $PHONELY_API_KEY"
+   ```
+
+4. Repeat until `next_cursor` is `null`: that's the last page.
+
+## Rules for cursors
+
+- Pass a cursor back exactly as you received it. Don't build or change one.
+- Use a cursor only with the same filters as the request that returned it. With different filters, the API answers `400` with `invalid_cursor`: start again without a cursor.
+- You can change `limit` from one page to the next.
+- Lists have no total count. To count items, page through the whole list.
+
+## Sort order
+
+Each list has a fixed order, documented on its reference page, with a tie-breaker so items that sort the same still come in the same order every time. Calls, for example, are newest first by `started_at`, then by `id`.
+
+## Keep a list of calls in sync
+
+To pick up new calls, poll the calls list:
+
+1. Set `started_from` a little before the time of your last sync, so calls that started just before it aren't missed.
+2. Page through the results.
+3. De-duplicate by `id`. A call's status, outcome and summary can still change after it first appears, so update calls you've already seen.
+
+By default the calls list shows calls whose `status` is `completed`, `ended`, `in_progress` or `in_warm_transfer`. To include other statuses, pass `status` once for each one you want.

@@ -1,0 +1,79 @@
+---
+title: "API v1 overview"
+description: "Connect your own systems to Phonely: base URLs, your first request, and the conventions every endpoint follows."
+sources:
+  - "phonely-db-svc/openapi/v1.json"
+  - "phonely-db-svc/app/schemas/v1/base.py"
+  - "phonely-db-svc/app/api/v1/_core/middleware.py"
+last-verified: "2026-11-06"
+---
+
+Phonely API v1 lets your own systems read and manage your agents, calls, knowledge sources and voices. Every endpoint follows the same rules for authentication, errors, pagination and changes, so once one request works, the rest work the same way.
+
+<Note>
+  API v1 replaces the [legacy API](/api-reference/introduction), which keeps working. To move an existing integration, see [Migrate from the legacy API](/api-reference/v1/migrate-from-legacy).
+</Note>
+
+## Base URLs
+
+| Region | Base URL |
+| --- | --- |
+| US | `https://api.us.phonely.ai/v1` |
+| AU | `https://api.au.phonely.ai/v1` |
+
+Use the base URL for the region your organization's data is in.
+
+## Make your first request
+
+1. [Create an API key](/api-reference/v1/authentication#create-an-api-key) in the Phonely web app.
+2. List the organizations the key can reach:
+
+   ```bash
+   curl https://api.us.phonely.ai/v1/organizations \
+     -H "Authorization: Bearer $PHONELY_API_KEY"
+   ```
+
+3. Check the response. A key belongs to one organization, so the list has one item:
+
+   ```json
+   {
+     "data": [
+       {
+         "object": "organization",
+         "id": "ORGANIZATION_ID",
+         "name": "Acme Dental"
+       }
+     ],
+     "next_cursor": null
+   }
+   ```
+
+## What you can do
+
+| Area | What the API covers |
+| --- | --- |
+| Agents | List, read and rename agents. Read and change an agent's voice, guidelines, settings and call analysis. Block and unblock phone numbers. |
+| Calls | List and read calls with their analysis, transcript and recording. Set a call's post-call outcome. |
+| Knowledge sources | Add text, files and website pages to an agent's knowledge. Read, change, download and delete them. |
+| Organizations | Read your organization and its usage. |
+| Voices | List and read the voices an agent can use. |
+
+Each endpoint's reference page documents its request, response and errors.
+
+## Conventions
+
+- Requests and responses are JSON. Field and parameter names are snake_case, such as `customer_phone_number`.
+- Timestamps are UTC, always in the same format: `2026-10-07T09:12:03.000000Z`. Time filters take ISO 8601 with a timezone.
+- IDs are strings. Every resource has an `object` field naming its type, such as `"object": "call"`.
+- Every documented field is always in the response. A value that's missing is `null`.
+- Fixed values, such as statuses and reasons, are lowercase snake_case. New values can be added at any time, so handle values you don't recognize.
+- An unknown request field or query parameter is a `400`, so a misspelled filter never passes silently.
+- A request body can be up to 1 MB. File uploads have their own limit, documented on the upload endpoint.
+
+## Request IDs
+
+Every response has an `X-Request-Id` header, and every error body repeats it as `request_id`. Include it when you contact Phonely support about a request.
+
+To trace a request through your own logs, send your own `X-Request-Id`: up to 128 letters, digits, `.`, `_`, `:` or `-`. Phonely uses it for that request. Otherwise Phonely generates one.
+
+Responses carry `Cache-Control: no-store`: they can hold customer data, so caches and proxies must not store them.

@@ -1,0 +1,139 @@
+---
+title: "Migrate from the legacy API"
+description: "Move an integration from the legacy Phonely API to API v1, endpoint by endpoint."
+sources:
+  - "phonely-db-svc/openapi/v1.json"
+  - "app/api/get-orgs/**"
+  - "app/api/get-agents/**"
+  - "app/api/get-agent/**"
+  - "app/api/update-agent/**"
+  - "app/api/duplicate-agent/**"
+  - "app/api/calls/**"
+  - "app/api/get-call/**"
+  - "app/api/report-call-error/**"
+  - "app/api/agent-documents/**"
+  - "app/api/agent-websites/**"
+  - "app/api/agent-block-list/**"
+  - "app/api/list-voices/**"
+  - "app/api/import-number/**"
+  - "app/api/agent-generations/**"
+last-verified: "2026-11-06"
+---
+
+The [legacy API](/api-reference/introduction) keeps working, so you can move to API v1 at your own pace. Both APIs read and change the same agents and calls, so you can move one endpoint at a time.
+
+## What changes
+
+| | Legacy API | API v1 |
+| --- | --- | --- |
+| Base URL | `https://app.phonely.ai/api` | `https://api.us.phonely.ai/v1` or `https://api.au.phonely.ai/v1`. See [Base URLs](/api-reference/v1/overview#base-urls). |
+| API key | Your personal key from **Settings** → **Account**, in the `X-Authorization` header, often with your user ID in the request | An organization key from **Settings** → **API Keys**, in `Authorization: Bearer`. See [Authentication](/api-reference/v1/authentication). |
+| Names | Mostly camelCase, such as `customerPhoneNumber` | snake_case, such as `customer_phone_number` |
+| Lists | `limit` and `offset`, with a `total` | `limit` and `cursor`, with no total. See [Pagination](/api-reference/v1/pagination). |
+
+API v1 also answers every failure with the same [error body](/api-reference/v1/errors), and sends every timestamp in one UTC format: `2026-10-07T09:12:03.000000Z`.
+
+## Endpoint by endpoint
+
+| Legacy API | API v1 |
+| --- | --- |
+| `GET /get-orgs` | `GET /v1/organizations` |
+| `POST /get-agents` | `GET /v1/agents` |
+| `POST /get-agent` | `GET /v1/agents/{id}`. The agent's voice, guidelines and settings each have their own endpoint: `GET /v1/agents/{id}/voice`, `/guidelines` and `/settings`. |
+| `POST /update-agent` | The agent's name: `PATCH /v1/agents/{id}`. Its voice: `PATCH /v1/agents/{id}/voice`. Its conversation style and humanized speech: `PATCH /v1/agents/{id}/guidelines`. |
+| `GET /calls/{agentId}` | `GET /v1/calls?agent_id={agentId}` |
+| `POST /get-call` | `GET /v1/calls/{id}`. The transcript: `GET /v1/calls/{id}/transcript`. The recording: `GET /v1/calls/{id}/recording`, which returns a link valid for 10 minutes. |
+| `PATCH /calls/{agentId}/{callIdOrPhone}` | `PATCH /v1/calls/{id}`. To update by phone number, first find the call: [list the agent's calls](#find-a-call-by-phone-number) with `customer_phone_number`. |
+| `GET /agent-documents`, `GET /agent-websites` | `GET /v1/agents/{id}/knowledge-sources`: documents, files and website pages in one list. |
+| `POST /agent-documents` | `POST /v1/agents/{id}/knowledge-sources/files`, one file per request. |
+| `POST /agent-websites` | Find pages with `POST /v1/agents/{id}/knowledge-sources/website-map`, then add the ones you want with `POST /v1/agents/{id}/knowledge-sources/websites`. |
+| `DELETE /agent-documents`, `DELETE /agent-websites` | `DELETE /v1/knowledge-sources/{id}` |
+| `GET /agent-block-list` | `GET /v1/agents/{id}/blocked-numbers` |
+| `POST /agent-block-list` | `POST /v1/agents/{id}/blocked-numbers`, one number per request. |
+| `DELETE /agent-block-list` | `DELETE /v1/agents/{id}/blocked-numbers/{phone_number}`, one number per request. |
+| `GET /list-voices` | `GET /v1/voices` |
+
+API v1 also covers things the legacy API doesn't, such as text knowledge sources and your organization's usage.
+
+## Not in API v1 yet
+
+Keep using the legacy API for these:
+
+- Duplicate an agent (`POST /duplicate-agent`).
+- Change an agent's greeting (`greetingMessage` in `POST /update-agent`).
+- Report an issue with a call (`POST /report-call-error`).
+- Import a phone number (`POST /import-number`).
+- Generate an agent from a prompt (`POST /agent-generations`, `GET /agent-generations/{generationId}`).
+
+Moving an agent to another organization (`orgId` in `POST /update-agent`) won't come to API v1, because an API key acts in one organization. Move agents in the Phonely web app.
+
+## Calls
+
+### List filters
+
+| Legacy parameter | API v1 parameter |
+| --- | --- |
+| `limit`, `offset` | `limit`, `cursor` |
+| `start_date`, `end_date` | `started_from`, `started_before` |
+| `min_duration`, `max_duration` | `min_duration_seconds`, `max_duration_seconds` |
+| `call_type` | `type` |
+| `status`, `sentiment`, `outcome`, `ended_reason`, `customer_phone_number`, `campaign_id` | The same names. Use the values listed on the API v1 reference page. |
+
+By default, the API v1 list shows calls whose `status` is `completed`, `ended`, `in_progress` or `in_warm_transfer`.
+
+### Call fields
+
+| Legacy `get-call` field | API v1 |
+| --- | --- |
+| `callId`, `agentId` | `id`, `agent_id` |
+| `businessPhoneNumber`, `customerPhoneNumber` | `business_phone_number`, `customer_phone_number` |
+| `callerName` | `customer_name` |
+| `callStarted`, `startedAt` | `started_at` |
+| `callEnded` | `ended_at` |
+| `duration` | `duration_seconds` |
+| `endedReason` | `ended_reason` |
+| `callDirection` | `type` |
+| `summary`, `longSummary` | `summary`, `long_summary` |
+| `keyPoints`, `actionItems`, `unansweredQuestions` | `key_points`, `action_items`, `unanswered_questions` |
+| `followUp`, `followUpReason` | `is_follow_up_needed`, `follow_up_reason` |
+| `mentionedDate`, `mentionedTime`, `mentionedEmail` | `mentioned_date`, `mentioned_time`, `mentioned_email` |
+| `sentiment`, `purpose` | `sentiment`, `purpose` |
+| `transcript`, `messages`, `transcriptText` | `GET /v1/calls/{id}/transcript` |
+| `recordingUrl` | `GET /v1/calls/{id}/recording` |
+| `agentName` | `name` from `GET /v1/agents/{id}` |
+| `callStartedDateString`, `callEndedDateString` | Not returned. Format `started_at` and `ended_at` as you need. |
+| `topic`, `ai_success`, `dashboardUrl` | Not returned. |
+
+### Post-call outcome
+
+| Legacy field | API v1 field |
+| --- | --- |
+| `custom_call_outcome` | `custom_outcome` |
+| `custom_call_outcome_value` | `custom_outcome_value` |
+| `custom_call_metadata` | `custom_metadata` |
+
+`custom_metadata` replaces the whole object stored before. See [Updates and concurrency](/api-reference/v1/updates-and-concurrency#updating-call-outcomes).
+
+### Find a call by phone number
+
+The legacy `PATCH` could take a phone number instead of a call ID. In API v1, find the call first, then update it by ID:
+
+1. List the agent's calls for that number. Calls are newest first, so `limit=1` returns the latest call:
+
+   ```bash
+   curl "https://api.us.phonely.ai/v1/calls?agent_id=AGENT_ID&customer_phone_number=%2B14155550123&limit=1" \
+     -H "Authorization: Bearer $PHONELY_API_KEY"
+   ```
+
+   Encode the `+` as `%2B`, or it arrives as a space.
+
+2. Update the call with its `id`:
+
+   ```bash
+   curl -X PATCH https://api.us.phonely.ai/v1/calls/CALL_ID \
+     -H "Authorization: Bearer $PHONELY_API_KEY" \
+     -H "Content-Type: application/json" \
+     -d '{"custom_outcome": "Booked"}'
+   ```
+
+To update the oldest call for a number instead, page to the end of the list: its last item is the oldest call.

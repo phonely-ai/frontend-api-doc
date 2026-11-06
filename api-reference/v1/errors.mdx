@@ -1,0 +1,103 @@
+---
+title: "Errors and retries"
+description: "Read API v1 errors, stay within rate limits, and retry safely."
+sources:
+  - "phonely-db-svc/openapi/v1.json"
+  - "phonely-db-svc/app/schemas/v1/base.py"
+  - "phonely-db-svc/app/api/v1/_core/errors.py"
+  - "phonely-db-svc/app/api/v1/_core/limits.py"
+last-verified: "2026-11-06"
+---
+
+Every API v1 failure has an HTTP status that says what kind of failure it is, and the same JSON body. Branch on the status and the `code`, retry only what's safe to retry, and include the `request_id` when you contact support.
+
+## The error body
+
+```json
+{
+  "error": {
+    "code": "validation_failed",
+    "message": "The request is invalid.",
+    "details": [
+      {
+        "field": "limit",
+        "issue": "out_of_range",
+        "message": "Input should be less than or equal to 100"
+      }
+    ],
+    "request_id": "req_82296cc7b60d46fc9b036d015e1410b6"
+  }
+}
+```
+
+| Field | What it holds |
+| --- | --- |
+| `code` | What went wrong. Stable and machine-readable: branch on it. |
+| `message` | An explanation for people. Its wording can change, so don't parse it. |
+| `details` | One entry per problem field, so you see every problem in one response. Empty when the error isn't about a field. |
+| `request_id` | The same value as the `X-Request-Id` header. Include it when you contact support. |
+
+Each `details` entry has the `field` as you sent it, an `issue` and a `message`. The `issue` is one of:
+
+| `issue` | Meaning |
+| --- | --- |
+| `required` | A required field or parameter is missing. |
+| `unknown_field` | The endpoint has no field or parameter with this name. |
+| `read_only_field` | The field is in the resource, but a request can't change it. |
+| `invalid_json` | The body isn't valid JSON. |
+| `invalid_type` | The value has the wrong type, such as text for a number. |
+| `invalid_value` | The value has the right type but isn't allowed. |
+| `out_of_range` | A number or time is outside its allowed range. |
+| `invalid_cursor` | The `cursor` isn't one the API returned for this request. |
+
+## Status codes
+
+| Status | `code` | When |
+| --- | --- | --- |
+| `400` | `validation_failed` | The request is invalid: a malformed body, a wrong value, or an unknown field or parameter. |
+| `400` | `invalid_cursor` | The `cursor` is malformed or came from a request with different filters. See [Pagination](/api-reference/v1/pagination). |
+| `401` | `invalid_api_key` | The API key is missing, invalid or revoked. See [Authentication](/api-reference/v1/authentication). |
+| `403` | `insufficient_access` | A read-only key tried to make a change. |
+| `403` | `organization_mismatch` | `Phonely-Organization` doesn't match the key's organization. |
+| `404` | `not_found` | The resource doesn't exist, or belongs to another organization. Both get the same answer. |
+| `405` | `method_not_allowed` | The path doesn't support this HTTP method. |
+| `409` | Varies | The change conflicts with the resource's current state. The endpoint's reference page lists its codes, such as `sms_setup_required`. |
+| `412` | `precondition_failed` | The resource changed since you read it. See [Updates and concurrency](/api-reference/v1/updates-and-concurrency). |
+| `413` | `payload_too_large` | The request body is over its size limit. |
+| `415` | `unsupported_media_type` | The uploaded file type isn't supported. |
+| `428` | `precondition_required` | A change that replaces a list came without `If-Match`. |
+| `429` | `rate_limited` | Too many requests. Wait for the number of seconds in `Retry-After`. |
+| `500` | `internal_error` | An unexpected error on Phonely's side. |
+| `502` | `bad_gateway`, `knowledge_processing_failed` | A service the request depends on failed. |
+| `503` | `service_unavailable` | The API or a service it depends on is temporarily unavailable. |
+| `504` | `gateway_timeout` | The request took too long. |
+
+New codes can be added. Treat an unknown `code` by its HTTP status.
+
+## Rate limits
+
+Limits are counted per minute, for each API key and for its whole organization. A request must be within both.
+
+| Requests | Per key | Per organization |
+| --- | --- | --- |
+| Reads (`GET`) | 100 | 500 |
+| Changes (`PATCH`, `POST`, `DELETE`) | 50 | 250 |
+| Adding knowledge: text, files, website pages and website maps | 10 | 30 |
+
+Each minute starts on the minute. Over a limit, the API answers `429` with a `Retry-After` header: the number of seconds until the next minute starts. A refused request doesn't count against either limit.
+
+## Retry safely
+
+| Response | What to do |
+| --- | --- |
+| `429` | Wait the number of seconds in `Retry-After`, then retry. |
+| `500`, `502`, `503`, `504`, or no response | Retry with exponential backoff, if the request is safe to repeat. |
+| Any other `4xx` | Don't retry unchanged. Fix the request first. |
+
+Whether a request is safe to repeat depends on what it does:
+
+- **Reads** are always safe to repeat.
+- **Updates** (`PATCH`) set fields to the values you send, so repeating one leaves the same result. To make sure a repeat can't overwrite someone else's change, send `If-Match`. A call's outcome update is saved again each time it's sent. See [Updates and concurrency](/api-reference/v1/updates-and-concurrency).
+- **Blocking or unblocking a phone number** is safe to repeat: blocking a number that's already blocked, or unblocking one that isn't, changes nothing.
+- **Deleting a knowledge source** is safe to repeat. Once it's gone, a repeat answers `404`.
+- **Adding knowledge isn't safe to repeat.** These requests don't support idempotency keys, so if a request times out and you send it again, the agent can end up with two copies. Before you retry, list the agent's knowledge sources to see whether the first request went through.
