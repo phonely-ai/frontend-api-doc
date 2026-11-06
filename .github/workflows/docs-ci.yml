@@ -47,3 +47,6 @@ jobs:
 
       - name: OpenAPI contract
         run: node scripts/check-openapi-contract.mjs
+
+      - name: API v1 spec copy
+        run: node scripts/sync-v1-openapi.mjs --check

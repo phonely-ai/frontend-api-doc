@@ -22,7 +22,7 @@ Use `skill.md` for the full source and claim-traceability contract. Refresh `las
 
 Treat source paths as publishable metadata. Use the narrowest customer-safe source boundary and never list secret files, credential stores, billing-provider services, admin routes, or private authentication implementations in public page frontmatter.
 
-For the API Reference, `openapi.json` is the supported public API contract. Every operation in that schema must have one visible reference page. A route's existence in the application does not make it a public API; do not document app-internal, billing, admin, cron, or Ask AI routes unless they are deliberately added to the supported schema.
+For the API Reference, two schemas are the supported public API contract. API v1's `api-reference/v1/openapi.json` is a copy of db-svc's generated `openapi/v1.json`, written only by `scripts/sync-v1-openapi.mjs`; Mintlify generates its endpoint pages, so edit the endpoint text in db-svc, never here. The legacy API's hand-maintained `openapi.json` has one visible reference page per operation. A route's existence in the application does not make it a public API; do not document app-internal, billing, admin, cron, or Ask AI routes unless they are deliberately added to the supported schema.
 
 ### Ordering Within a Page
 

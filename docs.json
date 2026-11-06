@@ -41,6 +41,11 @@
       "vscode"
     ]
   },
+  "api": {
+    "playground": {
+      "display": "simple"
+    }
+  },
   "navigation": {
     "global": {
       "anchors": [
@@ -217,7 +222,7 @@
       {
         "tab": "API Reference",
         "icon": "code",
-        "pages": [
+        "groups": [
           {
             "group": "API v1",
             "pages": [
@@ -230,6 +235,13 @@
               "api-reference/v1/migrate-from-legacy",
               "api-reference/v1/changelog"
             ]
+          },
+          {
+            "group": "API v1 endpoints",
+            "openapi": {
+              "source": "/api-reference/v1/openapi.json",
+              "directory": "api-reference/v1"
+            }
           },
           {
             "group": "Legacy API",
