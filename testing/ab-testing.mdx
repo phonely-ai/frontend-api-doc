@@ -1,22 +1,25 @@
 ---
-title: "A/B Testing"
-description: "Compare a control agent with a variant using live call traffic."
+title: "Classic A/B tests"
+description: "Compare your agent with a full variant, for voice, settings, knowledge base, outbound flow or flow layout changes, using live calls."
 sources:
   - "features/testing/modules/ab-test/**"
   - "app/(main)/(routes)/testing/ab-test/**"
   - "services/ab-test-case-service.ts"
   - "features/testing/modules/ab-test/utils/open-test-variant-agent.ts"
   - "components/ui/multi-select-with-icon.tsx"
-last-verified: "2026-10-19"
+  - "features/experiments/ui/new-test-chooser/new-test-chooser.tsx"
+last-verified: "2026-11-08"
 ---
 
-A/B Testing compares your current agent, the **Control**, with a duplicated **Variant** using live calls. Phonely routes the configured share of calls to the variant and evaluates both agents against the same success criterion. Tests can run on the calls your agent answers, on the calls it places, or on both.
+A classic A/B test compares your current agent, the **Control**, with a duplicated **Variant** using live calls. Phonely routes the configured share of calls to the variant and evaluates both agents against the same success criterion. Tests can run on the calls your agent answers, on the calls it places, or on both.
+
+To test a change to the settings of blocks in an inbound flow, use an [experiment](/testing/experiments) instead: it reads the result in plain words and can apply or revert the winner. Use classic A/B tests for voice, settings, the knowledge base, outbound flows, or a new flow layout. An agent runs experiments or classic A/B tests, not both at once.
 
 Use [Unit Testing](/testing/simulation-testing) for repeatable generated scenarios before exposing changes to live traffic.
 
 ## Create a test
 
-Open **Testing > A/B Testing** and create a test in **Planned**. The setup has four parts:
+On the **Experiments** page, select **New test**, then **Classic A/B test**, and create a test in **Planned**. The setup has four parts:
 
 | Step | What you configure |
 | --- | --- |

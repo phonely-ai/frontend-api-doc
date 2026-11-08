@@ -163,6 +163,7 @@
             "icon": "flask-conical",
             "pages": [
               "testing/simulation-testing",
+              "testing/experiments",
               "testing/ab-testing"
             ]
           },
