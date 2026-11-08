@@ -1,0 +1,116 @@
+---
+title: "Experiments"
+description: "Test a flow change on part of your live inbound calls, see in plain words whether it helps, and apply or revert it."
+sources:
+  - "features/experiments/**"
+  - "features/workflows/modules/editor/components/controls/save-button-group.tsx"
+  - "features/workflows/modules/editor/components/controls/flow-checklist-popover.tsx"
+  - "features/workflows/modules/editor/components/experiments/**"
+  - "features/workflows/modules/editor/hooks/use-workflow-save-actions.ts"
+  - "features/workflows/modules/editor/hooks/use-follow-base-publish.ts"
+  - "config/sidebar-navigation.ts"
+  - "phonely-db-svc/app/experiments/**"
+  - "phonely-db-svc/app/services/experiments/**"
+last-verified: "2026-11-08"
+---
+
+An experiment runs a change to your flow on a share of your real inbound calls while the rest keep running the published flow. Phonely counts how each version does against a success metric, tells you in plain words when one is better, and lets you apply the winner or revert it later.
+
+In an experiment, your published flow is the **Base**. The version with your change is **Variant B**.
+
+Use [Unit Testing](/testing/simulation-testing) to try a change against generated scenarios first. To test voice, settings, the knowledge base, outbound flows or a new flow layout, use a [classic A/B test](/testing/ab-testing).
+
+## What an experiment can test
+
+- **Inbound phone calls.** Outbound calls, web calls, test calls, and simulations always run the Base.
+- **Changes to the settings of existing blocks.** Adding, removing, or reconnecting blocks, changing a block's type or the order of its exits, and changing its call stage or variables can't be tested. Those changes are published instead.
+- **Up to three experiments per agent at a time.** A caller is in at most one of them and hears the same version on every call. On some agents each call is assigned separately instead; the start sheet says which applies.
+
+An agent runs experiments or classic A/B tests, not both at once.
+
+## Set up a test
+
+1. On the **Experiments** page, select **New test**, then **Change a call flow**. Your call flows open.
+2. Open the flow and make your change. The flow must have been published at least once.
+3. Select **Publish**. Phonely runs its usual checks and AI review.
+4. When the review is done, choose **Publish as experiment**. If the review flagged something, **Publish as experiment** is on the flow checklist, next to the findings.
+5. Phonely lists every changed block. For each block, choose **Test** or **Publish now**. A block whose change can't be tested is set to **Publish now**, with the reason.
+6. Select **Continue**.
+
+The blocks you chose to publish are published right away. The tested change moves into a **Draft** experiment, and the editor shows the published flow again. The tested blocks and the flow's tab show an experiment marker, and the **Experiments** button in the editor's top bar lists the experiment.
+
+If the publish fails or you cancel it, the Draft is deleted and your draft is left as it was. To change what a Draft tests, make the new change in the same flow, open the **Experiments** button, and select **Re-capture** on the Draft.
+
+## Start the experiment
+
+Open the Draft on the **Experiments** page and select **Set up and start**. The start sheet has three steps:
+
+| Step | What you set |
+| --- | --- |
+| **What changes** | Review each variant's changes. A change that can't run is shown with the reason. |
+| **How we measure** | **What counts as success**: a saved success metric, pre-filled from your Performance board. **How much better do you expect it to be?** and **Smallest improvement worth keeping**, in points (30 % → 33 % is +3 points). |
+| **How we run** | **Who hears which version**: the share of this agent's calls that hear each version. **Longest it runs**: 1 to 90 days, 30 by default. Under **Advanced**: **Stop after this many calls**, **Count voicemail calls**, and **Count weekends toward the minimum days**. |
+
+The sheet estimates how many calls each version needs and when the experiment can reach a result, from the agent's calls in the last 7 days. Select **Start experiment**.
+
+If other experiments already hold all of the agent's calls, choose **Make room and start** to shrink them, keeping each one's own split.
+
+<Warning>
+  An experiment changes what live callers hear. Try the change with test calls first, and start with a split that suits the risk of the change.
+</Warning>
+
+## Follow the results
+
+The **Experiments** page has four tabs: **Running** (live and paused experiments, then Drafts), **Needs decision** (a result is in and waits for you), **Completed**, and **History** (earlier experiments and classic A/B tests). Select **How experiments work** in the header for a short explainer.
+
+Open an experiment to see:
+
+- **The result** at the top, in plain words, with what you can do next.
+- **How each version is doing**: each version's success rate and, once there are enough calls, how much better or worse Variant B most likely is, in points. Before then, it shows how far each version is from the minimum and roughly how many more calls that takes.
+- **The counts**: Calls, Counted, Waiting for report, Not counted, and Succeeded, with the reasons calls weren't counted (not answered, voicemail, and so on). More detail is under **Details**.
+- **Warnings**, each with what it means and what to do.
+- **Timeline**: every start, pause, resume, publish, result, apply, and stop, with who did it.
+
+By default, each version needs at least 100 counted calls before Phonely compares them, and a result also needs a few weekdays of running. Counts update as calls finish reporting, within about 15 minutes.
+
+## Results
+
+| Result | What it means | What happens |
+| --- | --- | --- |
+| **Too early** | Not enough calls to compare yet. | Keeps running. |
+| **Ahead so far** | Variant B leads, but it could still be chance. | Keeps running. |
+| **Winner** | Variant B is better, and the range of likely differences is above zero. | Moves to **Needs decision**. Calls keep splitting until you decide. |
+| **No difference** | The versions are within the smallest improvement worth keeping. | Moves to **Needs decision**. |
+| **No clear result** | The experiment reached its time or call limit without a result. | Ends. Every call runs the Base. |
+| **Split problem** | Calls weren't splitting between the versions as set, so the numbers can't be trusted. | Pauses. Stop it and start a new one. |
+
+## Decide, apply, or revert
+
+| Action | What it does |
+| --- | --- |
+| **Apply Variant B** | Offered for a winner. Publishes the Base with Variant B's change as a new version of the flow, and carries the change into your draft. The experiment ends and every call hears the change. |
+| **Apply anyway** | Applies any variant whatever the result. The confirmation says what you're skipping, for example that the variant performed the same as the Base. |
+| **Revert** | After an apply, puts back the flow from before as a new version. Later edits to other blocks are kept. |
+| **Stop** | Ends the experiment and keeps the Base, after you confirm. |
+| **Pause** / **Resume** | Every call runs the Base while paused. |
+| **Crown as version** | Saves the variant as a new version without publishing it. |
+
+If your draft has its own edits on the tested blocks, Apply is refused and nothing changes: publish or discard those draft edits, then apply. Only people who can edit the agent see these actions; viewers can read the results.
+
+## When you publish a flow under test
+
+Publishing a flow that a running experiment tests doesn't pause it. Your published changes flow into every variant, and the experiment keeps running and counting. A variant keeps its own value only for the setting it tests. After the publish, the editor tells you which experiments now use the new version, and any tested setting that kept the variant's value.
+
+If the publish removed or changed a block the experiment tests so that Variant B can't be built anymore, the experiment pauses and only **Stop** is offered. If a later publish lets Variant B be built again, the experiment picks up where it was.
+
+<AccordionGroup>
+  <Accordion title="Publish doesn't offer Publish as experiment">
+    Publish offers the choice only where a change can be tested. On a flow that has never been published, an outbound flow, or a classic A/B test's variant, **Publish** publishes right away. You also need to be able to edit the agent's experiments.
+  </Accordion>
+  <Accordion title="A block is set to Publish now">
+    Its change can't be tested: the block is new or removed, its type changed, its exits are in a new order, it is connected differently, or its call stage or variables changed. Publish it now, or test only the blocks whose settings changed.
+  </Accordion>
+  <Accordion title="No result appears">
+    Each version needs enough counted calls first; **How each version is doing** shows how far each one is. If a warning says the comparison can't update, stop the experiment and start a new one.
+  </Accordion>
+</AccordionGroup>
