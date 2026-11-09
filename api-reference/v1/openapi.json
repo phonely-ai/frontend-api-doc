@@ -2151,7 +2151,7 @@
         "additionalProperties": false,
         "properties": {
           "code": {
-            "description": "What went wrong, stable and machine-readable. Known values: `validation_failed`, `invalid_cursor`, `invalid_api_key`, `invalid_user_token`, `user_unavailable`, `insufficient_access`, `organization_mismatch`, `forbidden`, `not_found`, `method_not_allowed`, `conflict`, `sms_setup_required`, `opportunity_analysis_not_set_up`, `precondition_failed`, `payload_too_large`, `unsupported_media_type`, `precondition_required`, `rate_limited`, `internal_error`, `knowledge_processing_failed`, `bad_gateway`, `service_unavailable`, `gateway_timeout`. More can be added, so handle values you don't recognize.",
+            "description": "What went wrong, stable and machine-readable. Known values: `validation_failed`, `invalid_cursor`, `invalid_api_key`, `invalid_user_token`, `user_unavailable`, `insufficient_access`, `organization_mismatch`, `forbidden`, `not_found`, `method_not_allowed`, `conflict`, `agent_limit_reached`, `agent_too_large`, `sms_setup_required`, `opportunity_analysis_not_set_up`, `precondition_failed`, `payload_too_large`, `unsupported_media_type`, `precondition_required`, `rate_limited`, `internal_error`, `knowledge_processing_failed`, `bad_gateway`, `service_unavailable`, `gateway_timeout`. More can be added, so handle values you don't recognize.",
             "title": "Code",
             "type": "string",
             "x-extensible-enum": [
@@ -2166,6 +2166,8 @@
               "not_found",
               "method_not_allowed",
               "conflict",
+              "agent_limit_reached",
+              "agent_too_large",
               "sms_setup_required",
               "opportunity_analysis_not_set_up",
               "precondition_failed",
@@ -5482,6 +5484,187 @@
           "Agents"
         ],
         "x-permission": "write_configuration",
+        "x-scope": "organization",
+        "x-stability-level": "beta",
+        "x-mint": {
+          "metadata": {
+            "tag": "Beta"
+          }
+        }
+      }
+    },
+    "/v1/agents/{id}/duplicate": {
+      "post": {
+        "description": "Duplicate an agent in the same organization, including its flows and knowledge.\n\nTakes no request body. The copy is named '<name> (Copy)'; rename it with PATCH /v1/agents/{id}.\nFiles and knowledge chunks finish copying in the background. Each request makes a new copy: don't\nautomatically retry an uncertain outcome. The response waits up to ten seconds for the agent list's\nmirror; a slow mirror can still take a few seconds longer to show the new agent. A 403\n`agent_limit_reached` means the organization's plan has no room for another agent.",
+        "operationId": "duplicate_agent",
+        "parameters": [
+          {
+            "description": "The agent to copy.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "The agent to copy.",
+              "title": "Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Must be the key's org.",
+            "in": "header",
+            "name": "Phonely-Organization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional. Must be the key's org.",
+              "title": "Phonely-Organization"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Agent"
+                }
+              }
+            },
+            "description": "Successful Response",
+            "headers": {
+              "Phonely-Organization": {
+                "description": "The authorized organization for this request.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "The request is invalid: a malformed body, a bad or unknown field, or an unknown query parameter."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "The API key is missing, invalid or revoked.",
+            "headers": {
+              "WWW-Authenticate": {
+                "description": "Always `Bearer`.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "The resource doesn't exist, or belongs to another organization."
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "`agent_too_large`: the copy exceeds the synchronous write budget."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Rate limited. Retry after the number of seconds in `Retry-After`.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until the request can be retried.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "An unexpected error. Contact support with the request ID."
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "`bad_gateway`: the copy could not be written or processing could not be started."
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Authentication, authorization or another required service is temporarily unavailable."
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Duplicate an agent",
+        "tags": [
+          "Agents"
+        ],
+        "x-permission": "write_agent",
+        "x-rate-class": "expensive",
         "x-scope": "organization",
         "x-stability-level": "beta",
         "x-mint": {
@@ -10101,5 +10284,15 @@
         "x-stability-level": "stable"
       }
     }
-  }
+  },
+  "servers": [
+    {
+      "description": "US",
+      "url": "https://api.us.phonely.ai"
+    },
+    {
+      "description": "Australia",
+      "url": "https://api.au.phonely.ai"
+    }
+  ]
 }
