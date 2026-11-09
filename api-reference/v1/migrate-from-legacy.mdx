@@ -17,7 +17,7 @@ sources:
   - "app/api/list-voices/**"
   - "app/api/import-number/**"
   - "app/api/agent-generations/**"
-last-verified: "2026-11-06"
+last-verified: "2026-11-09"
 ---
 
 The [legacy API](/api-reference/introduction) keeps working, so you can move to API v1 at your own pace. Both APIs read and change the same agents and calls, so you can move one endpoint at a time.
@@ -41,6 +41,7 @@ API v1 also answers every failure with the same [error body](/api-reference/v1/e
 | `POST /get-agents` | `GET /v1/agents` |
 | `POST /get-agent` | `GET /v1/agents/{id}`. The agent's voice, guidelines and settings each have their own endpoint: `GET /v1/agents/{id}/voice`, `/guidelines` and `/settings`. |
 | `POST /update-agent` | The agent's name: `PATCH /v1/agents/{id}`. Its voice: `PATCH /v1/agents/{id}/voice`. Its conversation style and humanized speech: `PATCH /v1/agents/{id}/guidelines`. |
+| `POST /duplicate-agent` | `POST /v1/agents/{id}/duplicate`, with no request body. The copy is made in your key's organization and named `<name> (Copy)`; rename it with `PATCH /v1/agents/{id}`. Its knowledge files finish copying in the background. Each request makes a new copy, so don't retry automatically. |
 | `GET /calls/{agentId}` | `GET /v1/calls?agent_id={agentId}` |
 | `POST /get-call` | `GET /v1/calls/{id}`. The transcript: `GET /v1/calls/{id}/transcript`. The recording: `GET /v1/calls/{id}/recording`, which returns a link valid for 10 minutes. |
 | `PATCH /calls/{agentId}/{callIdOrPhone}` | `PATCH /v1/calls/{id}`. To update by phone number, first find the call: [list the agent's calls](#find-a-call-by-phone-number) with `customer_phone_number`. |
@@ -59,7 +60,6 @@ API v1 also covers things the legacy API doesn't, such as text knowledge sources
 
 Keep using the legacy API for these:
 
-- Duplicate an agent (`POST /duplicate-agent`).
 - Change an agent's greeting (`greetingMessage` in `POST /update-agent`).
 - Report an issue with a call (`POST /report-call-error`).
 - Import a phone number (`POST /import-number`).
