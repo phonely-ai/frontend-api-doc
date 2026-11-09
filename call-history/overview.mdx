@@ -13,7 +13,9 @@ sources:
   - "features/calls/model/analytics-field-filters.ts"
   - "features/calls/assistant-capability/lib/call-analysis-handoff.ts"
   - "features/calls/assistant-capability/services/get-call-details.ts"
-last-verified: "2026-10-05"
+  - "features/calls/model/runtime-trace/ivr-inputs.ts"
+  - "features/calls/model/call-topics.ts"
+last-verified: "2026-11-09"
 ---
 
 Call History is the record of an agent's phone and web conversations. Use it to find a call, understand what happened, and inspect how the flow ran.
@@ -42,12 +44,14 @@ Call Details keeps the transcript beside two review tabs:
 
 | Tab | Use it for |
 | --- | --- |
-| **Highlights** | Summary, sentiment, caller and end details, topics, outcome, actions, and time spent in blocks |
+| **Highlights** | Summary, sentiment, caller and end details, topics, outcome, actions, and time spent in blocks. Topics come from the agent's Call Topics analytics field when it is configured |
 | **Blocks** | The ordered blocks and actions recorded while the call ran, including stored variables and available execution details |
 
-For a completed call, use the audio player to hear the conversation while following the transcript. Transcript event separators identify non-conversational events where available. When the agent hangs up after completing a warm transfer, the transcript labels that step **Phonely Left Call** rather than **User Left Call**.
+For a completed call, use the audio player to hear the conversation while following the transcript. Transcript event separators identify non-conversational events where available. When the agent hangs up after completing a warm transfer, the transcript labels that step **Phonely Left Call** rather than **User Left Call**. When the agent navigated a phone menu during a warm transfer, the transfer step also lists the **IVR inputs** it sent, such as the digits it pressed or the phrases it spoke, with the time of each.
 
 Select a block or duration segment to move to the corresponding part of the transcript. This is useful when one Talk block contains several caller and agent turns.
+
+In **Blocks**, a [**Code**](/blocks/data-and-automation-blocks/code) block's recorded data lists its **Inputs** first, then its **Output**, as separate labeled sections, with its standard output and error and the remaining execution details below. When a block did not record inputs, it says so instead.
 
 ## Understand why callers left early
 

@@ -23,7 +23,10 @@ sources:
   - "features/performance/model/analytics-catalog.ts"
   - "features/performance/utils/stats-coverage.ts"
   - "phonely-db-svc/app/analytics/catalog.py"
-last-verified: "2026-10-26"
+  - "features/performance/hooks/use-tv-mode.ts"
+  - "features/performance/ui/performance-tv-bar.tsx"
+  - "features/performance/utils/tv-mode.ts"
+last-verified: "2026-11-09"
 ---
 
 Performance turns an agent's call history into a board of cards that help you understand traffic, results, and recurring patterns.
@@ -150,6 +153,12 @@ Changing a saved metric or filter can affect cards that use it. Ask AI cannot de
 A view keeps a board's cards, filters, and settings for an agent. Use the view selector to switch between views and manage them. To change the active view's name or description, open **Settings > View settings**.
 
 Use separate views for questions that need different scopes, such as weekly operations, negative-sentiment calls, or a specific outcome. Give each view a name that describes the question it answers.
+
+## Show the board on a wall display
+
+**TV mode** is a full-screen, read-only version of the board for wall displays. It fits the board to the screen, pages through rows that do not fit, scales the text so it is readable from a distance, and keeps the screen awake.
+
+Turn it on with the **TV** button in the header or by pressing **T**, and add `?tv=1` to the page URL to open straight into it. A bookmarked `?tv=1` link is convenient for a dedicated display, though the browser enters full screen only after you select **Full screen** from inside TV mode, since full screen requires an action on the page. Adjust the text size from inside TV mode when a display needs larger or smaller cards, and select **Exit TV mode** to return to the editable board.
 
 ## Interpret the results
 

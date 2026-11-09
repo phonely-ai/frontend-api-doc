@@ -3,14 +3,15 @@ title: "A/B Testing"
 description: "Compare a control agent with a variant using live call traffic."
 sources:
   - "features/testing/modules/ab-test/**"
+  - "features/testing/modules/variant-mode/**"
   - "app/(main)/(routes)/testing/ab-test/**"
   - "services/ab-test-case-service.ts"
   - "features/testing/modules/ab-test/utils/open-test-variant-agent.ts"
   - "components/ui/multi-select-with-icon.tsx"
-last-verified: "2026-10-19"
+last-verified: "2026-11-09"
 ---
 
-A/B Testing compares your current agent, the **Control**, with a duplicated **Variant** using live calls. Phonely routes the configured share of calls to the variant and evaluates both agents against the same success criterion. Tests can run on the calls your agent answers, on the calls it places, or on both.
+A/B Testing compares your current agent, the **Control**, with one or more **Variants** using live calls. Phonely routes the configured share of calls to each variant and evaluates every arm against the same success criterion. Tests can run on the calls your agent answers, on the calls it places, or on both.
 
 Use [Unit Testing](/testing/simulation-testing) for repeatable generated scenarios before exposing changes to live traffic.
 
@@ -46,16 +47,27 @@ When choosing successful outcomes or ended reasons, search to narrow the options
 
 ### Edit the variant
 
-Creating a test duplicates the control agent. Make the change you want to measure, then keep unrelated settings aligned so the result remains interpretable.
+Make the change you want to measure on the variant, then keep unrelated settings aligned so the result remains interpretable. The **Edit variant** action names the variant's letter once the test has started—for example **Edit Variant C**—and reads plainly for a planned test, which has no letter yet.
 
-- Most tests open the variant in the agent editor through **Edit variant agent**.
+How the variant opens depends on the test:
+
+- A delta test (one with no separately copied variant agent) is edited on the **base agent's own page** in Variant B mode. A strip at the top of the window names the test being edited and offers **Back to test**, **Exit to base**, and, once the test has started, **Promote B**. The sidebar, page, and flow editor sit below the strip so it never covers anything. Every surface shows the base agent with the variant's changes applied, and any field, guideline section, or block the variant changes carries a **B** marker; hovering it shows "Changed in Variant B". Saves in this mode go to the variant only, never to the base agent. Some things the variant cannot change—such as phone numbers, compliance, analytics, renaming or deleting the agent, adding or removing flows, and knowledge-base document and website edits—are read-only or refused with a message. Deleting a knowledge-base document or website in Variant B mode drops it from the variant only; the base keeps it.
+- A test with its own copied variant agent opens that agent's page in test-agent mode, with the same strip and **Back to test**.
 - An outbound workflow test opens the variant's call flow instead. **Edit variant flow** takes you to the campaign page's call-flow canvas, where the Campaigns view is hidden and a chip marks the surface as the variant.
 
-Select **Back to tests** in the notice that stays on screen while you edit to return to Testing.
+**Promote B** writes only the variant's changes onto the base agent through the published-change path, keeping any base edits made during the test. Publishing a flow on an agent that has a delta test whose variant also changes the same flow asks you first, so you can keep the variant's version while the rest of the change reaches it.
 
 ## Start and manage the test
 
-Review the variant before selecting **Begin Test**. While a test is in progress, eligible calls are assigned to the Control or Variant according to the traffic split.
+Review the variant before selecting **Begin Test**. While a test is in progress, eligible calls are assigned to the Control or a Variant according to the traffic split.
+
+### Run several tests on one agent
+
+Up to four A/B tests can run on the same agent at once. They share a single control, **A (original)**, and each running test's variant takes its own percentage of the agent's calls. When a test starts, it is assigned the next free letter—**B**, **C**, **D**, or **E**—and keeps that letter after it ends. A planned test shows **Variant** with no letter until it starts, because the letter it would receive can change before then. These letters label the variant everywhere it appears in the app; a planned test can still be edited, but it does not take any calls until you start it.
+
+When you start a test, the **Start test** dialog shows the agent's whole split: A (original), each already-running test's variant, and this test's variant with the letter it will get. Set this test's share up to what A still has; already-running tests keep their shares here, and a running test's percentage is changed from its own test settings.
+
+If the percentage you planned no longer fits beside the running tests, the dialog starts the new test at whatever A has left, and **Make room** previews an even split that gives A and every variant—including the new one—an equal share, with A keeping any percentage that does not divide evenly. When four tests are already running, or no variant letter is free, the agent is at capacity and a new test cannot start until one finishes.
 
 The test appears in one of three sections:
 
@@ -81,7 +93,7 @@ Phonely calculates success from the criterion selected during setup:
 - **Call Ended Reason** counts calls with one of the selected ended reasons.
 - **Call Duration** compares whether shorter or longer calls better match the goal.
 
-The result may also show the difference between success rates, the probability that the variant wins, a p-value, and a confidence interval. Treat these as evidence from the calls collected so far, not a guarantee about future calls. A small sample or an interval that crosses zero means the result remains uncertain.
+The result may also show the difference between success rates, the probability that the variant wins, a p-value, and a confidence interval. Success rates and differences are shown to up to three significant digits without rounding up, while the underlying comparisons keep full precision. Treat these as evidence from the calls collected so far, not a guarantee about future calls. A small sample or an interval that crosses zero means the result remains uncertain.
 
 If you decide to keep the variant, apply it deliberately and complete an end-to-end test of the resulting control agent. Do not assume every variant difference should be promoted simply because one metric improved.
 
