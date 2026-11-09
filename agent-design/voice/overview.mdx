@@ -10,9 +10,12 @@ sources:
   - "services/voice-service.ts"
   - "services/agent-service.ts"
   - "phonely-backend/app/agent/assistant/assistant.py"
+  - "phonely-backend/app/agent/assistant/transcriber_config.py"
+  - "phonely-backend/app/custom_llm/llm_data_utils.py"
+  - "phonely-db-svc/app/services/agent_configuration/languages.py"
   - "phonely-db-svc/app/services/voice_service.py"
   - "phonely-db-svc/app/api/public/voices.py"
-last-verified: "2026-11-02"
+last-verified: "2026-11-09"
 ---
 
 Voice controls the speech callers hear during phone conversations. The selected voice and its settings belong to the agent and apply across its inbound and outbound flows.
@@ -27,6 +30,8 @@ Open **Agent Design**, then select **Voice**.
 2. Search by voice name or filter the library by language, gender, accent, or other available traits.
 3. Select the voice you want the agent to use.
 
+The library's **Language** and **Multi-lingual** filters help you find voices. To change the languages the agent understands and replies in, use [Languages in Voice Settings](#choose-languages-for-your-agent).
+
 The selected voice appears first in the library, followed by featured voices. Use the heart control to save a voice to **Favorites**. Favorites are shared across the agent's organization. Use the **Favorites** filter to show only favorited voices, and **Mine** to show voices owned by you or your organization.
 
 To give a voice owned by you or your organization a clearer label, select **Rename voice** in its row, enter a name, and select **Save**. Changing favorites and renaming voices are unavailable while the agent is read-only.
@@ -35,7 +40,7 @@ Choose a voice that remains clear at phone-call audio quality and fits the conve
 
 ## Customize the voice
 
-Use **Voice Settings** to adjust the selected voice. Changes save automatically.
+Use **Voice Settings** to adjust the selected voice. On wider layouts, the settings appear beside the voice library. On narrower layouts, select **Voice Settings** to open the panel. You need edit access to change these settings. Changes save automatically.
 
 | Setting | What it controls |
 | :-- | :-- |
@@ -44,16 +49,25 @@ Use **Voice Settings** to adjust the selected voice. Changes save automatically.
 | **Background Noise** | Optional office ambience and its volume |
 | **Pronunciations** | How Cartesia voices pronounce specific names or terms |
 
-### Choose the agent's languages
+### Choose languages for your agent
 
-**Languages** is the single control for what your agent hears and says. New agents start with English.
+To add or change the languages used for transcription and replies, open **Agent Design > Voice > Voice Settings > Languages**. New agents start with English.
+
+1. Open **Languages** and select the languages your callers use.
+2. Keep the existing language selected when you want to add another. For example, keep **English** selected and add **Spanish** for an agent that handles both.
+3. Review the selected languages and wait for **Saved** before leaving.
+4. Use **Web Call** to test recognition and replies in each selected language.
+
+Adding a language does not require changing the **Transcriber** when that language is already available in **Languages**.
 
 What you can choose depends on two things:
 
 - **The transcriber.** Each speech recognition engine supports its own set of languages. Switching engines keeps only the languages the new one accepts.
 - **The selected voice.** A voice that speaks one language limits the agent to that language. Choose a Spanish-only voice on an English agent and the agent handles Spanish, not both.
 
-When only one language is available, the control becomes a single choice and explains why. If a multi-language selection has to narrow, an inline message and a toast name the voice and the one language the agent will use.
+When the voice or transcriber limits the agent to one language, **Languages** offers a single choice. Choosing a single-language voice can remove other selected languages; the voice-switch warning names the language that remains.
+
+After changing a voice or transcriber, return to **Languages** and check the selection again. An engine change can remove unsupported languages without the voice-switch warning. Some transcribers do not offer a language selector; see [Troubleshooting](#troubleshooting).
 
 <Tip>
   Select only the languages your callers actually use. Extra languages give the agent more ways to mishear a caller without improving the conversations you expect.
@@ -67,9 +81,13 @@ Enter the written word and its pronunciation, then play the entry before saving 
 
 ### Configure transcription
 
-Expand **Advanced** in Voice Settings to add **Transcription Keywords**, which help the transcriber recognize uncommon names, product terms, or identifiers.
+Use **Voice Settings > Advanced > Transcription Keywords** when the agent mishears an uncommon name, product term, or identifier. Enter each term and press `Enter` to add it. Keywords help recognition; use **Pronunciations** to change how a supported voice says a word.
 
-The **Transcriber** itself is selected in **Agent Settings > Advanced > Speech & Turn-Taking**. Keep the default unless testing shows that another engine better fits the language or audio conditions of your calls. Changing the engine keeps your language selections compatible with it and applies that engine's recommended turn-taking defaults.
+To add a transcription language, use [Languages](#choose-languages-for-your-agent).
+
+To change the speech recognition engine, open **Agent Design > Settings > Advanced > Speech & Turn-Taking > Transcriber**. This selects the engine, not the languages.
+
+Keep the default unless a needed language is unavailable or call testing shows that another engine better fits your audio conditions. Changing the engine applies its recommended turn-taking defaults and keeps only compatible languages. Return to **Voice > Voice Settings > Languages** to review the selection, then test with **Web Call**.
 
 ## Test the voice
 
@@ -103,7 +121,13 @@ Select **Add or Clone a Voice** when the built-in library does not contain the v
 
 <AccordionGroup>
   <Accordion title="A language I need is unavailable">
-    Either the selected voice speaks a single language, or the transcriber does not support that language. Select a multi-lingual voice, or change the transcriber in **Agent Settings > Advanced > Speech & Turn-Taking**, then set **Languages** again.
+    Check **Voice > Voice Settings > Languages**, rather than the voice-library filters. A single-language voice limits the agent to one language; select a voice using the library's **Multi-lingual** filter if you need several. If the language is still unavailable, review **Transcriber** under **Agent Design > Settings > Advanced > Speech & Turn-Taking**. After changing the engine, return to **Languages** and review the selection.
+  </Accordion>
+  <Accordion title="I cannot find or change Languages">
+    On a narrower layout, select **Voice Settings** to open the panel. Some transcribers do not offer a language choice, so **Languages** is hidden. If you need another language, review the **Transcriber** under **Agent Design > Settings > Advanced > Speech & Turn-Taking**. If the control is visible but disabled, check that you have edit access to the agent.
+  </Accordion>
+  <Accordion title="The language list failed to load or a change did not save">
+    Use the retry action beside the loading error before changing the voice or transcriber. If a language save fails, Phonely shows an error and restores the previous selection. Resolve the error, retry the change, and confirm **Saved** before testing.
   </Accordion>
   <Accordion title="A word is pronounced incorrectly">
     If the selected voice supports **Pronunciations**, add the word and test a clearer pronunciation. If the setting is unavailable, select a Cartesia voice or another voice that already pronounces the term correctly.
