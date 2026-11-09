@@ -156,9 +156,13 @@ Use separate views for questions that need different scopes, such as weekly oper
 
 ## Show the board on a wall display
 
-**TV mode** is a full-screen, read-only version of the board for wall displays. It fits the board to the screen, pages through rows that do not fit, scales the text so it is readable from a distance, and keeps the screen awake.
+**TV mode** is a read-only board for wall displays. It fits the board to the screen, pages through rows that do not fit, and scales text for viewing from a distance.
 
-Turn it on with the **TV** button in the header or by pressing **T**, and add `?tv=1` to the page URL to open straight into it. A bookmarked `?tv=1` link is convenient for a dedicated display, though the browser enters full screen only after you select **Full screen** from inside TV mode, since full screen requires an action on the page. Adjust the text size from inside TV mode when a display needs larger or smaller cards, and select **Exit TV mode** to return to the editable board.
+Select the **TV mode** icon in the header or press **T** to enter. Use the text-size controls inside TV mode to make cards larger or smaller, and select **Exit TV mode** to return to the regular board.
+
+Add `?tv=1` to the page URL to bookmark the TV layout. If the URL already has query parameters, add `&tv=1` instead. Opening a bookmark does not automatically enter browser full screen; select **Full screen** when offered. The TV mode icon and **T** shortcut request full screen directly. The TV layout still works if the browser does not support or allow full screen.
+
+Phonely requests a screen wake lock when the browser supports it. Browser or power-saving policies can deny the request, so confirm the screen stays awake when setting up an unattended display.
 
 ## Interpret the results
 

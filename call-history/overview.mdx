@@ -44,7 +44,7 @@ Call Details keeps the transcript beside two review tabs:
 
 | Tab | Use it for |
 | --- | --- |
-| **Highlights** | Summary, sentiment, caller and end details, topics, outcome, actions, and time spent in blocks. Topics come from the agent's Call Topics analytics field when it is configured |
+| **Highlights** | Summary, sentiment, caller and end details, topics, outcome, actions, and time spent in blocks. Topics use the agent's Call Topics analytics field result when the call has one |
 | **Blocks** | The ordered blocks and actions recorded while the call ran, including stored variables and available execution details |
 
 For a completed call, use the audio player to hear the conversation while following the transcript. Transcript event separators identify non-conversational events where available. When the agent hangs up after completing a warm transfer, the transcript labels that step **Phonely Left Call** rather than **User Left Call**. When the agent navigated a phone menu during a warm transfer, the transfer step also lists the **IVR inputs** it sent, such as the digits it pressed or the phrases it spoke, with the time of each.
@@ -63,7 +63,9 @@ Turn Opportunity Analysis on from the agent's **Settings > Analytics** tab. Choo
 
 ## Correct call classifications
 
-In **Highlights**, you can correct the detected sentiment and add or remove configured topics. These changes update the call record used by filters and reporting.
+In **Highlights**, you can correct the detected sentiment. Calls using the legacy topic selector also let you add or remove configured topics. These changes update the call record used by filters and reporting.
+
+When a call has a result from the agent's **Call Topics** analytics field, Highlights shows those topics as read-only labels. Calls without that field result retain the legacy topic selector.
 
 If call review is enabled for your role, mark the call as a success or error after reviewing it. Calls flagged for review also show their review reasons and status.
 

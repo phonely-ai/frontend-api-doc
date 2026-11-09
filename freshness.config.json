@@ -2043,7 +2043,7 @@
           "pages": [
             "testing/ab-testing"
           ],
-          "note": "PHO-11785 lets up to four A/B tests run on one agent at once, sharing control A (original) and each taking its own percentage of the agent's calls. Documented the B\u2013E variant lettering used across the app, the per-test share set against what A has left, the Make room even-split preview, the capacity limit, and the new three-significant-digit display of success rates and differences (PHO-12161). Included the planned-vs-started letter behavior."
+          "note": "PHO-11785 lets up to four A/B tests run on one agent at once, sharing control A (original). Documented B\u2013E lettering, planned variants without letters, per-test success criteria, the control share left after all running variants, available-share limits, Make room and the capacity limit. Reviewed the whole setup guide against the final concurrent-test UI. PHO-12161 changes displayed success rates and differences to three significant digits."
         },
         {
           "id": "variant-b-edit-on-base-agent",
@@ -2051,7 +2051,7 @@
           "pages": [
             "testing/ab-testing"
           ],
-          "note": "PHO-11789 edits a delta test's Variant B on the base agent's own page in Variant B mode, with a top strip offering Back to test, Exit to base and Promote B, B markers on changed fields/sections/blocks, variant-only saves, and read-only or refused actions B cannot change. Publishing a flow the variant also changes now prompts first. PHO-11782's overlap prompt and sync state are covered by the same page section. Documented the edit-variant surfaces and Promote B; internal store/sync plumbing is not user-facing."
+          "note": "PHO-11789 edits a variant stored as changes on the base agent in variant-editing mode. The guide uses the assigned B\u2013E letter for markers and Promote, covers Back to test, Exit to base, variant-only saves, base-only restrictions and Ask AI unavailability, and distinguishes copied-agent and outbound-flow editors. PHO-11782 publishing guidance now describes overlapping changes, Publish, Stop the test(s) and publish, Cancel and the visible sync states. Promotion preserves unrelated base edits and does not end the test."
         },
         {
           "id": "call-history-block-and-transfer-details",
@@ -2059,7 +2059,7 @@
           "pages": [
             "call-history/overview"
           ],
-          "note": "PHO-12048 shows a Code block's Inputs first and Output as separate labeled sections in Call Details > Blocks, with a note when inputs were not recorded. PHO-10151 lists the IVR inputs the agent sent while navigating a phone menu during a warm transfer. PHO-12125 shows the Call Topics analytics field's topics in Highlights instead of the backend's freeform c_topic. Reviewed the affected Call History sections for accuracy and terminology."
+          "note": "PHO-12048 shows Code block Inputs before Output, with a message when inputs were not recorded. PHO-10151 lists timestamped IVR inputs during warm transfers. PHO-12125 displays Call Topics analytics-field results as read-only labels in Highlights; calls without a field result retain the editable legacy topic selector. Reviewed the affected Call History sections and corrected the adjacent classification-editing guidance."
         },
         {
           "id": "call-details-db-svc-migration",
@@ -2100,7 +2100,7 @@
           "pages": [
             "performance"
           ],
-          "note": "PHO-11933 adds Performance TV mode, a full-screen read-only wall-display board (TV button or T, ?tv=1 deep link, text scaling, keep-awake), documented in a new section. PHO-11942 saves/clears Performance outcome costs through the authenticated organization PATCH with server-side admin/agent-organization checks while preserving existing configurations and calculations; the save path is internal and the Cost measure is already documented, so no further prose is required for that change."
+          "note": "PHO-11933 adds Performance TV mode, a read-only wall-display board with the TV mode icon or T shortcut, tv=1 deep links, text scaling and optional browser full screen. Documented the fullscreen action needed after a bookmarked load and the browser-dependent wake-lock request. PHO-11942 preserves existing outcome-cost configurations and calculations while moving saves to authenticated organization PATCH; the save path is internal and Cost is already documented."
         },
         {
           "id": "enterprise-commit-balance",
