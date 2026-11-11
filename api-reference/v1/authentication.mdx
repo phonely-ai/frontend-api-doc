@@ -1,0 +1,72 @@
+---
+title: "Authentication"
+description: "Create an organization API key, send it with each request, and keep it safe."
+sources:
+  - "features/settings/modules/api-keys/**"
+  - "features/settings/model/settings-tabs.ts"
+  - "phonely-db-svc/openapi/v1.json"
+  - "phonely-db-svc/app/api/v1/_core/limits.py"
+  - "phonely-db-svc/app/api/v1/_core/middleware.py"
+last-verified: "2026-11-06"
+---
+
+API v1 authenticates every request with an organization API key. A key belongs to one organization and can act only in that organization.
+
+## Create an API key
+
+Only organization owners and admins can create and revoke API keys.
+
+1. In the Phonely web app, open **Settings**, then select **API Keys**.
+2. Select **Create API key**.
+3. Enter a **Name** that says where the key will be used, such as `Production backend`.
+4. Choose what the key can do:
+   - **Read only**: can read calls, agents and other data.
+   - **Full access**: can read data and make changes.
+5. Select **Create key**, then copy the key and store it somewhere safe. You can't see it again after you close the dialog.
+
+The new key starts with `phk_`. The **API Keys** table lists each key's name, the start of the key, its access, when it was created and who created it.
+
+<Note>
+  The legacy API's key, under **Settings** → **Account**, doesn't work with API v1. Create an organization API key instead.
+</Note>
+
+## Send the key
+
+Send the key as a bearer token in the `Authorization` header of every request:
+
+```bash
+curl https://api.us.phonely.ai/v1/agents \
+  -H "Authorization: Bearer $PHONELY_API_KEY"
+```
+
+A **Read only** key can make `GET` requests. Any request that changes something needs a **Full access** key.
+
+## The organization header
+
+The `Phonely-Organization` header is optional for API keys. If you send it, it must be the ID of the key's own organization. Successful responses that act in an organization include `Phonely-Organization`, set to the organization the request acted in.
+
+## Keep keys safe
+
+- Call the API only from your own servers. Never put a key in a web page or a mobile app, where anyone using it could read it. Browsers can't call API v1 from other websites.
+- Store keys in a secrets manager or environment variables, never in source control.
+- Create one key per integration, so you can revoke one without stopping the others.
+- Give each integration the least access it needs: use **Read only** unless it makes changes.
+
+## Revoke a key
+
+1. Open **Settings**, then select **API Keys**.
+2. Select **Revoke** on the key's row.
+3. Confirm with **Revoke key**.
+
+Anything using the key stops working within a minute. Revoking can't be undone.
+
+## Authentication errors
+
+| Status | `code` | What it means |
+| --- | --- | --- |
+| `401` | `invalid_api_key` | The key is missing, invalid or revoked. The response includes `WWW-Authenticate: Bearer`. |
+| `403` | `insufficient_access` | A **Read only** key tried to make a change. |
+| `403` | `organization_mismatch` | `Phonely-Organization` names an organization other than the key's. |
+| `429` | `rate_limited` | Too many failed attempts: after 30 failed authentications from one IP address in a minute, requests from that address are refused until the minute ends. Wait for the number of seconds in `Retry-After`. |
+
+For the full error format, see [Errors and retries](/api-reference/v1/errors).
