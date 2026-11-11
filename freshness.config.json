@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.277.0",
-        "commit": "0d9d844de3ae0a147748360dd17432fd3ac70b3f"
+        "label": "v0.280.0",
+        "commit": "6f06cc3a76ccadbaa5241db8f50ed9a0e42b28d6"
       }
     },
     {
@@ -2020,6 +2020,144 @@
             "call-history/overview"
           ],
           "note": "Repository tooling (test:changed/verify:merge scripts, CI isolation, agent skill docs), code-comment gardening, removal of already-commented-out options (for example the commented-out Unsure sentiment, Warm Transfer call type, Run JavaScript, and Get an Event entries that were never active), release version bumps, changelog, and mergeback merges. None change the public product experience."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.277.0-v0.280.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-11-09",
+      "fromExclusive": {
+        "label": "v0.277.0",
+        "commit": "0d9d844de3ae0a147748360dd17432fd3ac70b3f"
+      },
+      "throughInclusive": {
+        "label": "v0.280.0",
+        "commit": "6f06cc3a76ccadbaa5241db8f50ed9a0e42b28d6"
+      },
+      "dispositions": [
+        {
+          "id": "ab-testing-multiple-concurrent-tests",
+          "status": "docs-updated",
+          "pages": [
+            "testing/ab-testing"
+          ],
+          "note": "PHO-11785 lets up to four A/B tests run on one agent at once, sharing control A (original). Documented B\u2013E lettering, planned variants without letters, per-test success criteria, the control share left after all running variants, available-share limits, Make room and the capacity limit. Reviewed the whole setup guide against the final concurrent-test UI. PHO-12161 changes displayed success rates and differences to three significant digits."
+        },
+        {
+          "id": "variant-b-edit-on-base-agent",
+          "status": "docs-updated",
+          "pages": [
+            "testing/ab-testing"
+          ],
+          "note": "PHO-11789 edits a variant stored as changes on the base agent in variant-editing mode. The guide uses the assigned B\u2013E letter for markers and Promote, covers Back to test, Exit to base, variant-only saves, base-only restrictions and Ask AI unavailability, and distinguishes copied-agent and outbound-flow editors. PHO-11782 publishing guidance now describes overlapping changes, Publish, Stop the test(s) and publish, Cancel and the visible sync states. Promotion preserves unrelated base edits and does not end the test."
+        },
+        {
+          "id": "call-history-block-and-transfer-details",
+          "status": "docs-updated",
+          "pages": [
+            "call-history/overview"
+          ],
+          "note": "PHO-12048 shows Code block Inputs before Output, with a message when inputs were not recorded. PHO-10151 lists timestamped IVR inputs during warm transfers. PHO-12125 displays Call Topics analytics-field results as read-only labels in Highlights; calls without a field result retain the editable legacy topic selector. Reviewed the affected Call History sections and corrected the adjacent classification-editing guidance."
+        },
+        {
+          "id": "call-details-db-svc-migration",
+          "status": "no-doc-change",
+          "pages": [
+            "call-history/overview"
+          ],
+          "note": "PHO-11965 moves Call Details, previous/next preloads, review details and Ask AI call reads to db-svc, with a dedicated read receipt and a lightweight scheduling API for campaign badges. The changelog states call mapping, query keys, timestamps and navigation behavior are preserved, so there is no user-visible contract change; the internal data source is not documented."
+        },
+        {
+          "id": "knowledge-sources-db-svc-and-upload-limit",
+          "status": "docs-updated",
+          "pages": [
+            "agent-knowledge-base/overview"
+          ],
+          "note": "PHO-11565 moves Knowledge Base, onboarding, LivePro imports and Ask AI to db-svc for knowledge sources, with on-demand file links and per-source deletion outcomes. The user-visible consequence is the new 25 MiB uploaded-file limit, which is documented; the db-svc data source itself and autosave-retention internals are not user-facing."
+        },
+        {
+          "id": "flow-and-agent-writes-db-svc-migration",
+          "status": "no-doc-change",
+          "pages": [
+            "flow-editor/versions",
+            "settings/delete-agents"
+          ],
+          "note": "PHO-12025 (flow reads/writes and versions), PHO-12066 (agent create/delete/transfer, staff switches, live toggle, phone-number names, default-flow and outcome updates) and PHO-12101 (selector options, call feedback tags, response issue categories) move browser Firestore writes to db-svc. The changelogs state editing, autosave, publishing, deletion and conflict behavior are preserved; a failed selector-option list now shows an error with Retry, which is a minor in-surface affordance already consistent with existing guidance. No documented user task changes. PostHog event-shape changes are internal analytics."
+        },
+        {
+          "id": "onboarding-agent-name-length-cap",
+          "status": "no-doc-change",
+          "pages": [
+            "get-started/quick-start"
+          ],
+          "note": "PHO-12066 follow-up keeps an onboarding website-derived agent name within 50 characters. This is an input validation detail on the onboarding form, not a documented user task or stated limit on any indexed page; no user-facing documentation consequence."
+        },
+        {
+          "id": "performance-tv-mode-and-outcome-costs",
+          "status": "docs-updated",
+          "pages": [
+            "performance"
+          ],
+          "note": "PHO-11933 adds Performance TV mode, a read-only wall-display board with the TV mode icon or T shortcut, tv=1 deep links, text scaling and optional browser full screen. Documented the fullscreen action needed after a bookmarked load and the browser-dependent wake-lock request. PHO-11942 preserves existing outcome-cost configurations and calculations while moving saves to authenticated organization PATCH; the save path is internal and Cost is already documented."
+        },
+        {
+          "id": "enterprise-commit-balance",
+          "status": "needs-doc-update",
+          "pages": [
+            "billing-and-usage/plans-and-billing-history"
+          ],
+          "note": "PHO-12124 adds an Enterprise Plan & Billing 'Available commit balance' card (this cycle, rollover and credit) with a 'View breakdown' side sheet, keeps 'Commit remaining' for other contracts, shows pay-as-you-go cards when there is no commit, and reports commit spent this cycle including rollover and credits. This is an Enterprise-only billing surface; the indexed Plans and Billing page describes a standard subscription view and does not yet cover enterprise commit contracts. Recorded as a known gap for deliberate Enterprise-billing documentation with an explicit audience decision rather than exposing a partial enterprise-only description now."
+        },
+        {
+          "id": "agent-qa-test-suite",
+          "status": "needs-doc-update",
+          "pages": [
+            "testing/simulation-testing"
+          ],
+          "note": "PHO-10773 and its follow-ups (PHO-11736/11737/11738/11739/11740/11741/11743/11744/11745, PHO-12154, PHO-12155, PHO-12163) ship Agent QA / Test Suite: a new per-agent Test Suite page under Optimize, gated to admins and Enterprise agents (requiresAgentQa), that builds scenarios from recorded calls, pairs each test call with the real call it came from, runs a measured QA loop and opens a run report. Ask AI has no Agent QA tools. This is a sizeable new customer-facing capability with no existing documentation home and an admin/Enterprise audience that needs an explicit decision; the run loop, orchestrator, simulation, derivation, understanding, cleanup and report-rendering internals must not be exposed. The only in-boundary user-visible refinement to an existing page is that Test Suite call waveforms (PHO-12155) seek on click or press-and-drag and no longer move the playhead on hover. Recorded as a known gap for a deliberate Test Suite page with an audience decision; model-effort and derivation-speed changes (PHO-12154/12163) are internal."
+        },
+        {
+          "id": "viewer-webcall-access",
+          "status": "no-doc-change",
+          "pages": [
+            "flow-editor/test-and-publish"
+          ],
+          "note": "PHO-11899 restores webcall (test-call) access for global and organization Viewers without granting agent editing permissions. Indexed pages do not enumerate per-role webcall permissions, so there is no documented contract to change; the fix returns the prior ability rather than adding a new user task."
+        },
+        {
+          "id": "server-tracing-datadog",
+          "status": "not-public",
+          "pages": [],
+          "note": "PHO-12027 sends server OpenTelemetry traces to Datadog APM through a Vercel trace drain, keeping AI SDK and Langfuse spans on a Langfuse-only provider. This is internal observability with no user-facing surface; prompts, tool results and model output are not sent to Datadog. No public contract change."
+        },
+        {
+          "id": "firebase-oidc-auth",
+          "status": "not-public",
+          "pages": [],
+          "note": "PHO-12159 lets server routes authenticate to Firebase through Vercel OIDC / Workload Identity Federation instead of a service account key, falling back to the private key when unconfigured. This is a deployment-side credential/auth mechanism with no user-visible behavior change."
+        },
+        {
+          "id": "ui-dialog-and-picker-fixes",
+          "status": "no-doc-change",
+          "pages": [
+            "flow-editor/variables",
+            "outbound-calling/phone-numbers"
+          ],
+          "note": "PHO-12063 keeps long variable/source names inside the Add Flow Input and Replace Invalid Variable dialogs; PHO-11983 makes the 'More flows' overflow picker searchable and scrollable; PHO-11420 keeps available numbers on one line in the Get a Number modal. These are presentation/overflow fixes to existing controls with no change to the documented user task, inputs, or results."
+        },
+        {
+          "id": "dependency-and-security-bumps",
+          "status": "not-public",
+          "pages": [],
+          "note": "Bumping Next.js to 16.4.5 for three Moderate security advisories is a dependency update with no user-visible behavior change."
+        },
+        {
+          "id": "housekeeping-releases-and-gardening",
+          "status": "not-public",
+          "pages": [],
+          "note": "Release tag commits (v0.278.0, v0.279.0, v0.280.0), mergebacks and merges into dev, changelog date updates, test timezone fix (PHO-12051), ESLint convention enforcement and suppressions, test pruning, dead-code and stale-comment removal, and AGENTS.md cleanup. These are internal housekeeping, tests, tooling and release mechanics with no public product contract change. The ESLint pass also standardizes native tooltips to the shared tooltip and name icon-only buttons for screen readers, an accessibility/consistency change that alters no documented user task."
         }
       ]
     }

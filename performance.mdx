@@ -23,7 +23,10 @@ sources:
   - "features/performance/model/analytics-catalog.ts"
   - "features/performance/utils/stats-coverage.ts"
   - "phonely-db-svc/app/analytics/catalog.py"
-last-verified: "2026-10-26"
+  - "features/performance/hooks/use-tv-mode.ts"
+  - "features/performance/ui/performance-tv-bar.tsx"
+  - "features/performance/utils/tv-mode.ts"
+last-verified: "2026-11-09"
 ---
 
 Performance turns an agent's call history into a board of cards that help you understand traffic, results, and recurring patterns.
@@ -150,6 +153,16 @@ Changing a saved metric or filter can affect cards that use it. Ask AI cannot de
 A view keeps a board's cards, filters, and settings for an agent. Use the view selector to switch between views and manage them. To change the active view's name or description, open **Settings > View settings**.
 
 Use separate views for questions that need different scopes, such as weekly operations, negative-sentiment calls, or a specific outcome. Give each view a name that describes the question it answers.
+
+## Show the board on a wall display
+
+**TV mode** is a read-only board for wall displays. It fits the board to the screen, pages through rows that do not fit, and scales text for viewing from a distance.
+
+Select the **TV mode** icon in the header or press **T** to enter. Use the text-size controls inside TV mode to make cards larger or smaller, and select **Exit TV mode** to return to the regular board.
+
+Add `?tv=1` to the page URL to bookmark the TV layout. If the URL already has query parameters, add `&tv=1` instead. Opening a bookmark does not automatically enter browser full screen; select **Full screen** when offered. The TV mode icon and **T** shortcut request full screen directly. The TV layout still works if the browser does not support or allow full screen.
+
+Phonely requests a screen wake lock when the browser supports it. Browser or power-saving policies can deny the request, so confirm the screen stays awake when setting up an unattended display.
 
 ## Interpret the results
 
