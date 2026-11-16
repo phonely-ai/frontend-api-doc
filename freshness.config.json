@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.280.0",
-        "commit": "6f06cc3a76ccadbaa5241db8f50ed9a0e42b28d6"
+        "label": "v0.283.0",
+        "commit": "333c53dce1821de50400d593450f9ad8c87972b1"
       }
     },
     {
@@ -365,7 +365,7 @@
             "outboundcalling/createaoutboundcallingcampaign",
             "outboundcalling/avoidmarkedasspamlikely"
           ],
-          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused \u2014 do-not-dial day\" indicator on campaign list and detail views."
+          "note": "Documented per-campaign Do Not Dial Days in Set Call Cadence: the US federal holidays preset, selecting individual dates, draft-then-Save behavior, and the \"Paused — do-not-dial day\" indicator on campaign list and detail views."
         },
         {
           "id": "call-review-webhook-cache-miss-and-event-separators",
@@ -583,7 +583,7 @@
           "pages": [
             "outboundcalling/createaoutboundcallingcampaign"
           ],
-          "note": "Documented the Queued, Queued \u00b7 After hours, and Queued \u00b7 On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
+          "note": "Documented the Queued, Queued · After hours, and Queued · On hold states, their tooltips, and the calling-window or misconfiguration causes of a hold."
         },
         {
           "id": "block-test-output-selection",
@@ -2043,7 +2043,7 @@
           "pages": [
             "testing/ab-testing"
           ],
-          "note": "PHO-11785 lets up to four A/B tests run on one agent at once, sharing control A (original). Documented B\u2013E lettering, planned variants without letters, per-test success criteria, the control share left after all running variants, available-share limits, Make room and the capacity limit. Reviewed the whole setup guide against the final concurrent-test UI. PHO-12161 changes displayed success rates and differences to three significant digits."
+          "note": "PHO-11785 lets up to four A/B tests run on one agent at once, sharing control A (original). Documented B–E lettering, planned variants without letters, per-test success criteria, the control share left after all running variants, available-share limits, Make room and the capacity limit. Reviewed the whole setup guide against the final concurrent-test UI. PHO-12161 changes displayed success rates and differences to three significant digits."
         },
         {
           "id": "variant-b-edit-on-base-agent",
@@ -2051,7 +2051,7 @@
           "pages": [
             "testing/ab-testing"
           ],
-          "note": "PHO-11789 edits a variant stored as changes on the base agent in variant-editing mode. The guide uses the assigned B\u2013E letter for markers and Promote, covers Back to test, Exit to base, variant-only saves, base-only restrictions and Ask AI unavailability, and distinguishes copied-agent and outbound-flow editors. PHO-11782 publishing guidance now describes overlapping changes, Publish, Stop the test(s) and publish, Cancel and the visible sync states. Promotion preserves unrelated base edits and does not end the test."
+          "note": "PHO-11789 edits a variant stored as changes on the base agent in variant-editing mode. The guide uses the assigned B–E letter for markers and Promote, covers Back to test, Exit to base, variant-only saves, base-only restrictions and Ask AI unavailability, and distinguishes copied-agent and outbound-flow editors. PHO-11782 publishing guidance now describes overlapping changes, Publish, Stop the test(s) and publish, Cancel and the visible sync states. Promotion preserves unrelated base edits and does not end the test."
         },
         {
           "id": "call-history-block-and-transfer-details",
@@ -2158,6 +2158,158 @@
           "status": "not-public",
           "pages": [],
           "note": "Release tag commits (v0.278.0, v0.279.0, v0.280.0), mergebacks and merges into dev, changelog date updates, test timezone fix (PHO-12051), ESLint convention enforcement and suppressions, test pruning, dead-code and stale-comment removal, and AGENTS.md cleanup. These are internal housekeeping, tests, tooling and release mechanics with no public product contract change. The ESLint pass also standardizes native tooltips to the shared tooltip and name icon-only buttons for screen readers, an accessibility/consistency change that alters no documented user task."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.280.0-v0.283.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-11-16",
+      "fromExclusive": {
+        "label": "v0.280.0",
+        "commit": "6f06cc3a76ccadbaa5241db8f50ed9a0e42b28d6"
+      },
+      "throughInclusive": {
+        "label": "v0.283.0",
+        "commit": "333c53dce1821de50400d593450f9ad8c87972b1"
+      },
+      "dispositions": [
+        {
+          "id": "ask-ai-open-agent-design-tabs",
+          "status": "docs-updated",
+          "pages": [
+            "agent-design/overview"
+          ],
+          "note": "PHO-12169 lets Ask AI navigation cards open a specific Agent Design tab (Voice, Guidelines, Knowledge Base, Workflows, Settings) via a new agentTab argument, keeping the agent's editing and test context. This is an Ask AI retrieval/navigation behavior and the open-app-route tool guide now points Voice/language intents at the Voice tab. The user-visible facts (Agent Design tab set and names) are already described on the Agent Setup page; refreshed its last-verified while editing that page for the Knowledge Base recording removal. No new tab or label was introduced."
+        },
+        {
+          "id": "ai-descriptive-block-names",
+          "status": "already-covered",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "PHO-11148 has Generate with AI and Ask AI replace blank or default block titles with descriptive names while preserving custom titles and honoring explicit rename requests, keeping output-variable group headings in sync. This is an AI-authoring quality refinement with no new user task, input, or label; the Ask AI flow-editing behavior is already described generally. No page change needed."
+        },
+        {
+          "id": "workflow-edge-contrast",
+          "status": "no-doc-change",
+          "pages": [
+            "flow-editor/connections-and-routing"
+          ],
+          "note": "PHO-9170 makes selected and hovered workflow connections darker and thicker for readability in crowded flows. Purely cosmetic canvas styling with no change to a user task, control, or term; verified the Connections and Routing page describes connecting blocks and does not claim any specific edge color or thickness. No customer-facing documentation consequence."
+        },
+        {
+          "id": "codebase-gardening",
+          "status": "not-public",
+          "pages": [],
+          "note": "Routine gardening commits (#3756 prune tests, #3755 consolidate abstractions, #3752 and #3603 remove dead code, #3784 remove stale comments) plus the merge-adjacent content.ts touch. Internal test, abstraction, dead-code, and comment cleanup with no change to any user-visible contract."
+        },
+        {
+          "id": "agent-qa-test-suite-refinements",
+          "status": "needs-doc-update",
+          "pages": [
+            "testing/simulation-testing"
+          ],
+          "note": "Agent QA / Test Suite refinements this window: PHO-12186 review cards highlight only the scenario's part of a call and keep card buttons in place; PHO-12188 the final suite reopens a scenario to decide again with a Discarded list; PHO-12187 assignment names the moment that places each call and review highlights it; PHO-12189 alignment answers stay changeable until the suite is built and end on a Check your answers screen; PHO-12195 a report counts a failing call held by a test-setup question so its pass rate matches the suite page; PHO-12196 the Check-your-answers button says Resubmit when an answer changed. Agent QA remains an admin/Enterprise capability with no existing documentation home and no Ask AI tools; its run loop, derivation, alignment, and report internals must not be exposed. Carrying the existing agent-qa-test-suite gap (a deliberate Test Suite page with an audience decision) forward unchanged; these are refinements within that still-undocumented surface."
+        },
+        {
+          "id": "internal-observability-langfuse",
+          "status": "not-public",
+          "pages": [],
+          "note": "PHO-12183 migrates frontend Langfuse to SDK v6/v4 APIs and updates evidence readers, preserving request tracing, prompt caching, and feedback while removing legacy trace setters. Internal observability plumbing with no user-visible contract; the changed app/api/assistant and observability files are Ask AI operational internals, not indexed product facts."
+        },
+        {
+          "id": "dnc-list-db-svc",
+          "status": "no-doc-change",
+          "pages": [
+            "outbound-calling/compliance"
+          ],
+          "note": "PHO-12152 reads the Phone Numbers settings' org Phonely DNC list from db-svc instead of browser Firestore. Who can see it is unchanged (org members and platform admins). User-visible refinements are minor: an entry saved without a date lists last with N/A and sorts earliest by Added At, and a failed load shows one error toast. The compliance/DNC guidance does not describe the DNC table's date/sort mechanics, so no indexed page states anything now contradicted; verified the compliance page still matches. Backend storage migration is otherwise internal."
+        },
+        {
+          "id": "workflow-json-body-validation",
+          "status": "already-covered",
+          "pages": [
+            "blocks/api-request"
+          ],
+          "note": "PHO-11982 shows JSON body errors in workflow blocks (API Request, Send Call Data, Signpost) and blocks publishing malformed JSON including trailing commas, while preserving variable chips and keeping drafts autosaving. The API Request page already instructs using valid JSON, inspecting Show request for malformed values, and has a troubleshooting entry for unresolved/malformed body values; the new inline error surface reinforces existing guidance without adding a new task or label. No page change required."
+        },
+        {
+          "id": "dependency-security-bumps",
+          "status": "not-public",
+          "pages": [],
+          "note": "#3770 bumps undici, follow-redirects, re2js and other packages to patched versions (changelog, package.json, package-lock.json only). Dependency security maintenance with no user-visible contract change."
+        },
+        {
+          "id": "offer-polish-language",
+          "status": "no-doc-change",
+          "pages": [
+            "agent-design/voice/overview"
+          ],
+          "note": "PHO-12191 adds Polish to the agent language catalogue (Soniox, Gladia, ElevenLabs transcribers); it is deliberately absent from the Phonely/Deepgram multi preset, so a Polish agent needs Gladia, Soniox, or ElevenLabs. The Voice page documents languages generically (the selectable set depends on transcriber and voice) and does not enumerate individual languages, so adding one language does not contradict any stated fact; verified the Languages and transcriber guidance still holds. No page change needed."
+        },
+        {
+          "id": "settings-api-keys-visibility",
+          "status": "docs-updated",
+          "pages": [
+            "settings/overview"
+          ],
+          "note": "PHO-12105 shows Settings > API Keys to organization owners and admins (previously Phonely staff only); members, viewers, and call-history-only users still do not see it, and a direct link opens Account. Added an API Keys row to the Settings Overview pages table and an availability note pointing to API v1 Authentication, and listed API keys among organization-level settings. The API v1 Authentication page already states owners and admins create and revoke keys, so its content remains accurate; cited api-key-permissions.ts."
+        },
+        {
+          "id": "duplicate-agents-db-svc",
+          "status": "no-doc-change",
+          "pages": [
+            "settings/delete-agents"
+          ],
+          "note": "PHO-12201 moves web app agent duplication through db-svc, including websites and current published flow versions with remapped references, enforcing source/destination permissions and the destination plan limit while files and indexing finish in the background. The duplicate action and its permission/plan behavior are backend-contract preserving; the Agent Settings duplicate control is noted on the Agent Setup page and the Manage and Delete Agents page does not describe duplication, so no indexed fact changed. Backend migration is otherwise internal."
+        },
+        {
+          "id": "platform-changelog-db-svc",
+          "status": "not-public",
+          "pages": [],
+          "note": "PHO-12197 reads and writes the platform changelog (What's New modal and Settings > Changelog) through db-svc instead of browser Firestore. Drafts stay visible to Phonely admins only; other signed-in users see published entries as before, so audience and visible behavior are unchanged. Settings > Changelog is a Phonely-admin surface not documented in the customer corpus; storage migration with no user-visible contract change."
+        },
+        {
+          "id": "poc-claim-links-and-billing",
+          "status": "needs-doc-update",
+          "pages": [
+            "billing-and-usage/plans-and-billing-history"
+          ],
+          "note": "PHO-11970 adds a /claim POC (proof-of-concept) claim page and POC billing surfaces: a new/existing customer claims a POC link to start billing at the signed rate, Enterprise owners skip the onboarding plan step, and the Enterprise Contract admin tab gains a POCs panel to link, reissue, or end a POC, with free call minutes shown on the claim page and admin list. This is a new customer-facing entry point, but it is gated behind signed POC links and the Enterprise Contract admin tab (sales-led/Enterprise), with no home in the standard Plans and Billing page, which describes the standard subscription view. Recorded as a known gap for a deliberate POC/Enterprise-billing documentation decision alongside the existing enterprise-commit-balance gap, rather than exposing a partial Enterprise-only description now; token-masking of claim query params is an analytics-privacy internal."
+        },
+        {
+          "id": "retire-recording-library",
+          "status": "docs-updated",
+          "pages": [
+            "agent-knowledge-base/overview",
+            "agent-design/overview"
+          ],
+          "note": "PHO-12204 retires the legacy custom recording library from Knowledge Base, onboarding, and Ask AI: the Upload Recording source, the Calls filter, recording playback, and the recordings dialog are removed; Call History recordings, Ask AI audio attachments, and Agent QA recording imports are unchanged, and stored records/files are preserved. Removed the Upload Recording source row, the recordings-as-playback sentence, the Calls filter, and the delete-recordings wording from the Knowledge Base page, and removed calls from the Knowledge Base summary on the Agent Setup page. Both pages' remaining source-of-truth (documents and websites) is verified against knowledge-list-panel.tsx at the target commit."
+        },
+        {
+          "id": "remove-legacy-coval-evaluation",
+          "status": "no-doc-change",
+          "pages": [
+            "testing/simulation-testing"
+          ],
+          "note": "PHO-12218 removes the legacy Coval evaluation result page (/testing/evaluation/<agentId>/<resultId>), the unused /api/update-evaluations route, and browser read access to t_test_cases and t_evaluation_results. The current Unit Testing page is served by the intact call-unit-testing surface (test cases, results table, result details), not the deleted legacy page; verified the Review results and Data Sources sections still match code at the target commit. The removed page was unused legacy, so no indexed content is affected."
+        },
+        {
+          "id": "retire-settings-notifications",
+          "status": "docs-updated",
+          "pages": [
+            "settings/overview",
+            "billing-and-usage/usage-notifications"
+          ],
+          "note": "PHO-12221 removes Settings > Notifications (usage alerts and execution logs), its sidebar shortcut and Ask AI destination, the unused /api/send-notification-email route, and browser access to t_notifications. Removed the Notifications row and the organization-level mention from the Settings Overview page, deleted the now-nonexistent billing-and-usage/usage-notifications page from navigation, and added a redirect from its old route to the Settings Overview page so historical review-window references resolve. Verified Notifications is gone from settings-tabs.ts and sidebar-navigation.ts at the target commit."
+        },
+        {
+          "id": "releases-and-merges",
+          "status": "not-public",
+          "pages": [],
+          "note": "Version bump commits v0.281.0/v0.282.0/v0.283.0 and the main-into-dev merge carry no file changes of their own in this scan. Release/merge bookkeeping with no user-visible contract change."
         }
       ]
     }

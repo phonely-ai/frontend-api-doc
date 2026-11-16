@@ -213,8 +213,7 @@
               "billing-and-usage/teams",
               "settings/delete-agents",
               "billing-and-usage/plans-and-billing-history",
-              "billing-and-usage/manage-agents-and-usage",
-              "billing-and-usage/usage-notifications"
+              "billing-and-usage/manage-agents-and-usage"
             ]
           }
         ]
@@ -358,6 +357,10 @@
     "/css/variables-table-alignment.css"
   ],
   "redirects": [
+    {
+      "source": "/billing-and-usage/usage-notifications",
+      "destination": "/settings/overview"
+    },
     {
       "source": "/call-topics-and-sentiments",
       "destination": "/call-topics"
