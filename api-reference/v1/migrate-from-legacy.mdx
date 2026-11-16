@@ -50,8 +50,8 @@ API v1 also answers every failure with the same [error body](/api-reference/v1/e
 | `POST /agent-websites` | Find pages with `POST /v1/agents/{id}/knowledge-sources/website-map`, then add the ones you want with `POST /v1/agents/{id}/knowledge-sources/websites`. |
 | `DELETE /agent-documents`, `DELETE /agent-websites` | `DELETE /v1/knowledge-sources/{id}` |
 | `GET /agent-block-list` | `GET /v1/agents/{id}/blocked-numbers` |
-| `POST /agent-block-list` | `POST /v1/agents/{id}/blocked-numbers`, one number per request. |
-| `DELETE /agent-block-list` | `DELETE /v1/agents/{id}/blocked-numbers/{phone_number}`, one number per request. |
+| `POST /agent-block-list` | `PATCH /v1/agents/{id}/blocked-numbers`, with `{"add": ["+14155550100"]}`. |
+| `DELETE /agent-block-list` | `PATCH /v1/agents/{id}/blocked-numbers`, with `{"remove": ["+14155550100"]}`. |
 | `GET /list-voices` | `GET /v1/voices` |
 
 API v1 also covers things the legacy API doesn't, such as text knowledge sources and your organization's usage.
