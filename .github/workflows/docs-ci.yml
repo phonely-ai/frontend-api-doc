@@ -50,3 +50,6 @@ jobs:
 
       - name: API v1 spec copy
         run: node scripts/sync-v1-openapi.mjs --check
+
+      - name: API reference rendering regressions
+        run: node --test scripts/sync-v1-openapi.test.mjs

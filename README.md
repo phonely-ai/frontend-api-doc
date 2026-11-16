@@ -46,3 +46,43 @@ This docs set covers:
 - Add `title` and `description` to every indexed MDX page.
 - Use `.mintignore` or `noindex: true` for legacy, duplicate, or out-of-scope pages.
 - Keep hidden AI runbooks public-safe. Hidden does not mean secret.
+
+## Documentation automation
+
+Written documentation and the generated API reference have independent rolling PRs.
+
+- `automation/docs-freshness` owns reviewed prose, navigation and the written-doc ledger. The production web app is
+  its main source, with supporting service evidence where behavior requires it. Handwritten API guides stay reviewed prose.
+- `automation/api-reference` owns only `api-reference/v1/openapi.json` and `api-reference/v1/source.json`.
+  Its input must be `phonely-db-svc`'s committed customer `openapi/v1.json` at an immutable commit confirmed serving US production.
+  OpenClaw resolves the observed production version; neither the newest release nor an image-publishing job establishes it.
+
+The source record describes the copied contract, not the latest deployment. It is excluded from Mintlify publication.
+It is separate from the written-doc review history, so a confirmed rollback can correct the reference without reversing
+past content reviews. The initial record identifies the existing launch copy; it does not assert today's deployment.
+
+The renderer adds only Mintlify Beta badges. Never hand-edit the generated copy or obtain it from an all-tier profile.
+App-only operations are excluded by the upstream customer-spec generator, not filtered by a second policy here.
+
+After fetching the source at the verified commit:
+
+```bash
+node scripts/sync-v1-openapi.mjs /tmp/v1.json --release v0.231.1 --commit <full-source-commit>
+node scripts/sync-v1-openapi.mjs --check /tmp/v1.json
+```
+
+The updater must also verify that the release tag resolves to that commit and recheck the confirmed production contract
+before publishing its PR. `--check` without an upstream file validates local rendering and provenance consistency;
+it cannot independently establish GitHub source identity or production readiness. CI uses that offline mode; the updater
+must use the upstream-file check as well.
+
+Production detection belongs to OpenClaw. It reads existing US container identity, running and readiness metrics from
+Datadog, requires fresh matching coverage and a consistent published version over a 15-minute observation window,
+then resolves that tag to its immutable GitHub commit. Missing data or mixed versions postpone the update.
+This is observed runtime evidence for a reviewed docs PR, not certification of every deployment step.
+The docs repository and its CI need no Datadog credentials, deployment adapter or config-repository changes.
+
+Identical rendered contracts require no update. Both streams preserve pending reviewer work, use separate worktrees and
+stop on conflicts. Neither merges automatically. A human merge publishes through Mintlify; publication is verified afterward.
+OpenClaw sends changed API-reference PRs to the existing docs Slack channel only after CI passes. Human review and merge
+remain required. Scheduling is enabled only after both implementation PRs merge and the manual reconciliation check passes.
