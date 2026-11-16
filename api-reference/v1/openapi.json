@@ -2151,7 +2151,7 @@
         "additionalProperties": false,
         "properties": {
           "code": {
-            "description": "What went wrong, stable and machine-readable. Known values: `validation_failed`, `invalid_cursor`, `invalid_api_key`, `invalid_user_token`, `user_unavailable`, `insufficient_access`, `organization_mismatch`, `forbidden`, `not_found`, `method_not_allowed`, `conflict`, `agent_limit_reached`, `agent_too_large`, `sms_setup_required`, `opportunity_analysis_not_set_up`, `precondition_failed`, `payload_too_large`, `unsupported_media_type`, `precondition_required`, `rate_limited`, `internal_error`, `knowledge_processing_failed`, `bad_gateway`, `service_unavailable`, `gateway_timeout`. More can be added, so handle values you don't recognize.",
+            "description": "What went wrong, stable and machine-readable. Known values: `validation_failed`, `invalid_cursor`, `invalid_api_key`, `invalid_user_token`, `user_unavailable`, `staff_sign_in_required`, `insufficient_access`, `organization_mismatch`, `forbidden`, `not_found`, `method_not_allowed`, `conflict`, `agent_limit_reached`, `agent_too_large`, `sms_setup_required`, `opportunity_analysis_not_set_up`, `precondition_failed`, `payload_too_large`, `unsupported_media_type`, `precondition_required`, `rate_limited`, `internal_error`, `knowledge_processing_failed`, `bad_gateway`, `service_unavailable`, `gateway_timeout`. More can be added, so handle values you don't recognize.",
             "title": "Code",
             "type": "string",
             "x-extensible-enum": [
@@ -2160,6 +2160,7 @@
               "invalid_api_key",
               "invalid_user_token",
               "user_unavailable",
+              "staff_sign_in_required",
               "insufficient_access",
               "organization_mismatch",
               "forbidden",
