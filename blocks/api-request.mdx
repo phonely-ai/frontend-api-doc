@@ -2,6 +2,9 @@
 title: "API Request"
 description: "Send an HTTP request and use the response in later blocks."
 sources:
+  - "features/workflows/modules/editor/hooks/use-workflow-save-actions.ts"
+  - "features/workflows/modules/editor/hooks/use-checklist.ts"
+  - "features/workflows/model/schema/json-template.ts"
   - "features/workflows/model/nodes/http-request.ts"
   - "features/workflows/model/schema/request.ts"
   - "features/workflows/model/schema/retry.ts"
@@ -13,7 +16,7 @@ sources:
   - "features/workflows/modules/editor/testing/apply-output-selection.ts"
   - "phonely-backend/app/agent/live_actions/http_request/api_request.py"
   - "phonely-backend/app/utils/url_validator.py"
-last-verified: "2026-08-18"
+last-verified: "2026-11-16"
 ---
 
 Use **API Request** to read from or send data to an external service. The block can look up account information, create or update a record, or trigger another operation through an HTTP endpoint.
@@ -56,6 +59,8 @@ For `POST`, `PUT`, and `PATCH`, choose a body type:
 `GET` and `DELETE` do not include a request body.
 
 For a JSON body, choose **Manual** to add typed fields or **Code** to edit the raw JSON. Manual fields support strings, numbers, booleans, arrays, objects, and nested values.
+
+In **Code** mode, syntax errors appear below the JSON editor. Fix the reported commas, quotes, or brackets, including any trailing comma. Invalid JSON in a reachable block prevents publishing; use the [Flow Checklist](/workflow-checklist#fix-block-errors) to find affected blocks.
 
 Follow the endpoint's documentation for its required field names, formats, and authentication.
 

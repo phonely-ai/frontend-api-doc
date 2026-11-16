@@ -2,6 +2,10 @@
 title: "Send Call Data"
 description: "Send call data to an HTTP endpoint after a call."
 sources:
+  - "features/workflows/modules/editor/hooks/use-workflow-save-actions.ts"
+  - "features/workflows/modules/editor/components/request/request.tsx"
+  - "features/workflows/model/schema/request.ts"
+  - "features/workflows/model/schema/json-template.ts"
   - "features/workflows/model/nodes/send-call-data.ts"
   - "features/workflows/model/node-descriptors/index.ts"
   - "features/workflows/modules/editor/custom-nodes/send-call-data/**"
@@ -11,7 +15,7 @@ sources:
   - "phonely-backend/app/call/routes.py"
   - "phonely-backend/app/integrations/routes.py"
   - "phonely-backend/app/utils/url_validator.py"
-last-verified: "2026-07-16"
+last-verified: "2026-11-16"
 ---
 
 Use **Send Call Data** to send data from a completed call to a webhook, CRM, analytics service, or automation endpoint.
@@ -112,6 +116,8 @@ For example, a custom body might resolve to:
   "outcome": "Appointment booked"
 }
 ```
+
+In **Code** mode, fix any JSON syntax errors shown below the editor before publishing. The [Flow Checklist](/workflow-checklist#fix-block-errors) helps you find blocks with errors.
 
 Match the field names, structure, and data types expected by the receiving endpoint.
 

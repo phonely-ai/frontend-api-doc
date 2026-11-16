@@ -2229,11 +2229,13 @@
         },
         {
           "id": "workflow-json-body-validation",
-          "status": "already-covered",
+          "status": "docs-updated",
           "pages": [
-            "blocks/api-request"
+            "blocks/api-request",
+            "blocks/data-and-automation-blocks/send-call-data",
+            "workflow-checklist"
           ],
-          "note": "PHO-11982 shows JSON body errors in workflow blocks (API Request, Send Call Data, Signpost) and blocks publishing malformed JSON including trailing commas, while preserving variable chips and keeping drafts autosaving. The API Request page already instructs using valid JSON, inspecting Show request for malformed values, and has a troubleshooting entry for unresolved/malformed body values; the new inline error surface reinforces existing guidance without adding a new task or label. No page change required."
+          "note": "PHO-11982 adds inline JSON syntax errors in Code mode and prevents publishing when a reachable block has an invalid JSON body. Updated API Request and Send Call Data with error recovery and Flow Checklist links; updated Flow Checklist to name invalid JSON as a publishing blocker and clarify that syntax errors do not stop draft autosaving. Variable chips remain supported. Signpost uses the same validation but has no separate public guide; no new page is needed."
         },
         {
           "id": "dependency-security-bumps",
