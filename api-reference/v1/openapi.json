@@ -215,23 +215,6 @@
         "title": "AgentAdvancedSettingsUpdate",
         "type": "object"
       },
-      "AgentBlockedNumberAdd": {
-        "additionalProperties": false,
-        "description": "A phone number to block.",
-        "properties": {
-          "phone_number": {
-            "description": "The number to block, in E.164, such as `+14155550100`.",
-            "pattern": "^\\+[1-9]\\d{6,14}$",
-            "title": "Phone Number",
-            "type": "string"
-          }
-        },
-        "required": [
-          "phone_number"
-        ],
-        "title": "AgentBlockedNumberAdd",
-        "type": "object"
-      },
       "AgentBlockedNumbers": {
         "additionalProperties": false,
         "description": "The phone numbers an agent refuses calls from.",
@@ -263,6 +246,34 @@
           "phone_numbers"
         ],
         "title": "AgentBlockedNumbers",
+        "type": "object"
+      },
+      "AgentBlockedNumbersUpdate": {
+        "additionalProperties": false,
+        "description": "The numbers to block and unblock. Numbers not sent stay as they are.",
+        "properties": {
+          "add": {
+            "description": "Numbers to block, in E.164, such as `+14155550100`. One already blocked stays as it is.",
+            "items": {
+              "pattern": "^\\+[1-9]\\d{6,14}$",
+              "type": "string"
+            },
+            "maxItems": 1000,
+            "title": "Add",
+            "type": "array"
+          },
+          "remove": {
+            "description": "Numbers to unblock, in E.164. One that isn't blocked is ignored.",
+            "items": {
+              "pattern": "^\\+[1-9]\\d{6,14}$",
+              "type": "string"
+            },
+            "maxItems": 1000,
+            "title": "Remove",
+            "type": "array"
+          }
+        },
+        "title": "AgentBlockedNumbersUpdate",
         "type": "object"
       },
       "AgentCallAnalysis": {
@@ -4631,7 +4642,7 @@
     },
     "/v1/agents/{id}/blocked-numbers": {
       "get": {
-        "description": "The phone numbers an agent refuses calls from.\n\nOnly numbers in E.164 are listed: a call is refused when the caller's number matches one exactly, so a\nnumber saved in another format never blocks anything. The web app also shows those, until they're removed.",
+        "description": "The phone numbers an agent refuses calls from.\n\nOnly numbers in E.164 are listed: a call is refused when the caller's number matches one exactly, so a\nnumber saved in another format never blocks anything.",
         "operationId": "get_agent_blocked_numbers",
         "parameters": [
           {
@@ -4783,9 +4794,9 @@
         "x-scope": "organization",
         "x-stability-level": "stable"
       },
-      "post": {
-        "description": "Refuse calls from one phone number.\n\nA number that's already blocked stays as it is, so sending the same request again changes nothing.\nAnswers with all of the agent's blocked numbers. Applies from the next call.",
-        "operationId": "add_blocked_number",
+      "patch": {
+        "description": "Block and unblock phone numbers, in one change.\n\nOnly the numbers sent change, so changes from other callers are kept and no `If-Match` is needed. A number\nalready blocked, or one that isn't blocked, is ignored, so sending the same request again changes nothing.\nAnswers with all of the agent's blocked numbers. Applies from the next call.",
+        "operationId": "update_agent_blocked_numbers",
         "parameters": [
           {
             "description": "The agent's ID.",
@@ -4821,7 +4832,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AgentBlockedNumberAdd"
+                "$ref": "#/components/schemas/AgentBlockedNumbersUpdate"
               }
             }
           },
@@ -4938,166 +4949,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Add a blocked number",
-        "tags": [
-          "Agents"
-        ],
-        "x-permission": "write_configuration",
-        "x-scope": "organization",
-        "x-stability-level": "stable"
-      }
-    },
-    "/v1/agents/{id}/blocked-numbers/{phone_number}": {
-      "delete": {
-        "description": "Stop refusing calls from one phone number.\n\nA number that isn't blocked is ignored, so sending the same request again changes nothing.\nAnswers with no body. Applies from the next call.",
-        "operationId": "remove_blocked_number",
-        "parameters": [
-          {
-            "description": "The agent's ID.",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "description": "The agent's ID.",
-              "title": "Id",
-              "type": "string"
-            }
-          },
-          {
-            "description": "The number in E.164, with the `+` URL-encoded, such as `%2B14155550100`.",
-            "in": "path",
-            "name": "phone_number",
-            "required": true,
-            "schema": {
-              "pattern": "^\\+[1-9]\\d{6,14}$",
-              "title": "Phone Number",
-              "type": "string"
-            }
-          },
-          {
-            "description": "Optional. Must be the key's org.",
-            "in": "header",
-            "name": "Phonely-Organization",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional. Must be the key's org.",
-              "title": "Phonely-Organization"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Successful Response",
-            "headers": {
-              "Phonely-Organization": {
-                "description": "The authorized organization for this request.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "The request is invalid: a malformed body, a bad or unknown field, or an unknown query parameter."
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "The API key is missing, invalid or revoked.",
-            "headers": {
-              "WWW-Authenticate": {
-                "description": "Always `Bearer`.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "The resource doesn't exist, or belongs to another organization."
-          },
-          "429": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "Rate limited. Retry after the number of seconds in `Retry-After`.",
-            "headers": {
-              "Retry-After": {
-                "description": "Seconds until the request can be retried.",
-                "schema": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "An unexpected error. Contact support with the request ID."
-          },
-          "503": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "summary": "Remove a blocked number",
+        "summary": "Update an agent's blocked numbers",
         "tags": [
           "Agents"
         ],
