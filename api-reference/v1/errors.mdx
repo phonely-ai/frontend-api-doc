@@ -6,7 +6,8 @@ sources:
   - "phonely-db-svc/app/schemas/v1/base.py"
   - "phonely-db-svc/app/api/v1/_core/errors.py"
   - "phonely-db-svc/app/api/v1/_core/limits.py"
-last-verified: "2026-11-06"
+  - "phonely-db-svc/app/api/v1/_core/policy.py"
+last-verified: "2026-11-19"
 ---
 
 Every API v1 failure has an HTTP status that says what kind of failure it is, and the same JSON body. Branch on the status and the `code`, retry only what's safe to retry, and include the `request_id` when you contact support.
@@ -57,11 +58,12 @@ Each `details` entry has the `field` as you sent it, an `issue` and a `message`.
 | `400` | `validation_failed` | The request is invalid: a malformed body, a wrong value, or an unknown field or parameter. |
 | `400` | `invalid_cursor` | The `cursor` is malformed or came from a request with different filters. See [Pagination](/api-reference/v1/pagination). |
 | `401` | `invalid_api_key` | The API key is missing, invalid or revoked. See [Authentication](/api-reference/v1/authentication). |
-| `403` | `insufficient_access` | A read-only key tried to make a change. |
+| `403` | `insufficient_access` | The key's access doesn't allow the operation: a **Read only** key tried to make a change, or API keys can't use the operation. |
+| `403` | `agent_limit_reached` | Your plan has no room for another agent, such as when you duplicate one. |
 | `403` | `organization_mismatch` | `Phonely-Organization` doesn't match the key's organization. |
 | `404` | `not_found` | The resource doesn't exist, or belongs to another organization. Both get the same answer. |
 | `405` | `method_not_allowed` | The path doesn't support this HTTP method. |
-| `409` | Varies | The change conflicts with the resource's current state. The endpoint's reference page lists its codes, such as `sms_setup_required`. |
+| `409` | Varies | The change conflicts with the resource's current state. The endpoint's reference page lists its codes, such as `agent_too_large` or `sms_setup_required`. |
 | `412` | `precondition_failed` | The resource changed since you read it. See [Updates and concurrency](/api-reference/v1/updates-and-concurrency). |
 | `413` | `payload_too_large` | The request body is over its size limit. |
 | `415` | `unsupported_media_type` | The uploaded file type isn't supported. |
@@ -70,6 +72,7 @@ Each `details` entry has the `field` as you sent it, an `issue` and a `message`.
 | `500` | `internal_error` | An unexpected error on Phonely's side. |
 | `502` | `bad_gateway`, `knowledge_processing_failed` | A service the request depends on failed. |
 | `503` | `service_unavailable` | The API or a service it depends on is temporarily unavailable. |
+| `503` | `query_timeout` | Reading the calls you asked for took too long. Narrow the filters, such as a shorter time range. |
 | `504` | `gateway_timeout` | The request took too long. |
 
 New codes can be added. Treat an unknown `code` by its HTTP status.
@@ -82,7 +85,7 @@ Limits are counted per minute, for each API key and for its whole organization. 
 | --- | --- | --- |
 | Reads (`GET`) | 100 | 500 |
 | Changes (`PATCH`, `POST`, `DELETE`) | 50 | 250 |
-| Adding knowledge: text, files, website pages and website maps | 10 | 30 |
+| Duplicating an agent, adding a document or file, and counting calls | 10 | 30 |
 
 Each minute starts on the minute. Over a limit, the API answers `429` with a `Retry-After` header: the number of seconds until the next minute starts. A refused request doesn't count against either limit.
 
@@ -91,6 +94,7 @@ Each minute starts on the minute. Over a limit, the API answers `429` with a `Re
 | Response | What to do |
 | --- | --- |
 | `429` | Wait the number of seconds in `Retry-After`, then retry. |
+| `503` with `query_timeout` | Narrow the filters, such as a shorter time range, then try again. |
 | `500`, `502`, `503`, `504`, or no response | Retry with exponential backoff, if the request is safe to repeat. |
 | Any other `4xx` | Don't retry unchanged. Fix the request first. |
 
@@ -101,3 +105,4 @@ Whether a request is safe to repeat depends on what it does:
 - **Blocking or unblocking a phone number** is safe to repeat: blocking a number that's already blocked, or unblocking one that isn't, changes nothing.
 - **Deleting a knowledge source** is safe to repeat. Once it's gone, a repeat answers `404`.
 - **Adding knowledge isn't safe to repeat.** These requests don't support idempotency keys, so if a request times out and you send it again, the agent can end up with two copies. Before you retry, list the agent's knowledge sources to see whether the first request went through.
+- **Duplicating an agent isn't safe to repeat.** Each request makes another copy. Before you retry, list your agents to see whether the copy was made.

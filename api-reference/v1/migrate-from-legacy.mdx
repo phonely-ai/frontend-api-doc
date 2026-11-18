@@ -17,7 +17,7 @@ sources:
   - "app/api/list-voices/**"
   - "app/api/import-number/**"
   - "app/api/agent-generations/**"
-last-verified: "2026-11-09"
+last-verified: "2026-11-19"
 ---
 
 The [legacy API](/api-reference/introduction) keeps working, so you can move to API v1 at your own pace. Both APIs read and change the same agents and calls, so you can move one endpoint at a time.
@@ -26,7 +26,7 @@ The [legacy API](/api-reference/introduction) keeps working, so you can move to 
 
 | | Legacy API | API v1 |
 | --- | --- | --- |
-| Base URL | `https://app.phonely.ai/api` | `https://api.us.phonely.ai/v1` or `https://api.au.phonely.ai/v1`. See [Base URLs](/api-reference/v1/overview#base-urls). |
+| Base URL | `https://app.phonely.ai/api` | `https://api.us.phonely.ai/v1`. See [Base URL](/api-reference/v1/overview#base-url). |
 | API key | Your personal key from **Settings** → **Account**, in the `X-Authorization` header, often with your user ID in the request | An organization key from **Settings** → **API Keys**, in `Authorization: Bearer`. See [Authentication](/api-reference/v1/authentication). |
 | Names | Mostly camelCase, such as `customerPhoneNumber` | snake_case, such as `customer_phone_number` |
 | Lists | `limit` and `offset`, with a `total` | `limit` and `cursor`, with no total. See [Pagination](/api-reference/v1/pagination). |
@@ -47,20 +47,20 @@ API v1 also answers every failure with the same [error body](/api-reference/v1/e
 | `PATCH /calls/{agentId}/{callIdOrPhone}` | `PATCH /v1/calls/{id}`. To update by phone number, first find the call: [list the agent's calls](#find-a-call-by-phone-number) with `customer_phone_number`. |
 | `GET /agent-documents`, `GET /agent-websites` | `GET /v1/agents/{id}/knowledge-sources`: documents, files and website pages in one list. |
 | `POST /agent-documents` | `POST /v1/agents/{id}/knowledge-sources/files`, one file per request. |
-| `POST /agent-websites` | Find pages with `POST /v1/agents/{id}/knowledge-sources/website-map`, then add the ones you want with `POST /v1/agents/{id}/knowledge-sources/websites`. |
 | `DELETE /agent-documents`, `DELETE /agent-websites` | `DELETE /v1/knowledge-sources/{id}` |
 | `GET /agent-block-list` | `GET /v1/agents/{id}/blocked-numbers` |
 | `POST /agent-block-list` | `PATCH /v1/agents/{id}/blocked-numbers`, with `{"add": ["+14155550100"]}`. |
 | `DELETE /agent-block-list` | `PATCH /v1/agents/{id}/blocked-numbers`, with `{"remove": ["+14155550100"]}`. |
 | `GET /list-voices` | `GET /v1/voices` |
 
-API v1 also covers things the legacy API doesn't, such as text knowledge sources and your organization's usage.
+API v1 also covers things the legacy API doesn't, such as documents written as text, call counts and your organization's usage.
 
 ## Not in API v1 yet
 
 Keep using the legacy API for these:
 
 - Change an agent's greeting (`greetingMessage` in `POST /update-agent`).
+- Add website pages to an agent's knowledge (`POST /agent-websites`). Pages already added show in `GET /v1/agents/{id}/knowledge-sources`, and API v1 can read, change and delete them.
 - Report an issue with a call (`POST /report-call-error`).
 - Import a phone number (`POST /import-number`).
 - Generate an agent from a prompt (`POST /agent-generations`, `GET /agent-generations/{generationId}`).
@@ -116,9 +116,9 @@ By default, the API v1 list shows calls whose `status` is `completed`, `ended`, 
 
 ### Find a call by phone number
 
-The legacy `PATCH` could take a phone number instead of a call ID. In API v1, find the call first, then update it by ID:
+The legacy `PATCH` could take a phone number instead of a call ID, with `preference=last` for the most recent call or `preference=first` for the earliest. In API v1, find the call first, then update it by ID:
 
-1. List the agent's calls for that number. Calls are newest first, so `limit=1` returns the latest call:
+1. List the agent's calls for that number. Calls are newest first, so `limit=1` returns the most recent call, as `preference=last` did:
 
    ```bash
    curl "https://api.us.phonely.ai/v1/calls?agent_id=AGENT_ID&customer_phone_number=%2B14155550123&limit=1" \
@@ -136,4 +136,4 @@ The legacy `PATCH` could take a phone number instead of a call ID. In API v1, fi
      -d '{"custom_outcome": "Booked"}'
    ```
 
-To update the oldest call for a number instead, page to the end of the list: its last item is the oldest call.
+For the earliest call, as `preference=first` did, page to the end of the list: its last item is the earliest call. The legacy lookup searched calls in any status, while the API v1 list shows completed, ended and in-progress calls unless you [pass `status`](/api-reference/v1/pagination#keep-a-list-of-calls-in-sync).

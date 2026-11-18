@@ -7,7 +7,7 @@ sources:
   - "phonely-db-svc/openapi/v1.json"
   - "phonely-db-svc/app/api/v1/_core/limits.py"
   - "phonely-db-svc/app/api/v1/_core/middleware.py"
-last-verified: "2026-11-06"
+last-verified: "2026-11-19"
 ---
 
 API v1 authenticates every request with an organization API key. A key belongs to one organization and can act only in that organization.
@@ -65,8 +65,8 @@ Anything using the key stops working within a minute. Revoking can't be undone.
 | Status | `code` | What it means |
 | --- | --- | --- |
 | `401` | `invalid_api_key` | The key is missing, invalid or revoked. The response includes `WWW-Authenticate: Bearer`. |
-| `403` | `insufficient_access` | A **Read only** key tried to make a change. |
+| `403` | `insufficient_access` | The key's access doesn't allow the operation: a **Read only** key tried to make a change, or API keys can't use the operation. |
 | `403` | `organization_mismatch` | `Phonely-Organization` names an organization other than the key's. |
-| `429` | `rate_limited` | Too many failed attempts: after 30 failed authentications from one IP address in a minute, requests from that address are refused until the minute ends. Wait for the number of seconds in `Retry-After`. |
+| `429` | `rate_limited` | Too many failed attempts from one IP address: requests from that address are refused until the minute ends. Wait for the number of seconds in `Retry-After`. |
 
 For the full error format, see [Errors and retries](/api-reference/v1/errors).

@@ -3,10 +3,28 @@ title: "API v1 changelog"
 description: "New endpoints, new fields, and notice of changes to Beta endpoints in Phonely API v1."
 sources:
   - "phonely-db-svc/openapi/v1.json"
-last-verified: "2026-11-11"
+last-verified: "2026-11-19"
 ---
 
 This page lists every change to API v1, newest first. It's also where Phonely announces a breaking change to a Beta endpoint, at least 14 days before it happens. See [Versioning and stability](/api-reference/v1/versioning).
+
+<Update label="2026-11-18" description="Call counts and search, and knowledge changes">
+  **Added**
+
+  - `GET /v1/calls/counts`: how many calls match, in all and by status, type, ended reason, sentiment and outcome. It takes the same filters as `GET /v1/calls`.
+  - Filters for `GET /v1/calls`: `customer_phone_number_contains`, `transcript_contains`, `analytics_field` and `experiment_id`. A page of calls can now hold up to 500.
+  - Call fields: `is_read`, `user_review`, `failure_reason`, `experiment_ids` and `experiment_arm`, and `warm_transfer_started_at` in the calls list.
+  - The error code `query_timeout` (`503`): reading the calls you asked for took too long. Narrow the filters.
+
+  **Removed**
+
+  - Adding website pages to an agent's knowledge (`POST /v1/agents/{id}/knowledge-sources/websites`) and discovering them (`POST /v1/agents/{id}/knowledge-sources/website-map`). Each request paid for scraping with no limit per organization, and no integration used them. Add website pages in the Phonely web app. Pages already added still show in the agent's knowledge sources, and API v1 can read, change and delete them.
+
+  **Changed**
+
+  - The reference lists every knowledge endpoint under Knowledge sources, with shorter titles, so some reference page addresses changed. The endpoints themselves didn't.
+  - `insufficient_access` also answers an API key that calls an operation API keys can't use.
+</Update>
 
 <Update label="2026-11-11" description="API v1 release">
   API v1 is available. It covers agents and their voice, guidelines, settings, call analysis and blocked numbers, and duplicating an agent; calls with their transcripts, recordings and post-call outcomes; knowledge sources; organizations and usage; and voices.
