@@ -5,14 +5,14 @@ sources:
   - "phonely-db-svc/openapi/v1.json"
   - "phonely-db-svc/app/schemas/v1/base.py"
   - "phonely-db-svc/app/api/v1/_core/cursor.py"
-last-verified: "2026-11-06"
+last-verified: "2026-11-19"
 ---
 
 Every API v1 list returns one page at a time. Ask for the next page with the cursor the previous page returned, until there isn't one.
 
 ## Read a list page by page
 
-1. Request the first page. `limit` sets how many items a page holds: 1 to 100, 50 when you leave it out.
+1. Request the first page. `limit` sets how many items a page holds: 50 when you leave it out, up to 100 for most lists and 500 for calls. Each list's reference page gives its maximum.
 
    ```bash
    curl "https://api.us.phonely.ai/v1/calls?agent_id=AGENT_ID&limit=100" \
@@ -42,11 +42,11 @@ Every API v1 list returns one page at a time. Ask for the next page with the cur
 - Pass a cursor back exactly as you received it. Don't build or change one.
 - Use a cursor only with the same filters as the request that returned it. With different filters, the API answers `400` with `invalid_cursor`: start again without a cursor.
 - You can change `limit` from one page to the next.
-- Lists have no total count. To count items, page through the whole list.
+- Lists have no total count. To count calls, use `GET /v1/calls/counts` with the same filters.
 
 ## Sort order
 
-Each list has a fixed order, documented on its reference page, with a tie-breaker so items that sort the same still come in the same order every time. Calls, for example, are newest first by `started_at`, then by `id`.
+Each list's order is on its reference page. Calls are newest first.
 
 ## Keep a list of calls in sync
 

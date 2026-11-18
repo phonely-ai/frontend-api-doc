@@ -5,7 +5,7 @@ sources:
   - "phonely-db-svc/openapi/v1.json"
   - "phonely-db-svc/app/schemas/v1/base.py"
   - "phonely-db-svc/app/api/v1/_core/middleware.py"
-last-verified: "2026-11-06"
+last-verified: "2026-11-19"
 ---
 
 Phonely API v1 lets your own systems read and manage your agents, calls, knowledge sources and voices. Every endpoint follows the same rules for authentication, errors, pagination and changes, so once one request works, the rest work the same way.
@@ -14,14 +14,9 @@ Phonely API v1 lets your own systems read and manage your agents, calls, knowled
   API v1 replaces the [legacy API](/api-reference/introduction), which keeps working. To move an existing integration, see [Migrate from the legacy API](/api-reference/v1/migrate-from-legacy).
 </Note>
 
-## Base URLs
+## Base URL
 
-| Region | Base URL |
-| --- | --- |
-| US | `https://api.us.phonely.ai/v1` |
-| AU | `https://api.au.phonely.ai/v1` |
-
-Use the base URL for the region your organization's data is in.
+API v1 is at `https://api.us.phonely.ai/v1`. It isn't available yet for organizations whose data is in the AU region.
 
 ## Make your first request
 
@@ -53,8 +48,8 @@ Use the base URL for the region your organization's data is in.
 | Area | What the API covers |
 | --- | --- |
 | Agents | List, read and rename agents. Read and change an agent's voice, guidelines, settings and call analysis. Block and unblock phone numbers. |
-| Calls | List and read calls with their analysis, transcript and recording. Set a call's post-call outcome. |
-| Knowledge sources | Add text, files and website pages to an agent's knowledge. Read, change, download and delete them. |
+| Calls | List, search and count calls, and read them with their analysis, transcript and recording. Set a call's post-call outcome. |
+| Knowledge sources | Add documents and files to an agent's knowledge. Read, change, download and delete its knowledge sources. |
 | Organizations | Read your organization and its usage. |
 | Voices | List and read the voices an agent can use. |
 
@@ -72,8 +67,4 @@ Each endpoint's reference page documents its request, response and errors.
 
 ## Request IDs
 
-Every response has an `X-Request-Id` header, and every error body repeats it as `request_id`. Include it when you contact Phonely support about a request.
-
-To trace a request through your own logs, send your own `X-Request-Id`: up to 128 letters, digits, `.`, `_`, `:` or `-`. Phonely uses it for that request. Otherwise Phonely generates one.
-
-Responses carry `Cache-Control: no-store`: they can hold customer data, so caches and proxies must not store them.
+Every response has an `X-Request-Id` header. Include it when you contact Phonely support about a request. To trace a request in your own logs, you can send your own `X-Request-Id`.

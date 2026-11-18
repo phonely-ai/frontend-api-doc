@@ -6,7 +6,8 @@ sources:
   - "phonely-db-svc/app/schemas/v1/base.py"
   - "phonely-db-svc/app/api/v1/_core/errors.py"
   - "phonely-db-svc/app/api/v1/_core/limits.py"
-last-verified: "2026-11-06"
+  - "phonely-db-svc/app/api/v1/_core/policy.py"
+last-verified: "2026-11-19"
 ---
 
 Every API v1 failure has an HTTP status that says what kind of failure it is, and the same JSON body. Branch on the status and the `code`, retry only what's safe to retry, and include the `request_id` when you contact support.
@@ -57,7 +58,7 @@ Each `details` entry has the `field` as you sent it, an `issue` and a `message`.
 | `400` | `validation_failed` | The request is invalid: a malformed body, a wrong value, or an unknown field or parameter. |
 | `400` | `invalid_cursor` | The `cursor` is malformed or came from a request with different filters. See [Pagination](/api-reference/v1/pagination). |
 | `401` | `invalid_api_key` | The API key is missing, invalid or revoked. See [Authentication](/api-reference/v1/authentication). |
-| `403` | `insufficient_access` | A read-only key tried to make a change. |
+| `403` | `insufficient_access` | The key's access doesn't allow the operation: a **Read only** key tried to make a change, or API keys can't use the operation. |
 | `403` | `organization_mismatch` | `Phonely-Organization` doesn't match the key's organization. |
 | `404` | `not_found` | The resource doesn't exist, or belongs to another organization. Both get the same answer. |
 | `405` | `method_not_allowed` | The path doesn't support this HTTP method. |
@@ -66,7 +67,7 @@ Each `details` entry has the `field` as you sent it, an `issue` and a `message`.
 | `413` | `payload_too_large` | The request body is over its size limit. |
 | `415` | `unsupported_media_type` | The uploaded file type isn't supported. |
 | `428` | `precondition_required` | A change that replaces a list came without `If-Match`. |
-| `429` | `rate_limited` | Too many requests. Wait for the number of seconds in `Retry-After`. |
+| `429` | `rate_limited` | Too many requests. See [Rate limits](#rate-limits). |
 | `500` | `internal_error` | An unexpected error on Phonely's side. |
 | `502` | `bad_gateway`, `knowledge_processing_failed` | A service the request depends on failed. |
 | `503` | `service_unavailable` | The API or a service it depends on is temporarily unavailable. |
@@ -82,9 +83,9 @@ Limits are counted per minute, for each API key and for its whole organization. 
 | --- | --- | --- |
 | Reads (`GET`) | 100 | 500 |
 | Changes (`PATCH`, `POST`, `DELETE`) | 50 | 250 |
-| Adding knowledge: text, files, website pages and website maps | 10 | 30 |
+| Duplicating an agent, adding a document or file, and counting calls | 10 | 30 |
 
-Each minute starts on the minute. Over a limit, the API answers `429` with a `Retry-After` header: the number of seconds until the next minute starts. A refused request doesn't count against either limit.
+Over a limit, the API answers `429`. Wait the number of seconds in `Retry-After`.
 
 ## Retry safely
 
@@ -94,10 +95,4 @@ Each minute starts on the minute. Over a limit, the API answers `429` with a `Re
 | `500`, `502`, `503`, `504`, or no response | Retry with exponential backoff, if the request is safe to repeat. |
 | Any other `4xx` | Don't retry unchanged. Fix the request first. |
 
-Whether a request is safe to repeat depends on what it does:
-
-- **Reads** are always safe to repeat.
-- **Updates** (`PATCH`) set fields to the values you send, so repeating one leaves the same result. To make sure a repeat can't overwrite someone else's change, send `If-Match`. A call's outcome update is saved again each time it's sent. See [Updates and concurrency](/api-reference/v1/updates-and-concurrency).
-- **Blocking or unblocking a phone number** is safe to repeat: blocking a number that's already blocked, or unblocking one that isn't, changes nothing.
-- **Deleting a knowledge source** is safe to repeat. Once it's gone, a repeat answers `404`.
-- **Adding knowledge isn't safe to repeat.** These requests don't support idempotency keys, so if a request times out and you send it again, the agent can end up with two copies. Before you retry, list the agent's knowledge sources to see whether the first request went through.
+Reads, updates and deletes are safe to repeat. Requests that create something, such as adding a document or duplicating an agent, aren't: if one times out, check whether it went through before you send it again.
