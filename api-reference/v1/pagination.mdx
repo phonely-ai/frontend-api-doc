@@ -42,11 +42,11 @@ Every API v1 list returns one page at a time. Ask for the next page with the cur
 - Pass a cursor back exactly as you received it. Don't build or change one.
 - Use a cursor only with the same filters as the request that returned it. With different filters, the API answers `400` with `invalid_cursor`: start again without a cursor.
 - You can change `limit` from one page to the next.
-- Lists have no total count. To count calls, use `GET /v1/calls/counts` with the same filters: it also breaks the count down by status, type, ended reason, sentiment and outcome. For other lists, page through the whole list.
+- Lists have no total count. To count calls, use `GET /v1/calls/counts` with the same filters.
 
 ## Sort order
 
-Each list has a fixed order, documented on its reference page, with a tie-breaker so items that sort the same still come in the same order every time. Calls, for example, are newest first by `started_at`, then by `id`.
+Each list's order is on its reference page. Calls are newest first.
 
 ## Keep a list of calls in sync
 

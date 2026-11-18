@@ -67,8 +67,4 @@ Each endpoint's reference page documents its request, response and errors.
 
 ## Request IDs
 
-Every response has an `X-Request-Id` header, and every error body repeats it as `request_id`. Include it when you contact Phonely support about a request.
-
-To trace a request through your own logs, send your own `X-Request-Id`: up to 128 letters, digits, `.`, `_`, `:` or `-`. Phonely uses it for that request. Otherwise Phonely generates one.
-
-Responses carry `Cache-Control: no-store`: they can hold customer data, so caches and proxies must not store them.
+Every response has an `X-Request-Id` header. Include it when you contact Phonely support about a request. To trace a request in your own logs, you can send your own `X-Request-Id`.

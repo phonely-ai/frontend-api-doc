@@ -41,7 +41,7 @@ API v1 also answers every failure with the same [error body](/api-reference/v1/e
 | `POST /get-agents` | `GET /v1/agents` |
 | `POST /get-agent` | `GET /v1/agents/{id}`. The agent's voice, guidelines and settings each have their own endpoint: `GET /v1/agents/{id}/voice`, `/guidelines` and `/settings`. |
 | `POST /update-agent` | The agent's name: `PATCH /v1/agents/{id}`. Its voice: `PATCH /v1/agents/{id}/voice`. Its conversation style and humanized speech: `PATCH /v1/agents/{id}/guidelines`. |
-| `POST /duplicate-agent` | `POST /v1/agents/{id}/duplicate`, with no request body. The copy is made in your key's organization and named `<name> (Copy)`; rename it with `PATCH /v1/agents/{id}`. Its knowledge files finish copying in the background. Each request makes a new copy, so don't retry automatically. |
+| `POST /duplicate-agent` | `POST /v1/agents/{id}/duplicate`, with no request body. The copy is named `<name> (Copy)`; rename it with `PATCH /v1/agents/{id}`. |
 | `GET /calls/{agentId}` | `GET /v1/calls?agent_id={agentId}` |
 | `POST /get-call` | `GET /v1/calls/{id}`. The transcript: `GET /v1/calls/{id}/transcript`. The recording: `GET /v1/calls/{id}/recording`, which returns a link valid for 10 minutes. |
 | `PATCH /calls/{agentId}/{callIdOrPhone}` | `PATCH /v1/calls/{id}`. To update by phone number, first find the call: [list the agent's calls](#find-a-call-by-phone-number) with `customer_phone_number`. |
@@ -60,7 +60,7 @@ API v1 also covers things the legacy API doesn't, such as documents written as t
 Keep using the legacy API for these:
 
 - Change an agent's greeting (`greetingMessage` in `POST /update-agent`).
-- Add website pages to an agent's knowledge (`POST /agent-websites`). Pages already added show in `GET /v1/agents/{id}/knowledge-sources`, and API v1 can read, change and delete them.
+- Add website pages to an agent's knowledge (`POST /agent-websites`).
 - Report an issue with a call (`POST /report-call-error`).
 - Import a phone number (`POST /import-number`).
 - Generate an agent from a prompt (`POST /agent-generations`, `GET /agent-generations/{generationId}`).
@@ -112,7 +112,7 @@ By default, the API v1 list shows calls whose `status` is `completed`, `ended`, 
 | `custom_call_outcome_value` | `custom_outcome_value` |
 | `custom_call_metadata` | `custom_metadata` |
 
-`custom_metadata` replaces the whole object stored before. See [Updates and concurrency](/api-reference/v1/updates-and-concurrency#updating-call-outcomes).
+See [Updating call outcomes](/api-reference/v1/updates-and-concurrency#updating-call-outcomes).
 
 ### Find a call by phone number
 
@@ -136,4 +136,4 @@ The legacy `PATCH` could take a phone number instead of a call ID, with `prefere
      -d '{"custom_outcome": "Booked"}'
    ```
 
-For the earliest call, as `preference=first` did, page to the end of the list: its last item is the earliest call. The legacy lookup searched calls in any status, while the API v1 list shows completed, ended and in-progress calls unless you [pass `status`](/api-reference/v1/pagination#keep-a-list-of-calls-in-sync).
+For the earliest call, as `preference=first` did, page to the end of the list: its last item is the earliest call.
