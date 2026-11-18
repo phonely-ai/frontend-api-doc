@@ -1457,6 +1457,42 @@
               "unsure"
             ]
           },
+          "experiment_arm": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The A/B arm that handled the call: `a`, the control, or `b`, the variant. `null` when the call took part in no experiment. Known values: `a`, `b`. More can be added, so handle values you don't recognize.",
+            "title": "Experiment Arm",
+            "x-extensible-enum": [
+              "a",
+              "b"
+            ]
+          },
+          "experiment_ids": {
+            "description": "The A/B experiments the call took part in: one on the variant arm, every experiment it was the shared control call of on the control arm. Empty when none.",
+            "items": {
+              "type": "string"
+            },
+            "title": "Experiment Ids",
+            "type": "array"
+          },
+          "failure_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Why an outbound call failed before it connected, such as a number the carrier refused. `null` for every other call.",
+            "title": "Failure Reason"
+          },
           "follow_up_reason": {
             "anyOf": [
               {
@@ -1485,6 +1521,11 @@
             ],
             "description": "Whether a person should follow up with the customer.",
             "title": "Is Follow Up Needed"
+          },
+          "is_read": {
+            "description": "Whether someone in the organization has opened the call in the web app.",
+            "title": "Is Read",
+            "type": "boolean"
           },
           "key_points": {
             "anyOf": [
@@ -1686,6 +1727,22 @@
             "description": "Questions the agent didn't answer.",
             "title": "Unanswered Questions"
           },
+          "user_review": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "How someone in the organization rated the call in the web app: `success` (it went well) or `error` (the agent made a mistake). `null` when no one has rated it. Known values: `success`, `error`. More can be added, so handle values you don't recognize.",
+            "title": "User Review",
+            "x-extensible-enum": [
+              "success",
+              "error"
+            ]
+          },
           "warm_transfer_started_at": {
             "anyOf": [
               {
@@ -1716,6 +1773,12 @@
           "sentiment",
           "summary",
           "campaign_id",
+          "is_read",
+          "user_review",
+          "failure_reason",
+          "experiment_ids",
+          "experiment_arm",
+          "warm_transfer_started_at",
           "long_summary",
           "purpose",
           "key_points",
@@ -1727,12 +1790,86 @@
           "mentioned_email",
           "mentioned_date",
           "mentioned_time",
-          "warm_transfer_started_at",
           "custom_outcome",
           "custom_outcome_value",
           "custom_metadata"
         ],
         "title": "Call",
+        "type": "object"
+      },
+      "CallCounts": {
+        "additionalProperties": false,
+        "description": "How many of an agent's calls match the filters, in all and by value.",
+        "properties": {
+          "agent_id": {
+            "description": "The agent whose calls were counted.",
+            "title": "Agent Id",
+            "type": "string"
+          },
+          "ended_reason": {
+            "description": "Matching calls by `ended_reason`, most first.",
+            "items": {
+              "$ref": "#/components/schemas/CallValueCount"
+            },
+            "title": "Ended Reason",
+            "type": "array"
+          },
+          "object": {
+            "const": "call_counts",
+            "default": "call_counts",
+            "description": "The type of this object, always `call_counts`.",
+            "title": "Object",
+            "type": "string"
+          },
+          "outcome": {
+            "description": "Matching calls by `outcome`, most first.",
+            "items": {
+              "$ref": "#/components/schemas/CallValueCount"
+            },
+            "title": "Outcome",
+            "type": "array"
+          },
+          "sentiment": {
+            "description": "Matching calls by `sentiment`, most first.",
+            "items": {
+              "$ref": "#/components/schemas/CallValueCount"
+            },
+            "title": "Sentiment",
+            "type": "array"
+          },
+          "status": {
+            "description": "Matching calls by `status`, most first.",
+            "items": {
+              "$ref": "#/components/schemas/CallValueCount"
+            },
+            "title": "Status",
+            "type": "array"
+          },
+          "total_count": {
+            "description": "How many calls match.",
+            "title": "Total Count",
+            "type": "integer"
+          },
+          "type": {
+            "description": "Matching calls by `type`, most first.",
+            "items": {
+              "$ref": "#/components/schemas/CallValueCount"
+            },
+            "title": "Type",
+            "type": "array"
+          }
+        },
+        "required": [
+          "object",
+          "agent_id",
+          "total_count",
+          "status",
+          "type",
+          "ended_reason",
+          "sentiment",
+          "outcome"
+        ],
+        "title": "CallCounts",
         "type": "object"
       },
       "CallList": {
@@ -1930,10 +2067,51 @@
               "unsure"
             ]
           },
+          "experiment_arm": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The A/B arm that handled the call: `a`, the control, or `b`, the variant. `null` when the call took part in no experiment. Known values: `a`, `b`. More can be added, so handle values you don't recognize.",
+            "title": "Experiment Arm",
+            "x-extensible-enum": [
+              "a",
+              "b"
+            ]
+          },
+          "experiment_ids": {
+            "description": "The A/B experiments the call took part in: one on the variant arm, every experiment it was the shared control call of on the control arm. Empty when none.",
+            "items": {
+              "type": "string"
+            },
+            "title": "Experiment Ids",
+            "type": "array"
+          },
+          "failure_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Why an outbound call failed before it connected, such as a number the carrier refused. `null` for every other call.",
+            "title": "Failure Reason"
+          },
           "id": {
             "description": "The call's ID.",
             "title": "Id",
             "type": "string"
+          },
+          "is_read": {
+            "description": "Whether someone in the organization has opened the call in the web app.",
+            "title": "Is Read",
+            "type": "boolean"
           },
           "object": {
             "const": "call",
@@ -2043,6 +2221,35 @@
               "pay_per_call",
               "unknown"
             ]
+          },
+          "user_review": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "How someone in the organization rated the call in the web app: `success` (it went well) or `error` (the agent made a mistake). `null` when no one has rated it. Known values: `success`, `error`. More can be added, so handle values you don't recognize.",
+            "title": "User Review",
+            "x-extensible-enum": [
+              "success",
+              "error"
+            ]
+          },
+          "warm_transfer_started_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "When a warm transfer to a person began. `null` when there was none.",
+            "title": "Warm Transfer Started At"
           }
         },
         "required": [
@@ -2060,7 +2267,13 @@
           "outcome",
           "sentiment",
           "summary",
-          "campaign_id"
+          "campaign_id",
+          "is_read",
+          "user_review",
+          "failure_reason",
+          "experiment_ids",
+          "experiment_arm",
+          "warm_transfer_started_at"
         ],
         "title": "CallSummary",
         "type": "object"
@@ -2158,20 +2371,39 @@
         "title": "CallUpdate",
         "type": "object"
       },
+      "CallValueCount": {
+        "additionalProperties": false,
+        "description": "How many matching calls hold one value.",
+        "properties": {
+          "count": {
+            "description": "How many matching calls hold it.",
+            "title": "Count",
+            "type": "integer"
+          },
+          "value": {
+            "description": "The value, exactly as a call in the list reports it.",
+            "title": "Value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "value",
+          "count"
+        ],
+        "title": "CallValueCount",
+        "type": "object"
+      },
       "Error": {
         "additionalProperties": false,
         "properties": {
           "code": {
-            "description": "What went wrong, stable and machine-readable. Known values: `validation_failed`, `invalid_cursor`, `invalid_api_key`, `invalid_user_token`, `user_unavailable`, `staff_sign_in_required`, `insufficient_access`, `organization_mismatch`, `forbidden`, `not_found`, `method_not_allowed`, `conflict`, `agent_limit_reached`, `agent_too_large`, `sms_setup_required`, `opportunity_analysis_not_set_up`, `precondition_failed`, `payload_too_large`, `unsupported_media_type`, `precondition_required`, `rate_limited`, `internal_error`, `knowledge_processing_failed`, `bad_gateway`, `service_unavailable`, `gateway_timeout`. More can be added, so handle values you don't recognize.",
+            "description": "What went wrong, stable and machine-readable. Known values: `validation_failed`, `invalid_cursor`, `invalid_api_key`, `insufficient_access`, `organization_mismatch`, `forbidden`, `not_found`, `method_not_allowed`, `conflict`, `agent_limit_reached`, `agent_too_large`, `sms_setup_required`, `opportunity_analysis_not_set_up`, `precondition_failed`, `payload_too_large`, `unsupported_media_type`, `precondition_required`, `rate_limited`, `internal_error`, `knowledge_processing_failed`, `bad_gateway`, `service_unavailable`, `gateway_timeout`, `query_timeout`. More can be added, so handle values you don't recognize.",
             "title": "Code",
             "type": "string",
             "x-extensible-enum": [
               "validation_failed",
               "invalid_cursor",
               "invalid_api_key",
-              "invalid_user_token",
-              "user_unavailable",
-              "staff_sign_in_required",
               "insufficient_access",
               "organization_mismatch",
               "forbidden",
@@ -2191,7 +2423,8 @@
               "knowledge_processing_failed",
               "bad_gateway",
               "service_unavailable",
-              "gateway_timeout"
+              "gateway_timeout",
+              "query_timeout"
             ]
           },
           "details": {
@@ -2458,41 +2691,6 @@
         "title": "KnowledgeSource",
         "type": "object"
       },
-      "KnowledgeSourceBatch": {
-        "additionalProperties": false,
-        "properties": {
-          "data": {
-            "description": "The sources successfully added by this request.",
-            "items": {
-              "$ref": "#/components/schemas/KnowledgeSource"
-            },
-            "title": "Data",
-            "type": "array"
-          },
-          "errors": {
-            "description": "Failures per page. Empty when every page was added.",
-            "items": {
-              "$ref": "#/components/schemas/KnowledgeWebsiteError"
-            },
-            "title": "Errors",
-            "type": "array"
-          },
-          "object": {
-            "const": "knowledge_source_batch",
-            "default": "knowledge_source_batch",
-            "description": "The type of this object, always `knowledge_source_batch`.",
-            "title": "Object",
-            "type": "string"
-          }
-        },
-        "required": [
-          "object",
-          "data",
-          "errors"
-        ],
-        "title": "KnowledgeSourceBatch",
-        "type": "object"
-      },
       "KnowledgeSourceCreate": {
         "additionalProperties": false,
         "properties": {
@@ -2511,7 +2709,7 @@
           },
           "type": {
             "const": "document",
-            "description": "Create a text document. Files and websites have separate routes.",
+            "description": "Create a text document. Files have their own route.",
             "title": "Type",
             "type": "string"
           }
@@ -2671,7 +2869,7 @@
                 "type": "null"
               }
             ],
-            "description": "New Markdown text. Empty text removes old search chunks. Files are read-only.",
+            "description": "New Markdown text. A file's text can't be changed.",
             "title": "Content"
           },
           "is_active": {
@@ -2683,7 +2881,7 @@
                 "type": "null"
               }
             ],
-            "description": "Whether calls use the source. Turning it off keeps its text and chunks.",
+            "description": "Whether calls use the source.",
             "title": "Is Active"
           },
           "name": {
@@ -2702,160 +2900,6 @@
           }
         },
         "title": "KnowledgeSourceUpdate",
-        "type": "object"
-      },
-      "KnowledgeWebsiteError": {
-        "additionalProperties": false,
-        "properties": {
-          "message": {
-            "description": "What failed for this page.",
-            "title": "Message",
-            "type": "string"
-          },
-          "url": {
-            "description": "The page that could not be added.",
-            "title": "Url",
-            "type": "string"
-          }
-        },
-        "required": [
-          "url",
-          "message"
-        ],
-        "title": "KnowledgeWebsiteError",
-        "type": "object"
-      },
-      "KnowledgeWebsiteMap": {
-        "additionalProperties": false,
-        "properties": {
-          "data": {
-            "description": "Discovered pages; mapping does not add them to the agent.",
-            "items": {
-              "$ref": "#/components/schemas/KnowledgeWebsitePage"
-            },
-            "title": "Data",
-            "type": "array"
-          },
-          "object": {
-            "const": "knowledge_website_map",
-            "default": "knowledge_website_map",
-            "description": "The type of this object, always `knowledge_website_map`.",
-            "title": "Object",
-            "type": "string"
-          }
-        },
-        "required": [
-          "object",
-          "data"
-        ],
-        "title": "KnowledgeWebsiteMap",
-        "type": "object"
-      },
-      "KnowledgeWebsiteMapRequest": {
-        "additionalProperties": false,
-        "properties": {
-          "limit": {
-            "default": 100,
-            "description": "Maximum number of pages to return, 1–100.",
-            "maximum": 100,
-            "minimum": 1,
-            "title": "Limit",
-            "type": "integer"
-          },
-          "search": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Optional search text to narrow the discovered pages.",
-            "title": "Search"
-          },
-          "url": {
-            "description": "The HTTP or HTTPS site to discover pages on.",
-            "format": "uri",
-            "minLength": 1,
-            "title": "Url",
-            "type": "string"
-          }
-        },
-        "required": [
-          "url"
-        ],
-        "title": "KnowledgeWebsiteMapRequest",
-        "type": "object"
-      },
-      "KnowledgeWebsitePage": {
-        "additionalProperties": false,
-        "properties": {
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The page description when available.",
-            "title": "Description"
-          },
-          "title": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The page title when available.",
-            "title": "Title"
-          },
-          "url": {
-            "description": "The discovered page URL.",
-            "title": "Url",
-            "type": "string"
-          }
-        },
-        "required": [
-          "url",
-          "title",
-          "description"
-        ],
-        "title": "KnowledgeWebsitePage",
-        "type": "object"
-      },
-      "KnowledgeWebsitesCreate": {
-        "additionalProperties": false,
-        "properties": {
-          "max_age_ms": {
-            "default": 86400000,
-            "description": "Maximum cached page age in milliseconds. Used only for a single URL.",
-            "minimum": 0,
-            "title": "Max Age Ms",
-            "type": "integer"
-          },
-          "urls": {
-            "description": "One to 50 HTTP or HTTPS pages to add.",
-            "items": {
-              "format": "uri",
-              "minLength": 1,
-              "type": "string"
-            },
-            "maxItems": 50,
-            "minItems": 1,
-            "title": "Urls",
-            "type": "array"
-          }
-        },
-        "required": [
-          "urls"
-        ],
-        "title": "KnowledgeWebsitesCreate",
         "type": "object"
       },
       "OpportunityAnalysis": {
@@ -4118,7 +4162,7 @@
   "paths": {
     "/v1/agents": {
       "get": {
-        "description": "The organization's agents, by name, as the web app lists them.\n\nPages follow the name, then `id`. Agents an A/B experiment creates for its variants aren't listed.",
+        "description": "The organization's agents, ordered by name, then `id`.",
         "operationId": "list_agents",
         "parameters": [
           {
@@ -4227,7 +4271,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "429": {
             "content": {
@@ -4265,7 +4309,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -4284,7 +4328,7 @@
     },
     "/v1/agents/{id}": {
       "get": {
-        "description": "One agent.\n\nAn agent of another organization, or a deleted one, answers 404, the same as an ID that doesn't exist.",
+        "description": "One agent.",
         "operationId": "get_agent",
         "parameters": [
           {
@@ -4378,7 +4422,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -4426,7 +4470,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -4443,7 +4487,7 @@
         "x-stability-level": "stable"
       },
       "patch": {
-        "description": "Rename an agent.\n\nAnswers with the updated agent. The web app shows the new name at once; agent lists show it within\nseconds. In the web app, the caller shows as who last changed the agent.",
+        "description": "Rename an agent. Answers with the updated agent.",
         "operationId": "update_agent",
         "parameters": [
           {
@@ -4565,7 +4609,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "A read-only key can't make changes, and `Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -4623,7 +4667,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -4642,7 +4686,7 @@
     },
     "/v1/agents/{id}/blocked-numbers": {
       "get": {
-        "description": "The phone numbers an agent refuses calls from.\n\nOnly numbers in E.164 are listed: a call is refused when the caller's number matches one exactly, so a\nnumber saved in another format never blocks anything.",
+        "description": "The phone numbers an agent refuses calls from.",
         "operationId": "get_agent_blocked_numbers",
         "parameters": [
           {
@@ -4730,7 +4774,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -4778,7 +4822,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -4795,7 +4839,7 @@
         "x-stability-level": "stable"
       },
       "patch": {
-        "description": "Block and unblock phone numbers, in one change.\n\nOnly the numbers sent change, so changes from other callers are kept and no `If-Match` is needed. A number\nalready blocked, or one that isn't blocked, is ignored, so sending the same request again changes nothing.\nAnswers with all of the agent's blocked numbers. Applies from the next call.",
+        "description": "Block and unblock phone numbers in one request.\n\nOnly the numbers sent change, so no `If-Match` is needed, and sending the same request again changes nothing.\nAnswers with all of the agent's blocked numbers. Applies from the next call.",
         "operationId": "update_agent_blocked_numbers",
         "parameters": [
           {
@@ -4893,7 +4937,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "A read-only key can't make changes, and `Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -4941,7 +4985,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -4949,7 +4993,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Update an agent's blocked numbers",
+        "summary": "Update blocked numbers",
         "tags": [
           "Agents"
         ],
@@ -4960,7 +5004,7 @@
     },
     "/v1/agents/{id}/call-analysis": {
       "get": {
-        "description": "What is worked out from an agent's calls after they end, as the Analytics settings in the web app show it.",
+        "description": "What is worked out from an agent's calls after they end.",
         "operationId": "get_agent_call_analysis",
         "parameters": [
           {
@@ -5054,7 +5098,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -5102,7 +5146,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -5124,7 +5168,7 @@
         }
       },
       "patch": {
-        "description": "Change what is worked out from an agent's calls after they end.\n\nOnly the parts sent change. `analytics_fields` and `opportunities` are replaced whole, so a request with either\nneeds `If-Match`; options post-call analysis names automatically change the `ETag` too. Answers with the agent's\nwhole call analysis. Applies to calls that end from then on.",
+        "description": "Change what is worked out from an agent's calls after they end.\n\nOnly the parts sent change. `analytics_fields` and `opportunities` are replaced whole, so a request with either\nneeds `If-Match`. Answers with the agent's whole call analysis. Applies to calls that end after the change.",
         "operationId": "update_agent_call_analysis",
         "parameters": [
           {
@@ -5246,7 +5290,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "A read-only key can't make changes, and `Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -5324,7 +5368,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -5348,7 +5392,7 @@
     },
     "/v1/agents/{id}/duplicate": {
       "post": {
-        "description": "Duplicate an agent in the same organization, including its flows and knowledge.\n\nTakes no request body. The copy is named '<name> (Copy)'; rename it with PATCH /v1/agents/{id}.\nFiles and knowledge chunks finish copying in the background. Each request makes a new copy: don't\nautomatically retry an uncertain outcome. The response waits up to ten seconds for the agent list's\nmirror; a slow mirror can still take a few seconds longer to show the new agent. A 403\n`agent_limit_reached` means the organization's plan has no room for another agent.",
+        "description": "Copy an agent, with its flows and knowledge, into the same organization.\n\nTakes no request body. The copy is named `<name> (Copy)`; rename it with `PATCH /v1/agents/{id}`. A 403\n`agent_limit_reached` means the organization's plan has no room for another agent.",
         "operationId": "duplicate_agent",
         "parameters": [
           {
@@ -5436,7 +5480,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "A read-only key can't make changes, and `Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -5456,7 +5500,7 @@
                 }
               }
             },
-            "description": "`agent_too_large`: the copy exceeds the synchronous write budget."
+            "description": "`agent_too_large`: the agent is too large to copy."
           },
           "429": {
             "content": {
@@ -5494,7 +5538,7 @@
                 }
               }
             },
-            "description": "`bad_gateway`: the copy could not be written or processing could not be started."
+            "description": "`bad_gateway`: the copy couldn't be made."
           },
           "503": {
             "content": {
@@ -5504,7 +5548,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -5529,7 +5573,7 @@
     },
     "/v1/agents/{id}/guidelines": {
       "get": {
-        "description": "An agent's guidelines: the sections on its Guidelines page in the web app, and its response style.",
+        "description": "An agent's guideline sections and response style.",
         "operationId": "get_agent_guidelines",
         "parameters": [
           {
@@ -5623,7 +5667,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -5671,7 +5715,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -5693,7 +5737,7 @@
         }
       },
       "patch": {
-        "description": "Change an agent's guidelines and response style.\n\nOnly the fields sent change. `sections` is the whole set of guideline sections, so a request with it needs\n`If-Match`: a section left out is deleted, a new type is added, and a section sent as it is stays as it is. Answers\nwith the agent's guidelines. Applies from the next call. In the web app, the API key's name shows as who last\nchanged each section.",
+        "description": "Change an agent's guidelines and response style.\n\nOnly the fields sent change. `sections` replaces all of the agent's sections, so a request with it needs\n`If-Match`, and a section left out is deleted. Answers with the agent's guidelines. Applies from the next call.",
         "operationId": "update_agent_guidelines",
         "parameters": [
           {
@@ -5815,7 +5859,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "A read-only key can't make changes, and `Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -5883,7 +5927,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -5907,7 +5951,7 @@
     },
     "/v1/agents/{id}/knowledge-sources": {
       "get": {
-        "description": "What an agent knows: the documents, uploaded files and website pages in its knowledge base.\n\nPages follow the name, then `id`. A source that's turned off is listed with `is_active` false.",
+        "description": "An agent's documents, files and website pages, ordered by name, then `id`.\n\nA source that's turned off is listed with `is_active` false.",
         "operationId": "list_agent_knowledge_sources",
         "parameters": [
           {
@@ -6027,7 +6071,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -6075,7 +6119,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -6083,16 +6127,16 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "List an agent's knowledge sources",
+        "summary": "List knowledge sources",
         "tags": [
-          "Agents"
+          "Knowledge sources"
         ],
         "x-permission": "read_knowledge",
         "x-scope": "organization",
         "x-stability-level": "stable"
       },
       "post": {
-        "description": "Add a text document to an agent's knowledge.\n\nThe document is available from the next call. Empty text is saved without indexing.\nIf indexing fails, the saved text remains available directly on calls.",
+        "description": "Add a text document to an agent's knowledge. The agent uses it from its next call.",
         "operationId": "create_agent_knowledge_source",
         "parameters": [
           {
@@ -6190,7 +6234,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "A read-only key can't make changes, and `Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -6248,7 +6292,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -6256,9 +6300,9 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Add a knowledge document",
+        "summary": "Add a document",
         "tags": [
-          "Agents"
+          "Knowledge sources"
         ],
         "x-permission": "write_knowledge",
         "x-rate-class": "expensive",
@@ -6268,7 +6312,7 @@
     },
     "/v1/agents/{id}/knowledge-sources/files": {
       "post": {
-        "description": "Upload a file to an agent's knowledge.\n\nSend one PDF, DOCX, TXT or CSV file, at most 25 MiB. If processing fails, the uploaded file and its\nsource record are removed on a best-effort basis and the request fails.",
+        "description": "Upload a file to an agent's knowledge: one PDF, DOCX, TXT or CSV file, up to 25 MiB.",
         "operationId": "create_agent_knowledge_file",
         "parameters": [
           {
@@ -6377,7 +6421,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "A read-only key can't make changes, and `Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -6455,7 +6499,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -6463,361 +6507,9 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Upload a knowledge file",
+        "summary": "Upload a file",
         "tags": [
-          "Agents"
-        ],
-        "x-permission": "write_knowledge",
-        "x-rate-class": "expensive",
-        "x-scope": "organization",
-        "x-stability-level": "stable"
-      }
-    },
-    "/v1/agents/{id}/knowledge-sources/website-map": {
-      "post": {
-        "description": "Discover pages on a website without adding them to the agent.\n\nUse the returned URLs to choose which pages to add. Returns at most 100 pages.",
-        "operationId": "website_map_agent_knowledge",
-        "parameters": [
-          {
-            "description": "The agent's ID.",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "description": "The agent's ID.",
-              "title": "Id",
-              "type": "string"
-            }
-          },
-          {
-            "description": "Optional. Must be the key's org.",
-            "in": "header",
-            "name": "Phonely-Organization",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional. Must be the key's org.",
-              "title": "Phonely-Organization"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/KnowledgeWebsiteMapRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/KnowledgeWebsiteMap"
-                }
-              }
-            },
-            "description": "Successful Response",
-            "headers": {
-              "Phonely-Organization": {
-                "description": "The authorized organization for this request.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "The request is invalid: a malformed body, a bad or unknown field, or an unknown query parameter."
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "The API key is missing, invalid or revoked.",
-            "headers": {
-              "WWW-Authenticate": {
-                "description": "Always `Bearer`.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "The resource doesn't exist, or belongs to another organization."
-          },
-          "429": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "Rate limited. Retry after the number of seconds in `Retry-After`.",
-            "headers": {
-              "Retry-After": {
-                "description": "Seconds until the request can be retried.",
-                "schema": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "An unexpected error. Contact support with the request ID."
-          },
-          "502": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "`knowledge_processing_failed`: knowledge processing could not finish."
-          },
-          "503": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "summary": "Discover website pages",
-        "tags": [
-          "Agents"
-        ],
-        "x-permission": "write_knowledge",
-        "x-rate-class": "expensive",
-        "x-scope": "organization",
-        "x-stability-level": "stable"
-      }
-    },
-    "/v1/agents/{id}/knowledge-sources/websites": {
-      "post": {
-        "description": "Add website pages to an agent's knowledge.\n\nSend one to 50 URLs. A batch returns the sources added and failures per page.\nThe maximum cached age applies only when sending one URL.",
-        "operationId": "create_agent_knowledge_websites",
-        "parameters": [
-          {
-            "description": "The agent's ID.",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "description": "The agent's ID.",
-              "title": "Id",
-              "type": "string"
-            }
-          },
-          {
-            "description": "Optional. Must be the key's org.",
-            "in": "header",
-            "name": "Phonely-Organization",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional. Must be the key's org.",
-              "title": "Phonely-Organization"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/KnowledgeWebsitesCreate"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/KnowledgeSourceBatch"
-                }
-              }
-            },
-            "description": "Successful Response",
-            "headers": {
-              "Phonely-Organization": {
-                "description": "The authorized organization for this request.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "The request is invalid: a malformed body, a bad or unknown field, or an unknown query parameter."
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "The API key is missing, invalid or revoked.",
-            "headers": {
-              "WWW-Authenticate": {
-                "description": "Always `Bearer`.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "The resource doesn't exist, or belongs to another organization."
-          },
-          "429": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "Rate limited. Retry after the number of seconds in `Retry-After`.",
-            "headers": {
-              "Retry-After": {
-                "description": "Seconds until the request can be retried.",
-                "schema": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "An unexpected error. Contact support with the request ID."
-          },
-          "502": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "`knowledge_processing_failed`: knowledge processing could not finish."
-          },
-          "503": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "summary": "Add knowledge website pages",
-        "tags": [
-          "Agents"
+          "Knowledge sources"
         ],
         "x-permission": "write_knowledge",
         "x-rate-class": "expensive",
@@ -6827,7 +6519,7 @@
     },
     "/v1/agents/{id}/settings": {
       "get": {
-        "description": "An agent's call settings, compliance settings and advanced settings, as the web app shows them.\n\nA setting nobody has changed shows the value calls use.",
+        "description": "An agent's call, compliance and advanced settings.\n\nA setting nobody has changed shows the value calls use.",
         "operationId": "get_agent_settings",
         "parameters": [
           {
@@ -6921,7 +6613,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -6969,7 +6661,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -6991,7 +6683,7 @@
         }
       },
       "patch": {
-        "description": "Change an agent's settings.\n\nOnly the fields sent change, and `null` resets a field to the default calls use. Answers with all of the agent's\nsettings. Applies from the next call. The web app shows the change and its author at once.",
+        "description": "Change an agent's settings.\n\nOnly the fields sent change, and `null` resets a field to its default. Answers with all of the agent's settings.\nApplies from the next call.",
         "operationId": "update_agent_settings",
         "parameters": [
           {
@@ -7113,7 +6805,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "A read-only key can't make changes, and `Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -7181,7 +6873,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -7205,7 +6897,7 @@
     },
     "/v1/agents/{id}/voice": {
       "get": {
-        "description": "An agent's voice, as its Voice settings in the web app show it.\n\nA setting nobody has changed shows the value calls use.",
+        "description": "How an agent sounds and what it listens for.\n\nA setting nobody has changed shows the value calls use.",
         "operationId": "get_agent_voice",
         "parameters": [
           {
@@ -7299,7 +6991,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -7347,7 +7039,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -7355,7 +7047,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Get an agent's voice",
+        "summary": "Get voice",
         "tags": [
           "Agents"
         ],
@@ -7369,7 +7061,7 @@
         }
       },
       "patch": {
-        "description": "Change how an agent sounds and what it listens for.\n\nOnly the fields sent change. A request with a list (`languages`, `pronunciations`, `transcription_keywords`)\nreplaces it whole, so it needs `If-Match`. Answers with the agent's whole voice. Applies from the next call.",
+        "description": "Change how an agent sounds and what it listens for.\n\nOnly the fields sent change. A list (`languages`, `pronunciations`, `transcription_keywords`) is replaced whole,\nso a request with one needs `If-Match`. Answers with the agent's whole voice. Applies from the next call.",
         "operationId": "update_agent_voice",
         "parameters": [
           {
@@ -7491,7 +7183,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "A read-only key can't make changes, and `Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -7559,7 +7251,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -7567,7 +7259,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Update an agent's voice",
+        "summary": "Update voice",
         "tags": [
           "Agents"
         ],
@@ -7583,16 +7275,48 @@
     },
     "/v1/calls": {
       "get": {
-        "description": "One agent's calls, newest first.\n\nPages follow `started_at` (newest first, calls without one last), then `id`. Filters combine\nwith AND; the values of one repeated filter combine with OR. To pick up new calls, poll with\n`started_from` set a little before your last sync and de-duplicate by `id`: a call's status,\noutcome and summary can still change after it first appears.",
+        "description": "One agent's calls, newest first.\n\nPages follow `started_at`, newest first, then `id`; calls without a start time come last. Filters combine\nwith AND, and the values of a repeated filter combine with OR. A page that matches too much to read in time\nanswers 503 `query_timeout`: narrow the filters, such as a shorter time range for `transcript_contains`,\nrather than retrying it as sent.",
         "operationId": "list_calls",
         "parameters": [
           {
-            "description": "The agent whose calls to list.",
+            "description": "Calls per page, 1 to 500.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "description": "Calls per page, 1 to 500.",
+              "maximum": 500,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "`next_cursor` from the previous page.",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "`next_cursor` from the previous page.",
+              "title": "Cursor"
+            }
+          },
+          {
+            "description": "The agent whose calls to read.",
             "in": "query",
             "name": "agent_id",
             "required": true,
             "schema": {
-              "description": "The agent whose calls to list.",
+              "description": "The agent whose calls to read.",
               "minLength": 1,
               "title": "Agent Id",
               "type": "string"
@@ -7761,6 +7485,86 @@
             }
           },
           {
+            "description": "Only calls whose `customer_phone_number` contains this text, such as `5550123`. Not with `customer_phone_number`.",
+            "in": "query",
+            "name": "customer_phone_number_contains",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 64,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls whose `customer_phone_number` contains this text, such as `5550123`. Not with `customer_phone_number`.",
+              "title": "Customer Phone Number Contains"
+            }
+          },
+          {
+            "description": "Only calls where the agent or the customer said this text, ignoring case. Needs `started_from`, at most 31 days before `started_before` (or now).",
+            "in": "query",
+            "name": "transcript_contains",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 100,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls where the agent or the customer said this text, ignoring case. Needs `started_from`, at most 31 days before `started_before` (or now).",
+              "title": "Transcript Contains"
+            }
+          },
+          {
+            "description": "Only calls whose analytics fields hold these options, each as `<field_id>:<option_id>` from the agent's `GET /v1/agents/{id}/call-analysis`. Options of one field combine with OR, different fields with AND. Repeat for several, at most 200.",
+            "in": "query",
+            "name": "analytics_field",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls whose analytics fields hold these options, each as `<field_id>:<option_id>` from the agent's `GET /v1/agents/{id}/call-analysis`. Options of one field combine with OR, different fields with AND. Repeat for several, at most 200.",
+              "title": "Analytics Field"
+            }
+          },
+          {
+            "description": "Only calls that took part in this A/B experiment, on either arm, as a call's `experiment_ids` reports it.",
+            "in": "query",
+            "name": "experiment_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls that took part in this A/B experiment, on either arm, as a call's `experiment_ids` reports it.",
+              "title": "Experiment Id"
+            }
+          },
+          {
             "description": "Only calls placed by this campaign.",
             "in": "query",
             "name": "campaign_id",
@@ -7815,38 +7619,6 @@
               ],
               "description": "Only calls that lasted at most this long. Like `min_duration_seconds`, it matches only calls with a duration (`duration_seconds` not `null`).",
               "title": "Max Duration Seconds"
-            }
-          },
-          {
-            "description": "Calls per page, 1 to 100.",
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "default": 50,
-              "description": "Calls per page, 1 to 100.",
-              "maximum": 100,
-              "minimum": 1,
-              "title": "Limit",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "`next_cursor` from the previous page.",
-            "in": "query",
-            "name": "cursor",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "`next_cursor` from the previous page.",
-              "title": "Cursor"
             }
           },
           {
@@ -7923,7 +7695,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "429": {
             "content": {
@@ -7961,7 +7733,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -7978,9 +7750,455 @@
         "x-stability-level": "stable"
       }
     },
+    "/v1/calls/counts": {
+      "get": {
+        "description": "How many of an agent's calls match, in all and by status, type, ended reason, sentiment and outcome.\n\nTakes the same filters as `GET /v1/calls` and counts every call that list would page through.\nEach breakdown lists only the values some matching call holds, most calls first; a call with no\nvalue for one, such as no sentiment yet, is in `total_count` but in none of that breakdown's\nentries. Counts of a busy agent with only `status` set can be up to 12 minutes old. Counts that\nsearch transcripts answer 503 `query_timeout` when they match too much to read in time.",
+        "operationId": "get_call_counts",
+        "parameters": [
+          {
+            "description": "The agent whose calls to read.",
+            "in": "query",
+            "name": "agent_id",
+            "required": true,
+            "schema": {
+              "description": "The agent whose calls to read.",
+              "minLength": 1,
+              "title": "Agent Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only calls in these statuses; repeat for several. Defaults to `completed`, `ended`, `in_progress` and `in_warm_transfer`.",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "items": {
+                    "$ref": "#/components/schemas/CallStatus"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls in these statuses; repeat for several. Defaults to `completed`, `ended`, `in_progress` and `in_warm_transfer`.",
+              "title": "Status"
+            }
+          },
+          {
+            "description": "Only calls of these types, as a call's `type` reports them; repeat for several.",
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls of these types, as a call's `type` reports them; repeat for several.",
+              "title": "Type"
+            }
+          },
+          {
+            "description": "Only calls that started at or after this time (ISO 8601 with a timezone).",
+            "in": "query",
+            "name": "started_from",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls that started at or after this time (ISO 8601 with a timezone).",
+              "title": "Started From"
+            }
+          },
+          {
+            "description": "Only calls that started before this time (ISO 8601 with a timezone).",
+            "in": "query",
+            "name": "started_before",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls that started before this time (ISO 8601 with a timezone).",
+              "title": "Started Before"
+            }
+          },
+          {
+            "description": "Only calls that ended for these reasons, as a call's `ended_reason` reports them; repeat for several.",
+            "in": "query",
+            "name": "ended_reason",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls that ended for these reasons, as a call's `ended_reason` reports them; repeat for several.",
+              "title": "Ended Reason"
+            }
+          },
+          {
+            "description": "Only calls with these sentiments, as a call's `sentiment` reports them; repeat for several.",
+            "in": "query",
+            "name": "sentiment",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls with these sentiments, as a call's `sentiment` reports them; repeat for several.",
+              "title": "Sentiment"
+            }
+          },
+          {
+            "description": "Only calls with these outcomes, exactly as a call's `outcome` reports them; repeat for several.",
+            "in": "query",
+            "name": "outcome",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls with these outcomes, exactly as a call's `outcome` reports them; repeat for several.",
+              "title": "Outcome"
+            }
+          },
+          {
+            "description": "Only calls with this customer, exactly as a call's `customer_phone_number` reports it, such as `+14155550123`. Encode the `+` as `%2B` in the URL, or it arrives as a space.",
+            "in": "query",
+            "name": "customer_phone_number",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls with this customer, exactly as a call's `customer_phone_number` reports it, such as `+14155550123`. Encode the `+` as `%2B` in the URL, or it arrives as a space.",
+              "title": "Customer Phone Number"
+            }
+          },
+          {
+            "description": "Only calls whose `customer_phone_number` contains this text, such as `5550123`. Not with `customer_phone_number`.",
+            "in": "query",
+            "name": "customer_phone_number_contains",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 64,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls whose `customer_phone_number` contains this text, such as `5550123`. Not with `customer_phone_number`.",
+              "title": "Customer Phone Number Contains"
+            }
+          },
+          {
+            "description": "Only calls where the agent or the customer said this text, ignoring case. Needs `started_from`, at most 31 days before `started_before` (or now).",
+            "in": "query",
+            "name": "transcript_contains",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 100,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls where the agent or the customer said this text, ignoring case. Needs `started_from`, at most 31 days before `started_before` (or now).",
+              "title": "Transcript Contains"
+            }
+          },
+          {
+            "description": "Only calls whose analytics fields hold these options, each as `<field_id>:<option_id>` from the agent's `GET /v1/agents/{id}/call-analysis`. Options of one field combine with OR, different fields with AND. Repeat for several, at most 200.",
+            "in": "query",
+            "name": "analytics_field",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls whose analytics fields hold these options, each as `<field_id>:<option_id>` from the agent's `GET /v1/agents/{id}/call-analysis`. Options of one field combine with OR, different fields with AND. Repeat for several, at most 200.",
+              "title": "Analytics Field"
+            }
+          },
+          {
+            "description": "Only calls that took part in this A/B experiment, on either arm, as a call's `experiment_ids` reports it.",
+            "in": "query",
+            "name": "experiment_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls that took part in this A/B experiment, on either arm, as a call's `experiment_ids` reports it.",
+              "title": "Experiment Id"
+            }
+          },
+          {
+            "description": "Only calls placed by this campaign.",
+            "in": "query",
+            "name": "campaign_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls placed by this campaign.",
+              "title": "Campaign Id"
+            }
+          },
+          {
+            "description": "Only calls that lasted at least this long. Like `max_duration_seconds`, it matches only calls with a duration (`duration_seconds` not `null`).",
+            "in": "query",
+            "name": "min_duration_seconds",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls that lasted at least this long. Like `max_duration_seconds`, it matches only calls with a duration (`duration_seconds` not `null`).",
+              "title": "Min Duration Seconds"
+            }
+          },
+          {
+            "description": "Only calls that lasted at most this long. Like `min_duration_seconds`, it matches only calls with a duration (`duration_seconds` not `null`).",
+            "in": "query",
+            "name": "max_duration_seconds",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only calls that lasted at most this long. Like `min_duration_seconds`, it matches only calls with a duration (`duration_seconds` not `null`).",
+              "title": "Max Duration Seconds"
+            }
+          },
+          {
+            "description": "Optional. Must be the key's org.",
+            "in": "header",
+            "name": "Phonely-Organization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional. Must be the key's org.",
+              "title": "Phonely-Organization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CallCounts"
+                }
+              }
+            },
+            "description": "Successful Response",
+            "headers": {
+              "Phonely-Organization": {
+                "description": "The authorized organization for this request.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "The request is invalid: a malformed body, a bad or unknown field, or an unknown query parameter."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "The API key is missing, invalid or revoked.",
+            "headers": {
+              "WWW-Authenticate": {
+                "description": "Always `Bearer`.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "`Phonely-Organization` must name the key's organization."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Rate limited. Retry after the number of seconds in `Retry-After`.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until the request can be retried.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "An unexpected error. Contact support with the request ID."
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Count calls",
+        "tags": [
+          "Calls"
+        ],
+        "x-permission": "read_call",
+        "x-rate-class": "expensive",
+        "x-scope": "organization",
+        "x-stability-level": "stable"
+      }
+    },
     "/v1/calls/{id}": {
       "get": {
-        "description": "One call with its call analysis. The transcript and recording have their own endpoints.\n\nShared fields mean exactly what they mean in the list. A call is readable as soon as it's\nqueued, in any status the list's `status` filter accepts, including those the list leaves out\nby default such as `queued` and `failed`. A call in any other status, or of another\norganization's or a deleted agent, answers 404, the same as an ID that doesn't exist.\nReading a call doesn't mark it read in the web app.",
+        "description": "One call, with its call analysis. The transcript and recording have their own endpoints.\n\nA call can be read in any status the list's `status` filter accepts, including `queued` and `failed`, which\nthe list leaves out by default.",
         "operationId": "get_call",
         "parameters": [
           {
@@ -8068,7 +8286,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -8116,7 +8334,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -8133,7 +8351,7 @@
         "x-stability-level": "stable"
       },
       "patch": {
-        "description": "Set a call's post-call outcome: what happened, a number for it, and data to attach.\n\nSend only the fields to change: `null` clears one, and `custom_metadata` replaces the whole\nobject. A new `custom_outcome` joins the agent's list of post-call outcomes, which the web\napp's analytics and filters use. Answers with the updated call. The same calls can be updated\nas read with `GET /v1/calls/{id}`. To find a call by the customer's number, list the agent's\ncalls with `customer_phone_number` and `limit=1`: the newest call comes first.",
+        "description": "Set a call's post-call outcome: what happened, a number for it, and data to attach.\n\nSend only the fields to change: `null` clears one, and `custom_metadata` replaces the whole object. A new\n`custom_outcome` is added to the agent's list of post-call outcomes. Answers with the updated call. To find a\ncall by the customer's number, list the agent's calls with `customer_phone_number` and `limit=1`: the newest\ncall comes first.",
         "operationId": "update_call",
         "parameters": [
           {
@@ -8231,7 +8449,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "A read-only key can't make changes, and `Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -8279,7 +8497,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -8298,7 +8516,7 @@
     },
     "/v1/calls/{id}/recording": {
       "get": {
-        "description": "A link to the call's recording, valid for 10 minutes.\n\nEach request returns a new link. Don't store it: request one when you need the file, and\ndownload the file within 10 minutes to keep a copy. A call without a recording answers 404,\nand so does one that just ended: its recording is saved shortly after the call. The same\ncalls are readable as for `GET /v1/calls/{id}`.",
+        "description": "A link to the call's recording, valid for 10 minutes.\n\nEach request returns a new link, so request one when you need the file. A call with no recording yet answers 404.",
         "operationId": "get_call_recording",
         "parameters": [
           {
@@ -8386,7 +8604,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -8434,7 +8652,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -8453,7 +8671,7 @@
     },
     "/v1/calls/{id}/transcript": {
       "get": {
-        "description": "A call's transcript: the conversation and everything the agent did, in order.\n\nEntries are the turns the agent and the customer spoke, the flows it entered and the blocks it\nchose, the variables it stored, the knowledge it retrieved, the actions the flow ran, and\nevents on the line such as transfers. Each entry sets the one object its `type` names. While\nthe call is in progress, `entries` may be empty or partial; read it again after the call ends.\nActions that run after the call are added shortly after it ends. The same calls are readable\nas for `GET /v1/calls/{id}`.",
+        "description": "A call's transcript: the conversation and everything the agent did, in order.\n\nEntries are the turns the agent and the customer spoke, the flows it entered and the blocks it chose, the\nvariables it stored, the knowledge it retrieved, the actions the flow ran, and events on the line such as\ntransfers. Each entry sets the one object its `type` names. A call in progress has a partial transcript.",
         "operationId": "get_call_transcript",
         "parameters": [
           {
@@ -8541,7 +8759,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -8589,7 +8807,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -8608,7 +8826,7 @@
     },
     "/v1/knowledge-sources/{id}": {
       "delete": {
-        "description": "Delete a knowledge source.\n\nIts search chunks are removed first. If that fails, the source record is kept and the request fails.\nUploaded file cleanup is best-effort after the source has been removed.",
+        "description": "Delete a knowledge source.",
         "operationId": "delete_knowledge_source",
         "parameters": [
           {
@@ -8689,7 +8907,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "A read-only key can't make changes, and `Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -8747,7 +8965,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -8755,7 +8973,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Delete a knowledge source",
+        "summary": "Delete a source",
         "tags": [
           "Knowledge sources"
         ],
@@ -8764,7 +8982,7 @@
         "x-stability-level": "stable"
       },
       "get": {
-        "description": "One knowledge source, with the text the agent uses.\n\nIts agent is resolved from the source. Missing, unlinked and other organizations' sources\nanswer 404. A source that's turned off is still returned with `is_active` false.",
+        "description": "One knowledge source, with the text the agent uses.\n\nA source that's turned off has `is_active` false.",
         "operationId": "get_knowledge_source",
         "parameters": [
           {
@@ -8852,7 +9070,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -8900,7 +9118,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -8908,7 +9126,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Get a knowledge source",
+        "summary": "Get a source",
         "tags": [
           "Knowledge sources"
         ],
@@ -8917,7 +9135,7 @@
         "x-stability-level": "stable"
       },
       "patch": {
-        "description": "Change a knowledge source's name, text or active state.\n\nFile names and file content are read-only. Renaming does not re-index. Clearing text removes the old\nsearch chunks. Turning a source off keeps its text and chunks but stops using it on calls.",
+        "description": "Change a knowledge source's name, its text, or whether calls use it.\n\nA file's name and content can't be changed.",
         "operationId": "update_knowledge_source",
         "parameters": [
           {
@@ -9015,7 +9233,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "A read-only key can't make changes, and `Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -9073,7 +9291,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -9081,7 +9299,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Update a knowledge source",
+        "summary": "Update a source",
         "tags": [
           "Knowledge sources"
         ],
@@ -9092,7 +9310,7 @@
     },
     "/v1/knowledge-sources/{id}/download": {
       "get": {
-        "description": "Get a download link for an uploaded file.\n\nThe signed link expires in ten minutes. A text document, website or file with no stored object URI answers 404.",
+        "description": "A link to download an uploaded file, valid for 10 minutes.\n\nDocuments and website pages have no file, so they answer 404.",
         "operationId": "get_knowledge_source_download",
         "parameters": [
           {
@@ -9180,7 +9398,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -9238,7 +9456,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -9246,7 +9464,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Get a file download link",
+        "summary": "Get a download link",
         "tags": [
           "Knowledge sources"
         ],
@@ -9257,7 +9475,7 @@
     },
     "/v1/organizations": {
       "get": {
-        "description": "The organizations available to the caller. An org API key can reach only its own organization.",
+        "description": "The organizations the caller can act in. An API key acts only in its own organization.",
         "operationId": "list_organizations",
         "parameters": [
           {
@@ -9358,7 +9576,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "429": {
             "content": {
@@ -9396,7 +9614,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -9415,7 +9633,7 @@
     },
     "/v1/organizations/{id}": {
       "get": {
-        "description": "One organization. Any other organization's ID answers 404, the same as an ID that doesn't exist.",
+        "description": "One organization.",
         "operationId": "get_organization",
         "parameters": [
           {
@@ -9503,7 +9721,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -9551,7 +9769,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -9751,7 +9969,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -9799,7 +10017,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -9818,7 +10036,7 @@
     },
     "/v1/voices": {
       "get": {
-        "description": "Public voices and the API key organization's private voices, by name then ID.\n\nPersonal ownership, an agent's selection and A/B references do not grant catalog access.\nDeprecated catalog voices are hidden unless owned by your organization. Newly created or\nchanged voices can take a short time to reach this catalog's database mirror.",
+        "description": "Public voices and your organization's own voices, ordered by name, then `id`.",
         "operationId": "list_voices",
         "parameters": [
           {
@@ -9927,7 +10145,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "429": {
             "content": {
@@ -9965,7 +10183,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
@@ -9984,7 +10202,7 @@
     },
     "/v1/voices/{id}": {
       "get": {
-        "description": "One public or organization-owned voice, with the same fields and visibility as the list.\n\nA missing or inaccessible voice answers 404. Existing agent assignments do not change when\na voice disappears from the catalog. Newly created or changed voices may briefly lag in the mirror.",
+        "description": "One voice: a public one or your organization's own.",
         "operationId": "get_voice",
         "parameters": [
           {
@@ -10072,7 +10290,7 @@
                 }
               }
             },
-            "description": "The key can't do this: a read-only key writing, or `Phonely-Organization` naming another org."
+            "description": "`Phonely-Organization` must name the key's organization."
           },
           "404": {
             "content": {
@@ -10120,7 +10338,7 @@
                 }
               }
             },
-            "description": "Authentication, authorization or another required service is temporarily unavailable."
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
           }
         },
         "security": [
