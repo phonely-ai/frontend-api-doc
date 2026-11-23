@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.283.0",
-        "commit": "333c53dce1821de50400d593450f9ad8c87972b1"
+        "label": "v0.284.0",
+        "commit": "d4522f88d842dd772a395b96aa9eb3269d39c1ae"
       }
     },
     {
@@ -2312,6 +2312,100 @@
           "status": "not-public",
           "pages": [],
           "note": "Version bump commits v0.281.0/v0.282.0/v0.283.0 and the main-into-dev merge carry no file changes of their own in this scan. Release/merge bookkeeping with no user-visible contract change."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.283.0-v0.284.0",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-11-23",
+      "fromExclusive": {
+        "label": "v0.283.0",
+        "commit": "333c53dce1821de50400d593450f9ad8c87972b1"
+      },
+      "throughInclusive": {
+        "label": "v0.284.0",
+        "commit": "d4522f88d842dd772a395b96aa9eb3269d39c1ae"
+      },
+      "dispositions": [
+        {
+          "id": "workflow-loading-and-version-history",
+          "status": "docs-updated",
+          "pages": [
+            "flow-editor/versions"
+          ],
+          "note": "PHO-11533 loads the selected flow independently of the full flow list. Version History lists saved versions before loading a selected canvas and shows the loading indicator in that version’s row. The draft stays intact while reviewing history. The Flow Versions guide now describes the loading state and when the default published-to-draft comparison opens."
+        },
+        {
+          "id": "featured-voices-storage-field",
+          "status": "no-doc-change",
+          "pages": [
+            "agent-design/voice/overview"
+          ],
+          "note": "PHO-11962 reads and writes a voice's featured state from a voice.featured field on the voice list and sets it by admins through db-svc, removing the separate featured-voices-service and blocking browser reads/writes of the old list in Firestore rules. The featured voices a customer sees and their visible order are unchanged; this is a storage and permissions move with no customer-facing contract change."
+        },
+        {
+          "id": "remove-sell-call-block",
+          "status": "not-public",
+          "pages": [],
+          "note": "PHO-12250 removes Sell Call from the add-block menu for all users. Sell Call was already admin-only (listed in adminOnlyActions and gated in use-actions.ts) and never offered to product users, and no public block guide documents it; existing blocks keep their settings, connections, variables, names, icons, and Ask AI inspection. No documented customer-facing fact changed."
+        },
+        {
+          "id": "agent-qa-test-suite-refinements-2",
+          "status": "needs-doc-update",
+          "pages": [
+            "testing/simulation-testing"
+          ],
+          "note": "Agent QA / Test Suite work this window: PHO-11916 refuses to start a run when no test call can enter the agent's inbound workflow and says so; PHO-12277 keeps a zip upload running when the setup page is left and preserves the picked zip; PHO-12291 adds noise-aware keep gates, never finishes a run below baseline, and acts on every failing scenario each iteration; PHO-12304 splits QA build files by serialized byte size. Agent QA / Test Suite is admin-and-Enterprise-gated (requiresAgentQa) and carried as an open audience gap from the v0.277.0-v0.280.0 and v0.280.0-v0.283.0 windows; kept pending for a deliberate public-audience decision rather than documenting an Enterprise-only surface now. No evidence in this window of a decision to open it to standard users."
+        },
+        {
+          "id": "agent-qa-trace-tagging",
+          "status": "not-public",
+          "pages": [],
+          "note": "PHO-12276 tags Agent QA Langfuse traces with agent, suite, user, and run for observability. Server-side tracing metadata with no customer-facing surface or Ask AI-behavioral fact."
+        },
+        {
+          "id": "v1-client-and-staff-auth",
+          "status": "not-public",
+          "pages": [],
+          "note": "PHO-12248/PHO-12106 add the web app's db-svc /v1 client foundation (one client per sign-in, org-scoped requests, safe retries, whole-list fetching, readable /v1 errors) with no screen using it yet; PHO-12282/PHO-12324 move Phonely staff re-verification to the normal login page and align the staff sign-in copy to db-svc's every-3-days-per-org rule, removing the staff sign-in dialog. Staff sign-in is internal and customers' sign-in does not change; the /v1 client is unused internal plumbing. No public API contract or documented fact changed."
+        },
+        {
+          "id": "experiments-surface",
+          "status": "needs-doc-update",
+          "pages": [
+            "testing/ab-testing"
+          ],
+          "note": "The released frontend adds Experiments to the sidebar for agents with Testing access, a setup sheet, a separate volume-gated Test this change first action, and controls to review and apply results. Classic A/B tests are still available from New test. Enterprise availability is confirmed. Draft docs PR #141 owns the Experiments guide and classic A/B navigation, so that documentation remains pending there. Reviewed the bundled lint, style and state refactors separately from those feature changes."
+        },
+        {
+          "id": "poc-claim-and-admin",
+          "status": "needs-doc-update",
+          "pages": [
+            "billing-and-usage/plans-and-billing-history"
+          ],
+          "note": "PHO-12254 reads a POC contract's document id from db-svc's provider-neutral document_id as POC contracts move SignNow->PandaDoc; PHO-11970 gives a POC claim its own message when another proof-of-concept or contract from the same deal is still active. POC claim and billing is a sales-led/Enterprise-gated entry point with no home in the standard Plans and Billing page; carried as an open gap from the v0.280.0-v0.283.0 window pending a deliberate POC/Enterprise-billing documentation decision rather than exposing a partial Enterprise-only description now. No evidence of a standard-audience decision in this window."
+        },
+        {
+          "id": "dtmf-transfer-add-and-revert",
+          "status": "no-doc-change",
+          "pages": [
+            "blocks/communication-blocks/transfer-call"
+          ],
+          "note": "PHO-12311 added a dtmf: PBX transfer code option to Transfer Call cold-transfer destinations and was reverted in the same window (#3818); the net diff across the two commits is empty, so no code shipped and the Transfer Call guide's documented cold/warm transfer, destinations, failover, detection, and recovery behavior is unchanged. Reviewed the original commit and its revert together."
+        },
+        {
+          "id": "lint-and-comment-cleanup",
+          "status": "not-public",
+          "pages": [],
+          "note": "PHO-12287 condenses performance-feature code comments and adds a lint rule capping a comment block at 3 lines, with a large eslint-suppressions.json regeneration and a pruned lint suppression from the main hotfixes (no behavior change). Internal engineering hygiene with no user-facing or Ask AI-behavioral fact."
+        },
+        {
+          "id": "releases-and-merges",
+          "status": "not-public",
+          "pages": [],
+          "note": "Version bump v0.284.0 and the main-into-dev mergeback/hotfix merge commits (PHO-12304 hotfix, dating v0.284.0) carry only release and merge bookkeeping within this scan. No user-visible contract change."
         }
       ]
     }
