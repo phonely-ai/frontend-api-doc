@@ -13,7 +13,8 @@ sources:
   - "features/workflows/modules/editor/hooks/use-version-preview.ts"
   - "features/workflows/modules/editor/hooks/use-workflow-save-actions.ts"
   - "features/workflows/hooks/use-workflow-version-summaries.ts"
-last-verified: "2026-11-23"
+  - "features/workflows/model/workflow-version-notes.ts"
+last-verified: "2026-11-25"
 ---
 
 A version is a read-only snapshot of a flow. Use versions to preserve meaningful checkpoints, compare earlier configurations, and restore a known design without changing the published version.
@@ -28,7 +29,7 @@ A version is a read-only snapshot of a flow. Use versions to preserve meaningful
 
 Select the main **Publish** button to publish the current draft. To create a checkpoint without changing the published version, open the adjacent menu and select **Save as Version**.
 
-Each version receives a number and an initial name such as `Version 4`. Phonely also adds initial release notes; when it can compare the draft with the published version, those notes summarize the detected changes. Review the name and notes when the version marks an important release or decision.
+Each version receives a number and an initial name such as `Version 4`. Phonely also adds initial release notes. When it can compare the draft with the published version, the notes list the blocks added, removed, or modified, and how many connections changed. If that list would be long, it gives block counts instead of block names. The first publish of a flow is noted as the initial published version. Review and edit the name and notes when the version marks an important release or decision.
 
 Save a checkpoint when you may need to explain or return to the current design, such as:
 

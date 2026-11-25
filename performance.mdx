@@ -21,12 +21,13 @@ sources:
   - "features/performance/ui/field-note.tsx"
   - "features/performance/ui/internal-metric-chip.tsx"
   - "features/performance/model/analytics-catalog.ts"
+  - "features/performance/model/analytics-query.ts"
   - "features/performance/utils/stats-coverage.ts"
   - "phonely-db-svc/app/analytics/catalog.py"
   - "features/performance/hooks/use-tv-mode.ts"
   - "features/performance/ui/performance-tv-bar.tsx"
   - "features/performance/utils/tv-mode.ts"
-last-verified: "2026-11-09"
+last-verified: "2026-11-25"
 ---
 
 Performance turns an agent's call history into a board of cards that help you understand traffic, results, and recurring patterns.
@@ -124,6 +125,12 @@ Measures include a billing family alongside call metrics: **Billed minutes**, **
 Save the result to add it to the board. Use the browser's Back button or the back arrow to leave Explore; if you have unsaved work, Phonely asks before discarding it.
 
 You can save a metric or filter to reuse it across cards. Manage those saved definitions from Explore or from **Settings > Saved metrics & filters** on the board. Deleting a saved definition asks for confirmation and identifies the metric or filter to be removed.
+
+### Limit a breakdown to its top values
+
+When a breakdown has many values, use the selector beside it to keep only the leading ones. Choose **All** or **Top 1**, **Top 3**, **Top 4**, **Top 5**, **Top 10**, or **Top 20**. Phonely ranks the values by the first metric on the card and groups every remaining value into an **Other** row.
+
+A breakdown by an outbound variable, a webhook field, or an API response field can have a different value for nearly every call, so it starts on **Top 10** when you select it. Change the selector to **All** to see every value. Breakdowns by other fields keep starting on **All**.
 
 ### Use per-call stats
 

@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.284.0",
-        "commit": "d4522f88d842dd772a395b96aa9eb3269d39c1ae"
+        "label": "v0.285.0",
+        "commit": "1fd85055b07c739ae24e5d41dd466a3374d55afa"
       }
     },
     {
@@ -2406,6 +2406,190 @@
           "status": "not-public",
           "pages": [],
           "note": "Version bump v0.284.0 and the main-into-dev mergeback/hotfix merge commits (PHO-12304 hotfix, dating v0.284.0) carry only release and merge bookkeeping within this scan. No user-visible contract change."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.285.0-1fd85055b07c739ae24e5d41dd466a3374d55afa",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-11-25",
+      "fromExclusive": {
+        "label": "v0.284.0",
+        "commit": "d4522f88d842dd772a395b96aa9eb3269d39c1ae"
+      },
+      "throughInclusive": {
+        "label": "v0.285.0",
+        "commit": "1fd85055b07c739ae24e5d41dd466a3374d55afa"
+      },
+      "dispositions": [
+        {
+          "id": "pbx-transfer-codes",
+          "status": "docs-updated",
+          "pages": [
+            "blocks/communication-blocks/transfer-call"
+          ],
+          "note": "Documented PBX transfer codes (dtmf:) as a Cold Transfer destination, the characters they accept, and the Warm Transfer error."
+        },
+        {
+          "id": "ask-ai-multi-file-attachments",
+          "status": "docs-updated",
+          "pages": [
+            "key-concepts/ask-ai",
+            "get-started/home-overview"
+          ],
+          "note": "Documented attaching up to three files to one Ask AI message, the per-type and total size limits, per-file progress, partial reads, and retrying a failed file."
+        },
+        {
+          "id": "performance-breakdown-top-n",
+          "status": "docs-updated",
+          "pages": [
+            "performance"
+          ],
+          "note": "Documented the Top N selector on breakdowns, the Other row, and the Top 10 starting point for breakdowns by outbound variables, webhook fields, and API response fields."
+        },
+        {
+          "id": "talk-exit-evaluation",
+          "status": "docs-updated",
+          "pages": [
+            "blocks/flow-blocks/talk"
+          ],
+          "note": "Documented how Talk exits are judged, what the exit check can see, and how to write exits and required values so callers always have a way out. Removed an unsupported exit-count limit."
+        },
+        {
+          "id": "publish-review-and-version-notes",
+          "status": "docs-updated",
+          "pages": [
+            "flow-editor/test-and-publish",
+            "workflow-checklist",
+            "flow-editor/versions"
+          ],
+          "note": "Documented the eight-second publish review, that reviews of an already-published flow report only serious problems the draft introduces, Talk exits that cannot be taken, and the automatic version notes."
+        },
+        {
+          "id": "integration-source-mapping-repair",
+          "status": "docs-updated",
+          "pages": [
+            "integrations/overview"
+          ],
+          "note": "Repaired a stale source reference for agent-level account connections. The page content was already accurate."
+        },
+        {
+          "id": "connected-apps-sign-in",
+          "status": "needs-doc-update",
+          "pages": [
+            "settings/overview"
+          ],
+          "note": "A new Connected Apps settings tab and a Connect page let outside apps sign in and act on a person's behalf. They appear only on deployments that serve the connection service, so availability and audience must be confirmed before documenting them."
+        },
+        {
+          "id": "custom-actions-catalog-retired",
+          "status": "no-doc-change",
+          "pages": [
+            "blocks/overview",
+            "flow-editor/collaboration",
+            "flow-editor/connections-and-routing",
+            "get-started/introduction",
+            "get-started/quick-start",
+            "key-concepts/flow-canvas-controls",
+            "key-concepts/flows",
+            "key-concepts/plan-your-agent"
+          ],
+          "note": "The Custom Actions catalog and its admin screens were retired. Existing actions keep running and stay editable. The guides never described the catalog, so nothing changes."
+        },
+        {
+          "id": "ask-ai-flow-authoring-behavior",
+          "status": "no-doc-change",
+          "pages": [
+            "key-concepts/ask-ai"
+          ],
+          "note": "Ask AI now writes transfers, wait messages, and Talk exits with better defaults and stricter validation. These are internal behavior improvements that do not change a documented task, setting, or limit."
+        },
+        {
+          "id": "password-visibility-control",
+          "status": "no-doc-change",
+          "pages": [
+            "get-started/quick-start"
+          ],
+          "note": "Sign-in, sign-up, and password reset share one show/hide password control. The documented steps do not change."
+        },
+        {
+          "id": "validation-library-upgrade-app-forms",
+          "status": "no-doc-change",
+          "pages": [
+            "agent-design/overview",
+            "agent-design/voice/overview",
+            "agent-knowledge-base/overview",
+            "api-reference/endpoint/generate-agent",
+            "api-reference/endpoint/get-agent-generation",
+            "api-reference/endpoint/set-post-call-outcome",
+            "billing-and-usage/account",
+            "billing-and-usage/teams",
+            "call-history/overview",
+            "outbound-calling/campaigns",
+            "settings/delete-agents"
+          ],
+          "note": "Forms and API handlers moved to a newer validation library. Fields, limits, and documented request and response shapes are unchanged."
+        },
+        {
+          "id": "validation-library-upgrade-flow-blocks",
+          "status": "no-doc-change",
+          "pages": [
+            "blocks/api-request",
+            "blocks/common-settings",
+            "blocks/communication-blocks/campaign",
+            "blocks/communication-blocks/email-sms-notification",
+            "blocks/communication-blocks/redial",
+            "blocks/communication-blocks/send-email",
+            "blocks/communication-blocks/send-sms",
+            "blocks/conversation-blocks/collect",
+            "blocks/data-and-automation-blocks/code",
+            "blocks/data-and-automation-blocks/send-call-data",
+            "blocks/data-and-automation-blocks/vision",
+            "blocks/data-and-automation-blocks/webhook",
+            "blocks/flow-blocks/start-flow",
+            "blocks/flow-control-and-routing/delay",
+            "blocks/flow-control-and-routing/end-call",
+            "blocks/flow-control-and-routing/filter",
+            "blocks/flow-control-and-routing/time-filter",
+            "blocks/flow-control-and-routing/transfer-flow",
+            "flow-editor/variables",
+            "integrations/gmail",
+            "integrations/google-calendar",
+            "integrations/google-drive",
+            "integrations/google-sheets",
+            "integrations/make",
+            "integrations/microsoft-outlook",
+            "integrations/slack",
+            "integrations/zapier"
+          ],
+          "note": "Block configuration schemas and editor forms moved to a newer validation library. Block settings, options, and limits are unchanged."
+        },
+        {
+          "id": "call-list-endpoint-switch-reverted",
+          "status": "no-doc-change",
+          "pages": [
+            "call-history/overview"
+          ],
+          "note": "A change to how the call list is loaded was reverted before release, so Call History behaves as before."
+        },
+        {
+          "id": "internal-quality-tooling",
+          "status": "not-public",
+          "pages": [],
+          "note": "Internal quality-assurance tooling and its validation schemas changed with the dependency upgrade. There is no customer-facing surface."
+        },
+        {
+          "id": "internal-platform-hardening",
+          "status": "not-public",
+          "pages": [],
+          "note": "Internal data-access rules, analytics privacy, and service cleanup. There is no customer-facing surface."
+        },
+        {
+          "id": "internal-build-and-release-tooling",
+          "status": "not-public",
+          "pages": [],
+          "note": "Build, test, and release automation, dependency updates, and release metadata do not change the public Phonely product experience."
         }
       ]
     }
