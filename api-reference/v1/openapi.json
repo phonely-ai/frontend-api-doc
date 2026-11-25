@@ -2605,6 +2605,7 @@
         "title": "GuidelineSectionUpdate",
         "type": "object"
       },
+      "JsonValue": {},
       "KnowledgeSource": {
         "additionalProperties": false,
         "description": "Something an agent knows: a document, an uploaded file or a website page.",
@@ -3231,7 +3232,75 @@
       },
       "TranscriptAction": {
         "additionalProperties": false,
+        "description": "One action. The object for its family is set, when it recorded any of that family's fields; every other\nfamily's object is `null`.",
         "properties": {
+          "code": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TranscriptCode"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set for a code action (`code`): what it ran with, returned and printed."
+          },
+          "duration_seconds": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "How long it took, in seconds. `null` when not recorded.",
+            "title": "Duration Seconds"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TranscriptEmail"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set for an email (`send_email`, `gmail`, `outlook`, `send_email_v2`)."
+          },
+          "filter": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TranscriptFilter"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set for a filter (`filter`, `filter_v2`): which case held."
+          },
+          "flow_transfer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TranscriptFlowTransfer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set when the call moved to another flow (`transfer_workflow`)."
+          },
+          "http": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TranscriptHttp"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set for an API request (`api_request`): recorded request and response details."
+          },
           "name": {
             "anyOf": [
               {
@@ -3243,6 +3312,39 @@
             ],
             "description": "The action's name, as the flow labels it.",
             "title": "Name"
+          },
+          "notification": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TranscriptNotification"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set for a notification about the call (`notification`)."
+          },
+          "redial": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TranscriptRedial"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set for a redial (`redial`): when the customer will be called again."
+          },
+          "sms": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TranscriptSms"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set for a text message (`send_sms`)."
           },
           "stage": {
             "description": "When it ran: before the call, during it, or after it ended. Known values: `pre_call`, `in_call`, `post_call`. More can be added, so handle values you don't recognize.",
@@ -3263,12 +3365,23 @@
                 "type": "null"
               }
             ],
-            "description": "Whether it succeeded, as the action recorded. `null` when it recorded no outcome. Known values: `succeeded`, `failed`. More can be added, so handle values you don't recognize.",
+            "description": "Whether it succeeded. An API request succeeded on a 2xx answer and failed on any other or on a timeout; a webhook by whether its data arrived; a redial when one was scheduled; any other action as it recorded. `null` when it recorded no outcome. Known values: `succeeded`, `failed`. More can be added, so handle values you don't recognize.",
             "title": "Status",
             "x-extensible-enum": [
               "succeeded",
               "failed"
             ]
+          },
+          "transfer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TranscriptTransfer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set for a call transfer (`transfer_call`): where it went, or how a warm transfer ended."
           },
           "type": {
             "anyOf": [
@@ -3281,13 +3394,51 @@
             ],
             "description": "What kind of action ran, as recorded: usually the type of the block that ran it, such as `api_request`, `send_sms` or `transfer_call`, or a step the agent runs itself, such as `outbound_variables` before an outbound call. `null` when not recorded.",
             "title": "Type"
+          },
+          "variables": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/TranscriptVariable"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set for `outbound_variables`: the values the outbound call started with. Credentials Phonely recognizes are replaced with `***` (best effort).",
+            "title": "Variables"
+          },
+          "webhook": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TranscriptWebhook"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set for a webhook that delivers data before the call (`webhook`)."
           }
         },
         "required": [
           "type",
           "name",
           "stage",
-          "status"
+          "status",
+          "duration_seconds",
+          "http",
+          "code",
+          "transfer",
+          "flow_transfer",
+          "sms",
+          "email",
+          "filter",
+          "webhook",
+          "redial",
+          "notification",
+          "variables"
         ],
         "title": "TranscriptAction",
         "type": "object"
@@ -3450,6 +3601,51 @@
         "title": "TranscriptBlockOption",
         "type": "object"
       },
+      "TranscriptCode": {
+        "additionalProperties": false,
+        "properties": {
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The error the code raised. `null` when it raised none. Credentials Phonely recognizes are replaced with `***` (best effort).",
+            "title": "Error"
+          },
+          "input": {
+            "$ref": "#/components/schemas/JsonValue",
+            "description": "What the code ran with. As recorded: an object or array, or a string when it wasn't JSON or was too long to keep whole (it then ends with a note saying it was truncated). Credentials Phonely recognizes are replaced with `***` (best effort)."
+          },
+          "logs": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "What the code printed. `null` when it printed nothing. Credentials Phonely recognizes are replaced with `***` (best effort).",
+            "title": "Logs"
+          },
+          "output": {
+            "$ref": "#/components/schemas/JsonValue",
+            "description": "What the code returned. As recorded: an object or array, or a string when it wasn't JSON or was too long to keep whole (it then ends with a note saying it was truncated). Credentials Phonely recognizes are replaced with `***` (best effort)."
+          }
+        },
+        "required": [
+          "input",
+          "output",
+          "logs",
+          "error"
+        ],
+        "title": "TranscriptCode",
+        "type": "object"
+      },
       "TranscriptCustomer": {
         "additionalProperties": false,
         "properties": {
@@ -3482,6 +3678,145 @@
           "is_endpoint_detected"
         ],
         "title": "TranscriptCustomer",
+        "type": "object"
+      },
+      "TranscriptEmail": {
+        "additionalProperties": false,
+        "properties": {
+          "bcc": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The addresses blind-copied. `null` when none.",
+            "title": "Bcc"
+          },
+          "body": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The email's body, as sent. Credentials Phonely recognizes are replaced with `***` (best effort).",
+            "title": "Body"
+          },
+          "body_format": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether `body` is plain text or HTML. Known values: `text`, `html`. More can be added, so handle values you don't recognize.",
+            "title": "Body Format",
+            "x-extensible-enum": [
+              "text",
+              "html"
+            ]
+          },
+          "cc": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The addresses copied. `null` when none, or the block has no copies.",
+            "title": "Cc"
+          },
+          "from_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The address it was sent from. `null` when the block sets none.",
+            "title": "From Email"
+          },
+          "from_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The sender name the email showed.",
+            "title": "From Name"
+          },
+          "reply_to": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The address replies go to. `null` when the block sets none.",
+            "title": "Reply To"
+          },
+          "subject": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The email's subject. Credentials Phonely recognizes are replaced with `***` (best effort).",
+            "title": "Subject"
+          },
+          "to": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The addresses the email was sent to.",
+            "title": "To"
+          }
+        },
+        "required": [
+          "to",
+          "cc",
+          "bcc",
+          "from_name",
+          "from_email",
+          "reply_to",
+          "subject",
+          "body",
+          "body_format"
+        ],
+        "title": "TranscriptEmail",
         "type": "object"
       },
       "TranscriptEntry": {
@@ -3661,6 +3996,118 @@
         "title": "TranscriptEvent",
         "type": "object"
       },
+      "TranscriptFilter": {
+        "additionalProperties": false,
+        "properties": {
+          "cases": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/TranscriptFilterCase"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The cases evaluated, in order, up to the one that held. `null` when not recorded.",
+            "title": "Cases"
+          },
+          "is_matched": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether a case held. `false` means the call took the else branch. `null` when not recorded.",
+            "title": "Is Matched"
+          },
+          "matched_case": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The number of the case that held. `null` when none did, or when only `is_matched` was recorded.",
+            "title": "Matched Case"
+          }
+        },
+        "required": [
+          "is_matched",
+          "matched_case",
+          "cases"
+        ],
+        "title": "TranscriptFilter",
+        "type": "object"
+      },
+      "TranscriptFilterCase": {
+        "additionalProperties": false,
+        "properties": {
+          "conditions": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Each condition as it was evaluated, values filled in, such as `94107 equals 94107 = True`. Credentials Phonely recognizes are replaced with `***` (best effort).",
+            "title": "Conditions"
+          },
+          "is_matched": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether the case held.",
+            "title": "Is Matched"
+          },
+          "logic_operator": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether every condition had to hold (`and`) or any one (`or`). Known values: `and`, `or`. More can be added, so handle values you don't recognize.",
+            "title": "Logic Operator",
+            "x-extensible-enum": [
+              "and",
+              "or"
+            ]
+          },
+          "number": {
+            "description": "The case's number, as the flow labels it: `Case 1` is 1.",
+            "title": "Number",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "number",
+          "logic_operator",
+          "conditions",
+          "is_matched"
+        ],
+        "title": "TranscriptFilterCase",
+        "type": "object"
+      },
       "TranscriptFlow": {
         "additionalProperties": false,
         "properties": {
@@ -3752,6 +4199,122 @@
         "title": "TranscriptFlow",
         "type": "object"
       },
+      "TranscriptFlowTransfer": {
+        "additionalProperties": false,
+        "properties": {
+          "flow_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The ID of the flow the call moved to.",
+            "title": "Flow Id"
+          },
+          "flow_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "That flow's name. `null` when not recorded.",
+            "title": "Flow Name"
+          }
+        },
+        "required": [
+          "flow_id",
+          "flow_name"
+        ],
+        "title": "TranscriptFlowTransfer",
+        "type": "object"
+      },
+      "TranscriptHttp": {
+        "additionalProperties": false,
+        "properties": {
+          "is_timed_out": {
+            "default": false,
+            "description": "Whether the request ran out of time before an answer came back.",
+            "title": "Is Timed Out",
+            "type": "boolean"
+          },
+          "method": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The HTTP method, such as `POST`. `null` when not recorded.",
+            "title": "Method"
+          },
+          "request_body": {
+            "$ref": "#/components/schemas/JsonValue",
+            "description": "The recorded request body, which may contain template placeholders. As recorded: an object or array, or a string when it wasn't JSON or was too long to keep whole (it then ends with a note saying it was truncated). Credentials Phonely recognizes are replaced with `***` (best effort)."
+          },
+          "request_headers": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The recorded request headers, which may contain template placeholders. Only `Content-Type`, `Accept`, `Accept-Language`, `User-Agent` and `Content-Length` show their value; every other value is `***`.",
+            "title": "Request Headers"
+          },
+          "response_body": {
+            "$ref": "#/components/schemas/JsonValue",
+            "description": "The body that came back. As recorded: an object or array, or a string when it wasn't JSON or was too long to keep whole (it then ends with a note saying it was truncated). Credentials Phonely recognizes are replaced with `***` (best effort)."
+          },
+          "status_code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The HTTP status code of the answer. `null` when none came back, or when the request was blocked before it was sent (`response_body` then says so).",
+            "title": "Status Code"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The recorded request URL, including query parameters. It may contain template placeholders. A webhook URL's path, its password and credential-named query values are replaced with `***`. Credentials Phonely recognizes are replaced with `***` (best effort).",
+            "title": "Url"
+          }
+        },
+        "required": [
+          "method",
+          "url",
+          "status_code",
+          "is_timed_out",
+          "request_headers",
+          "request_body",
+          "response_body"
+        ],
+        "title": "TranscriptHttp",
+        "type": "object"
+      },
       "TranscriptKnowledge": {
         "additionalProperties": false,
         "properties": {
@@ -3818,6 +4381,246 @@
         "title": "TranscriptKnowledgeSource",
         "type": "object"
       },
+      "TranscriptNotification": {
+        "additionalProperties": false,
+        "properties": {
+          "email_to": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The addresses an email about the call went to.",
+            "title": "Email To"
+          },
+          "emails_sent": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "How many of the emails were sent.",
+            "title": "Emails Sent"
+          },
+          "sms_sent": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "How many of the texts were sent.",
+            "title": "Sms Sent"
+          },
+          "sms_to": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The numbers a text about the call went to.",
+            "title": "Sms To"
+          }
+        },
+        "required": [
+          "sms_to",
+          "email_to",
+          "sms_sent",
+          "emails_sent"
+        ],
+        "title": "TranscriptNotification",
+        "type": "object"
+      },
+      "TranscriptRedial": {
+        "additionalProperties": false,
+        "properties": {
+          "delay_seconds": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "How long after this call the redial happens.",
+            "title": "Delay Seconds"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Why no redial was scheduled, as recorded, such as the redial limit being reached.",
+            "title": "Reason"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "How the customer will be called again: `retry_after` a delay in the same campaign, or `move_to_campaign`. `null` when no redial was scheduled. Known values: `retry_after`, `move_to_campaign`. More can be added, so handle values you don't recognize.",
+            "title": "Type",
+            "x-extensible-enum": [
+              "retry_after",
+              "move_to_campaign"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "delay_seconds",
+          "reason"
+        ],
+        "title": "TranscriptRedial",
+        "type": "object"
+      },
+      "TranscriptSms": {
+        "additionalProperties": false,
+        "properties": {
+          "from": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The number it was sent from.",
+            "title": "From"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The text that was sent. Credentials Phonely recognizes are replaced with `***` (best effort).",
+            "title": "Message"
+          },
+          "message_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Twilio's ID for the message (its SID). `null` when none was sent.",
+            "title": "Message Id"
+          },
+          "to": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The number the text was sent to.",
+            "title": "To"
+          }
+        },
+        "required": [
+          "to",
+          "from",
+          "message",
+          "message_id"
+        ],
+        "title": "TranscriptSms",
+        "type": "object"
+      },
+      "TranscriptTransfer": {
+        "additionalProperties": false,
+        "properties": {
+          "destination": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The number or SIP address the call was transferred to.",
+            "title": "Destination"
+          },
+          "mode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "`cold` hands the call over; `warm` connects a person first. Set on the transfer itself. Known values: `cold`, `warm`. More can be added, so handle values you don't recognize.",
+            "title": "Mode",
+            "x-extensible-enum": [
+              "cold",
+              "warm"
+            ]
+          },
+          "result": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A warm transfer's result, recorded as a second action after the transfer. `human_detected` means a person answered; every other result means the transfer did not connect. Known values: `human_detected`, `voicemail_detected`, `ivr_detected`, `sms_route`, `transfer_failed`, `dialout_stopped`. More can be added, so handle values you don't recognize.",
+            "title": "Result",
+            "x-extensible-enum": [
+              "human_detected",
+              "voicemail_detected",
+              "ivr_detected",
+              "sms_route",
+              "transfer_failed",
+              "dialout_stopped"
+            ]
+          }
+        },
+        "required": [
+          "destination",
+          "mode",
+          "result"
+        ],
+        "title": "TranscriptTransfer",
+        "type": "object"
+      },
       "TranscriptVariable": {
         "additionalProperties": false,
         "properties": {
@@ -3854,6 +4657,33 @@
           "captured"
         ],
         "title": "TranscriptVariables",
+        "type": "object"
+      },
+      "TranscriptWebhook": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/JsonValue",
+            "description": "The data the webhook delivered. As recorded: an object or array, or a string when it wasn't JSON or was too long to keep whole (it then ends with a note saying it was truncated). Credentials Phonely recognizes are replaced with `***` (best effort)."
+          },
+          "is_received": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether the webhook's data had arrived when the call needed it.",
+            "title": "Is Received"
+          }
+        },
+        "required": [
+          "is_received",
+          "data"
+        ],
+        "title": "TranscriptWebhook",
         "type": "object"
       },
       "Usage": {
@@ -6517,6 +7347,153 @@
         "x-stability-level": "stable"
       }
     },
+    "/v1/agents/{id}/organization": {
+      "get": {
+        "description": "The organization an agent belongs to, for when you have the agent's ID but not its organization, such as\nfrom a link to the agent in the web app. Send it as `Phonely-Organization` on the requests that follow.\n\nIt's found only in an organization you can act in, and only for an agent `GET /v1/agents/{id}` returns there;\nanything else is a 404, the same answer as an agent that doesn't exist.",
+        "operationId": "get_agent_organization",
+        "parameters": [
+          {
+            "description": "The agent's ID.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "The agent's ID.",
+              "title": "Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Must be the key's org.",
+            "in": "header",
+            "name": "Phonely-Organization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional. Must be the key's org.",
+              "title": "Phonely-Organization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Organization"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "The request is invalid: a malformed body, a bad or unknown field, or an unknown query parameter."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "The API key is missing, invalid or revoked.",
+            "headers": {
+              "WWW-Authenticate": {
+                "description": "Always `Bearer`.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "`Phonely-Organization` must name the key's organization."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "The resource doesn't exist, or belongs to another organization."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Rate limited. Retry after the number of seconds in `Retry-After`.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until the request can be retried.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "An unexpected error. Contact support with the request ID."
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get an agent's organization",
+        "tags": [
+          "Agents"
+        ],
+        "x-permission": "discover_organizations",
+        "x-scope": "principal",
+        "x-stability-level": "stable"
+      }
+    },
     "/v1/agents/{id}/settings": {
       "get": {
         "description": "An agent's call, compliance and advanced settings.\n\nA setting nobody has changed shows the value calls use.",
@@ -8514,6 +9491,153 @@
         "x-stability-level": "stable"
       }
     },
+    "/v1/calls/{id}/organization": {
+      "get": {
+        "description": "The organization a call belongs to, for when you have the call's ID but not its organization, such as from\na link to the call in the web app. Send it as `Phonely-Organization` on the requests that follow.\n\nIt's found only in an organization you can act in, and only for a call `GET /v1/calls/{id}` returns there;\nanything else is a 404, the same answer as a call that doesn't exist.",
+        "operationId": "get_call_organization",
+        "parameters": [
+          {
+            "description": "The call's ID.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "The call's ID.",
+              "title": "Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Must be the key's org.",
+            "in": "header",
+            "name": "Phonely-Organization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional. Must be the key's org.",
+              "title": "Phonely-Organization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Organization"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "The request is invalid: a malformed body, a bad or unknown field, or an unknown query parameter."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "The API key is missing, invalid or revoked.",
+            "headers": {
+              "WWW-Authenticate": {
+                "description": "Always `Bearer`.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "`Phonely-Organization` must name the key's organization."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "The resource doesn't exist, or belongs to another organization."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Rate limited. Retry after the number of seconds in `Retry-After`.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until the request can be retried.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "An unexpected error. Contact support with the request ID."
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Authentication, authorization or another required service is temporarily unavailable; or, as `query_timeout`, a read matched too much to finish in time: narrow its filters rather than retrying it as sent."
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get a call's organization",
+        "tags": [
+          "Calls"
+        ],
+        "x-permission": "discover_organizations",
+        "x-scope": "principal",
+        "x-stability-level": "stable"
+      }
+    },
     "/v1/calls/{id}/recording": {
       "get": {
         "description": "A link to the call's recording, valid for 10 minutes.\n\nEach request returns a new link, so request one when you need the file. A call with no recording yet answers 404.",
@@ -8671,7 +9795,7 @@
     },
     "/v1/calls/{id}/transcript": {
       "get": {
-        "description": "A call's transcript: the conversation and everything the agent did, in order.\n\nEntries are the turns the agent and the customer spoke, the flows it entered and the blocks it chose, the\nvariables it stored, the knowledge it retrieved, the actions the flow ran, and events on the line such as\ntransfers. Each entry sets the one object its `type` names. A call in progress has a partial transcript.",
+        "description": "A call's transcript: the conversation and everything the agent did, in order.\n\nEntries are the turns the agent and the customer spoke, the flows it entered and the blocks it chose, the\nvariables it stored, the knowledge it retrieved, the actions the flow ran, and events on the line such as\ntransfers. Each entry sets the one object its `type` names. A call in progress has a partial transcript.\n\nActions include recorded details for API requests, code, transfers, texts, emails, and more. Request details\nmay contain template placeholders. Credentials Phonely recognizes are replaced with `***`: by their name (such\nas `api_key` or `password`) or their format (such as a Stripe or OpenAI key). This is best effort: a secret under\na name and in a format that don't say so can show, so keep credentials in a block's headers: every header value\nexcept plain ones such as `Content-Type` is always masked.",
         "operationId": "get_call_transcript",
         "parameters": [
           {
