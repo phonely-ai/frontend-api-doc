@@ -2804,7 +2804,8 @@
           },
           "fileUrl": {
             "type": "string",
-            "description": "URL to access the document"
+            "nullable": true,
+            "description": "Signed URL to download an uploaded file. It expires one hour after the request, so list the documents again for a fresh URL instead of storing it. `null` when the uploaded file no longer exists. Absent for text documents."
           },
           "content": {
             "type": "string",
