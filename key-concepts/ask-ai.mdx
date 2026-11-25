@@ -42,7 +42,7 @@ sources:
   - "features/chat/assistant/interactive/**"
   - "features/workflows/assistant-capability/use-workflow-navigation-intent.ts"
   - "features/workflows/assistant-capability/workflow-result-navigation.ts"
-last-verified: "2026-10-26"
+last-verified: "2026-11-25"
 ---
 
 Ask AI is Phonely's in-product assistant. It opens in the app side panel and works alongside the page you are using.
@@ -130,7 +130,17 @@ Block references only work while their flow is open. If you reference a block an
 
 ## Add supporting material
 
-You can attach one supported audio recording, document, or CSV file to a request. Ask AI reads a CSV's contents, so you can hand it data such as a zip-code-to-region mapping. Wait for the file to finish processing before sending, and explain what you want Ask AI to do with it.
+Select **Attach files** in the message box to add up to three supported files to one message. You can select several files at once. Ask AI reads a CSV's contents, so you can hand it data such as a zip-code-to-region mapping. Explain what you want Ask AI to do with the files.
+
+| File type | Formats | Size limit per file |
+| :-- | :-- | :-- |
+| Audio | WAV, MP3, M4A, MP4, WebM, OGG, FLAC, AAC, Opus | 100 MB |
+| Document | PDF, DOC, DOCX | 25 MB |
+| CSV | CSV | 10 MB |
+
+The files in one message can total up to 100 MB. If a selection goes over a limit, Ask AI rejects the extra files and keeps the ones that fit.
+
+Each file shows its progress, such as **Uploading**, and a file that Ask AI could read only in part is marked **Partially read**. Wait for every file to finish processing before sending. If a file fails, select **Retry** on that file. Your draft and the files that already succeeded stay in the message. You can also remove a file with its **Remove** button.
 
 Attachments supplement the current page context; they do not change which agents or organization data you are allowed to access.
 

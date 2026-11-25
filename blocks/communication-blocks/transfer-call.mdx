@@ -5,13 +5,15 @@ sources:
   - "features/workflows/model/nodes/transfer-call.ts"
   - "features/workflows/model/node-descriptors/index.ts"
   - "features/workflows/modules/editor/custom-nodes/transfer-call/**"
+  - "features/workflows/model/schema/validators.ts"
+  - "voice-infra/app/adapters/telephony/twilio_adapter.py"
   - "phonely-backend/app/agent/live_actions/advanced_transfer_call.py"
   - "phonely-backend/app/agent/live_actions/transfer_call.py"
   - "phonely-backend/app/custom_llm/state_manager.py"
   - "voice-infra/app/websocket_streaming/pipelines/chatting_wt*pipeline.py"
   - "voice-infra/app/websocket_streaming/pipelines/state_manager/conversation_state_mixin.py"
   - "voice-infra/app/websocket_streaming/pipelines/state_manager/edit_state_mixin.py"
-last-verified: "2026-07-16"
+last-verified: "2026-11-25"
 ---
 
 Use **Transfer Call** to send an active call to an external phone destination. Choose a cold transfer for a direct handoff or a warm transfer when Phonely should reach the recipient first and manage the connection.
@@ -47,6 +49,15 @@ With multiple destinations, enter a distinct **Transition Condition** for each o
 Keep the conditions specific and distinguishable. Phone numbers and messages can use variables from earlier in the flow.
 
 For a warm transfer, **Enable Failover** for a destination to try its backup numbers in order when the primary number cannot be connected.
+
+### Transfer to a PBX with a transfer code
+
+If the caller's phone system is a PBX that transfers calls when it receives a feature code, enter a transfer code instead of a phone number in **Phone Number**. Start the code with `dtmf:`, followed by the keypad digits, for example `dtmf:##2100#`. Phonely plays those keypad tones to the caller's line, and the caller's phone system performs the transfer.
+
+- Use only the characters `0-9`, `*`, `#`, and `w` after `dtmf:`.
+- Transfer codes work with **Cold Transfer** only. A **Warm Transfer** block that has a transfer code shows the error "Transfer code must be used with Cold Transfer."
+- Failover numbers must be phone numbers, not transfer codes.
+- Test with a call that reaches your PBX before relying on the code.
 
 ## Configure a warm transfer
 

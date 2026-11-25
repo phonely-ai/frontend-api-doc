@@ -18,8 +18,9 @@ sources:
   - "phonely-backend/app/agent/live_actions/conversation/custom_prompt.py"
   - "phonely-backend/app/custom_llm/prompts/prompts_v4_0.py"
   - "features/workflows/ai/runtime/server-tools.ts"
+  - "features/workflows/ai/authoring/block-catalog.ts"
   - "features/workflows/modules/editor/custom-nodes/custom-node-card.tsx"
-last-verified: "2026-10-19"
+last-verified: "2026-11-25"
 ---
 
 Choose **Talk** when the agent needs to adapt over several turns, such as answering questions, understanding an issue, or qualifying a caller. It stays active until an exit condition is met and can collect values along the way.
@@ -54,7 +55,7 @@ Write conditions as completed, observable outcomes. For example:
 - `The caller wants to leave their contact details`
 - `The caller asks to speak with a person`
 
-A Talk block requires at least one exit condition and supports up to ten. Conditions must be non-empty and unique.
+A Talk block requires at least one exit condition. Conditions must be non-empty and unique.
 
 Each exit lists the variables it must capture before the call can leave through it, shown as chips on the condition and on the exit rows on the canvas. See [Require variables per exit](#require-variables-per-exit).
 
@@ -63,6 +64,16 @@ Each exit lists the variables it must capture before the call can leave through 
 </Warning>
 
 When several conditions lead to the same block, combine them into one outcome-focused condition for clearer routing. Exits leading to the same block are suggested for combining only when their variable requirements also match.
+
+#### How Phonely decides to take an exit
+
+Two separate steps handle each caller turn. The agent's replies follow the **Prompt** and the variable descriptions. It does not see the exit conditions. A separate check decides whether to leave the block, and it sees only the call transcript, the text of each exit condition, and the descriptions of the variables that exit requires. It never sees the **Prompt** or the block name.
+
+- Exits are checked only after the caller speaks, against the whole call so far, not only this block.
+- There is no default exit and no turn limit. While no exit is met, the call stays in the block.
+- Write each condition so it stands on its own and describes what the caller said or did. Do not rely on the Prompt to give it meaning.
+- Require only values the caller says aloud. Write each variable's **Description** as a plain definition of the value, and put how and when to ask for it in the **Prompt**.
+- Give a caller who withholds a value a way out. Add an exit such as "the caller refuses to give their name" that does not require that value.
 
 ### Variables
 
