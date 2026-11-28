@@ -26,7 +26,10 @@
       "id": "phonely-db-svc",
       "sourcePrefix": "phonely-db-svc/",
       "rootEnv": "PHONELY_DB_SVC_ROOT",
-      "accountedThrough": null
+      "accountedThrough": {
+        "label": "v0.247.0",
+        "commit": "0c87f7bfdb287f269333e1663246ec487283199b"
+      }
     }
   ],
   "reviewWindows": [
@@ -2591,6 +2594,64 @@
           "status": "not-public",
           "pages": [],
           "note": "Build, test, and release automation, dependency updates, and release metadata do not change the public Phonely product experience."
+        }
+      ]
+    },
+    {
+      "id": "phonely-db-svc-v0.239.0-v0.247.0",
+      "repository": "phonely-db-svc",
+      "issue": "PHO-12440",
+      "reviewedOn": "2026-11-28",
+      "fromExclusive": {
+        "label": "v0.239.0",
+        "commit": "9735770b7a839602b35f36a9acdad9b159cdf6c4"
+      },
+      "throughInclusive": {
+        "label": "v0.247.0",
+        "commit": "0c87f7bfdb287f269333e1663246ec487283199b"
+      },
+      "dispositions": [
+        {
+          "id": "v1-contract",
+          "status": "docs-updated",
+          "pages": [
+            "api-reference/v1/changelog",
+            "api-reference/v1/overview"
+          ],
+          "note": "Organization lookups for an agent or call, what each transcript action did, web app links, and organization-wide call counts are in the API v1 changelog. The overview points AI app users to their page. Endpoint pages come from the synced API reference."
+        },
+        {
+          "id": "ai-apps",
+          "status": "docs-updated",
+          "pages": [
+            "ai-apps/overview"
+          ],
+          "note": "Phonely's MCP tools, their titles, sending feedback, and the apps the Connect page recognizes are covered in Use Phonely in AI Apps."
+        },
+        {
+          "id": "performance-top-values",
+          "status": "already-covered",
+          "pages": [
+            "performance"
+          ],
+          "note": "Breakdowns by outbound variables, webhook fields and API response fields that start on Top 10 are already described on the Performance page."
+        },
+        {
+          "id": "api-conventions",
+          "status": "no-doc-change",
+          "pages": [
+            "api-reference/v1/errors",
+            "api-reference/v1/versioning",
+            "api-reference/v1/updates-and-concurrency",
+            "blocks/data-and-automation-blocks/webhook"
+          ],
+          "note": "Permission, call-route and agent-service changes leave the documented errors, versioning, ETag updates and webhook block behavior unchanged."
+        },
+        {
+          "id": "internal",
+          "status": "not-public",
+          "pages": [],
+          "note": "Internal routes, billing, number records, infrastructure, CI and test changes."
         }
       ]
     }
