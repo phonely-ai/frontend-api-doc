@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "phonely-ai/phonely-db-svc",
-  "release": "v0.243.2",
-  "commit": "2488fe072414a530f618689f980ecc901ce3dbcf",
-  "contractSha256": "d33ed713b75caaa9d5cc36be0c098037ef5cbbc2f79fdb52a585080577471c73"
+  "release": "v0.247.0",
+  "commit": "0c87f7bfdb287f269333e1663246ec487283199b",
+  "contractSha256": "1d1e67ab3fc07fc2113796b00bc2512092ab08c1a947939fe3e5851129a895d1"
 }
