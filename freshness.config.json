@@ -2476,11 +2476,12 @@
         },
         {
           "id": "connected-apps-sign-in",
-          "status": "needs-doc-update",
+          "status": "docs-updated",
           "pages": [
-            "settings/overview"
+            "settings/overview",
+            "ai-apps/overview"
           ],
-          "note": "A new Connected Apps settings tab and a Connect page let outside apps sign in and act on a person's behalf. They appear only on deployments that serve the connection service, so availability and audience must be confirmed before documenting them."
+          "note": "A new Connected Apps settings tab and a Connect page let outside apps sign in and act on a person's behalf. Documented in Use Phonely in AI Apps and the Settings Overview; every signed-in user, viewers included, has the tab."
         },
         {
           "id": "custom-actions-catalog-retired",
