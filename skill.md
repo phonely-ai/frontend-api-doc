@@ -12,6 +12,7 @@ The placement policy is: prompts are for behavior, indexed docs are for stable p
 ## Audience And Voice
 
 - Write for Phonely customers: business owners, operations managers, support leads, and team members using the product.
+- Readers use Phonely at app.phonely.ai. Document that product only. Don't name other deployments, their hosts or data regions, even to say a feature isn't available there, and don't qualify steps with "at app.phonely.ai". When source code behaves differently by deployment, document the app.phonely.ai behavior and leave the difference out. Docs CI rejects phonely.ai hosts outside the public set.
 - Explain what the customer can accomplish before naming implementation details.
 - Use exact UI labels, route names, endpoint names, settings names, and option names only after verifying them against code, an API schema, a live tool result, or a canonical docs page with fresh source coverage.
 - Do not describe internal component names, data structures, feature flags, or service boundaries unless the page is explicitly for developers and the claim is code-cited.
