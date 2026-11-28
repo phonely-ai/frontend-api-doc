@@ -2481,7 +2481,7 @@
             "settings/overview",
             "ai-apps/overview"
           ],
-          "note": "A new Connected Apps settings tab and a Connect page let outside apps sign in and act on a person's behalf. Documented in Use Phonely in AI Apps and the Settings Overview after confirming they are available on app.phonely.ai; every signed-in user, viewers included, has the tab."
+          "note": "A new Connected Apps settings tab and a Connect page let outside apps sign in and act on a person's behalf. Documented in Use Phonely in AI Apps and the Settings Overview; every signed-in user, viewers included, has the tab."
         },
         {
           "id": "custom-actions-catalog-retired",
