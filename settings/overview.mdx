@@ -5,8 +5,9 @@ sources:
   - "features/settings/model/settings-tabs.ts"
   - "features/settings/ui/**"
   - "features/settings/modules/api-keys/api-key-permissions.ts"
+  - "features/settings/modules/connected-apps/connected-apps-tab.tsx"
   - "app/(main)/(routes)/settings/page.tsx"
-last-verified: "2026-11-16"
+last-verified: "2026-11-28"
 ---
 
 Open **Settings** from your profile menu to manage your account and the current organization.
@@ -18,17 +19,18 @@ Open **Settings** from your profile menu to manage your account and the current 
 | **Account** | Profile, preferences, account identifiers, API access, and organization information |
 | **Team** | Members, invitations, and roles |
 | **API Keys** | Create, list, and revoke the organization's API keys for the public API |
+| **Connected Apps** | See and disconnect the AI apps you connected to Phonely, such as Claude, ChatGPT or Cursor |
 | **Plan & Billing** | Subscription, included usage, payment information, and invoices |
 | **Usage & Cost** | Usage and estimated cost trends by date, agent, and usage type |
 | **Agents** | Organization-wide agent inventory, usage export, and agent deletion |
 | **Numbers** | Phone numbers and the organization do-not-call list |
 | **Messaging** | Messaging configuration for the organization |
 
-The pages and controls you can use depend on your role, plan, and organization configuration. Users with viewer access see only **Account**. **API Keys** is available to the organization's owner and admins; see [API v1 Authentication](/api-reference/v1/authentication) for how to create and revoke keys.
+The pages and controls you can use depend on your role, plan, and organization configuration. Users with viewer access see only **Account** and **Connected Apps**. **API Keys** is available to the organization's owner and admins; see [API v1 Authentication](/api-reference/v1/authentication) for how to create and revoke keys. **Connected Apps** is in the web app at `app.phonely.ai`; see [Use Phonely in AI Apps](/ai-apps/overview).
 
 ## Personal and organization settings
 
-Changes under **Account** apply to your user unless the field is in the organization section. Team membership, API keys, billing, agents, numbers, and messaging are organization-level settings.
+Changes under **Account** apply to your user unless the field is in the organization section. **Connected Apps** lists only the apps you connected. Team membership, API keys, billing, agents, numbers, and messaging are organization-level settings.
 
 <Tip>
   Check the organization switcher before changing organization-level settings when you belong to more than one organization.

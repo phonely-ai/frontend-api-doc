@@ -3,10 +3,28 @@ title: "API v1 changelog"
 description: "New endpoints, new fields, and notice of changes to Beta endpoints in Phonely API v1."
 sources:
   - "phonely-db-svc/openapi/v1.json"
-last-verified: "2026-11-19"
+last-verified: "2026-11-28"
 ---
 
 This page lists every change to API v1, newest first. It's also where Phonely announces a breaking change to a Beta endpoint, at least 14 days before it happens. See [Versioning and stability](/api-reference/v1/versioning).
+
+<Update label="2026-11-27" description="Organization-wide call counts and links to the web app">
+  **Added**
+
+  - `web_url` on agents and calls: the agent's or call's page in the Phonely web app.
+  - `GET /v1/calls/counts` without `agent_id` counts the whole organization's calls, including deleted agents' calls. It needs `started_from`, at most 31 days back, and doesn't take `experiment_id` or `analytics_field`. A new `agent` breakdown lists the agents with the most matching calls.
+
+  **Changed**
+
+  - `GET /v1/calls/counts` no longer returns `agent_id`. Read the counted agent from the new `agent` breakdown instead.
+</Update>
+
+<Update label="2026-11-25" description="Find an organization, and what each transcript action did">
+  **Added**
+
+  - `GET /v1/agents/{id}/organization` and `GET /v1/calls/{id}/organization`: the organization an agent or call belongs to, for when you have its ID but not its organization.
+  - Each action in `GET /v1/calls/{id}/transcript` gains `duration_seconds` and an object for its kind of action, such as `http`, `code`, `transfer`, `sms` or `email`, with what it sent and received. Credentials Phonely recognizes are shown as `***`.
+</Update>
 
 <Update label="2026-11-18" description="Call counts and search, and knowledge changes">
   **Added**

@@ -12,6 +12,7 @@ sources:
   - "phonely-db-svc/app/mcp/app.py"
   - "phonely-db-svc/app/mcp/tools.py"
   - "phonely-db-svc/openapi/mcp-tools.json"
+  - "features/connected-apps/model/connected-apps-enabled.ts"
   - "phonely-db-svc/openapi/v1.json"
 last-verified: "2026-11-28"
 ---
@@ -22,6 +23,7 @@ Connect an AI app such as Claude, ChatGPT or Cursor to Phonely, then ask about y
 
 - A Phonely account.
 - An AI app that can connect to a remote MCP server, such as Claude, ChatGPT or Cursor.
+- An organization whose data is in the US region. Phonely's MCP server isn't available yet for organizations whose data is in the AU region.
 - Phonely's MCP server address:
 
 ```text
@@ -98,7 +100,7 @@ For automations that run without you signing in, connect with an organization AP
 
 ## Disconnect an App
 
-1. Open **Settings**, then select **Connected Apps**. Each app shows when it was **Connected** and **Last used**.
+1. In the Phonely web app at `app.phonely.ai`, open **Settings**, then select **Connected Apps**. Each app shows when it was **Connected** and **Last used**.
 2. Select **Disconnect** on the app's row, then **Disconnect** again to confirm. The app loses access to Phonely right away.
 
 Apps unused for 90 days are disconnected automatically. To use one again, connect it again.

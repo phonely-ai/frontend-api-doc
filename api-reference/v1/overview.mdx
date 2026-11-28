@@ -5,7 +5,7 @@ sources:
   - "phonely-db-svc/openapi/v1.json"
   - "phonely-db-svc/app/schemas/v1/base.py"
   - "phonely-db-svc/app/api/v1/_core/middleware.py"
-last-verified: "2026-11-19"
+last-verified: "2026-11-28"
 ---
 
 Phonely API v1 lets your own systems read and manage your agents, calls, knowledge sources and voices. Every endpoint follows the same rules for authentication, errors, pagination and changes, so once one request works, the rest work the same way.
@@ -50,10 +50,12 @@ API v1 is at `https://api.us.phonely.ai/v1`. It isn't available yet for organiza
 | Agents | List, read and rename agents. Read and change an agent's voice, guidelines, settings and call analysis. Block and unblock phone numbers. |
 | Calls | List, search and count calls, and read them with their analysis, transcript and recording. Set a call's post-call outcome. |
 | Knowledge sources | Add documents and files to an agent's knowledge. Read, change, download and delete its knowledge sources. |
-| Organizations | Read your organization and its usage. |
+| Organizations | Read your organization and its usage. Find the organization an agent or call belongs to. |
 | Voices | List and read the voices an agent can use. |
 
 Each endpoint's reference page documents its request, response and errors.
+
+To work with these from Claude, ChatGPT, Cursor or another AI app instead of your own code, see [Use Phonely in AI Apps](/ai-apps/overview).
 
 ## Conventions
 
