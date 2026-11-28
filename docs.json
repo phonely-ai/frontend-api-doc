@@ -205,6 +205,13 @@
             ]
           },
           {
+            "group": "AI APPS",
+            "icon": "sparkles",
+            "pages": [
+              "ai-apps/overview"
+            ]
+          },
+          {
             "group": "SETTINGS & BILLING",
             "icon": "settings",
             "pages": [
