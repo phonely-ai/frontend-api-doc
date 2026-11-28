@@ -4,7 +4,7 @@
  *
  * The docs are written for people using Phonely at app.phonely.ai. Source code
  * that pages are verified against also names other deployments, so a host
- * outside this set in a tracked docs file is almost always a leak.
+ * outside this set in a docs file is almost always a leak.
  *
  * The synced API reference spec is checked against the db-svc release instead
  * (scripts/sync-v1-openapi.mjs --check), so it is excluded here.
@@ -12,7 +12,7 @@
  * Usage: node scripts/check-public-hosts.mjs   (exit 1 on any other host)
  */
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 
 const PUBLIC_HOSTS = new Set([
   'phonely.ai',
@@ -27,9 +27,10 @@ const EXCLUDED = new Set(['api-reference/v1/openapi.json']);
 const CHECKED = /\.(mdx?|json)$/;
 const HOST = /(?:[a-z0-9-]+\.)*phonely\.ai\b/gi;
 
-const files = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' })
+// Committed files and new ones not yet committed, such as a page a draft adds.
+const files = execFileSync('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard'], { encoding: 'utf8' })
   .split('\0')
-  .filter((path) => CHECKED.test(path) && !EXCLUDED.has(path));
+  .filter((path) => CHECKED.test(path) && !EXCLUDED.has(path) && existsSync(path));
 
 const failures = [];
 for (const path of files) {
