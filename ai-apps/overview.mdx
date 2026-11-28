@@ -1,0 +1,118 @@
+---
+title: "Use Phonely in AI Apps"
+description: "Connect Claude, ChatGPT, Cursor or another AI app to Phonely to review calls and update agents by asking in plain language."
+sources:
+  - "features/connected-apps/ui/connect-page.tsx"
+  - "features/connected-apps/ui/connect-sign-in-form.tsx"
+  - "features/connected-apps/ui/connect-allow.tsx"
+  - "features/connected-apps/ui/connect-destination.tsx"
+  - "features/settings/model/settings-tabs.ts"
+  - "features/settings/modules/connected-apps/connected-apps-tab.tsx"
+  - "features/settings/modules/connected-apps/disconnect-app-dialog.tsx"
+  - "phonely-db-svc/app/mcp/app.py"
+  - "phonely-db-svc/app/mcp/tools.py"
+  - "phonely-db-svc/openapi/mcp-tools.json"
+  - "phonely-db-svc/openapi/v1.json"
+last-verified: "2026-11-28"
+---
+
+Connect an AI app such as Claude, ChatGPT or Cursor to Phonely, then ask about your calls and agents in plain language: why yesterday's calls were transferred, how many calls each agent took this week, or what to change in an agent's guidelines. The app works with your own Phonely access, so it can see and change only what you can in the web app.
+
+## Before You Start
+
+- A Phonely account.
+- An AI app that can connect to a remote MCP server, such as Claude, ChatGPT or Cursor.
+- Phonely's MCP server address:
+
+```text
+https://mcp.phonely.ai/mcp
+```
+
+## Connect an AI App
+
+### Claude
+
+1. In Claude, add a custom connector with the address `https://mcp.phonely.ai/mcp`. On Claude Team and Enterprise plans, an organization Owner adds the connector first. See Anthropic's [guide to custom connectors](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp).
+2. Connect it. Phonely's **Connect Claude to Phonely** page opens in your browser.
+3. Sign in with **Continue with Google**, or with your Phonely email and password.
+4. Review what Claude will be able to do, then select **Allow**. Phonely returns you to Claude.
+
+### Claude Code
+
+1. Add Phonely from your terminal:
+
+```bash
+claude mcp add --transport http phonely https://mcp.phonely.ai/mcp
+```
+
+2. In Claude Code, run `/mcp`, select **phonely** and sign in. See Anthropic's [Claude Code MCP guide](https://code.claude.com/docs/en/mcp).
+3. On Phonely's page, sign in and select **Allow**.
+
+### Other AI Apps
+
+Add a remote MCP server with the address `https://mcp.phonely.ai/mcp`, following your app's own instructions. When the app opens Phonely's page, sign in and select **Allow**.
+
+## What You'll See
+
+Before you allow an app, Phonely shows who is connecting and what the app will be able to do:
+
+- Act as you in every organization you can access
+- Read and change your agents, calls and knowledge, as far as your role allows
+- Keep access until you disconnect it in **Settings** → **Connected Apps**
+
+Below that, Phonely shows where it will send you back:
+
+- **Recognized app**: an app Phonely knows, such as Claude.
+- **An app on this computer**: an app running on your computer, such as Claude Code. Continue only if you started connecting from it.
+- **Not an app Phonely recognizes**: anyone can name an app anything. Continue only if you started connecting from an app at the address shown.
+
+Once you select **Allow**, the app appears in **Settings** → **Connected Apps**.
+
+## What You Can Do
+
+| Area | Read | Change |
+| --- | --- | --- |
+| Agents | Your agents, and each agent's voice, guidelines, settings, call analysis and blocked numbers | Rename or duplicate an agent; update its voice, guidelines, settings, call analysis or blocked numbers |
+| Knowledge | An agent's knowledge sources, and each source's details | Add a text document; update or delete a source |
+| Calls | Calls filtered by details such as date, status, outcome, sentiment, phone number or words said; call counts by status, type, ended reason, sentiment, outcome and agent; a call's details, transcript and recording | Set a call's outcome |
+| Organizations | Your organizations, their details and usage | |
+| Voices | Phonely's voices | |
+
+Changes to an agent apply from its next call. Uploading files and adding website pages to an agent's knowledge stay in the web app.
+
+When the app can't do what you ask, or gets something wrong, ask it to send feedback to Phonely. Feedback is available when you sign in as yourself, not with an API key.
+
+## Example Prompts
+
+- "Why were yesterday's calls on my front desk agent transferred?"
+- "How many calls did each of my agents take this week, and how did they end?"
+- "Find this week's calls where the caller asked about a refund, and link me to each one."
+- "Add our holiday hours to the front desk agent's guidelines."
+- "Phonely should let me change my agent's phone number from here. Send that as feedback."
+
+Phonely gives the app a link to each call and agent in the Phonely web app, so it can send you straight there. If you belong to more than one organization and the app can't tell which one you mean, paste a link to one of that organization's calls or agents.
+
+## Use an API Key Instead
+
+For automations that run without you signing in, connect with an organization API key instead: send it as a bearer token in the `Authorization` header. A key works only in its own organization, and a **Read only** key can't make changes. See [Authentication](/api-reference/v1/authentication) to create a key.
+
+## Disconnect an App
+
+1. Open **Settings**, then select **Connected Apps**. Each app shows when it was **Connected** and **Last used**.
+2. Select **Disconnect** on the app's row, then **Disconnect** again to confirm. The app loses access to Phonely right away.
+
+Apps unused for 90 days are disconnected automatically. To use one again, connect it again.
+
+## Troubleshooting
+
+| You see | What to do |
+| --- | --- |
+| **This link has expired** | Connection links last 10 minutes. Start again from your app. |
+| **No Phonely account uses this Google account.** | Sign in with the Google account or email your Phonely account uses. |
+| **This account can't connect** | Select **Use a different account** and sign in with another Phonely account. |
+| **Your browser blocked the Google window.** | Allow pop-ups for the page, then try again. |
+| **Too many attempts. Wait a moment, then try again.** | Wait a moment, then try again. |
+
+## Privacy
+
+See the [Phonely Privacy Policy](https://www.phonely.ai/privacy-policy) for how Phonely handles your data.
