@@ -14,6 +14,7 @@ sources:
   - "features/performance/modules/formula/utils/formula-variables.ts"
   - "features/performance/modules/analytics/explore/explore-model.ts"
   - "features/performance/modules/analytics/explore/explore-query-rail.tsx"
+  - "features/performance/modules/analytics/widgets/widget-table.tsx"
   - "app/(main)/(routes)/performance/**"
   - "features/performance/ui/performance-compare-toggle.tsx"
   - "features/performance/utils/period-comparison.ts"
@@ -27,7 +28,7 @@ sources:
   - "features/performance/hooks/use-tv-mode.ts"
   - "features/performance/ui/performance-tv-bar.tsx"
   - "features/performance/utils/tv-mode.ts"
-last-verified: "2026-11-25"
+last-verified: "2026-11-28"
 ---
 
 Performance turns an agent's call history into a board of cards that help you understand traffic, results, and recurring patterns.
@@ -125,6 +126,12 @@ Measures include a billing family alongside call metrics: **Billed minutes**, **
 Save the result to add it to the board. Use the browser's Back button or the back arrow to leave Explore; if you have unsaved work, Phonely asks before discarding it.
 
 You can save a metric or filter to reuse it across cards. Manage those saved definitions from Explore or from **Settings > Saved metrics & filters** on the board. Deleting a saved definition asks for confirmation and identifies the metric or filter to be removed.
+
+### Break a table down by more than two fields
+
+A chart accepts up to two breakdowns, because a third would outrun the colors a chart can tell apart. A **Table** card is not held to that limit: each breakdown becomes a column, so **Add Breakdown** stays available after the second one.
+
+When a table has two or more breakdown columns, a tab strip above it lets you choose how rows are grouped. Each breakdown has its own tab, and the last tab, **Ungrouped**, lists one flat row for every combination of values. Use **Ungrouped** when fields only mean something together, such as a first name and a last name. Your choice of **Ungrouped** is saved with the card. Which breakdown a grouped table clusters under is not saved.
 
 ### Limit a breakdown to its top values
 
