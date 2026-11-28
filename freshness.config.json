@@ -6,8 +6,8 @@
       "sourcePrefix": "",
       "rootEnv": "PHONELY_FRONTEND_ROOT",
       "accountedThrough": {
-        "label": "v0.285.0",
-        "commit": "1fd85055b07c739ae24e5d41dd466a3374d55afa"
+        "label": "v0.286.0",
+        "commit": "25e468a7a419fd93f2864215bbf35eccbeeab483"
       }
     },
     {
@@ -2652,6 +2652,62 @@
           "status": "not-public",
           "pages": [],
           "note": "Internal routes, billing, number records, infrastructure, CI and test changes."
+        }
+      ]
+    },
+    {
+      "id": "phonely-frontend-v0.286.0-25e468a7a419fd93f2864215bbf35eccbeeab483",
+      "repository": "phonely-frontend",
+      "issue": "PHO-9239",
+      "reviewedOn": "2026-11-28",
+      "fromExclusive": {
+        "label": "v0.285.0",
+        "commit": "1fd85055b07c739ae24e5d41dd466a3374d55afa"
+      },
+      "throughInclusive": {
+        "label": "v0.286.0",
+        "commit": "25e468a7a419fd93f2864215bbf35eccbeeab483"
+      },
+      "dispositions": [
+        {
+          "id": "performance-table-breakdowns",
+          "status": "docs-updated",
+          "pages": [
+            "performance"
+          ],
+          "note": "Performance tables accept more than two breakdowns, and a saved Ungrouped view lists one flat row per combination. The Performance page now explains both."
+        },
+        {
+          "id": "block-picker-labels",
+          "status": "docs-updated",
+          "pages": [
+            "key-concepts/flow-canvas-controls",
+            "key-concepts/flows"
+          ],
+          "note": "The Add block picker's tabs are During Call and Post Call, and its search box reads Search blocks. The flow pages now use those labels."
+        },
+        {
+          "id": "publish-review-version-notes",
+          "status": "already-covered",
+          "pages": [
+            "flow-editor/test-and-publish",
+            "flow-editor/versions"
+          ],
+          "note": "Publish Review stays advisory, and version notes are generated from the saved flow changes. Both pages already describe this behavior."
+        },
+        {
+          "id": "editor-interaction-polish",
+          "status": "no-doc-change",
+          "pages": [
+            "key-concepts/flows"
+          ],
+          "note": "Editor popovers now close on a canvas click, the add-block buttons are keyboard accessible, and the collapsed flow list shows initials with labels. These are interaction refinements the docs do not describe."
+        },
+        {
+          "id": "internal-tests-and-tooling",
+          "status": "not-public",
+          "pages": [],
+          "note": "Internal tests, dependency and tooling updates, and release housekeeping with no customer-facing documentation impact."
         }
       ]
     }
