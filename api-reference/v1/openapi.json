@@ -40,13 +40,19 @@
             ],
             "description": "The agent's primary phone number in E.164, such as `+14155550100`. `null` when it has none, or when its primary line is a SIP address.",
             "title": "Phone Number"
+          },
+          "web_url": {
+            "description": "This agent in the Phonely web app. Opening it needs a Phonely sign-in with access to the agent.",
+            "title": "Web Url",
+            "type": "string"
           }
         },
         "required": [
           "object",
           "id",
           "name",
-          "phone_number"
+          "phone_number",
+          "web_url"
         ],
         "title": "Agent",
         "type": "object"
@@ -1755,6 +1761,11 @@
             ],
             "description": "When a warm transfer to a person began. `null` when there was none.",
             "title": "Warm Transfer Started At"
+          },
+          "web_url": {
+            "description": "This call in the Phonely web app. Opening it needs a Phonely sign-in with access to the agent.",
+            "title": "Web Url",
+            "type": "string"
           }
         },
         "required": [
@@ -1779,6 +1790,7 @@
           "experiment_ids",
           "experiment_arm",
           "warm_transfer_started_at",
+          "web_url",
           "long_summary",
           "purpose",
           "key_points",
@@ -1797,14 +1809,52 @@
         "title": "Call",
         "type": "object"
       },
+      "CallAgentCount": {
+        "additionalProperties": false,
+        "description": "How many matching calls one agent had.",
+        "properties": {
+          "count": {
+            "description": "How many matching calls it had.",
+            "title": "Count",
+            "type": "integer"
+          },
+          "id": {
+            "description": "The agent's ID.",
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The agent's name, also once it's deleted. `null` when it has none.",
+            "title": "Name"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "count"
+        ],
+        "title": "CallAgentCount",
+        "type": "object"
+      },
       "CallCounts": {
         "additionalProperties": false,
-        "description": "How many of an agent's calls match the filters, in all and by value.",
+        "description": "How many calls match the filters, in all, by value and by agent.",
         "properties": {
-          "agent_id": {
-            "description": "The agent whose calls were counted.",
-            "title": "Agent Id",
-            "type": "string"
+          "agent": {
+            "description": "Matching calls by agent, most first: the 50 with the most.",
+            "items": {
+              "$ref": "#/components/schemas/CallAgentCount"
+            },
+            "title": "Agent",
+            "type": "array"
           },
           "ended_reason": {
             "description": "Matching calls by `ended_reason`, most first.",
@@ -1861,13 +1911,13 @@
         },
         "required": [
           "object",
-          "agent_id",
           "total_count",
           "status",
           "type",
           "ended_reason",
           "sentiment",
-          "outcome"
+          "outcome",
+          "agent"
         ],
         "title": "CallCounts",
         "type": "object"
@@ -2250,6 +2300,11 @@
             ],
             "description": "When a warm transfer to a person began. `null` when there was none.",
             "title": "Warm Transfer Started At"
+          },
+          "web_url": {
+            "description": "This call in the Phonely web app. Opening it needs a Phonely sign-in with access to the agent.",
+            "title": "Web Url",
+            "type": "string"
           }
         },
         "required": [
@@ -2273,7 +2328,8 @@
           "failure_reason",
           "experiment_ids",
           "experiment_arm",
-          "warm_transfer_started_at"
+          "warm_transfer_started_at",
+          "web_url"
         ],
         "title": "CallSummary",
         "type": "object"
@@ -5660,7 +5716,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "List blocked numbers",
+        "summary": "Get an agent's blocked numbers",
         "tags": [
           "Agents"
         ],
@@ -5823,7 +5879,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Update blocked numbers",
+        "summary": "Update an agent's blocked numbers",
         "tags": [
           "Agents"
         ],
@@ -5984,7 +6040,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Get call analysis",
+        "summary": "Get an agent's call analysis",
         "tags": [
           "Agents"
         ],
@@ -6206,7 +6262,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Update call analysis",
+        "summary": "Update an agent's call analysis",
         "tags": [
           "Agents"
         ],
@@ -6553,7 +6609,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Get guidelines",
+        "summary": "Get an agent's guidelines",
         "tags": [
           "Agents"
         ],
@@ -6765,7 +6821,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Update guidelines",
+        "summary": "Update an agent's guidelines",
         "tags": [
           "Agents"
         ],
@@ -6957,7 +7013,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "List knowledge sources",
+        "summary": "List an agent's knowledge sources",
         "tags": [
           "Knowledge sources"
         ],
@@ -7130,7 +7186,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Add a document",
+        "summary": "Add a knowledge document",
         "tags": [
           "Knowledge sources"
         ],
@@ -7337,7 +7393,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Upload a file",
+        "summary": "Upload a knowledge file",
         "tags": [
           "Knowledge sources"
         ],
@@ -7646,7 +7702,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Get settings",
+        "summary": "Get an agent's settings",
         "tags": [
           "Agents"
         ],
@@ -7858,7 +7914,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Update settings",
+        "summary": "Update an agent's settings",
         "tags": [
           "Agents"
         ],
@@ -8024,7 +8080,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Get voice",
+        "summary": "Get an agent's voice",
         "tags": [
           "Agents"
         ],
@@ -8236,7 +8292,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Update voice",
+        "summary": "Update an agent's voice",
         "tags": [
           "Agents"
         ],
@@ -8729,19 +8785,26 @@
     },
     "/v1/calls/counts": {
       "get": {
-        "description": "How many of an agent's calls match, in all and by status, type, ended reason, sentiment and outcome.\n\nTakes the same filters as `GET /v1/calls` and counts every call that list would page through.\nEach breakdown lists only the values some matching call holds, most calls first; a call with no\nvalue for one, such as no sentiment yet, is in `total_count` but in none of that breakdown's\nentries. Counts of a busy agent with only `status` set can be up to 12 minutes old. Counts that\nsearch transcripts answer 503 `query_timeout` when they match too much to read in time.",
+        "description": "How many of the organization's calls match, or one agent's: in all, and by status, type, ended reason,\nsentiment, outcome and agent.\n\nTakes the filters of `GET /v1/calls`, with `agent_id` optional, and counts every call that list would page\nthrough. Each breakdown lists the values some matching call holds, most calls first, and `agent` lists the 50\nagents with the most; a call with no value for one, such as no sentiment yet, is in `total_count` but in none of\nthat breakdown's entries. To match the web app's Performance page, set `status` to `completed` and `ended`, and\n`type` to every type but `web_call`. One agent's counts with only `status` set can be up to 12 minutes old.\nCounts that can't be read in time answer 503 `query_timeout`: narrow the filters, such as a shorter time range.",
         "operationId": "get_call_counts",
         "parameters": [
           {
-            "description": "The agent whose calls to read.",
+            "description": "Only this agent's calls. Without it, the calls of every agent in the organization, deleted ones included, which needs `started_from`, at most 31 days before `started_before` (or now).",
             "in": "query",
             "name": "agent_id",
-            "required": true,
+            "required": false,
             "schema": {
-              "description": "The agent whose calls to read.",
-              "minLength": 1,
-              "title": "Agent Id",
-              "type": "string"
+              "anyOf": [
+                {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only this agent's calls. Without it, the calls of every agent in the organization, deleted ones included, which needs `started_from`, at most 31 days before `started_before` (or now).",
+              "title": "Agent Id"
             }
           },
           {
@@ -9784,7 +9847,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Get a call recording",
+        "summary": "Get a call's recording",
         "tags": [
           "Calls"
         ],
@@ -9939,7 +10002,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Get a call transcript",
+        "summary": "Get a call's transcript",
         "tags": [
           "Calls"
         ],
@@ -10097,7 +10160,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Delete a source",
+        "summary": "Delete a knowledge source",
         "tags": [
           "Knowledge sources"
         ],
@@ -10250,7 +10313,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Get a source",
+        "summary": "Get a knowledge source",
         "tags": [
           "Knowledge sources"
         ],
@@ -10423,7 +10486,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Update a source",
+        "summary": "Update a knowledge source",
         "tags": [
           "Knowledge sources"
         ],
@@ -10588,7 +10651,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Get a download link",
+        "summary": "Get a knowledge source's download link",
         "tags": [
           "Knowledge sources"
         ],
@@ -10599,7 +10662,7 @@
     },
     "/v1/organizations": {
       "get": {
-        "description": "The organizations the caller can act in. An API key acts only in its own organization.",
+        "description": "The organizations the caller belongs to: a person's memberships, or an API key's own organization.",
         "operationId": "list_organizations",
         "parameters": [
           {
@@ -11149,7 +11212,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "List usage",
+        "summary": "List an organization's usage",
         "tags": [
           "Organizations"
         ],
