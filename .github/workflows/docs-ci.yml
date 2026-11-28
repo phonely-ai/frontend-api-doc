@@ -39,6 +39,9 @@ jobs:
       - name: Freshness contract
         run: node scripts/freshness-ledger.mjs
 
+      - name: Public hosts
+        run: node scripts/check-public-hosts.mjs
+
       - name: Orphan media
         run: node scripts/find-orphan-media.mjs --fail-on-orphans
 
